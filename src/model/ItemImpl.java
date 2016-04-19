@@ -102,6 +102,7 @@ public class ItemImpl implements Item, Serializable {
         this.getSetReview().add(rev);
     }
 
+    @Override
     public void addLike() {
         this.like++;
     }
