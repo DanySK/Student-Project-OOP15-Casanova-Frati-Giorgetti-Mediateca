@@ -1,12 +1,14 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Enum of book review taken from http://generi.librimondadori.it .
- * 
+ *
  * @author Edoardo
  *
  */
-public enum BookGenre {
+public enum BookGenre implements Serializable {
 
     ARTE_CINEMA_MUSICA_SPETTACOLO, ATTUALITA_REPORTAGE, BENESSERE_SELFHELP_LIFESTYLE, BIOGRAFIE, CLASSICI_CRITICA, CUCINA, FANTASY, GIALLI_THRILLER, GRAPHICNOVEL, HOBBY, MODA, NARRATIVA_MODERNA_CONTEMPORANEA, POESIA, POLITICA, PSICOLOGIA_SOCIOLOGIA, RELIGIONE_SPIRITUALITA, ROMANZI_AMORE, SCIENZE_TECNOLOGIE, SPORT, STORIA_AVVENTURA, UMORISMO, VIAGGI_GUIDE,
 

@@ -25,8 +25,8 @@ public class ItemImpl implements Item, Serializable {
     private final String title;
     private final int releaseYear;
     private final String author;
-    private final Optional<Image> cover;
-    private List<Review> setReview = new LinkedList();
+    private Optional<Image> cover = Optional.absent();
+    private List<Review> setReview = new LinkedList<Review>();
     private int like;
 
     /**
@@ -38,13 +38,113 @@ public class ItemImpl implements Item, Serializable {
      * @param author
      * @param cover
      */
-    public ItemImpl(final String title, final int releaseYear, final String author, final Optional<Image> cover) {
+    public ItemImpl(final String title, final int releaseYear, final String author, final Image cover) {
         this.title = title;
         this.releaseYear = releaseYear;
         this.author = author;
-        this.cover = cover;
+        this.cover = Optional.fromNullable(cover);
         this.like = 0;
         this.iD = this.hashCode();
+    }
+
+    /**
+     * Builder constructor pattern.
+     *
+     * @author Edoardo
+     *
+     */
+    public static class BuilderItem {
+
+        private Integer iD;
+        public String title;
+        public Integer releaseYear;
+        public String author;
+        public Image cover;
+        private List<Review> setReview = new LinkedList<Review>();
+        private Integer like;
+
+        /**
+         * Public constructor.
+         */
+        public BuilderItem() {
+        }
+
+        /**
+         * Build iD's field.
+         *
+         * @param i
+         *            glob identifier
+         * @return this.iD
+         *
+         */
+        public BuilderItem iD(final int i) {
+            this.iD = this.hashCode();
+            return this;
+        }
+
+        /**
+         * Build title's field.
+         *
+         * @param s
+         *            item's title
+         * @return title
+         *
+         */
+        public BuilderItem title(final String s) {
+            this.title = s;
+            return this;
+        }
+
+        /**
+         * Build releaseYear's field.
+         *
+         * @param i
+         *            item's release year
+         * @return realeseYear
+         */
+        public BuilderItem releaseYear(final int i) {
+            this.releaseYear = i;
+            return this;
+        }
+
+        /**
+         * Build author's field.
+         *
+         * @param s
+         *            item's author
+         * @return author
+         *
+         */
+        public BuilderItem author(final String s) {
+            this.author = s;
+            return this;
+        }
+
+        /**
+         * Build cover's field.
+         *
+         * @param img
+         *            item's cover
+         * @return cover
+         */
+        public BuilderItem cover(final Image img) {
+            this.cover = img;
+            return this;
+        }
+
+        /**
+         * Join insert field.
+         *
+         * @return new ItemImpl
+         * @throws IllegalStateException
+         *             if args are null
+         */
+        public ItemImpl build() throws IllegalStateException {
+            if ((this.title == null) || (this.releaseYear == null) || (this.author == null)) {
+                throw new IllegalStateException("Param null");
+            }
+            return new ItemImpl(this.title, this.releaseYear, this.author, this.cover);
+        }
     }
 
     @Override
@@ -89,7 +189,7 @@ public class ItemImpl implements Item, Serializable {
 
     @Override
     public boolean equals(final Object object) {
-        if (!(object instanceof ItemImpl) || (object == null)) {
+        if (!(object instanceof ItemImpl)) {
             return false;
         }
         final ItemImpl item = (ItemImpl) object;

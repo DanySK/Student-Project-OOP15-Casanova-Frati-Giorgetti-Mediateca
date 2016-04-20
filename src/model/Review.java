@@ -23,7 +23,7 @@ public interface Review {
      * Setting the note text.
      *
      * @param note
-     *            List<String>
+     *            composed by List<String>
      *
      */
     void setNote(final List<String> note);

@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,10 +10,14 @@ import java.util.List;
  * @author Edoardo
  *
  */
-public class ReviewImpl implements Review {
+public class ReviewImpl implements Review, Serializable {
 
-    static final int MAX = 5;
-    static final int MIN = 0;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 8843824865824137318L;
+    private static final int MAX = 5;
+    private static final int MIN = 0;
     private int vote;
     private List<String> note = new LinkedList<String>();
 
@@ -20,7 +25,9 @@ public class ReviewImpl implements Review {
      * Review Constructor.
      *
      * @param vote
+     *            if it sis os
      * @param note
+     *            dkosks dkosk sslsl
      */
     public ReviewImpl(final int vote, final List<String> note) {
         this.setVote(vote);
@@ -54,11 +61,7 @@ public class ReviewImpl implements Review {
 
     @Override
     public boolean checkVote(final int vote) {
-        if ((vote >= ReviewImpl.MIN) && (vote <= ReviewImpl.MAX)) {
-            return true;
-        } else {
-            return false;
-        }
+        return ((vote >= ReviewImpl.MIN) && (vote <= ReviewImpl.MAX));
     }
 
 }
