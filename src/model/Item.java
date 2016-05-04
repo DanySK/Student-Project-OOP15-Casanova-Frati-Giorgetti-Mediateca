@@ -14,6 +14,18 @@ import com.google.common.base.Optional;
 public interface Item {
 
     /**
+     *
+     * @return Item's publisher.
+     */
+    String getPublisher();
+
+    /**
+     *
+     * @return Item's current language
+     */
+    Language getCurrentLanguage();
+
+    /**
      * hashCode function uses the Objects.hashCode( field1, field2, .. ) taken
      * from Google Guava.
      */
@@ -75,11 +87,12 @@ public interface Item {
      * Add a review to the Item.
      *
      * @param rev
+     *            in order to add this review to the item's set
      */
     void addReview(final Review rev);
 
     /**
-     * Add liketo the Item
+     * Add liketo the Item.
      */
     void addLike();
 
