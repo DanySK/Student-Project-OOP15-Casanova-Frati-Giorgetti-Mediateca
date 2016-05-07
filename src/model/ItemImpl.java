@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Image;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,7 +26,7 @@ public class ItemImpl implements Item, Serializable {
     private final String publisher;
     private final String author;
     private final Language currentLanguage;
-    private Optional<Image> cover = Optional.absent();
+    private Optional<String> pathCover = Optional.absent();
     private List<Review> setReview = new LinkedList<Review>();
     private int like;
 
@@ -45,17 +44,17 @@ public class ItemImpl implements Item, Serializable {
      *            author in the case of book, director in the case of movie
      * @param initCurrentLanguage
      *            of the general item contained in the archive
-     * @param initCover
+     * @param initPathCover
      *            of the general item
      */
     public ItemImpl(final String initTitle, final int initReleaseYear, final String initPublisher,
-            final String initAuthor, final Language initCurrentLanguage, final Image initCover) {
+            final String initAuthor, final Language initCurrentLanguage, final String initPathCover) {
         this.title = initTitle;
         this.releaseYear = initReleaseYear;
         this.publisher = initPublisher;
         this.author = initAuthor;
         this.currentLanguage = initCurrentLanguage;
-        this.cover = initCover == null ? Optional.absent() : Optional.of(initCover);
+        this.pathCover = initPathCover == null ? Optional.absent() : Optional.of(initPathCover);
         this.like = 0;
         this.iD = this.hashCode();
     }
@@ -91,8 +90,8 @@ public class ItemImpl implements Item, Serializable {
     }
 
     @Override
-    public Optional<Image> getCover() {
-        return this.cover;
+    public Optional<String> getPathCover() {
+        return this.pathCover;
     }
 
     @Override

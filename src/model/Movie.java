@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.Image;
-
 /**
  * Movie extends ItemImpl taking his common field with Book. It forms the
  * archive with Book.
@@ -29,7 +27,7 @@ public class Movie extends ItemImpl {
      *            director of the movie.
      * @param initCurrentLanguage
      *            of the movie contained in the archive.
-     * @param initCover
+     * @param initPathCover
      *            of the movie.
      * @param initGenre
      *            of the movie.
@@ -39,9 +37,9 @@ public class Movie extends ItemImpl {
      *            true == color, false == b/w.
      */
     public Movie(final String initTitle, final int initReleaseYear, final String initPublisher, final String initAuthor,
-            final Language initCurrentLanguage, final Image initCover, final MovieGenre initGenre,
+            final Language initCurrentLanguage, final String initPathCover, final MovieGenre initGenre,
             final Integer initDuration, final Boolean initColour) {
-        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initCover);
+        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initPathCover);
         this.genre = initGenre;
         this.duration = initDuration;
         this.colour = initColour;

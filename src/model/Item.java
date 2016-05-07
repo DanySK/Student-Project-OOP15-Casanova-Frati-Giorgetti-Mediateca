@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.Image;
 import java.util.List;
 
 import com.google.common.base.Optional;
@@ -69,7 +68,7 @@ public interface Item {
      *
      * @return Item's Image, if it is present.
      */
-    Optional<Image> getCover();
+    Optional<String> getPathCover();
 
     /**
      *

@@ -1,7 +1,5 @@
 package model;
 
-import java.awt.Image;
-
 import com.google.common.base.Optional;
 
 /**
@@ -29,7 +27,7 @@ public class Book extends ItemImpl {
      *            who wrote the book
      * @param initCurrentLanguage
      *            of the book
-     * @param initCover
+     * @param initPathCover
      *            of the book
      * @param initISBN
      *            International Standard Book Number
@@ -41,9 +39,9 @@ public class Book extends ItemImpl {
      *            if there is more then one
      */
     public Book(final String initTitle, final int initReleaseYear, final String initAuthor,
-            final Language initCurrentLanguage, final Image initCover, final String initISBN, final BookGenre initGenre,
-            final String initPublisher, final Integer initNumRelease) {
-        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initCover);
+            final Language initCurrentLanguage, final String initPathCover, final String initISBN,
+            final BookGenre initGenre, final String initPublisher, final Integer initNumRelease) {
+        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initPathCover);
         this.isbn = initISBN;
         this.genre = initGenre;
         this.numRelease = initNumRelease == null ? Optional.of(1) : Optional.of(initNumRelease);
