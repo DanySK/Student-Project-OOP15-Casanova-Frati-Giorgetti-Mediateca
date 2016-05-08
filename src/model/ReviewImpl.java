@@ -24,28 +24,28 @@ public class ReviewImpl implements Review, Serializable {
     /**
      * Review Constructor.
      *
-     * @param vote
-     *            if it sis os
-     * @param note
-     *            dkosks dkosk sslsl
+     * @param initVote
+     *            item's vote
+     * @param initNote
+     *            item's text note.
      */
-    public ReviewImpl(final int vote, final List<String> note) {
-        this.setVote(vote);
-        this.setNote(note);
+    public ReviewImpl(final int initVote, final List<String> initNote) {
+        this.setVote(initVote);
+        this.setNote(initNote);
     }
 
     @Override
-    public boolean setVote(final int vote) {
-        if (this.checkVote(vote)) {
-            this.vote = vote;
+    public boolean setVote(final int initVote) {
+        if (this.checkVote(initVote)) {
+            this.vote = initVote;
             return true;
         }
         return false;
     }
 
     @Override
-    public void setNote(final List<String> note) {
-        this.note = note;
+    public void setNote(final List<String> initNote) {
+        this.note = initNote;
 
     }
 
@@ -60,8 +60,8 @@ public class ReviewImpl implements Review, Serializable {
     }
 
     @Override
-    public boolean checkVote(final int vote) {
-        return ((vote >= ReviewImpl.MIN) && (vote <= ReviewImpl.MAX));
+    public boolean checkVote(final int initVote) {
+        return ((initVote >= ReviewImpl.MIN) && (initVote <= ReviewImpl.MAX));
     }
 
 }

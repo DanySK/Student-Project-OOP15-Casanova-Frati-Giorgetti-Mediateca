@@ -29,6 +29,7 @@ public class ItemImpl implements Item, Serializable {
     private Optional<String> pathCover = Optional.absent();
     private List<Review> setReview = new LinkedList<Review>();
     private int like;
+    private float averageVote;
 
     /**
      * Item's constructors whit starter initialization. In the field ID there is
@@ -56,6 +57,7 @@ public class ItemImpl implements Item, Serializable {
         this.currentLanguage = initCurrentLanguage;
         this.pathCover = initPathCover == null ? Optional.absent() : Optional.of(initPathCover);
         this.like = 0;
+        this.averageVote = 0;
         this.iD = this.hashCode();
     }
 
@@ -106,7 +108,7 @@ public class ItemImpl implements Item, Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(this.author, this.releaseYear, this.title, this.publisher);
+        return Objects.hashCode(this.author, this.releaseYear, this.title, this.publisher, this.currentLanguage);
     }
 
     @Override
@@ -116,7 +118,8 @@ public class ItemImpl implements Item, Serializable {
         }
         final ItemImpl item = (ItemImpl) object;
         return Objects.equal(this.author, item.author) && Objects.equal(this.releaseYear, item.releaseYear)
-                && Objects.equal(this.title, item.title);
+                && Objects.equal(this.title, item.title) && Objects.equal(this.publisher, item.publisher)
+                && Objects.equal(this.currentLanguage, item.currentLanguage);
     }
 
     @Override
@@ -127,5 +130,15 @@ public class ItemImpl implements Item, Serializable {
     @Override
     public void addLike() {
         this.like++;
+    }
+
+    @Override
+    public void setAverageVote() {
+        int div = this.setReview.size();
+        int total = 0;
+        for (Review r : this.setReview) {
+            total = total + r.getVote();
+        }
+        this.averageVote = (float) total / div;
     }
 }

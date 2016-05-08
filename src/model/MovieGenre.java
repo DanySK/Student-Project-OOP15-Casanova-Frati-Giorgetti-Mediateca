@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * Enum of film genre taken from
  * https://it.wikipedia.org/wiki/Generi_cinematografici .
@@ -7,7 +9,7 @@ package model;
  * @author Edoardo
  *
  */
-public enum MovieGenre {
+public enum MovieGenre implements Serializable {
 
     /**
      *

@@ -91,8 +91,13 @@ public interface Item {
     void addReview(final Review rev);
 
     /**
-     * Add liketo the Item.
+     * Add like to the Item.
      */
     void addLike();
+
+    /**
+     * Calculate the average of the review's vote.
+     */
+    void setAverageVote();
 
 }
