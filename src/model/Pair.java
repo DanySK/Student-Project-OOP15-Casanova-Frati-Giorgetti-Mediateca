@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * This class is taken from the lessons' slide. It manages a pair of generic
  * type.
@@ -9,8 +11,9 @@ package model;
  * @param <X>
  * @param <Y>
  */
-public class Pair<X, Y> {
+public class Pair<X, Y> implements Serializable {
 
+    private static final long serialVersionUID = -6161750573464309304L;
     private X first;
     private Y second;
 
@@ -43,6 +46,26 @@ public class Pair<X, Y> {
      */
     public Y getSecond() {
         return this.second;
+    }
+
+    /**
+     * First element setter.
+     *
+     * @param initFirst
+     *            the first element.
+     */
+    public void setFirst(final X initFirst) {
+        this.first = initFirst;
+    }
+
+    /**
+     * Secodn element setter.
+     *
+     * @param initSecond
+     *            the second element.
+     */
+    public void setSecond(final Y initSecond) {
+        this.second = initSecond;
     }
 
     @Override
