@@ -61,11 +61,12 @@ public class ItemImpl implements Item, Serializable {
         this.iD = this.hashCode();
     }
 
-    public String toString_1() {
-        return "ItemImpl [iD=" + this.iD + ", title=" + this.title + ", releaseYear=" + this.releaseYear
-                + ", publisher=" + this.publisher + ", author=" + this.author + ", currentLanguage="
-                + this.currentLanguage + ", pathCover=" + this.pathCover + ", setReview=" + this.setReview.toString()
-                + ", like=" + this.like + ", averageVote=" + this.averageVote + "]";
+    @Override
+    public String toString() {
+        return "[iD=" + this.iD + ", title=" + this.title + ", releaseYear=" + this.releaseYear + ", publisher="
+                + this.publisher + ", author=" + this.author + ", currentLanguage=" + this.currentLanguage
+                + ", pathCover=" + this.pathCover + ", setReview=" + this.setReview.toString() + ", like=" + this.like
+                + ", averageVote=" + this.averageVote;
     }
 
     @Override

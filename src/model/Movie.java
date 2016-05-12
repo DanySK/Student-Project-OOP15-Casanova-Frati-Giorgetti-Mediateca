@@ -11,8 +11,8 @@ public class Movie extends ItemImpl {
 
     @Override
     public String toString() {
-        return super.toString_1() + "Movie [genre=" + this.genre + ", duration=" + this.duration + ", colour="
-                + this.colour + "]";
+        return super.toString() + "genre=" + this.genre + ", duration=" + this.duration + ", colour=" + this.colour
+                + "] - MOVIE";
     }
 
     private static final long serialVersionUID = 856227185802047288L;
