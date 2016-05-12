@@ -1,7 +1,5 @@
 package model;
 
-import java.util.List;
-
 /**
  * Each user can leave a review on an item.
  *
@@ -26,7 +24,7 @@ public interface Review {
      *            composed by List<String>
      *
      */
-    void setNote(final List<String> note);
+    void setNote(final String note);
 
     /**
      * Getter vote.
@@ -40,7 +38,7 @@ public interface Review {
      *
      * @return text's note
      */
-    List<String> getNote();
+    String getNote();
 
     /**
      * Check if the input parameter is correct.

@@ -100,4 +100,9 @@ public interface Item {
      */
     void setAverageVote();
 
+    /**
+     *
+     * @return Item's average vote.
+     */
+    float getAverageVote();
 }

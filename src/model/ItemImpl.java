@@ -61,6 +61,13 @@ public class ItemImpl implements Item, Serializable {
         this.iD = this.hashCode();
     }
 
+    public String toString_1() {
+        return "ItemImpl [iD=" + this.iD + ", title=" + this.title + ", releaseYear=" + this.releaseYear
+                + ", publisher=" + this.publisher + ", author=" + this.author + ", currentLanguage="
+                + this.currentLanguage + ", pathCover=" + this.pathCover + ", setReview=" + this.setReview.toString()
+                + ", like=" + this.like + ", averageVote=" + this.averageVote + "]";
+    }
+
     @Override
     public String getPublisher() {
         return this.publisher;
@@ -107,6 +114,11 @@ public class ItemImpl implements Item, Serializable {
     }
 
     @Override
+    public float getAverageVote() {
+        return this.averageVote;
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hashCode(this.author, this.releaseYear, this.title, this.publisher, this.currentLanguage);
     }
@@ -125,6 +137,7 @@ public class ItemImpl implements Item, Serializable {
     @Override
     public void addReview(final Review rev) {
         this.getSetReview().add(rev);
+        this.setAverageVote();
     }
 
     @Override

@@ -9,6 +9,12 @@ package model;
  */
 public class Movie extends ItemImpl {
 
+    @Override
+    public String toString() {
+        return super.toString_1() + "Movie [genre=" + this.genre + ", duration=" + this.duration + ", colour="
+                + this.colour + "]";
+    }
+
     private static final long serialVersionUID = 856227185802047288L;
     private final MovieGenre genre;
     private final Integer duration;

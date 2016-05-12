@@ -9,6 +9,9 @@ package model;
  */
 public class ItemFactory {
 
+    public ItemFactory() {
+    }
+
     /**
      * This method return a new Book(...).
      *

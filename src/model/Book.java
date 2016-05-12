@@ -11,6 +11,12 @@ import com.google.common.base.Optional;
  */
 public class Book extends ItemImpl {
 
+    @Override
+    public String toString() {
+        return super.toString_1() + "Book [isbn=" + this.isbn + ", genre=" + this.genre + ", numRelease="
+                + this.numRelease + "]";
+    }
+
     private static final long serialVersionUID = -7358930538078727479L;
     private final String isbn;
     private final BookGenre genre;
@@ -45,5 +51,29 @@ public class Book extends ItemImpl {
         this.isbn = initISBN;
         this.genre = initGenre;
         this.numRelease = initNumRelease == null ? Optional.of(1) : Optional.of(initNumRelease);
+    }
+
+    /**
+     *
+     * @return num of release.
+     */
+    public Optional<Integer> getNumRelease() {
+        return this.numRelease;
+    }
+
+    /**
+     *
+     * @return ISBN code.
+     */
+    public String getIsbn() {
+        return this.isbn;
+    }
+
+    /**
+     *
+     * @return Book's genre.
+     */
+    public BookGenre getGenre() {
+        return this.genre;
     }
 }

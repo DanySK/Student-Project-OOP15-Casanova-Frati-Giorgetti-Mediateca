@@ -1,8 +1,6 @@
 package model;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
 
 /**
  * Review is composed by 2 field, the first is a vote and the second is a text.
@@ -19,7 +17,7 @@ public class ReviewImpl implements Review, Serializable {
     private static final int MAX = 5;
     private static final int MIN = 0;
     private int vote;
-    private List<String> note = new LinkedList<String>();
+    private String note;
 
     /**
      * Review Constructor.
@@ -29,7 +27,7 @@ public class ReviewImpl implements Review, Serializable {
      * @param initNote
      *            item's text note.
      */
-    public ReviewImpl(final int initVote, final List<String> initNote) {
+    public ReviewImpl(final int initVote, final String initNote) {
         this.setVote(initVote);
         this.setNote(initNote);
     }
@@ -44,7 +42,7 @@ public class ReviewImpl implements Review, Serializable {
     }
 
     @Override
-    public void setNote(final List<String> initNote) {
+    public void setNote(final String initNote) {
         this.note = initNote;
 
     }
@@ -55,8 +53,13 @@ public class ReviewImpl implements Review, Serializable {
     }
 
     @Override
-    public List<String> getNote() {
+    public String getNote() {
         return this.note;
+    }
+
+    @Override
+    public String toString() {
+        return "ReviewImpl [vote=" + this.vote + ", note=" + this.note + "]";
     }
 
     @Override
