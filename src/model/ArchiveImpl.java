@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -9,8 +10,8 @@ import java.util.Map;
 public class ArchiveImpl implements Serializable, Archive {
 
     private static final long serialVersionUID = 3943672353334594237L;
-    private Map<Integer, Pair<Book, Pair<Integer, List<UserImpl>>>> bookArchive = new HashMap<>();
-    private Map<Integer, Pair<Movie, Pair<Integer, List<UserImpl>>>> movieArchive = new HashMap<>();
+    private Map<Integer, Pair<Book, Pair<Integer, List<Pair<UserImpl, Date>>>>> bookArchive = new HashMap<>();
+    private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<UserImpl, Date>>>>> movieArchive = new HashMap<>();
 
     /**
      * Empty constructor.
