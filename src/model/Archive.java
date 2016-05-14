@@ -1,5 +1,7 @@
 package model;
 
+import java.util.GregorianCalendar;
+
 public interface Archive {
 
     /**
@@ -57,5 +59,32 @@ public interface Archive {
      *            Item's identifier.
      */
     void removeItem(final Type t, final Integer id);
+
+    /**
+     * This method apply dayBetweenDates to the required item of Type t with
+     * identifier id.
+     *
+     * @param t
+     *            Item's type
+     *
+     * @param itemId
+     *            Item's identifier.
+     * @param userId
+     *            User's Identifier.
+     * @return the number of days elapsed
+     *
+     */
+    double calculateDifferenceDays(final Type t, final Integer itemId, final Integer userId);
+
+    /**
+     * This method calculates the difference of days elapsed from the day when
+     * Item was taken from archive by userId. It uses the current date to
+     * calculate the difference.
+     *
+     * @param fromDate
+     *            item's taken date.
+     * @return the number of days elapsed.
+     */
+    double dayBetweenDates(final GregorianCalendar fromDate);
 
 }

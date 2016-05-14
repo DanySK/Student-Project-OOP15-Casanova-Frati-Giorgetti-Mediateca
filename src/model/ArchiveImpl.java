@@ -1,7 +1,8 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -10,8 +11,9 @@ import java.util.Map;
 public class ArchiveImpl implements Serializable, Archive {
 
     private static final long serialVersionUID = 3943672353334594237L;
-    private Map<Integer, Pair<Book, Pair<Integer, List<Pair<UserImpl, Date>>>>> bookArchive = new HashMap<>();
-    private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<UserImpl, Date>>>>> movieArchive = new HashMap<>();
+    public static final double SSINDD = 86400000.0;
+    private Map<Integer, Pair<Book, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> bookArchive = new HashMap<>();
+    private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> movieArchive = new HashMap<>();
 
     /**
      * Empty constructor.
@@ -82,4 +84,38 @@ public class ArchiveImpl implements Serializable, Archive {
     public String toString() {
         return "ArchiveImpl [BookArchive=" + this.bookArchive + ", MovieArchive=" + this.movieArchive + "]";
     }
+
+    @Override
+    public double calculateDifferenceDays(final Type t, final Integer id, final Integer userId) {
+        if (t == Type.BOOK) {
+            int i = this.bookArchive.get(id).getSecond().getSecond().indexOf(userId);
+            return this.dayBetweenDates(this.bookArchive.get(id).getSecond().getSecond().get(i).getSecond());
+        } else if (t == Type.MOVIE) {
+            int i = this.movieArchive.get(id).getSecond().getSecond().indexOf(userId);
+            return this.dayBetweenDates(this.movieArchive.get(id).getSecond().getSecond().get(i).getSecond());
+        } else {
+            throw new RuntimeException("Error type.");
+        }
+    }
+
+    @Override
+    public double dayBetweenDates(final GregorianCalendar fromDate) {
+
+        // Current date
+        Calendar c = Calendar.getInstance();
+        GregorianCalendar toDate = new GregorianCalendar(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH));
+
+        // Conversion in ms
+        long msFromDate = fromDate.getTimeInMillis();
+        long msToDate = toDate.getTimeInMillis();
+
+        long msBetween = msToDate - msFromDate;
+
+        // Conversion in days with math rounding
+        double ddBetween = Math.round(msBetween / ArchiveImpl.SSINDD);
+
+        return ddBetween;
+    }
+
 }
