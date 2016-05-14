@@ -38,6 +38,7 @@ public interface Archive {
     void changeAmount(Type t, Integer id, Integer initAmount);
 
     /**
+     * This method return an Item Type t with identifier id.
      *
      * @param t
      *            Item's type.
@@ -46,5 +47,15 @@ public interface Archive {
      * @return Book or Movie (it depends by Type) with id code.
      */
     Item getItem(final Type t, final Integer id);
+
+    /**
+     * This method removes a Book or Movie from the respective archive.
+     *
+     * @param t
+     *            Item's type
+     * @param id
+     *            Item's identifier.
+     */
+    void removeItem(final Type t, final Integer id);
 
 }

@@ -66,6 +66,19 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
+    public void removeItem(final Type t, final Integer id) {
+        if (t == Type.BOOK) {
+            this.bookArchive.remove(id);
+            System.out.println("Book with id: " + id + "removed.");
+        } else if (t == Type.MOVIE) {
+            this.movieArchive.remove(id);
+            System.out.println("Movie with id: " + id + "removed.");
+        } else {
+            throw new RuntimeException("Error type.");
+        }
+    }
+
+    @Override
     public String toString() {
         return "ArchiveImpl [BookArchive=" + this.bookArchive + ", MovieArchive=" + this.movieArchive + "]";
     }
