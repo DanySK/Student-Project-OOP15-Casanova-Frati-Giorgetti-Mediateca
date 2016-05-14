@@ -87,4 +87,28 @@ public interface Archive {
      */
     double dayBetweenDates(final GregorianCalendar fromDate);
 
+    /**
+     * This method adds the user (userId) to the list of item's loans.
+     *
+     * @param t
+     *            item's type.
+     * @param itemId
+     *            Item's identifier.
+     * @param userId
+     *            User's identifier.
+     */
+    void addUser(final Type t, final Integer itemId, final Integer userId);
+
+    /**
+     * This method removes the user (userId) to the list of item's loans.
+     *
+     * @param t
+     *            item's type.
+     * @param itemId
+     *            Item's identifier.
+     * @param userId
+     *            User's identifier.
+     */
+    void removeUser(final Type t, final Integer itemId, final Integer userId);
+
 }

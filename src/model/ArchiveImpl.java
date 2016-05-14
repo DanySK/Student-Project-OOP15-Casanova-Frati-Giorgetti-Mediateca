@@ -10,8 +10,11 @@ import java.util.Map;
 
 public class ArchiveImpl implements Serializable, Archive {
 
-    private static final long serialVersionUID = 3943672353334594237L;
+    /**
+     * SSINDD is the double used to divide milliseconds and get the days.
+     */
     public static final double SSINDD = 86400000.0;
+    private static final long serialVersionUID = 3943672353334594237L;
     private Map<Integer, Pair<Book, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> bookArchive = new HashMap<>();
     private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> movieArchive = new HashMap<>();
 
@@ -101,10 +104,7 @@ public class ArchiveImpl implements Serializable, Archive {
     @Override
     public double dayBetweenDates(final GregorianCalendar fromDate) {
 
-        // Current date
-        Calendar c = Calendar.getInstance();
-        GregorianCalendar toDate = new GregorianCalendar(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
-                c.get(Calendar.DAY_OF_MONTH));
+        GregorianCalendar toDate = this.getToDay();
 
         // Conversion in ms
         long msFromDate = fromDate.getTimeInMillis();
@@ -116,6 +116,42 @@ public class ArchiveImpl implements Serializable, Archive {
         double ddBetween = Math.round(msBetween / ArchiveImpl.SSINDD);
 
         return ddBetween;
+    }
+
+    GregorianCalendar getToDay() {
+        // Current date
+        Calendar c = Calendar.getInstance();
+        GregorianCalendar toDay = new GregorianCalendar(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
+                c.get(Calendar.DAY_OF_MONTH));
+        return toDay;
+    }
+
+    @Override
+    public void addUser(final Type t, final Integer itemId, final Integer userId) {
+        if (t == Type.BOOK) {
+            this.bookArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
+            System.out.println("User " + userId + " adds to book list " + itemId + " in date " + this.getToDay());
+        } else if (t == Type.MOVIE) {
+            this.movieArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
+            System.out.println("User " + userId + " adds to movie list " + itemId + " in date " + this.getToDay());
+        } else {
+            throw new RuntimeException("Error type.");
+        }
+    }
+
+    @Override
+    public void removeUser(final Type t, final Integer itemId, final Integer userId) {
+        if (t == Type.BOOK) {
+            int i = this.bookArchive.get(itemId).getSecond().getSecond().indexOf(userId);
+            this.bookArchive.get(itemId).getSecond().getSecond().remove(i);
+            System.out.println("User " + userId + " removes to book list " + itemId + " in date " + this.getToDay());
+        } else if (t == Type.MOVIE) {
+            int i = this.movieArchive.get(itemId).getSecond().getSecond().indexOf(userId);
+            this.movieArchive.get(itemId).getSecond().getSecond().remove(i);
+            System.out.println("User " + userId + " removes to movie list " + itemId + " in date " + this.getToDay());
+        } else {
+            throw new RuntimeException("Error type.");
+        }
     }
 
 }
