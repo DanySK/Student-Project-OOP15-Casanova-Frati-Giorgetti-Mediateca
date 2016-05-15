@@ -1,7 +1,5 @@
 package model;
 
-import java.util.GregorianCalendar;
-
 public interface Archive {
 
     /**
@@ -77,17 +75,6 @@ public interface Archive {
     double calculateDifferenceDays(final Type t, final Integer itemId, final Integer userId);
 
     /**
-     * This method calculates the difference of days elapsed from the day when
-     * Item was taken from archive by userId. It uses the current date to
-     * calculate the difference.
-     *
-     * @param fromDate
-     *            item's taken date.
-     * @return the number of days elapsed.
-     */
-    double dayBetweenDates(final GregorianCalendar fromDate);
-
-    /**
      * This method adds the user (userId) to the list of item's loans.
      *
      * @param t
@@ -110,5 +97,16 @@ public interface Archive {
      *            User's identifier.
      */
     void removeUser(final Type t, final Integer itemId, final Integer userId);
+
+    /**
+     * This method check the availability of the Item in the respective archive.
+     * 
+     * @param t
+     *            item's type.
+     * @param itemId
+     *            item's identifier.
+     * @return true if item is available else return false.
+     */
+    boolean checkAvailability(final Type t, final Integer itemId);
 
 }

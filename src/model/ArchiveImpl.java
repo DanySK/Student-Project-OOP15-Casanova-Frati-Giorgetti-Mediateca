@@ -101,8 +101,16 @@ public class ArchiveImpl implements Serializable, Archive {
         }
     }
 
-    @Override
-    public double dayBetweenDates(final GregorianCalendar fromDate) {
+    /**
+     * This method calculates the difference of days elapsed from the day when
+     * Item was taken from archive by userId. It uses the current date to
+     * calculate the difference.
+     *
+     * @param fromDate
+     *            item's taken date.
+     * @return the number of days elapsed.
+     */
+    private double dayBetweenDates(final GregorianCalendar fromDate) {
 
         GregorianCalendar toDate = this.getToDay();
 
@@ -118,7 +126,7 @@ public class ArchiveImpl implements Serializable, Archive {
         return ddBetween;
     }
 
-    GregorianCalendar getToDay() {
+    private GregorianCalendar getToDay() {
         // Current date
         Calendar c = Calendar.getInstance();
         GregorianCalendar toDay = new GregorianCalendar(c.get(Calendar.YEAR), c.get(Calendar.MONTH),
@@ -154,4 +162,41 @@ public class ArchiveImpl implements Serializable, Archive {
         }
     }
 
+    @Override
+    public boolean checkAvailability(final Type t, final Integer itemId) {
+        if (t == Type.BOOK) {
+            int i = this.bookArchive.get(itemId).getSecond().getFirst()
+                    - this.bookArchive.get(itemId).getSecond().getSecond().size();
+            if (i == 0) {
+                System.out.println("Book: " + itemId + "not available");
+                return false;
+            }
+            if (i > 0) {
+                System.out.println("Book: " + itemId + "available");
+                return true;
+            }
+            if (i < 0) {
+                throw new RuntimeException("Amount < 0 in the bookArchive, BookId: " + itemId);
+            }
+
+        } else if (t == Type.MOVIE) {
+            int i = this.movieArchive.get(itemId).getSecond().getFirst()
+                    - this.movieArchive.get(itemId).getSecond().getSecond().size();
+            if (i == 0) {
+                System.out.println("Movie: " + itemId + "not available");
+                return false;
+            }
+            if (i > 0) {
+                System.out.println("Movie: " + itemId + "available");
+                return true;
+            }
+            if (i < 0) {
+                throw new RuntimeException("Amount < 0 in the movieArchive, MovieId: " + itemId);
+            }
+        } else {
+            throw new RuntimeException("Error type.");
+        }
+
+        return false;
+    }
 }
