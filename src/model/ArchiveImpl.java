@@ -3,10 +3,11 @@ package model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.Maps;
 
 /**
  * This class implements Serializable and Archive. This class is the 'real
@@ -23,8 +24,10 @@ public class ArchiveImpl implements Serializable, Archive {
      */
     public static final double SSINDD = 86400000.0;
     private static final long serialVersionUID = 3943672353334594237L;
-    private Map<Integer, Pair<Book, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> bookArchive = new HashMap<>();
-    private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> movieArchive = new HashMap<>();
+    private Map<Integer, Pair<Book, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> bookArchive = Maps
+            .newHashMap();
+    private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> movieArchive = Maps
+            .newHashMap();
 
     /**
      * Empty constructor. NON COMPLETO DEVE ESSERE AGGIUNTO IL CASO IN CUI
@@ -45,7 +48,9 @@ public class ArchiveImpl implements Serializable, Archive {
                     System.out.println(e.getMessage());
                 }
             } else {
-                this.bookArchive.put(i.getiD(), new Pair(i, new Pair(initNumCopy, new LinkedList<>())));
+                this.bookArchive.put(i.getiD(), new Pair<Book, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>(
+                        (Book) i,
+                        new Pair<Integer, List<Pair<Integer, GregorianCalendar>>>(initNumCopy, new LinkedList<>())));
             }
 
         }
@@ -59,7 +64,9 @@ public class ArchiveImpl implements Serializable, Archive {
                     System.out.println(e.getMessage());
                 }
             } else {
-                this.movieArchive.put(i.getiD(), new Pair(i, new Pair(initNumCopy, new LinkedList<>())));
+                this.movieArchive.put(i.getiD(), new Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>(
+                        (Movie) i,
+                        new Pair<Integer, List<Pair<Integer, GregorianCalendar>>>(initNumCopy, new LinkedList<>())));
             }
         }
 
