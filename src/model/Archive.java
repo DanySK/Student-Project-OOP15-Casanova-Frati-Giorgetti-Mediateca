@@ -103,8 +103,11 @@ public interface Archive {
      *            Item's identifier.
      * @param userId
      *            User's identifier.
+     * @throws Exception
+     *             in the case which the item is not in the archive or the user
+     *             is not in the item's list.
      */
-    void removeUser(final Type t, final Integer itemId, final Integer userId);
+    void removeUser(final Type t, final Integer itemId, final Integer userId) throws Exception;
 
     /**
      * This method check the availability of the Item in the respective archive.
