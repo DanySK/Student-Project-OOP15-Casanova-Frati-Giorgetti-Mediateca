@@ -76,4 +76,14 @@ public class Book extends ItemImpl {
     public BookGenre getGenre() {
         return this.genre;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        return super.equals(o);
+    }
 }

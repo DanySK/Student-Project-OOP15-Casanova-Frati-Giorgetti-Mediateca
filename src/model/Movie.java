@@ -74,4 +74,14 @@ public class Movie extends ItemImpl {
     public Boolean getColour() {
         return this.colour;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object o) {
+        return super.equals(o);
+    }
 }
