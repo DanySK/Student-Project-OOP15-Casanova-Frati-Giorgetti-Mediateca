@@ -1,5 +1,13 @@
 package model;
 
+import java.util.List;
+
+/**
+ * This interface contains methods to communicate with the archives.
+ *
+ * @author Edoardo
+ *
+ */
 public interface Archive {
 
     /**
@@ -100,7 +108,7 @@ public interface Archive {
 
     /**
      * This method check the availability of the Item in the respective archive.
-     * 
+     *
      * @param t
      *            item's type.
      * @param itemId
@@ -108,5 +116,21 @@ public interface Archive {
      * @return true if item is available else return false.
      */
     boolean checkAvailability(final Type t, final Integer itemId);
+
+    /**
+     * This method return a list of UserID that have taken a required Item from
+     * the archives.
+     *
+     * @param t
+     *            Item's type.
+     * @param itemId
+     *            Item's identifier.
+     * @return the list of users identifier that have taken a required Item from
+     *         the archives.
+     * @throws Exception
+     *             in the case which the item required is not present in the
+     *             archive.
+     */
+    List<Integer> getUserList(final Type t, final Integer itemId) throws Exception;
 
 }

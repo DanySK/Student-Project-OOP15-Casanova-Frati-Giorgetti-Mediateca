@@ -8,6 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class implements Serializable and Archive. This class is the 'real
+ * database' of the project. It contains two complex field which are able to
+ * save a lot of information about book and movie in the media-center.
+ *
+ * @author Edoardo
+ *
+ */
 public class ArchiveImpl implements Serializable, Archive {
 
     /**
@@ -19,8 +27,10 @@ public class ArchiveImpl implements Serializable, Archive {
     private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> movieArchive = new HashMap<>();
 
     /**
-     * Empty constructor.
+     * Empty constructor. NON COMPLETO DEVE ESSERE AGGIUNTO IL CASO IN CUI
+     * L'ARCHIVIO HA GIA' UN FILE DI CONFIGURAZIONE.
      */
+
     public ArchiveImpl() {
     }
 
@@ -101,15 +111,6 @@ public class ArchiveImpl implements Serializable, Archive {
         }
     }
 
-    /**
-     * This method calculates the difference of days elapsed from the day when
-     * Item was taken from archive by userId. It uses the current date to
-     * calculate the difference.
-     *
-     * @param fromDate
-     *            item's taken date.
-     * @return the number of days elapsed.
-     */
     private double dayBetweenDates(final GregorianCalendar fromDate) {
 
         GregorianCalendar toDate = this.getToDay();
@@ -179,7 +180,8 @@ public class ArchiveImpl implements Serializable, Archive {
                 throw new RuntimeException("Amount < 0 in the bookArchive, BookId: " + itemId);
             }
 
-        } else if (t == Type.MOVIE) {
+        }
+        if (t == Type.MOVIE) {
             int i = this.movieArchive.get(itemId).getSecond().getFirst()
                     - this.movieArchive.get(itemId).getSecond().getSecond().size();
             if (i == 0) {
@@ -198,5 +200,34 @@ public class ArchiveImpl implements Serializable, Archive {
         }
 
         return false;
+    }
+
+    @Override
+    public List<Integer> getUserList(final Type t, final Integer itemId) throws Exception {
+        LinkedList<Integer> ls = new LinkedList<>();
+        if (t == Type.BOOK) {
+            if (this.bookArchive.containsKey(itemId)) {
+                for (int i = 0; i < this.bookArchive.get(itemId).getSecond().getSecond().size(); i++) {
+                    ls.add(this.bookArchive.get(itemId).getSecond().getSecond().get(i).getFirst());
+                }
+                return ls;
+            } else {
+                throw new Exception("Book: " + itemId + "Not contained into the archive.");
+            }
+        }
+        if (t == Type.MOVIE) {
+            if (this.movieArchive.containsKey(itemId)) {
+                for (int i = 0; i < this.movieArchive.get(itemId).getSecond().getSecond().size(); i++) {
+                    ls.add(this.movieArchive.get(itemId).getSecond().getSecond().get(i).getFirst());
+                }
+                return ls;
+            } else {
+                throw new Exception("Movie: " + itemId + " Not contained into the archive.");
+            }
+        }
+        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
+            throw new RuntimeException("Error Type.");
+        }
+        return null;
     }
 }
