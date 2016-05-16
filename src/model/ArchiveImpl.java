@@ -81,16 +81,25 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void removeItem(final Type t, final Integer id) {
+    public void removeItem(final Type t, final Integer id) throws Exception {
         if (t == Type.BOOK) {
-            this.bookArchive.remove(id);
-            System.out.println("Book with id: " + id + "removed.");
-        } else if (t == Type.MOVIE) {
-            this.movieArchive.remove(id);
-            System.out.println("Movie with id: " + id + "removed.");
-        } else {
+            if (this.bookArchive.containsKey(id)) {
+                this.bookArchive.remove(id);
+                System.out.println("Book with id: " + id + "removed.");
+            } else {
+                throw new Exception("Book: " + id + " is not into the archive.");
+            }
+            if (this.movieArchive.containsKey(id)) {
+                this.movieArchive.remove(id);
+                System.out.println("Movie with id: " + id + "removed.");
+            } else {
+                throw new Exception("Movie: " + id + " is not into the archive.");
+            }
+        }
+        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
             throw new RuntimeException("Error type.");
         }
+
     }
 
     @Override
@@ -99,7 +108,7 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public double calculateDifferenceDays(final Type t, final Integer itemId, final Integer userId) throws Exception {
+    public double calculateDifferenceDays(final Type t, final Integer itemId, final Integer userId) throws Exception { // OK
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 int i = this.bookArchive.get(itemId).getSecond().getSecond().indexOf(userId);

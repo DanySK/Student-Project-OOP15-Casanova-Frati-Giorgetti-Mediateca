@@ -63,8 +63,10 @@ public interface Archive {
      *            Item's type
      * @param id
      *            Item's identifier.
+     * @throws Exception
+     *             in the case which the item is not in the archive.
      */
-    void removeItem(final Type t, final Integer id);
+    void removeItem(final Type t, final Integer id) throws Exception;
 
     /**
      * This method apply dayBetweenDates to the required item of Type t with
