@@ -30,31 +30,36 @@ public class ArchiveImpl implements Serializable, Archive {
      * Empty constructor. NON COMPLETO DEVE ESSERE AGGIUNTO IL CASO IN CUI
      * L'ARCHIVIO HA GIA' UN FILE DI CONFIGURAZIONE.
      */
-
     public ArchiveImpl() {
     }
 
     @Override
     public <X extends ItemImpl> void addItem(final X i, final Integer initNumCopy) {
         if (Book.class.isInstance(i)) {
-            if (this.bookArchive.isEmpty()) {
-                if (this.bookArchive.containsKey(i.getiD())) {
-                    System.out.println(
-                            "Book already present in the archive!\nAdding of initNumCopy to te pre-existing value");
+            if (this.bookArchive.containsKey(i.getiD())) {
+                System.out.println(
+                        "Book already present in the archive!\nAdding of initNumCopy to te pre-existing value");
+                try {
                     this.changeAmount(Type.BOOK, i.getiD(), initNumCopy);
-                } else {
-                    this.bookArchive.put(i.getiD(), new Pair(i, new Pair(initNumCopy, new LinkedList<>())));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
+            } else {
+                this.bookArchive.put(i.getiD(), new Pair(i, new Pair(initNumCopy, new LinkedList<>())));
             }
+
         }
         if (Movie.class.isInstance(i)) {
             if (this.movieArchive.containsKey(i.getiD())) {
                 System.out.println(
                         "Movie already present in the archive!\nAdding of initNumCopy to te pre-existing value");
-                this.changeAmount(Type.MOVIE, i.getiD(), initNumCopy);
+                try {
+                    this.changeAmount(Type.MOVIE, i.getiD(), initNumCopy);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
             } else {
                 this.movieArchive.put(i.getiD(), new Pair(i, new Pair(initNumCopy, new LinkedList<>())));
-                System.out.println(i.toString() + "Sono di movie");
             }
         }
 
@@ -85,7 +90,7 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public Item getItem(final Type t, final Integer itemId) throws Exception { // OK
+    public Item getItem(final Type t, final Integer itemId) throws Exception {
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 return this.bookArchive.get(itemId).getFirst();
@@ -107,7 +112,7 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void removeItem(final Type t, final Integer itemId) throws Exception { // OK
+    public void removeItem(final Type t, final Integer itemId) throws Exception {
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 this.bookArchive.remove(itemId);
@@ -115,6 +120,8 @@ public class ArchiveImpl implements Serializable, Archive {
             } else {
                 throw new Exception("Book: " + itemId + " is not into the archive.");
             }
+        }
+        if (t == Type.MOVIE) {
             if (this.movieArchive.containsKey(itemId)) {
                 this.movieArchive.remove(itemId);
                 System.out.println("Movie with id: " + itemId + "removed.");
@@ -125,7 +132,6 @@ public class ArchiveImpl implements Serializable, Archive {
         if ((t != Type.BOOK) && (t != Type.MOVIE)) {
             throw new RuntimeException("Error type.");
         }
-
     }
 
     @Override
@@ -142,7 +148,7 @@ public class ArchiveImpl implements Serializable, Archive {
                     return this
                             .dayBetweenDates(this.bookArchive.get(itemId).getSecond().getSecond().get(i).getSecond());
                 } else {
-                    throw new Exception("User: " + userId + "Not contained into the " + userId + " list");
+                    throw new Exception("User: " + userId + "Not contained into the " + itemId + " list");
                 }
             } else {
                 throw new Exception("Book: " + itemId + "Not contained into the archive.");
@@ -155,7 +161,7 @@ public class ArchiveImpl implements Serializable, Archive {
                     return this
                             .dayBetweenDates(this.movieArchive.get(itemId).getSecond().getSecond().get(i).getSecond());
                 } else {
-                    throw new Exception("User: " + userId + "Not contained into the " + userId + " list");
+                    throw new Exception("User: " + userId + "Not contained into the " + itemId + " list");
                 }
             } else {
                 throw new Exception("Movie: " + itemId + "Not contained into the archive.");
@@ -165,6 +171,7 @@ public class ArchiveImpl implements Serializable, Archive {
             throw new RuntimeException("Error type.");
         }
         return -1;
+
     }
 
     private double dayBetweenDates(final GregorianCalendar fromDate) {
@@ -192,21 +199,22 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void addUser(final Type t, final Integer itemId, final Integer userId) throws Exception { // OK
+    public void addUser(final Type t, final Integer itemId, final Integer userId) throws Exception {
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
-                this.bookArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
+                this.bookArchive.get(itemId).getSecond().getSecond().add(new Pair<>(userId, this.getToDay()));
                 System.out.println("User " + userId + " adds to book list " + itemId + " in date " + this.getToDay());
             } else {
-                throw new Exception("Book: " + itemId + "Not contained into the archive.");
+                throw new Exception("User: " + userId + "can not take book: " + itemId
+                        + "becouse it is not contained into the archive.");
             }
         }
         if (t == Type.MOVIE) {
             if (this.movieArchive.containsKey(itemId)) {
-                this.movieArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
-                System.out.println("User " + userId + " adds to movie list " + itemId + " in date " + this.getToDay());
+                this.movieArchive.get(itemId).getSecond().getSecond().add(new Pair<>(userId, this.getToDay()));
+                System.out.println("User: " + userId + "can not take movie: " + itemId
+                        + "becouse it is not contained into the archive.");
             } else {
-
                 throw new Exception("Movie: " + itemId + "Not contained into the archive.");
             }
         }
@@ -216,7 +224,7 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void removeUser(final Type t, final Integer itemId, final Integer userId) throws Exception { // OK
+    public void removeUser(final Type t, final Integer itemId, final Integer userId) throws Exception {
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 int i = this.bookArchive.get(itemId).getSecond().getSecond().indexOf(userId);
@@ -225,7 +233,7 @@ public class ArchiveImpl implements Serializable, Archive {
                     System.out.println(
                             "User " + userId + " removes from book list " + itemId + " in date " + this.getToDay());
                 } else {
-                    throw new Exception("User: " + userId + "is not in the " + itemId + " list");
+                    throw new Exception("User: " + userId + "is not in the book: " + itemId + " list");
                 }
             } else {
                 throw new Exception("Book: " + itemId + "Not contained into the archive.");
@@ -239,7 +247,7 @@ public class ArchiveImpl implements Serializable, Archive {
                     System.out.println(
                             "User " + userId + " removes from movie list " + itemId + " in date " + this.getToDay());
                 } else {
-                    throw new Exception("User: " + userId + "is not in the " + itemId + " list");
+                    throw new Exception("User: " + userId + "is not in the movie: " + itemId + " list");
                 }
             } else {
                 throw new Exception("Movie: " + itemId + "Not contained into the archive.");
@@ -251,7 +259,7 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public boolean checkAvailability(final Type t, final Integer itemId) throws Exception { // OK
+    public boolean checkAvailability(final Type t, final Integer itemId) throws Exception {
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 int i = this.bookArchive.get(itemId).getSecond().getFirst()
@@ -300,6 +308,9 @@ public class ArchiveImpl implements Serializable, Archive {
     public List<Integer> getUserList(final Type t, final Integer itemId) throws Exception { // OK
         LinkedList<Integer> ls = new LinkedList<>();
         if (t == Type.BOOK) {
+            if (this.bookArchive.isEmpty()) {
+                return ls;
+            }
             if (this.bookArchive.containsKey(itemId)) {
                 for (int i = 0; i < this.bookArchive.get(itemId).getSecond().getSecond().size(); i++) {
                     ls.add(this.bookArchive.get(itemId).getSecond().getSecond().get(i).getFirst());
@@ -310,6 +321,9 @@ public class ArchiveImpl implements Serializable, Archive {
             }
         }
         if (t == Type.MOVIE) {
+            if (this.movieArchive.isEmpty()) {
+                return ls;
+            }
             if (this.movieArchive.containsKey(itemId)) {
                 for (int i = 0; i < this.movieArchive.get(itemId).getSecond().getSecond().size(); i++) {
                     ls.add(this.movieArchive.get(itemId).getSecond().getSecond().get(i).getFirst());
@@ -322,6 +336,6 @@ public class ArchiveImpl implements Serializable, Archive {
         if ((t != Type.BOOK) && (t != Type.MOVIE)) {
             throw new RuntimeException("Error Type.");
         }
-        return null;
+        return ls;
     }
 }
