@@ -42,8 +42,10 @@ public interface Archive {
      *            Item's identifier.
      * @param initAmount
      *            amount of copy to add to the archive
+     * @throws Exception
+     *             in the case which the item is not in the archive.
      */
-    void changeAmount(Type t, Integer id, Integer initAmount);
+    void changeAmount(Type t, Integer id, Integer initAmount) throws Exception;
 
     /**
      * This method return an Item Type t with identifier id.

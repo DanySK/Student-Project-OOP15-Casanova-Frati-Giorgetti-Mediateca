@@ -61,28 +61,43 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void changeAmount(final Type t, final Integer id, final Integer amount) {
+    public void changeAmount(final Type t, final Integer itemId, final Integer amount) throws Exception {
         if (t == Type.BOOK) {
-            this.bookArchive.get(id).getSecond().setFirst(this.bookArchive.get(id).getSecond().getFirst() + amount);
-        } else if (t == Type.MOVIE) {
-            this.movieArchive.get(id).getSecond().setFirst(this.movieArchive.get(id).getSecond().getFirst() + amount);
-        }
-    }
-
-    @Override
-    public Item getItem(final Type t, final Integer id) throws Exception {
-        if (t == Type.BOOK) {
-            if (this.bookArchive.containsKey(id)) {
-                return this.bookArchive.get(id).getFirst();
+            if (this.bookArchive.containsKey(itemId)) {
+                this.bookArchive.get(itemId).getSecond()
+                        .setFirst(this.bookArchive.get(itemId).getSecond().getFirst() + amount);
             } else {
-                throw new Exception("Book: " + id + " is not into the archive.");
+                throw new Exception("Book: " + itemId + " is not into the archive.");
             }
         }
         if (t == Type.MOVIE) {
-            if (this.movieArchive.containsKey(id)) {
-                return this.movieArchive.get(id).getFirst();
+            if (this.movieArchive.containsKey(itemId)) {
+                this.movieArchive.get(itemId).getSecond()
+                        .setFirst(this.movieArchive.get(itemId).getSecond().getFirst() + amount);
             } else {
-                throw new Exception("Book: " + id + " is not into the archive.");
+                throw new Exception("Movie: " + itemId + " is not into the archive.");
+            }
+        }
+        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
+            throw new Exception("Error Type.");
+        }
+
+    }
+
+    @Override
+    public Item getItem(final Type t, final Integer itemId) throws Exception { // OK
+        if (t == Type.BOOK) {
+            if (this.bookArchive.containsKey(itemId)) {
+                return this.bookArchive.get(itemId).getFirst();
+            } else {
+                throw new Exception("Book: " + itemId + " is not into the archive.");
+            }
+        }
+        if (t == Type.MOVIE) {
+            if (this.movieArchive.containsKey(itemId)) {
+                return this.movieArchive.get(itemId).getFirst();
+            } else {
+                throw new Exception("Movie: " + itemId + " is not into the archive.");
             }
         }
         if ((t != Type.BOOK) && (t != Type.MOVIE)) {
@@ -92,19 +107,19 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void removeItem(final Type t, final Integer id) throws Exception { // OK
+    public void removeItem(final Type t, final Integer itemId) throws Exception { // OK
         if (t == Type.BOOK) {
-            if (this.bookArchive.containsKey(id)) {
-                this.bookArchive.remove(id);
-                System.out.println("Book with id: " + id + "removed.");
+            if (this.bookArchive.containsKey(itemId)) {
+                this.bookArchive.remove(itemId);
+                System.out.println("Book with id: " + itemId + "removed.");
             } else {
-                throw new Exception("Book: " + id + " is not into the archive.");
+                throw new Exception("Book: " + itemId + " is not into the archive.");
             }
-            if (this.movieArchive.containsKey(id)) {
-                this.movieArchive.remove(id);
-                System.out.println("Movie with id: " + id + "removed.");
+            if (this.movieArchive.containsKey(itemId)) {
+                this.movieArchive.remove(itemId);
+                System.out.println("Movie with id: " + itemId + "removed.");
             } else {
-                throw new Exception("Movie: " + id + " is not into the archive.");
+                throw new Exception("Movie: " + itemId + " is not into the archive.");
             }
         }
         if ((t != Type.BOOK) && (t != Type.MOVIE)) {
