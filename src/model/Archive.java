@@ -78,9 +78,12 @@ public interface Archive {
      * @param userId
      *            User's Identifier.
      * @return the number of days elapsed
+     * @throws Exception
+     *             in the case which the item is not in the archive or the user
+     *             is not in the item's list.
      *
      */
-    double calculateDifferenceDays(final Type t, final Integer itemId, final Integer userId);
+    double calculateDifferenceDays(final Type t, final Integer itemId, final Integer userId) throws Exception;
 
     /**
      * This method adds the user (userId) to the list of item's loans.

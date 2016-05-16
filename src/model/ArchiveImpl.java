@@ -99,16 +99,37 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public double calculateDifferenceDays(final Type t, final Integer id, final Integer userId) {
+    public double calculateDifferenceDays(final Type t, final Integer itemId, final Integer userId) throws Exception {
         if (t == Type.BOOK) {
-            int i = this.bookArchive.get(id).getSecond().getSecond().indexOf(userId);
-            return this.dayBetweenDates(this.bookArchive.get(id).getSecond().getSecond().get(i).getSecond());
-        } else if (t == Type.MOVIE) {
-            int i = this.movieArchive.get(id).getSecond().getSecond().indexOf(userId);
-            return this.dayBetweenDates(this.movieArchive.get(id).getSecond().getSecond().get(i).getSecond());
-        } else {
+            if (this.bookArchive.containsKey(itemId)) {
+                int i = this.bookArchive.get(itemId).getSecond().getSecond().indexOf(userId);
+                if (i >= 0) {
+                    return this
+                            .dayBetweenDates(this.bookArchive.get(itemId).getSecond().getSecond().get(i).getSecond());
+                } else {
+                    throw new Exception("User: " + userId + "Not contained into the " + userId + " list");
+                }
+            } else {
+                throw new Exception("Book: " + itemId + "Not contained into the archive.");
+            }
+        }
+        if (t == Type.MOVIE) {
+            if (this.movieArchive.containsKey(itemId)) {
+                int i = this.movieArchive.get(itemId).getSecond().getSecond().indexOf(userId);
+                if (i >= 0) {
+                    return this
+                            .dayBetweenDates(this.movieArchive.get(itemId).getSecond().getSecond().get(i).getSecond());
+                } else {
+                    throw new Exception("User: " + userId + "Not contained into the " + userId + " list");
+                }
+            } else {
+                throw new Exception("Movie: " + itemId + "Not contained into the archive.");
+            }
+        }
+        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
             throw new RuntimeException("Error type.");
         }
+        return -1;
     }
 
     private double dayBetweenDates(final GregorianCalendar fromDate) {
@@ -136,7 +157,7 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void addUser(final Type t, final Integer itemId, final Integer userId) throws Exception {
+    public void addUser(final Type t, final Integer itemId, final Integer userId) throws Exception { // OK
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 this.bookArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
@@ -151,7 +172,7 @@ public class ArchiveImpl implements Serializable, Archive {
                 System.out.println("User " + userId + " adds to movie list " + itemId + " in date " + this.getToDay());
             } else {
 
-                throw new Exception("Book: " + itemId + "Not contained into the archive.");
+                throw new Exception("Movie: " + itemId + "Not contained into the archive.");
             }
         }
         if ((t != Type.MOVIE) && (t != Type.BOOK)) {
@@ -164,7 +185,7 @@ public class ArchiveImpl implements Serializable, Archive {
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 int i = this.bookArchive.get(itemId).getSecond().getSecond().indexOf(userId);
-                if (i > 0) {
+                if (i >= 0) {
                     this.bookArchive.get(itemId).getSecond().getSecond().remove(i);
                     System.out.println(
                             "User " + userId + " removes from book list " + itemId + " in date " + this.getToDay());
@@ -178,7 +199,7 @@ public class ArchiveImpl implements Serializable, Archive {
         if (t == Type.MOVIE) {
             if (this.movieArchive.containsKey(itemId)) {
                 int i = this.movieArchive.get(itemId).getSecond().getSecond().indexOf(userId);
-                if (i > 0) {
+                if (i >= 0) {
                     this.movieArchive.get(itemId).getSecond().getSecond().remove(i);
                     System.out.println(
                             "User " + userId + " removes from movie list " + itemId + " in date " + this.getToDay());
