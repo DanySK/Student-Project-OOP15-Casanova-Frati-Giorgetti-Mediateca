@@ -164,41 +164,48 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public boolean checkAvailability(final Type t, final Integer itemId) {
+    public boolean checkAvailability(final Type t, final Integer itemId) throws Exception {
         if (t == Type.BOOK) {
-            int i = this.bookArchive.get(itemId).getSecond().getFirst()
-                    - this.bookArchive.get(itemId).getSecond().getSecond().size();
-            if (i == 0) {
-                System.out.println("Book: " + itemId + "not available");
-                return false;
+            if (this.bookArchive.containsKey(itemId)) {
+                int i = this.bookArchive.get(itemId).getSecond().getFirst()
+                        - this.bookArchive.get(itemId).getSecond().getSecond().size();
+                if (i == 0) {
+                    System.out.println("Book: " + itemId + "not available");
+                    return false;
+                }
+                if (i > 0) {
+                    System.out.println("Book: " + itemId + "available");
+                    return true;
+                }
+                if (i < 0) {
+                    throw new RuntimeException("Amount < 0 in the bookArchive, BookId: " + itemId);
+                }
+            } else {
+                throw new Exception("Book: " + itemId + "Not contained into the archive.");
             }
-            if (i > 0) {
-                System.out.println("Book: " + itemId + "available");
-                return true;
-            }
-            if (i < 0) {
-                throw new RuntimeException("Amount < 0 in the bookArchive, BookId: " + itemId);
-            }
-
         }
         if (t == Type.MOVIE) {
-            int i = this.movieArchive.get(itemId).getSecond().getFirst()
-                    - this.movieArchive.get(itemId).getSecond().getSecond().size();
-            if (i == 0) {
-                System.out.println("Movie: " + itemId + "not available");
-                return false;
+            if (this.movieArchive.containsKey(itemId)) {
+                int i = this.movieArchive.get(itemId).getSecond().getFirst()
+                        - this.movieArchive.get(itemId).getSecond().getSecond().size();
+                if (i == 0) {
+                    System.out.println("Movie: " + itemId + "not available");
+                    return false;
+                }
+                if (i > 0) {
+                    System.out.println("Movie: " + itemId + "available");
+                    return true;
+                }
+                if (i < 0) {
+                    throw new RuntimeException("Amount < 0 in the movieArchive, MovieId: " + itemId);
+                }
+            } else {
+                throw new Exception("Movie: " + itemId + "Not contained into the archive.");
             }
-            if (i > 0) {
-                System.out.println("Movie: " + itemId + "available");
-                return true;
-            }
-            if (i < 0) {
-                throw new RuntimeException("Amount < 0 in the movieArchive, MovieId: " + itemId);
-            }
-        } else {
+        }
+        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
             throw new RuntimeException("Error type.");
         }
-
         return false;
     }
 
