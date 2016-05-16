@@ -27,7 +27,7 @@ public class ItemImpl implements Item, Serializable {
     private final String author;
     private final Language currentLanguage;
     private Optional<String> pathCover = Optional.absent();
-    private List<Review> setReview = new LinkedList<Review>();
+    private List<ReviewImpl> setReview = new LinkedList<ReviewImpl>();
     private int like;
     private float averageVote;
 
@@ -105,7 +105,7 @@ public class ItemImpl implements Item, Serializable {
     }
 
     @Override
-    public List<Review> getSetReview() {
+    public List<ReviewImpl> getSetReview() {
         return this.setReview;
     }
 
@@ -136,7 +136,7 @@ public class ItemImpl implements Item, Serializable {
     }
 
     @Override
-    public void addReview(final Review rev) {
+    public void addReview(final ReviewImpl rev) {
         this.getSetReview().add(rev);
         this.setAverageVote();
     }

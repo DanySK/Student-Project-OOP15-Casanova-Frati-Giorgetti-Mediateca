@@ -74,7 +74,7 @@ public interface Item {
      *
      * @return Item's List of Review, if it is present.
      */
-    List<Review> getSetReview();
+    List<ReviewImpl> getSetReview();
 
     /**
      *
@@ -88,7 +88,7 @@ public interface Item {
      * @param rev
      *            in order to add this review to the item's set
      */
-    void addReview(final Review rev);
+    void addReview(ReviewImpl rev);
 
     /**
      * Add like to the Item.
@@ -105,4 +105,5 @@ public interface Item {
      * @return Item's average vote.
      */
     float getAverageVote();
+
 }
