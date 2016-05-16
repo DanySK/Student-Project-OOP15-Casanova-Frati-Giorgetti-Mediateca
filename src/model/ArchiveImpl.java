@@ -136,20 +136,31 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void addUser(final Type t, final Integer itemId, final Integer userId) {
+    public void addUser(final Type t, final Integer itemId, final Integer userId) throws Exception {
         if (t == Type.BOOK) {
-            this.bookArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
-            System.out.println("User " + userId + " adds to book list " + itemId + " in date " + this.getToDay());
-        } else if (t == Type.MOVIE) {
-            this.movieArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
-            System.out.println("User " + userId + " adds to movie list " + itemId + " in date " + this.getToDay());
-        } else {
+            if (this.bookArchive.containsKey(itemId)) {
+                this.bookArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
+                System.out.println("User " + userId + " adds to book list " + itemId + " in date " + this.getToDay());
+            } else {
+                throw new Exception("Book: " + itemId + "Not contained into the archive.");
+            }
+        }
+        if (t == Type.MOVIE) {
+            if (this.movieArchive.containsKey(itemId)) {
+                this.movieArchive.get(itemId).getSecond().getSecond().add(new Pair(userId, this.getToDay()));
+                System.out.println("User " + userId + " adds to movie list " + itemId + " in date " + this.getToDay());
+            } else {
+
+                throw new Exception("Book: " + itemId + "Not contained into the archive.");
+            }
+        }
+        if ((t != Type.MOVIE) && (t != Type.BOOK)) {
             throw new RuntimeException("Error type.");
         }
     }
 
     @Override
-    public void removeUser(final Type t, final Integer itemId, final Integer userId) throws Exception {
+    public void removeUser(final Type t, final Integer itemId, final Integer userId) throws Exception { // OK
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 int i = this.bookArchive.get(itemId).getSecond().getSecond().indexOf(userId);
@@ -184,7 +195,7 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public boolean checkAvailability(final Type t, final Integer itemId) throws Exception {
+    public boolean checkAvailability(final Type t, final Integer itemId) throws Exception { // OK
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {
                 int i = this.bookArchive.get(itemId).getSecond().getFirst()
@@ -230,7 +241,7 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public List<Integer> getUserList(final Type t, final Integer itemId) throws Exception {
+    public List<Integer> getUserList(final Type t, final Integer itemId) throws Exception { // OK
         LinkedList<Integer> ls = new LinkedList<>();
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(itemId)) {

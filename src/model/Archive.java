@@ -91,8 +91,10 @@ public interface Archive {
      *            Item's identifier.
      * @param userId
      *            User's identifier.
+     * @throws Exception
+     *             in the case which the item is not in the archive.
      */
-    void addUser(final Type t, final Integer itemId, final Integer userId);
+    void addUser(final Type t, final Integer itemId, final Integer userId) throws Exception;
 
     /**
      * This method removes the user (userId) to the list of item's loans.
