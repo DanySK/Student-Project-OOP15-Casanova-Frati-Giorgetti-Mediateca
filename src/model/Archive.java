@@ -53,8 +53,10 @@ public interface Archive {
      * @param id
      *            Item's identifier.
      * @return Book or Movie (it depends by Type) with id code.
+     * @throws Exception
+     *             in the case which the item is not in the archive.
      */
-    Item getItem(final Type t, final Integer id);
+    Item getItem(final Type t, final Integer id) throws Exception;
 
     /**
      * This method removes a Book or Movie from the respective archive.

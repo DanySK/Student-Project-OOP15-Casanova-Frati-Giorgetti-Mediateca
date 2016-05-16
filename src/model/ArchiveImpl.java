@@ -70,18 +70,29 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public Item getItem(final Type t, final Integer id) {
+    public Item getItem(final Type t, final Integer id) throws Exception {
         if (t == Type.BOOK) {
-            return this.bookArchive.get(id).getFirst();
-        } else if (t == Type.MOVIE) {
-            return this.movieArchive.get(id).getFirst();
-        } else {
+            if (this.bookArchive.containsKey(id)) {
+                return this.bookArchive.get(id).getFirst();
+            } else {
+                throw new Exception("Book: " + id + " is not into the archive.");
+            }
+        }
+        if (t == Type.MOVIE) {
+            if (this.movieArchive.containsKey(id)) {
+                return this.movieArchive.get(id).getFirst();
+            } else {
+                throw new Exception("Book: " + id + " is not into the archive.");
+            }
+        }
+        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
             throw new RuntimeException("Error type.");
         }
+        return null;
     }
 
     @Override
-    public void removeItem(final Type t, final Integer id) throws Exception {
+    public void removeItem(final Type t, final Integer id) throws Exception { // OK
         if (t == Type.BOOK) {
             if (this.bookArchive.containsKey(id)) {
                 this.bookArchive.remove(id);
