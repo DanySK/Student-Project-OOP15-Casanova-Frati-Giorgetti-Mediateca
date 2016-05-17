@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * This interface contains methods to communicate with the archives.
@@ -125,8 +125,6 @@ public interface Archive {
      * This method return a list of UserID that have taken a required Item from
      * the archives.
      *
-     * @param t
-     *            Item's type.
      * @param itemId
      *            Item's identifier.
      * @return the list of users identifier that have taken a required Item from
@@ -135,6 +133,6 @@ public interface Archive {
      *             in the case which the item required is not present in the
      *             archive.
      */
-    List<Integer> getUserList(final Type t, final Integer itemId) throws Exception;
+    Set<Integer> getUserList(final Integer itemId) throws Exception;
 
 }

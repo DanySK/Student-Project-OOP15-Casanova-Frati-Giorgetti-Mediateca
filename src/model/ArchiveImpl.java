@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * This class implements Serializable and Archive. This class is the 'real
@@ -153,36 +153,10 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public List<Integer> getUserList(final Type t, final Integer itemId) throws Exception { // OK
-        LinkedList<Integer> ls = new LinkedList<>();
-        if (t == Type.BOOK) {
-            if (this.bookArchive.isEmpty()) {
-                return ls;
-            }
-            if (this.bookArchive.containsKey(itemId)) {
-                for (int i = 0; i < this.bookArchive.get(itemId).getSecond().getSecond().size(); i++) {
-                    ls.add(this.bookArchive.get(itemId).getSecond().getSecond().get(i).getFirst());
-                }
-                return ls;
-            } else {
-                throw new Exception("Book: " + itemId + "Not contained into the archive.");
-            }
-        }
-        if (t == Type.MOVIE) {
-            if (this.movieArchive.isEmpty()) {
-                return ls;
-            }
-            if (this.movieArchive.containsKey(itemId)) {
-                for (int i = 0; i < this.movieArchive.get(itemId).getSecond().getSecond().size(); i++) {
-                    ls.add(this.movieArchive.get(itemId).getSecond().getSecond().get(i).getFirst());
-                }
-                return ls;
-            } else {
-                throw new Exception("Movie: " + itemId + " Not contained into the archive.");
-            }
-        }
-        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
-            throw new RuntimeException("Error Type.");
+    public Set<Integer> getUserList(final Integer itemId) throws Exception {
+        Set<Integer> ls = new HashSet<>();
+        if (this.itemArchive.containsKey(itemId)) {
+            ls = this.itemArchive.get(itemId).getSecond().getUserList().keySet();
         }
         return ls;
     }
