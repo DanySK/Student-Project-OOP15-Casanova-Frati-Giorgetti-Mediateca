@@ -36,16 +36,14 @@ public interface Archive {
     /**
      * This method is used to change item's setting.
      *
-     * @param t
-     *            Item's Type.
-     * @param id
+     * @param itemId
      *            Item's identifier.
      * @param initAmount
      *            amount of copy to add to the archive
      * @throws Exception
      *             in the case which the item is not in the archive.
      */
-    void changeAmount(Type t, Integer id, Integer initAmount) throws Exception;
+    void changeAmount(final Integer itemId, final Integer initAmount) throws Exception;
 
     /**
      * This method return an Item Type t with identifier id.

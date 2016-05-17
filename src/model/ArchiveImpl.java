@@ -24,8 +24,7 @@ public class ArchiveImpl implements Serializable, Archive {
      */
     public static final double SSINDD = 86400000.0;
     private static final long serialVersionUID = 3943672353334594237L;
-    private Map<Integer, Pair<Book, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> bookArchive = Maps
-            .newHashMap();
+    private Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = Maps.newHashMap();
     private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> movieArchive = Maps
             .newHashMap();
 
@@ -37,61 +36,24 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public <X extends ItemImpl> void addItem(final X i, final Integer initNumCopy) {
-        if (Book.class.isInstance(i)) {
-            if (this.bookArchive.containsKey(i.getiD())) {
-                System.out.println(
-                        "Book already present in the archive!\nAdding of initNumCopy to te pre-existing value");
-                try {
-                    this.changeAmount(Type.BOOK, i.getiD(), initNumCopy);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            } else {
-                this.bookArchive.put(i.getiD(), new Pair<Book, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>(
-                        (Book) i,
-                        new Pair<Integer, List<Pair<Integer, GregorianCalendar>>>(initNumCopy, new LinkedList<>())));
-            }
-
-        }
-        if (Movie.class.isInstance(i)) {
-            if (this.movieArchive.containsKey(i.getiD())) {
-                System.out.println(
-                        "Movie already present in the archive!\nAdding of initNumCopy to te pre-existing value");
-                try {
-                    this.changeAmount(Type.MOVIE, i.getiD(), initNumCopy);
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
-                }
-            } else {
-                this.movieArchive.put(i.getiD(), new Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>(
-                        (Movie) i,
-                        new Pair<Integer, List<Pair<Integer, GregorianCalendar>>>(initNumCopy, new LinkedList<>())));
+    public void addItem(final ItemImpl i, final Integer initNumCopy) {
+        if (!this.itemArchive.containsKey(i.getiD())) {
+            this.itemArchive.put(i.getiD(), new Pair<>(i, new ItemInfo(initNumCopy)));
+        } else {
+            try {
+                this.changeAmount(i.getiD(), initNumCopy);
+            } catch (Exception e) {
+                e.getMessage();
             }
         }
-
     }
 
     @Override
-    public void changeAmount(final Type t, final Integer itemId, final Integer amount) throws Exception {
-        if (t == Type.BOOK) {
-            if (this.bookArchive.containsKey(itemId)) {
-                this.bookArchive.get(itemId).getSecond()
-                        .setFirst(this.bookArchive.get(itemId).getSecond().getFirst() + amount);
-            } else {
-                throw new Exception("Book: " + itemId + " is not into the archive.");
-            }
-        }
-        if (t == Type.MOVIE) {
-            if (this.movieArchive.containsKey(itemId)) {
-                this.movieArchive.get(itemId).getSecond()
-                        .setFirst(this.movieArchive.get(itemId).getSecond().getFirst() + amount);
-            } else {
-                throw new Exception("Movie: " + itemId + " is not into the archive.");
-            }
-        }
-        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
-            throw new Exception("Error Type.");
+    public void changeAmount(final Integer itemId, final Integer amount) throws Exception {
+        if (this.itemArchive.containsKey(itemId)) {
+            this.itemArchive.get(itemId).getSecond().addQuantity(amount);
+        } else {
+            throw new Exception("Item " + itemId + " is not in the archive.");
         }
 
     }
