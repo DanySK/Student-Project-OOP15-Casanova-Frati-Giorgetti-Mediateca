@@ -46,29 +46,27 @@ public interface Archive {
     void changeAmount(final Integer itemId, final Integer initAmount) throws Exception;
 
     /**
-     * This method return an Item Type t with identifier id.
+     * This method return an Item identified by id.
      *
-     * @param t
-     *            Item's type.
-     * @param id
+     * @param itemId
      *            Item's identifier.
-     * @return Book or Movie (it depends by Type) with id code.
+     *
+     * @return Item with id code.
+     *
      * @throws Exception
      *             in the case which the item is not in the archive.
      */
-    Item getItem(final Type t, final Integer id) throws Exception;
+    Item getItem(final Integer itemId) throws Exception;
 
     /**
-     * This method removes a Book or Movie from the respective archive.
+     * This method removes a Item from the respective archive.
      *
-     * @param t
-     *            Item's type
      * @param id
      *            Item's identifier.
      * @throws Exception
      *             in the case which the item is not in the archive.
      */
-    void removeItem(final Type t, final Integer id) throws Exception;
+    void removeItem(final Integer id) throws Exception;
 
     /**
      * This method apply dayBetweenDates to the required item of Type t with
