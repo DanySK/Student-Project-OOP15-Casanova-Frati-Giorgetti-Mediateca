@@ -127,7 +127,7 @@ public interface Archive {
      *
      * @param itemId
      *            Item's identifier.
-     * @return the list of users identifier that have taken a required Item from
+     * @return the Set of users identifier that have taken a required Item from
      *         the archives.
      * @throws Exception
      *             in the case which the item required is not present in the

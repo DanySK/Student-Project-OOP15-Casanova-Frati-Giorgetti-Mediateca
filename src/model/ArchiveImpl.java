@@ -157,7 +157,9 @@ public class ArchiveImpl implements Serializable, Archive {
         Set<Integer> ls = new HashSet<>();
         if (this.itemArchive.containsKey(itemId)) {
             ls = this.itemArchive.get(itemId).getSecond().getUserList().keySet();
+            return ls;
+        } else {
+            throw new Exception("Item: " + itemId + "Not contained into the archive.");
         }
-        return ls;
     }
 }
