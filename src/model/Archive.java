@@ -21,17 +21,17 @@ public interface Archive {
     }
 
     /**
-     * This function adds an ItemImpl to the respective archive.
+     * This function adds an ItemImpl to the archive.
      *
      * @param i
-     *            Book or Movie in order to add to the respective archive.
+     *            Book or Movie to add to the archive.
      * @param initNumCopy
      *            Book or Movie number copies
+     * @throws Exception
+     *             in the case which initNumCopy < 0 or item not in the archive.
      *
-     * @param <X>
-     *            Accept every X that S <: ItemImpl
      */
-    <X extends ItemImpl> void addItem(X i, Integer initNumCopy);
+    void addItem(final ItemImpl i, final Integer initNumCopy) throws Exception;
 
     /**
      * This method is used to change item's setting.

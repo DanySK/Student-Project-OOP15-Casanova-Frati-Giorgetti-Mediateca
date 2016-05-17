@@ -36,15 +36,15 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void addItem(final ItemImpl i, final Integer initNumCopy) {
-        if (!this.itemArchive.containsKey(i.getiD())) {
-            this.itemArchive.put(i.getiD(), new Pair<>(i, new ItemInfo(initNumCopy)));
-        } else {
-            try {
+    public void addItem(final ItemImpl i, final Integer initNumCopy) throws Exception {
+        if (initNumCopy > 0) {
+            if (!this.itemArchive.containsKey(i.getiD())) {
+                this.itemArchive.put(i.getiD(), new Pair<>(i, new ItemInfo(initNumCopy)));
+            } else {
                 this.changeAmount(i.getiD(), initNumCopy);
-            } catch (Exception e) {
-                e.getMessage();
             }
+        } else {
+            throw new Exception("initNumCopy <= 0");
         }
     }
 
