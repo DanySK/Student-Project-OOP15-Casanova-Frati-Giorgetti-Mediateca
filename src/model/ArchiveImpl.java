@@ -121,27 +121,13 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void addUser(final Type t, final Integer itemId, final Integer userId) throws Exception {
-        if (t == Type.BOOK) {
-            if (this.bookArchive.containsKey(itemId)) {
-                this.bookArchive.get(itemId).getSecond().getSecond().add(new Pair<>(userId, this.getToDay()));
-                System.out.println("User " + userId + " adds to book list " + itemId + " in date " + this.getToDay());
-            } else {
-                throw new Exception("User: " + userId + "can not take book: " + itemId
-                        + "becouse it is not contained into the archive.");
-            }
-        }
-        if (t == Type.MOVIE) {
-            if (this.movieArchive.containsKey(itemId)) {
-                this.movieArchive.get(itemId).getSecond().getSecond().add(new Pair<>(userId, this.getToDay()));
-                System.out.println("User: " + userId + "can not take movie: " + itemId
-                        + "becouse it is not contained into the archive.");
-            } else {
-                throw new Exception("Movie: " + itemId + "Not contained into the archive.");
-            }
-        }
-        if ((t != Type.MOVIE) && (t != Type.BOOK)) {
-            throw new RuntimeException("Error type.");
+    public void addUser(final Integer itemId, final Integer userId) throws Exception {
+        if (this.itemArchive.containsKey(itemId)) {
+            this.itemArchive.get(itemId).getSecond().getUserList().put(userId, this.getToDay());
+            System.out.println("User " + userId + " adds to book list " + itemId + " in date " + this.getToDay());
+        } else {
+            throw new Exception("User: " + userId + "can not take book: " + itemId
+                    + "becouse it is not contained into the archive.");
         }
     }
 
