@@ -72,4 +72,11 @@ public class ItemInfo {
         this.userList = userList;
     }
 
+    public boolean isAvailable() {
+        if ((this.quantity - this.userList.size()) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
