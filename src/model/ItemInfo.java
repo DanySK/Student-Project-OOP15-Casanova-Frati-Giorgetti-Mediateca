@@ -1,13 +1,18 @@
 package model;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.base.Objects;
 
-public class ItemInfo {
+public class ItemInfo implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = -7549869898253407439L;
     private Integer quantity;
     private Map<Integer, GregorianCalendar> userList;
 
