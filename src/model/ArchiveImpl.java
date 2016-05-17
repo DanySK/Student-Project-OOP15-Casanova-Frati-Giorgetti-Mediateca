@@ -126,43 +126,23 @@ public class ArchiveImpl implements Serializable, Archive {
             this.itemArchive.get(itemId).getSecond().getUserList().put(userId, this.getToDay());
             System.out.println("User " + userId + " adds to book list " + itemId + " in date " + this.getToDay());
         } else {
-            throw new Exception("User: " + userId + "can not take book: " + itemId
+            throw new Exception("User: " + userId + "can not take item: " + itemId
                     + "becouse it is not contained into the archive.");
         }
     }
 
     @Override
-    public void removeUser(final Type t, final Integer itemId, final Integer userId) throws Exception {
-        if (t == Type.BOOK) {
-            if (this.bookArchive.containsKey(itemId)) {
-                int i = this.bookArchive.get(itemId).getSecond().getSecond().indexOf(userId);
-                if (i >= 0) {
-                    this.bookArchive.get(itemId).getSecond().getSecond().remove(i);
-                    System.out.println(
-                            "User " + userId + " removes from book list " + itemId + " in date " + this.getToDay());
-                } else {
-                    throw new Exception("User: " + userId + "is not in the book: " + itemId + " list");
-                }
+    public void removeUser(final Integer itemId, final Integer userId) throws Exception {
+        if (this.itemArchive.containsKey(itemId)) {
+            if (this.itemArchive.get(itemId).getSecond().getUserList().containsKey(userId)) {
+                this.itemArchive.get(itemId).getSecond().getUserList().remove(userId, this.getToDay());
+                System.out.println("User " + userId + " adds to item list " + itemId + " in date " + this.getToDay());
             } else {
-                throw new Exception("Book: " + itemId + "Not contained into the archive.");
+                throw new Exception(("userId is not in the item's list"));
             }
-        }
-        if (t == Type.MOVIE) {
-            if (this.movieArchive.containsKey(itemId)) {
-                int i = this.movieArchive.get(itemId).getSecond().getSecond().indexOf(userId);
-                if (i >= 0) {
-                    this.movieArchive.get(itemId).getSecond().getSecond().remove(i);
-                    System.out.println(
-                            "User " + userId + " removes from movie list " + itemId + " in date " + this.getToDay());
-                } else {
-                    throw new Exception("User: " + userId + "is not in the movie: " + itemId + " list");
-                }
-            } else {
-                throw new Exception("Movie: " + itemId + "Not contained into the archive.");
-            }
-        }
-        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
-            throw new RuntimeException("Error Type.");
+        } else {
+            throw new Exception(
+                    "User: " + userId + "can not remove user:" + userId + " from item: " + itemId + "list.");
         }
     }
 

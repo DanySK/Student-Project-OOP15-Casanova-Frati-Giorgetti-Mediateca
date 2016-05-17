@@ -99,8 +99,6 @@ public interface Archive {
     /**
      * This method removes the user (userId) to the list of item's loans.
      *
-     * @param t
-     *            item's type.
      * @param itemId
      *            Item's identifier.
      * @param userId
@@ -109,7 +107,7 @@ public interface Archive {
      *             in the case which the item is not in the archive or the user
      *             is not in the item's list.
      */
-    void removeUser(final Type t, final Integer itemId, final Integer userId) throws Exception;
+    void removeUser(final Integer itemId, final Integer userId) throws Exception;
 
     /**
      * This method check the availability of the Item in the respective archive.
