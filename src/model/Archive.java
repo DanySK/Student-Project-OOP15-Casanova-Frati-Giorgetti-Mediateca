@@ -69,11 +69,8 @@ public interface Archive {
     void removeItem(final Integer id) throws Exception;
 
     /**
-     * This method apply dayBetweenDates to the required item of Type t with
-     * identifier id.
-     *
-     * @param t
-     *            Item's type
+     * This method apply dayBetweenDates to the required item with identifier
+     * id.
      *
      * @param itemId
      *            Item's identifier.
@@ -85,7 +82,7 @@ public interface Archive {
      *             is not in the item's list.
      *
      */
-    double calculateDifferenceDays(final Type t, final Integer itemId, final Integer userId) throws Exception;
+    double calculateDifferenceDays(final Integer itemId, final Integer userId) throws Exception;
 
     /**
      * This method adds the user (userId) to the list of item's loans.
