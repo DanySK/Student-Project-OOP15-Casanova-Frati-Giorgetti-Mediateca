@@ -154,9 +154,8 @@ public class ArchiveImpl implements Serializable, Archive {
 
     @Override
     public Set<Integer> getUserList(final Integer itemId) throws Exception {
-        Set<Integer> ls = new HashSet<>();
         if (this.itemArchive.containsKey(itemId)) {
-            ls = this.itemArchive.get(itemId).getSecond().getUserList().keySet();
+            Set<Integer> ls = new HashSet<>(this.itemArchive.get(itemId).getSecond().getUserList().keySet());
             return ls;
         } else {
             throw new Exception("Item: " + itemId + "Not contained into the archive.");
