@@ -112,8 +112,6 @@ public interface Archive {
     /**
      * This method check the availability of the Item in the respective archive.
      *
-     * @param t
-     *            item's type.
      * @param itemId
      *            item's identifier.
      * @return true if item is available else return false.
@@ -121,7 +119,7 @@ public interface Archive {
      *             in the case which the item required is not present in the
      *             archive.
      */
-    boolean checkAvailability(final Type t, final Integer itemId) throws Exception;
+    boolean checkAvailability(final Integer itemId) throws Exception;
 
     /**
      * This method return a list of UserID that have taken a required Item from

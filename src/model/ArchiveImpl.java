@@ -3,11 +3,10 @@ package model;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import com.google.common.collect.Maps;
 
 /**
  * This class implements Serializable and Archive. This class is the 'real
@@ -24,9 +23,7 @@ public class ArchiveImpl implements Serializable, Archive {
      */
     public static final double SSINDD = 86400000.0;
     private static final long serialVersionUID = 3943672353334594237L;
-    private Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = Maps.newHashMap();
-    private Map<Integer, Pair<Movie, Pair<Integer, List<Pair<Integer, GregorianCalendar>>>>> movieArchive = Maps
-            .newHashMap();
+    private Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = new HashMap<>();
 
     /**
      * Empty constructor. NON COMPLETO DEVE ESSERE AGGIUNTO IL CASO IN CUI
@@ -147,49 +144,12 @@ public class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public boolean checkAvailability(final Type t, final Integer itemId) throws Exception {
-        if (t == Type.BOOK) {
-            if (this.bookArchive.containsKey(itemId)) {
-                int i = this.bookArchive.get(itemId).getSecond().getFirst()
-                        - this.bookArchive.get(itemId).getSecond().getSecond().size();
-                if (i == 0) {
-                    System.out.println("Book: " + itemId + "not available");
-                    return false;
-                }
-                if (i > 0) {
-                    System.out.println("Book: " + itemId + "available");
-                    return true;
-                }
-                if (i < 0) {
-                    throw new RuntimeException("Amount < 0 in the bookArchive, BookId: " + itemId);
-                }
-            } else {
-                throw new Exception("Book: " + itemId + "Not contained into the archive.");
-            }
+    public boolean checkAvailability(final Integer itemId) throws Exception {
+        if (this.itemArchive.containsKey(itemId)) {
+            return this.itemArchive.get(itemId).getSecond().isAvailable();
+        } else {
+            throw new Exception("Item: " + itemId + "Not contained into the archive.");
         }
-        if (t == Type.MOVIE) {
-            if (this.movieArchive.containsKey(itemId)) {
-                int i = this.movieArchive.get(itemId).getSecond().getFirst()
-                        - this.movieArchive.get(itemId).getSecond().getSecond().size();
-                if (i == 0) {
-                    System.out.println("Movie: " + itemId + "not available");
-                    return false;
-                }
-                if (i > 0) {
-                    System.out.println("Movie: " + itemId + "available");
-                    return true;
-                }
-                if (i < 0) {
-                    throw new RuntimeException("Amount < 0 in the movieArchive, MovieId: " + itemId);
-                }
-            } else {
-                throw new Exception("Movie: " + itemId + "Not contained into the archive.");
-            }
-        }
-        if ((t != Type.BOOK) && (t != Type.MOVIE)) {
-            throw new RuntimeException("Error type.");
-        }
-        return false;
     }
 
     @Override
