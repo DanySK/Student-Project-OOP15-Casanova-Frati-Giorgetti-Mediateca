@@ -4,6 +4,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.common.base.Objects;
+
 public class ItemInfo {
 
     private Integer quantity;
@@ -28,40 +30,16 @@ public class ItemInfo {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + ((this.quantity == null) ? 0 : this.quantity.hashCode());
-        result = (prime * result) + ((this.userList == null) ? 0 : this.userList.hashCode());
-        return result;
+        return Objects.hashCode(this.quantity, this.userList);
     }
 
     @Override
     public boolean equals(final Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+        if (!(obj instanceof ItemInfo)) {
             return false;
         }
-        if (this.getClass() != obj.getClass()) {
-            return false;
-        }
-        ItemInfo other = (ItemInfo) obj;
-        if (this.quantity == null) {
-            if (other.quantity != null) {
-                return false;
-            }
-        } else if (!this.quantity.equals(other.quantity)) {
-            return false;
-        }
-        if (this.userList == null) {
-            if (other.userList != null) {
-                return false;
-            }
-        } else if (!this.userList.equals(other.userList)) {
-            return false;
-        }
-        return true;
+        final ItemInfo item = (ItemInfo) obj;
+        return Objects.equal(this.quantity, item.quantity) && Objects.equal(this.userList, item.userList);
     }
 
     public void setQuantity(final Integer quantity) {
