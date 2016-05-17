@@ -30,4 +30,12 @@ public class ItemInfo {
         this.userList = userList;
     }
 
+    public int getUserPosition(final Integer userId) {
+        for (int i = 0; i < this.userList.size(); i++) {
+            if (i == userId) {
+                return i;
+            }
+        }
+        return -1;
+    }
 }
