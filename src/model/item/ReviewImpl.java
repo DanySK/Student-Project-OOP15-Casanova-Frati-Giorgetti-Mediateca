@@ -43,7 +43,7 @@ public class ReviewImpl implements Review, Serializable {
 
     @Override
     public void setNote(final String initNote) {
-        this.note = initNote;
+        this.note = initNote.toUpperCase();
 
     }
 
