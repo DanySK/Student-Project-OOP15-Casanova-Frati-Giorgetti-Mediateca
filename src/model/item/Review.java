@@ -48,4 +48,11 @@ public interface Review {
      * @return true if is in the range, else false
      */
     boolean checkVote(final int vote);
+
+    /**
+     * This method is a simple hash code that gives a id number to the Review.
+     * 
+     * @return Review identifier.
+     */
+    long getId();
 }
