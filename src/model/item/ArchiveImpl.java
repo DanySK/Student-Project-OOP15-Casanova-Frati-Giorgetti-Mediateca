@@ -1,4 +1,4 @@
-package model;
+package model.item;
 
 import java.io.Serializable;
 import java.util.Calendar;
@@ -7,6 +7,14 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import model.Archive;
+import model.Book;
+import model.Item;
+import model.ItemImpl;
+import model.ItemInfo;
+import model.Movie;
+import model.Pair;
 
 /**
  * This class implements Serializable and Archive. This class is the 'real
