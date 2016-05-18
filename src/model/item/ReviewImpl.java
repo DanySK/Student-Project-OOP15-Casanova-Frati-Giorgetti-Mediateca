@@ -1,6 +1,7 @@
 package model.item;
 
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 
 /**
  * Review is composed by 2 field, the first is a vote and the second is a text.
@@ -16,8 +17,10 @@ public class ReviewImpl implements Review, Serializable {
     private static final long serialVersionUID = 8843824865824137318L;
     private static final int MAX = 5;
     private static final int MIN = 0;
+    private static final int RAN = 20;
     private int vote;
     private String note;
+    private final long id;
 
     /**
      * Review Constructor.
@@ -30,6 +33,7 @@ public class ReviewImpl implements Review, Serializable {
     public ReviewImpl(final int initVote, final String initNote) {
         this.setVote(initVote);
         this.setNote(initNote);
+        this.id = this.myHash();
     }
 
     @Override
@@ -67,4 +71,13 @@ public class ReviewImpl implements Review, Serializable {
         return ((initVote >= ReviewImpl.MIN) && (initVote <= ReviewImpl.MAX));
     }
 
+    @Override
+    public long getId() {
+        return this.id;
+    }
+
+    private long myHash() {
+        GregorianCalendar c = new GregorianCalendar();
+        return ReviewImpl.RAN * c.getTimeInMillis();
+    }
 }
