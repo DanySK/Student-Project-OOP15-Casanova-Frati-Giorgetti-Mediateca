@@ -29,6 +29,7 @@ public class UserImpl {
     private final String telephoneNumber;
     private Map<Integer, Pair<Boolean, Optional<Integer>>> loanArchive = new HashMap<>();
     private List<Integer> whishList = new LinkedList<>();
+    private List<Integer> recommendedList = new LinkedList<>();
     private boolean pro = false;
     private List<BookGenre> bookPreferences = new LinkedList<>();
     private List<MovieGenre> moviePreferences = new LinkedList<>();
@@ -194,6 +195,21 @@ public class UserImpl {
      */
     public String getTelephoneNumber() {
         return this.telephoneNumber;
+    }
+
+    /**
+     * @return the recommendedList
+     */
+    public List<Integer> getRecommendedList() {
+        return this.recommendedList;
+    }
+
+    /**
+     * @param initRecommendedList
+     *            the recommendedList to set
+     */
+    public void setRecommendedList(final List<Integer> initRecommendedList) {
+        this.recommendedList = initRecommendedList;
     }
 
 }
