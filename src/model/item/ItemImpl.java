@@ -50,10 +50,10 @@ public class ItemImpl implements Item, Serializable {
      */
     public ItemImpl(final String initTitle, final int initReleaseYear, final String initPublisher,
             final String initAuthor, final Language initCurrentLanguage, final String initPathCover) {
-        this.title = initTitle;
+        this.title = initTitle.toUpperCase();
         this.releaseYear = initReleaseYear;
-        this.publisher = initPublisher;
-        this.author = initAuthor;
+        this.publisher = initPublisher.toUpperCase();
+        this.author = initAuthor.toUpperCase();
         this.currentLanguage = initCurrentLanguage;
         this.pathCover = initPathCover == null ? Optional.absent() : Optional.of(initPathCover);
         this.like = 0;
