@@ -2,8 +2,6 @@ package model.item;
 
 import java.util.List;
 
-import com.google.common.base.Optional;
-
 /**
  * Item is the center interface of Book and Movie.
  *
@@ -63,12 +61,6 @@ public interface Item {
      * @return Item's author
      */
     String getAuthor();
-
-    /**
-     *
-     * @return Item's Image, if it is present.
-     */
-    Optional<String> getPathCover();
 
     /**
      *

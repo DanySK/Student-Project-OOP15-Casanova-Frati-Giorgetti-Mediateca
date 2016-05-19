@@ -33,8 +33,6 @@ public class Book extends ItemImpl {
      *            who wrote the book
      * @param initCurrentLanguage
      *            of the book
-     * @param initPathCover
-     *            of the book
      * @param initISBN
      *            International Standard Book Number
      * @param initGenre
@@ -45,9 +43,9 @@ public class Book extends ItemImpl {
      *            if there is more then one, if you pass null the archive set 1
      */
     public Book(final String initTitle, final int initReleaseYear, final String initAuthor,
-            final Language initCurrentLanguage, final String initPathCover, final String initISBN,
-            final BookGenre initGenre, final String initPublisher, final Integer initNumRelease) {
-        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initPathCover);
+            final Language initCurrentLanguage, final String initISBN, final BookGenre initGenre,
+            final String initPublisher, final Integer initNumRelease) {
+        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage);
         this.isbn = initISBN.toUpperCase();
         this.genre = initGenre;
         this.numRelease = initNumRelease == null ? Optional.of(1) : Optional.of(initNumRelease);

@@ -33,8 +33,6 @@ public class Movie extends ItemImpl {
      *            director of the movie.
      * @param initCurrentLanguage
      *            of the movie contained in the archive.
-     * @param initPathCover
-     *            of the movie.
      * @param initGenre
      *            of the movie.
      * @param initDuration
@@ -43,9 +41,9 @@ public class Movie extends ItemImpl {
      *            true == color, false == b/w.
      */
     public Movie(final String initTitle, final int initReleaseYear, final String initPublisher, final String initAuthor,
-            final Language initCurrentLanguage, final String initPathCover, final MovieGenre initGenre,
-            final Integer initDuration, final Boolean initColour) {
-        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initPathCover);
+            final Language initCurrentLanguage, final MovieGenre initGenre, final Integer initDuration,
+            final Boolean initColour) {
+        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage);
         this.genre = initGenre;
         this.duration = initDuration;
         this.colour = initColour;

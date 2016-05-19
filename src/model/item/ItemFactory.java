@@ -23,8 +23,6 @@ public class ItemFactory {
      *            who wrote the book
      * @param initCurrentLanguage
      *            of the book
-     * @param initPathCover
-     *            of the book
      * @param initISBN
      *            International Standard Book Number
      * @param initGenre
@@ -36,10 +34,10 @@ public class ItemFactory {
      * @return new Book(...).
      */
     public static Book getNewBook(final String initTitle, final int initReleaseYear, final String initAuthor,
-            final Language initCurrentLanguage, final String initPathCover, final String initISBN,
-            final BookGenre initGenre, final String initPublisher, final Integer initNumRelease) {
-        return new Book(initTitle, initReleaseYear, initAuthor, initCurrentLanguage, initPathCover, initISBN, initGenre,
-                initPublisher, initNumRelease);
+            final Language initCurrentLanguage, final String initISBN, final BookGenre initGenre,
+            final String initPublisher, final Integer initNumRelease) {
+        return new Book(initTitle, initReleaseYear, initAuthor, initCurrentLanguage, initISBN, initGenre, initPublisher,
+                initNumRelease);
     }
 
     /**
@@ -55,8 +53,7 @@ public class ItemFactory {
      *            director of the movie.
      * @param initCurrentLanguage
      *            of the movie contained in the archive.
-     * @param initPathCover
-     *            of the movie.
+     * 
      * @param initGenre
      *            of the movie.
      * @param initDuration
@@ -67,9 +64,9 @@ public class ItemFactory {
      * @return new Movie(...).
      */
     public static Movie getNewMovie(final String initTitle, final int initReleaseYear, final String initPublisher,
-            final String initAuthor, final Language initCurrentLanguage, final String initPathCover,
-            final MovieGenre initGenre, final Integer initDuration, final Boolean initColour) {
-        return new Movie(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initPathCover,
-                initGenre, initDuration, initColour);
+            final String initAuthor, final Language initCurrentLanguage, final MovieGenre initGenre,
+            final Integer initDuration, final Boolean initColour) {
+        return new Movie(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initGenre,
+                initDuration, initColour);
     }
 }

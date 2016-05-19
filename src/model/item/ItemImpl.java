@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Optional;
 
 /**
  * Item is the common part of book and movie. It implements its interface Item
@@ -26,7 +25,6 @@ public class ItemImpl implements Item, Serializable {
     private final String publisher;
     private final String author;
     private final Language currentLanguage;
-    private Optional<String> pathCover = Optional.absent();
     private List<ReviewImpl> setReview = new LinkedList<ReviewImpl>();
     private int like;
     private float averageVote;
@@ -49,13 +47,12 @@ public class ItemImpl implements Item, Serializable {
      *            of the general item
      */
     public ItemImpl(final String initTitle, final int initReleaseYear, final String initPublisher,
-            final String initAuthor, final Language initCurrentLanguage, final String initPathCover) {
+            final String initAuthor, final Language initCurrentLanguage) {
         this.title = initTitle.toUpperCase();
         this.releaseYear = initReleaseYear;
         this.publisher = initPublisher.toUpperCase();
         this.author = initAuthor.toUpperCase();
         this.currentLanguage = initCurrentLanguage;
-        this.pathCover = initPathCover == null ? Optional.absent() : Optional.of(initPathCover);
         this.like = 0;
         this.averageVote = 0;
         this.iD = this.hashCode();
@@ -65,8 +62,8 @@ public class ItemImpl implements Item, Serializable {
     public String toString() {
         return "[iD=" + this.iD + ", title=" + this.title + ", releaseYear=" + this.releaseYear + ", publisher="
                 + this.publisher + ", author=" + this.author + ", currentLanguage=" + this.currentLanguage
-                + ", pathCover=" + this.pathCover + ", setReview=" + this.setReview.toString() + ", like=" + this.like
-                + ", averageVote=" + this.averageVote;
+                + ", setReview=" + this.setReview.toString() + ", like=" + this.like + ", averageVote="
+                + this.averageVote;
     }
 
     @Override
@@ -97,11 +94,6 @@ public class ItemImpl implements Item, Serializable {
     @Override
     public String getAuthor() {
         return this.author;
-    }
-
-    @Override
-    public Optional<String> getPathCover() {
-        return this.pathCover;
     }
 
     @Override
