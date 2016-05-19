@@ -17,7 +17,7 @@ import model.item.MovieGenre;
  * @author Edoardo
  *
  */
-public class UserImpl {
+public class User {
 
     private final String name;
     private final String surname;
@@ -58,7 +58,7 @@ public class UserImpl {
      * @param initMoviePref
      *            User's preferences.
      */
-    public UserImpl(final String initName, final String initSurname, final GregorianCalendar initBirthdate,
+    public User(final String initName, final String initSurname, final GregorianCalendar initBirthdate,
             final String initUsername, final String initPassword, final Integer initIdUser, final String initEmail,
             final String initTelephoneNumber, final List<BookGenre> initBookPref,
             final List<MovieGenre> initMoviePref) {
