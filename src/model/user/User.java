@@ -1,5 +1,6 @@
 package model.user;
 
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,12 +14,18 @@ import model.item.BookGenre;
 import model.item.MovieGenre;
 
 /**
+ * User is the Mediateca client. This class saves in addition to general
+ * information also preferences info, wishlist and recommended list of item.
  *
  * @author Edoardo
  *
  */
-public class User {
+public class User implements Serializable {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 2261594876176760469L;
     private final String name;
     private final String surname;
     private final GregorianCalendar birthdate;
@@ -28,7 +35,7 @@ public class User {
     private final String email;
     private final String telephoneNumber;
     private Map<Integer, Pair<Boolean, Optional<Integer>>> loanArchive = new HashMap<>();
-    private List<Integer> whishList = new LinkedList<>();
+    private List<Integer> wishList = new LinkedList<>();
     private List<Integer> recommendedList = new LinkedList<>();
     private boolean pro = false;
     private List<BookGenre> bookPreferences = new LinkedList<>();
@@ -85,7 +92,7 @@ public class User {
      * @return the whishList.
      */
     public List<Integer> getWhishList() {
-        return this.whishList;
+        return this.wishList;
     }
 
     /**
@@ -93,7 +100,7 @@ public class User {
      *            the whishList to set.
      */
     public void setWhishList(final List<Integer> initWhishList) {
-        this.whishList = initWhishList;
+        this.wishList = initWhishList;
     }
 
     /**
