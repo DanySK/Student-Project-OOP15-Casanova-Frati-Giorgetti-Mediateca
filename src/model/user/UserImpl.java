@@ -62,13 +62,13 @@ public class UserImpl {
             final String initUsername, final String initPassword, final Integer initIdUser, final String initEmail,
             final String initTelephoneNumber, final List<BookGenre> initBookPref,
             final List<MovieGenre> initMoviePref) {
-        this.name = initName;
-        this.surname = initSurname;
+        this.name = initName.toUpperCase();
+        this.surname = initSurname.toUpperCase();
         this.birthdate = initBirthdate;
         this.username = initUsername;
         this.password = initPassword;
         this.idUser = initIdUser;
-        this.email = initEmail;
+        this.email = initEmail.toLowerCase();
         this.telephoneNumber = initTelephoneNumber;
         this.bookPreferences = initBookPref;
         this.moviePreferences = initMoviePref;
