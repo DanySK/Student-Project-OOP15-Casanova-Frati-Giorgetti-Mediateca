@@ -43,8 +43,6 @@ public class ItemImpl implements Item, Serializable {
      *            author in the case of book, director in the case of movie
      * @param initCurrentLanguage
      *            of the general item contained in the archive
-     * @param initPathCover
-     *            of the general item
      */
     public ItemImpl(final String initTitle, final int initReleaseYear, final String initPublisher,
             final String initAuthor, final Language initCurrentLanguage) {

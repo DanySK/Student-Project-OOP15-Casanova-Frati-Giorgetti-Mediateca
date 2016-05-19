@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 
 import model.Pair;
@@ -54,8 +55,6 @@ public class User implements Serializable {
      *            User's username.
      * @param initPassword
      *            User's password.
-     * @param initIdUser
-     *            User's auto generated.
      * @param initEmail
      *            User's email.
      * @param initTelephoneNumber
@@ -66,7 +65,7 @@ public class User implements Serializable {
      *            User's preferences.
      */
     public User(final String initName, final String initSurname, final GregorianCalendar initBirthdate,
-            final String initUsername, final String initPassword, final Integer initIdUser, final String initEmail,
+            final String initUsername, final String initPassword, final String initEmail,
             final String initTelephoneNumber, final List<BookGenre> initBookPref,
             final List<MovieGenre> initMoviePref) {
         this.name = initName.toUpperCase();
@@ -74,7 +73,7 @@ public class User implements Serializable {
         this.birthdate = initBirthdate;
         this.username = initUsername;
         this.password = initPassword;
-        this.idUser = initIdUser;
+        this.idUser = this.hashCode();
         this.email = initEmail.toLowerCase();
         this.telephoneNumber = initTelephoneNumber;
         this.bookPreferences = initBookPref;
@@ -219,4 +218,18 @@ public class User implements Serializable {
         this.recommendedList = initRecommendedList;
     }
 
+    @Override
+    public int hashCode() {
+        return com.google.common.base.Objects.hashCode(this.name, this.surname, this.birthdate, this.username);
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (!(obj instanceof User)) {
+            return false;
+        }
+        final User temp = (User) obj;
+        return Objects.equal(this.name, temp.name) && Objects.equal(this.surname, temp.surname)
+                && Objects.equal(this.birthdate, temp.birthdate) && Objects.equal(this.username, temp.username);
+    }
 }
