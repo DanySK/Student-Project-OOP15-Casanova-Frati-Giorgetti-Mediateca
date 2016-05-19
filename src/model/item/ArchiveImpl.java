@@ -12,8 +12,8 @@ import model.Pair;
 
 /**
  * This class implements Serializable and Archive. This class is the 'real
- * database' of the project. It contains two complex field which are able to
- * save a lot of information about book and movie in the media-center.
+ * database' of the project. It contains one field which is able to save a lot
+ * of information about book and movie into 'Mediateca'.
  *
  * @author Edoardo
  *
