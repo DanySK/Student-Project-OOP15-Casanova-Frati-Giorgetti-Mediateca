@@ -23,15 +23,28 @@ public class ArchiveImpl implements Serializable, Archive {
     /**
      * SSINDD is the double used to divide milliseconds and get the days.
      */
-    public static final double SSINDD = 86400000.0;
+    private static final double SSINDD = 86400000.0;
     private static final long serialVersionUID = 3943672353334594237L;
+    private static ArchiveImpl singleton = null;
     private Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = new HashMap<>();
 
     /**
-     * Empty constructor. NON COMPLETO DEVE ESSERE AGGIUNTO IL CASO IN CUI
-     * L'ARCHIVIO HA GIA' UN FILE DI CONFIGURAZIONE.
+     * Empty private constructor. NON COMPLETO DEVE ESSERE AGGIUNTO IL CASO IN
+     * CUI L'ARCHIVIO HA GIA' UN FILE DI CONFIGURAZIONE.
      */
-    public ArchiveImpl() {
+    private ArchiveImpl() {
+    }
+
+    /**
+     * Singleton constructor.
+     *
+     * @return a new ArchiveImpl.
+     */
+    public static ArchiveImpl getArchiveImpl() {
+        if (ArchiveImpl.singleton == null) {
+            ArchiveImpl.singleton = new ArchiveImpl();
+        }
+        return ArchiveImpl.singleton;
     }
 
     @Override
