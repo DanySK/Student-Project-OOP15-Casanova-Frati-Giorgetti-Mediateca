@@ -18,7 +18,7 @@ import model.Pair;
  * @author Edoardo
  *
  */
-public class ArchiveImpl implements Serializable, Archive {
+final class ArchiveImpl implements Serializable, Archive {
 
     /**
      * SSINDD is the double used to divide milliseconds and get the days.

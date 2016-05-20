@@ -11,7 +11,7 @@ import java.util.Map;
  * @author Edoardo
  *
  */
-public class ArchiveUser implements Serializable {
+final class ArchiveUser implements Serializable {
 
     /**
      *
