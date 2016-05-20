@@ -17,12 +17,22 @@ public class ArchiveUser implements Serializable {
      *
      */
     private static final long serialVersionUID = -891777149481744993L;
+    private static ArchiveUser singleton = null;
     private Map<Integer, User> userArchive = new HashMap<>();
 
+    private ArchiveUser() {
+    }
+
     /**
-     * Empty constructor.
+     * Singleton constructor.
+     *
+     * @return a new ArchiveUser.
      */
-    public ArchiveUser() {
+    public static ArchiveUser getArchiveImpl() {
+        if (ArchiveUser.singleton == null) {
+            ArchiveUser.singleton = new ArchiveUser();
+        }
+        return ArchiveUser.singleton;
     }
 
     /**
