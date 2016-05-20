@@ -20,7 +20,6 @@ public class StudyRoom implements Serializable {
     private static final long serialVersionUID = -6559792291462784732L;
     private static final int N = 100;
 
-    // true == busy, false == free
     private Map<GregorianCalendar, ArrayList<Integer>> mapStudyRoom = new HashMap<>();
 
     /**
@@ -75,14 +74,14 @@ public class StudyRoom implements Serializable {
      *            user's identifier.
      * @throws Exception
      *             in the case which the sit is a number < 0 || >= StudyRoom.N
-     *             && int he case of busy sit.
+     *             && in the case of busy sit.
      */
     public void takeSit(final GregorianCalendar day, final Integer sit, final Integer userId) throws Exception {
         if (!this.mapStudyRoom.containsKey(day)) {
             this.addDate(day);
         }
         if ((sit <= StudyRoom.N) && (sit > 0)) {
-            if (this.mapStudyRoom.get(day).get(sit) != 0) {
+            if (this.mapStudyRoom.get(day).get(sit) == 0) {
                 this.mapStudyRoom.get(day).set(sit, userId);
                 System.out.println("Day " + day.getTimeInMillis() + " User " + userId + " in position " + sit);
             } else {
