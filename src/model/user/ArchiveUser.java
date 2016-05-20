@@ -26,7 +26,7 @@ final class ArchiveUser implements Serializable {
     /**
      * Singleton constructor.
      *
-     * @return a new ArchiveUser.
+     * @return the ArchiveUser.
      */
     public static ArchiveUser getArchiveImpl() {
         if (ArchiveUser.singleton == null) {

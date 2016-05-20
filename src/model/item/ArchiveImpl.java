@@ -38,7 +38,7 @@ final class ArchiveImpl implements Serializable, Archive {
     /**
      * Singleton constructor.
      *
-     * @return a new ArchiveImpl.
+     * @return the ArchiveImpl.
      */
     public static ArchiveImpl getArchiveImpl() {
         if (ArchiveImpl.singleton == null) {
