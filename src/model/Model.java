@@ -2,7 +2,9 @@ package model;
 
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 
+import model.item.ArchiveImpl.TypeItem;
 import model.item.BookGenre;
 import model.item.Language;
 import model.item.MovieGenre;
@@ -160,5 +162,17 @@ public interface Model {
      *             archives.
      */
     void addLike(final int itemId, final int userId) throws Exception;
+
+    /**
+     * This method returns a set of integer which refer to every item contained
+     * into the archive. If you pass TypeItem.BOOK it return a set of books
+     * identifier. If you pass TypeItem.MOVIE it return a set of movie
+     * identifier.
+     *
+     * @param t
+     *            item's type
+     * @return a set of item identifier contained into the archive.
+     */
+    Set<Integer> getAllItemId(TypeItem t);
 
 }

@@ -2,6 +2,8 @@ package model.item;
 
 import java.util.Set;
 
+import model.item.ArchiveImpl.TypeItem;
+
 /**
  * This interface contains methods to communicate with the archives.
  *
@@ -134,5 +136,17 @@ public interface Archive {
      * @return true if item is into the map, else false.
      */
     boolean contains(final Integer itemId);
+
+    /**
+     * This method returns a set of integer which refer to every item contained
+     * into the archive. If you pass TypeItem.BOOK it return a set of books
+     * identifier. If you pass TypeItem.MOVIE it return a set of movie
+     * identifier.
+     *
+     * @param t
+     *            type of item.
+     * @return a set of item identifier.
+     */
+    Set<Integer> getItemId(final TypeItem t);
 
 }

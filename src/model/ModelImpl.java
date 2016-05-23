@@ -3,8 +3,10 @@ package model;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Set;
 
 import model.item.ArchiveImpl;
+import model.item.ArchiveImpl.TypeItem;
 import model.item.BookGenre;
 import model.item.ItemFactory;
 import model.item.Language;
@@ -21,9 +23,6 @@ import model.user.User;
  */
 public class ModelImpl implements Serializable, Model {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = -8370710936091204583L;
     private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
     private ArchiveUser archiveUser = ArchiveUser.getArchiveImpl();
@@ -104,4 +103,8 @@ public class ModelImpl implements Serializable, Model {
         }
     }
 
+    @Override
+    public Set<Integer> getAllItemId(final TypeItem t) {
+        return this.archiveItem.getItemId(t);
+    }
 }

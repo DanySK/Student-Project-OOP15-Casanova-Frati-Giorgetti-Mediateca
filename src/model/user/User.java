@@ -23,9 +23,6 @@ import model.item.MovieGenre;
  */
 public class User implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 2261594876176760469L;
     private final String name;
     private final String surname;

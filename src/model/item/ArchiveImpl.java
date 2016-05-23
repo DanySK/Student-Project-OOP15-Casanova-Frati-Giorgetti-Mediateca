@@ -28,6 +28,10 @@ public final class ArchiveImpl implements Serializable, Archive {
     private static ArchiveImpl singleton = null;
     private Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = new HashMap<>();
 
+    public enum TypeItem {
+        MOVIE, BOOK
+    }
+
     /**
      * Empty private constructor. NON COMPLETO DEVE ESSERE AGGIUNTO IL CASO IN
      * CUI L'ARCHIVIO HA GIA' UN FILE DI CONFIGURAZIONE.
@@ -180,6 +184,27 @@ public final class ArchiveImpl implements Serializable, Archive {
     @Override
     public boolean contains(final Integer itemId) {
         return (this.itemArchive.containsKey(itemId));
+    }
+
+    @Override
+    public Set<Integer> getItemId(final TypeItem t) {
+        Set<Integer> booklist = new HashSet<>();
+        Set<Integer> movielist = new HashSet<>();
+        for (Pair<ItemImpl, ItemInfo> i : this.itemArchive.values()) {
+            if (Book.class.isInstance(i.getFirst())) {
+                booklist.add(i.getFirst().getiD());
+            }
+            if (Movie.class.isInstance(i.getFirst())) {
+                movielist.add(i.getFirst().getiD());
+            }
+        }
+        if (t == TypeItem.BOOK) {
+            return booklist;
+        }
+        if (t == TypeItem.MOVIE) {
+            return movielist;
+        }
+        return null;
     }
 
 }
