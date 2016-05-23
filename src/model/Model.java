@@ -129,7 +129,7 @@ public interface Model {
      * @param userId
      *            user's identifier.
      * @throws Exception
-     *             in the case which itemId or userId is not conteined into
+     *             in the case which itemId or userId is not contained into
      *             their respective archive.
      */
     void borrowItem(final int itemId, final int userId) throws Exception;
@@ -141,7 +141,11 @@ public interface Model {
      *            item's identifier.
      * @param userId
      *            user's identifier.
+     * @throws Exception
+     *             in the case which itemId or userId is not contained into
+     *             their respective archive or userId is not associated to
+     *             itemId.
      */
-    void returnItem(final int itemId, final int userId);
+    void returnItem(final int itemId, final int userId) throws Exception;
 
 }

@@ -79,8 +79,12 @@ public class ModelImpl implements Serializable, Model {
     }
 
     @Override
-    public void returnItem(final int itemId, final int userId) {
-        // TODO Auto-generated method stub
+    public void returnItem(final int itemId, final int userId) throws Exception {
+        if (this.archiveItem.contains(itemId) && this.archiveUser.contains(userId)) {
+            this.archiveItem.removeUser(itemId, userId);
+        } else {
+            throw new Exception("ItemId: " + itemId + " or userId" + userId + "are not contained into the archive");
+        }
 
     }
 
