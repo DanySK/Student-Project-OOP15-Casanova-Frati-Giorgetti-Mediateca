@@ -128,8 +128,11 @@ public interface Model {
      *            item's identifier.
      * @param userId
      *            user's identifier.
+     * @throws Exception
+     *             in the case which itemId or userId is not conteined into
+     *             their respective archive.
      */
-    void borrowItem(final int itemId, final int userId);
+    void borrowItem(final int itemId, final int userId) throws Exception;
 
     /**
      * This method is used to dissociate a book with a user that return it.
