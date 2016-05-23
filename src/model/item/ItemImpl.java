@@ -106,6 +106,7 @@ public class ItemImpl implements Item, Serializable {
         return this.like.size();
     }
 
+    @Override
     public Set<Integer> getLikeUser() {
         return this.like;
     }

@@ -143,9 +143,22 @@ public interface Model {
      *            user's identifier.
      * @throws Exception
      *             in the case which itemId or userId is not contained into
-     *             their respective archive or userId is not associated to
+     *             their respective archives or userId is not associated to
      *             itemId.
      */
     void returnItem(final int itemId, final int userId) throws Exception;
+
+    /**
+     * This method adds a like to the itemId by userId.
+     *
+     * @param itemId
+     *            item's identifier.
+     * @param userId
+     *            user's identifier.
+     * @throws Exception
+     *             in the which itemId or userId is not contained into their
+     *             archives.
+     */
+    void addLike(final int itemId, final int userId) throws Exception;
 
 }

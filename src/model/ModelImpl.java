@@ -12,6 +12,13 @@ import model.item.MovieGenre;
 import model.user.ArchiveUser;
 import model.user.User;
 
+/**
+ * Main class of the model. It is Serializable and it has two main field, the
+ * first to save item and its info and the second to save the user and its info.
+ *
+ * @author Edoardo
+ *
+ */
 public class ModelImpl implements Serializable, Model {
 
     /**
@@ -86,6 +93,15 @@ public class ModelImpl implements Serializable, Model {
             throw new Exception("ItemId: " + itemId + " or userId" + userId + "are not contained into the archive");
         }
 
+    }
+
+    @Override
+    public void addLike(final int itemId, final int userId) throws Exception {
+        if (this.archiveItem.contains(itemId) && this.archiveUser.contains(userId)) {
+            this.archiveItem.getItem(itemId).addLike(userId);
+        } else {
+            throw new Exception("ItemId: " + itemId + " or userId" + userId + "are not contained into the archive");
+        }
     }
 
 }
