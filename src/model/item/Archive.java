@@ -125,4 +125,14 @@ public interface Archive {
      */
     Set<Integer> getUserList(final Integer itemId) throws Exception;
 
+    /**
+     * This method return true if itemId is a key into the map, it return false
+     * if itemId is not a key into the map.
+     *
+     * @param itemId
+     *            item's identifier.
+     * @return true if item is into the map, else false.
+     */
+    boolean contains(final Integer itemId);
+
 }

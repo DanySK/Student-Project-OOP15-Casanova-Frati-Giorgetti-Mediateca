@@ -72,6 +72,7 @@ public interface Model {
      * @param initNumCopy
      *            item's num of copy available.
      * @throws Exception
+     *             in the case which initNumCopy <= 0.
      */
     void registerBook(final String initTitle, final int initReleaseYear, final String initAuthor,
             final Language initCurrentLanguage, final String initISBN, final BookGenre initGenre,
@@ -96,18 +97,24 @@ public interface Model {
      *            item's duration in min.
      * @param initColor
      *            item's color.
+     * @param initNumCopy
+     *            item's num of copy available.
+     * @throws Exception
+     *             in the case which initNumCOpy <= 0
      */
     void registerMovie(final String initTitle, final int initReleaseYear, final String initPublisher,
             final String initAuthor, final Language initCurrentLanguage, final MovieGenre initGenre,
-            final Integer initDuration, final Boolean initColor);
+            final Integer initDuration, final Boolean initColor, final Integer initNumCopy) throws Exception;
 
     /**
      * This method removes an item from the archive.
      *
      * @param itemId
      *            item's identifier.
+     * @throws Exception
+     *             in the case which itemId is not into the archive.
      */
-    void deleteItem(final int itemId);
+    void deleteItem(final int itemId) throws Exception;
 
     /**
      * This method is used to associate a book with a user that borrow it.

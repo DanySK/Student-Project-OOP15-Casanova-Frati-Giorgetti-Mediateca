@@ -48,7 +48,7 @@ public final class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void addItem(final ItemImpl i, final Integer initNumCopy) throws RuntimeException {
+    public void addItem(final ItemImpl i, final Integer initNumCopy) throws Exception {
         if (initNumCopy > 0) {
             if (!this.itemArchive.containsKey(i.getiD())) {
                 this.itemArchive.put(i.getiD(), new Pair<>(i, new ItemInfo(initNumCopy)));
@@ -175,6 +175,11 @@ public final class ArchiveImpl implements Serializable, Archive {
         } else {
             throw new Exception("Item: " + itemId + "Not contained into the archive.");
         }
+    }
+
+    @Override
+    public boolean contains(final Integer itemId) {
+        return (this.itemArchive.containsKey(itemId));
     }
 
 }
