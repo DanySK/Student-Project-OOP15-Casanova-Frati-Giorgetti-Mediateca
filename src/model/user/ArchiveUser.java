@@ -84,4 +84,13 @@ public final class ArchiveUser implements Serializable {
             throw new Exception("User: " + userId + " not contained into the archive.Can not remove it");
         }
     }
+
+    /**
+     * @param userId
+     *            to find into the archive.
+     * @return true if userId is into the archive, else false.
+     */
+    public boolean contains(final Integer userId) {
+        return this.userArchive.containsKey(userId);
+    }
 }

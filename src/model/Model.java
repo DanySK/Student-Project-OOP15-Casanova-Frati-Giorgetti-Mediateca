@@ -50,8 +50,10 @@ public interface Model {
      *
      * @param userId
      *            user's identifier.
+     * @throws Exception
+     *             in the case which userId is not in the archive.
      */
-    void deleteUser(final int userId);
+    void deleteUser(final int userId) throws Exception;
 
     /**
      * This method registers the book into the item archive.

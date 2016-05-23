@@ -32,8 +32,12 @@ public class ModelImpl implements Serializable, Model {
     }
 
     @Override
-    public void deleteUser(final int userId) {
-        // TODO Auto-generated method stub
+    public void deleteUser(final int userId) throws Exception {
+        if (this.archiveUser.contains(userId)) {
+            this.archiveUser.removeUser(userId);
+        } else {
+            throw new Exception("User: " + userId + " not contained into the archive.Can not remove it");
+        }
 
     }
 
