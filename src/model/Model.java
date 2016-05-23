@@ -37,10 +37,13 @@ public interface Model {
      *            user's list of BookGenre preferences.
      * @param initMoviePref
      *            user's list of MovieGenre preferences.
+     * @throws Exception
+     *             in the case which Users already is into the archive.
      */
     void registerUser(final String initName, final String initSurname, final GregorianCalendar initBirthdate,
             final String initUsername, final String initPassword, final String initEmail,
-            final String initTelephoneNumber, final List<BookGenre> initBookPref, final List<MovieGenre> initMoviePref);
+            final String initTelephoneNumber, final List<BookGenre> initBookPref, final List<MovieGenre> initMoviePref)
+                    throws Exception;
 
     /**
      * This method removes the user with userId from the archive.

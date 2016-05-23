@@ -10,6 +10,7 @@ import model.item.ItemFactory;
 import model.item.Language;
 import model.item.MovieGenre;
 import model.user.ArchiveUser;
+import model.user.User;
 
 public class ModelImpl implements Serializable, Model {
 
@@ -23,8 +24,10 @@ public class ModelImpl implements Serializable, Model {
     @Override
     public void registerUser(final String initName, final String initSurname, final GregorianCalendar initBirthdate,
             final String initUsername, final String initPassword, final String initEmail,
-            final String initTelephoneNumber, final List<BookGenre> initBookPref,
-            final List<MovieGenre> initMoviePref) {
+            final String initTelephoneNumber, final List<BookGenre> initBookPref, final List<MovieGenre> initMoviePref)
+                    throws Exception {
+        this.archiveUser.addUser(new User(initName, initSurname, initBirthdate, initUsername, initPassword, initEmail,
+                initTelephoneNumber, initBookPref, initMoviePref));
 
     }
 
