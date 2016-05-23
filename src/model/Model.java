@@ -69,10 +69,13 @@ public interface Model {
      *            item's publisher.
      * @param initNumRelease
      *            item's num of release.
+     * @param initNumCopy
+     *            item's num of copy available.
+     * @throws Exception
      */
     void registerBook(final String initTitle, final int initReleaseYear, final String initAuthor,
             final Language initCurrentLanguage, final String initISBN, final BookGenre initGenre,
-            final String initPublisher, final Integer initNumRelease);
+            final String initPublisher, final Integer initNumRelease, final Integer initNumCopy) throws Exception;
 
     /**
      * This method registers the book into the item archive.

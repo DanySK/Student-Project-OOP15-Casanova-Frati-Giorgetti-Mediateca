@@ -18,7 +18,7 @@ import model.Pair;
  * @author Edoardo
  *
  */
-final class ArchiveImpl implements Serializable, Archive {
+public final class ArchiveImpl implements Serializable, Archive {
 
     /**
      * SSINDD is the double used to divide milliseconds and get the days.
@@ -48,7 +48,7 @@ final class ArchiveImpl implements Serializable, Archive {
     }
 
     @Override
-    public void addItem(final ItemImpl i, final Integer initNumCopy) throws Exception {
+    public void addItem(final ItemImpl i, final Integer initNumCopy) throws RuntimeException {
         if (initNumCopy > 0) {
             if (!this.itemArchive.containsKey(i.getiD())) {
                 this.itemArchive.put(i.getiD(), new Pair<>(i, new ItemInfo(initNumCopy)));
@@ -56,7 +56,7 @@ final class ArchiveImpl implements Serializable, Archive {
                 this.changeAmount(i.getiD(), initNumCopy);
             }
         } else {
-            throw new Exception("initNumCopy <= 0");
+            throw new RuntimeException("initNumCopy <= 0");
         }
     }
 

@@ -7,9 +7,12 @@ package model.item;
  * @author Edoardo
  *
  */
-public class ItemFactory {
+public final class ItemFactory {
 
-    public ItemFactory() {
+    /**
+     * Empty constructor.
+     */
+    private ItemFactory() {
     }
 
     /**
@@ -53,7 +56,7 @@ public class ItemFactory {
      *            director of the movie.
      * @param initCurrentLanguage
      *            of the movie contained in the archive.
-     * 
+     *
      * @param initGenre
      *            of the movie.
      * @param initDuration
