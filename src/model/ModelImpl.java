@@ -13,6 +13,7 @@ import model.item.BookGenre;
 import model.item.ItemFactory;
 import model.item.Language;
 import model.item.MovieGenre;
+import model.item.ReviewImpl;
 import model.user.ArchiveUser;
 import model.user.User;
 
@@ -26,7 +27,6 @@ import model.user.User;
 public class ModelImpl implements Serializable, Model {
 
     private static final long serialVersionUID = -8370710936091204583L;
-    private static int max_day = 30;
     private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
     private ArchiveUser archiveUser = ArchiveUser.getArchiveImpl();
 
@@ -106,6 +106,19 @@ public class ModelImpl implements Serializable, Model {
         } else {
             throw new Exception("ItemId: " + itemId + " or userId" + userId + "are not contained into the archive");
         }
+    }
+
+    @Override
+    public void addReview(final Integer itemId, final Integer userId, final Integer vote, final String note)
+            throws Exception {
+        ReviewImpl rev = new ReviewImpl(vote, note);
+        if (this.archiveUser.contains(userId) && this.archiveItem.contains(itemId)) {
+            this.archiveUser.getUser(userId).setItemReview(itemId, (int) rev.getId());
+            this.archiveItem.getItem(itemId).addReview(rev);
+        } else {
+            throw new Exception("ItemId: " + itemId + " or userId" + userId + "are not contained into the archive\n");
+        }
+
     }
 
     @Override

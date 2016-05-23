@@ -188,4 +188,20 @@ public interface Model {
      */
     Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception;
 
+    /**
+     * This method adds a review to the different archives.
+     *
+     * @param itemId
+     *            item's identifier.
+     * @param userId
+     *            user's identifier.
+     * @param vote
+     *            review's vote.
+     * @param note
+     *            review's note.
+     * @throws Exception
+     *             in the case which itemId or userId is not in the archive.
+     */
+    void addReview(final Integer itemId, final Integer userId, final Integer vote, final String note) throws Exception;
+
 }
