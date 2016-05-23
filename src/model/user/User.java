@@ -246,9 +246,15 @@ public class User implements Serializable {
      *
      * @param itemId
      *            item's identifier.
+     * @throws Exception
+     *             in the case which itemId is not in the archive.
      */
-    public void removeItem(final Integer itemId) {
-        this.loanArchive.put(itemId, new Pair<>(true, null));
+    public void removeItem(final Integer itemId) throws Exception {
+        if (this.loanArchive.containsKey(itemId)) {
+            this.loanArchive.put(itemId, new Pair<>(true, null));
+        } else {
+            throw new Exception("ItemId" + itemId + " is not in the archive.");
+        }
     }
 
     /**
