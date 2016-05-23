@@ -78,6 +78,7 @@ public class ModelImpl implements Serializable, Model {
     public void borrowItem(final int itemId, final int userId) throws Exception {
         if (this.archiveItem.contains(itemId) && this.archiveUser.contains(userId)) {
             this.archiveItem.addUser(itemId, userId);
+            this.archiveUser.getUser(userId).addItem(itemId);
         } else {
             throw new Exception("ItemId: " + itemId + " or userId" + userId + "are not contained into the archive");
         }
@@ -88,6 +89,7 @@ public class ModelImpl implements Serializable, Model {
     public void returnItem(final int itemId, final int userId) throws Exception {
         if (this.archiveItem.contains(itemId) && this.archiveUser.contains(userId)) {
             this.archiveItem.removeUser(itemId, userId);
+            this.archiveUser.getUser(userId).removeItem(itemId);
         } else {
             throw new Exception("ItemId: " + itemId + " or userId" + userId + "are not contained into the archive");
         }
@@ -106,5 +108,11 @@ public class ModelImpl implements Serializable, Model {
     @Override
     public Set<Integer> getAllItemId(final TypeItem t) {
         return this.archiveItem.getItemId(t);
+    }
+
+    public void checkDeadlineas(final Integer userId) {
+        if (this.archiveItem.contains(userId)) {
+            // this
+        }
     }
 }

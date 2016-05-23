@@ -32,6 +32,7 @@ public class User implements Serializable {
     private final Integer idUser;
     private final String email;
     private final String telephoneNumber;
+    // Map<itemId, Pair<Restituito, reviewId>>
     private Map<Integer, Pair<Boolean, Optional<Integer>>> loanArchive = new HashMap<>();
     private List<Integer> wishList = new LinkedList<>();
     private List<Integer> recommendedList = new LinkedList<>();
@@ -228,5 +229,38 @@ public class User implements Serializable {
         final User temp = (User) obj;
         return Objects.equal(this.name, temp.name) && Objects.equal(this.surname, temp.surname)
                 && Objects.equal(this.birthdate, temp.birthdate) && Objects.equal(this.username, temp.username);
+    }
+
+    /**
+     * This method adds an itemId to the user's map.
+     *
+     * @param itemId
+     *            item's identifier.
+     */
+    public void addItem(final Integer itemId) {
+        this.loanArchive.put(itemId, new Pair<>(false, null));
+    }
+
+    /**
+     * This method change item's status on the user's map.
+     *
+     * @param itemId
+     *            item's identifier.
+     */
+    public void removeItem(final Integer itemId) {
+        this.loanArchive.put(itemId, new Pair<>(true, null));
+    }
+
+    /**
+     * This method adds a reviewId to the respective item on the user's map.
+     *
+     * @param itemId
+     *            item's identifier.
+     * @param reviewId
+     *            review's identifier.
+     */
+    public void setItemReview(final Integer itemId, final Integer reviewId) {
+        this.loanArchive.put(itemId,
+                new Pair<Boolean, Optional<Integer>>(this.loanArchive.get(itemId).getFirst(), Optional.of(reviewId)));
     }
 }
