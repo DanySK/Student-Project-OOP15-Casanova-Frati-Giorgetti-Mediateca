@@ -1,8 +1,10 @@
 package model.item;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import com.google.common.base.Objects;
 
@@ -26,7 +28,7 @@ public class ItemImpl implements Item, Serializable {
     private final String author;
     private final Language currentLanguage;
     private List<ReviewImpl> setReview = new LinkedList<ReviewImpl>();
-    private int like;
+    private Set<Integer> like;
     private float averageVote;
 
     /**
@@ -51,7 +53,7 @@ public class ItemImpl implements Item, Serializable {
         this.publisher = initPublisher.toUpperCase();
         this.author = initAuthor.toUpperCase();
         this.currentLanguage = initCurrentLanguage;
-        this.like = 0;
+        this.like = new HashSet<Integer>();
         this.averageVote = 0;
         this.iD = this.hashCode();
     }
@@ -101,6 +103,10 @@ public class ItemImpl implements Item, Serializable {
 
     @Override
     public int getLike() {
+        return this.like.size();
+    }
+
+    public Set<Integer> getLikeUser() {
         return this.like;
     }
 
@@ -132,8 +138,10 @@ public class ItemImpl implements Item, Serializable {
     }
 
     @Override
-    public void addLike() {
-        this.like++;
+    public void addLike(final Integer userId) {
+        if (!this.like.contains(userId)) {
+            this.like.add(userId);
+        }
     }
 
     @Override

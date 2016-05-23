@@ -1,6 +1,7 @@
 package model.item;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Item is the center interface of Book and Movie.
@@ -75,6 +76,12 @@ public interface Item {
     int getLike();
 
     /**
+     *
+     * @return a set of userId that like this item.
+     */
+    Set<Integer> getLikeUser();
+
+    /**
      * Add a review to the Item.
      *
      * @param rev
@@ -83,9 +90,12 @@ public interface Item {
     void addReview(ReviewImpl rev);
 
     /**
-     * Add like to the Item.
+     * Add userId to set of like to the Item.
+     *
+     * @param userId
+     *            user's identifier that likes this item.
      */
-    void addLike();
+    void addLike(final Integer userId);
 
     /**
      * Calculate the average of the review's vote.
