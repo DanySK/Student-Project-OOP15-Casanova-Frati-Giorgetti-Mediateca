@@ -2,7 +2,9 @@ package model;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import model.item.ArchiveImpl;
@@ -24,6 +26,7 @@ import model.user.User;
 public class ModelImpl implements Serializable, Model {
 
     private static final long serialVersionUID = -8370710936091204583L;
+    private static int max_day = 30;
     private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
     private ArchiveUser archiveUser = ArchiveUser.getArchiveImpl();
 
@@ -110,9 +113,18 @@ public class ModelImpl implements Serializable, Model {
         return this.archiveItem.getItemId(t);
     }
 
-    public void checkDeadlineas(final Integer userId) {
+    @Override
+    public Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception {
+        Map<Integer, Double> mmap = new HashMap<>();
         if (this.archiveItem.contains(userId)) {
-            // this
+            for (Integer i : this.archiveUser.getUser(userId).getLoanArchive().keySet()) {
+                if (!this.archiveUser.getUser(userId).getLoanArchive().get(i).getFirst()) {
+                    mmap.put(i, this.archiveItem.calculateDifferenceDays(i, userId));
+                }
+            }
+            return mmap;
+        } else {
+            throw new Exception("UserId: " + userId + "is not in the archive.");
         }
     }
 }

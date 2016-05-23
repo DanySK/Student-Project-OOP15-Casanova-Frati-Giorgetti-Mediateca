@@ -258,7 +258,8 @@ public class User implements Serializable {
     }
 
     /**
-     * This method adds a reviewId to the respective item on the user's map.
+     * This method adds a reviewId to the respective item on the user's map, it
+     * doesn't change return/not status.
      *
      * @param itemId
      *            item's identifier.

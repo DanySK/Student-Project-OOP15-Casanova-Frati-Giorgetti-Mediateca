@@ -2,6 +2,7 @@ package model;
 
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import model.item.ArchiveImpl.TypeItem;
@@ -174,5 +175,17 @@ public interface Model {
      * @return a set of item identifier contained into the archive.
      */
     Set<Integer> getAllItemId(TypeItem t);
+
+    /**
+     * This method return a map with key the itemId and as value the difference
+     * of day between when the item was taken and today.
+     *
+     * @param userId
+     *            user's identifier.
+     * @return Map<Integer,Double> key = itemId, value = days.
+     * @throws Exception
+     *             in the case which userId is not in the archive.
+     */
+    Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception;
 
 }
