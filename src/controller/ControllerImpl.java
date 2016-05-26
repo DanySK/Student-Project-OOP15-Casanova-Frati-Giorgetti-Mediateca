@@ -2,7 +2,7 @@ package controller;
 
 /**
  * Class which implements the controller interface
- * 
+ *
  * @author
  *
  */
@@ -14,13 +14,13 @@ public class ControllerImpl implements Controller {
 	}
 
 	@Override
-	public void getUser() {
+	public void getUserUsername() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void setUser() {
+	public void setUserUsername() {
 		// TODO Auto-generated method stub
 
 	}
