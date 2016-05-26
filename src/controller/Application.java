@@ -1,5 +1,12 @@
 package controller;
 
+/**
+ * Class designed to start the program
+ * 
+ * @author
+ *
+ */
+
 public class Application {
 	public static void main(final String[] args) {
 		// application starter
