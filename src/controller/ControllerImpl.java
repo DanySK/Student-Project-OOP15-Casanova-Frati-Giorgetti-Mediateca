@@ -5,15 +5,15 @@ import javax.swing.text.View;
 import model.Model;
 
 /**
- * Class which implements the controller interface
+ * Class which implements the controller interface.
  *
  * @author
  *
  */
 
 public class ControllerImpl implements Controller {
-	View v;
-	Model m;
+	private View v;
+	private Model m;
 
 	/*
 	 * template per i futuri getter
@@ -21,10 +21,21 @@ public class ControllerImpl implements Controller {
 	 * public void getValore(){ view.setValore("valore"); }
 	 */
 
-	public ControllerImpl(final Model m) {
-		this.m = m;
+	/**
+	 * Constructor for ControllerImpl.
+	 *
+	 * @param inputM
+	 *            Model to be initialized
+	 */
+	public ControllerImpl(final Model inputM) {
+		this.m = inputM;
 	}
 
+	/**
+	 * Method who sets the View for the Controller.
+	 *
+	 */
+	@Override
 	public void setView(final View inputView) {
 		this.v = inputView;
 	}

@@ -4,13 +4,22 @@ import model.Model;
 import model.ModelImpl;
 
 /**
- * Class designed to start the program
+ * Class designed to start the program.
  *
  * @author
  *
  */
 
-public class Application {
+public final class Application {
+
+	private Application() {
+	}
+
+	/**
+	 *
+	 * @param args
+	 *            Arguments passed to the main method
+	 */
 	public static void main(final String[] args) {
 		// application starter
 		final Model m = new ModelImpl();
