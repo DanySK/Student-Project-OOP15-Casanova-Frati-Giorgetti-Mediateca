@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 public interface SelectAccountType {
 
 	/**
-	 * Method which returns panel of accoount selection.
+	 * Method which returns panel of account selection.
 	 *
 	 * @return panel of account selection
 	 */

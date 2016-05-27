@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.JPanel;
+
 /**
  *
  * Interface for the menu page.
@@ -8,5 +10,12 @@ package view;
  *
  */
 public interface Menu {
+
+	/**
+	 * Method which returns panel of menu with service options.
+	 *
+	 * @return the menu with service options.
+	 */
+	JPanel getMenuPanel();
 
 }
