@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.text.View;
+
 /**
  * Interface for a generic controller
  *
@@ -13,4 +15,6 @@ public interface Controller {
 	public void getUserUsername();
 
 	public void setUserUsername();
+
+	public void setView(View inputView);
 }
