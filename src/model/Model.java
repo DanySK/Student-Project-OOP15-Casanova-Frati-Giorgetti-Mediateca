@@ -217,4 +217,12 @@ public interface Model {
      *             in the case which t is not BOOK or MOVIE.
      */
     Set<Integer> filterItemGenre(final TypeItem t, final ItemGenre b) throws Exception;
+
+    /**
+     * This method update userId's recommended list of Book and Movie.
+     *
+     * @param userId
+     *            user's identifier.
+     */
+    void refreshRecommendedList(final Integer userId);
 }

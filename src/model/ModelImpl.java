@@ -210,4 +210,8 @@ public class ModelImpl implements Serializable, Model {
             }
         }
     }
+
+    public void refreshRecommendedList(final Integer userId) {
+        this.setReccomandedList(userId);
+    }
 }
