@@ -203,4 +203,17 @@ public interface Model {
      */
     void addReview(final Integer itemId, final Integer userId, final Integer vote, final String note) throws Exception;
 
+    /**
+     * This method return a set of Book or Movie with respective Genre.
+     *
+     * @param t
+     *            Item's type.
+     * @param b
+     *            Item's genre.
+     * @return set of item with required genre.
+     *
+     * @throws Exception
+     *             in the case which t is not BOOK or MOVIE.
+     */
+    Set<Integer> filterItemGenre(final TypeItem t, final ItemGenre b) throws Exception;
 }

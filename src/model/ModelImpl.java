@@ -140,9 +140,18 @@ public class ModelImpl implements Serializable, Model {
         }
     }
 
-    public Set<Integer> filterBookGenre(final ItemGenre b) {
+    public Set<Integer> filterItemGenre(final TypeItem t, final ItemGenre b) throws Exception {
         Set<Integer> r = new HashSet<>();
-        Set<Integer> all = new HashSet<>(this.getAllItemId(TypeItem.BOOK));
+        Set<Integer> all = new HashSet<>();
+        if (t == TypeItem.BOOK) {
+            all = this.getAllItemId(TypeItem.BOOK);
+        }
+        if (t == TypeItem.MOVIE) {
+            all = this.getAllItemId(TypeItem.MOVIE);
+        }
+        if ((t != TypeItem.MOVIE) && (t != TypeItem.BOOK)) {
+            throw new Exception("TypeItem " + t + "not valid");
+        }
         for (Integer i : all) {
             try {
                 if (this.archiveItem.getItem(i).getGenre().equals(b)) {
@@ -154,4 +163,5 @@ public class ModelImpl implements Serializable, Model {
         }
         return r;
     }
+
 }
