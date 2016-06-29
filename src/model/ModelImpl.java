@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,8 +36,10 @@ public class ModelImpl implements Serializable, Model {
             final String initUsername, final String initPassword, final String initEmail,
             final String initTelephoneNumber, final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
                     throws Exception {
-        this.archiveUser.addUser(new User(initName, initSurname, initBirthdate, initUsername, initPassword, initEmail,
-                initTelephoneNumber, initBookPref, initMoviePref));
+        User u = new User(initName, initSurname, initBirthdate, initUsername, initPassword, initEmail,
+                initTelephoneNumber, initBookPref, initMoviePref);
+        this.archiveUser.addUser(u);
+        this.setReccomandedList(u.getIdUser());
 
     }
 
@@ -140,6 +143,7 @@ public class ModelImpl implements Serializable, Model {
         }
     }
 
+    @Override
     public Set<Integer> filterItemGenre(final TypeItem t, final ItemGenre b) throws Exception {
         Set<Integer> r = new HashSet<>();
         Set<Integer> all = new HashSet<>();
@@ -164,4 +168,46 @@ public class ModelImpl implements Serializable, Model {
         return r;
     }
 
+    private void setReccomandedList(final Integer userId) {
+        List<ItemGenre> prefGenMovie = new LinkedList<>();
+        List<ItemGenre> prefGenBook = new LinkedList<>();
+        try {
+            prefGenMovie = this.archiveUser.getUser(userId).getMoviePreferences();
+            prefGenBook = this.archiveUser.getUser(userId).getBookPreferences();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        for (ItemGenre i : prefGenMovie) {
+            try {
+                Set<Integer> all = new HashSet<>(this.filterItemGenre(TypeItem.MOVIE, i));
+                Integer start = 0;
+                Integer best = 0;
+                for (Integer v : all) {
+                    if (this.archiveItem.getItem(v).getAverageVote() > start) {
+                        best = v;
+                    }
+                }
+                this.archiveUser.getUser(userId).getRecommendedList().add(best);
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+            for (ItemGenre ig : prefGenBook) {
+                try {
+                    Set<Integer> all = new HashSet<>(this.filterItemGenre(TypeItem.BOOK, ig));
+                    Integer start = 0;
+                    Integer best = 0;
+                    for (Integer v : all) {
+                        if (this.archiveItem.getItem(v).getAverageVote() > start) {
+                            best = v;
+                        }
+                    }
+                    this.archiveUser.getUser(userId).getRecommendedList().add(best);
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

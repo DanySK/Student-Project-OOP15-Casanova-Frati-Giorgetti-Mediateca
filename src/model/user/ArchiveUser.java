@@ -46,6 +46,7 @@ public final class ArchiveUser implements Serializable {
     public void addUser(final User initUser) throws Exception {
         if (!this.userArchive.containsKey(initUser.getIdUser())) {
             this.userArchive.put(initUser.getIdUser(), initUser);
+
         } else {
             throw new Exception(
                     "User: " + initUser.getIdUser() + "contained into the archive.Can not add one more time.");

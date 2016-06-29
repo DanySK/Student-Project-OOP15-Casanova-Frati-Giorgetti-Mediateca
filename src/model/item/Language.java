@@ -9,5 +9,9 @@ import java.io.Serializable;
  *
  */
 public enum Language implements Serializable {
+
+    /**
+     *
+     */
     ITALIAN, ENGLISH, SPANISH, FRENCH, RUSSIAN, AMERICAN
 }

@@ -165,7 +165,7 @@ public class User implements Serializable {
     }
 
     /**
-     * @return the username
+     * @return the Username
      */
     public String getUsername() {
         return this.username;

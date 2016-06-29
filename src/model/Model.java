@@ -19,7 +19,8 @@ import model.item.Language;
 public interface Model {
 
     /**
-     * This method registers a user into the user archive.
+     * This method registers a user into the user archive and set its
+     * preferences.
      *
      * @param initName
      *            user's name.
