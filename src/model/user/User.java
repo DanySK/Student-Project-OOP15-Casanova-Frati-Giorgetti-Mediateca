@@ -11,8 +11,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 
 import model.Pair;
-import model.item.BookGenre;
-import model.item.MovieGenre;
+import model.item.ItemGenre;
 
 /**
  * User is the Mediateca client. This class saves in addition to general
@@ -37,8 +36,8 @@ public class User implements Serializable {
     private List<Integer> wishList = new LinkedList<>();
     private List<Integer> recommendedList = new LinkedList<>();
     private boolean pro = false;
-    private List<BookGenre> bookPreferences = new LinkedList<>();
-    private List<MovieGenre> moviePreferences = new LinkedList<>();
+    private List<ItemGenre> bookPreferences = new LinkedList<>();
+    private List<ItemGenre> moviePreferences = new LinkedList<>();
 
     /**
      * User constructor.
@@ -64,8 +63,7 @@ public class User implements Serializable {
      */
     public User(final String initName, final String initSurname, final GregorianCalendar initBirthdate,
             final String initUsername, final String initPassword, final String initEmail,
-            final String initTelephoneNumber, final List<BookGenre> initBookPref,
-            final List<MovieGenre> initMoviePref) {
+            final String initTelephoneNumber, final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref) {
         this.name = initName.toUpperCase();
         this.surname = initSurname.toUpperCase();
         this.birthdate = initBirthdate;
@@ -118,7 +116,7 @@ public class User implements Serializable {
     /**
      * @return the bookPreferences
      */
-    public List<BookGenre> getBookPreferences() {
+    public List<ItemGenre> getBookPreferences() {
         return this.bookPreferences;
     }
 
@@ -126,14 +124,14 @@ public class User implements Serializable {
      * @param initBookPreferences
      *            the bookPreferences to set
      */
-    public void setBookPreferences(final List<BookGenre> initBookPreferences) {
+    public void setBookPreferences(final List<ItemGenre> initBookPreferences) {
         this.bookPreferences = initBookPreferences;
     }
 
     /**
      * @return the moviePreferences
      */
-    public List<MovieGenre> getMoviePreferences() {
+    public List<ItemGenre> getMoviePreferences() {
         return this.moviePreferences;
     }
 
@@ -141,7 +139,7 @@ public class User implements Serializable {
      * @param initMoviePreferences
      *            the moviePreferences to set
      */
-    public void setMoviePreferences(final List<MovieGenre> initMoviePreferences) {
+    public void setMoviePreferences(final List<ItemGenre> initMoviePreferences) {
         this.moviePreferences = initMoviePreferences;
     }
 

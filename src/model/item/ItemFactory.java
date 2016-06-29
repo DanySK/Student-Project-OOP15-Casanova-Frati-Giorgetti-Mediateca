@@ -37,7 +37,7 @@ public final class ItemFactory {
      * @return new Book(...).
      */
     public static Book getNewBook(final String initTitle, final int initReleaseYear, final String initAuthor,
-            final Language initCurrentLanguage, final String initISBN, final BookGenre initGenre,
+            final Language initCurrentLanguage, final String initISBN, final ItemGenre initGenre,
             final String initPublisher, final Integer initNumRelease) {
         return new Book(initTitle, initReleaseYear, initAuthor, initCurrentLanguage, initISBN, initGenre, initPublisher,
                 initNumRelease);
@@ -67,7 +67,7 @@ public final class ItemFactory {
      * @return new Movie(...).
      */
     public static Movie getNewMovie(final String initTitle, final int initReleaseYear, final String initPublisher,
-            final String initAuthor, final Language initCurrentLanguage, final MovieGenre initGenre,
+            final String initAuthor, final Language initCurrentLanguage, final ItemGenre initGenre,
             final Integer initDuration, final Boolean initColour) {
         return new Movie(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initGenre,
                 initDuration, initColour);

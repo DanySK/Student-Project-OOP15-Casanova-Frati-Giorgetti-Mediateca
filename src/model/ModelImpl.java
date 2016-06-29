@@ -3,16 +3,16 @@ package model;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
-import model.item.BookGenre;
 import model.item.ItemFactory;
+import model.item.ItemGenre;
 import model.item.Language;
-import model.item.MovieGenre;
 import model.item.ReviewImpl;
 import model.user.ArchiveUser;
 import model.user.User;
@@ -33,7 +33,7 @@ public class ModelImpl implements Serializable, Model {
     @Override
     public void registerUser(final String initName, final String initSurname, final GregorianCalendar initBirthdate,
             final String initUsername, final String initPassword, final String initEmail,
-            final String initTelephoneNumber, final List<BookGenre> initBookPref, final List<MovieGenre> initMoviePref)
+            final String initTelephoneNumber, final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
                     throws Exception {
         this.archiveUser.addUser(new User(initName, initSurname, initBirthdate, initUsername, initPassword, initEmail,
                 initTelephoneNumber, initBookPref, initMoviePref));
@@ -52,7 +52,7 @@ public class ModelImpl implements Serializable, Model {
 
     @Override
     public void registerBook(final String initTitle, final int initReleaseYear, final String initAuthor,
-            final Language initCurrentLanguage, final String initISBN, final BookGenre initGenre,
+            final Language initCurrentLanguage, final String initISBN, final ItemGenre initGenre,
             final String initPublisher, final Integer initNumRelease, final Integer initNumCopy) throws Exception {
         this.archiveItem.addItem(ItemFactory.getNewBook(initTitle, initReleaseYear, initAuthor, initCurrentLanguage,
                 initISBN, initGenre, initPublisher, initNumRelease), initNumCopy);
@@ -61,7 +61,7 @@ public class ModelImpl implements Serializable, Model {
 
     @Override
     public void registerMovie(final String initTitle, final int initReleaseYear, final String initPublisher,
-            final String initAuthor, final Language initCurrentLanguage, final MovieGenre initGenre,
+            final String initAuthor, final Language initCurrentLanguage, final ItemGenre initGenre,
             final Integer initDuration, final Boolean initColor, final Integer initNumCopy) throws Exception {
         this.archiveItem.addItem(ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher, initAuthor,
                 initCurrentLanguage, initGenre, initDuration, initColor), initNumCopy);
@@ -118,7 +118,6 @@ public class ModelImpl implements Serializable, Model {
         } else {
             throw new Exception("ItemId: " + itemId + " or userId" + userId + "are not contained into the archive\n");
         }
-
     }
 
     @Override
@@ -139,5 +138,20 @@ public class ModelImpl implements Serializable, Model {
         } else {
             throw new Exception("UserId: " + userId + "is not in the archive.");
         }
+    }
+
+    public Set<Integer> filterBookGenre(final ItemGenre b) {
+        Set<Integer> r = new HashSet<>();
+        Set<Integer> all = new HashSet<>(this.getAllItemId(TypeItem.BOOK));
+        for (Integer i : all) {
+            try {
+                if (this.archiveItem.getItem(i).getGenre().equals(b)) {
+                    r.add(i);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return r;
     }
 }

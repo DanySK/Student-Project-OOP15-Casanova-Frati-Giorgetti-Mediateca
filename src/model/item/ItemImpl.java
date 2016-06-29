@@ -29,6 +29,7 @@ public class ItemImpl implements Item, Serializable {
     private final Language currentLanguage;
     private List<ReviewImpl> setReview = new LinkedList<ReviewImpl>();
     private Set<Integer> like;
+    private ItemGenre genre;
     private float averageVote;
 
     /**
@@ -47,7 +48,7 @@ public class ItemImpl implements Item, Serializable {
      *            of the general item contained in the archive
      */
     public ItemImpl(final String initTitle, final int initReleaseYear, final String initPublisher,
-            final String initAuthor, final Language initCurrentLanguage) {
+            final String initAuthor, final Language initCurrentLanguage, final ItemGenre initGenre) {
         this.title = initTitle.toUpperCase();
         this.releaseYear = initReleaseYear;
         this.publisher = initPublisher.toUpperCase();
@@ -56,6 +57,7 @@ public class ItemImpl implements Item, Serializable {
         this.like = new HashSet<Integer>();
         this.averageVote = 0;
         this.iD = this.hashCode();
+        this.genre = initGenre;
     }
 
     @Override
@@ -63,7 +65,7 @@ public class ItemImpl implements Item, Serializable {
         return "[iD=" + this.iD + ", title=" + this.title + ", releaseYear=" + this.releaseYear + ", publisher="
                 + this.publisher + ", author=" + this.author + ", currentLanguage=" + this.currentLanguage
                 + ", setReview=" + this.setReview.toString() + ", like=" + this.like + ", averageVote="
-                + this.averageVote;
+                + this.averageVote + this.genre;
     }
 
     @Override
@@ -114,6 +116,11 @@ public class ItemImpl implements Item, Serializable {
     @Override
     public float getAverageVote() {
         return this.averageVote;
+    }
+
+    @Override
+    public ItemGenre getGenre() {
+        return this.genre;
     }
 
     @Override

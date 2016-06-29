@@ -6,9 +6,8 @@ import java.util.Map;
 import java.util.Set;
 
 import model.item.ArchiveImpl.TypeItem;
-import model.item.BookGenre;
+import model.item.ItemGenre;
 import model.item.Language;
-import model.item.MovieGenre;
 
 /**
  * Interface for a generic model. It defines the main methods of the class
@@ -45,7 +44,7 @@ public interface Model {
      */
     void registerUser(final String initName, final String initSurname, final GregorianCalendar initBirthdate,
             final String initUsername, final String initPassword, final String initEmail,
-            final String initTelephoneNumber, final List<BookGenre> initBookPref, final List<MovieGenre> initMoviePref)
+            final String initTelephoneNumber, final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
                     throws Exception;
 
     /**
@@ -83,7 +82,7 @@ public interface Model {
      *             in the case which initNumCopy <= 0.
      */
     void registerBook(final String initTitle, final int initReleaseYear, final String initAuthor,
-            final Language initCurrentLanguage, final String initISBN, final BookGenre initGenre,
+            final Language initCurrentLanguage, final String initISBN, final ItemGenre initGenre,
             final String initPublisher, final Integer initNumRelease, final Integer initNumCopy) throws Exception;
 
     /**
@@ -111,7 +110,7 @@ public interface Model {
      *             in the case which initNumCOpy <= 0
      */
     void registerMovie(final String initTitle, final int initReleaseYear, final String initPublisher,
-            final String initAuthor, final Language initCurrentLanguage, final MovieGenre initGenre,
+            final String initAuthor, final Language initCurrentLanguage, final ItemGenre initGenre,
             final Integer initDuration, final Boolean initColor, final Integer initNumCopy) throws Exception;
 
     /**

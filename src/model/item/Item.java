@@ -108,4 +108,10 @@ public interface Item {
      */
     float getAverageVote();
 
+    /**
+     *
+     * @return Utem's genre.
+     */
+    ItemGenre getGenre();
+
 }

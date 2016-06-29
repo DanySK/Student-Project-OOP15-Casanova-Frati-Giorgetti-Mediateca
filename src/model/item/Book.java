@@ -13,13 +13,12 @@ public class Book extends ItemImpl {
 
     @Override
     public String toString() {
-        return super.toString() + "Book [isbn=" + this.isbn + ", genre=" + this.genre + ", numRelease="
-                + this.numRelease + "] - BOOK";
+        return super.toString() + "Book [isbn=" + this.isbn + ", numRelease=" + this.numRelease + "] - BOOK";
     }
 
     private static final long serialVersionUID = -7358930538078727479L;
     private final String isbn;
-    private final BookGenre genre;
+
     private Optional<Integer> numRelease = Optional.absent();
 
     /**
@@ -43,11 +42,10 @@ public class Book extends ItemImpl {
      *            if there is more then one, if you pass null the archive set 1
      */
     public Book(final String initTitle, final int initReleaseYear, final String initAuthor,
-            final Language initCurrentLanguage, final String initISBN, final BookGenre initGenre,
+            final Language initCurrentLanguage, final String initISBN, final ItemGenre initGenre,
             final String initPublisher, final Integer initNumRelease) {
-        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage);
+        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initGenre);
         this.isbn = initISBN.toUpperCase();
-        this.genre = initGenre;
         this.numRelease = initNumRelease == null ? Optional.of(1) : Optional.of(initNumRelease);
     }
 
@@ -65,14 +63,6 @@ public class Book extends ItemImpl {
      */
     public String getIsbn() {
         return this.isbn;
-    }
-
-    /**
-     *
-     * @return Book's genre.
-     */
-    public BookGenre getGenre() {
-        return this.genre;
     }
 
     @Override

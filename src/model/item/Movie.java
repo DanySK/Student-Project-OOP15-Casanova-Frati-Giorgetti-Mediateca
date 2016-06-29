@@ -11,12 +11,10 @@ public class Movie extends ItemImpl {
 
     @Override
     public String toString() {
-        return super.toString() + "genre=" + this.genre + ", duration=" + this.duration + ", colour=" + this.color
-                + "] - MOVIE";
+        return super.toString() + ", duration=" + this.duration + ", colour=" + this.color + "] - MOVIE";
     }
 
     private static final long serialVersionUID = 856227185802047288L;
-    private final MovieGenre genre;
     private final Integer duration;
     private final Boolean color;
 
@@ -41,20 +39,11 @@ public class Movie extends ItemImpl {
      *            true == color, false == b/w.
      */
     public Movie(final String initTitle, final int initReleaseYear, final String initPublisher, final String initAuthor,
-            final Language initCurrentLanguage, final MovieGenre initGenre, final Integer initDuration,
+            final Language initCurrentLanguage, final ItemGenre initGenre, final Integer initDuration,
             final Boolean initColor) {
-        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage);
-        this.genre = initGenre;
+        super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initGenre);
         this.duration = initDuration;
         this.color = initColor;
-    }
-
-    /**
-     *
-     * @return movie's genre.
-     */
-    public MovieGenre getGenre() {
-        return this.genre;
     }
 
     /**
