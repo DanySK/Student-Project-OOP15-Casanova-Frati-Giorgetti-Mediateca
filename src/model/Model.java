@@ -225,5 +225,5 @@ public interface Model {
    * @param userId
    *          user's identifier.
    */
-  void refreshRecommendedList(final Integer userId); prova
+  void refreshRecommendedList(final Integer userId); pro
 }
