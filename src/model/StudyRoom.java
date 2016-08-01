@@ -120,7 +120,6 @@ public class StudyRoom implements Serializable {
       } else {
         throw new Exception(+sit + " not valid position.");
       }
-
     }
   }
 }

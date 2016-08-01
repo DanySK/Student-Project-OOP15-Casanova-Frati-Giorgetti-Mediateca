@@ -237,4 +237,5 @@ public class ModelImpl implements Serializable, Model {
               throws Exception {
     this.studyRoom.cancelSit(day, sit, userId);
   }
+
 }
