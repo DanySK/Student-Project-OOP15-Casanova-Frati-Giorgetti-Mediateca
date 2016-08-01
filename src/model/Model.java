@@ -226,4 +226,37 @@ public interface Model {
    *          user's identifier.
    */
   void refreshRecommendedList(final Integer userId);
+
+  /**
+   * This method is used by the user to book a place into the StudyRoom.
+   *
+   * @param day
+   *          required.
+   * @param sit
+   *          required.
+   * @param userId
+   *          of the user.
+   * @throws Exception
+   *           in the case which sit/userId in not valid or it is busy.
+   */
+  void bookSit(final GregorianCalendar day, final Integer sit, final Integer userId)
+              throws Exception;
+
+  /**
+   * This method is used by the user to remove himself from a specific sit into
+   * the study room. In the case which the day is not into the map, it will be
+   * anything.
+   *
+   * @param day
+   *          to search.
+   * @param sit
+   *          required to cancel.
+   * @param userId
+   *          of the user.
+   * @throws Exception
+   *           in the case which the sit is a number < 0 || >= StudyRoom.N or if
+   *           the sit is not busy by the specific userId.
+   */
+  void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
+              throws Exception;
 }

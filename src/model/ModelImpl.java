@@ -30,6 +30,7 @@ public class ModelImpl implements Serializable, Model {
   private static final long serialVersionUID = -8370710936091204583L;
   private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
   private ArchiveUser archiveUser = ArchiveUser.getArchiveImpl();
+  private StudyRoom studyRoom = new StudyRoom();
 
   @Override
   public void registerUser(final String initName, final String initSurname,
@@ -223,5 +224,19 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void refreshRecommendedList(final Integer userId) {
     this.setReccomandedList(userId);
+  }
+
+  @Override
+  public void bookSit(final GregorianCalendar day, final Integer sit, final Integer userId)
+              throws Exception {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
+              throws Exception {
+    // TODO Auto-generated method stub
+
   }
 }
