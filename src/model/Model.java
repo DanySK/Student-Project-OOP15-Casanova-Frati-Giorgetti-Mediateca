@@ -266,4 +266,10 @@ public interface Model {
    * @return system password.
    */
   String getSystemPassword();
+
+  /**
+   * @param systemPassword
+   *          the systemPassword to set
+   */
+  void setSystemPassword(String systemPassword);
 }

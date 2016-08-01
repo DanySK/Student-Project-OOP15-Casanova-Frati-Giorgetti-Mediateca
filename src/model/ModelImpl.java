@@ -31,7 +31,7 @@ public class ModelImpl implements Serializable, Model {
   private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
   private ArchiveUser archiveUser = ArchiveUser.getArchiveImpl();
   private StudyRoom studyRoom = new StudyRoom();
-  private final String systemPassword = "FmAlchemist";
+  private String systemPassword = "FmAlchemist";
 
   @Override
   public void registerUser(final String initName, final String initSurname,
@@ -242,6 +242,11 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public String getSystemPassword() {
     return this.systemPassword;
+  }
+
+  @Override
+  public void setSystemPassword(final String initSystemPassword) {
+    this.systemPassword = initSystemPassword;
   }
 
 }
