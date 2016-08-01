@@ -259,4 +259,11 @@ public interface Model {
    */
   void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
               throws Exception;
+
+  /**
+   * This method return the system password for the 'mediatica' manager.
+   *
+   * @return system password.
+   */
+  String getSystemPassword();
 }
