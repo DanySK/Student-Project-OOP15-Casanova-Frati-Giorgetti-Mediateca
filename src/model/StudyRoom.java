@@ -102,16 +102,25 @@ public class StudyRoom implements Serializable {
    *          to search.
    * @param sit
    *          required to cancel.
+   * @param userId
+   *          to remove.
    * @throws Exception
-   *           in the case which the sit is a number < 0 || >= StudyRoom.N.
+   *           in the case which the sit is a number < 0 || >= StudyRoom.N or if
+   *           the sit is not busy by the specific userId.
    */
-  public void cancelSit(final GregorianCalendar day, final Integer sit) throws Exception {
+  public void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
+              throws Exception {
     if (this.mapStudyRoom.containsKey(day)) {
       if ((sit <= StudyRoom.N) && (sit > 0)) {
-        this.mapStudyRoom.get(day).add(sit, 0);
+        if (this.mapStudyRoom.get(day).get(sit).equals(userId)) {
+          this.mapStudyRoom.get(day).add(sit, 0);
+        } else {
+          throw new Exception(+sit + " not busy by " + userId);
+        }
       } else {
         throw new Exception(+sit + " not valid position.");
       }
+
     }
   }
 }

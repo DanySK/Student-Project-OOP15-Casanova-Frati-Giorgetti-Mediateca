@@ -227,16 +227,14 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void bookSit(final GregorianCalendar day, final Integer sit, final Integer userId)
-              throws Exception {
-    // TODO Auto-generated method stub
-
+  public void bookSit(final GregorianCalendar initDay, final Integer initSit,
+              final Integer initUserId) throws Exception {
+    this.studyRoom.takeSit(initDay, initSit, initUserId);
   }
 
   @Override
   public void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
               throws Exception {
-    // TODO Auto-generated method stub
-
+    this.studyRoom.cancelSit(day, sit, userId);
   }
 }
