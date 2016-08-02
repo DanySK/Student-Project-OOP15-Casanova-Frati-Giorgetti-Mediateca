@@ -228,8 +228,10 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void refreshRecommendedList(final Integer userId) {
-    this.setReccomandedList(userId);
+  public void refreshRecommendedList() {
+    for (Integer i : this.getAllUserId()) {
+      this.setReccomandedList(i);
+    }
   }
 
   @Override

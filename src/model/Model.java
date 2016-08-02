@@ -228,12 +228,10 @@ public interface Model {
   Set<Integer> filterItemGenre(final TypeItem type, final ItemGenre genre) throws Exception;
 
   /**
-   * This method update userId's recommended list of Book and Movie.
+   * This method update all userId's recommended list of Book and Movie.
    *
-   * @param userId
-   *          user's identifier.
    */
-  void refreshRecommendedList(final Integer userId);
+  void refreshRecommendedList();
 
   /**
    * This method is used by the user to book a place into the StudyRoom.
