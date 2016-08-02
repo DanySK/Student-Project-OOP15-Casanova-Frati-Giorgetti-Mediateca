@@ -87,10 +87,10 @@ public final class ArchiveImpl implements Serializable, Archive {
   public Item getItem(final Integer itemId) throws Exception {
     if (this.itemArchive.containsKey(itemId)) {
       if (Book.class.isInstance(this.itemArchive.get(itemId).getFirst())) {
-        return this.itemArchive.get(itemId).getFirst();
+        return new ItemImpl(this.itemArchive.get(itemId).getFirst());
       }
       if (Movie.class.isInstance(this.itemArchive.get(itemId).getFirst())) {
-        return this.itemArchive.get(itemId).getFirst();
+        return new ItemImpl(this.itemArchive.get(itemId).getFirst());
       }
     } else {
       throw new Exception("Item " + itemId + "is not in the archive.");
