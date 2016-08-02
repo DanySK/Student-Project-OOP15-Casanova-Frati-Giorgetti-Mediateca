@@ -93,57 +93,68 @@ public class ItemImpl implements Item, Serializable {
 
   @Override
   public String getPublisher() {
-    return this.publisher;
+    String s = this.publisher;
+    return s;
   }
 
   @Override
   public Language getCurrentLanguage() {
-    return this.currentLanguage;
+    Language l = this.currentLanguage;
+    return l;
   }
 
   @Override
   public int getiD() {
-    return this.iD;
+    int i = this.iD;
+    return i;
   }
 
   @Override
   public String getTitle() {
-    return this.title;
+    String s = this.title;
+    return s;
   }
 
   @Override
   public int getReleaseYear() {
-    return this.releaseYear;
+    int i = this.releaseYear;
+    return i;
   }
 
   @Override
   public String getAuthor() {
-    return this.author;
+    String s = this.author;
+    return s;
   }
 
   @Override
   public List<ReviewImpl> getSetReview() {
-    return this.setReview;
+    List<ReviewImpl> l = new LinkedList<>(this.setReview);
+    return l;
   }
 
   @Override
   public int getLike() {
-    return this.like.size();
+    int i = this.like.size();
+    return i;
   }
 
   @Override
   public Set<Integer> getLikeUser() {
-    return this.like;
+    Set<Integer> s = new HashSet<>(this.like);
+    return s;
   }
 
   @Override
   public float getAverageVote() {
-    return this.averageVote;
+    float f = this.averageVote;
+    return f;
   }
 
   @Override
   public ItemGenre getGenre() {
-    return this.genre;
+    ItemGenre g = this.genre;
+    return g;
   }
 
   @Override
