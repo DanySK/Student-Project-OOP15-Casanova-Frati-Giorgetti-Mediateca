@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import model.item.ArchiveImpl.TypeItem;
+import model.item.Item;
 import model.item.ItemGenre;
 import model.item.Language;
 
@@ -212,6 +213,18 @@ public interface Model {
    */
   void addReview(final Integer itemId, final Integer userId, final Integer vote, final String note)
               throws Exception;
+
+  /**
+   * This method return a specific Item in the archive white item identifier ==
+   * itemId.
+   *
+   * @param itemId
+   *          item's identifier.
+   * @return Object Item.
+   * @throws Exception
+   *           in the case which item is not in the archive.
+   */
+  Item getRequiredItem(final Integer itemId) throws Exception;
 
   /**
    * This method return a set of Book or Movie with respective Genre.

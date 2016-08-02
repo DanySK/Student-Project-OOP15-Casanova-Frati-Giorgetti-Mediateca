@@ -11,6 +11,7 @@ import java.util.Set;
 
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
+import model.item.Item;
 import model.item.ItemFactory;
 import model.item.ItemGenre;
 import model.item.Language;
@@ -131,6 +132,15 @@ public class ModelImpl implements Serializable, Model {
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive\n");
+    }
+  }
+
+  @Override
+  public Item getRequiredItem(final Integer itemId) throws Exception {
+    if (this.archiveItem.contains(itemId)) {
+      return this.archiveItem.getItem(itemId);
+    } else {
+      throw new Exception("ItemId: " + itemId + " not contained into the archive\n");
     }
   }
 
