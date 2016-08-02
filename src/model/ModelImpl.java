@@ -312,7 +312,8 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public String getSystemPassword() {
-    return this.systemPassword;
+    String s = this.systemPassword;
+    return s;
   }
 
   @Override
