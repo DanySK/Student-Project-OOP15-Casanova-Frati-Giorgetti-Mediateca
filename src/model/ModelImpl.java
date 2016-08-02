@@ -140,6 +140,11 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
+  public Set<Integer> getAllUserId() {
+    return this.archiveUser.getUserId();
+  }
+
+  @Override
   public Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception {
     Map<Integer, Double> mmap = new HashMap<>();
     if (this.archiveItem.contains(userId)) {

@@ -177,6 +177,14 @@ public interface Model {
   Set<Integer> getAllItemId(TypeItem type);
 
   /**
+   * This method returns a set of integer which refer to every user contained
+   * into the archive.
+   *
+   * @return a set of user identifier contained into the archive.
+   */
+  Set<Integer> getAllUserId();
+
+  /**
    * This method return a map with key the itemId and as value the difference of
    * day between when the item was taken and today.
    *
