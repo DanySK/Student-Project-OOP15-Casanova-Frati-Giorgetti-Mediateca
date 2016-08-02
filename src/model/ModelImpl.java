@@ -34,6 +34,19 @@ public class ModelImpl implements Serializable, Model {
   private StudyRoom studyRoom = new StudyRoom();
   private String systemPassword = "FmAlchemist";
 
+  /**
+   * Enum in order to simplify filter.
+   *
+   * @author Edoardo
+   *
+   */
+  public enum TypeSearch {
+    /**
+     *
+     */
+    TITLE, AUTHOR, PUBLISHER, RELEASE_YEAR
+  }
+
   @Override
   public void registerUser(final String initName, final String initSurname,
               final GregorianCalendar initBirthdate, final String initUsername,
@@ -191,14 +204,36 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Set<Integer> filterItemName(final String name) throws Exception {
+  public Set<Integer> filterItem(final TypeSearch ts, final String param) throws Exception {
+    if ((ts != TypeSearch.AUTHOR) || (ts != TypeSearch.TITLE) || (ts != TypeSearch.PUBLISHER)
+                || (ts != TypeSearch.RELEASE_YEAR)) {
+      throw new Exception("TypeSearch " + ts + "not valid");
+    }
     Set<Integer> all = new HashSet<>();
     Set<Integer> r = new HashSet<>();
     all.addAll(this.getAllItemId(TypeItem.BOOK));
     all.addAll(this.getAllItemId(TypeItem.MOVIE));
     for (Integer i : all) {
-      if (this.archiveItem.getItem(i).getTitle().equals(name)) {
-        r.add(i);
+      if (ts == TypeSearch.TITLE) {
+        if (this.archiveItem.getItem(i).getTitle().equals(param)) {
+          r.add(i);
+        }
+      }
+      if (ts == TypeSearch.AUTHOR) {
+        if (this.archiveItem.getItem(i).getAuthor().equals(param)) {
+          r.add(i);
+        }
+      }
+      if (ts == TypeSearch.PUBLISHER) {
+        if (this.archiveItem.getItem(i).getPublisher().equals(param)) {
+          r.add(i);
+        }
+      }
+      if (ts == TypeSearch.RELEASE_YEAR) {
+        Integer num = Integer.parseInt(param);
+        if (num.equals(this.archiveItem.getItem(i).getReleaseYear())) {
+          r.add(i);
+        }
       }
     }
     return r;

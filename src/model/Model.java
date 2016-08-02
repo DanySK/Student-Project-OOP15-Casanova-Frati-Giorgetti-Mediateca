@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import model.ModelImpl.TypeSearch;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
 import model.item.ItemGenre;
@@ -241,16 +242,19 @@ public interface Model {
   Set<Integer> filterItemGenre(final TypeItem type, final ItemGenre genre) throws Exception;
 
   /**
-   * This method return a set of Book and Movie which name match with param
-   * name.
+   * This method return a set of Book and Movie which required condition match
+   * whit ts and param.
    *
-   * @param name
+   * @param ts
+   *          Type of field search.
+   * @param param
    *          to search in the archive
-   * @return set of item identifier with required name.
+   * 
+   * @return set of item identifier with satisfy condition.
    * @throws Exception
    *           in the case which name is not into the archive.
    */
-  Set<Integer> filterItemName(final String name) throws Exception;
+  Set<Integer> filterItem(final TypeSearch ts, final String param) throws Exception;
 
   /**
    * This method update all userId's recommended list of Book and Movie.
