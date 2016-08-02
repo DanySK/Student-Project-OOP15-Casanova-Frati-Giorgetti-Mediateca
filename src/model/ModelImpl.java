@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.Optional;
+
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
@@ -204,12 +206,17 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Set<Integer> filterItem(final TypeSearch ts, final String param) throws Exception {
+  public Set<Integer> filterItem(final Optional<Set<Integer>> set, final TypeSearch ts,
+              final String param) throws Exception {
     if ((ts != TypeSearch.AUTHOR) || (ts != TypeSearch.TITLE) || (ts != TypeSearch.PUBLISHER)
                 || (ts != TypeSearch.RELEASE_YEAR)) {
       throw new Exception("TypeSearch " + ts + "not valid");
     }
+    // Set<Integer> all;
     Set<Integer> all = new HashSet<>();
+    if (set.isPresent()) {
+      all.addAll(set.get());
+    }
     Set<Integer> r = new HashSet<>();
     all.addAll(this.getAllItemId(TypeItem.BOOK));
     all.addAll(this.getAllItemId(TypeItem.MOVIE));

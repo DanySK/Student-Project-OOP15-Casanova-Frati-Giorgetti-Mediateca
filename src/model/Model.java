@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.common.base.Optional;
+
 import model.ModelImpl.TypeSearch;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
@@ -242,19 +244,24 @@ public interface Model {
   Set<Integer> filterItemGenre(final TypeItem type, final ItemGenre genre) throws Exception;
 
   /**
-   * This method return a set of Book and Movie which required condition match
-   * whit ts and param.
+   * This method return a set of itemId which required condition match with ts
+   * and param. It is possible to pass as the first param a Set of integer where
+   * search. If the set is NULL the method search in all the archive. In this
+   * way you can chain different filters.
    *
+   * @param set
+   *          set where search.
    * @param ts
    *          Type of field search.
    * @param param
    *          to search in the archive
-   * 
+   *
    * @return set of item identifier with satisfy condition.
    * @throws Exception
    *           in the case which name is not into the archive.
    */
-  Set<Integer> filterItem(final TypeSearch ts, final String param) throws Exception;
+  Set<Integer> filterItem(final Optional<Set<Integer>> set, final TypeSearch ts, final String param)
+              throws Exception;
 
   /**
    * This method update all userId's recommended list of Book and Movie.
