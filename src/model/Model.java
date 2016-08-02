@@ -241,6 +241,18 @@ public interface Model {
   Set<Integer> filterItemGenre(final TypeItem type, final ItemGenre genre) throws Exception;
 
   /**
+   * This method return a set of Book and Movie which name match with param
+   * name.
+   *
+   * @param name
+   *          to search in the archive
+   * @return set of item identifier with required name.
+   * @throws Exception
+   *           in the case which name is not into the archive.
+   */
+  Set<Integer> filterItemName(final String name) throws Exception;
+
+  /**
    * This method update all userId's recommended list of Book and Movie.
    *
    */

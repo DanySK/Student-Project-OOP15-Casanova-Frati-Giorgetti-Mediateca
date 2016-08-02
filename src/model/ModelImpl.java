@@ -183,12 +183,22 @@ public class ModelImpl implements Serializable, Model {
       throw new Exception("TypeItem " + t + "not valid");
     }
     for (Integer i : all) {
-      try {
-        if (this.archiveItem.getItem(i).getGenre().equals(b)) {
-          r.add(i);
-        }
-      } catch (Exception e) {
-        e.printStackTrace();
+      if (this.archiveItem.getItem(i).getGenre().equals(b)) {
+        r.add(i);
+      }
+    }
+    return r;
+  }
+
+  @Override
+  public Set<Integer> filterItemName(final String name) throws Exception {
+    Set<Integer> all = new HashSet<>();
+    Set<Integer> r = new HashSet<>();
+    all.addAll(this.getAllItemId(TypeItem.BOOK));
+    all.addAll(this.getAllItemId(TypeItem.MOVIE));
+    for (Integer i : all) {
+      if (this.archiveItem.getItem(i).getTitle().equals(name)) {
+        r.add(i);
       }
     }
     return r;
