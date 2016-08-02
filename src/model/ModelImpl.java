@@ -16,6 +16,7 @@ import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
 import model.item.ItemFactory;
 import model.item.ItemGenre;
+import model.item.ItemImpl;
 import model.item.Language;
 import model.item.ReviewImpl;
 import model.user.ArchiveUser;
@@ -153,7 +154,7 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public Item getRequiredItem(final Integer itemId) throws Exception {
     if (this.archiveItem.contains(itemId)) {
-      return this.archiveItem.getItem(itemId);
+      return new ItemImpl(this.archiveItem.getItem(itemId));
     } else {
       throw new Exception("ItemId: " + itemId + " not contained into the archive\n");
     }
@@ -161,12 +162,14 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public Set<Integer> getAllItemId(final TypeItem t) {
-    return this.archiveItem.getItemId(t);
+    Set<Integer> s = new HashSet<>(this.archiveItem.getItemId(t));
+    return s;
   }
 
   @Override
   public Set<Integer> getAllUserId() {
-    return this.archiveUser.getUserId();
+    Set<Integer> s = new HashSet<>(this.archiveUser.getUserId());
+    return s;
   }
 
   @Override
@@ -212,7 +215,6 @@ public class ModelImpl implements Serializable, Model {
                 || (ts != TypeSearch.RELEASE_YEAR)) {
       throw new Exception("TypeSearch " + ts + "not valid");
     }
-    // Set<Integer> all;
     Set<Integer> all = new HashSet<>();
     if (set.isPresent()) {
       all.addAll(set.get());

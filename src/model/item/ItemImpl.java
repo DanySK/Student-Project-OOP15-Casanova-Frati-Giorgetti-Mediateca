@@ -48,7 +48,7 @@ public class ItemImpl implements Item, Serializable {
    *          of the general item contained in the archive
    * @param initGenre
    *          of the general item
-   * 
+   *
    */
   public ItemImpl(final String initTitle, final int initReleaseYear, final String initPublisher,
               final String initAuthor, final Language initCurrentLanguage,
@@ -62,6 +62,25 @@ public class ItemImpl implements Item, Serializable {
     this.averageVote = 0;
     this.iD = this.hashCode();
     this.genre = initGenre;
+  }
+
+  /**
+   * Item's constructors whit starter initialization starting from an ItemImpl,
+   * it's used in the method where I have to return a copy of an Item.
+   *
+   * @param initItem
+   *          item.
+   */
+  public ItemImpl(final Item initItem) {
+    this.title = initItem.getTitle();
+    this.releaseYear = initItem.getReleaseYear();
+    this.publisher = initItem.getPublisher();
+    this.author = initItem.getAuthor();
+    this.currentLanguage = initItem.getCurrentLanguage();
+    this.like = initItem.getLikeUser();
+    this.averageVote = initItem.getAverageVote();
+    this.iD = initItem.getiD();
+    this.genre = initItem.getGenre();
   }
 
   @Override
