@@ -55,8 +55,7 @@ public class Book extends ItemImpl {
    * @return num of release.
    */
   public Optional<Integer> getNumRelease() {
-    Optional<Integer> i = this.numRelease;
-    return i;
+    return this.numRelease;
   }
 
   /**
@@ -64,8 +63,7 @@ public class Book extends ItemImpl {
    * @return ISBN code.
    */
   public String getIsbn() {
-    String s = this.isbn;
-    return s;
+    return this.isbn;
   }
 
   @Override
