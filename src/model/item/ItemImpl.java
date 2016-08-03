@@ -1,6 +1,7 @@
 package model.item;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -123,8 +124,7 @@ public class ItemImpl implements Item, Serializable {
 
   @Override
   public List<ReviewImpl> getSetReview() {
-    List<ReviewImpl> l = new LinkedList<>(this.setReview);
-    return l;
+    return Collections.unmodifiableList(this.setReview);
   }
 
   @Override
@@ -134,8 +134,7 @@ public class ItemImpl implements Item, Serializable {
 
   @Override
   public Set<Integer> getLikeUser() {
-    Set<Integer> s = new HashSet<>(this.like);
-    return s;
+    return Collections.unmodifiableSet(this.like);
   }
 
   @Override

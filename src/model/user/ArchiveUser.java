@@ -1,8 +1,8 @@
 package model.user;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -103,7 +103,6 @@ public final class ArchiveUser implements Serializable {
    * @return UserId set.
    */
   public Set<Integer> getUserId() {
-    Set<Integer> s = new HashSet<>(this.userArchive.keySet());
-    return s;
+    return Collections.unmodifiableSet(this.userArchive.keySet());
   }
 }

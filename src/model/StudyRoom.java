@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -59,8 +60,7 @@ public class StudyRoom implements Serializable {
     if (!this.mapStudyRoom.containsKey(day)) {
       this.addDate(day);
     }
-    List<Integer> l = new ArrayList<>(this.mapStudyRoom.get(day));
-    return l;
+    return Collections.unmodifiableList(this.mapStudyRoom.get(day));
   }
 
   /**

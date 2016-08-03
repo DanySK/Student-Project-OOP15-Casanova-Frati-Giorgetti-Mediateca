@@ -2,6 +2,7 @@ package model.item;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -187,9 +188,8 @@ public final class ArchiveImpl implements Serializable, Archive {
   @Override
   public Set<Integer> getUserList(final Integer itemId) throws Exception {
     if (this.itemArchive.containsKey(itemId)) {
-      Set<Integer> ls = new HashSet<>(
-                  this.itemArchive.get(itemId).getSecond().getUserList().keySet());
-      return ls;
+      return Collections
+                  .unmodifiableSet(this.itemArchive.get(itemId).getSecond().getUserList().keySet());
     } else {
       throw new Exception("Item: " + itemId + "Not contained into the archive.");
     }
@@ -213,10 +213,10 @@ public final class ArchiveImpl implements Serializable, Archive {
       }
     }
     if (t == TypeItem.BOOK) {
-      return booklist;
+      return Collections.unmodifiableSet(booklist);
     }
     if (t == TypeItem.MOVIE) {
-      return movielist;
+      return Collections.unmodifiableSet(movielist);
     }
     return null;
   }
