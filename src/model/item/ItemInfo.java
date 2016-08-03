@@ -44,7 +44,7 @@ public class ItemInfo implements Serializable {
    * @return total quantity of ItemImpl available and not into the archive.
    */
   public Integer getQuantity() {
-    return Integer.valueOf(this.quantity);
+    return this.quantity;
   }
 
   /**

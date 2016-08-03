@@ -93,38 +93,32 @@ public class ItemImpl implements Item, Serializable {
 
   @Override
   public String getPublisher() {
-    String s = this.publisher;
-    return s;
+    return this.publisher;
   }
 
   @Override
   public Language getCurrentLanguage() {
-    Language l = this.currentLanguage;
-    return l;
+    return this.currentLanguage;
   }
 
   @Override
   public int getiD() {
-    int i = this.iD;
-    return i;
+    return this.iD;
   }
 
   @Override
   public String getTitle() {
-    String s = this.title;
-    return s;
+    return this.title;
   }
 
   @Override
   public int getReleaseYear() {
-    int i = this.releaseYear;
-    return i;
+    return this.releaseYear;
   }
 
   @Override
   public String getAuthor() {
-    String s = this.author;
-    return s;
+    return this.author;
   }
 
   @Override
@@ -135,8 +129,7 @@ public class ItemImpl implements Item, Serializable {
 
   @Override
   public int getLike() {
-    int i = this.like.size();
-    return i;
+    return this.like.size();
   }
 
   @Override
@@ -147,14 +140,12 @@ public class ItemImpl implements Item, Serializable {
 
   @Override
   public float getAverageVote() {
-    float f = this.averageVote;
-    return f;
+    return this.averageVote;
   }
 
   @Override
   public ItemGenre getGenre() {
-    ItemGenre g = this.genre;
-    return g;
+    return this.genre;
   }
 
   @Override
