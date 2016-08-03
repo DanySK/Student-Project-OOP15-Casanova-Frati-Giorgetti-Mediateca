@@ -16,7 +16,6 @@ import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
 import model.item.ItemFactory;
 import model.item.ItemGenre;
-import model.item.ItemImpl;
 import model.item.Language;
 import model.item.ReviewImpl;
 import model.user.ArchiveUser;
@@ -154,7 +153,7 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public Item getRequiredItem(final Integer itemId) throws Exception {
     if (this.archiveItem.contains(itemId)) {
-      return new ItemImpl(this.archiveItem.getItem(itemId));
+      return this.archiveItem.getItem(itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " not contained into the archive\n");
     }
@@ -162,14 +161,12 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public Set<Integer> getAllItemId(final TypeItem t) {
-    Set<Integer> s = new HashSet<>(this.archiveItem.getItemId(t));
-    return s;
+    return this.archiveItem.getItemId(t);
   }
 
   @Override
   public Set<Integer> getAllUserId() {
-    Set<Integer> s = new HashSet<>(this.archiveUser.getUserId());
-    return s;
+    return this.archiveUser.getUserId();
   }
 
   @Override

@@ -59,7 +59,8 @@ public class StudyRoom implements Serializable {
     if (!this.mapStudyRoom.containsKey(day)) {
       this.addDate(day);
     }
-    return this.mapStudyRoom.get(day);
+    List<Integer> l = new ArrayList<>(this.mapStudyRoom.get(day));
+    return l;
   }
 
   /**
