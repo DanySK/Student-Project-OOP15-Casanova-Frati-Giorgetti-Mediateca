@@ -65,24 +65,19 @@ public class ItemImpl implements Item, Serializable {
     this.genre = initGenre;
   }
 
-  /**
+  /*
    * Item's constructors whit starter initialization starting from an ItemImpl,
    * it's used in the method where I have to return a copy of an Item.
    *
-   * @param initItem
-   *          item.
+   * @param initItem item.
+   *
+   * public ItemImpl(final Item initItem) { this.title = initItem.getTitle();
+   * this.releaseYear = initItem.getReleaseYear(); this.publisher =
+   * initItem.getPublisher(); this.author = initItem.getAuthor();
+   * this.currentLanguage = initItem.getCurrentLanguage(); this.like =
+   * initItem.getLikeUser(); this.averageVote = initItem.getAverageVote();
+   * this.iD = initItem.getiD(); this.genre = initItem.getGenre(); }
    */
-  public ItemImpl(final Item initItem) {
-    this.title = initItem.getTitle();
-    this.releaseYear = initItem.getReleaseYear();
-    this.publisher = initItem.getPublisher();
-    this.author = initItem.getAuthor();
-    this.currentLanguage = initItem.getCurrentLanguage();
-    this.like = initItem.getLikeUser();
-    this.averageVote = initItem.getAverageVote();
-    this.iD = initItem.getiD();
-    this.genre = initItem.getGenre();
-  }
 
   @Override
   public String toString() {
