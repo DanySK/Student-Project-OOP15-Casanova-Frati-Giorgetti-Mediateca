@@ -16,6 +16,6 @@ public interface Menu {
 	 *
 	 * @return the menu with service options.
 	 */
-	JPanel getMenuPanel();
+	JPanel getPanel();
 
 }

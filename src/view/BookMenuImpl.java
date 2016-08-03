@@ -14,5 +14,6 @@ public class BookMenuImpl implements BookMenu {
 	private final JButton seeBorrowedBook;
 	private final JButton likeBook;
 	private final JButton checkBookAvailability;
+	private final JButton searchBook;
 
 }

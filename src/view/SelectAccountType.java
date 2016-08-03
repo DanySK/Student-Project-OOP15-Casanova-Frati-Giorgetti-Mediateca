@@ -15,6 +15,6 @@ public interface SelectAccountType {
 	 *
 	 * @return panel of account selection
 	 */
-	JPanel getPanelSelectAccount();
+	JPanel getPanel();
 
 }
