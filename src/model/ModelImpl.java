@@ -245,51 +245,40 @@ public class ModelImpl implements Serializable, Model {
     return r;
   }
 
-  private void setReccomandedList(final Integer userId) {
-    List<ItemGenre> prefGenMovie = new LinkedList<>();
-    List<ItemGenre> prefGenBook = new LinkedList<>();
-    try {
-      prefGenMovie = this.archiveUser.getUser(userId).getMoviePreferences();
-      prefGenBook = this.archiveUser.getUser(userId).getBookPreferences();
-    } catch (Exception e) {
-      e.printStackTrace();
+  private void setReccomandedList(final Integer userId) throws Exception {
+    List<ItemGenre> prefGenMovie = new LinkedList<>(
+                this.archiveUser.getUser(userId).getMoviePreferences());
+    List<ItemGenre> prefGenBook = new LinkedList<>(
+                this.archiveUser.getUser(userId).getBookPreferences());
+    Set<Integer> all;
+
+    for (ItemGenre im : prefGenMovie) {
+      all = this.filterItemGenre(TypeItem.MOVIE, im);
+      Integer start = 0;
+      Integer best = 0;
+      for (Integer v : all) {
+        if (this.archiveItem.getItem(v).getAverageVote() > start) {
+          best = v;
+        }
+      }
+      this.archiveUser.getUser(userId).getRecommendedList().add(best);
     }
-    for (ItemGenre i : prefGenMovie) {
-      try {
-        Set<Integer> all = new HashSet<>(this.filterItemGenre(TypeItem.MOVIE, i));
-        Integer start = 0;
-        Integer best = 0;
-        for (Integer v : all) {
-          if (this.archiveItem.getItem(v).getAverageVote() > start) {
-            best = v;
-          }
-        }
-        this.archiveUser.getUser(userId).getRecommendedList().add(best);
-      } catch (Exception e) {
 
-        e.printStackTrace();
-      }
-      for (ItemGenre ig : prefGenBook) {
-        try {
-          Set<Integer> all = new HashSet<>(this.filterItemGenre(TypeItem.BOOK, ig));
-          Integer start = 0;
-          Integer best = 0;
-          for (Integer v : all) {
-            if (this.archiveItem.getItem(v).getAverageVote() > start) {
-              best = v;
-            }
-          }
-          this.archiveUser.getUser(userId).getRecommendedList().add(best);
-        } catch (Exception e) {
-
-          e.printStackTrace();
+    for (ItemGenre ig : prefGenBook) {
+      all = this.filterItemGenre(TypeItem.BOOK, ig);
+      Integer start = 0;
+      Integer best = 0;
+      for (Integer v : all) {
+        if (this.archiveItem.getItem(v).getAverageVote() > start) {
+          best = v;
         }
       }
+      this.archiveUser.getUser(userId).getRecommendedList().add(best);
     }
   }
 
   @Override
-  public void refreshRecommendedList() {
+  public void refreshRecommendedList() throws Exception {
     for (Integer i : this.getAllUserId()) {
       this.setReccomandedList(i);
     }

@@ -265,9 +265,12 @@ public interface Model {
 
   /**
    * This method update all userId's recommended list of Book and Movie.
+   * 
+   * @throws Exception
+   *           in the case which there is problem to get user whit userId
    *
    */
-  void refreshRecommendedList();
+  void refreshRecommendedList() throws Exception;
 
   /**
    * This method is used by the user to book a place into the StudyRoom.
