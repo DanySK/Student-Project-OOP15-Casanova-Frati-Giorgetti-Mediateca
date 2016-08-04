@@ -42,10 +42,6 @@ public final class ArchiveImpl implements Serializable, Archive {
     MOVIE, BOOK
   }
 
-  /**
-   * Empty private constructor. NON COMPLETO DEVE ESSERE AGGIUNTO IL CASO IN CUI
-   * L'ARCHIVIO HA GIA' UN FILE DI CONFIGURAZIONE.
-   */
   private ArchiveImpl() {
   }
 
@@ -62,12 +58,38 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
+  public void setArchiveImpl(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
+              throws Exception {
+    if (ArchiveImpl.singleton == null) {
+      ArchiveImpl.getArchiveImpl().setItemArchive(initItemArchive);
+    } else {
+      throw new Exception("Item archive already loaded");
+    }
+  }
+
+  /**
+   * @return the itemArchive
+   */
+  public Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive() {
+    return this.itemArchive;
+  }
+
+  /**
+   * @param initItemArchive
+   *          the itemArchive to set
+   */
+  public void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive) {
+    this.itemArchive = initItemArchive;
+  }
+
+  @Override
   public void addItem(final ItemImpl i, final Integer initNumCopy) throws Exception {
     if (initNumCopy > 0) {
-      if (!this.itemArchive.containsKey(i.getiD())) {
-        this.itemArchive.put(i.getiD(), new Pair<>(i, new ItemInfo(initNumCopy)));
+      if (!this.containsItem(i.getiD())) {
+        ArchiveImpl.singleton.getItemArchive().put(i.getiD(),
+                    new Pair<>(i, new ItemInfo(initNumCopy)));
       } else {
-        this.changeAmount(i.getiD(), initNumCopy);
+        ArchiveImpl.singleton.calculateDifferenceDays(i.getiD(), initNumCopy);
       }
     } else {
       throw new RuntimeException("initNumCopy <= 0");
@@ -76,8 +98,8 @@ public final class ArchiveImpl implements Serializable, Archive {
 
   @Override
   public void changeAmount(final Integer itemId, final Integer amount) throws Exception {
-    if (this.itemArchive.containsKey(itemId)) {
-      this.itemArchive.get(itemId).getSecond().addQuantity(amount);
+    if (this.containsItem(itemId)) {
+      ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().addQuantity(amount);
     } else {
       throw new Exception("Item " + itemId + " is not in the archive.");
     }
@@ -86,23 +108,17 @@ public final class ArchiveImpl implements Serializable, Archive {
 
   @Override
   public Item getItem(final Integer itemId) throws Exception {
-    if (this.itemArchive.containsKey(itemId)) {
-      if (Book.class.isInstance(this.itemArchive.get(itemId).getFirst())) {
-        return this.itemArchive.get(itemId).getFirst();
-      }
-      if (Movie.class.isInstance(this.itemArchive.get(itemId).getFirst())) {
-        return this.itemArchive.get(itemId).getFirst();
-      }
+    if (this.containsItem(itemId)) {
+      return ArchiveImpl.singleton.getItemArchive().get(itemId).getFirst();
     } else {
       throw new Exception("Item " + itemId + "is not in the archive.");
     }
-    return null;
   }
 
   @Override
   public void removeItem(final Integer itemId) throws Exception {
-    if (this.itemArchive.containsKey(itemId)) {
-      this.itemArchive.remove(itemId);
+    if (this.containsItem(itemId)) {
+      ArchiveImpl.singleton.getItemArchive().remove(itemId);
     } else {
       throw new Exception("Item: " + itemId + " is not into the archive.");
     }
@@ -112,10 +128,11 @@ public final class ArchiveImpl implements Serializable, Archive {
   @Override
   public double calculateDifferenceDays(final Integer itemId, final Integer userId)
               throws Exception {
-    if (this.itemArchive.containsKey(itemId)) {
-      if (this.itemArchive.get(itemId).getSecond().getUserList().containsKey(userId)) {
-        return this.dayBetweenDates(
-                    this.itemArchive.get(itemId).getSecond().getUserList().get(userId));
+    if (this.containsItem(itemId)) {
+      if (ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList()
+                  .containsKey(userId)) {
+        return this.dayBetweenDates(ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond()
+                    .getUserList().get(userId));
       } else {
         throw new Exception("User: " + userId + "Not contained into the " + itemId + " list");
       }
@@ -150,8 +167,9 @@ public final class ArchiveImpl implements Serializable, Archive {
 
   @Override
   public void addUser(final Integer itemId, final Integer userId) throws Exception {
-    if (this.itemArchive.containsKey(itemId)) {
-      this.itemArchive.get(itemId).getSecond().getUserList().put(userId, this.getToDay());
+    if (this.containsItem(itemId)) {
+      ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList().put(userId,
+                  this.getToDay());
       System.out.println("User " + userId + " adds to book list " + itemId + " in date "
                   + this.getToDay());
     } else {
@@ -162,9 +180,11 @@ public final class ArchiveImpl implements Serializable, Archive {
 
   @Override
   public void removeUser(final Integer itemId, final Integer userId) throws Exception {
-    if (this.itemArchive.containsKey(itemId)) {
-      if (this.itemArchive.get(itemId).getSecond().getUserList().containsKey(userId)) {
-        this.itemArchive.get(itemId).getSecond().getUserList().remove(userId, this.getToDay());
+    if (this.containsItem(itemId)) {
+      if (ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList()
+                  .containsKey(userId)) {
+        ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList().remove(userId,
+                    this.getToDay());
         System.out.println("User " + userId + " adds to item list " + itemId + " in date "
                     + this.getToDay());
       } else {
@@ -178,8 +198,8 @@ public final class ArchiveImpl implements Serializable, Archive {
 
   @Override
   public boolean checkAvailability(final Integer itemId) throws Exception {
-    if (this.itemArchive.containsKey(itemId)) {
-      return this.itemArchive.get(itemId).getSecond().isAvailable();
+    if (this.containsItem(itemId)) {
+      return ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().isAvailable();
     } else {
       throw new Exception("Item: " + itemId + "Not contained into the archive.");
     }
@@ -187,24 +207,24 @@ public final class ArchiveImpl implements Serializable, Archive {
 
   @Override
   public Set<Integer> getUserList(final Integer itemId) throws Exception {
-    if (this.itemArchive.containsKey(itemId)) {
-      return Collections
-                  .unmodifiableSet(this.itemArchive.get(itemId).getSecond().getUserList().keySet());
+    if (this.containsItem(itemId)) {
+      return Collections.unmodifiableSet(ArchiveImpl.singleton.getItemArchive().get(itemId)
+                  .getSecond().getUserList().keySet());
     } else {
       throw new Exception("Item: " + itemId + "Not contained into the archive.");
     }
   }
 
   @Override
-  public boolean contains(final Integer itemId) {
-    return (this.itemArchive.containsKey(itemId));
+  public boolean containsItem(final Integer itemId) {
+    return (ArchiveImpl.singleton.getItemArchive().containsKey(itemId));
   }
 
   @Override
   public Set<Integer> getItemId(final TypeItem t) {
     Set<Integer> booklist = new HashSet<>();
     Set<Integer> movielist = new HashSet<>();
-    for (Pair<ItemImpl, ItemInfo> i : this.itemArchive.values()) {
+    for (Pair<ItemImpl, ItemInfo> i : ArchiveImpl.singleton.getItemArchive().values()) {
       if (Book.class.isInstance(i.getFirst())) {
         booklist.add(i.getFirst().getiD());
       }
