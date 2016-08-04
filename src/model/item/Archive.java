@@ -33,12 +33,6 @@ public interface Archive {
   Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive();
 
   /**
-   * @param initItemArchive
-   *          the itemArchive to set.
-   */
-  void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive);
-
-  /**
    * This function adds an ItemImpl to the archive.
    *
    * @param i

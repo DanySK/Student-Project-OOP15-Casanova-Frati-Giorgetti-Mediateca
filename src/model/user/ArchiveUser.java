@@ -18,13 +18,13 @@ public interface ArchiveUser {
    */
   Map<Integer, User> getUserArchive();
 
-  /**
+  /*
    * This method set the map of user into the archive.
    *
-   * @param initUserArchive
-   *          the userArchive to set.
+   * @param initUserArchive the userArchive to set.
+   * 
+   * void setUserArchive(final Map<Integer, User> initUserArchive);
    */
-  void setUserArchive(final Map<Integer, User> initUserArchive);
 
   /**
    * This method must be called only at the start of the program, if it had

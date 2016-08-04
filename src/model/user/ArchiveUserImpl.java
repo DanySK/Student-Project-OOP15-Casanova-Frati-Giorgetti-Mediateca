@@ -7,8 +7,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * This class implements Serializable, it has only one field which contains the
- * map of user register to the 'Mediateca'.
+ * This class implements Serializable and ArchiveUser, it has only one field
+ * which contains the map of user register to the 'Mediateca'.
  *
  * @author Edoardo
  *
@@ -30,8 +30,7 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
     return this.userArchive;
   }
 
-  @Override
-  public void setUserArchive(final Map<Integer, User> initUserArchive) {
+  private void setUserArchive(final Map<Integer, User> initUserArchive) {
     this.userArchive = initUserArchive;
   }
 

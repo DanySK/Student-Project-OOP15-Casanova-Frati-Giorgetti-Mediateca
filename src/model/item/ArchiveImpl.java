@@ -70,6 +70,7 @@ public final class ArchiveImpl implements Serializable, Archive {
   /**
    * @return the itemArchive
    */
+  @Override
   public Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive() {
     return this.itemArchive;
   }
@@ -78,7 +79,7 @@ public final class ArchiveImpl implements Serializable, Archive {
    * @param initItemArchive
    *          the itemArchive to set
    */
-  public void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive) {
+  private void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive) {
     this.itemArchive = initItemArchive;
   }
 

@@ -62,6 +62,21 @@ public class ModelImpl implements Serializable, Model {
     this.archiveItem.setArchiveImpl(initItemArchive);
   }
 
+  /**
+   * @return the archiveUser
+   */
+  public Map<Integer, User> getArchiveUser() {
+    return this.archiveUser.getUserArchive();
+  }
+
+  /**
+   * @param initArchiveUser
+   *          the archiveUser to set
+   */
+  public void setArchiveUser(final Map<Integer, User> initArchiveUser) throws Exception {
+    this.archiveUser.setArchiveImpl(initArchiveUser);
+  }
+
   @Override
   public void registerUser(final String initName, final String initSurname,
               final GregorianCalendar initBirthdate, final String initUsername,
