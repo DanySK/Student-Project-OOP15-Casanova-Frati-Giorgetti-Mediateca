@@ -16,6 +16,8 @@ import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
 import model.item.ItemFactory;
 import model.item.ItemGenre;
+import model.item.ItemImpl;
+import model.item.ItemInfo;
 import model.item.Language;
 import model.item.ReviewImpl;
 import model.user.ArchiveUser;
@@ -47,6 +49,17 @@ public class ModelImpl implements Serializable, Model {
      *
      */
     TITLE, AUTHOR, PUBLISHER, RELEASE_YEAR
+  }
+
+  @Override
+  public Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive() {
+    return ArchiveImpl.getArchiveImpl().getItemArchive();
+  }
+
+  @Override
+  public void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
+              throws Exception {
+    ArchiveImpl.getArchiveImpl().setArchiveImpl(initItemArchive);
   }
 
   @Override

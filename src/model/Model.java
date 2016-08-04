@@ -11,6 +11,8 @@ import model.ModelImpl.TypeSearch;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
 import model.item.ItemGenre;
+import model.item.ItemImpl;
+import model.item.ItemInfo;
 import model.item.Language;
 
 /**
@@ -21,6 +23,21 @@ import model.item.Language;
  *
  */
 public interface Model {
+
+  /**
+   * This method @return the item archive in order to be serialized.
+   */
+  Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive();
+
+  /**
+   * This method set the item archive in order to be (de)serialized.
+   *
+   * @param itemArchive
+   *          item's archive.
+   * @throws Exception
+   *           in the case which the archive is been already initialized.
+   */
+  void setItemArchive(Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive) throws Exception;
 
   /**
    * This method registers a user into the user archive and set its preferences.
@@ -265,7 +282,7 @@ public interface Model {
 
   /**
    * This method update all userId's recommended list of Book and Movie.
-   * 
+   *
    * @throws Exception
    *           in the case which there is problem to get user whit userId
    *
