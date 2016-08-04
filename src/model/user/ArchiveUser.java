@@ -45,6 +45,24 @@ public final class ArchiveUser implements Serializable {
   }
 
   /**
+   * This method must be called only at the start of the program, if it had
+   * already file config saved. With this method you set the main field
+   * userArchive.
+   *
+   * @param initUserArchive
+   *          saved user's archive.
+   * @throws Exception
+   *           in the case which field it's already initialized.
+   */
+  public void setArchiveImpl(final Map<Integer, User> initUserArchive) throws Exception {
+    if (ArchiveUser.singleton == null) {
+      ArchiveUser.getArchiveImpl().setUserArchive(initUserArchive);
+    } else {
+      throw new Exception("Item archive already loaded");
+    }
+  }
+
+  /**
    * Singleton constructor.
    *
    * @return the ArchiveUser.
