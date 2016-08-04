@@ -26,6 +26,25 @@ public final class ArchiveUser implements Serializable {
   }
 
   /**
+   * This method return the map of user into the archive.
+   *
+   * @return the userArchive
+   */
+  public Map<Integer, User> getUserArchive() {
+    return this.userArchive;
+  }
+
+  /**
+   * This method set the map of user into the archive.
+   *
+   * @param initUserArchive
+   *          the userArchive to set.
+   */
+  public void setUserArchive(final Map<Integer, User> initUserArchive) {
+    this.userArchive = initUserArchive;
+  }
+
+  /**
    * Singleton constructor.
    *
    * @return the ArchiveUser.
@@ -46,8 +65,8 @@ public final class ArchiveUser implements Serializable {
    *           if user is not contained into the archive.
    */
   public void addUser(final User initUser) throws Exception {
-    if (!this.userArchive.containsKey(initUser.getIdUser())) {
-      this.userArchive.put(initUser.getIdUser(), initUser);
+    if (!ArchiveUser.singleton.contains(initUser.getIdUser())) {
+      ArchiveUser.singleton.getUserArchive().put(initUser.getIdUser(), initUser);
 
     } else {
       throw new Exception("User: " + initUser.getIdUser()
@@ -64,8 +83,8 @@ public final class ArchiveUser implements Serializable {
    *           if user is not contained into the archive.
    */
   public void removeUser(final Integer userId) throws Exception {
-    if (this.userArchive.containsKey(userId)) {
-      this.userArchive.remove(userId);
+    if (ArchiveUser.singleton.contains(userId)) {
+      ArchiveUser.singleton.getUserArchive().remove(userId);
     } else {
       throw new Exception("User: " + userId + " not contained into the archive.Can not remove it");
     }
@@ -81,8 +100,8 @@ public final class ArchiveUser implements Serializable {
    *           if user is not contained into the archive.
    */
   public User getUser(final Integer userId) throws Exception {
-    if (this.userArchive.containsKey(userId)) {
-      return this.userArchive.get(userId);
+    if (ArchiveUser.singleton.contains(userId)) {
+      return ArchiveUser.singleton.getUserArchive().get(userId);
     } else {
       throw new Exception("User: " + userId + " not contained into the archive.Can not remove it");
     }
@@ -94,7 +113,7 @@ public final class ArchiveUser implements Serializable {
    * @return true if userId is into the archive, else false.
    */
   public boolean contains(final Integer userId) {
-    return this.userArchive.containsKey(userId);
+    return ArchiveUser.singleton.getUserArchive().containsKey(userId);
   }
 
   /**
@@ -103,6 +122,6 @@ public final class ArchiveUser implements Serializable {
    * @return UserId set.
    */
   public Set<Integer> getUserId() {
-    return Collections.unmodifiableSet(this.userArchive.keySet());
+    return Collections.unmodifiableSet(ArchiveUser.singleton.getUserArchive().keySet());
   }
 }

@@ -33,7 +33,7 @@ import model.user.User;
 public class ModelImpl implements Serializable, Model {
 
   private static final long serialVersionUID = -8370710936091204583L;
-  // private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
+  private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
   private ArchiveUser archiveUser = ArchiveUser.getArchiveImpl();
   private StudyRoom studyRoom = new StudyRoom();
   private String systemPassword = "FmAlchemist";
