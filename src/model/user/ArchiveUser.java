@@ -18,14 +18,6 @@ public interface ArchiveUser {
    */
   Map<Integer, User> getUserArchive();
 
-  /*
-   * This method set the map of user into the archive.
-   *
-   * @param initUserArchive the userArchive to set.
-   * 
-   * void setUserArchive(final Map<Integer, User> initUserArchive);
-   */
-
   /**
    * This method must be called only at the start of the program, if it had
    * already file config saved. With this method you set the main field
