@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+
 import javax.swing.text.View;
 
 import model.Model;
@@ -29,6 +31,11 @@ public class ControllerImpl implements Controller {
 	 */
 	public ControllerImpl(final Model inputM) {
 		this.m = inputM;
+		// init(fileuser, filebook);
+	}
+
+	public void init(final File file1, final File file2) {
+		// filemanager.readfile(file1)
 	}
 
 	/**
