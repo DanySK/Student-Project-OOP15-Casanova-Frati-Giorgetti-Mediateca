@@ -82,22 +82,24 @@ public class User implements Serializable {
    * @return the full user loanArchive.
    */
   public Map<Integer, Pair<Boolean, Optional<Integer>>> getLoanArchive() {
-    return this.loanArchive;
+    return Collections.unmodifiableMap(this.loanArchive);
   }
 
   /**
    * @return the whishList.
    */
   public List<Integer> getWhishList() {
-    return this.wishList;
+    return Collections.unmodifiableList(this.wishList);
   }
 
   /**
+   * This method adds to the wishlist the required itemId.
+   * 
    * @param initWhishList
    *          the whishList to set.
    */
-  public void setWhishList(final List<Integer> initWhishList) {
-    this.wishList = initWhishList;
+  public void addToWhishList(final Integer initWhishList) {
+    this.wishList.add(initWhishList);
   }
 
   /**

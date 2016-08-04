@@ -41,8 +41,6 @@ public class ModelImpl implements Serializable, Model {
   /**
    * Enum in order to simplify filter.
    *
-   * @author Edoardo
-   *
    */
   public enum TypeSearch {
     /**
