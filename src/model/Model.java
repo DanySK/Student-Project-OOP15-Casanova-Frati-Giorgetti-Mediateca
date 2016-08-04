@@ -43,7 +43,7 @@ public interface Model {
   /**
    * This method @return the archiveUser in order to be serialized.
    */
-  Map<Integer, User> getArchiveUser();
+  Map<Integer, User> getUserArchive();
 
   /**
    * This method set the user archive in order to be (de)serialized.
@@ -54,7 +54,7 @@ public interface Model {
    * @throws Exception
    *           in the case which the archive is benne already initialized.
    */
-  void setArchiveUser(final Map<Integer, User> initArchiveUser) throws Exception;
+  void setUserArchive(final Map<Integer, User> initArchiveUser) throws Exception;
 
   /**
    * This method registers a user into the user archive and set its preferences.

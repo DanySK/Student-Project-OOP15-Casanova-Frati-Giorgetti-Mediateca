@@ -63,12 +63,12 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Map<Integer, User> getArchiveUser() {
+  public Map<Integer, User> getUserArchive() {
     return this.archiveUser.getUserArchive();
   }
 
   @Override
-  public void setArchiveUser(final Map<Integer, User> initArchiveUser) throws Exception {
+  public void setUserArchive(final Map<Integer, User> initArchiveUser) throws Exception {
     this.archiveUser.setArchiveImpl(initArchiveUser);
   }
 
