@@ -95,7 +95,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void deleteItem(final int itemId) throws Exception {
-    if (this.archiveItem.contains(itemId)) {
+    if (this.archiveItem.containsItem(itemId)) {
       this.archiveItem.removeItem(itemId);
     } else {
       throw new Exception("Item: " + itemId + " is not into the archive.");
@@ -105,7 +105,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void borrowItem(final int itemId, final int userId) throws Exception {
-    if (this.archiveItem.contains(itemId) && this.archiveUser.contains(userId)) {
+    if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.addUser(itemId, userId);
       this.archiveUser.getUser(userId).addItem(itemId);
     } else {
@@ -117,7 +117,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void returnItem(final int itemId, final int userId) throws Exception {
-    if (this.archiveItem.contains(itemId) && this.archiveUser.contains(userId)) {
+    if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.removeUser(itemId, userId);
       this.archiveUser.getUser(userId).removeItem(itemId);
     } else {
@@ -129,7 +129,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void addLike(final int itemId, final int userId) throws Exception {
-    if (this.archiveItem.contains(itemId) && this.archiveUser.contains(userId)) {
+    if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.getItem(itemId).addLike(userId);
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
@@ -141,7 +141,7 @@ public class ModelImpl implements Serializable, Model {
   public void addReview(final Integer itemId, final Integer userId, final Integer vote,
               final String note) throws Exception {
     ReviewImpl rev = new ReviewImpl(vote, note);
-    if (this.archiveUser.contains(userId) && this.archiveItem.contains(itemId)) {
+    if (this.archiveUser.contains(userId) && this.archiveItem.containsItem(itemId)) {
       this.archiveUser.getUser(userId).setItemReview(itemId, (int) rev.getId());
       this.archiveItem.getItem(itemId).addReview(rev);
     } else {
@@ -152,7 +152,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public Item getRequiredItem(final Integer itemId) throws Exception {
-    if (this.archiveItem.contains(itemId)) {
+    if (this.archiveItem.containsItem(itemId)) {
       return this.archiveItem.getItem(itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " not contained into the archive\n");
@@ -172,7 +172,7 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception {
     Map<Integer, Double> mmap = new HashMap<>();
-    if (this.archiveItem.contains(userId)) {
+    if (this.archiveItem.containsItem(userId)) {
       for (Integer i : this.archiveUser.getUser(userId).getLoanArchive().keySet()) {
         if (!this.archiveUser.getUser(userId).getLoanArchive().get(i).getFirst()) {
           mmap.put(i, this.archiveItem.calculateDifferenceDays(i, userId));
