@@ -20,7 +20,7 @@ import model.item.ItemImpl;
 import model.item.ItemInfo;
 import model.item.Language;
 import model.item.ReviewImpl;
-import model.user.ArchiveUser;
+import model.user.ArchiveUserImpl;
 import model.user.User;
 
 /**
@@ -34,7 +34,7 @@ public class ModelImpl implements Serializable, Model {
 
   private static final long serialVersionUID = -8370710936091204583L;
   private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
-  private ArchiveUser archiveUser = ArchiveUser.getArchiveImpl();
+  private ArchiveUserImpl archiveUser = ArchiveUserImpl.getArchiveImpl();
   private StudyRoom studyRoom = new StudyRoom();
   private String systemPassword = "FmAlchemist";
 
