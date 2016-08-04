@@ -33,7 +33,7 @@ import model.user.User;
 public class ModelImpl implements Serializable, Model {
 
   private static final long serialVersionUID = -8370710936091204583L;
-  private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
+  // private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
   private ArchiveUser archiveUser = ArchiveUser.getArchiveImpl();
   private StudyRoom studyRoom = new StudyRoom();
   private String systemPassword = "FmAlchemist";
@@ -90,9 +90,10 @@ public class ModelImpl implements Serializable, Model {
               final String initAuthor, final Language initCurrentLanguage, final String initISBN,
               final ItemGenre initGenre, final String initPublisher, final Integer initNumRelease,
               final Integer initNumCopy) throws Exception {
-    this.archiveItem.addItem(ItemFactory.getNewBook(initTitle, initReleaseYear, initAuthor,
-                initCurrentLanguage, initISBN, initGenre, initPublisher, initNumRelease),
-                initNumCopy);
+    ArchiveImpl.getArchiveImpl()
+                .addItem(ItemFactory.getNewBook(initTitle, initReleaseYear, initAuthor,
+                            initCurrentLanguage, initISBN, initGenre, initPublisher,
+                            initNumRelease), initNumCopy);
 
   }
 
@@ -102,14 +103,16 @@ public class ModelImpl implements Serializable, Model {
               final Language initCurrentLanguage, final ItemGenre initGenre,
               final Integer initDuration, final Boolean initColor, final Integer initNumCopy)
                           throws Exception {
-    this.archiveItem.addItem(ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher,
-                initAuthor, initCurrentLanguage, initGenre, initDuration, initColor), initNumCopy);
+    ArchiveImpl.getArchiveImpl()
+                .addItem(ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher,
+                            initAuthor, initCurrentLanguage, initGenre, initDuration, initColor),
+                initNumCopy);
   }
 
   @Override
   public void deleteItem(final int itemId) throws Exception {
-    if (this.archiveItem.containsItem(itemId)) {
-      this.archiveItem.removeItem(itemId);
+    if (ArchiveImpl.getArchiveImpl().containsItem(itemId)) {
+      ArchiveImpl.getArchiveImpl().removeItem(itemId);
     } else {
       throw new Exception("Item: " + itemId + " is not into the archive.");
     }
@@ -118,8 +121,8 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void borrowItem(final int itemId, final int userId) throws Exception {
-    if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
-      this.archiveItem.addUser(itemId, userId);
+    if (ArchiveImpl.getArchiveImpl().containsItem(itemId) && this.archiveUser.contains(userId)) {
+      ArchiveImpl.getArchiveImpl().addUser(itemId, userId);
       this.archiveUser.getUser(userId).addItem(itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
@@ -130,8 +133,8 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void returnItem(final int itemId, final int userId) throws Exception {
-    if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
-      this.archiveItem.removeUser(itemId, userId);
+    if (ArchiveImpl.getArchiveImpl().containsItem(itemId) && this.archiveUser.contains(userId)) {
+      ArchiveImpl.getArchiveImpl().removeUser(itemId, userId);
       this.archiveUser.getUser(userId).removeItem(itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
@@ -142,8 +145,8 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void addLike(final int itemId, final int userId) throws Exception {
-    if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
-      this.archiveItem.getItem(itemId).addLike(userId);
+    if (ArchiveImpl.getArchiveImpl().containsItem(itemId) && this.archiveUser.contains(userId)) {
+      ArchiveImpl.getArchiveImpl().getItem(itemId).addLike(userId);
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive");
@@ -154,9 +157,9 @@ public class ModelImpl implements Serializable, Model {
   public void addReview(final Integer itemId, final Integer userId, final Integer vote,
               final String note) throws Exception {
     ReviewImpl rev = new ReviewImpl(vote, note);
-    if (this.archiveUser.contains(userId) && this.archiveItem.containsItem(itemId)) {
+    if (this.archiveUser.contains(userId) && ArchiveImpl.getArchiveImpl().containsItem(itemId)) {
       this.archiveUser.getUser(userId).setItemReview(itemId, (int) rev.getId());
-      this.archiveItem.getItem(itemId).addReview(rev);
+      ArchiveImpl.getArchiveImpl().getItem(itemId).addReview(rev);
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive\n");
@@ -165,8 +168,8 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public Item getRequiredItem(final Integer itemId) throws Exception {
-    if (this.archiveItem.containsItem(itemId)) {
-      return this.archiveItem.getItem(itemId);
+    if (ArchiveImpl.getArchiveImpl().containsItem(itemId)) {
+      return ArchiveImpl.getArchiveImpl().getItem(itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " not contained into the archive\n");
     }
@@ -174,7 +177,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public Set<Integer> getAllItemId(final TypeItem t) {
-    return this.archiveItem.getItemId(t);
+    return ArchiveImpl.getArchiveImpl().getItemId(t);
   }
 
   @Override
@@ -185,10 +188,10 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception {
     Map<Integer, Double> mmap = new HashMap<>();
-    if (this.archiveItem.containsItem(userId)) {
+    if (ArchiveImpl.getArchiveImpl().containsItem(userId)) {
       for (Integer i : this.archiveUser.getUser(userId).getLoanArchive().keySet()) {
         if (!this.archiveUser.getUser(userId).getLoanArchive().get(i).getFirst()) {
-          mmap.put(i, this.archiveItem.calculateDifferenceDays(i, userId));
+          mmap.put(i, ArchiveImpl.getArchiveImpl().calculateDifferenceDays(i, userId));
         }
       }
       return mmap;
@@ -211,7 +214,7 @@ public class ModelImpl implements Serializable, Model {
       throw new Exception("TypeItem " + t + "not valid");
     }
     for (Integer i : all) {
-      if (this.archiveItem.getItem(i).getGenre().equals(b)) {
+      if (ArchiveImpl.getArchiveImpl().getItem(i).getGenre().equals(b)) {
         r.add(i);
       }
     }
@@ -234,23 +237,23 @@ public class ModelImpl implements Serializable, Model {
     all.addAll(this.getAllItemId(TypeItem.MOVIE));
     for (Integer i : all) {
       if (ts == TypeSearch.TITLE) {
-        if (this.archiveItem.getItem(i).getTitle().equals(param)) {
+        if (ArchiveImpl.getArchiveImpl().getItem(i).getTitle().equals(param)) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.AUTHOR) {
-        if (this.archiveItem.getItem(i).getAuthor().equals(param)) {
+        if (ArchiveImpl.getArchiveImpl().getItem(i).getAuthor().equals(param)) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.PUBLISHER) {
-        if (this.archiveItem.getItem(i).getPublisher().equals(param)) {
+        if (ArchiveImpl.getArchiveImpl().getItem(i).getPublisher().equals(param)) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.RELEASE_YEAR) {
         Integer num = Integer.parseInt(param);
-        if (num.equals(this.archiveItem.getItem(i).getReleaseYear())) {
+        if (num.equals(ArchiveImpl.getArchiveImpl().getItem(i).getReleaseYear())) {
           r.add(i);
         }
       }
@@ -270,7 +273,7 @@ public class ModelImpl implements Serializable, Model {
       Integer start = 0;
       Integer best = 0;
       for (Integer v : all) {
-        if (this.archiveItem.getItem(v).getAverageVote() > start) {
+        if (ArchiveImpl.getArchiveImpl().getItem(v).getAverageVote() > start) {
           best = v;
         }
       }
@@ -282,7 +285,7 @@ public class ModelImpl implements Serializable, Model {
       Integer start = 0;
       Integer best = 0;
       for (Integer v : all) {
-        if (this.archiveItem.getItem(v).getAverageVote() > start) {
+        if (ArchiveImpl.getArchiveImpl().getItem(v).getAverageVote() > start) {
           best = v;
         }
       }
