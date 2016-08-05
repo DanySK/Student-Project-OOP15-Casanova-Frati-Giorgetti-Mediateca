@@ -50,7 +50,7 @@ public interface Model {
    *
    * @param initArchiveUser
    *          the archiveUser to set
-   * 
+   *
    * @throws Exception
    *           in the case which the archive is benne already initialized.
    */
@@ -233,6 +233,18 @@ public interface Model {
    *           in the case which userId is not in the archive.
    */
   Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception;
+
+  /**
+   * This method return true if userId hadn't return book on time.
+   *
+   * @param userId
+   *          user's identifier.
+   * @return true if user is blocked.
+   *
+   * @throws Exception
+   *           in the case which user'Id is not in che archive.
+   */
+  boolean blockUser(final Integer userId) throws Exception;
 
   /**
    * This method adds a review to the different archives.

@@ -33,6 +33,7 @@ import model.user.User;
 public class ModelImpl implements Serializable, Model {
 
   private static final long serialVersionUID = -8370710936091204583L;
+  private static final int MAX_DAY = 60;
   private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
   private ArchiveUserImpl archiveUser = ArchiveUserImpl.getArchiveImpl();
   private StudyRoom studyRoom = new StudyRoom();
@@ -203,6 +204,17 @@ public class ModelImpl implements Serializable, Model {
     } else {
       throw new Exception("UserId: " + userId + "is not in the archive.");
     }
+  }
+
+  @Override
+  public boolean blockUser(final Integer userId) throws Exception {
+    Map<Integer, Double> mmap = this.checkDeadlineas(userId);
+    for (Double d : mmap.values()) {
+      if (d > ModelImpl.MAX_DAY) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
