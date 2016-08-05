@@ -97,9 +97,7 @@ public interface Archive {
   double calculateDifferenceDays(final Integer itemId, final Integer userId) throws Exception;
 
   /**
-   * This method adds the user (userId) to the list of ItemImpl's loans. This
-   * method must be used also in the case which the loan is expired, because it
-   * updates into the archive the reference to the date.
+   * This method adds the user (userId) to the list of ItemImpl's loans.
    *
    * @param itemId
    *          ItemImpl's identifier.
