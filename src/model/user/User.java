@@ -36,7 +36,6 @@ public class User implements Serializable {
   private Map<Integer, Pair<Boolean, Optional<Integer>>> loanArchive = new HashMap<>();
   private List<Integer> wishList = new LinkedList<>();
   private List<Integer> recommendedList = new LinkedList<>();
-  private boolean pro = false;
   private List<ItemGenre> bookPreferences = new LinkedList<>();
   private List<ItemGenre> moviePreferences = new LinkedList<>();
 
@@ -94,27 +93,12 @@ public class User implements Serializable {
 
   /**
    * This method adds to the wishlist the required itemId.
-   * 
+   *
    * @param initWhishList
    *          the whishList to set.
    */
   public void addToWhishList(final Integer initWhishList) {
     this.wishList.add(initWhishList);
-  }
-
-  /**
-   * @return true if user is pro, else false.
-   */
-  public boolean isPro() {
-    return this.pro;
-  }
-
-  /**
-   * @param initPro
-   *          the pro to set.
-   */
-  public void setPro(final boolean initPro) {
-    this.pro = initPro;
   }
 
   /**
