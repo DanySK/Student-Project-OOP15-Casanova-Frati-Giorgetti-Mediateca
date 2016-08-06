@@ -10,14 +10,6 @@ import javax.swing.text.View;
  */
 
 public interface Controller {
-	/**
-	 *
-	 * @param userName
-	 *            username given by the user
-	 * @param password
-	 *            password given by the user
-	 */
-	void login(String userName, String password);
 
 	/**
 	 *
@@ -37,4 +29,6 @@ public interface Controller {
 	 *
 	 */
 	void setView(View inputView);
+
+	void login(Integer userId, String password);
 }

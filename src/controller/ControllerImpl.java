@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.swing.text.View;
 
 import model.Model;
+import model.user.User;
 
 /**
  * Class which implements the controller interface.
@@ -17,6 +18,7 @@ import model.Model;
 public class ControllerImpl implements Controller {
 	private View v;
 	private Model m;
+	private User actualUser;
 
 	/*
 	 * template per i futuri getter
@@ -44,7 +46,7 @@ public class ControllerImpl implements Controller {
 	}
 
 	/**
-	 * Method for the initialization of the model
+	 * Method for the initialization of the model.
 	 *
 	 * @param fileUser
 	 * @param fileBooks
@@ -70,8 +72,13 @@ public class ControllerImpl implements Controller {
 	}
 
 	@Override
-	public void login(final String userName, final String password) {
-
+	public void login(final Integer userId, final String password) {
+		if (this.m.getUserArchive().containsKey(userId)
+				&& (this.m.getUserArchive().get(userId).getPassword() == password)) {
+			// cambia schermata
+		} else {
+			// lancia messaggio e/o eccezione
+		}
 	}
 
 	@Override
