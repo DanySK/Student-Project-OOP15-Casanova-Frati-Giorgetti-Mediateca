@@ -39,6 +39,10 @@ public class ModelImpl implements Serializable, Model {
   private StudyRoom studyRoom = new StudyRoom();
   private String systemPassword = "FmAlchemist";
 
+  public ModelImpl() {
+
+  }
+
   /**
    * Enum in order to simplify filter.
    *
@@ -81,7 +85,7 @@ public class ModelImpl implements Serializable, Model {
                 initTelephoneNumber, initBookPref, initMoviePref);
     this.archiveUser.addUser(u);
     this.setReccomandedList(u.getIdUser());
-
+    System.out.println("User " + u.toString() + "adds to te archive.");
   }
 
   @Override
@@ -287,26 +291,30 @@ public class ModelImpl implements Serializable, Model {
 
     for (ItemGenre im : prefGenMovie) {
       all = this.filterItemGenre(TypeItem.MOVIE, im);
-      Integer start = 0;
-      Integer best = 0;
-      for (Integer v : all) {
-        if (this.archiveItem.getItem(v).getAverageVote() > start) {
-          best = v;
+      if (all.size() != 0) {
+        Integer start = 0;
+        Integer best = 0;
+        for (Integer v : all) {
+          if (this.archiveItem.getItem(v).getAverageVote() > start) {
+            best = v;
+          }
         }
+        this.archiveUser.getUser(userId).getRecommendedList().add(best);
       }
-      this.archiveUser.getUser(userId).getRecommendedList().add(best);
     }
 
     for (ItemGenre ig : prefGenBook) {
       all = this.filterItemGenre(TypeItem.BOOK, ig);
-      Integer start = 0;
-      Integer best = 0;
-      for (Integer v : all) {
-        if (this.archiveItem.getItem(v).getAverageVote() > start) {
-          best = v;
+      if (all.size() != 0) {
+        Integer start = 0;
+        Integer best = 0;
+        for (Integer v : all) {
+          if (this.archiveItem.getItem(v).getAverageVote() > start) {
+            best = v;
+          }
         }
+        this.archiveUser.getUser(userId).getRecommendedList().add(best);
       }
-      this.archiveUser.getUser(userId).getRecommendedList().add(best);
     }
   }
 
