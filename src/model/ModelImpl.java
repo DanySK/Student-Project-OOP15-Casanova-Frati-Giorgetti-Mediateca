@@ -40,7 +40,6 @@ public class ModelImpl implements Serializable, Model {
   private String systemPassword = "FmAlchemist";
 
   public ModelImpl() {
-
   }
 
   /**
