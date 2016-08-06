@@ -39,6 +39,9 @@ public class ModelImpl implements Serializable, Model {
   private StudyRoom studyRoom = new StudyRoom();
   private String systemPassword = "FmAlchemist";
 
+  /**
+   * Empty constructor.
+   */
   public ModelImpl() {
   }
 
