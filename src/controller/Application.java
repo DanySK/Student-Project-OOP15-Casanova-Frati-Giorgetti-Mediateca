@@ -21,7 +21,7 @@ public final class Application {
 		// application starter
 		final Model m = new ModelImpl();
 		final Controller c = new ControllerImpl(m);
-		System.out.println(System.getProperty("user.dir"));
+		// System.out.println(System.getProperty("user.dir"));
 		// things to implement
 		// final View v = new ViewImpl(c);
 		// c.setView(v);

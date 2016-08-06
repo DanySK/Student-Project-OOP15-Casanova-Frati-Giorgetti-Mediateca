@@ -7,8 +7,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Map;
 
-import model.item.Item;
+import model.Model;
+import model.Pair;
+import model.item.ItemImpl;
+import model.item.ItemInfo;
+import model.user.User;
 
 /**
  * Class which does the operations of I/O.
@@ -18,7 +23,6 @@ import model.item.Item;
  */
 public class FileManager {
 
-	private String fileName;
 	private String path = System.getProperty("user.dir");
 
 	/**
@@ -38,7 +42,7 @@ public class FileManager {
 	 * @param object
 	 * @throws IOException
 	 */
-	public void write(final String fileName, final Object object) throws IOException {
+	public void write(final String fileName, final Model model) throws IOException {
 
 		File myFile = new File(fileName);
 		if (!myFile.exists()) {
@@ -47,17 +51,22 @@ public class FileManager {
 
 		FileOutputStream fos = new FileOutputStream(this.path + "\\res\\" + fileName);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		oos.writeObject(object);
+		oos.writeObject(model);
 		oos.close();
 	}
 
-	public void read(final String fileName, final Item item) throws IOException, FileNotFoundException {
+	@SuppressWarnings("unchecked")
+	public void read(final String fileName, final Model model) throws IOException, FileNotFoundException {
 		try {
 			FileInputStream fin = new FileInputStream(this.path + "\\res\\" + fileName);
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			Object object = ois.readObject();
+			if (fileName.contains("utenti")) {
+				model.setUserArchive((Map<Integer, User>) object);
+			} else {
+				model.setItemArchive((Map<Integer, Pair<ItemImpl, ItemInfo>>) object);
+			}
 			ois.close();
-			// return object;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

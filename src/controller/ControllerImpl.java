@@ -1,6 +1,7 @@
 package controller;
 
-import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.text.View;
 
@@ -31,11 +32,32 @@ public class ControllerImpl implements Controller {
 	 */
 	public ControllerImpl(final Model inputM) {
 		this.m = inputM;
-		// init(fileuser, filebook);
+		try {
+			this.init("archivio.utente", "archivio.libri", "archivio.film");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void init(final File file1, final File file2) {
-		// filemanager.readfile(file1)
+	/**
+	 * Method for the initialization of the model
+	 *
+	 * @param fileUser
+	 * @param fileBooks
+	 * @param fileMovies
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 */
+	public void init(final String fileUser, final String fileBooks, final String fileMovies)
+			throws FileNotFoundException, IOException {
+		FileManager fm = new FileManager();
+		fm.read(fileUser, this.m);
+		fm.read(fileBooks, this.m);
+		fm.read(fileMovies, this.m);
 	}
 
 	/**
