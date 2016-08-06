@@ -102,9 +102,12 @@ public class ModelImpl implements Serializable, Model {
               final String initAuthor, final Language initCurrentLanguage, final String initISBN,
               final ItemGenre initGenre, final String initPublisher, final Integer initNumRelease,
               final Integer initNumCopy) throws Exception {
-    this.archiveItem.addItem(ItemFactory.getNewBook(initTitle, initReleaseYear, initAuthor,
-                initCurrentLanguage, initISBN, initGenre, initPublisher, initNumRelease),
-                initNumCopy);
+    // Da sistemare prima della consegna, Item Facotry direttamente dentro il
+    // metodo addItem
+    ItemImpl b = ItemFactory.getNewBook(initTitle, initReleaseYear, initAuthor, initCurrentLanguage,
+                initISBN, initGenre, initPublisher, initNumRelease);
+    this.archiveItem.addItem(b, initNumCopy);
+    System.out.println("Book " + b.toString() + " adds to the archive");
 
   }
 
@@ -114,8 +117,12 @@ public class ModelImpl implements Serializable, Model {
               final Language initCurrentLanguage, final ItemGenre initGenre,
               final Integer initDuration, final Boolean initColor, final Integer initNumCopy)
                           throws Exception {
-    this.archiveItem.addItem(ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher,
-                initAuthor, initCurrentLanguage, initGenre, initDuration, initColor), initNumCopy);
+    // Da sistemare prima della consegna, Item Facotry direttamente dentro il
+    // metodo addItem
+    ItemImpl m = ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher, initAuthor,
+                initCurrentLanguage, initGenre, initDuration, initColor);
+    this.archiveItem.addItem(m, initNumCopy);
+    System.out.println("Movie " + m.toString() + " adds to the archive");
   }
 
   @Override
@@ -133,6 +140,7 @@ public class ModelImpl implements Serializable, Model {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.addUser(itemId, userId);
       this.archiveUser.getUser(userId).addItem(itemId);
+      System.out.println("UserId " + userId + "takes itemId " + itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive");
