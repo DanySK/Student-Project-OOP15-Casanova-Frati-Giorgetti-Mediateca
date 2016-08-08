@@ -82,7 +82,9 @@ public class UserImpl implements Serializable, User {
     return Collections.unmodifiableMap(this.loanArchive);
   }
 
-  @Override
+  /**
+   * @return the whishList.
+   */
   public List<Integer> getWhishList() {
     return Collections.unmodifiableList(this.wishList);
   }
@@ -92,72 +94,114 @@ public class UserImpl implements Serializable, User {
     this.wishList.add(initWhishList);
   }
 
-  @Override
+  /**
+   * @return the bookPreferences
+   */
   public List<ItemGenre> getBookPreferences() {
     return Collections.unmodifiableList(this.bookPreferences);
   }
 
-  @Override
+  /**
+   * @param initBookPreferences
+   *          the bookPreferences to set
+   */
   public void setBookPreferences(final List<ItemGenre> initBookPreferences) {
     this.bookPreferences = initBookPreferences;
   }
 
-  @Override
+  /**
+   * @return the moviePreferences
+   */
   public List<ItemGenre> getMoviePreferences() {
     return Collections.unmodifiableList(this.moviePreferences);
   }
 
-  @Override
+  /**
+   * @param initMoviePreferences
+   *          the moviePreferences to set
+   */
   public void setMoviePreferences(final List<ItemGenre> initMoviePreferences) {
     this.moviePreferences = initMoviePreferences;
   }
 
-  @Override
+  /**
+   *
+   * @return user's name.
+   */
   public String getName() {
     return this.name;
   }
 
-  @Override
+  /**
+   *
+   * @return user's surname.
+   */
   public String getSurname() {
     return this.surname;
   }
 
-  @Override
+  /**
+   *
+   * @return user's birthdate.
+   */
   public GregorianCalendar getBirthdate() {
     return this.birthdate;
   }
 
-  @Override
+  /**
+   *
+   * @return user's username.
+   */
   public String getUsername() {
     return this.username;
   }
 
-  @Override
+  /**
+   *
+   * @return user's password.
+   */
   public String getPassword() {
     return this.password;
   }
 
-  @Override
+  /**
+   *
+   * @return user's id.
+   */
   public Integer getIdUser() {
     return this.idUser;
   }
 
-  @Override
+  /**
+   *
+   * @return user's email.
+   */
   public String getEmail() {
     return this.email;
   }
 
-  @Override
+  /**
+   *
+   * @return user's telephone number.
+   */
   public String getTelephoneNumber() {
     return this.telephoneNumber;
   }
 
-  @Override
+  /**
+   *
+   * @return user's recommended list.
+   */
   public List<Integer> getRecommendedList() {
     return Collections.unmodifiableList(this.recommendedList);
   }
 
-  @Override
+  /**
+   * This method sets user's recommended list.
+   *
+   * @param initRecommendedList
+   *          of itemId to set.
+   */
   public void setRecommendedList(final List<Integer> initRecommendedList) {
     this.recommendedList = initRecommendedList;
   }

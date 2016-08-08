@@ -1,13 +1,10 @@
 package model.user;
 
-import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Optional;
 
 import model.Pair;
-import model.item.ItemGenre;
 
 /**
  * User is the Mediateca client. This class saves in addition to general
@@ -24,90 +21,12 @@ public interface User {
   Map<Integer, Pair<Boolean, Optional<Integer>>> getLoanArchive();
 
   /**
-   * @return the whishList.
-   */
-  List<Integer> getWhishList();
-
-  /**
    * This method adds to the wishlist the required itemId.
    *
    * @param initWhishList
    *          the whishList to set.
    */
   void addToWhishList(final Integer initWhishList);
-
-  /**
-   * @return the bookPreferences
-   */
-  List<ItemGenre> getBookPreferences();
-
-  /**
-   * @param initBookPreferences
-   *          the bookPreferences to set
-   */
-  void setBookPreferences(final List<ItemGenre> initBookPreferences);
-
-  /**
-   * @return the moviePreferences
-   */
-  List<ItemGenre> getMoviePreferences();
-
-  /**
-   * @param initMoviePreferences
-   *          the moviePreferences to set
-   */
-  void setMoviePreferences(final List<ItemGenre> initMoviePreferences);
-
-  /**
-   * @return the name
-   */
-  String getName();
-
-  /**
-   * @return the surname
-   */
-  String getSurname();
-
-  /**
-   * @return the date of birth
-   */
-  GregorianCalendar getBirthdate();
-
-  /**
-   * @return the Username
-   */
-  String getUsername();
-
-  /**
-   * @return the password
-   */
-  String getPassword();
-
-  /**
-   * @return the idUser
-   */
-  Integer getIdUser();
-
-  /**
-   * @return the email
-   */
-  String getEmail();
-
-  /**
-   * @return the telephoneNumber
-   */
-  String getTelephoneNumber();
-
-  /**
-   * @return the recommendedList
-   */
-  List<Integer> getRecommendedList();
-
-  /**
-   * @param initRecommendedList
-   *          the recommendedList to set
-   */
-  void setRecommendedList(final List<Integer> initRecommendedList);
 
   /**
    * This method adds an itemId to the user's map.
