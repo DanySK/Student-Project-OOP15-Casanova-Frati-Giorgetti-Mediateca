@@ -16,7 +16,7 @@ public interface ArchiveUser {
    *
    * @return the userArchive
    */
-  Map<Integer, User> getUserArchive();
+  Map<Integer, UserImpl> getUserArchive();
 
   /**
    * This method must be called only at the start of the program, if it had
@@ -28,7 +28,7 @@ public interface ArchiveUser {
    * @throws Exception
    *           in the case which field it's already initialized.
    */
-  void setArchiveImpl(final Map<Integer, User> initUserArchive) throws Exception;
+  void setArchiveImpl(final Map<Integer, UserImpl> initUserArchive) throws Exception;
 
   /**
    * This method adds a User into the archive.
@@ -38,7 +38,7 @@ public interface ArchiveUser {
    * @throws Exception
    *           if user is not contained into the archive.
    */
-  void addUser(final User initUser) throws Exception;
+  void addUser(final UserImpl initUser) throws Exception;
 
   /**
    * This method remove/delete user from the archive.
@@ -59,7 +59,7 @@ public interface ArchiveUser {
    * @throws Exception
    *           if user is not contained into the archive.
    */
-  User getUser(final Integer userId) throws Exception;
+  UserImpl getUser(final Integer userId) throws Exception;
 
   /**
    * @param userId

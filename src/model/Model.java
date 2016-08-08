@@ -14,7 +14,7 @@ import model.item.ItemGenre;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
 import model.item.Language;
-import model.user.User;
+import model.user.UserImpl;
 
 /**
  * Interface for a generic model. It defines the main methods of the class
@@ -43,7 +43,7 @@ public interface Model {
   /**
    * This method @return the archiveUser in order to be serialized.
    */
-  Map<Integer, User> getUserArchive();
+  Map<Integer, UserImpl> getUserArchive();
 
   /**
    * This method set the user archive in order to be (de)serialized.
@@ -54,7 +54,7 @@ public interface Model {
    * @throws Exception
    *           in the case which the archive is benne already initialized.
    */
-  void setUserArchive(final Map<Integer, User> initArchiveUser) throws Exception;
+  void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception;
 
   /**
    * This method registers a user into the user archive and set its preferences.

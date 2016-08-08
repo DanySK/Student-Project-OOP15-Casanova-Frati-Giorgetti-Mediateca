@@ -1,14 +1,9 @@
 package model.user;
 
-import java.io.Serializable;
-import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 
 import model.Pair;
@@ -21,75 +16,17 @@ import model.item.ItemGenre;
  * @author Edoardo
  *
  */
-public class User implements Serializable {
-
-  private static final long serialVersionUID = 2261594876176760469L;
-  private final String name;
-  private final String surname;
-  private final GregorianCalendar birthdate;
-  private final String username;
-  private final String password;
-  private final Integer idUser;
-  private final String email;
-  private final String telephoneNumber;
-  // Map<itemId, Pair<Restituito, reviewId>>
-  private Map<Integer, Pair<Boolean, Optional<Integer>>> loanArchive = new HashMap<>();
-  private List<Integer> wishList = new LinkedList<>();
-  private List<Integer> recommendedList = new LinkedList<>();
-  private List<ItemGenre> bookPreferences = new LinkedList<>();
-  private List<ItemGenre> moviePreferences = new LinkedList<>();
-
-  /**
-   * User constructor.
-   *
-   * @param initName
-   *          User's name.
-   * @param initSurname
-   *          User's surname.
-   * @param initBirthdate
-   *          User's day of birth.
-   * @param initUsername
-   *          User's username.
-   * @param initPassword
-   *          User's password.
-   * @param initEmail
-   *          User's email.
-   * @param initTelephoneNumber
-   *          User's telephone Number.
-   * @param initBookPref
-   *          User's preferences.
-   * @param initMoviePref
-   *          User's preferences.
-   */
-  public User(final String initName, final String initSurname,
-              final GregorianCalendar initBirthdate, final String initUsername,
-              final String initPassword, final String initEmail, final String initTelephoneNumber,
-              final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref) {
-    this.name = initName.toUpperCase();
-    this.surname = initSurname.toUpperCase();
-    this.birthdate = initBirthdate;
-    this.username = initUsername;
-    this.password = initPassword;
-    this.idUser = this.hashCode();
-    this.email = initEmail.toLowerCase();
-    this.telephoneNumber = initTelephoneNumber;
-    this.bookPreferences = initBookPref;
-    this.moviePreferences = initMoviePref;
-  }
+public interface User {
 
   /**
    * @return the full user loanArchive.
    */
-  public Map<Integer, Pair<Boolean, Optional<Integer>>> getLoanArchive() {
-    return Collections.unmodifiableMap(this.loanArchive);
-  }
+  Map<Integer, Pair<Boolean, Optional<Integer>>> getLoanArchive();
 
   /**
    * @return the whishList.
    */
-  public List<Integer> getWhishList() {
-    return Collections.unmodifiableList(this.wishList);
-  }
+  List<Integer> getWhishList();
 
   /**
    * This method adds to the wishlist the required itemId.
@@ -97,127 +34,80 @@ public class User implements Serializable {
    * @param initWhishList
    *          the whishList to set.
    */
-  public void addToWhishList(final Integer initWhishList) {
-    this.wishList.add(initWhishList);
-  }
+  void addToWhishList(final Integer initWhishList);
 
   /**
    * @return the bookPreferences
    */
-  public List<ItemGenre> getBookPreferences() {
-    return Collections.unmodifiableList(this.bookPreferences);
-  }
+  List<ItemGenre> getBookPreferences();
 
   /**
    * @param initBookPreferences
    *          the bookPreferences to set
    */
-  public void setBookPreferences(final List<ItemGenre> initBookPreferences) {
-    this.bookPreferences = initBookPreferences;
-  }
+  void setBookPreferences(final List<ItemGenre> initBookPreferences);
 
   /**
    * @return the moviePreferences
    */
-  public List<ItemGenre> getMoviePreferences() {
-    return Collections.unmodifiableList(this.moviePreferences);
-  }
+  List<ItemGenre> getMoviePreferences();
 
   /**
    * @param initMoviePreferences
    *          the moviePreferences to set
    */
-  public void setMoviePreferences(final List<ItemGenre> initMoviePreferences) {
-    this.moviePreferences = initMoviePreferences;
-  }
+  void setMoviePreferences(final List<ItemGenre> initMoviePreferences);
 
   /**
    * @return the name
    */
-  public String getName() {
-    return this.name;
-  }
+  String getName();
 
   /**
    * @return the surname
    */
-  public String getSurname() {
-    return this.surname;
-  }
+  String getSurname();
 
   /**
    * @return the date of birth
    */
-  public GregorianCalendar getBirthdate() {
-    return this.birthdate;
-  }
+  GregorianCalendar getBirthdate();
 
   /**
    * @return the Username
    */
-  public String getUsername() {
-    return this.username;
-  }
+  String getUsername();
 
   /**
    * @return the password
    */
-  public String getPassword() {
-    return this.password;
-  }
+  String getPassword();
 
   /**
    * @return the idUser
    */
-  public Integer getIdUser() {
-    return this.idUser;
-  }
+  Integer getIdUser();
 
   /**
    * @return the email
    */
-  public String getEmail() {
-    return this.email;
-  }
+  String getEmail();
 
   /**
    * @return the telephoneNumber
    */
-  public String getTelephoneNumber() {
-    return this.telephoneNumber;
-  }
+  String getTelephoneNumber();
 
   /**
    * @return the recommendedList
    */
-  public List<Integer> getRecommendedList() {
-    return Collections.unmodifiableList(this.recommendedList);
-  }
+  List<Integer> getRecommendedList();
 
   /**
    * @param initRecommendedList
    *          the recommendedList to set
    */
-  public void setRecommendedList(final List<Integer> initRecommendedList) {
-    this.recommendedList = initRecommendedList;
-  }
-
-  @Override
-  public int hashCode() {
-    return com.google.common.base.Objects.hashCode(this.name, this.surname, this.birthdate,
-                this.username);
-  }
-
-  @Override
-  public boolean equals(final Object obj) {
-    if (!(obj instanceof User)) {
-      return false;
-    }
-    final User temp = (User) obj;
-    return Objects.equal(this.name, temp.name) && Objects.equal(this.surname, temp.surname)
-                && Objects.equal(this.birthdate, temp.birthdate)
-                && Objects.equal(this.username, temp.username);
-  }
+  void setRecommendedList(final List<Integer> initRecommendedList);
 
   /**
    * This method adds an itemId to the user's map.
@@ -225,9 +115,7 @@ public class User implements Serializable {
    * @param itemId
    *          item's identifier.
    */
-  public void addItem(final Integer itemId) {
-    this.loanArchive.put(itemId, new Pair<>(false, null));
-  }
+  void addItem(final Integer itemId);
 
   /**
    * This method change item's status on the user's map.
@@ -237,13 +125,7 @@ public class User implements Serializable {
    * @throws Exception
    *           in the case which itemId is not in the archive.
    */
-  public void removeItem(final Integer itemId) throws Exception {
-    if (this.loanArchive.containsKey(itemId)) {
-      this.loanArchive.put(itemId, new Pair<>(true, null));
-    } else {
-      throw new Exception("ItemId" + itemId + " is not in the archive.");
-    }
-  }
+  void removeItem(final Integer itemId) throws Exception;
 
   /**
    * This method adds a reviewId to the respective item on the user's map, it
@@ -254,8 +136,22 @@ public class User implements Serializable {
    * @param reviewId
    *          review's identifier.
    */
-  public void setItemReview(final Integer itemId, final Integer reviewId) {
-    this.loanArchive.put(itemId, new Pair<Boolean, Optional<Integer>>(
-                this.loanArchive.get(itemId).getFirst(), Optional.of(reviewId)));
-  }
+  void setItemReview(final Integer itemId, final Integer reviewId);
+
+  /**
+   * This method @return true(false) if @param itemId was(wasn't) returned by
+   * the user.
+   *
+   * @return true if itemId was return else false.
+   */
+  boolean itWasReturned(final Integer itemId);
+
+  /**
+   * This method return the reviewId done by the user. It is optional.
+   *
+   * @param itemId
+   *          item's identifier.
+   * @return the reviewId if it is present.
+   */
+  Optional<Integer> getListReview(final Integer itemId);
 }

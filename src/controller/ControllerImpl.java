@@ -6,7 +6,7 @@ import java.io.IOException;
 import javax.swing.text.View;
 
 import model.Model;
-import model.user.User;
+import model.user.UserImpl;
 
 /**
  * Class which implements the controller interface.
@@ -18,7 +18,7 @@ import model.user.User;
 public class ControllerImpl implements Controller {
 	private View v;
 	private Model m;
-	private User actualUser;
+	private UserImpl actualUser;
 
 	/*
 	 * template per i futuri getter

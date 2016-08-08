@@ -13,7 +13,7 @@ import model.Model;
 import model.Pair;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
-import model.user.User;
+import model.user.UserImpl;
 
 /**
  * Class which does the operations of I/O.
@@ -62,7 +62,7 @@ public class FileManager {
 			ObjectInputStream ois = new ObjectInputStream(fin);
 			Object object = ois.readObject();
 			if (fileName.contains("utenti")) {
-				model.setUserArchive((Map<Integer, User>) object);
+				model.setUserArchive((Map<Integer, UserImpl>) object);
 			} else {
 				model.setItemArchive((Map<Integer, Pair<ItemImpl, ItemInfo>>) object);
 			}

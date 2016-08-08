@@ -21,7 +21,7 @@ import model.item.ItemInfo;
 import model.item.Language;
 import model.item.ReviewImpl;
 import model.user.ArchiveUserImpl;
-import model.user.User;
+import model.user.UserImpl;
 
 /**
  * Main class of the model. It is Serializable and it has two main field, the
@@ -68,12 +68,12 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Map<Integer, User> getUserArchive() {
+  public Map<Integer, UserImpl> getUserArchive() {
     return this.archiveUser.getUserArchive();
   }
 
   @Override
-  public void setUserArchive(final Map<Integer, User> initArchiveUser) throws Exception {
+  public void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception {
     this.archiveUser.setArchiveImpl(initArchiveUser);
   }
 
@@ -83,7 +83,7 @@ public class ModelImpl implements Serializable, Model {
               final String initPassword, final String initEmail, final String initTelephoneNumber,
               final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
                           throws Exception {
-    User u = new User(initName, initSurname, initBirthdate, initUsername, initPassword, initEmail,
+    UserImpl u = new UserImpl(initName, initSurname, initBirthdate, initUsername, initPassword, initEmail,
                 initTelephoneNumber, initBookPref, initMoviePref);
     this.archiveUser.addUser(u);
     this.setReccomandedList(u.getIdUser());

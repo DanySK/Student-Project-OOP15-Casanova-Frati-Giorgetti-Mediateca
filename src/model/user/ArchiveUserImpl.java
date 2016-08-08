@@ -20,22 +20,22 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
    */
   private static final long serialVersionUID = -891777149481744993L;
   private static ArchiveUserImpl singleton = null;
-  private Map<Integer, User> userArchive = new HashMap<>();
+  private Map<Integer, UserImpl> userArchive = new HashMap<>();
 
   private ArchiveUserImpl() {
   }
 
   @Override
-  public Map<Integer, User> getUserArchive() {
+  public Map<Integer, UserImpl> getUserArchive() {
     return this.userArchive;
   }
 
-  private void setUserArchive(final Map<Integer, User> initUserArchive) {
+  private void setUserArchive(final Map<Integer, UserImpl> initUserArchive) {
     this.userArchive = initUserArchive;
   }
 
   @Override
-  public void setArchiveImpl(final Map<Integer, User> initUserArchive) throws Exception {
+  public void setArchiveImpl(final Map<Integer, UserImpl> initUserArchive) throws Exception {
     if (ArchiveUserImpl.singleton == null) {
       ArchiveUserImpl.getArchiveImpl().setUserArchive(initUserArchive);
     } else {
@@ -56,7 +56,7 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
   }
 
   @Override
-  public void addUser(final User initUser) throws Exception {
+  public void addUser(final UserImpl initUser) throws Exception {
     if (!ArchiveUserImpl.singleton.contains(initUser.getIdUser())) {
       ArchiveUserImpl.singleton.getUserArchive().put(initUser.getIdUser(), initUser);
 
@@ -76,7 +76,7 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
   }
 
   @Override
-  public User getUser(final Integer userId) throws Exception {
+  public UserImpl getUser(final Integer userId) throws Exception {
     if (ArchiveUserImpl.singleton.contains(userId)) {
       return ArchiveUserImpl.singleton.getUserArchive().get(userId);
     } else {
