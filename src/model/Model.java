@@ -322,7 +322,7 @@ public interface Model {
               throws Exception;
 
   /**
-   * This method change some setting of an item.
+   * This method changes required setting of an item.
    *
    * @param ts
    *          field to be changed.
@@ -331,9 +331,23 @@ public interface Model {
    * @param param
    *          to change in the Item.
    * @throws Exception
-   *           in the which item is not in the archive or ts is not ok.
+   *           in the case which item is not in the archive or ts is not ok.
    */
   void changeItem(final TypeSearch ts, final Integer itemId, final Object param) throws Exception;
+
+  /**
+   * This method changes required setting of user.
+   *
+   * @param ts
+   *          field to be changed.
+   * @param userId
+   *          user's identifier.
+   * @param param
+   *          to change in the user.
+   * @throws Exception
+   *           in the case which user is not in the archive or ts is not ok.
+   */
+  void changeUser(final TypeSearch ts, final Integer userId, final Object param) throws Exception;
 
   /**
    * This method update all userId's recommended list of Book and Movie.

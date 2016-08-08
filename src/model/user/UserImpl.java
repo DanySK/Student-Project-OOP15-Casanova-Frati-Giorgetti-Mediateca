@@ -24,14 +24,14 @@ import model.item.ItemGenre;
 public class UserImpl implements Serializable, User {
 
   private static final long serialVersionUID = 2261594876176760469L;
-  private final String name;
-  private final String surname;
-  private final GregorianCalendar birthdate;
-  private final String username;
-  private final String password;
-  private final Integer idUser;
-  private final String email;
-  private final String telephoneNumber;
+  private String name;
+  private String surname;
+  private GregorianCalendar birthdate;
+  private String username;
+  private String password;
+  private Integer idUser;
+  private String email;
+  private String telephoneNumber;
   // Map<itemId, Pair<Restituito, reviewId>>
   private Map<Integer, Pair<Boolean, Optional<Integer>>> loanArchive = new HashMap<>();
   private List<Integer> wishList = new LinkedList<>();
@@ -160,6 +160,62 @@ public class UserImpl implements Serializable, User {
   @Override
   public void setRecommendedList(final List<Integer> initRecommendedList) {
     this.recommendedList = initRecommendedList;
+  }
+
+  /**
+   * @param initName
+   *          the name to set.
+   */
+  public void setName(final String initName) {
+    this.name = initName.toUpperCase();
+  }
+
+  /**
+   * @param initSurname
+   *          the surname to set
+   */
+  public void setSurname(final String initSurname) {
+    this.surname = initSurname.toUpperCase();
+  }
+
+  /**
+   * @param initBirthdate
+   *          the birthdate to set
+   */
+  public void setBirthdate(final GregorianCalendar initBirthdate) {
+    this.birthdate = initBirthdate;
+  }
+
+  /**
+   * @param initUsername
+   *          the username to set
+   */
+  public void setUsername(final String initUsername) {
+    this.username = initUsername;
+  }
+
+  /**
+   * @param initPassword
+   *          the password to set
+   */
+  public void setPassword(final String initPassword) {
+    this.password = initPassword;
+  }
+
+  /**
+   * @param initEmail
+   *          the email to set
+   */
+  public void setEmail(final String initEmail) {
+    this.email = initEmail.toLowerCase();
+  }
+
+  /**
+   * @param initTelephoneNumber
+   *          the telephoneNumber to set
+   */
+  public void setTelephoneNumber(final String initTelephoneNumber) {
+    this.telephoneNumber = initTelephoneNumber;
   }
 
   @Override

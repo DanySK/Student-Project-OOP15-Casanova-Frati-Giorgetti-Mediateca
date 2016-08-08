@@ -54,7 +54,7 @@ public class ModelImpl implements Serializable, Model {
     /**
      *
      */
-    TITLE, AUTHOR, PUBLISHER, RELEASE_YEAR, LANGUAGE, GENRE
+    TITLE, AUTHOR, PUBLISHER, RELEASE_YEAR, LANGUAGE, GENRE, NAME, SURNAME, BIRTHDATE, USERNAME, PASSWORD, EMAIL, TELEPHONE_NUMBER
   }
 
   @Override
@@ -315,7 +315,7 @@ public class ModelImpl implements Serializable, Model {
     if ((ts != TypeSearch.AUTHOR) || (ts != TypeSearch.TITLE) || (ts != TypeSearch.PUBLISHER)
                 || (ts != TypeSearch.RELEASE_YEAR) || (ts != TypeSearch.LANGUAGE)
                 || (ts != TypeSearch.GENRE)) {
-      throw new Exception("TypeSearch " + ts + "not valid to change");
+      throw new Exception("TypeSearch " + ts + "not valid to change on item");
     }
 
     if (ts == TypeSearch.TITLE) {
@@ -335,6 +335,37 @@ public class ModelImpl implements Serializable, Model {
     }
     if (ts == TypeSearch.GENRE) {
       this.archiveItem.getItem(itemId).setGenre((ItemGenre) param);
+    }
+  }
+
+  @Override
+  public void changeUser(final TypeSearch ts, final Integer userId, final Object param)
+              throws Exception {
+    if ((ts != TypeSearch.NAME) || (ts != TypeSearch.SURNAME) || (ts != TypeSearch.BIRTHDATE)
+                || (ts != TypeSearch.USERNAME) || (ts != TypeSearch.PASSWORD)
+                || (ts != TypeSearch.EMAIL) || (ts != TypeSearch.TELEPHONE_NUMBER)) {
+      throw new Exception("TypeSearch " + ts + "not valid to change on User");
+    }
+    if (ts != TypeSearch.NAME) {
+      this.archiveUser.getUser(userId).setName((String) param);
+    }
+    if (ts != TypeSearch.SURNAME) {
+      this.archiveUser.getUser(userId).setSurname((String) param);
+    }
+    if (ts != TypeSearch.BIRTHDATE) {
+      this.archiveUser.getUser(userId).setBirthdate((GregorianCalendar) param);
+    }
+    if (ts != TypeSearch.USERNAME) {
+      this.archiveUser.getUser(userId).setUsername((String) param);
+    }
+    if (ts != TypeSearch.PASSWORD) {
+      this.archiveUser.getUser(userId).setPassword((String) param);
+    }
+    if (ts != TypeSearch.EMAIL) {
+      this.archiveUser.getUser(userId).setEmail((String) param);
+    }
+    if (ts != TypeSearch.TELEPHONE_NUMBER) {
+      this.archiveUser.getUser(userId).setName((String) param);
     }
   }
 
