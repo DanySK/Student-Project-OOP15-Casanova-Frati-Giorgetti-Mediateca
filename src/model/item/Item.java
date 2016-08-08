@@ -1,8 +1,5 @@
 package model.item;
 
-import java.util.List;
-import java.util.Set;
-
 /**
  * Item is the center interface of Book and Movie.
  *
@@ -10,18 +7,6 @@ import java.util.Set;
  *
  */
 public interface Item {
-
-  /**
-   *
-   * @return Item's publisher.
-   */
-  String getPublisher();
-
-  /**
-   *
-   * @return Item's current language
-   */
-  Language getCurrentLanguage();
 
   /**
    * hashCode function uses the Objects.hashCode( field1, field2, .. ) taken
@@ -40,84 +25,6 @@ public interface Item {
   boolean equals(final Object obj);
 
   /**
-   *
-   * @return Item's iD
-   */
-  int getiD();
-
-  /**
-   *
-   * @return Item's title
-   */
-  String getTitle();
-
-  /**
-   *
-   * @return Item's releaseYear
-   */
-  int getReleaseYear();
-
-  /**
-   *
-   * @return Item's author
-   */
-  String getAuthor();
-
-  /**
-   *
-   * @return Item's List of Review, if it is present.
-   */
-  List<ReviewImpl> getSetReview();
-
-  /**
-   *
-   * @return Item's number of like received.
-   */
-  int getLike();
-
-  /**
-   *
-   * @return a set of userId that like this item.
-   */
-  Set<Integer> getLikeUser();
-
-  /**
-   * @param title
-   *          the title to set
-   */
-  void setTitle(String title);
-
-  /**
-   * @param releaseYear
-   *          the releaseYear to set
-   */
-  void setReleaseYear(int releaseYear);
-
-  /**
-   * @param publisher
-   *          the publisher to set
-   */
-  void setPublisher(String publisher);
-
-  /**
-   * @param author
-   *          the author to set
-   */
-  void setAuthor(String author);
-
-  /**
-   * @param currentLanguage
-   *          the currentLanguage to set
-   */
-  void setCurrentLanguage(Language currentLanguage);
-
-  /**
-   * @param genre
-   *          the genre to set
-   */
-  void setGenre(ItemGenre genre);
-
-  /**
    * Add a review to the Item.
    *
    * @param rev
@@ -132,22 +39,5 @@ public interface Item {
    *          user's identifier that likes this item.
    */
   void addLike(final Integer userId);
-
-  /**
-   * Calculate the average of the review's vote.
-   */
-  void setAverageVote();
-
-  /**
-   *
-   * @return Item's average vote.
-   */
-  float getAverageVote();
-
-  /**
-   *
-   * @return Utem's genre.
-   */
-  ItemGenre getGenre();
 
 }
