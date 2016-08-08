@@ -6,13 +6,12 @@ import javax.swing.JPanel;
  * Interface of panel of user login.
  *
  * @author Luca
- *
  */
 public interface UserLogin {
 	/**
 	 * Method which returns the user login panel.
 	 *
-	 * @return panel of user login
+	 * @return userLoginPanel
 	 */
 	JPanel getUserLoginPanel();
 

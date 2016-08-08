@@ -10,6 +10,13 @@ package view;
 public interface View {
 
 	/**
+	 * method which change panel in the container by passing the panel name.
+	 *
+	 * @param panelName
+	 */
+	void swapView(String panelName);
+
+	/**
 	 *
 	 * method to invoke at the start of the program. It sets the main frame and
 	 * the starting screen
@@ -30,9 +37,21 @@ public interface View {
 
 	/**
 	 *
-	 * method which @return the word which the user wants to search.
+	 * method which @return the string user wants to search.
+	 */
+	String getSearchText();
+
+	/**
+	 *
+	 * method which @return the filter in which the user wants to search.
 	 */
 	String getSearchFilter();
+
+	/**
+	 *
+	 * method which @return the type (Book or Movie) the user wants o search in.
+	 */
+	String getItemFilter();
 
 	/**
 	 *
@@ -54,25 +73,13 @@ public interface View {
 
 	/**
 	 *
-	 * method which @return the id of borrowed by user.
-	 */
-	int getBorrowedItem();
-
-	/**
-	 *
-	 * method which @return the id of given back by user.
-	 */
-	int getGivenBackItem();
-
-	/**
-	 *
 	 * method which sets the list of available items.
 	 */
 	void setItemAvailabilityList();
 
 	/**
 	 *
-	 * method which @return informations from user registration.
+	 * method which returns informations from user registration.
 	 */
 	void getUserRegistration();
 
@@ -84,13 +91,13 @@ public interface View {
 
 	/**
 	 *
-	 * method which @return information from item creation.
+	 * method which returns information from item creation.
 	 */
 	void getAddedItem();
 
 	/**
 	 *
-	 * method which @return information from item removal.
+	 * method which returns information from item removal.
 	 */
 	void getRemovedItem();
 
@@ -105,4 +112,11 @@ public interface View {
 	 * method which sets the status of study room.
 	 */
 	void setStudyRoomStatus();
+
+	/**
+	 * method which borrow item.
+	 * 
+	 * @param selectedItem
+	 */
+	void borrowBook(String selectedItem);
 }
