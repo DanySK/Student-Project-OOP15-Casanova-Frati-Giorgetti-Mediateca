@@ -83,8 +83,8 @@ public class ModelImpl implements Serializable, Model {
               final String initPassword, final String initEmail, final String initTelephoneNumber,
               final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
                           throws Exception {
-    UserImpl u = new UserImpl(initName, initSurname, initBirthdate, initUsername, initPassword, initEmail,
-                initTelephoneNumber, initBookPref, initMoviePref);
+    UserImpl u = new UserImpl(initName, initSurname, initBirthdate, initUsername, initPassword,
+                initEmail, initTelephoneNumber, initBookPref, initMoviePref);
     this.archiveUser.addUser(u);
     this.setReccomandedList(u.getIdUser());
     System.out.println("User " + u.toString() + "adds to te archive.");
