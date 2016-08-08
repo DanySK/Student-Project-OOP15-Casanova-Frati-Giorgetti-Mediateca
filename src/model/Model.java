@@ -27,12 +27,14 @@ import model.user.UserImpl;
 public interface Model {
 
   /**
-   * This method @return the item archive in order to be serialized.
+   * This method can be used by MANAGER. This method @return the item archive in
+   * order to be serialized.
    */
   Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive();
 
   /**
-   * This method set the item archive in order to be (de)serialized.
+   * This method can be used by MANAGER. This method set the item archive in
+   * order to be (de)serialized.
    *
    * @param itemArchive
    *          item's archive.
@@ -42,12 +44,14 @@ public interface Model {
   void setItemArchive(Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive) throws Exception;
 
   /**
-   * This method @return the archiveUser in order to be serialized.
+   * This method can be used by MANAGER. This method @return the archiveUser in
+   * order to be serialized.
    */
   Map<Integer, UserImpl> getUserArchive();
 
   /**
-   * This method set the user archive in order to be (de)serialized.
+   * This method can be used by MANAGER.This method set the user archive in
+   * order to be (de)serialized.
    *
    * @param initArchiveUser
    *          the archiveUser to set
@@ -58,7 +62,8 @@ public interface Model {
   void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception;
 
   /**
-   * This method registers a user into the user archive and set its preferences.
+   * This method can be used by USER. This method registers a user into the user
+   * archive and set its preferences.
    *
    * @param initName
    *          user's name.
@@ -88,7 +93,8 @@ public interface Model {
                           throws Exception;
 
   /**
-   * This method removes the user with userId from the archive.
+   * This method can be used by USER, MANAGER. This method removes the user with
+   * userId from the archive.
    *
    * @param userId
    *          user's identifier.
@@ -98,7 +104,8 @@ public interface Model {
   void deleteUser(final int userId) throws Exception;
 
   /**
-   * This method registers the book into the item archive.
+   * This method can be used by MANAGER. This method registers the book into the
+   * item archive.
    *
    * @param initTitle
    *          item's title.
@@ -127,7 +134,8 @@ public interface Model {
                           throws Exception;
 
   /**
-   * This method registers the book into the item archive.
+   * This method can be used by MANAGER. This method registers the book into the
+   * item archive.
    *
    * @param initTitle
    *          item's title.
@@ -156,7 +164,8 @@ public interface Model {
               final Integer initNumCopy) throws Exception;
 
   /**
-   * This method removes an item from the archive.
+   * This method can be used by MANAGER. This method removes an item from the
+   * archive.
    *
    * @param itemId
    *          item's identifier.
@@ -166,7 +175,8 @@ public interface Model {
   void deleteItem(final int itemId) throws Exception;
 
   /**
-   * This method is used to associate a book with a user that borrow it.
+   * This method can be used by USER. This method is used to associate a book
+   * with a user that borrow it.
    *
    * @param itemId
    *          item's identifier.
@@ -179,7 +189,8 @@ public interface Model {
   void borrowItem(final int itemId, final int userId) throws Exception;
 
   /**
-   * This method is used to dissociate a book with a user that return it.
+   * This method can be used by USER. This method is used to dissociate a book
+   * with a user that return it.
    *
    * @param itemId
    *          item's identifier.
@@ -192,7 +203,8 @@ public interface Model {
   void returnItem(final int itemId, final int userId) throws Exception;
 
   /**
-   * This method adds a like to the itemId by userId.
+   * This method can be used by USER. This method adds a like to the itemId by
+   * userId.
    *
    * @param itemId
    *          item's identifier.
@@ -205,9 +217,10 @@ public interface Model {
   void addLike(final int itemId, final int userId) throws Exception;
 
   /**
-   * This method returns a set of integer which refer to every item contained
-   * into the archive. If you pass TypeItem.BOOK it return a set of books
-   * identifier. If you pass TypeItem.MOVIE it return a set of movie identifier.
+   * This method can be used by USER, MANAGER. This method returns a set of
+   * integer which refer to every item contained into the archive. If you pass
+   * TypeItem.BOOK it return a set of books identifier. If you pass
+   * TypeItem.MOVIE it return a set of movie identifier.
    *
    * @param type
    *          item's type
@@ -216,16 +229,17 @@ public interface Model {
   Set<Integer> getAllItemId(TypeItem type);
 
   /**
-   * This method returns a set of integer which refer to every user contained
-   * into the archive.
+   * This method can be used by MANAGER. This method returns a set of integer
+   * which refer to every user contained into the archive.
    *
    * @return a set of user identifier contained into the archive.
    */
   Set<Integer> getAllUserId();
 
   /**
-   * This method return a map with key the itemId and as value the difference of
-   * day between when the item was taken and today.
+   * This method can be used by USER, MANAGER. This method return a map with key
+   * the itemId and as value the difference of day between when the item was
+   * taken and today.
    *
    * @param userId
    *          user's identifier.
@@ -236,7 +250,8 @@ public interface Model {
   Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception;
 
   /**
-   * This method return true if userId hadn't return book on time.
+   * This method can be used by USER, MANAGER. This method return true if userId
+   * hadn't return book on time.
    *
    * @param userId
    *          user's identifier.
@@ -248,7 +263,8 @@ public interface Model {
   boolean blockUser(final Integer userId) throws Exception;
 
   /**
-   * This method adds a review to the different archives.
+   * This method can be used by USER. This method adds a review to the different
+   * archives.
    *
    * @param itemId
    *          item's identifier.
@@ -265,7 +281,8 @@ public interface Model {
               throws Exception;
 
   /**
-   * This method return the List of ReviewImpl added to the specific itemId.
+   * This method can be used by USER, MANAGER. This method return the List of
+   * ReviewImpl added to the specific itemId.
    *
    * @param itemId
    *          item'd identifier.
@@ -276,8 +293,8 @@ public interface Model {
   List<ReviewImpl> getAllItemReview(final Integer itemId) throws Exception;
 
   /**
-   * This method return a specific Item in the archive white item identifier ==
-   * itemId.
+   * This method can be used by USER, MANAGER. This method return a specific
+   * Item in the archive white item identifier == itemId.
    *
    * @param itemId
    *          item's identifier.
@@ -288,7 +305,8 @@ public interface Model {
   Item getRequiredItem(final Integer itemId) throws Exception;
 
   /**
-   * This method return a set of Book or Movie with respective Genre.
+   * This method can be used by USER, MANAGER. This method return a set of Book
+   * or Movie with respective Genre.
    *
    * @param type
    *          Item's type.
@@ -302,10 +320,11 @@ public interface Model {
   Set<Integer> filterItemGenre(final TypeItem type, final ItemGenre genre) throws Exception;
 
   /**
-   * This method return a set of itemId which required condition match with ts
-   * and param. It is possible to pass as the first param a Set of integer where
-   * search. If the set is NULL the method search in all the archive. In this
-   * way you can chain different filters.
+   * This method can be used by USER, MANAGER. This method return a set of
+   * itemId which required condition match with ts and param. It is possible to
+   * pass as the first param a Set of integer where search. If the set is NULL
+   * the method search in all the archive. In this way you can chain different
+   * filters.
    *
    * @param set
    *          set where search.
@@ -322,7 +341,8 @@ public interface Model {
               throws Exception;
 
   /**
-   * This method changes required setting of an item.
+   * This method can be used by MANAGER. This method changes required setting of
+   * an item.
    *
    * @param ts
    *          field to be changed.
@@ -336,7 +356,8 @@ public interface Model {
   void changeItem(final TypeSearch ts, final Integer itemId, final Object param) throws Exception;
 
   /**
-   * This method changes required setting of user.
+   * This method can be used by USER. This method changes required setting of
+   * user.
    *
    * @param ts
    *          field to be changed.
@@ -350,7 +371,8 @@ public interface Model {
   void changeUser(final TypeSearch ts, final Integer userId, final Object param) throws Exception;
 
   /**
-   * This method update all userId's recommended list of Book and Movie.
+   * This method can be used by USER, MANAGER. This method update all userId's
+   * recommended list of Book and Movie.
    *
    * @throws Exception
    *           in the case which there is problem to get user whit userId
@@ -359,7 +381,8 @@ public interface Model {
   void refreshRecommendedList() throws Exception;
 
   /**
-   * This method is used by the user to book a place into the StudyRoom.
+   * This method can be used by USER. This method is used by the user to book a
+   * place into the StudyRoom.
    *
    * @param day
    *          required.
@@ -374,9 +397,9 @@ public interface Model {
               throws Exception;
 
   /**
-   * This method is used by the user to remove himself from a specific sit into
-   * the study room. In the case which the day is not into the map, it will be
-   * anything.
+   * This method can be used by USER. This method is used by the user to remove
+   * himself from a specific sit into the study room. In the case which the day
+   * is not into the map, it will be anything.
    *
    * @param day
    *          to search.
@@ -392,13 +415,16 @@ public interface Model {
               throws Exception;
 
   /**
-   * This method return the system password for the 'mediatica' manager.
+   * This method can be used by MANAGER. This method return the system password
+   * for the 'mediatica' manager.
    *
    * @return system password.
    */
   String getSystemPassword();
 
   /**
+   * This method can be used by MANAGER, this method set the systemPassword.
+   *
    * @param systemPassword
    *          the systemPassword to set
    */
