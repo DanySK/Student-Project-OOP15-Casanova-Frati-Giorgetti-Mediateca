@@ -322,6 +322,20 @@ public interface Model {
               throws Exception;
 
   /**
+   * This method change some setting of an item.
+   *
+   * @param ts
+   *          field to be changed.
+   * @param itemId
+   *          item's identifier.
+   * @param param
+   *          to change in the Item.
+   * @throws Exception
+   *           in the which item is not in the archive or ts is not ok.
+   */
+  void changeItem(final TypeSearch ts, final Integer itemId, final Object param) throws Exception;
+
+  /**
    * This method update all userId's recommended list of Book and Movie.
    *
    * @throws Exception

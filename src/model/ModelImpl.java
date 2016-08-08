@@ -309,6 +309,35 @@ public class ModelImpl implements Serializable, Model {
     return r;
   }
 
+  @Override
+  public void changeItem(final TypeSearch ts, final Integer itemId, final Object param)
+              throws Exception {
+    if ((ts != TypeSearch.AUTHOR) || (ts != TypeSearch.TITLE) || (ts != TypeSearch.PUBLISHER)
+                || (ts != TypeSearch.RELEASE_YEAR) || (ts != TypeSearch.LANGUAGE)
+                || (ts != TypeSearch.GENRE)) {
+      throw new Exception("TypeSearch " + ts + "not valid to change");
+    }
+
+    if (ts == TypeSearch.TITLE) {
+      this.archiveItem.getItem(itemId).setTitle((String) param);
+    }
+    if (ts == TypeSearch.AUTHOR) {
+      this.archiveItem.getItem(itemId).setAuthor((String) param);
+    }
+    if (ts == TypeSearch.PUBLISHER) {
+      this.archiveItem.getItem(itemId).setPublisher((String) param);
+    }
+    if (ts == TypeSearch.RELEASE_YEAR) {
+      this.archiveItem.getItem(itemId).setReleaseYear((int) param);
+    }
+    if (ts == TypeSearch.LANGUAGE) {
+      this.archiveItem.getItem(itemId).setCurrentLanguage((Language) param);
+    }
+    if (ts == TypeSearch.GENRE) {
+      this.archiveItem.getItem(itemId).setGenre((ItemGenre) param);
+    }
+  }
+
   private void setReccomandedList(final Integer userId) throws Exception {
     List<ItemGenre> prefGenMovie = new LinkedList<>(
                 this.archiveUser.getUser(userId).getMoviePreferences());
