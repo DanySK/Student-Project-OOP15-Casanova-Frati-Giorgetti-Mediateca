@@ -35,8 +35,8 @@ public class ModelImpl implements Serializable, Model {
 
   private static final long serialVersionUID = -8370710936091204583L;
   private static final int MAX_DAY = 60;
-  private ArchiveImpl archiveItem = ArchiveImpl.getArchiveImpl();
-  private ArchiveUserImpl archiveUser = ArchiveUserImpl.getArchiveImpl();
+  private ArchiveImpl archiveItem;
+  private ArchiveUserImpl archiveUser;
   private StudyRoom studyRoom = new StudyRoom();
   private String systemPassword = "FmAlchemist";
 
@@ -44,6 +44,25 @@ public class ModelImpl implements Serializable, Model {
    * Empty constructor.
    */
   public ModelImpl() {
+    this.archiveItem = ArchiveImpl.getArchiveImpl();
+    this.archiveUser = ArchiveUserImpl.getArchiveImpl();
+  }
+
+  /**
+   * Constructor that must be used in the case which there is already archive
+   * files saved.
+   *
+   * @param initItemArchive
+   *          Item archive saved in the file in order to be deserialized.
+   * @param initArchiveUser
+   *          User archive saved in the file in order to be deserialized.
+   * @throws Exception
+   *           in the case which singleton already exist.
+   */
+  public ModelImpl(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive,
+              final Map<Integer, UserImpl> initArchiveUser) throws Exception {
+    this.setItemArchive(initItemArchive);
+    this.setUserArchive(initArchiveUser);
   }
 
   /**
