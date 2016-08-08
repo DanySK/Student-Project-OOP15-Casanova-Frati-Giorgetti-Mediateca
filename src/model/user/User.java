@@ -23,10 +23,10 @@ public interface User {
   /**
    * This method adds to the wishlist the required itemId.
    *
-   * @param initWhishList
+   * @param initWishList
    *          the whishList to set.
    */
-  void addToWhishList(final Integer initWhishList);
+  void addToWishList(final Integer initWishList);
 
   /**
    * This method adds an itemId to the user's map.
