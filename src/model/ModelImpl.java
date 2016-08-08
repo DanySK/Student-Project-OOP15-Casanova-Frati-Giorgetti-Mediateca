@@ -54,7 +54,7 @@ public class ModelImpl implements Serializable, Model {
     /**
      *
      */
-    TITLE, AUTHOR, PUBLISHER, RELEASE_YEAR
+    TITLE, AUTHOR, PUBLISHER, RELEASE_YEAR, LANGUAGE, GENRE
   }
 
   @Override
@@ -261,9 +261,10 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public Set<Integer> filterItem(final Optional<Set<Integer>> set, final TypeSearch ts,
-              final String param) throws Exception {
+              final Object param) throws Exception {
     if ((ts != TypeSearch.AUTHOR) || (ts != TypeSearch.TITLE) || (ts != TypeSearch.PUBLISHER)
-                || (ts != TypeSearch.RELEASE_YEAR)) {
+                || (ts != TypeSearch.RELEASE_YEAR) || (ts != TypeSearch.LANGUAGE)
+                || (ts != TypeSearch.GENRE)) {
       throw new Exception("TypeSearch " + ts + "not valid");
     }
     Set<Integer> all = new HashSet<>();
@@ -290,8 +291,17 @@ public class ModelImpl implements Serializable, Model {
         }
       }
       if (ts == TypeSearch.RELEASE_YEAR) {
-        Integer num = Integer.parseInt(param);
-        if (num.equals(this.archiveItem.getItem(i).getReleaseYear())) {
+        if (this.archiveItem.getItem(i).getReleaseYear() == (int) param) {
+          r.add(i);
+        }
+      }
+      if (ts == TypeSearch.LANGUAGE) {
+        if (this.archiveItem.getItem(i).getCurrentLanguage().equals(param)) {
+          r.add(i);
+        }
+      }
+      if (ts == TypeSearch.GENRE) {
+        if (this.archiveItem.getItem(i).getGenre().equals(param)) {
           r.add(i);
         }
       }
