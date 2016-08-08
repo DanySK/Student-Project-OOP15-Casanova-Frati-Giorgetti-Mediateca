@@ -16,8 +16,9 @@ public final class Application {
 	 *
 	 * @param args
 	 *            Arguments passed to the main method
+	 * @throws Exception
 	 */
-	public static void main(final String[] args) {
+	public static void main(final String[] args) throws Exception {
 		// application starter
 		final Model m = new ModelImpl();
 		final Controller c = new ControllerImpl(m);

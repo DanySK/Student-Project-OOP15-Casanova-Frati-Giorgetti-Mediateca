@@ -43,19 +43,20 @@ public class FileManager {
 	 * @throws IOException
 	 */
 	public void write(final String fileName, final Model model) throws IOException {
-
 		File myFile = new File(fileName);
 		if (!myFile.exists()) {
 			myFile.createNewFile();
 		}
-
 		FileOutputStream fos = new FileOutputStream(this.path + "\\res\\" + fileName);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
-		oos.writeObject(model);
+		if (fileName.contains("utenti")) {
+			oos.writeObject(model.getUserArchive());
+		} else {
+			oos.writeObject(model.getItemArchive());
+		}
 		oos.close();
 	}
 
-	@SuppressWarnings("unchecked")
 	public void read(final String fileName, final Model model) throws IOException, FileNotFoundException {
 		try {
 			FileInputStream fin = new FileInputStream(this.path + "\\res\\" + fileName);

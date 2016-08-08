@@ -1,7 +1,5 @@
 package controller;
 
-import javax.swing.text.View;
-
 /**
  * Interface for a generic controller.
  *
@@ -24,11 +22,12 @@ public interface Controller {
 	/**
 	 * Method who sets the View for the Controller.
 	 *
-	 * @param inputView
+	 * @param v
 	 *            view requested by the controller
 	 *
 	 */
-	void setView(View inputView);
+	void setView(view.View v);
 
-	void login(Integer userId, String password);
+	void login(String username, String password);
+
 }
