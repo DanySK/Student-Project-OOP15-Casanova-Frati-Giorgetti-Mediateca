@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -184,6 +185,12 @@ public class ModelImpl implements Serializable, Model {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive\n");
     }
+  }
+
+  @Override
+  public List<ReviewImpl> getAllItemReview(final Integer itemId) throws Exception {
+    return (List<ReviewImpl>) Collections
+                .unmodifiableCollection(this.archiveItem.getItem(itemId).getSetReview());
   }
 
   @Override

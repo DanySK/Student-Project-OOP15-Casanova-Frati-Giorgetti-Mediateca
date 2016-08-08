@@ -14,6 +14,7 @@ import model.item.ItemGenre;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
 import model.item.Language;
+import model.item.ReviewImpl;
 import model.user.UserImpl;
 
 /**
@@ -262,6 +263,17 @@ public interface Model {
    */
   void addReview(final Integer itemId, final Integer userId, final Integer vote, final String note)
               throws Exception;
+
+  /**
+   * This method return the List of ReviewImpl added to the specific itemId.
+   *
+   * @param itemId
+   *          item'd identifier.
+   * @return List<ReviewImpl>.
+   * @throws Exception
+   *           in the case which item is not into the archive.
+   */
+  List<ReviewImpl> getAllItemReview(final Integer itemId) throws Exception;
 
   /**
    * This method return a specific Item in the archive white item identifier ==
