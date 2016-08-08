@@ -4,11 +4,20 @@ package view;
  *
  * Interface for the view. It defines methods which can be used by the
  * controller.
- * 
+ *
  * @author Luca Giorgetti
  */
 public interface View {
+
 	/**
+	 *
+	 * method to invoke at the start of the program. It sets the main frame and
+	 * the starting screen
+	 */
+	void startView();
+
+	/**
+	 *
 	 * method which @return the typed Username in login.
 	 */
 	String getUsername();

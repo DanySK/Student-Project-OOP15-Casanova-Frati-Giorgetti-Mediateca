@@ -35,6 +35,8 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.passwordTextArea.setRows(1);
 		this.passwordTextArea.setBounds(322, 199, 181, 25);
 		this.backToSelectAccount = new JButton("Torna alla scelta");
+		this.backToSelectAccount.addActionListener(arg0 -> {
+		});
 		this.backToSelectAccount.setBounds(626, 362, 162, 25);
 		this.userLoginPanel.setSize(800, 400);
 		this.userLoginPanel.setLayout(null);
