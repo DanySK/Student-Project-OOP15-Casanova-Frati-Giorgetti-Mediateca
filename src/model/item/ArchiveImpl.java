@@ -117,6 +117,15 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
+  public ItemInfo getItemInfo(final Integer itemId) throws Exception {
+    if (this.containsItem(itemId)) {
+      return ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond();
+    } else {
+      throw new Exception("Item " + itemId + "is not in the archive.");
+    }
+  }
+
+  @Override
   public void removeItem(final Integer itemId) throws Exception {
     if (this.containsItem(itemId)) {
       ArchiveImpl.singleton.getItemArchive().remove(itemId);

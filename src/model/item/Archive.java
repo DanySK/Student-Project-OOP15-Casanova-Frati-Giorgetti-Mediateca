@@ -71,6 +71,18 @@ public interface Archive {
   Item getItem(final Integer itemId) throws Exception;
 
   /**
+   * This method return the info about item's required.
+   *
+   * @param itemId
+   *          item's identifier.
+   * @return item's info.
+   * @throws Exception
+   *           in the case which item is not into the archive.
+   *
+   */
+  ItemInfo getItemInfo(final Integer itemId) throws Exception;
+
+  /**
    * This method removes a ItemImpl from the archive.
    *
    * @param id

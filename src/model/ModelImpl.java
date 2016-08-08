@@ -142,9 +142,13 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void borrowItem(final int itemId, final int userId) throws Exception {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
-      this.archiveItem.addUser(itemId, userId);
-      this.archiveUser.getUser(userId).addItem(itemId);
-      System.out.println("UserId " + userId + "takes itemId " + itemId);
+      if (this.archiveItem.getItemInfo(itemId).isAvailable()) {
+        this.archiveItem.addUser(itemId, userId);
+        this.archiveUser.getUser(userId).addItem(itemId);
+        System.out.println("UserId " + userId + "takes itemId " + itemId);
+      } else {
+        System.out.println(itemId + " not available.");
+      }
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive");
@@ -179,8 +183,13 @@ public class ModelImpl implements Serializable, Model {
               final String note) throws Exception {
     ReviewImpl rev = new ReviewImpl(vote, note);
     if (this.archiveUser.contains(userId) && this.archiveItem.containsItem(itemId)) {
-      this.archiveUser.getUser(userId).setItemReview(itemId, (int) rev.getId());
-      this.archiveItem.getItem(itemId).addReview(rev);
+      if (this.archiveUser.getUser(userId).getLoanArchive().containsKey(itemId)) {
+        this.archiveUser.getUser(userId).setItemReview(itemId, (int) rev.getId());
+        this.archiveItem.getItem(itemId).addReview(rev);
+        System.out.println(rev.toString() + " adds.");
+      } else {
+        throw new Exception("ItemId: " + itemId + " not loaned to " + userId + " userId\n");
+      }
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive\n");

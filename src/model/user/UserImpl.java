@@ -39,6 +39,16 @@ public class UserImpl implements Serializable, User {
   private List<ItemGenre> bookPreferences = new LinkedList<>();
   private List<ItemGenre> moviePreferences = new LinkedList<>();
 
+  @Override
+  public String toString() {
+    return "UserImpl [name=" + this.name + ", surname=" + this.surname + ", birthdate="
+                + this.birthdate + ", username=" + this.username + ", password=" + this.password
+                + ", idUser=" + this.idUser + ", email=" + this.email + ", telephoneNumber="
+                + this.telephoneNumber + ", loanArchive=" + this.loanArchive + ", wishList="
+                + this.wishList + ", recommendedList=" + this.recommendedList + ", bookPreferences="
+                + this.bookPreferences + ", moviePreferences=" + this.moviePreferences + "]";
+  }
+
   /**
    * User constructor.
    *
