@@ -189,8 +189,8 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public List<ReviewImpl> getAllItemReview(final Integer itemId) throws Exception {
-    return (List<ReviewImpl>) Collections
-                .unmodifiableCollection(this.archiveItem.getItem(itemId).getSetReview());
+    return (List<ReviewImpl>) Collections.unmodifiableCollection(
+                ((ItemImpl) this.archiveItem.getItem(itemId)).getSetReview());
   }
 
   @Override
@@ -252,7 +252,7 @@ public class ModelImpl implements Serializable, Model {
       throw new Exception("TypeItem " + t + "not valid");
     }
     for (Integer i : all) {
-      if (this.archiveItem.getItem(i).getGenre().equals(b)) {
+      if (((ItemImpl) this.archiveItem.getItem(i)).getGenre().equals(b)) {
         r.add(i);
       }
     }
@@ -276,32 +276,32 @@ public class ModelImpl implements Serializable, Model {
     all.addAll(this.getAllItemId(TypeItem.MOVIE));
     for (Integer i : all) {
       if (ts == TypeSearch.TITLE) {
-        if (this.archiveItem.getItem(i).getTitle().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getTitle().equals(param)) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.AUTHOR) {
-        if (this.archiveItem.getItem(i).getAuthor().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor().equals(param)) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.PUBLISHER) {
-        if (this.archiveItem.getItem(i).getPublisher().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher().equals(param)) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.RELEASE_YEAR) {
-        if (this.archiveItem.getItem(i).getReleaseYear() == (int) param) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getReleaseYear() == (int) param) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.LANGUAGE) {
-        if (this.archiveItem.getItem(i).getCurrentLanguage().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getCurrentLanguage().equals(param)) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.GENRE) {
-        if (this.archiveItem.getItem(i).getGenre().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getGenre().equals(param)) {
           r.add(i);
         }
       }
@@ -319,22 +319,22 @@ public class ModelImpl implements Serializable, Model {
     }
 
     if (ts == TypeSearch.TITLE) {
-      this.archiveItem.getItem(itemId).setTitle((String) param);
+      ((ItemImpl) this.archiveItem.getItem(itemId)).setTitle((String) param);
     }
     if (ts == TypeSearch.AUTHOR) {
-      this.archiveItem.getItem(itemId).setAuthor((String) param);
+      ((ItemImpl) this.archiveItem.getItem(itemId)).setAuthor((String) param);
     }
     if (ts == TypeSearch.PUBLISHER) {
-      this.archiveItem.getItem(itemId).setPublisher((String) param);
+      ((ItemImpl) this.archiveItem.getItem(itemId)).setPublisher((String) param);
     }
     if (ts == TypeSearch.RELEASE_YEAR) {
-      this.archiveItem.getItem(itemId).setReleaseYear((int) param);
+      ((ItemImpl) this.archiveItem.getItem(itemId)).setReleaseYear((int) param);
     }
     if (ts == TypeSearch.LANGUAGE) {
-      this.archiveItem.getItem(itemId).setCurrentLanguage((Language) param);
+      ((ItemImpl) this.archiveItem.getItem(itemId)).setCurrentLanguage((Language) param);
     }
     if (ts == TypeSearch.GENRE) {
-      this.archiveItem.getItem(itemId).setGenre((ItemGenre) param);
+      ((ItemImpl) this.archiveItem.getItem(itemId)).setGenre((ItemGenre) param);
     }
   }
 
@@ -382,7 +382,7 @@ public class ModelImpl implements Serializable, Model {
         Integer start = 0;
         Integer best = 0;
         for (Integer v : all) {
-          if (this.archiveItem.getItem(v).getAverageVote() > start) {
+          if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() > start) {
             best = v;
           }
         }
@@ -396,7 +396,7 @@ public class ModelImpl implements Serializable, Model {
         Integer start = 0;
         Integer best = 0;
         for (Integer v : all) {
-          if (this.archiveItem.getItem(v).getAverageVote() > start) {
+          if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() > start) {
             best = v;
           }
         }

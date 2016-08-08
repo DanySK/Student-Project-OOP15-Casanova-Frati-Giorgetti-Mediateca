@@ -83,15 +83,15 @@ public class UserImpl implements Serializable, User {
   }
 
   /**
-   * @return the whishList.
+   * @return the wishList.
    */
-  public List<Integer> getWhishList() {
+  public List<Integer> getWishlist() {
     return Collections.unmodifiableList(this.wishList);
   }
 
   @Override
-  public void addToWhishList(final Integer initWhishList) {
-    this.wishList.add(initWhishList);
+  public void addToWishList(final Integer initWishList) {
+    this.wishList.add(initWishList);
   }
 
   /**
