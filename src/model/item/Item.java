@@ -11,107 +11,143 @@ import java.util.Set;
  */
 public interface Item {
 
-    /**
-     *
-     * @return Item's publisher.
-     */
-    String getPublisher();
+  /**
+   *
+   * @return Item's publisher.
+   */
+  String getPublisher();
 
-    /**
-     *
-     * @return Item's current language
-     */
-    Language getCurrentLanguage();
+  /**
+   *
+   * @return Item's current language
+   */
+  Language getCurrentLanguage();
 
-    /**
-     * hashCode function uses the Objects.hashCode( field1, field2, .. ) taken
-     * from Google Guava.
-     */
-    @Override
-    int hashCode();
+  /**
+   * hashCode function uses the Objects.hashCode( field1, field2, .. ) taken
+   * from Google Guava.
+   */
+  @Override
+  int hashCode();
 
-    /**
-     * equals function uses Object.equal(obj1, obj2) taken from Google Guava.
-     *
-     * @param obj
-     * @return
-     */
-    @Override
-    boolean equals(final Object obj);
+  /**
+   * equals function uses Object.equal(obj1, obj2) taken from Google Guava.
+   *
+   * @param obj
+   * @return
+   */
+  @Override
+  boolean equals(final Object obj);
 
-    /**
-     *
-     * @return Item's iD
-     */
-    int getiD();
+  /**
+   *
+   * @return Item's iD
+   */
+  int getiD();
 
-    /**
-     *
-     * @return Item's title
-     */
-    String getTitle();
+  /**
+   *
+   * @return Item's title
+   */
+  String getTitle();
 
-    /**
-     *
-     * @return Item's releaseYear
-     */
-    int getReleaseYear();
+  /**
+   *
+   * @return Item's releaseYear
+   */
+  int getReleaseYear();
 
-    /**
-     *
-     * @return Item's author
-     */
-    String getAuthor();
+  /**
+   *
+   * @return Item's author
+   */
+  String getAuthor();
 
-    /**
-     *
-     * @return Item's List of Review, if it is present.
-     */
-    List<ReviewImpl> getSetReview();
+  /**
+   *
+   * @return Item's List of Review, if it is present.
+   */
+  List<ReviewImpl> getSetReview();
 
-    /**
-     *
-     * @return Item's number of like received.
-     */
-    int getLike();
+  /**
+   *
+   * @return Item's number of like received.
+   */
+  int getLike();
 
-    /**
-     *
-     * @return a set of userId that like this item.
-     */
-    Set<Integer> getLikeUser();
+  /**
+   *
+   * @return a set of userId that like this item.
+   */
+  Set<Integer> getLikeUser();
 
-    /**
-     * Add a review to the Item.
-     *
-     * @param rev
-     *            in order to add this review to the item's set
-     */
-    void addReview(ReviewImpl rev);
+  /**
+   * @param title
+   *          the title to set
+   */
+  void setTitle(String title);
 
-    /**
-     * Add userId to set of like to the Item.
-     *
-     * @param userId
-     *            user's identifier that likes this item.
-     */
-    void addLike(final Integer userId);
+  /**
+   * @param releaseYear
+   *          the releaseYear to set
+   */
+  void setReleaseYear(int releaseYear);
 
-    /**
-     * Calculate the average of the review's vote.
-     */
-    void setAverageVote();
+  /**
+   * @param publisher
+   *          the publisher to set
+   */
+  void setPublisher(String publisher);
 
-    /**
-     *
-     * @return Item's average vote.
-     */
-    float getAverageVote();
+  /**
+   * @param author
+   *          the author to set
+   */
+  void setAuthor(String author);
 
-    /**
-     *
-     * @return Utem's genre.
-     */
-    ItemGenre getGenre();
+  /**
+   * @param currentLanguage
+   *          the currentLanguage to set
+   */
+  void setCurrentLanguage(Language currentLanguage);
+
+  /**
+   * @param genre
+   *          the genre to set
+   */
+  void setGenre(ItemGenre genre);
+
+  /**
+   * Add a review to the Item.
+   *
+   * @param rev
+   *          in order to add this review to the item's set
+   */
+  void addReview(ReviewImpl rev);
+
+  /**
+   * Add userId to set of like to the Item.
+   *
+   * @param userId
+   *          user's identifier that likes this item.
+   */
+  void addLike(final Integer userId);
+
+  /**
+   * Calculate the average of the review's vote.
+   */
+  void setAverageVote();
+
+  /**
+   *
+   * @return Item's average vote.
+   */
+  float getAverageVote();
+
+  /**
+   *
+   * @return Utem's genre.
+   */
+  ItemGenre getGenre();
 
 }

@@ -23,11 +23,11 @@ public class ItemImpl implements Item, Serializable {
    */
   private static final long serialVersionUID = 7331548557628545541L;
   private final int iD;
-  private final String title;
-  private final int releaseYear;
-  private final String publisher;
-  private final String author;
-  private final Language currentLanguage;
+  private String title;
+  private int releaseYear;
+  private String publisher;
+  private String author;
+  private Language currentLanguage;
   private List<ReviewImpl> setReview = new LinkedList<ReviewImpl>();
   private Set<Integer> like;
   private ItemGenre genre;
@@ -64,20 +64,6 @@ public class ItemImpl implements Item, Serializable {
     this.iD = this.hashCode();
     this.genre = initGenre;
   }
-
-  /*
-   * Item's constructors whit starter initialization starting from an ItemImpl,
-   * it's used in the method where I have to return a copy of an Item.
-   *
-   * @param initItem item.
-   *
-   * public ItemImpl(final Item initItem) { this.title = initItem.getTitle();
-   * this.releaseYear = initItem.getReleaseYear(); this.publisher =
-   * initItem.getPublisher(); this.author = initItem.getAuthor();
-   * this.currentLanguage = initItem.getCurrentLanguage(); this.like =
-   * initItem.getLikeUser(); this.averageVote = initItem.getAverageVote();
-   * this.iD = initItem.getiD(); this.genre = initItem.getGenre(); }
-   */
 
   @Override
   public String toString() {
@@ -140,6 +126,36 @@ public class ItemImpl implements Item, Serializable {
   @Override
   public ItemGenre getGenre() {
     return this.genre;
+  }
+
+  @Override
+  public void setTitle(final String initTitle) {
+    this.title = initTitle;
+  }
+
+  @Override
+  public void setReleaseYear(final int initReleaseYear) {
+    this.releaseYear = initReleaseYear;
+  }
+
+  @Override
+  public void setPublisher(final String initPublisher) {
+    this.publisher = initPublisher;
+  }
+
+  @Override
+  public void setAuthor(final String initAuthor) {
+    this.author = initAuthor;
+  }
+
+  @Override
+  public void setCurrentLanguage(final Language initCurrentLanguage) {
+    this.currentLanguage = initCurrentLanguage;
+  }
+
+  @Override
+  public void setGenre(final ItemGenre initGenre) {
+    this.genre = initGenre;
   }
 
   @Override
