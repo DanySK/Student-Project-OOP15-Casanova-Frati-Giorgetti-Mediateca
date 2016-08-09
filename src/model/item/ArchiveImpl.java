@@ -104,7 +104,6 @@ public final class ArchiveImpl implements Serializable, Archive {
     } else {
       throw new Exception("Item " + itemId + " is not in the archive.");
     }
-
   }
 
   @Override

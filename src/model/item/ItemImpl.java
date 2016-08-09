@@ -168,7 +168,7 @@ public class ItemImpl implements Item, Serializable {
    *          item's title.
    */
   public void setTitle(final String initTitle) {
-    this.title = initTitle;
+    this.title = initTitle.toUpperCase();
   }
 
   /**

@@ -33,14 +33,15 @@ public interface Archive {
   Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive();
 
   /**
-   * This function adds an ItemImpl to the archive.
+   * This function adds an ItemImpl to the archive. If the Item is already
+   * presenti in the archive, the amount will be increase of initNumCopy.
    *
    * @param i
    *          Book or Movie to add to the archive.
    * @param initNumCopy
    *          Book or Movie number copies
    * @throws Exception
-   *           in the case which initNumCopy < 0 or item not in the archive.
+   *           in the case which initNumCopy < 0.
    *
    */
   void addItem(final ItemImpl i, final Integer initNumCopy) throws Exception;

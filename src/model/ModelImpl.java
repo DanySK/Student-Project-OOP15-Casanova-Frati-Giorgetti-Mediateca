@@ -373,9 +373,9 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void changeItem(final TypeSearch ts, final Integer itemId, final Object param)
               throws Exception {
-    if ((ts != TypeSearch.AUTHOR) || (ts != TypeSearch.TITLE) || (ts != TypeSearch.PUBLISHER)
-                || (ts != TypeSearch.RELEASE_YEAR) || (ts != TypeSearch.LANGUAGE)
-                || (ts != TypeSearch.GENRE)) {
+    if ((ts != TypeSearch.AUTHOR) && (ts != TypeSearch.TITLE) && (ts != TypeSearch.PUBLISHER)
+                && (ts != TypeSearch.RELEASE_YEAR) && (ts != TypeSearch.LANGUAGE)
+                && (ts != TypeSearch.GENRE)) {
       throw new Exception("TypeSearch " + ts + "not valid to change on item");
     }
 
@@ -402,9 +402,9 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void changeUser(final TypeSearch ts, final Integer userId, final Object param)
               throws Exception {
-    if ((ts != TypeSearch.NAME) || (ts != TypeSearch.SURNAME) || (ts != TypeSearch.BIRTHDATE)
-                || (ts != TypeSearch.USERNAME) || (ts != TypeSearch.PASSWORD)
-                || (ts != TypeSearch.EMAIL) || (ts != TypeSearch.TELEPHONE_NUMBER)) {
+    if ((ts != TypeSearch.NAME) && (ts != TypeSearch.SURNAME) && (ts != TypeSearch.BIRTHDATE)
+                && (ts != TypeSearch.USERNAME) && (ts != TypeSearch.PASSWORD)
+                && (ts != TypeSearch.EMAIL) && (ts != TypeSearch.TELEPHONE_NUMBER)) {
       throw new Exception("TypeSearch " + ts + "not valid to change on User");
     }
     if (ts != TypeSearch.NAME) {
