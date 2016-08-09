@@ -198,7 +198,7 @@ public class ItemImpl implements Item, Serializable {
    *          item's author.
    */
   public void setAuthor(final String initAuthor) {
-    this.author = initAuthor;
+    this.author = initAuthor.toUpperCase();
   }
 
   /**
