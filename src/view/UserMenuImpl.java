@@ -10,7 +10,6 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	final private JButton exitProgram;
 	private JLabel mainLabel;
 	private JButton bookServices;
-	private JButton filmServices;
 	private JButton studyRoomServices;
 	private JButton accountSettings;
 
@@ -28,8 +27,6 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		this.exitProgram.setBounds(436, 228, 153, 38);
 		this.bookServices = new JButton("Biblioteca");
 		this.bookServices.setBounds(296, 60, 163, 108);
-		this.filmServices = new JButton("Mediateca");
-		this.filmServices.setBounds(92, 60, 170, 108);
 		this.studyRoomServices = new JButton("Sala studio");
 		this.studyRoomServices.setBounds(501, 60, 163, 108);
 		this.accountSettings = new JButton("Impostazioni Account");
@@ -38,14 +35,12 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		this.UserMenuPanel.setSize(screenLenght, screenWidth);
 		this.UserMenuPanel.add(this.mainLabel);
 		this.UserMenuPanel.add(this.bookServices);
-		this.UserMenuPanel.add(this.filmServices);
 		this.UserMenuPanel.add(this.studyRoomServices);
 		this.UserMenuPanel.add(this.exitProgram);
 		this.UserMenuPanel.add(this.accountSettings);
 		this.exitProgram.addActionListener(e -> System.exit(0));
 		this.bookServices.addActionListener(e -> this.toViewClass
 				.swapView("Book Panel"));
-		// this.filmServices.addActionListener(e -> );
 		// this.studyRoomServices.addActionListener(e -> );
 		// this.accountSettings.addActionListener(e -> );
 

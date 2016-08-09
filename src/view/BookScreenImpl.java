@@ -12,15 +12,18 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 	private static final int ELEMENTS_TO_SHOW = 25;
 	private final JPanel bookMenuPanel = new JPanel();
 	private View toViewClass = new ViewImpl();
+	private ReviewScreen toReview = new ReviewScreenImpl();
+	private BorrowedScreen toBorrowed = new BorrowedScreenImpl();
 	private final JLabel mainLabel;
-	private final JButton borrowBook;
-	private final JButton giveBackBook;
-	private final JButton reviewBook;
-	private final JButton seeBorrowedBook;
+	private final JButton borrowItem;
+	private final JButton giveBackItem;
+	private final JButton likeItem;
+	private final JButton seeBorrowedItem;
 	private final JTextField searchField;
 	private final JComboBox filterSelect;
 	private final JComboBox itemSelect;
 	private final JButton search;
+	private final JButton review;
 	private String textToSearch;
 	private String selectedFilter;
 	private String itemType;
@@ -32,15 +35,15 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 		this.mainLabel = new JLabel(
 				"Benvenuto nell'area Biblioteca, premi un pulsante");
 		this.mainLabel.setBounds(21, 9, 281, 16);
-		this.giveBackBook = new JButton("Restituisci Libro");
-		this.giveBackBook.setBounds(302, 133, 136, 25);
-		this.reviewBook = new JButton("Recensisci Libro");
-		this.reviewBook.setBounds(302, 160, 136, 25);
-		this.seeBorrowedBook = new JButton("Libri in prestito");
-		this.seeBorrowedBook.setBounds(302, 230, 136, 25);
+		this.giveBackItem = new JButton("Restituisci ");
+		this.giveBackItem.setBounds(302, 133, 136, 25);
+		this.likeItem = new JButton("Mi Piace");
+		this.likeItem.setBounds(302, 187, 136, 25);
+		this.seeBorrowedItem = new JButton("In prestito");
+		this.seeBorrowedItem.setBounds(302, 236, 136, 25);
 		this.bookMenuPanel.setLayout(null);
-		this.borrowBook = new JButton("Prendi Libro");
-		this.borrowBook.setBounds(302, 106, 136, 25);
+		this.borrowItem = new JButton("Prendi ");
+		this.borrowItem.setBounds(302, 106, 136, 25);
 		this.searchField = new JTextField();
 		this.searchField.setText("Inserisci una o pi\u00F9 parole da cercare");
 		this.searchField.setBounds(21, 67, 269, 22);
@@ -58,17 +61,20 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 		this.FilteredList = new JList();
 		this.FilteredList.setVisibleRowCount(BookScreenImpl.ELEMENTS_TO_SHOW);
 		this.FilteredList.setBounds(21, 106, 269, 181);
+		this.review = new JButton("Recensisci");
+		this.review.setBounds(302, 160, 136, 25);
 
-		this.bookMenuPanel.add(this.borrowBook);
+		this.bookMenuPanel.add(this.borrowItem);
 		this.bookMenuPanel.add(this.mainLabel);
-		this.bookMenuPanel.add(this.giveBackBook);
-		this.bookMenuPanel.add(this.reviewBook);
-		this.bookMenuPanel.add(this.seeBorrowedBook);
+		this.bookMenuPanel.add(this.giveBackItem);
+		this.bookMenuPanel.add(this.likeItem);
+		this.bookMenuPanel.add(this.seeBorrowedItem);
 		this.bookMenuPanel.add(this.searchField);
 		this.bookMenuPanel.add(this.search);
 		this.bookMenuPanel.add(this.backToMenu);
 		this.bookMenuPanel.add(this.itemSelect);
 		this.bookMenuPanel.add(this.FilteredList);
+		this.bookMenuPanel.add(this.review);
 
 		this.backToMenu.addActionListener(e -> this.toViewClass
 				.swapView("Menu Panel"));
@@ -77,9 +83,20 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 		this.itemType = (String) this.itemSelect.getSelectedItem();
 		this.itemSelectedFromList = (String) this.FilteredList
 				.getSelectedValue();
-		this.borrowBook.addActionListener(e -> this.toViewClass
-				.borrowBook(this.itemSelectedFromList));
-
+		this.borrowItem.addActionListener(e -> this.toViewClass
+				.borrowItem(this.itemSelectedFromList));
+		this.giveBackItem.addActionListener(e -> this.toViewClass
+				.giveBackItem(this.itemSelectedFromList));
+		this.likeItem.addActionListener(e -> this.toViewClass
+				.likeItem(this.itemSelectedFromList));
+		this.review.addActionListener(e -> {
+			this.toViewClass.reviewItem(this.itemSelectedFromList);
+			this.toReview.startReviewScreen();
+		});
+		this.seeBorrowedItem.addActionListener(e -> {
+			this.toViewClass.setBorrowedItemList();
+			this.toBorrowed.startBorrowedScreen();
+		});
 	}
 
 	@Override

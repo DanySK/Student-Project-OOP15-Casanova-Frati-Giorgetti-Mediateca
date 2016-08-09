@@ -1,5 +1,7 @@
 package view;
 
+import java.util.List;
+
 /**
  *
  * Interface for the view. It defines methods which can be used by the
@@ -54,6 +56,13 @@ public interface View {
 	String getItemFilter();
 
 	/**
+	 * method which returns the score typed by user.
+	 *
+	 * @return
+	 */
+	int getScore();
+
+	/**
 	 *
 	 * method which @return the review typed by the user.
 	 */
@@ -68,8 +77,10 @@ public interface View {
 	/**
 	 *
 	 * method which sets the list of items borrowed by user.
+	 *
+	 * @return
 	 */
-	void setBorrowedItemList();
+	List setBorrowedItemList();
 
 	/**
 	 *
@@ -115,8 +126,30 @@ public interface View {
 
 	/**
 	 * method which borrow item.
-	 * 
+	 *
 	 * @param selectedItem
 	 */
-	void borrowBook(String selectedItem);
+	void borrowItem(String selectedItem);
+
+	/**
+	 * method which give back item.
+	 *
+	 * @param selectedItem
+	 */
+	void giveBackItem(String selectedItem);
+
+	/**
+	 * method which review item.
+	 *
+	 * @param selectedItem
+	 */
+	void reviewItem(String selecetedItem);
+
+	/**
+	 * method which puts user's like to item.
+	 *
+	 * @param selectedItem
+	 */
+	void likeItem(String selecetedItem);
+
 }

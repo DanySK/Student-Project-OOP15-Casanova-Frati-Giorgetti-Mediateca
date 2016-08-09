@@ -22,13 +22,13 @@ public class ViewImpl implements View {
 	static final int SCREEN_WIDTH = 920;
 	final private JPanel container = new JPanel();
 	final private CardLayout cl = new CardLayout();
-	final String selectedItem;
 
 	final JPanel card1 = new UserLoginImpl();
 	final JPanel card2 = new UserMenuImpl(ViewImpl.SCREEN_LENGHT,
 			ViewImpl.SCREEN_WIDTH);
 	final JPanel card3 = new BookScreenImpl(ViewImpl.SCREEN_LENGHT,
 			ViewImpl.SCREEN_WIDTH);
+	private ReviewScreen toReview = new ReviewScreenImpl();
 
 	@Override
 	public void swapView(final String panelName) {
@@ -91,8 +91,13 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public String getReview() {
+	public int getScore() {
+		return this.toReview.getSelectedScore();
+	}
 
+	@Override
+	public String getReview() {
+		return this.toReview.getReview();
 	}
 
 	public void setFilteredList(final List filteredList) {
@@ -102,10 +107,25 @@ public class ViewImpl implements View {
 	public void setBorrowedItemList(final List borrowedItemsList) {
 
 	}
-	@Override
-	public void borrowBook(final String selectedItem) {
-		return;
 
+	@Override
+	public void borrowItem(final String selectedItem) {
+		return;
+	}
+
+	@Override
+	public void giveBackItem(final String selectedItem) {
+		return;
+	}
+
+	@Override
+	public void reviewItem(final String selectedItem) {
+		return;
+	}
+
+	@Override
+	public void likeItem(final String selecetedItem) {
+		return;
 	}
 
 	public void setItemAvailabilityList(final List availableItemList) {
@@ -117,11 +137,11 @@ public class ViewImpl implements View {
 
 	}
 
-	@Override
-	public String getMenagerPassword() {
-
-	}
-
+	/*
+	 * @Override public String getMenagerPassword() {
+	 * 
+	 * }
+	 */
 	@Override
 	public void getAddedItem() {
 
@@ -132,11 +152,11 @@ public class ViewImpl implements View {
 
 	}
 
-	@Override
-	public int getStudyRoomSitsJustTaken() {
-
-	}
-
+	/*
+	 * @Override public int getStudyRoomSitsJustTaken() {
+	 * 
+	 * }
+	 */
 	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {
 
 	}
@@ -144,15 +164,12 @@ public class ViewImpl implements View {
 	@Override
 	public void setFilteredList() {
 		// TODO Auto-generated method stub
-
 	}
 
-	@Override
-	public void setBorrowedItemList() {
-		// TODO Auto-generated method stub
-
-	}
-
+	/*
+	 * @Override public List setBorrowedItemList() { return listaPrestiti; //
+	 * TODO Auto-generated method stub }
+	 */
 	@Override
 	public void setItemAvailabilityList() {
 		// TODO Auto-generated method stub
@@ -163,5 +180,23 @@ public class ViewImpl implements View {
 	public void setStudyRoomStatus() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public List setBorrowedItemList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getMenagerPassword() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getStudyRoomSitsJustTaken() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
