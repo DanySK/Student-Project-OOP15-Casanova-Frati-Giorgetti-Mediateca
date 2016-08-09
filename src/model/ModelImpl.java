@@ -445,11 +445,8 @@ public class ModelImpl implements Serializable, Model {
     List<Integer> toAdd = new LinkedList<Integer>();
 
     for (ItemGenre im : this.archiveUser.getUser(userId).getMoviePreferences()) {
-      System.out.println("FILM Sto cercando genere: " + im.toString());
       all = this.filterItemGenre(TypeItem.MOVIE, im);
-      System.out.println("FILM Ho trovato questo" + all.toString());
       if (all.size() != 0) {
-        System.out.println("Sono entrato film");
         Integer start = 0;
         Integer best = 0;
         for (Integer v : all) {
@@ -462,24 +459,20 @@ public class ModelImpl implements Serializable, Model {
     }
 
     for (ItemGenre ig : this.archiveUser.getUser(userId).getBookPreferences()) {
-      System.out.println("BOOK Sto cercando genere: " + ig.toString());
       all = this.filterItemGenre(TypeItem.BOOK, ig);
-      System.out.println("BOOK Ho trovato questo" + all.toString());
       if (all.size() != 0) {
-        System.out.println("Sono entrato book di tipo " + ig.toString());
         Integer start = 0;
         Integer best = 0;
         for (Integer v : all) {
           if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
-            System.out.println("Nuovo best :" + v);
             best = v;
           }
         }
         toAdd.add(best);
       }
     }
-
     this.archiveUser.getUser(userId).setRecommendedList(toAdd);
+
   }
 
   @Override
