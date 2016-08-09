@@ -33,33 +33,10 @@ public interface Model {
   Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive();
 
   /**
-   * This method can be used by MANAGER. This method set the item archive in
-   * order to be (de)serialized.
-   *
-   * @param itemArchive
-   *          item's archive.
-   * @throws Exception
-   *           in the case which the archive is been already initialized.
-   */
-  void setItemArchive(Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive) throws Exception;
-
-  /**
    * This method can be used by MANAGER. This method @return the archiveUser in
    * order to be serialized.
    */
   Map<Integer, UserImpl> getUserArchive();
-
-  /**
-   * This method can be used by MANAGER.This method set the user archive in
-   * order to be (de)serialized.
-   *
-   * @param initArchiveUser
-   *          the archiveUser to set
-   *
-   * @throws Exception
-   *           in the case which the archive is benne already initialized.
-   */
-  void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception;
 
   /**
    * This method can be used by USER. This method registers a user into the user

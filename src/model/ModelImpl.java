@@ -81,8 +81,16 @@ public class ModelImpl implements Serializable, Model {
     return this.archiveItem.getItemArchive();
   }
 
-  @Override
-  public void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
+  /**
+   * This method can be used by MANAGER. This method set the item archive in
+   * order to be (de)serialized.
+   *
+   * @param itemArchive
+   *          item's archive.
+   * @throws Exception
+   *           in the case which the archive is been already initialized.
+   */
+  private void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
               throws Exception {
     this.archiveItem.setArchiveImpl(initItemArchive);
   }
@@ -92,8 +100,17 @@ public class ModelImpl implements Serializable, Model {
     return this.archiveUser.getUserArchive();
   }
 
-  @Override
-  public void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception {
+  /**
+   * This method can be used by MANAGER.This method set the user archive in
+   * order to be (de)serialized.
+   *
+   * @param initArchiveUser
+   *          the archiveUser to set
+   *
+   * @throws Exception
+   *           in the case which the archive is benne already initialized.
+   */
+  private void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception {
     this.archiveUser.setArchiveImpl(initArchiveUser);
   }
 
@@ -103,11 +120,20 @@ public class ModelImpl implements Serializable, Model {
               final String initPassword, final String initEmail, final String initTelephoneNumber,
               final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
                           throws Exception {
-    UserImpl u = new UserImpl(initName, initSurname, initBirthdate, initUsername, initPassword,
-                initEmail, initTelephoneNumber, initBookPref, initMoviePref);
-    this.archiveUser.addUser(u);
-    this.setReccomandedList(u.getIdUser());
-    System.out.println("User " + u.toString() + "adds to te archive.");
+    if (!this.checkUsername(initUsername)) {
+      UserImpl u = new UserImpl(initName, initSurname, initBirthdate, initUsername, initPassword,
+                  initEmail, initTelephoneNumber, initBookPref, initMoviePref);
+      this.archiveUser.addUser(u);
+      this.setReccomandedList(u.getIdUser());
+      System.out.println("User " + u.toString() + "adds to te archive.");
+    } else {
+      throw new Exception("Can not add user " + initUsername
+                  + " into the archive becouse there is already a user with that username.");
+    }
+  }
+
+  private boolean checkUsername(final String initUsername) {
+    return this.archiveUser.getAllUsername().contains(initUsername);
   }
 
   @Override

@@ -1,5 +1,6 @@
 package model.user;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -74,4 +75,10 @@ public interface ArchiveUser {
    * @return UserId set.
    */
   Set<Integer> getUserId();
+
+  /**
+   * This method @return a List of username of user that were already
+   * registered.
+   */
+  List<String> getAllUsername();
 }

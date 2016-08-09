@@ -3,6 +3,8 @@ package model.user;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -92,5 +94,14 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
   @Override
   public Set<Integer> getUserId() {
     return Collections.unmodifiableSet(ArchiveUserImpl.singleton.getUserArchive().keySet());
+  }
+
+  @Override
+  public List<String> getAllUsername() {
+    List<String> all = new LinkedList<>();
+    for (UserImpl i : this.userArchive.values()) {
+      all.add(i.getUsername());
+    }
+    return all;
   }
 }
