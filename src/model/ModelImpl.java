@@ -361,8 +361,8 @@ public class ModelImpl implements Serializable, Model {
     all.addAll(this.getAllItemId(TypeItem.MOVIE));
     for (Integer i : all) {
       if (ts == TypeSearch.TITLE) {
-        String f = (String) param;
-        if (((ItemImpl) this.archiveItem.getItem(i)).getTitle().equals(f.toUpperCase())) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getTitle()
+                    .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }
@@ -373,7 +373,8 @@ public class ModelImpl implements Serializable, Model {
         }
       }
       if (ts == TypeSearch.PUBLISHER) {
-        if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher()
+                    .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }
