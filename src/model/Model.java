@@ -406,4 +406,15 @@ public interface Model {
    *          the systemPassword to set
    */
   void setSystemPassword(String systemPassword);
+
+  /**
+   * This method return a require user.
+   *
+   * @param userId
+   *          user's identifier.
+   * @return required User with userId.
+   * @throws Exception
+   *           in the case which User is not in the archive.
+   */
+  UserImpl getRequiredUser(final Integer userId) throws Exception;
 }

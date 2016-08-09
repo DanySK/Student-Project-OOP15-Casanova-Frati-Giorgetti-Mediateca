@@ -20,15 +20,6 @@ public interface ArchiveUser {
   Map<Integer, UserImpl> getUserArchive();
 
   /**
-   * This method return a require user.
-   *
-   * @param userId
-   *          user's identifier.
-   * @return required User with userId.
-   */
-  UserImpl getRequiredUser(final Integer userId);
-
-  /**
    * This method must be called only at the start of the program, if it had
    * already file config saved. With this method you set the main field
    * userArchive.

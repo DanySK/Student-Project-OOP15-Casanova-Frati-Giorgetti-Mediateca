@@ -149,6 +149,7 @@ public class ModelImpl implements Serializable, Model {
   public void deleteUser(final int userId) throws Exception {
     if (this.archiveUser.contains(userId)) {
       this.archiveUser.removeUser(userId);
+      System.out.println("User: " + userId + " removed from archive.");
     } else {
       throw new Exception("User: " + userId + " not contained into the archive.Can not remove it");
     }
@@ -195,6 +196,7 @@ public class ModelImpl implements Serializable, Model {
   public void deleteItem(final int itemId) throws Exception {
     if (this.archiveItem.containsItem(itemId)) {
       this.archiveItem.removeItem(itemId);
+      System.out.println("Item: " + itemId + " removed from archive.");
     } else {
       throw new Exception("Item: " + itemId + " is not into the archive.");
     }
@@ -270,6 +272,15 @@ public class ModelImpl implements Serializable, Model {
       return this.archiveItem.getItem(itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " not contained into the archive\n");
+    }
+  }
+
+  @Override
+  public UserImpl getRequiredUser(final Integer userId) throws Exception {
+    if (this.archiveUser.contains(userId)) {
+      return this.archiveUser.getUser(userId);
+    } else {
+      throw new Exception("UserId: " + userId + " not contained into the archive\n");
     }
   }
 

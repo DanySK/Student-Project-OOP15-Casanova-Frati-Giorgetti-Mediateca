@@ -45,11 +45,6 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
   }
 
   @Override
-  public UserImpl getRequiredUser(final Integer userId) {
-    return this.getUserArchive().get(userId);
-  }
-
-  @Override
   public void setArchiveUserImpl(final Map<Integer, UserImpl> initUserArchive) throws Exception {
     this.userArchive.putAll(initUserArchive);
   }
