@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
@@ -408,7 +409,7 @@ public interface Model {
   void setSystemPassword(String systemPassword);
 
   /**
-   * This method return a require user.
+   * This method can be used by MANAGER, This method return a require user.
    *
    * @param userId
    *          user's identifier.
@@ -417,4 +418,12 @@ public interface Model {
    *           in the case which User is not in the archive.
    */
   UserImpl getRequiredUser(final Integer userId) throws Exception;
+
+  /**
+   * This method can be used by MANAGER, USER. This method @return a copy of the
+   * StudyRoom main field, the all map.
+   * 
+   * @return
+   */
+  Map<GregorianCalendar, ArrayList<Integer>> getStudyRoom();
 }

@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -36,7 +37,7 @@ public class ModelImpl implements Serializable, Model {
   private static final int MAX_DAY = 60;
   private ArchiveImpl archiveItem;
   private ArchiveUserImpl archiveUser;
-  private StudyRoom studyRoom = new StudyRoom();
+  private StudyRoomImpl studyRoom = new StudyRoomImpl();
   private String systemPassword = "FmAlchemist";
 
   /**
@@ -504,7 +505,11 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void bookSit(final GregorianCalendar initDay, final Integer initSit,
               final Integer initUserId) throws Exception {
-    this.studyRoom.takeSit(initDay, initSit, initUserId);
+    if (this.archiveUser.contains(initUserId)) {
+      this.studyRoom.takeSit(initDay, initSit, initUserId);
+    } else {
+      throw new Exception("UserId: " + initUserId + " not in the archive.");
+    }
   }
 
   @Override
@@ -524,4 +529,8 @@ public class ModelImpl implements Serializable, Model {
     this.systemPassword = initSystemPassword;
   }
 
+  @Override
+  public Map<GregorianCalendar, ArrayList<Integer>> getStudyRoom() {
+    return this.studyRoom.getStudyRoom();
+  }
 }

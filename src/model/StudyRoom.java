@@ -1,10 +1,7 @@
 package model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,18 +13,12 @@ import java.util.Map;
  * @author Edoardo
  *
  */
-public class StudyRoom implements Serializable {
-
-  private static final long serialVersionUID = -6559792291462784732L;
-  private static final int N = 100;
-
-  private Map<GregorianCalendar, ArrayList<Integer>> mapStudyRoom = new HashMap<>();
+public interface StudyRoom {
 
   /**
-   * Empty constructor.
+   * This method @return a copy of the StudyRoom's map in order to ba saved.
    */
-  public StudyRoom() {
-  }
+  Map<GregorianCalendar, ArrayList<Integer>> getStudyRoom();
 
   /**
    * This method add a day into the archive of StudyRoom.
@@ -35,17 +26,7 @@ public class StudyRoom implements Serializable {
    * @param day
    *          to add.
    */
-  public void addDate(final GregorianCalendar day) {
-    if (!this.mapStudyRoom.containsKey(day) || this.mapStudyRoom.isEmpty()) {
-      ArrayList<Integer> al = new ArrayList<Integer>(StudyRoom.N);
-      for (int i = 0; i < StudyRoom.N; i++) {
-        al.add(i, 0);
-      }
-      this.mapStudyRoom.put(day, al);
-    } else {
-      System.out.println("Day is in the archive");
-    }
-  }
+  void addDate(final GregorianCalendar day);
 
   /**
    * This method return a list of integer which represent the user list that
@@ -56,12 +37,7 @@ public class StudyRoom implements Serializable {
    *          to search.
    * @return the list of free sit.
    */
-  public List<Integer> getAllSit(final GregorianCalendar day) {
-    if (!this.mapStudyRoom.containsKey(day)) {
-      this.addDate(day);
-    }
-    return Collections.unmodifiableList(this.mapStudyRoom.get(day));
-  }
+  List<Integer> getAllSit(final GregorianCalendar day);
 
   /**
    * This method add a userId to a specific sit into the StudyRoom. In the case
@@ -77,23 +53,8 @@ public class StudyRoom implements Serializable {
    *           in the case which the sit is a number < 0 || >= StudyRoom.N && in
    *           the case of busy sit.
    */
-  public void takeSit(final GregorianCalendar day, final Integer sit, final Integer userId)
-              throws Exception {
-    if (!this.mapStudyRoom.containsKey(day)) {
-      this.addDate(day);
-    }
-    if ((sit <= StudyRoom.N) && (sit > 0)) {
-      if (this.mapStudyRoom.get(day).get(sit) == 0) {
-        this.mapStudyRoom.get(day).set(sit, userId);
-        System.out.println(
-                    "Day " + day.getTimeInMillis() + " User " + userId + " in position " + sit);
-      } else {
-        throw new Exception(+sit + " busy sit.");
-      }
-    } else {
-      throw new Exception(+sit + "not valid sit position.");
-    }
-  }
+  void takeSit(final GregorianCalendar day, final Integer sit, final Integer userId)
+              throws Exception;
 
   /**
    * This method remove a userId from a specific sit into the study room. In the
@@ -109,18 +70,6 @@ public class StudyRoom implements Serializable {
    *           in the case which the sit is a number < 0 || >= StudyRoom.N or if
    *           the sit is not busy by the specific userId.
    */
-  public void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
-              throws Exception {
-    if (this.mapStudyRoom.containsKey(day)) {
-      if ((sit <= StudyRoom.N) && (sit > 0)) {
-        if (this.mapStudyRoom.get(day).get(sit).equals(userId)) {
-          this.mapStudyRoom.get(day).add(sit, 0);
-        } else {
-          throw new Exception(+sit + " not busy by " + userId);
-        }
-      } else {
-        throw new Exception(+sit + " not valid position.");
-      }
-    }
-  }
+  void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
+              throws Exception;
 }
