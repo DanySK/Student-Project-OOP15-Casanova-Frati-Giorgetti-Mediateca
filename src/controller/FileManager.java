@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.util.Map;
 
 import model.Model;
+import model.ModelImpl;
 import model.Pair;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
@@ -57,17 +58,22 @@ public class FileManager {
 		oos.close();
 	}
 
-	public void read(final String fileName, final Model model) throws IOException, FileNotFoundException {
+	public void read(final String fileNameUser, final String fileNameItem, Model model)
+			throws IOException, FileNotFoundException {
 		try {
-			FileInputStream fin = new FileInputStream(this.path + "\\res\\" + fileName);
-			ObjectInputStream ois = new ObjectInputStream(fin);
-			Object object = ois.readObject();
-			if (fileName.contains("utenti")) {
-				model.setUserArchive((Map<Integer, UserImpl>) object);
-			} else {
-				model.setItemArchive((Map<Integer, Pair<ItemImpl, ItemInfo>>) object);
-			}
-			ois.close();
+			FileInputStream fisUser = new FileInputStream(this.path + "\\res\\" + fileNameUser);
+			ObjectInputStream oisUser = new ObjectInputStream(fisUser);
+			Object objectUser = oisUser.readObject();
+
+			FileInputStream fisItem = new FileInputStream(this.path + "\\res\\" + fileNameItem);
+			ObjectInputStream oisItem = new ObjectInputStream(fisItem);
+			Object objectItem = oisItem.readObject();
+
+			model = new ModelImpl((Map<Integer, Pair<ItemImpl, ItemInfo>>) objectItem,
+					(Map<Integer, UserImpl>) objectUser);
+
+			oisUser.close();
+			oisItem.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
