@@ -132,6 +132,13 @@ public class ModelImpl implements Serializable, Model {
     }
   }
 
+  /**
+   *
+   * @param initUsername
+   *          username to find in the archive.
+   * @return true if username is in the archive, false if username is not in the
+   *         archive.
+   */
   private boolean checkUsername(final String initUsername) {
     return this.archiveUser.getAllUsername().contains(initUsername);
   }
