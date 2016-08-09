@@ -227,10 +227,10 @@ public final class ArchiveImpl implements Serializable, Archive {
       }
     }
     if (t == TypeItem.BOOK) {
-      return Collections.unmodifiableSet(booklist);
+      return booklist;
     }
     if (t == TypeItem.MOVIE) {
-      return Collections.unmodifiableSet(movielist);
+      return movielist;
     }
     return null;
   }
