@@ -407,26 +407,27 @@ public class ModelImpl implements Serializable, Model {
                 && (ts != TypeSearch.EMAIL) && (ts != TypeSearch.TELEPHONE_NUMBER)) {
       throw new Exception("TypeSearch " + ts + "not valid to change on User");
     }
-    if (ts != TypeSearch.NAME) {
+    if (ts == TypeSearch.NAME) {
       this.archiveUser.getUser(userId).setName((String) param);
     }
-    if (ts != TypeSearch.SURNAME) {
+    if (ts == TypeSearch.SURNAME) {
       this.archiveUser.getUser(userId).setSurname((String) param);
     }
-    if (ts != TypeSearch.BIRTHDATE) {
+
+    if (ts == TypeSearch.BIRTHDATE) {
       this.archiveUser.getUser(userId).setBirthdate((GregorianCalendar) param);
     }
-    if (ts != TypeSearch.USERNAME) {
+    if (ts == TypeSearch.USERNAME) {
       this.archiveUser.getUser(userId).setUsername((String) param);
     }
-    if (ts != TypeSearch.PASSWORD) {
+    if (ts == TypeSearch.PASSWORD) {
       this.archiveUser.getUser(userId).setPassword((String) param);
     }
-    if (ts != TypeSearch.EMAIL) {
+    if (ts == TypeSearch.EMAIL) {
       this.archiveUser.getUser(userId).setEmail((String) param);
     }
-    if (ts != TypeSearch.TELEPHONE_NUMBER) {
-      this.archiveUser.getUser(userId).setName((String) param);
+    if (ts == TypeSearch.TELEPHONE_NUMBER) {
+      this.archiveUser.getUser(userId).setTelephoneNumber((String) param);
     }
   }
 
