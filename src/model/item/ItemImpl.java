@@ -242,7 +242,7 @@ public class ItemImpl implements Item, Serializable {
 
   @Override
   public void addReview(final ReviewImpl rev) {
-    this.getSetReview().add(rev);
+    this.setReview.add(rev);
     this.setAverageVote();
   }
 
