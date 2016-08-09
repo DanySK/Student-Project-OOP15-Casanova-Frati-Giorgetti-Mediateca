@@ -82,7 +82,7 @@ public interface Model {
 
   /**
    * This method can be used by MANAGER. This method registers the book into the
-   * item archive.
+   * item archive, if the item is already present its amount will me increase.
    *
    * @param initTitle
    *          item's title.
@@ -112,7 +112,7 @@ public interface Model {
 
   /**
    * This method can be used by MANAGER. This method registers the book into the
-   * item archive.
+   * item archive, if the item is already present its amount will me increase.
    *
    * @param initTitle
    *          item's title.

@@ -158,13 +158,17 @@ public class ModelImpl implements Serializable, Model {
               final String initAuthor, final Language initCurrentLanguage, final String initISBN,
               final ItemGenre initGenre, final String initPublisher, final Integer initNumRelease,
               final Integer initNumCopy) throws Exception {
-    // Da sistemare prima della consegna, Item Facotry direttamente dentro il
-    // metodo addItem
+
     ItemImpl b = ItemFactory.getNewBook(initTitle, initReleaseYear, initAuthor, initCurrentLanguage,
                 initISBN, initGenre, initPublisher, initNumRelease);
-    this.archiveItem.addItem(b, initNumCopy);
-    System.out.println("Book " + b.toString() + " adds to the archive");
-
+    if (!this.archiveItem.containsItem(b.getiD())) {
+      this.archiveItem.addItem(b, initNumCopy);
+      System.out.println("Book " + b.toString() + " adds to the archive");
+    } else {
+      this.archiveItem.changeAmount(b.getiD(), initNumCopy);
+      System.out.println("Item already present in the archive, change amount in "
+                  + this.archiveItem.getItemArchive().get(b.getiD()).getSecond().getQuantity());
+    }
   }
 
   @Override
@@ -173,12 +177,16 @@ public class ModelImpl implements Serializable, Model {
               final Language initCurrentLanguage, final ItemGenre initGenre,
               final Integer initDuration, final Boolean initColor, final Integer initNumCopy)
                           throws Exception {
-    // Da sistemare prima della consegna, Item Facotry direttamente dentro il
-    // metodo addItem
     ItemImpl m = ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher, initAuthor,
                 initCurrentLanguage, initGenre, initDuration, initColor);
-    this.archiveItem.addItem(m, initNumCopy);
-    System.out.println("Movie " + m.toString() + " adds to the archive");
+    if (!this.archiveItem.containsItem(m.getiD())) {
+      this.archiveItem.addItem(m, initNumCopy);
+      System.out.println("Movie " + m.toString() + " adds to the archive");
+    } else {
+      this.archiveItem.changeAmount(m.getiD(), initNumCopy);
+      System.out.println("Item already present in the archive, change amount in "
+                  + this.archiveItem.getItemArchive().get(m.getiD()).getSecond().getQuantity());
+    }
   }
 
   @Override

@@ -89,8 +89,6 @@ public final class ArchiveImpl implements Serializable, Archive {
       if (!this.containsItem(i.getiD())) {
         ArchiveImpl.singleton.getItemArchive().put(i.getiD(),
                     new Pair<>(i, new ItemInfo(initNumCopy)));
-      } else {
-        ArchiveImpl.singleton.changeAmount(i.getiD(), initNumCopy);
       }
     } else {
       throw new RuntimeException("initNumCopy <= 0");
