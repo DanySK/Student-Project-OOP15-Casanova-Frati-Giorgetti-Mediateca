@@ -40,8 +40,8 @@ public class ControllerImpl implements Controller {
 	 *            Model to be initialized
 	 * @throws Exception
 	 */
-	public ControllerImpl(final Model inputM) throws Exception {
-		this.m = inputM;
+	public ControllerImpl() throws Exception {
+		this.init("archivio.utenti", "archivio.oggetti", this.m);
 
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.set(Calendar.YEAR, 1994);
@@ -58,7 +58,6 @@ public class ControllerImpl implements Controller {
 
 			this.fm.write("archivio.utenti", this.m);
 			this.fm.write("archivio.oggetti", this.m);
-			this.init("archivio.utente", "archivio.oggetti");
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -78,10 +77,11 @@ public class ControllerImpl implements Controller {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	public void init(final String fileUser, final String fileItem) throws FileNotFoundException, IOException {
+	public void init(final String fileUser, final String fileItem, final Model model)
+			throws FileNotFoundException, IOException {
 
-		this.fm.read(fileUser, this.m);
-		this.fm.read(fileItem, this.m);
+		this.fm.read(fileUser, fileItem, model);
+
 	}
 
 	@Override
