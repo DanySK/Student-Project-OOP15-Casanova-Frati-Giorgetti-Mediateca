@@ -32,19 +32,6 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
     return this.userArchive;
   }
 
-  private void setUserArchive(final Map<Integer, UserImpl> initUserArchive) {
-    this.userArchive = initUserArchive;
-  }
-
-  @Override
-  public void setArchiveImpl(final Map<Integer, UserImpl> initUserArchive) throws Exception {
-    if (ArchiveUserImpl.singleton == null) {
-      ArchiveUserImpl.getArchiveImpl().setUserArchive(initUserArchive);
-    } else {
-      throw new Exception("Item archive already loaded");
-    }
-  }
-
   /**
    * Singleton constructor.
    *
@@ -55,6 +42,11 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
       ArchiveUserImpl.singleton = new ArchiveUserImpl();
     }
     return ArchiveUserImpl.singleton;
+  }
+
+  @Override
+  public void setArchiveUserImpl(final Map<Integer, UserImpl> initUserArchive) throws Exception {
+    this.userArchive.putAll(initUserArchive);
   }
 
   @Override

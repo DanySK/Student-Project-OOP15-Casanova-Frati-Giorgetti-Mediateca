@@ -29,7 +29,7 @@ public interface ArchiveUser {
    * @throws Exception
    *           in the case which field it's already initialized.
    */
-  void setArchiveImpl(final Map<Integer, UserImpl> initUserArchive) throws Exception;
+  void setArchiveUserImpl(final Map<Integer, UserImpl> initUserArchive) throws Exception;
 
   /**
    * This method adds a User into the archive.

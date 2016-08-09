@@ -61,6 +61,8 @@ public class ModelImpl implements Serializable, Model {
    */
   public ModelImpl(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive,
               final Map<Integer, UserImpl> initArchiveUser) throws Exception {
+    this.archiveItem = ArchiveImpl.getArchiveImpl();
+    this.archiveUser = ArchiveUserImpl.getArchiveImpl();
     this.setItemArchive(initItemArchive);
     this.setUserArchive(initArchiveUser);
   }
@@ -92,7 +94,7 @@ public class ModelImpl implements Serializable, Model {
    */
   private void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
               throws Exception {
-    this.archiveItem.setArchiveImpl(initItemArchive);
+    this.archiveItem.setArchiveItemImpl(initItemArchive);
   }
 
   @Override
@@ -111,7 +113,7 @@ public class ModelImpl implements Serializable, Model {
    *           in the case which the archive is benne already initialized.
    */
   private void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception {
-    this.archiveUser.setArchiveImpl(initArchiveUser);
+    this.archiveUser.setArchiveUserImpl(initArchiveUser);
   }
 
   @Override

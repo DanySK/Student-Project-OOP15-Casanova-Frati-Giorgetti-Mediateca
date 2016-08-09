@@ -24,7 +24,7 @@ public interface Archive {
    * @throws Exception
    *           in the case which itemArchive is already initialized.
    */
-  void setArchiveImpl(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
+  void setArchiveItemImpl(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
               throws Exception;
 
   /**

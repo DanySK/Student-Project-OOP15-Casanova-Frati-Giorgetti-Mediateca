@@ -58,13 +58,8 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public void setArchiveImpl(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
-              throws Exception {
-    if (ArchiveImpl.singleton == null) {
-      ArchiveImpl.getArchiveImpl().setItemArchive(initItemArchive);
-    } else {
-      throw new Exception("Item archive already loaded");
-    }
+  public void setArchiveItemImpl(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive) {
+    this.itemArchive.putAll(initItemArchive);
   }
 
   /**
@@ -73,14 +68,6 @@ public final class ArchiveImpl implements Serializable, Archive {
   @Override
   public Map<Integer, Pair<ItemImpl, ItemInfo>> getItemArchive() {
     return this.itemArchive;
-  }
-
-  /**
-   * @param initItemArchive
-   *          the itemArchive to set
-   */
-  private void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive) {
-    this.itemArchive = initItemArchive;
   }
 
   @Override
