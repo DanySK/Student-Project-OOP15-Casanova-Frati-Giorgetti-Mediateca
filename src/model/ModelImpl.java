@@ -14,7 +14,6 @@ import com.google.common.base.Optional;
 
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
-import model.item.Item;
 import model.item.ItemFactory;
 import model.item.ItemGenre;
 import model.item.ItemImpl;
@@ -236,6 +235,8 @@ public class ModelImpl implements Serializable, Model {
   public void addLike(final int itemId, final int userId) throws Exception {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.getItem(itemId).addLike(userId);
+      this.archiveUser.getUser(userId).addToWishList(itemId);
+      System.out.println("UserId: " + userId + " likes itemId: " + itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive");
@@ -269,9 +270,9 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Item getRequiredItem(final Integer itemId) throws Exception {
+  public ItemImpl getRequiredItem(final Integer itemId) throws Exception {
     if (this.archiveItem.containsItem(itemId)) {
-      return this.archiveItem.getItem(itemId);
+      return (ItemImpl) this.archiveItem.getItem(itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " not contained into the archive\n");
     }
@@ -346,9 +347,9 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public Set<Integer> filterItem(final Optional<Set<Integer>> set, final TypeSearch ts,
               final Object param) throws Exception {
-    if ((ts != TypeSearch.AUTHOR) || (ts != TypeSearch.TITLE) || (ts != TypeSearch.PUBLISHER)
-                || (ts != TypeSearch.RELEASE_YEAR) || (ts != TypeSearch.LANGUAGE)
-                || (ts != TypeSearch.GENRE)) {
+    if ((ts != TypeSearch.AUTHOR) && (ts != TypeSearch.TITLE) && (ts != TypeSearch.PUBLISHER)
+                && (ts != TypeSearch.RELEASE_YEAR) && (ts != TypeSearch.LANGUAGE)
+                && (ts != TypeSearch.GENRE)) {
       throw new Exception("TypeSearch " + ts + "not valid");
     }
     Set<Integer> all = new HashSet<>();
@@ -360,12 +361,14 @@ public class ModelImpl implements Serializable, Model {
     all.addAll(this.getAllItemId(TypeItem.MOVIE));
     for (Integer i : all) {
       if (ts == TypeSearch.TITLE) {
-        if (((ItemImpl) this.archiveItem.getItem(i)).getTitle().equals(param)) {
+        String f = (String) param;
+        if (((ItemImpl) this.archiveItem.getItem(i)).getTitle().equals(f.toUpperCase())) {
           r.add(i);
         }
       }
       if (ts == TypeSearch.AUTHOR) {
-        if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor()
+                    .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }

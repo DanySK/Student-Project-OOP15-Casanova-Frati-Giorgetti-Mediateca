@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
@@ -34,7 +36,7 @@ public class UserImpl implements Serializable, User {
   private String telephoneNumber;
   // Map<itemId, Pair<Restituito, reviewId>>
   private Map<Integer, Pair<Boolean, Optional<Integer>>> loanArchive = new HashMap<>();
-  private List<Integer> wishList = new LinkedList<>();
+  private Set<Integer> wishList = new HashSet<>();
   private List<Integer> recommendedList = new LinkedList<>();
   private List<ItemGenre> bookPreferences = new LinkedList<>();
   private List<ItemGenre> moviePreferences = new LinkedList<>();
@@ -95,13 +97,14 @@ public class UserImpl implements Serializable, User {
   /**
    * @return the wishList.
    */
-  public List<Integer> getWishlist() {
-    return Collections.unmodifiableList(this.wishList);
+  public Set<Integer> getWishlist() {
+    return Collections.unmodifiableSet(this.wishList);
   }
 
   @Override
-  public void addToWishList(final Integer initWishList) {
-    this.wishList.add(initWishList);
+  public void addToWishList(final Integer itemId) {
+    this.wishList.add(itemId);
+    System.out.println("UserId: " + this.idUser + " adds to its wishlist itemId: " + itemId);
   }
 
   /**
