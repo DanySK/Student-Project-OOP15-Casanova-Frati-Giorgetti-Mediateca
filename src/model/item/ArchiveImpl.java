@@ -90,7 +90,7 @@ public final class ArchiveImpl implements Serializable, Archive {
         ArchiveImpl.singleton.getItemArchive().put(i.getiD(),
                     new Pair<>(i, new ItemInfo(initNumCopy)));
       } else {
-        ArchiveImpl.singleton.calculateDifferenceDays(i.getiD(), initNumCopy);
+        ArchiveImpl.singleton.changeAmount(i.getiD(), initNumCopy);
       }
     } else {
       throw new RuntimeException("initNumCopy <= 0");
