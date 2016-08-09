@@ -11,7 +11,9 @@ import java.util.Map;
 /**
  * This class implements a StudyRoom, it is Serializable and it has one field
  * that is a map which has key the date and the value a ArrayList of UserId( 0
- * means that the sit is free, another number means that it is busy).
+ * means that the sit is free, another number means that it is busy). The map is
+ * modifible only by addDate(), takeSit(), cancelSit(). The getter method return
+ * a COPY !
  *
  * @author Edoardo
  *
