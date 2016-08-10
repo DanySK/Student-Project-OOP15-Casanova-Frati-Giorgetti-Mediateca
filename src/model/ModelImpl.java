@@ -323,6 +323,7 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
+  @Deprecated
   public Set<Integer> filterItemGenre(final TypeItem t, final ItemGenre b) throws Exception {
     Set<Integer> r = new HashSet<>();
     Set<Integer> all = new HashSet<>();
