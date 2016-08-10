@@ -60,7 +60,13 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.userLoginPanel.add(this.send);
 		this.password = this.passwordTextArea.getText();
 		this.username = this.usernameTextArea.getText();
+		this.send.addActionListener(e -> this.sendLoginToView());
 
+	}
+
+	@Override
+	public void sendLoginToView() {
+		this.toViewClass.sendLogin();
 	}
 
 	@Override

@@ -28,6 +28,6 @@ public interface Controller {
 	 */
 	void setView(view.View v);
 
-	void login(String username, String password);
+	void login();
 
 }

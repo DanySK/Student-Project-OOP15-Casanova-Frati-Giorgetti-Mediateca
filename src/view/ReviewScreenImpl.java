@@ -25,6 +25,9 @@ public class ReviewScreenImpl implements ReviewScreen {
 	private String reviewTyped;
 	private View toViewClass = new ViewImpl();
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	public void startReviewScreen() {
 		final JFrame mainFrame = new JFrame();

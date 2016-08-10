@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import controller.Controller;
+
 /**
  * Main class of the view. Contains the implementation of methods which can be
  * used by controller.
@@ -34,6 +36,13 @@ public class ViewImpl implements View {
 	public void swapView(final String panelName) {
 		this.cl.show(this.container, panelName);
 		return;
+	}
+
+	private Controller c;
+
+	@Override
+	public void setController(final Controller c) {
+		this.c = c;
 	}
 
 	@Override
@@ -139,7 +148,7 @@ public class ViewImpl implements View {
 
 	/*
 	 * @Override public String getMenagerPassword() {
-	 * 
+	 *
 	 * }
 	 */
 	@Override
@@ -152,9 +161,14 @@ public class ViewImpl implements View {
 
 	}
 
+	@Override
+	public void sendLogin() {
+		this.c.login();
+	}
+
 	/*
 	 * @Override public int getStudyRoomSitsJustTaken() {
-	 * 
+	 *
 	 * }
 	 */
 	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {
