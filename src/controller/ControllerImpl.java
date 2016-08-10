@@ -2,15 +2,12 @@ package controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import model.Model;
-import model.item.ItemGenre;
-import model.item.Language;
 import model.user.UserImpl;
 import view.View;
 
@@ -49,25 +46,26 @@ public class ControllerImpl implements Controller {
 		calendar.set(Calendar.YEAR, 1994);
 		calendar.set(Calendar.MONTH, 3);
 		calendar.set(Calendar.DAY_OF_MONTH, 6);
-		try {
-
-			this.m.registerUser("Enrico", "Casanova", calendar, "Dakaiden", "Arctica64", "enrico.casanova@dadas.it",
-					"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
-			this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
-					ItemGenre.ADVENTURE_HISTORY, "Gesù", 0011, 100000);
-			this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
-					120, true, 1000000);
-
-			this.fm.write("archivio.utenti", this.m);
-			this.fm.write("archivio.oggetti", this.m);
-
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		/*
+		 * try {
+		 * 
+		 * /* this.m.registerUser("Enrico", "Casanova", calendar, "Dakaiden",
+		 * "Arctica64", "enrico.casanova@dadas.it", "334534534534", new
+		 * ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
+		 * this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien"
+		 * , Language.ENGLISH, "23123121", ItemGenre.ADVENTURE_HISTORY, "Gesù",
+		 * 0011, 100000); this.m.registerMovie("Star Trek", 2009, "Bad Robot",
+		 * "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY, 120, true,
+		 * 1000000);
+		 * 
+		 * 
+		 * this.fm.write("archivio.utenti", this.m);
+		 * this.fm.write("archivio.oggetti", this.m);
+		 * 
+		 * } catch (FileNotFoundException e) { // TODO Auto-generated catch
+		 * block e.printStackTrace(); } catch (IOException e) { // TODO
+		 * Auto-generated catch block e.printStackTrace(); }
+		 */
 	}
 
 	/**
