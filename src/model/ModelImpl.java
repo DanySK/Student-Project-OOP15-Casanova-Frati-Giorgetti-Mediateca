@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.base.Optional;
-
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.ItemFactory;
@@ -346,21 +344,15 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Set<Integer> filterItem(final Optional<Set<Integer>> set, final TypeSearch ts,
-              final Object param) throws Exception {
+  public Set<Integer> filtersItem(final Set<Integer> set, final TypeSearch ts, final Object param)
+              throws Exception {
     if ((ts != TypeSearch.AUTHOR) && (ts != TypeSearch.TITLE) && (ts != TypeSearch.PUBLISHER)
                 && (ts != TypeSearch.RELEASE_YEAR) && (ts != TypeSearch.LANGUAGE)
                 && (ts != TypeSearch.GENRE)) {
       throw new Exception("TypeSearch " + ts + "not valid");
     }
-    Set<Integer> all = new HashSet<>();
-    if (set.isPresent()) {
-      all.addAll(set.get());
-    }
     Set<Integer> r = new HashSet<>();
-    all.addAll(this.getAllItemId(TypeItem.BOOK));
-    all.addAll(this.getAllItemId(TypeItem.MOVIE));
-    for (Integer i : all) {
+    for (Integer i : set) {
       if (ts == TypeSearch.TITLE) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getTitle()
                     .equals(((String) param).toUpperCase())) {

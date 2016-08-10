@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.base.Optional;
-
 import model.ModelImpl.TypeSearch;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
@@ -299,10 +297,9 @@ public interface Model {
 
   /**
    * This method can be used by USER, MANAGER. This method return a set of
-   * itemId which required condition match with ts and param. It is possible to
-   * pass as the first param a Set of integer where search. If the set is NULL
-   * the method search in all the archive. In this way you can chain different
-   * filters.
+   * itemId which required condition match with ts and param. The first argument
+   * is the set of integer that the method filter. In this way you can chain
+   * different filters.
    *
    * @param set
    *          set where search.
@@ -315,7 +312,7 @@ public interface Model {
    * @throws Exception
    *           in the case which name is not into the archive.
    */
-  Set<Integer> filterItem(final Optional<Set<Integer>> set, final TypeSearch ts, final Object param)
+  Set<Integer> filtersItem(final Set<Integer> set, final TypeSearch ts, final Object param)
               throws Exception;
 
   /**
@@ -422,7 +419,7 @@ public interface Model {
   /**
    * This method can be used by MANAGER, USER. This method @return a copy of the
    * StudyRoom main field, the all map.
-   * 
+   *
    * @return
    */
   Map<GregorianCalendar, ArrayList<Integer>> getStudyRoom();
