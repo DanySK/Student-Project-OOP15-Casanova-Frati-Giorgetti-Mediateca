@@ -11,7 +11,6 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import controller.Controller;
-import controller.ControllerImpl;
 
 /**
  * Main class of the view. Contains the implementation of methods which can be
@@ -42,7 +41,7 @@ public class ViewImpl implements View {
 	private Controller c;
 
 	@Override
-	public void setController(final ControllerImpl c) {
+	public void setController(final Controller c) {
 		this.c = c;
 	}
 
@@ -149,7 +148,7 @@ public class ViewImpl implements View {
 
 	/*
 	 * @Override public String getMenagerPassword() {
-	 * 
+	 *
 	 * }
 	 */
 	@Override
@@ -169,7 +168,7 @@ public class ViewImpl implements View {
 
 	/*
 	 * @Override public int getStudyRoomSitsJustTaken() {
-	 * 
+	 *
 	 * }
 	 */
 	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {

@@ -2,7 +2,7 @@ package view;
 
 import java.util.List;
 
-import controller.ControllerImpl;
+import controller.Controller;
 
 /**
  *
@@ -159,7 +159,7 @@ public interface View {
 	 *
 	 * @param c
 	 */
-	void setController(ControllerImpl c);
+	void setController(Controller c);
 
 	void sendLogin();
 
