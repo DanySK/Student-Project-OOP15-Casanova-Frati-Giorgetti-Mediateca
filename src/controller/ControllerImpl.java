@@ -26,6 +26,8 @@ public class ControllerImpl implements Controller {
 	private Model m;
 	private UserImpl actualUser;
 	private FileManager fm = new FileManager();
+	private String username;
+	private String password;
 
 	/*
 	 * template per i futuri getter
@@ -41,7 +43,7 @@ public class ControllerImpl implements Controller {
 	 * @throws Exception
 	 */
 	public ControllerImpl() throws Exception {
-		this.init("archivio.utenti", "archivio.oggetti", this.m);
+		// this.init("archivio.utenti", "archivio.oggetti", this.m);
 
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.set(Calendar.YEAR, 1994);
@@ -85,7 +87,9 @@ public class ControllerImpl implements Controller {
 	}
 
 	@Override
-	public void login(final String username, final String password) {
+	public void login() {
+		String username = this.v.getUsername();
+		String password = this.v.getPassword();
 		Map<Integer, UserImpl> map = this.m.getUserArchive();
 		for (Entry<Integer, UserImpl> entry : map.entrySet()) {
 			if ((entry.getValue().getUsername() == username) && (entry.getValue().getPassword() == password)) {
@@ -97,15 +101,18 @@ public class ControllerImpl implements Controller {
 
 	}
 
+	public void sendMessage(final String string) {
+
+	}
+
 	@Override
 	public void getUserUsername() {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void setUserUsername() {
-		// TODO Auto-generated method stub
+	public void getUserPassword() {
+
 	}
 
 	/**
@@ -116,5 +123,11 @@ public class ControllerImpl implements Controller {
 	public void setView(final view.View v) {
 		// TODO Auto-generated method stub
 		this.v = v;
+	}
+
+	@Override
+	public void setUserUsername() {
+		// TODO Auto-generated method stub
+
 	}
 }
