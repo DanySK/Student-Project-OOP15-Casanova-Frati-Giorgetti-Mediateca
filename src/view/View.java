@@ -14,13 +14,6 @@ import controller.Controller;
 public interface View {
 
 	/**
-	 * method which change panel in the container by passing the panel name.
-	 *
-	 * @param panelName
-	 */
-	void swapView(String panelName);
-
-	/**
 	 *
 	 * method to invoke at the start of the program. It sets the main frame and
 	 * the starting screen
@@ -160,6 +153,8 @@ public interface View {
 	 * @param c
 	 */
 	void setController(Controller c);
+
+	void swapView(String panelName);
 
 	void sendLogin();
 

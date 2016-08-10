@@ -12,7 +12,7 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	 */
 	private static final long serialVersionUID = 1L;
 	private final JPanel userLoginPanel = new JPanel();
-	private View toViewClass = new ViewImpl();
+	// private View toViewClass = new ViewImpl();
 	private final JLabel mainLabel;
 	private final JLabel passwordLabel;
 	private final JLabel usernameLabel;
@@ -36,7 +36,7 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.passwordTextArea.setRows(1);
 		this.passwordTextArea.setBounds(322, 199, 181, 25);
 		this.backToSelectAccount = new JButton("Torna alla scelta");
-		this.backToSelectAccount.addActionListener(e -> this.toViewClass
+		this.backToSelectAccount.addActionListener(e -> ViewImpl
 				.swapView("User Menu Card"));
 		this.backToSelectAccount.setBounds(626, 362, 162, 25);
 		this.userLoginPanel.setSize(800, 400);
@@ -60,13 +60,8 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.userLoginPanel.add(this.send);
 		this.password = this.passwordTextArea.getText();
 		this.username = this.usernameTextArea.getText();
-		this.send.addActionListener(e -> this.sendLoginToView());
+		this.send.addActionListener(e -> View.sendLogin());
 
-	}
-
-	@Override
-	public void sendLoginToView() {
-		this.toViewClass.sendLogin();
 	}
 
 	@Override
