@@ -66,7 +66,7 @@ public interface Model {
               final GregorianCalendar initBirthdate, final String initUsername,
               final String initPassword, final String initEmail, final String initTelephoneNumber,
               final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
-                          throws Exception;
+              throws Exception;
 
   /**
    * This method can be used by USER, MANAGER. This method removes the user with
@@ -107,7 +107,7 @@ public interface Model {
   void registerBook(final String initTitle, final int initReleaseYear, final String initAuthor,
               final Language initCurrentLanguage, final String initIsbn, final ItemGenre initGenre,
               final String initPublisher, final Integer initNumRelease, final Integer initNumCopy)
-                          throws Exception;
+              throws Exception;
 
   /**
    * This method can be used by MANAGER. This method registers the book into the
@@ -423,4 +423,14 @@ public interface Model {
    * @return
    */
   Map<GregorianCalendar, ArrayList<Integer>> getStudyRoom();
+
+  /**
+   * This method set the reccomandedList of userId.
+   *
+   * @param userId
+   *          user's identifier.
+   * @throws Exception
+   *           in the case which user is not into the archive.
+   */
+  void setReccomandedList(final Integer userId) throws Exception;
 }
