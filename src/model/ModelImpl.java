@@ -37,7 +37,7 @@ public class ModelImpl implements Serializable, Model {
   private static final int MAX_DAY = 60;
   private Archive archiveItem;
   private ArchiveUser archiveUser;
-  private StudyRoom studyRoom = new StudyRoomImpl();
+  private StudyRoom studyRoom;
   private String systemPassword = "FmAlchemist";
 
   /**
@@ -46,6 +46,7 @@ public class ModelImpl implements Serializable, Model {
   public ModelImpl() {
     this.archiveItem = ArchiveImpl.getArchiveImpl();
     this.archiveUser = ArchiveUserImpl.getArchiveImpl();
+    this.studyRoom = new StudyRoomImpl();
   }
 
   /**
@@ -56,15 +57,20 @@ public class ModelImpl implements Serializable, Model {
    *          Item archive saved in the file in order to be deserialized.
    * @param initArchiveUser
    *          User archive saved in the file in order to be deserialized.
+   * @param initStudyRoom
+   *          StudyRoom saved in the file in order to be deserialized.
+   *
    * @throws Exception
    *           in the case which singleton already exist.
    */
   public ModelImpl(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive,
-              final Map<Integer, UserImpl> initArchiveUser) throws Exception {
+              final Map<Integer, UserImpl> initArchiveUser,
+              final Map<GregorianCalendar, ArrayList<Integer>> initStudyRoom) throws Exception {
     this.archiveItem = ArchiveImpl.getArchiveImpl();
     this.archiveUser = ArchiveUserImpl.getArchiveImpl();
     this.setItemArchive(initItemArchive);
     this.setUserArchive(initArchiveUser);
+    this.studyRoom = new StudyRoomImpl(initStudyRoom);
   }
 
   /**
@@ -325,28 +331,6 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  @Deprecated
-  public Set<Integer> filterItemGenre(final TypeItem t, final ItemGenre b) throws Exception {
-    Set<Integer> r = new HashSet<>();
-    Set<Integer> all = new HashSet<>();
-    if (t == TypeItem.BOOK) {
-      all = this.getAllItemId(TypeItem.BOOK);
-    }
-    if (t == TypeItem.MOVIE) {
-      all = this.getAllItemId(TypeItem.MOVIE);
-    }
-    if ((t != TypeItem.MOVIE) && (t != TypeItem.BOOK)) {
-      throw new Exception("TypeItem " + t + "not valid");
-    }
-    for (Integer i : all) {
-      if (((ItemImpl) this.archiveItem.getItem(i)).getGenre().equals(b)) {
-        r.add(i);
-      }
-    }
-    return r;
-  }
-
-  @Override
   public Set<Integer> filtersItem(final Set<Integer> set, final TypeSearch ts, final Object param)
               throws Exception {
     if ((ts != TypeSearch.AUTHOR) && (ts != TypeSearch.TITLE) && (ts != TypeSearch.PUBLISHER)
@@ -517,6 +501,11 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
+  public List<Integer> getAllUserSit(final GregorianCalendar day) {
+    return this.studyRoom.getAllSit(day);
+  }
+
+  @Override
   public String getSystemPassword() {
     String s = this.systemPassword;
     return s;
@@ -531,4 +520,5 @@ public class ModelImpl implements Serializable, Model {
   public Map<GregorianCalendar, ArrayList<Integer>> getStudyRoom() {
     return this.studyRoom.getStudyRoom();
   }
+
 }

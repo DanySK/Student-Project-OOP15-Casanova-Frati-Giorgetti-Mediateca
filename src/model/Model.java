@@ -281,21 +281,6 @@ public interface Model {
   Item getRequiredItem(final Integer itemId) throws Exception;
 
   /**
-   * This method can be used by USER, MANAGER. This method return a set of Book
-   * or Movie with respective Genre.
-   *
-   * @param type
-   *          Item's type.
-   * @param genre
-   *          Item's genre.
-   * @return set of item with required genre.
-   *
-   * @throws Exception
-   *           in the case which t is not BOOK or MOVIE.
-   */
-  Set<Integer> filterItemGenre(final TypeItem type, final ItemGenre genre) throws Exception;
-
-  /**
    * This method can be used by USER, MANAGER. This method return a set of
    * itemId which required condition match with ts and param. The first argument
    * is the set of integer that the method filter. In this way you can chain
@@ -388,6 +373,16 @@ public interface Model {
    */
   void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
               throws Exception;
+
+  /**
+   * This method return all the userId sit on this day.
+   *
+   * @param day
+   *          required.
+   * @return a list og integer where 0 means that the sit is free else it is
+   *         busy.
+   */
+  List<Integer> getAllUserSit(final GregorianCalendar day);
 
   /**
    * This method can be used by MANAGER. This method return the system password
