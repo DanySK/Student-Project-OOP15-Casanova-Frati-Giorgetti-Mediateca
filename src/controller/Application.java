@@ -1,7 +1,5 @@
 package controller;
 
-import model.Model;
-import model.ModelImpl;
 import view.View;
 import view.ViewImpl;
 
@@ -22,12 +20,13 @@ public final class Application {
 	 */
 	public static void main(final String[] args) throws Exception {
 		// application starter
-		final Model m = new ModelImpl();
+		// final Model m = new ModelImpl();
 
 		/*
 		 * FileManager fm = new FileManager(); fm.read("archivio.utenti",
 		 * "archivio.oggetti", m);
 		 */
+
 		final Controller c = new ControllerImpl();
 
 		// things to implement

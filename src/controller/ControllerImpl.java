@@ -2,12 +2,15 @@ package controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import model.Model;
+import model.ModelImpl.TypeSearch;
+import model.item.ArchiveImpl;
+import model.item.ArchiveImpl.TypeItem;
 import model.user.UserImpl;
 import view.View;
 
@@ -23,8 +26,6 @@ public class ControllerImpl implements Controller {
 	private Model m;
 	private UserImpl actualUser;
 	private FileManager fm = new FileManager();
-	private String username;
-	private String password;
 
 	/*
 	 * template per i futuri getter
@@ -40,15 +41,15 @@ public class ControllerImpl implements Controller {
 	 * @throws Exception
 	 */
 	public ControllerImpl() throws Exception {
-		// this.init("archivio.utenti", "archivio.oggetti", this.m);
+		this.init("archivio.utenti", "archivio.oggetti", this.m);
 
-		GregorianCalendar calendar = new GregorianCalendar();
-		calendar.set(Calendar.YEAR, 1994);
-		calendar.set(Calendar.MONTH, 3);
-		calendar.set(Calendar.DAY_OF_MONTH, 6);
 		/*
+		 * GregorianCalendar calendar = new GregorianCalendar();
+		 * calendar.set(Calendar.YEAR, 1994); calendar.set(Calendar.MONTH, 3);
+		 * calendar.set(Calendar.DAY_OF_MONTH, 6);
+		 *
 		 * try {
-		 * 
+		 *
 		 * /* this.m.registerUser("Enrico", "Casanova", calendar, "Dakaiden",
 		 * "Arctica64", "enrico.casanova@dadas.it", "334534534534", new
 		 * ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
@@ -57,11 +58,11 @@ public class ControllerImpl implements Controller {
 		 * 0011, 100000); this.m.registerMovie("Star Trek", 2009, "Bad Robot",
 		 * "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY, 120, true,
 		 * 1000000);
-		 * 
-		 * 
+		 *
+		 *
 		 * this.fm.write("archivio.utenti", this.m);
 		 * this.fm.write("archivio.oggetti", this.m);
-		 * 
+		 *
 		 * } catch (FileNotFoundException e) { // TODO Auto-generated catch
 		 * block e.printStackTrace(); } catch (IOException e) { // TODO
 		 * Auto-generated catch block e.printStackTrace(); }
@@ -86,8 +87,8 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void login() {
-		String username = this.v.getUsername();
-		String password = this.v.getPassword();
+		final String username = this.v.getUsername();
+		final String password = this.v.getPassword();
 		Map<Integer, UserImpl> map = this.m.getUserArchive();
 		for (Entry<Integer, UserImpl> entry : map.entrySet()) {
 			if ((entry.getValue().getUsername() == username) && (entry.getValue().getPassword() == password)) {
@@ -99,17 +100,34 @@ public class ControllerImpl implements Controller {
 
 	}
 
+	public void itemElaboration() throws Exception {
+		TypeItem ty = null;
+		for (ArchiveImpl.TypeItem y : ArchiveImpl.TypeItem.values()) {
+			if (y.toString().equals(this.v.getItemFilter())) {
+				ty = y;
+			}
+		}
+
+		TypeSearch ts = null;
+		for (TypeSearch s : TypeSearch.values()) {
+			if (s.toString().equals(this.v.getSearchFilter())) {
+				ts = s;
+
+			}
+		}
+
+		Object searchText = this.v.getSearchText();
+
+		Set<String> set = new HashSet<>();
+
+		for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
+			set.add(this.m.getRequiredItem(i).toString());
+		}
+
+		this.v.setFilteredList(set);
+	}
+
 	public void sendMessage(final String string) {
-
-	}
-
-	@Override
-	public void getUserUsername() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void getUserPassword() {
 
 	}
 
@@ -121,11 +139,5 @@ public class ControllerImpl implements Controller {
 	public void setView(final view.View v) {
 		// TODO Auto-generated method stub
 		this.v = v;
-	}
-
-	@Override
-	public void setUserUsername() {
-		// TODO Auto-generated method stub
-
 	}
 }
