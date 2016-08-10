@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import model.item.Archive;
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.ItemFactory;
@@ -19,6 +20,7 @@ import model.item.ItemImpl;
 import model.item.ItemInfo;
 import model.item.Language;
 import model.item.ReviewImpl;
+import model.user.ArchiveUser;
 import model.user.ArchiveUserImpl;
 import model.user.UserImpl;
 
@@ -33,9 +35,9 @@ public class ModelImpl implements Serializable, Model {
 
   private static final long serialVersionUID = -8370710936091204583L;
   private static final int MAX_DAY = 60;
-  private ArchiveImpl archiveItem;
-  private ArchiveUserImpl archiveUser;
-  private StudyRoomImpl studyRoom = new StudyRoomImpl();
+  private Archive archiveItem;
+  private ArchiveUser archiveUser;
+  private StudyRoom studyRoom = new StudyRoomImpl();
   private String systemPassword = "FmAlchemist";
 
   /**
@@ -119,7 +121,7 @@ public class ModelImpl implements Serializable, Model {
               final GregorianCalendar initBirthdate, final String initUsername,
               final String initPassword, final String initEmail, final String initTelephoneNumber,
               final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
-                          throws Exception {
+              throws Exception {
     if (!this.checkUsername(initUsername)) {
       UserImpl u = new UserImpl(initName, initSurname, initBirthdate, initUsername, initPassword,
                   initEmail, initTelephoneNumber, initBookPref, initMoviePref);
@@ -177,7 +179,7 @@ public class ModelImpl implements Serializable, Model {
               final String initPublisher, final String initAuthor,
               final Language initCurrentLanguage, final ItemGenre initGenre,
               final Integer initDuration, final Boolean initColor, final Integer initNumCopy)
-                          throws Exception {
+              throws Exception {
     ItemImpl m = ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher, initAuthor,
                 initCurrentLanguage, initGenre, initDuration, initColor);
     if (!this.archiveItem.containsItem(m.getiD())) {
