@@ -454,6 +454,7 @@ public class ModelImpl implements Serializable, Model {
     }
   }
 
+  @Override
   public void setReccomandedList(final Integer userId) throws Exception {
 
     Set<Integer> all;
