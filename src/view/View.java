@@ -2,6 +2,8 @@ package view;
 
 import java.util.List;
 
+import controller.ControllerImpl;
+
 /**
  *
  * Interface for the view. It defines methods which can be used by the
@@ -151,5 +153,14 @@ public interface View {
 	 * @param selectedItem
 	 */
 	void likeItem(String selecetedItem);
+
+	/**
+	 * method which sets the program controller.
+	 *
+	 * @param c
+	 */
+	void setController(ControllerImpl c);
+
+	void sendLogin();
 
 }

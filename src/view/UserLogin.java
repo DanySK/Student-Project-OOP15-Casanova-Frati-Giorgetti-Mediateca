@@ -29,4 +29,5 @@ public interface UserLogin {
 	 */
 	String getUserPassword();
 
+	void sendLoginToView();
 }
