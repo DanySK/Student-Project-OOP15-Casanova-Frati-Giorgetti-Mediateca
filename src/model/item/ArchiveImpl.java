@@ -78,7 +78,7 @@ public final class ArchiveImpl implements Serializable, Archive {
                     new Pair<>(i, new ItemInfo(initNumCopy)));
       }
     } else {
-      throw new RuntimeException("initNumCopy <= 0");
+      throw new Exception("initNumCopy <= 0");
     }
   }
 
