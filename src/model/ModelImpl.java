@@ -90,15 +90,15 @@ public class ModelImpl implements Serializable, Model {
   }
 
   /**
-   * This method can be used by MANAGER. This method set the item archive in
-   * order to be (de)serialized.
+   * DA RIPRISTINARE PRIVATE This method can be used by MANAGER. This method set
+   * the item archive in order to be (de)serialized.
    *
-   * @param itemArchive
+   * @param initItemArchive
    *          item's archive.
    * @throws Exception
    *           in the case which the archive is been already initialized.
    */
-  private void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
+  public void setItemArchive(final Map<Integer, Pair<ItemImpl, ItemInfo>> initItemArchive)
               throws Exception {
     this.archiveItem.setArchiveItemImpl(initItemArchive);
   }
@@ -109,8 +109,8 @@ public class ModelImpl implements Serializable, Model {
   }
 
   /**
-   * This method can be used by MANAGER.This method set the user archive in
-   * order to be (de)serialized.
+   * DA RIPRISTINARE PRIVATE This method can be used by MANAGER.This method set
+   * the user archive in order to be (de)serialized.
    *
    * @param initArchiveUser
    *          the archiveUser to set
@@ -118,8 +118,18 @@ public class ModelImpl implements Serializable, Model {
    * @throws Exception
    *           in the case which the archive is benne already initialized.
    */
-  private void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception {
+  public void setUserArchive(final Map<Integer, UserImpl> initArchiveUser) throws Exception {
     this.archiveUser.setArchiveUserImpl(initArchiveUser);
+  }
+
+  /**
+   * DA ELIMINARE E RIPRISTINARE METODO IN StudyRoomImpl.
+   *
+   * @param initStudyRoom
+   *          study room to set.
+   */
+  public void setStudyRoom(final Map<GregorianCalendar, ArrayList<Integer>> initStudyRoom) {
+    this.getStudyRoom().putAll(initStudyRoom);
   }
 
   @Override
