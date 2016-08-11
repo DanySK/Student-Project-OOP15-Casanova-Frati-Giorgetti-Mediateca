@@ -2,6 +2,7 @@ package model.user;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Formatter;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,12 +44,13 @@ public class UserImpl implements Serializable, User {
 
   @Override
   public String toString() {
-    return "UserImpl [name=" + this.name + ", surname=" + this.surname + ", birthdate="
-                + this.birthdate + ", username=" + this.username + ", password=" + this.password
-                + ", idUser=" + this.idUser + ", email=" + this.email + ", telephoneNumber="
-                + this.telephoneNumber + ", loanArchive=" + this.loanArchive + ", wishList="
-                + this.wishList + ", recommendedList=" + this.recommendedList + ", bookPreferences="
-                + this.bookPreferences + ", moviePreferences=" + this.moviePreferences + "]";
+    StringBuilder stringBuilder = new StringBuilder();
+    Formatter formatter = new Formatter(stringBuilder);
+    String template = "%15s | %15s | %15s | %30s | %10s ";
+    formatter.format(template, this.getName(), this.getSurname(), this.getUsername(),
+                this.getEmail(), this.getTelephoneNumber());
+    formatter.close();
+    return stringBuilder.toString();
   }
 
   /**

@@ -1,5 +1,7 @@
 package model.item;
 
+import java.util.Formatter;
+
 /**
  * Movie extends ItemImpl taking his common field with Book. It forms the
  * archive with Book.
@@ -12,6 +14,22 @@ public class Movie extends ItemImpl {
   private static final long serialVersionUID = 856227185802047288L;
   private final Integer duration;
   private final Boolean color;
+
+  @Override
+  public String toString() {
+    StringBuilder stringBuilder = new StringBuilder();
+    Formatter formatter = new Formatter(stringBuilder);
+    String str;
+    if (this.color) {
+      str = "COLOR";
+    } else {
+      str = "B/W";
+    }
+    String template = " | %13s";
+    formatter.format(template, str);
+    formatter.close();
+    return super.toString() + stringBuilder.toString();
+  }
 
   /**
    * Movie's constructor.

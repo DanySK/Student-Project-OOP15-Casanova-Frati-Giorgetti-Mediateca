@@ -17,7 +17,7 @@ public class Book extends ItemImpl {
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
     Formatter formatter = new Formatter(stringBuilder);
-    String template = "%13s";
+    String template = " | %13s";
     formatter.format(template, this.getIsbn());
     formatter.close();
     return " " + super.toString() + stringBuilder.toString();
