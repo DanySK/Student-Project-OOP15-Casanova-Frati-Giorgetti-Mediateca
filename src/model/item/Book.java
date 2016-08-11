@@ -1,5 +1,7 @@
 package model.item;
 
+import java.util.Formatter;
+
 import com.google.common.base.Optional;
 
 /**
@@ -13,8 +15,12 @@ public class Book extends ItemImpl {
 
   @Override
   public String toString() {
-    return super.toString() + "Book [isbn=" + this.isbn + ", numRelease=" + this.numRelease
-                + "] - BOOK";
+    StringBuilder stringBuilder = new StringBuilder();
+    Formatter formatter = new Formatter(stringBuilder);
+    String template = "%13s";
+    formatter.format(template, this.getIsbn());
+    formatter.close();
+    return " " + super.toString() + stringBuilder.toString();
   }
 
   private static final long serialVersionUID = -7358930538078727479L;

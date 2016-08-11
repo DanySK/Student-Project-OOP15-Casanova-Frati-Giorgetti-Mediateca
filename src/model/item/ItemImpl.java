@@ -2,6 +2,7 @@ package model.item;
 
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.Formatter;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -67,10 +68,13 @@ public class ItemImpl implements Item, Serializable {
 
   @Override
   public String toString() {
-    return "[iD=" + this.iD + ", title=" + this.title + ", releaseYear=" + this.releaseYear
-                + ", publisher=" + this.publisher + ", author=" + this.author + ", currentLanguage="
-                + this.currentLanguage + ", setReview=" + this.setReview.toString() + ", like="
-                + this.like + ", averageVote=" + this.averageVote + this.genre;
+    StringBuilder stringBuilder = new StringBuilder();
+    Formatter formatter = new Formatter(stringBuilder);
+    String template = "%15s %20s %20s %30s %10s ";
+    formatter.format(template, this.getiD(), this.getTitle(), this.getAuthor(), this.getGenre(),
+                this.getCurrentLanguage());
+    formatter.close();
+    return stringBuilder.toString();
   }
 
   /**
