@@ -29,7 +29,7 @@ public interface BookScreen {
 	String getItemType();
 
 	/**
-	 * method which returns the string of the item selected from filtered list
+	 * method which returns the string of the item selected from filtered list.
 	 */
 	String getSelectedItemFromList();
 }

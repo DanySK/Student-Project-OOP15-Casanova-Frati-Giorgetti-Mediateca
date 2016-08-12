@@ -11,9 +11,6 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 	private static final long serialVersionUID = 1L;
 	private static final int ELEMENTS_TO_SHOW = 25;
 	private final JPanel bookMenuPanel = new JPanel();
-	private View toViewClass = new ViewImpl();
-	private ReviewScreen toReview = new ReviewScreenImpl();
-	private BorrowedScreen toBorrowed = new BorrowedScreenImpl();
 	private final JLabel mainLabel;
 	private final JButton borrowItem;
 	private final JButton giveBackItem;
@@ -31,7 +28,8 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 	private final JButton backToMenu;
 	private final JList FilteredList;
 
-	public BookScreenImpl(final int screenLenght, final int screenWidth) {
+	public BookScreenImpl(final View v, final ListScreen l,
+			final ReviewScreen r, final int screenLenght, final int screenWidth) {
 		this.mainLabel = new JLabel(
 				"Benvenuto nell'area Biblioteca, premi un pulsante");
 		this.mainLabel.setBounds(21, 9, 281, 16);
@@ -76,26 +74,25 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 		this.bookMenuPanel.add(this.FilteredList);
 		this.bookMenuPanel.add(this.review);
 
-		this.backToMenu.addActionListener(e -> this.toViewClass
-				.swapView("Menu Panel"));
+		this.backToMenu.addActionListener(e -> v.swapView("Menu Panel"));
 		this.textToSearch = this.searchField.getText();
 		this.selectedFilter = (String) this.filterSelect.getSelectedItem();
 		this.itemType = (String) this.itemSelect.getSelectedItem();
 		this.itemSelectedFromList = (String) this.FilteredList
 				.getSelectedValue();
-		this.borrowItem.addActionListener(e -> this.toViewClass
+		this.borrowItem.addActionListener(e -> v
 				.borrowItem(this.itemSelectedFromList));
-		this.giveBackItem.addActionListener(e -> this.toViewClass
+		this.giveBackItem.addActionListener(e -> v
 				.giveBackItem(this.itemSelectedFromList));
-		this.likeItem.addActionListener(e -> this.toViewClass
+		this.likeItem.addActionListener(e -> v
 				.likeItem(this.itemSelectedFromList));
 		this.review.addActionListener(e -> {
-			this.toViewClass.reviewItem(this.itemSelectedFromList);
-			this.toReview.startReviewScreen();
+			v.reviewItem(this.itemSelectedFromList);
+			r.startReviewScreen();
 		});
 		this.seeBorrowedItem.addActionListener(e -> {
-			this.toViewClass.setBorrowedItemList();
-			this.toBorrowed.startBorrowedScreen();
+			v.setBorrowedItemList();
+			l.startListScreen(v, ListScreenImpl.ListScreenType.BORROWED);
 		});
 	}
 

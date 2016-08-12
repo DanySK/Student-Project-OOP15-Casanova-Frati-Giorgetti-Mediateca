@@ -19,24 +19,34 @@ import controller.Controller;
  * @author Luca
  *
  */
+
 public class ViewImpl implements View {
-	static final int SCREEN_LENGHT = 1280;
-	static final int SCREEN_WIDTH = 920;
-	static final private JPanel container = new JPanel();
-	final static private CardLayout cl = new CardLayout();
 
-	final JPanel card1 = new UserLoginImpl();
-	final JPanel card2 = new UserMenuImpl(ViewImpl.SCREEN_LENGHT,
-			ViewImpl.SCREEN_WIDTH);
-	final JPanel card3 = new BookScreenImpl(ViewImpl.SCREEN_LENGHT,
-			ViewImpl.SCREEN_WIDTH);
-	private ReviewScreen toReview = new ReviewScreenImpl();
+	final private static JPanel container = new JPanel();
+	final private static CardLayout cl = new CardLayout();
+	final int SCREEN_LENGHT = 1280;
+	final int SCREEN_WIDTH = 920;
+	View v;
+	public ReviewScreen r = new ReviewScreenImpl();
+	public ListScreen l = new ListScreenImpl();
 
-	public static void swapView(final String panelName) {
-		ViewImpl.cl.show(ViewImpl.container, panelName);
-		return;
+	public void View() {
+		this.v = new ViewImpl();
+
 	}
 
+	final JPanel card1 = new UserLoginImpl(this.v);
+	final JPanel card2 = new UserMenuImpl(this.v, this.l, this.r,
+			this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+	final JPanel card3 = new BookScreenImpl(this.v, this.l, this.r,
+			this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+
+	/**
+	 * enum for List screen type
+	 *
+	 * @author Luca Giorgetti
+	 *
+	 */
 	private static Controller c;
 
 	@Override
@@ -49,7 +59,7 @@ public class ViewImpl implements View {
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Mediateca");
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		mainFrame.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
+		mainFrame.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 		mainFrame.setResizable(false);
 		ViewImpl.container.setLayout(ViewImpl.cl);
 		final JPanel card0 = new JPanel();
@@ -64,9 +74,16 @@ public class ViewImpl implements View {
 		ViewImpl.container.add(this.card2, "User Menu Card");
 		ViewImpl.container.add(this.card3, "Book Screen Panel");
 		ViewImpl.cl.show(ViewImpl.container, "Main Card");
-		login.addActionListener(e -> ViewImpl.swapView("LoginCard"));
+		login.addActionListener(e -> ViewImpl.cl.show(ViewImpl.container,
+				"LoginCard"));
 		mainFrame.add(ViewImpl.container);
 		mainFrame.setVisible(true);
+	}
+
+	@Override
+	public void swapView(final String panelName) {
+		ViewImpl.cl.show(ViewImpl.container, panelName);
+		return;
 	}
 
 	@Override
@@ -100,12 +117,12 @@ public class ViewImpl implements View {
 
 	@Override
 	public int getScore() {
-		return this.toReview.getSelectedScore();
+		return ReviewScreen.getSelectedScore();
 	}
 
 	@Override
 	public String getReview() {
-		return this.toReview.getReview();
+		return ReviewScreen.getReview();
 	}
 
 	public void setFilteredList(final List filteredList) {
@@ -147,7 +164,7 @@ public class ViewImpl implements View {
 
 	/*
 	 * @Override public String getMenagerPassword() {
-	 * 
+	 *
 	 * }
 	 */
 	@Override
@@ -167,7 +184,7 @@ public class ViewImpl implements View {
 
 	/*
 	 * @Override public int getStudyRoomSitsJustTaken() {
-	 * 
+	 *
 	 * }
 	 */
 	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {
@@ -183,11 +200,6 @@ public class ViewImpl implements View {
 	 * @Override public List setBorrowedItemList() { return listaPrestiti; //
 	 * TODO Auto-generated method stub }
 	 */
-	@Override
-	public void setItemAvailabilityList() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void setStudyRoomStatus() {
@@ -196,7 +208,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public List setBorrowedItemList() {
+	public List<String> setBorrowedItemList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -211,5 +223,10 @@ public class ViewImpl implements View {
 	public int getStudyRoomSitsJustTaken() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public List<String> setLikeList() {
+		return null;
 	}
 }

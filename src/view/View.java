@@ -71,20 +71,6 @@ public interface View {
 
 	/**
 	 *
-	 * method which sets the list of items borrowed by user.
-	 *
-	 * @return
-	 */
-	List setBorrowedItemList();
-
-	/**
-	 *
-	 * method which sets the list of available items.
-	 */
-	void setItemAvailabilityList();
-
-	/**
-	 *
 	 * method which returns informations from user registration.
 	 */
 	void getUserRegistration();
@@ -154,8 +140,11 @@ public interface View {
 	 */
 	void setController(Controller c);
 
+	List<String> setLikeList();
+
+	List setBorrowedItemList();
+
 	void swapView(String panelName);
 
 	void sendLogin();
-
 }

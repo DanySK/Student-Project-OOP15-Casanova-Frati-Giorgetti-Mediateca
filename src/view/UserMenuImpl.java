@@ -16,10 +16,15 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	/**
 	 * Create the panel.
 	 *
+	 * @param v
+	 * @param r
+	 * @param l
+	 *
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
-	public UserMenuImpl(final int screenLenght, final int screenWidth) {
+	public UserMenuImpl(final View v, final ListScreen l, final ReviewScreen r,
+			final int screenLenght, final int screenWidth) {
 		this.mainLabel = new JLabel(
 				"Seleziona il tipo di servizio a cui vuoi accedere:");
 		this.mainLabel.setBounds(12, 13, 324, 48);
@@ -39,8 +44,7 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		this.UserMenuPanel.add(this.exitProgram);
 		this.UserMenuPanel.add(this.accountSettings);
 		this.exitProgram.addActionListener(e -> System.exit(0));
-		this.bookServices.addActionListener(e -> this.toViewClass
-				.swapView("Book Panel"));
+		this.bookServices.addActionListener(e -> v.swapView("Book Panel"));
 		// this.studyRoomServices.addActionListener(e -> );
 		// this.accountSettings.addActionListener(e -> );
 

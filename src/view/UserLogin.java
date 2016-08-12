@@ -1,6 +1,5 @@
 package view;
 
-import javax.swing.JPanel;
 
 /**
  * Interface of panel of user login.
@@ -8,12 +7,6 @@ import javax.swing.JPanel;
  * @author Luca
  */
 public interface UserLogin {
-	/**
-	 * Method which returns the user login panel.
-	 *
-	 * @return userLoginPanel
-	 */
-	JPanel getUserLoginPanel();
 
 	/**
 	 * Method which returns username inserted by user.
@@ -29,5 +22,4 @@ public interface UserLogin {
 	 */
 	String getUserPassword();
 
-	void sendLoginToView();
 }

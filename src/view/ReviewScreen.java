@@ -19,13 +19,19 @@ public interface ReviewScreen {
 	 * @param scoreGroup
 	 * @return int
 	 */
-	int getSelectedScore();
+	static int getSelectedScore() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	/**
 	 * method which returns the review typed by user.
 	 *
 	 * @return
 	 */
-	String getReview();
+	static String getReview() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
