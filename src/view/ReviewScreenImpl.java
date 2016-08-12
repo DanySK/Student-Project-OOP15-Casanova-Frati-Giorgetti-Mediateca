@@ -21,15 +21,11 @@ public class ReviewScreenImpl implements ReviewScreen {
 	private JButton discard;
 	private JButton send;
 	private static ButtonGroup scoreGroup = new ButtonGroup();
-	private View toViewClass = new ViewImpl();
 	ReviewScreen r;
 
-	public void ReviewScreen() {
-		this.r = new ReviewScreenImpl();
-	}
-
 	@Override
-	public void startReviewScreen() {
+	public void startReviewScreen(final View v) {
+		this.r = new ReviewScreenImpl();
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Recensione");
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -99,7 +95,7 @@ public class ReviewScreenImpl implements ReviewScreen {
 		});
 
 		this.send.addActionListener(e -> {
-			this.toViewClass.getReview();
+			v.getReview();
 			mainFrame.dispose();
 
 		});

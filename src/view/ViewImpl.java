@@ -26,20 +26,12 @@ public class ViewImpl implements View {
 	final private static CardLayout cl = new CardLayout();
 	final int SCREEN_LENGHT = 1280;
 	final int SCREEN_WIDTH = 920;
-	View v;
+
 	public ReviewScreen r = new ReviewScreenImpl();
 	public ListScreen l = new ListScreenImpl();
-
-	public void View() {
-		this.v = new ViewImpl();
-
-	}
-
-	final JPanel card1 = new UserLoginImpl(this.v);
-	final JPanel card2 = new UserMenuImpl(this.v, this.l, this.r,
-			this.SCREEN_LENGHT, this.SCREEN_WIDTH);
-	final JPanel card3 = new BookScreenImpl(this.v, this.l, this.r,
-			this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+	JPanel card1;
+	JPanel card2;
+	JPanel card3;
 
 	/**
 	 * enum for List screen type
@@ -54,8 +46,18 @@ public class ViewImpl implements View {
 		ViewImpl.c = c;
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	public void startView() {
+		View v = new ViewImpl();
+		this.card1 = new UserLoginImpl(v);
+		this.card2 = new UserMenuImpl(v, this.l, this.r, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH);
+		this.card3 = new BookScreenImpl(v, this.l, this.r, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH);
+
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Mediateca");
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -65,18 +67,21 @@ public class ViewImpl implements View {
 		final JPanel card0 = new JPanel();
 		final JLabel welcome = new JLabel(
 				"Benvenuto in Mediateca: esegui il login per poter accedere!");
+		welcome.setBounds(52, 13, 339, 16);
 		final JButton login = new JButton("Login");
+		login.setBounds(118, 67, 194, 148);
+		card0.setLayout(null);
 
-		card0.add(welcome, "Benvenuto");
+		card0.add(welcome);
+		card0.add(login);
 
 		ViewImpl.container.add(card0, "Main Card");
 		ViewImpl.container.add(this.card1, "Login Card");
 		ViewImpl.container.add(this.card2, "User Menu Card");
 		ViewImpl.container.add(this.card3, "Book Screen Panel");
 		ViewImpl.cl.show(ViewImpl.container, "Main Card");
-		login.addActionListener(e -> ViewImpl.cl.show(ViewImpl.container,
-				"LoginCard"));
-		mainFrame.add(ViewImpl.container);
+		login.addActionListener(e -> this.swapView("Login Card"));
+		mainFrame.getContentPane().add(ViewImpl.container);
 		mainFrame.setVisible(true);
 	}
 
@@ -164,7 +169,7 @@ public class ViewImpl implements View {
 
 	/*
 	 * @Override public String getMenagerPassword() {
-	 *
+	 * 
 	 * }
 	 */
 	@Override
@@ -184,7 +189,7 @@ public class ViewImpl implements View {
 
 	/*
 	 * @Override public int getStudyRoomSitsJustTaken() {
-	 *
+	 * 
 	 * }
 	 */
 	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {

@@ -5,11 +5,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class UserMenuImpl extends JPanel implements UserMenu {
+	private static final long serialVersionUID = 1L;
 	private JPanel UserMenuPanel = new JPanel();
-	private View toViewClass = new ViewImpl();
 	final private JButton exitProgram;
 	private JLabel mainLabel;
-	private JButton bookServices;
+	private JButton mediateca;
 	private JButton studyRoomServices;
 	private JButton accountSettings;
 
@@ -25,34 +25,38 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	 */
 	public UserMenuImpl(final View v, final ListScreen l, final ReviewScreen r,
 			final int screenLenght, final int screenWidth) {
+		this.setLayout(null);
+
 		this.mainLabel = new JLabel(
-				"Seleziona il tipo di servizio a cui vuoi accedere:");
-		this.mainLabel.setBounds(12, 13, 324, 48);
+				"Seleziona il tipo di serviziovuoi accedere: a cui vuoi accedere");
+		this.mainLabel.setBounds(12, 25, 414, 16);
+		this.add(this.mainLabel);
+
 		this.exitProgram = new JButton("Esci");
-		this.exitProgram.setBounds(436, 228, 153, 38);
-		this.bookServices = new JButton("Biblioteca");
-		this.bookServices.setBounds(296, 60, 163, 108);
+		this.exitProgram.setBounds(246, 228, 163, 38);
+		this.add(this.exitProgram);
+
+		this.mediateca = new JButton("Mediateca");
+		this.mediateca.setBounds(32, 54, 163, 65);
+		this.add(this.mediateca);
+
 		this.studyRoomServices = new JButton("Sala studio");
-		this.studyRoomServices.setBounds(501, 60, 163, 108);
+		this.studyRoomServices.setBounds(246, 54, 163, 65);
+		this.add(this.studyRoomServices);
+
 		this.accountSettings = new JButton("Impostazioni Account");
-		this.accountSettings.setBounds(183, 228, 153, 38);
-		this.UserMenuPanel.setLayout(null);
-		this.UserMenuPanel.setSize(screenLenght, screenWidth);
-		this.UserMenuPanel.add(this.mainLabel);
-		this.UserMenuPanel.add(this.bookServices);
-		this.UserMenuPanel.add(this.studyRoomServices);
-		this.UserMenuPanel.add(this.exitProgram);
-		this.UserMenuPanel.add(this.accountSettings);
-		this.exitProgram.addActionListener(e -> System.exit(0));
-		this.bookServices.addActionListener(e -> v.swapView("Book Panel"));
-		// this.studyRoomServices.addActionListener(e -> );
+		this.accountSettings.addActionListener(arg0 -> {
+		});
+		this.accountSettings.setBounds(32, 228, 163, 38);
+		this.add(this.accountSettings);
+
+		this.exitProgram.addActionListener(e -> v.swapView("Menu Panel"));
+		this.mediateca.addActionListener(e -> v.swapView("Book Panel"));
+		// this.studyRoomServices.addActionListener(e
+		// ->
+		// );
 		// this.accountSettings.addActionListener(e -> );
 
-	}
-
-	@Override
-	public JPanel getUserMenuPanel() {
-		return this.UserMenuPanel;
 	}
 
 }

@@ -27,13 +27,9 @@ public class ListScreenImpl implements ListScreen {
 		BORROWED, LIKE
 	}
 
-	public void ListScreen() {
-		this.l = new ListScreenImpl();
-	}
-
 	@Override
 	public void startListScreen(final View v, final ListScreenType a) {
-
+		this.l = new ListScreenImpl();
 		final JFrame mainFrame = new JFrame();
 		JPanel mainPanel = new JPanel();
 		for (ListScreenType i : ListScreenType.values()) {

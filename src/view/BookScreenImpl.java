@@ -88,7 +88,7 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 				.likeItem(this.itemSelectedFromList));
 		this.review.addActionListener(e -> {
 			v.reviewItem(this.itemSelectedFromList);
-			r.startReviewScreen();
+			r.startReviewScreen(v);
 		});
 		this.seeBorrowedItem.addActionListener(e -> {
 			v.setBorrowedItemList();

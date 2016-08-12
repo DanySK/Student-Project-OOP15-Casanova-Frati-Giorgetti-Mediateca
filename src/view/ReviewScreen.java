@@ -11,7 +11,7 @@ public interface ReviewScreen {
 	/**
 	 * method which open the frame with the review panel.
 	 */
-	void startReviewScreen();
+	void startReviewScreen(View v);
 
 	/**
 	 * method which returns the score typed by user.
