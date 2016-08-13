@@ -40,10 +40,8 @@ public class StudyRoomImpl implements Serializable, StudyRoom {
   }
 
   @Override
-  // DA RIPRISTINARE TORNANDO COLLECTION NON MODIFICABILE
   public Map<GregorianCalendar, ArrayList<Integer>> getStudyRoom() {
-    return this.mapStudyRoom;
-    // return Collections.unmodifiableMap(this.mapStudyRoom);
+    return Collections.unmodifiableMap(this.mapStudyRoom);
   }
 
   @Override
