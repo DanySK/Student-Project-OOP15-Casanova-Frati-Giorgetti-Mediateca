@@ -32,6 +32,7 @@ public class ViewImpl implements View {
 	JPanel card1;
 	JPanel card2;
 	JPanel card3;
+	JPanel card4;
 
 	/**
 	 * enum for List screen type
@@ -46,6 +47,10 @@ public class ViewImpl implements View {
 		ViewImpl.c = c;
 	}
 
+	public enum UserInfo {
+		name, surname, username, password, birthDate, email, telephone
+	}
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -57,7 +62,8 @@ public class ViewImpl implements View {
 				this.SCREEN_WIDTH);
 		this.card3 = new BookScreenImpl(v, this.l, this.r, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH);
-
+		this.card4 = new UserModifyImpl(v, this.SCREEN_LENGHT,
+				this.SCREEN_LENGHT);
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Mediateca");
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -79,52 +85,61 @@ public class ViewImpl implements View {
 		ViewImpl.container.add(this.card1, "Login Card");
 		ViewImpl.container.add(this.card2, "User Menu Card");
 		ViewImpl.container.add(this.card3, "Book Screen Panel");
+		ViewImpl.container.add(this.card4, "User Modify Card");
 		ViewImpl.cl.show(ViewImpl.container, "Main Card");
 		login.addActionListener(e -> this.swapView("Login Card"));
 		mainFrame.getContentPane().add(ViewImpl.container);
 		mainFrame.setVisible(true);
 	}
 
+	// //OK
 	@Override
 	public void swapView(final String panelName) {
 		ViewImpl.cl.show(ViewImpl.container, panelName);
 		return;
 	}
 
+	// //OK
 	@Override
 	public String getUsername() {
 		return ((UserLoginImpl) this.card1).getUserUsername();
 	}
 
+	// //OK
 	@Override
 	public String getPassword() {
 		return ((UserLoginImpl) this.card1).getUserPassword();
 
 	}
 
+	// //OK
 	@Override
 	public String getSearchFilter() {
 		return ((BookScreenImpl) this.card3).getSearchFilter();
 
 	}
 
+	// //OK
 	@Override
 	public String getItemFilter() {
 		return ((BookScreenImpl) this.card3).getItemType();
 
 	}
 
+	// //OK
 	@Override
 	public String getSearchText() {
 		return ((BookScreenImpl) this.card3).getSearchText();
 
 	}
 
+	// //OK
 	@Override
 	public int getScore() {
 		return ReviewScreen.getSelectedScore();
 	}
 
+	// //OK
 	@Override
 	public String getReview() {
 		return ReviewScreen.getReview();
@@ -182,16 +197,13 @@ public class ViewImpl implements View {
 
 	}
 
+	// //OK
 	@Override
 	public void sendLogin() {
 		ViewImpl.c.login();
 	}
 
-	/*
-	 * @Override public int getStudyRoomSitsJustTaken() {
-	 * 
-	 * }
-	 */
+	@Override
 	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {
 
 	}
@@ -234,4 +246,32 @@ public class ViewImpl implements View {
 	public List<String> setLikeList() {
 		return null;
 	}
+
+	// //waiting CONTROLLER Function Name
+	@Override
+	public void sendUserModify() {
+		// ViewImpl.c.userModify();
+	}
+
+	// //OK
+	@Override
+	public void setUserModifyField(final String name, final String surname,
+			final String username, final String password,
+			final String birthDate, final String email, final String telephone) {
+		((UserModifyImpl) this.card4).setField(name, surname, username,
+				password, birthDate, email, telephone);
+	}
+
+	// //OK
+	@Override
+	public void giveMeUserInfo() {
+
+	}
+
+	// //OK
+	@Override
+	public String getModifiedInfo(final UserInfo info) {
+		return ((UserModifyImpl) this.card4).getInfo(info);
+	}
+
 }

@@ -26,7 +26,7 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	 * Create the panel.
 	 */
 	public UserLoginImpl(final View v) {
-		this.mainLabel = new JLabel("Inserisci qui nome username e password");
+		this.mainLabel = new JLabel("Inserisci qui username e password");
 		this.mainLabel.setBounds(250, 94, 267, 16);
 		this.passwordLabel = new JLabel("Password:");
 		this.passwordLabel.setBounds(250, 193, 76, 34);
@@ -34,8 +34,8 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.passwordTextArea.setRows(1);
 		this.passwordTextArea.setBounds(322, 199, 181, 25);
 		this.backToSelectAccount = new JButton("Torna alla scelta");
-		this.backToSelectAccount.addActionListener(e -> v
-				.swapView("User Menu Card"));
+		this.backToSelectAccount
+				.addActionListener(e -> v.swapView("Main Card"));
 		this.backToSelectAccount.setBounds(626, 362, 162, 25);
 		this.setSize(800, 400);
 		this.setLayout(null);

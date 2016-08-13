@@ -1,7 +1,9 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import view.ViewImpl.UserInfo;
 import controller.Controller;
 
 /**
@@ -147,4 +149,15 @@ public interface View {
 	void swapView(String panelName);
 
 	void sendLogin();
+
+	void sendUserModify();
+
+	void giveMeUserInfo();
+
+	void setUserModifyField(String name, String surname, String username,
+			String password, String birthDate, String email, String telephone);
+
+	String getModifiedInfo(UserInfo info);
+
+	void setStudyRoomStatus(ArrayList studyRoomStatus);
 }
