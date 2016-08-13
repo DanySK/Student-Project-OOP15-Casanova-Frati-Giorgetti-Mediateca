@@ -28,13 +28,13 @@ public class ViewImpl implements View {
 	final int SCREEN_LENGHT = 1280;
 	final int SCREEN_WIDTH = 920;
 
-	public ReviewScreen r = new ReviewScreenImpl();
 	JPanel card1;
 	JPanel card2;
 	JPanel card3;
 	JPanel card4;
 	JPanel card5;
 	JPanel card6;
+	JPanel card7;
 
 	/**
 	 * enum for List screen type
@@ -42,11 +42,11 @@ public class ViewImpl implements View {
 	 * @author Luca Giorgetti
 	 *
 	 */
-	private static Controller c;
+	private Controller c;
 
 	@Override
 	public void setController(final Controller c) {
-		ViewImpl.c = c;
+		this.c = c;
 	}
 
 	public enum UserInfo {
@@ -57,7 +57,7 @@ public class ViewImpl implements View {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
 				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card");
+				"BorrowedList Screen Card"), REVIEW("Review Card");
 
 		private final String name;
 
@@ -74,13 +74,15 @@ public class ViewImpl implements View {
 		}
 	}
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	public void startView() {
 		View v = new ViewImpl();
 		this.card1 = new UserLoginImpl(v);
-		this.card2 = new UserMenuImpl(v, this.r, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH);
-		this.card3 = new MediatecaScreenImpl(v, this.r, this.SCREEN_LENGHT,
+		this.card2 = new UserMenuImpl(v, this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+		this.card3 = new MediatecaScreenImpl(v, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH);
 		this.card4 = new UserModifyImpl(v, this.SCREEN_LENGHT,
 				this.SCREEN_LENGHT);
@@ -88,6 +90,8 @@ public class ViewImpl implements View {
 				this.SCREEN_WIDTH, ListScreenType.LIKE);
 		this.card6 = new ListScreenImpl(v, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH, ListScreenType.BORROWED);
+		this.card7 = new ReviewScreenImpl(v, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH);
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Mediateca");
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -112,6 +116,7 @@ public class ViewImpl implements View {
 		ViewImpl.container.add(this.card4, CardName.USER_MODIFY.toString());
 		ViewImpl.container.add(this.card5, CardName.LIKE_LIST.toString());
 		ViewImpl.container.add(this.card6, CardName.BORROWED_LIST.toString());
+		ViewImpl.container.add(this.card7, CardName.REVIEW.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
@@ -164,13 +169,13 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public int getScore() {
-		return ReviewScreen.getSelectedScore();
+		return ((ReviewScreen) this.card7).getSelectedScore();
 	}
 
 	// //OK
 	@Override
 	public String getReview() {
-		return ReviewScreen.getReview();
+		return ((ReviewScreen) this.card7).getReview();
 	}
 
 	public void setFilteredList(final List<String> filteredList) {
@@ -226,7 +231,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void sendLogin() {
-		ViewImpl.c.login();
+		this.c.login();
 	}
 
 	@Override
@@ -300,5 +305,12 @@ public class ViewImpl implements View {
 	@Override
 	public void giveMeLikeList() {
 		// ViewImpl.c.likeList();
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void controllerGetReview() {
+		// ViewImpl.c.review();
+
 	}
 }

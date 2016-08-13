@@ -24,12 +24,11 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	 * Create the panel.
 	 *
 	 * @param v
-	 * @param r
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
-	public UserMenuImpl(final View v, final ReviewScreen r,
-			final int screenLenght, final int screenWidth) {
+	public UserMenuImpl(final View v, final int screenLenght,
+			final int screenWidth) {
 		this.setLayout(null);
 
 		this.mainLabel = new JLabel(

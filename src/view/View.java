@@ -62,9 +62,9 @@ public interface View {
 
 	/**
 	 *
-	 * method which @return the review typed by the user.
+	 * method which calls the controller for taking review.
 	 */
-	String getReview();
+	void controllerGetReview();
 
 	/**
 	 *
@@ -222,4 +222,12 @@ public interface View {
 	 * @return
 	 */
 	void giveMeLikeList();
+
+	/**
+	 * method which allows to get review typed by user.
+	 * 
+	 * @return
+	 */
+	String getReview();
+
 }

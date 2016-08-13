@@ -40,12 +40,11 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	 * Builder for MediatecaScreen.
 	 *
 	 * @param v
-	 * @param r
 	 * @param screenLenght
 	 * @param screenWidth
 	 */
-	public MediatecaScreenImpl(final View v, final ReviewScreen r,
-			final int screenLenght, final int screenWidth) {
+	public MediatecaScreenImpl(final View v, final int screenLenght,
+			final int screenWidth) {
 		this.mainLabel = new JLabel(
 				"Benvenuto nell'area Biblioteca, premi un pulsante");
 		this.mainLabel.setBounds(21, 9, 281, 16);
@@ -74,7 +73,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.backToMenu.setBounds(302, 262, 136, 25);
 		this.FilteredList = new JList();
 		this.FilteredList
-		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.FilteredList.setBounds(21, 106, 269, 181);
 		this.review = new JButton("Recensisci");
 		this.review.setBounds(302, 160, 136, 25);
@@ -105,10 +104,9 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 				.likeItem(this.itemSelectedFromList));
 		this.review.addActionListener(e -> {
 			v.reviewItem(this.itemSelectedFromList);
-			r.startReviewScreen(v);
+			v.swapView(CardName.REVIEW);
 		});
 		this.seeBorrowedItem.addActionListener(e -> {
-			v.setBorrowedItemList();
 			v.swapView(CardName.BORROWED_LIST);
 		});
 	}
