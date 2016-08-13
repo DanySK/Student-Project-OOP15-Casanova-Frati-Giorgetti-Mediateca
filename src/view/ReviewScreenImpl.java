@@ -13,10 +13,16 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.WindowConstants;
 
+/**
+ * Class which implements the ReviewScreen interface.
+ *
+ * @author Luca Giorgetti
+ *
+ */
 public class ReviewScreenImpl implements ReviewScreen {
-	final static int FRAME_LENGHT = 1280;
-	final static int FRAME_WIDTH = 920;
-	final static int MAX_MARK = 5;
+	static final int FRAME_LENGHT = 1280;
+	static final int FRAME_WIDTH = 920;
+	static final int MAX_MARK = 5;
 	private static JTextArea review;
 	private JButton discard;
 	private JButton send;

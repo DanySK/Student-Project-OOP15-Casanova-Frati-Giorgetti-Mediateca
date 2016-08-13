@@ -1,6 +1,5 @@
 package view;
 
-
 /**
  * Interface of panel of user login.
  *
@@ -11,14 +10,14 @@ public interface UserLogin {
 	/**
 	 * Method which returns username inserted by user.
 	 *
-	 * @return user username
+	 * @return username
 	 */
 	String getUserUsername();
 
 	/**
 	 * Method which returns password inserted by user.
 	 *
-	 * @return user password
+	 * @return password
 	 */
 	String getUserPassword();
 

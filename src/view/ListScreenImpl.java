@@ -10,16 +10,31 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-public class ListScreenImpl implements ListScreen {
-	final static int FRAME_LENGHT = 1280;
-	final static int FRAME_WIDTH = 920;
+/**
+ * Class implementing the interface for ListScreen.
+ *
+ * @author Luca Giorgetti
+ *
+ */
+public class ListScreenImpl extends JPanel implements ListScreen {
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	static final int FRAME_LENGHT = 1280;
+	static final int FRAME_WIDTH = 920;
 
 	private static JLabel presentation;
 	private static JList<String> jList;
 	private static JButton exit;
 	private static List<String> showedList;
-	ListScreen l;
 
+	/**
+	 * Enumeration with types of list which can be showed.
+	 *
+	 * @author Luca Giorgetti
+	 *
+	 */
 	public enum ListScreenType {
 		/**
 		 *
@@ -27,9 +42,16 @@ public class ListScreenImpl implements ListScreen {
 		BORROWED, LIKE
 	}
 
-	@Override
-	public void startListScreen(final View v, final ListScreenType a) {
-		this.l = new ListScreenImpl();
+	/**
+	 * builder for ListScreen.
+	 *
+	 * @param v
+	 * @param screenLenght
+	 * @param screenWidth
+	 * @param a
+	 */
+	public ListScreenImpl(final View v, final int screenLenght,
+			final int screenWidth, final ListScreenType a) {
 		final JFrame mainFrame = new JFrame();
 		JPanel mainPanel = new JPanel();
 		for (ListScreenType i : ListScreenType.values()) {
@@ -37,7 +59,7 @@ public class ListScreenImpl implements ListScreen {
 				mainFrame.setTitle("Oggetti in prestito");
 				ListScreenImpl.presentation = new JLabel(
 						"Ecco gli oggetti che hai in prestito:");
-				ListScreenImpl.showedList = v.setLikeList();
+				v.giveMeBorrowList();
 
 			}
 		}
@@ -46,7 +68,7 @@ public class ListScreenImpl implements ListScreen {
 		mainFrame.setSize(ReviewScreenImpl.FRAME_LENGHT,
 				ReviewScreenImpl.FRAME_WIDTH);
 		mainFrame.setResizable(false);
-		ListScreenImpl.showedList = v.setLikeList();
+		v.giveMeLikeList();
 		ListScreenImpl.presentation = new JLabel(
 				"Ecco gli oggetti che ti interessano:");
 		ListScreenImpl.presentation.setBounds(525, 33, 197, 16);
@@ -69,6 +91,16 @@ public class ListScreenImpl implements ListScreen {
 			mainFrame.dispose();
 		});
 
+	}
+
+	@Override
+	public void setBorrowedList(final List<String> bList) {
+		ListScreenImpl.showedList = bList;
+	}
+
+	@Override
+	public void setLikeList(final List<String> lList) {
+		ListScreenImpl.showedList = lList;
 	}
 
 }

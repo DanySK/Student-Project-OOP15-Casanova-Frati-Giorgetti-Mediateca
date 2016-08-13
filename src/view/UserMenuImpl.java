@@ -4,10 +4,17 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import view.ViewImpl.CardName;
+
+/**
+ * Class which implements the UserMenu interface.
+ *
+ * @author Luca Giorgetti
+ *
+ */
 public class UserMenuImpl extends JPanel implements UserMenu {
 	private static final long serialVersionUID = 1L;
-	private JPanel UserMenuPanel = new JPanel();
-	final private JButton exitProgram;
+	private final JButton exitProgram;
 	private JLabel mainLabel;
 	private JButton mediateca;
 	private JButton studyRoomServices;
@@ -18,12 +25,10 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	 *
 	 * @param v
 	 * @param r
-	 * @param l
-	 *
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
-	public UserMenuImpl(final View v, final ListScreen l, final ReviewScreen r,
+	public UserMenuImpl(final View v, final ReviewScreen r,
 			final int screenLenght, final int screenWidth) {
 		this.setLayout(null);
 
@@ -50,8 +55,8 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		this.accountSettings.setBounds(32, 228, 163, 38);
 		this.add(this.accountSettings);
 
-		this.exitProgram.addActionListener(e -> v.swapView("Menu Panel"));
-		this.mediateca.addActionListener(e -> v.swapView("Book Panel"));
+		this.exitProgram.addActionListener(e -> v.swapView(CardName.MENU));
+		this.mediateca.addActionListener(e -> v.swapView(CardName.ITEM));
 		// this.studyRoomServices.addActionListener(e
 		// ->
 		// );

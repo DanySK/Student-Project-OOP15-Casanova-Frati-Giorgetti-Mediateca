@@ -5,12 +5,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import view.ViewImpl.CardName;
 import view.ViewImpl.UserInfo;
 
+/**
+ * Class which implements the UserModify interface.
+ * 
+ * @author Luca Giorgetti
+ *
+ */
 public class UserModifyImpl extends JPanel implements UserModify {
-	/**
-	 *
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	private JTextField nameF;
@@ -120,7 +125,7 @@ public class UserModifyImpl extends JPanel implements UserModify {
 		this.send.setBounds(341, 262, 97, 25);
 		this.add(this.send);
 		v.giveMeUserInfo();
-		this.discarge.addActionListener(e -> v.swapView("User Menu Card"));
+		this.discarge.addActionListener(e -> v.swapView(CardName.MENU));
 
 		this.send.addActionListener(e -> v.sendUserModify());
 	}

@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import view.ListScreenImpl.ListScreenType;
 import controller.Controller;
 
 /**
@@ -22,17 +23,18 @@ import controller.Controller;
 
 public class ViewImpl implements View {
 
-	final private static JPanel container = new JPanel();
-	final private static CardLayout cl = new CardLayout();
+	private static final JPanel container = new JPanel();
+	private static final CardLayout cl = new CardLayout();
 	final int SCREEN_LENGHT = 1280;
 	final int SCREEN_WIDTH = 920;
 
 	public ReviewScreen r = new ReviewScreenImpl();
-	public ListScreen l = new ListScreenImpl();
 	JPanel card1;
 	JPanel card2;
 	JPanel card3;
 	JPanel card4;
+	JPanel card5;
+	JPanel card6;
 
 	/**
 	 * enum for List screen type
@@ -51,19 +53,41 @@ public class ViewImpl implements View {
 		name, surname, username, password, birthDate, email, telephone
 	}
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+	public enum CardName {
+		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
+				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
+				"LikeList Screen Card"), BORROWED_LIST(
+				"BorrowedList Screen Card");
+
+		private final String name;
+
+		/**
+		 * @param text
+		 */
+		private CardName(final String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return this.name;
+		}
+	}
+
 	@Override
 	public void startView() {
 		View v = new ViewImpl();
 		this.card1 = new UserLoginImpl(v);
-		this.card2 = new UserMenuImpl(v, this.l, this.r, this.SCREEN_LENGHT,
+		this.card2 = new UserMenuImpl(v, this.r, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH);
-		this.card3 = new BookScreenImpl(v, this.l, this.r, this.SCREEN_LENGHT,
+		this.card3 = new MediatecaScreenImpl(v, this.r, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH);
 		this.card4 = new UserModifyImpl(v, this.SCREEN_LENGHT,
 				this.SCREEN_LENGHT);
+		this.card5 = new ListScreenImpl(v, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH, ListScreenType.LIKE);
+		this.card6 = new ListScreenImpl(v, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH, ListScreenType.BORROWED);
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Mediateca");
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -81,55 +105,59 @@ public class ViewImpl implements View {
 		card0.add(welcome);
 		card0.add(login);
 
-		ViewImpl.container.add(card0, "Main Card");
-		ViewImpl.container.add(this.card1, "Login Card");
-		ViewImpl.container.add(this.card2, "User Menu Card");
-		ViewImpl.container.add(this.card3, "Book Screen Panel");
-		ViewImpl.container.add(this.card4, "User Modify Card");
-		ViewImpl.cl.show(ViewImpl.container, "Main Card");
-		login.addActionListener(e -> this.swapView("Login Card"));
+		ViewImpl.container.add(card0, CardName.MAIN.toString());
+		ViewImpl.container.add(this.card1, CardName.LOGIN.toString());
+		ViewImpl.container.add(this.card2, CardName.MENU.toString());
+		ViewImpl.container.add(this.card3, CardName.ITEM.toString());
+		ViewImpl.container.add(this.card4, CardName.USER_MODIFY.toString());
+		ViewImpl.container.add(this.card5, CardName.LIKE_LIST.toString());
+		ViewImpl.container.add(this.card6, CardName.BORROWED_LIST.toString());
+
+		this.swapView(CardName.MAIN);
+		login.addActionListener(e -> this.swapView(CardName.LOGIN));
 		mainFrame.getContentPane().add(ViewImpl.container);
 		mainFrame.setVisible(true);
 	}
 
 	// //OK
+
 	@Override
-	public void swapView(final String panelName) {
-		ViewImpl.cl.show(ViewImpl.container, panelName);
+	public void swapView(final CardName name) {
+		ViewImpl.cl.show(ViewImpl.container, name.toString());
 		return;
 	}
 
 	// //OK
 	@Override
 	public String getUsername() {
-		return ((UserLoginImpl) this.card1).getUserUsername();
+		return ((UserLogin) this.card1).getUserUsername();
 	}
 
 	// //OK
 	@Override
 	public String getPassword() {
-		return ((UserLoginImpl) this.card1).getUserPassword();
+		return ((UserLogin) this.card1).getUserPassword();
 
 	}
 
 	// //OK
 	@Override
 	public String getSearchFilter() {
-		return ((BookScreenImpl) this.card3).getSearchFilter();
+		return ((MediatecaScreen) this.card3).getSearchFilter();
 
 	}
 
 	// //OK
 	@Override
 	public String getItemFilter() {
-		return ((BookScreenImpl) this.card3).getItemType();
+		return ((MediatecaScreen) this.card3).getItemType();
 
 	}
 
 	// //OK
 	@Override
 	public String getSearchText() {
-		return ((BookScreenImpl) this.card3).getSearchText();
+		return ((MediatecaScreen) this.card3).getSearchText();
 
 	}
 
@@ -145,12 +173,14 @@ public class ViewImpl implements View {
 		return ReviewScreen.getReview();
 	}
 
-	public void setFilteredList(final List filteredList) {
+	public void setFilteredList(final List<String> filteredList) {
 
 	}
 
-	public void setBorrowedItemList(final List borrowedItemsList) {
-
+	// //OK
+	@Override
+	public void setBorrowedItemList(final List<String> borrowedItemsList) {
+		((ListScreenImpl) this.card6).setBorrowedList(borrowedItemsList);
 	}
 
 	@Override
@@ -173,10 +203,6 @@ public class ViewImpl implements View {
 		return;
 	}
 
-	public void setItemAvailabilityList(final List availableItemList) {
-
-	}
-
 	@Override
 	public void getUserRegistration() {
 
@@ -184,7 +210,7 @@ public class ViewImpl implements View {
 
 	/*
 	 * @Override public String getMenagerPassword() {
-	 * 
+	 *
 	 * }
 	 */
 	@Override
@@ -213,21 +239,10 @@ public class ViewImpl implements View {
 		// TODO Auto-generated method stub
 	}
 
-	/*
-	 * @Override public List setBorrowedItemList() { return listaPrestiti; //
-	 * TODO Auto-generated method stub }
-	 */
-
 	@Override
 	public void setStudyRoomStatus() {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public List<String> setBorrowedItemList() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -240,11 +255,6 @@ public class ViewImpl implements View {
 	public int getStudyRoomSitsJustTaken() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public List<String> setLikeList() {
-		return null;
 	}
 
 	// //waiting CONTROLLER Function Name
@@ -274,4 +284,21 @@ public class ViewImpl implements View {
 		return ((UserModifyImpl) this.card4).getInfo(info);
 	}
 
+	// //OK
+	@Override
+	public void setLikeItemList(final List<String> likeList) {
+		((ListScreenImpl) this.card5).setLikeList(likeList);
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void giveMeBorrowList() {
+		// ViewImpl.c.borrowList();
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void giveMeLikeList() {
+		// ViewImpl.c.likeList();
+	}
 }

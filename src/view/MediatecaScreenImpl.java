@@ -7,7 +7,15 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BookScreenImpl extends JPanel implements BookScreen {
+import view.ViewImpl.CardName;
+
+/**
+ * Class for ItemScreen
+ *
+ * @author Luca Giorgetti
+ *
+ */
+public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private static final long serialVersionUID = 1L;
 	private static final int ELEMENTS_TO_SHOW = 25;
 	private final JPanel bookMenuPanel = new JPanel();
@@ -28,8 +36,16 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 	private final JButton backToMenu;
 	private final JList FilteredList;
 
-	public BookScreenImpl(final View v, final ListScreen l,
-			final ReviewScreen r, final int screenLenght, final int screenWidth) {
+	/**
+	 * Builder for MediatecaScreen.
+	 *
+	 * @param v
+	 * @param r
+	 * @param screenLenght
+	 * @param screenWidth
+	 */
+	public MediatecaScreenImpl(final View v, final ReviewScreen r,
+			final int screenLenght, final int screenWidth) {
 		this.mainLabel = new JLabel(
 				"Benvenuto nell'area Biblioteca, premi un pulsante");
 		this.mainLabel.setBounds(21, 9, 281, 16);
@@ -57,7 +73,8 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 		this.backToMenu = new JButton("Torna al Menu");
 		this.backToMenu.setBounds(302, 262, 136, 25);
 		this.FilteredList = new JList();
-		this.FilteredList.setVisibleRowCount(BookScreenImpl.ELEMENTS_TO_SHOW);
+		this.FilteredList
+		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.FilteredList.setBounds(21, 106, 269, 181);
 		this.review = new JButton("Recensisci");
 		this.review.setBounds(302, 160, 136, 25);
@@ -74,7 +91,7 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 		this.bookMenuPanel.add(this.FilteredList);
 		this.bookMenuPanel.add(this.review);
 
-		this.backToMenu.addActionListener(e -> v.swapView("Menu Panel"));
+		this.backToMenu.addActionListener(e -> v.swapView(CardName.MENU));
 		this.textToSearch = this.searchField.getText();
 		this.selectedFilter = (String) this.filterSelect.getSelectedItem();
 		this.itemType = (String) this.itemSelect.getSelectedItem();
@@ -92,7 +109,7 @@ public class BookScreenImpl extends JPanel implements BookScreen {
 		});
 		this.seeBorrowedItem.addActionListener(e -> {
 			v.setBorrowedItemList();
-			l.startListScreen(v, ListScreenImpl.ListScreenType.BORROWED);
+			v.swapView(CardName.BORROWED_LIST);
 		});
 	}
 

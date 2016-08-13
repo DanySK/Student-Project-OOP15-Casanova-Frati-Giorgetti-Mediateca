@@ -6,7 +6,7 @@ package view;
  *
  * @author Luca Giorgetti
  */
-public interface BookScreen {
+public interface MediatecaScreen {
 	/**
 	 * method which returns text to search typed by user.
 	 *
@@ -30,6 +30,8 @@ public interface BookScreen {
 
 	/**
 	 * method which returns the string of the item selected from filtered list.
+	 * 
+	 * @return selectedItem
 	 */
 	String getSelectedItemFromList();
 }

@@ -5,6 +5,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import view.ViewImpl.CardName;
+
+/**
+ * Class for the Login panel, implements Userlogin.
+ *
+ * @author Luca Giorgetti
+ *
+ */
 public class UserLoginImpl extends JPanel implements UserLogin {
 
 	/**
@@ -23,7 +31,9 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	private String password = new String();
 
 	/**
-	 * Create the panel.
+	 * Create the panel. Need the calling class
+	 *
+	 * @param v
 	 */
 	public UserLoginImpl(final View v) {
 		this.mainLabel = new JLabel("Inserisci qui username e password");
@@ -34,8 +44,8 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.passwordTextArea.setRows(1);
 		this.passwordTextArea.setBounds(322, 199, 181, 25);
 		this.backToSelectAccount = new JButton("Torna alla scelta");
-		this.backToSelectAccount
-				.addActionListener(e -> v.swapView("Main Card"));
+		this.backToSelectAccount.addActionListener(e -> v
+				.swapView(CardName.MAIN));
 		this.backToSelectAccount.setBounds(626, 362, 162, 25);
 		this.setSize(800, 400);
 		this.setLayout(null);

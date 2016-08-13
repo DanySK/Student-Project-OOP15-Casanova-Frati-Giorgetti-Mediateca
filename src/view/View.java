@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 
+import view.ViewImpl.CardName;
 import view.ViewImpl.UserInfo;
 import controller.Controller;
 
@@ -142,22 +143,83 @@ public interface View {
 	 */
 	void setController(Controller c);
 
-	List<String> setLikeList();
-
-	List setBorrowedItemList();
-
-	void swapView(String panelName);
-
+	/**
+	 * method which asks to controller to get login info.
+	 */
 	void sendLogin();
 
+	/**
+	 * method which told to controller to get modified user info.
+	 */
 	void sendUserModify();
+
+	/**
+	 * method which told to controller to set user info.
+	 */
 
 	void giveMeUserInfo();
 
+	/**
+	 * method which sets in field the user info.
+	 *
+	 * @param name
+	 * @param surname
+	 * @param username
+	 * @param password
+	 * @param birthDate
+	 * @param email
+	 * @param telephone
+	 */
 	void setUserModifyField(String name, String surname, String username,
 			String password, String birthDate, String email, String telephone);
 
+	/**
+	 * method which gets info modified by user. Needs a info type passed.
+	 *
+	 * @param info
+	 * @return information
+	 */
 	String getModifiedInfo(UserInfo info);
 
+	/**
+	 * method which sets the status of study room.
+	 *
+	 * @param studyRoomStatus
+	 */
 	void setStudyRoomStatus(ArrayList studyRoomStatus);
+
+	/**
+	 * method which allows to switch between cards by passing the card name.
+	 *
+	 * @param name
+	 */
+	void swapView(CardName name);
+
+	/**
+	 * method which allows to sets the list containin items borrowed by user.
+	 *
+	 * @param borrowedItemsList
+	 */
+	void setBorrowedItemList(List<String> borrowedItemsList);
+
+	/**
+	 * method which allows to sets the list containin items liked by user.
+	 *
+	 * @param likeList
+	 */
+	void setLikeItemList(List<String> likeList);
+
+	/**
+	 * method which calls controller for setting borrow list.
+	 *
+	 * @return
+	 */
+	void giveMeBorrowList();
+
+	/**
+	 * method which calls controller for setting like list.
+	 *
+	 * @return
+	 */
+	void giveMeLikeList();
 }
