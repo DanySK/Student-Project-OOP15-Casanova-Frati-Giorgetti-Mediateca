@@ -1,7 +1,6 @@
 package view;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import view.ViewImpl.CardName;
 import view.ViewImpl.UserInfo;
@@ -68,12 +67,6 @@ public interface View {
 
 	/**
 	 *
-	 * method which sets the list of items filtered by the word typed .
-	 */
-	void setFilteredList();
-
-	/**
-	 *
 	 * method which returns informations from user registration.
 	 */
 	void getUserRegistration();
@@ -109,32 +102,32 @@ public interface View {
 	void setStudyRoomStatus();
 
 	/**
-	 * method which borrow item.
+	 * method which asks to borrow item.
 	 *
 	 * @param selectedItem
 	 */
-	void borrowItem(String selectedItem);
+	void borrowItem();
 
 	/**
-	 * method which give back item.
+	 * method which asks to give back item.
 	 *
 	 * @param selectedItem
 	 */
-	void giveBackItem(String selectedItem);
+	void giveBackItem();
 
 	/**
-	 * method which review item.
+	 * method which asks to review item.
 	 *
 	 * @param selectedItem
 	 */
-	void reviewItem(String selecetedItem);
+	void reviewItem();
 
 	/**
-	 * method which puts user's like to item.
+	 * method which asks to put user's like to item.
 	 *
 	 * @param selectedItem
 	 */
-	void likeItem(String selecetedItem);
+	void likeItem();
 
 	/**
 	 * method which sets the program controller.
@@ -200,14 +193,14 @@ public interface View {
 	 *
 	 * @param borrowedItemsList
 	 */
-	void setBorrowedItemList(List<String> borrowedItemsList);
+	void setBorrowedItemList(String[] borrowedItemsList);
 
 	/**
-	 * method which allows to sets the list containin items liked by user.
+	 * method which allows to sets the list containing items liked by user.
 	 *
 	 * @param likeList
 	 */
-	void setLikeItemList(List<String> likeList);
+	void setLikeItemList(String[] likeList);
 
 	/**
 	 * method which calls controller for setting borrow list.
@@ -239,5 +232,17 @@ public interface View {
 	 * method which tells controller to take manager login.
 	 */
 	void sendManagerLogin();
+
+	/**
+	 * method which calls controller for setting filtered list.
+	 */
+	void giveMeFilteredList();
+
+	/**
+	 * function which allows to set filterd list.
+	 *
+	 * @param filteredList
+	 */
+	void setFilteredList(String[] filteredList);
 
 }

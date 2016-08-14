@@ -34,7 +34,8 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private String itemType;
 	private String itemSelectedFromList;
 	private final JButton backToMenu;
-	private final JList FilteredList;
+	private final JList<String> filteredJList;
+	private String filteredList[];
 
 	/**
 	 * Builder for MediatecaScreen.
@@ -71,10 +72,11 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.search.setBounds(302, 66, 80, 25);
 		this.backToMenu = new JButton("Torna al Menu");
 		this.backToMenu.setBounds(302, 262, 136, 25);
-		this.FilteredList = new JList();
-		this.FilteredList
-				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
-		this.FilteredList.setBounds(21, 106, 269, 181);
+		v.giveMeFilteredList();
+		this.filteredJList = new JList<String>(this.filteredList);
+		this.filteredJList
+		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+		this.filteredJList.setBounds(21, 106, 269, 181);
 		this.review = new JButton("Recensisci");
 		this.review.setBounds(302, 160, 136, 25);
 
@@ -87,23 +89,19 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.bookMenuPanel.add(this.search);
 		this.bookMenuPanel.add(this.backToMenu);
 		this.bookMenuPanel.add(this.itemSelect);
-		this.bookMenuPanel.add(this.FilteredList);
+		this.bookMenuPanel.add(this.filteredJList);
 		this.bookMenuPanel.add(this.review);
 
 		this.backToMenu.addActionListener(e -> v.swapView(CardName.MENU));
 		this.textToSearch = this.searchField.getText();
 		this.selectedFilter = (String) this.filterSelect.getSelectedItem();
 		this.itemType = (String) this.itemSelect.getSelectedItem();
-		this.itemSelectedFromList = (String) this.FilteredList
-				.getSelectedValue();
-		this.borrowItem.addActionListener(e -> v
-				.borrowItem(this.itemSelectedFromList));
-		this.giveBackItem.addActionListener(e -> v
-				.giveBackItem(this.itemSelectedFromList));
-		this.likeItem.addActionListener(e -> v
-				.likeItem(this.itemSelectedFromList));
+		this.itemSelectedFromList = this.filteredJList.getSelectedValue();
+		this.borrowItem.addActionListener(e -> v.borrowItem());
+		this.giveBackItem.addActionListener(e -> v.giveBackItem());
+		this.likeItem.addActionListener(e -> v.likeItem());
 		this.review.addActionListener(e -> {
-			v.reviewItem(this.itemSelectedFromList);
+			v.reviewItem();
 			v.swapView(CardName.REVIEW);
 		});
 		this.seeBorrowedItem.addActionListener(e -> {
@@ -130,4 +128,10 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	public String getItemType() {
 		return this.itemType;
 	}
+
+	@Override
+	public void setFilteredList(final String[] list) {
+		this.filteredList = list;
+	}
+
 }

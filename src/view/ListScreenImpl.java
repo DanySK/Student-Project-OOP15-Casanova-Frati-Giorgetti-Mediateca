@@ -1,7 +1,5 @@
 package view;
 
-import java.util.List;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -23,7 +21,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 	private JLabel presentation;
 	private JButton exit;
-	private List<String> showedList;
+	private String[] showedList;
 	private JList<String> list;
 
 	/**
@@ -64,7 +62,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 		this.presentation.setBounds(525, 33, 197, 16);
 		this.add(this.presentation);
-		this.list = new JList<String>();
+		this.list = new JList<String>(this.showedList);
 		this.list.setBounds(71, 43, 289, 191);
 		this.add(this.list);
 
@@ -81,12 +79,12 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	}
 
 	@Override
-	public void setBorrowedList(final List<String> bList) {
+	public void setBorrowedList(final String[] bList) {
 		this.showedList = bList;
 	}
 
 	@Override
-	public void setLikeList(final List<String> lList) {
+	public void setLikeList(final String[] lList) {
 		this.showedList = lList;
 	}
 }

@@ -1,5 +1,6 @@
 package view;
 
+
 /**
  *
  * Interface of panel of Book Screen.
@@ -30,8 +31,15 @@ public interface MediatecaScreen {
 
 	/**
 	 * method which returns the string of the item selected from filtered list.
-	 * 
+	 *
 	 * @return selectedItem
 	 */
 	String getSelectedItemFromList();
+
+	/**
+	 * method which sets the filter list.
+	 *
+	 * @param list
+	 */
+	void setFilteredList(String[] list);
 }

@@ -1,7 +1,5 @@
 package view;
 
-import java.util.List;
-
 /**
  * Interface for creating a new JFrame with a list printed inside.
  *
@@ -13,13 +11,13 @@ public interface ListScreen {
 	 *
 	 * @param bList
 	 */
-	void setBorrowedList(List<String> bList);
+	void setBorrowedList(String[] bList);
 
 	/**
 	 * method which sets the like list taken by controller.
-	 * 
+	 *
 	 * @param lList
 	 */
-	void setLikeList(List<String> lList);
+	void setLikeList(String[] lList);
 
 }

@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,15 +33,15 @@ public class ViewImpl implements View {
 	final int SCREEN_LENGHT = 1280;
 	final int SCREEN_WIDTH = 920;
 
-	JPanel card1;
-	JPanel card2;
-	JPanel card3;
-	JPanel card4;
-	JPanel card5;
-	JPanel card6;
-	JPanel card7;
-	JPanel card8;
-	JPanel card9;
+	private JPanel card1;
+	private JPanel card2;
+	private JPanel card3;
+	private JPanel card4;
+	private JPanel card5;
+	private JPanel card6;
+	private JPanel card7;
+	private JPanel card8;
+	private JPanel card9;
 
 	/**
 	 * enum for List screen type
@@ -57,23 +56,36 @@ public class ViewImpl implements View {
 		this.c = c;
 	}
 
+	/**
+	 * enum for info of user.
+	 *
+	 * @author Luca Giorgetti
+	 *
+	 */
 	public enum UserInfo {
 		name, surname, username, password, birthDate, email, telephone
 	}
 
+	/**
+	 * enum for card name.
+	 *
+	 * @author Luca Giorgetti
+	 *
+	 */
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
 						"LikeList Screen Card"), BORROWED_LIST(
 								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-										"User Create Card"), MANAGER_LOGIN("Manager Login");
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+												"Item Create Card"), MANAGER_MENU("Manager Menu Card");
 
 		private final String name;
 
 		/**
 		 * @param text
 		 */
-		private CardName(final String name) {
+		CardName(final String name) {
 			this.name = name;
 		}
 
@@ -215,33 +227,32 @@ public class ViewImpl implements View {
 		return ((ReviewScreen) this.card7).getReview();
 	}
 
-	public void setFilteredList(final List<String> filteredList) {
+	// //OK
+	@Override
+	public void setFilteredList(final String[] filteredList) {
+		((MediatecaScreenImpl) this.card3).setFilteredList(filteredList);
 	}
 
 	// //OK
 	@Override
-	public void setBorrowedItemList(final List<String> borrowedItemsList) {
+	public void setBorrowedItemList(final String[] borrowedItemsList) {
 		((ListScreenImpl) this.card6).setBorrowedList(borrowedItemsList);
 	}
 
 	@Override
-	public void borrowItem(final String selectedItem) {
-		return;
+	public void borrowItem() {
 	}
 
 	@Override
-	public void giveBackItem(final String selectedItem) {
-		return;
+	public void giveBackItem() {
 	}
 
 	@Override
-	public void reviewItem(final String selectedItem) {
-		return;
+	public void reviewItem() {
 	}
 
 	@Override
-	public void likeItem(final String selecetedItem) {
-		return;
+	public void likeItem() {
 	}
 
 	@Override
@@ -249,11 +260,6 @@ public class ViewImpl implements View {
 
 	}
 
-	/*
-	 * @Override public String getMenagerPassword() {
-	 * 
-	 * }
-	 */
 	@Override
 	public void getAddedItem() {
 
@@ -273,11 +279,6 @@ public class ViewImpl implements View {
 	@Override
 	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {
 
-	}
-
-	@Override
-	public void setFilteredList() {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -327,7 +328,7 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void setLikeItemList(final List<String> likeList) {
+	public void setLikeItemList(final String[] likeList) {
 		((ListScreenImpl) this.card5).setLikeList(likeList);
 	}
 
@@ -361,6 +362,13 @@ public class ViewImpl implements View {
 	@Override
 	public void sendManagerLogin() {
 		// this.c.managerLogin();
+
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void giveMeFilteredList() {
+		// this.c.filterList();
 
 	}
 }
