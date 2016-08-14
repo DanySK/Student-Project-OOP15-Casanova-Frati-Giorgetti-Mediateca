@@ -20,8 +20,6 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	static final int FRAME_LENGHT = 1280;
-	static final int FRAME_WIDTH = 920;
 
 	private JLabel presentation;
 	private JButton exit;
@@ -51,19 +49,19 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 */
 	public ListScreenImpl(final View v, final int screenLenght,
 			final int screenWidth, final ListScreenType a) {
-		for (ListScreenType i : ListScreenType.values()) {
-			if (i == ListScreenType.BORROWED) {
+		for (final ListScreenType i : ListScreenType.values()) {
+			if (i.equals(ListScreenType.BORROWED)) {
 				this.presentation = new JLabel(
 						"Ecco gli oggetti che hai in prestito:");
 				v.giveMeBorrowList();
 
-			} else {
+			} else if (i.equals(ListScreenType.LIKE)) {
 				this.presentation = new JLabel(
 						"Ecco gli oggetti che ti interessano:");
 				v.giveMeLikeList();
 			}
 		}
-		this.setLayout(null);
+
 		this.presentation.setBounds(525, 33, 197, 16);
 		this.add(this.presentation);
 		this.list = new JList<String>();
@@ -77,6 +75,8 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		this.exit.addActionListener(e -> {
 			v.swapView(CardName.ITEM);
 		});
+		this.setSize(screenLenght, screenWidth);
+		this.setLayout(null);
 
 	}
 

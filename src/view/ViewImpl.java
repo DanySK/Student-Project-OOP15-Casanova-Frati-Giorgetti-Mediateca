@@ -1,6 +1,9 @@
 package view;
 
 import java.awt.CardLayout;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +11,12 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 import view.ListScreenImpl.ListScreenType;
+import view.UserLoginImpl.LoginType;
+import view.UserScreenImpl.UserScreenType;
 import controller.Controller;
 
 /**
@@ -35,6 +41,8 @@ public class ViewImpl implements View {
 	JPanel card5;
 	JPanel card6;
 	JPanel card7;
+	JPanel card8;
+	JPanel card9;
 
 	/**
 	 * enum for List screen type
@@ -57,7 +65,8 @@ public class ViewImpl implements View {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
 				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card"), REVIEW("Review Card");
+				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+				"User Create Card"), MANAGER_LOGIN("Manager Login");
 
 		private final String name;
 
@@ -80,18 +89,23 @@ public class ViewImpl implements View {
 	@Override
 	public void startView() {
 		View v = new ViewImpl();
-		this.card1 = new UserLoginImpl(v);
+		this.card1 = new UserLoginImpl(v, LoginType.USER, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH);
 		this.card2 = new UserMenuImpl(v, this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 		this.card3 = new MediatecaScreenImpl(v, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH);
-		this.card4 = new UserModifyImpl(v, this.SCREEN_LENGHT,
-				this.SCREEN_LENGHT);
+		this.card4 = new UserScreenImpl(v, UserScreenType.MODIFY,
+				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
 		this.card5 = new ListScreenImpl(v, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH, ListScreenType.LIKE);
 		this.card6 = new ListScreenImpl(v, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH, ListScreenType.BORROWED);
 		this.card7 = new ReviewScreenImpl(v, this.SCREEN_LENGHT,
 				this.SCREEN_WIDTH);
+		this.card8 = new UserScreenImpl(v, UserScreenType.CREATE,
+				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
+		this.card9 = new UserLoginImpl(v, LoginType.MANAGER,
+				this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Mediateca");
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -99,17 +113,37 @@ public class ViewImpl implements View {
 		mainFrame.setResizable(false);
 		ViewImpl.container.setLayout(ViewImpl.cl);
 		final JPanel card0 = new JPanel();
-		final JLabel welcome = new JLabel(
-				"Benvenuto in Mediateca: esegui il login per poter accedere!");
-		welcome.setBounds(52, 13, 339, 16);
+		final JLabel welcome = new JLabel("Benvenuto in Mediateca!");
+		welcome.setHorizontalAlignment(SwingConstants.CENTER);
+		welcome.setFont(new Font("Tahoma", Font.BOLD, 40));
+		welcome.setBounds(325, 63, 615, 82);
 		final JButton login = new JButton("Login");
-		login.setBounds(118, 67, 194, 148);
-		card0.setLayout(null);
+		login.setFont(new Font("Tahoma", Font.BOLD, 30));
+		final JButton userCreate = new JButton("Registrati");
+		userCreate.setFont(new Font("Tahoma", Font.BOLD, 30));
+		userCreate.setBounds(670, 173, 281, 179);
+		login.setBounds(299, 173, 281, 179);
 
+		card0.setLayout(null);
+		card0.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 		card0.add(welcome);
 		card0.add(login);
+		card0.add(userCreate);
+		this.card1.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 
 		ViewImpl.container.add(card0, CardName.MAIN.toString());
+
+		JLabel ManagerLogin = new JLabel("Accedi come Gestore");
+		ManagerLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		ManagerLogin.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent arg0) {
+				v.swapView(CardName.MANAGER_LOGIN);
+			}
+		});
+		ManagerLogin.setFont(new Font("Tahoma", Font.BOLD, 30));
+		ManagerLogin.setBounds(40, 801, 334, 64);
+		card0.add(ManagerLogin);
 		ViewImpl.container.add(this.card1, CardName.LOGIN.toString());
 		ViewImpl.container.add(this.card2, CardName.MENU.toString());
 		ViewImpl.container.add(this.card3, CardName.ITEM.toString());
@@ -117,9 +151,12 @@ public class ViewImpl implements View {
 		ViewImpl.container.add(this.card5, CardName.LIKE_LIST.toString());
 		ViewImpl.container.add(this.card6, CardName.BORROWED_LIST.toString());
 		ViewImpl.container.add(this.card7, CardName.REVIEW.toString());
+		ViewImpl.container.add(this.card8, CardName.USER_CREATE.toString());
+		ViewImpl.container.add(this.card9, CardName.MANAGER_LOGIN.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
+		userCreate.addActionListener(e -> this.swapView(CardName.USER_CREATE));
 		mainFrame.getContentPane().add(ViewImpl.container);
 		mainFrame.setVisible(true);
 	}
@@ -273,7 +310,7 @@ public class ViewImpl implements View {
 	public void setUserModifyField(final String name, final String surname,
 			final String username, final String password,
 			final String birthDate, final String email, final String telephone) {
-		((UserModifyImpl) this.card4).setField(name, surname, username,
+		((UserScreenImpl) this.card4).setField(name, surname, username,
 				password, birthDate, email, telephone);
 	}
 
@@ -286,7 +323,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public String getModifiedInfo(final UserInfo info) {
-		return ((UserModifyImpl) this.card4).getInfo(info);
+		return ((UserScreenImpl) this.card4).getInfo(info);
 	}
 
 	// //OK
@@ -311,6 +348,20 @@ public class ViewImpl implements View {
 	@Override
 	public void controllerGetReview() {
 		// ViewImpl.c.review();
+
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void sendUserCreate() {
+		// this.c.userCreate();
+
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void sendManagerLogin() {
+		// this.c.managerLogin();
 
 	}
 }

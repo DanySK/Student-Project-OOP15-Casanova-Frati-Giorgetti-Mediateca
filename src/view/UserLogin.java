@@ -21,4 +21,11 @@ public interface UserLogin {
 	 */
 	String getUserPassword();
 
+	/**
+	 * Method which returns password inserted by manager.
+	 *
+	 * @return managerPassword
+	 */
+	String getManagerPassword();
+
 }

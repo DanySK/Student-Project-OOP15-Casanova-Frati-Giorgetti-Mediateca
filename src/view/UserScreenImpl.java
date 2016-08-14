@@ -10,11 +10,11 @@ import view.ViewImpl.UserInfo;
 
 /**
  * Class which implements the UserModify interface.
- * 
+ *
  * @author Luca Giorgetti
  *
  */
-public class UserModifyImpl extends JPanel implements UserModify {
+public class UserScreenImpl extends JPanel implements UserScreen {
 
 	private static final long serialVersionUID = 1L;
 
@@ -36,6 +36,13 @@ public class UserModifyImpl extends JPanel implements UserModify {
 	private JButton discarge;
 	private JButton send;
 
+	public enum UserScreenType {
+		/**
+		 *
+		 */
+		CREATE, MODIFY
+	}
+
 	/**
 	 * Create the panel.
 	 *
@@ -46,8 +53,9 @@ public class UserModifyImpl extends JPanel implements UserModify {
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
-	public UserModifyImpl(final View v, final int screenLenght,
-			final int screenWidth) {
+	public UserScreenImpl(final View v, final UserScreenType type,
+			final int screenLenght, final int screenWidth) {
+
 		this.setLayout(null);
 
 		this.nameF = new JTextField();
@@ -92,6 +100,30 @@ public class UserModifyImpl extends JPanel implements UserModify {
 		this.surnameL = new JLabel("Cognome:");
 		this.surnameL.setBounds(64, 66, 94, 16);
 		this.add(this.surnameL);
+		this.discarge = new JButton("Annulla");
+		if (type.equals(UserScreenType.CREATE)) {
+			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
+			this.send = new JButton("Crea");
+			this.discarge.addActionListener(e -> v.swapView(CardName.MAIN));
+			this.send.addActionListener(e -> v.sendUserCreate());
+		} else if (type.equals(UserScreenType.MODIFY)) {
+			this.presentation = new JLabel("Modifica qui i tuoi dati:");
+			v.giveMeUserInfo();
+			this.send = new JButton("Invio");
+			this.usernameF.setEditable(false);
+			this.discarge.addActionListener(e -> v.swapView(CardName.MENU));
+
+			this.send.addActionListener(e -> v.sendUserModify());
+		}
+
+		this.presentation.setBounds(104, 11, 181, 16);
+		this.add(this.presentation);
+
+		this.discarge.setBounds(12, 262, 97, 25);
+		this.add(this.discarge);
+
+		this.send.setBounds(341, 262, 97, 25);
+		this.add(this.send);
 
 		this.usernameL = new JLabel("Username:");
 		this.usernameL.setBounds(64, 98, 94, 16);
@@ -112,22 +144,6 @@ public class UserModifyImpl extends JPanel implements UserModify {
 		this.cellL = new JLabel("Recapito:");
 		this.cellL.setBounds(64, 205, 94, 16);
 		this.add(this.cellL);
-
-		this.presentation = new JLabel("Modifica qui i tuoi dati:");
-		this.presentation.setBounds(104, 11, 181, 16);
-		this.add(this.presentation);
-
-		this.discarge = new JButton("Annulla");
-		this.discarge.setBounds(12, 262, 97, 25);
-		this.add(this.discarge);
-
-		this.send = new JButton("Invio");
-		this.send.setBounds(341, 262, 97, 25);
-		this.add(this.send);
-		v.giveMeUserInfo();
-		this.discarge.addActionListener(e -> v.swapView(CardName.MENU));
-
-		this.send.addActionListener(e -> v.sendUserModify());
 	}
 
 	@Override

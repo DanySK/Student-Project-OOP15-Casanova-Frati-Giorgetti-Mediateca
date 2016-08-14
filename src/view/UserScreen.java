@@ -9,7 +9,7 @@ import view.ViewImpl.UserInfo;
  * @author Luca Giorgetti
  *
  */
-public interface UserModify {
+public interface UserScreen {
 	/**
 	 * Method which sets user information in JTextFields in UserModifyImpl.
 	 * Needs String for each field.

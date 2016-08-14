@@ -225,9 +225,19 @@ public interface View {
 
 	/**
 	 * method which allows to get review typed by user.
-	 * 
+	 *
 	 * @return
 	 */
 	String getReview();
+
+	/**
+	 * method which tells controller to take user creation info.
+	 */
+	void sendUserCreate();
+
+	/**
+	 * method which tells controller to take manager login.
+	 */
+	void sendManagerLogin();
 
 }
