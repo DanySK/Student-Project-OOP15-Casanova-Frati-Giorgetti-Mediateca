@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+import view.ItemScreenImpl.ItemScreenType;
 import view.ListScreenImpl.ListScreenType;
 import view.UserLoginImpl.LoginType;
 import view.UserScreenImpl.UserScreenType;
@@ -42,6 +43,7 @@ public class ViewImpl implements View {
 	private JPanel card7;
 	private JPanel card8;
 	private JPanel card9;
+	private JPanel card10;
 
 	/**
 	 * enum for List screen type
@@ -118,6 +120,8 @@ public class ViewImpl implements View {
 				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
 		this.card9 = new UserLoginImpl(v, LoginType.MANAGER,
 				this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+		this.card10 = new ItemScreenImpl(v, ItemScreenType.CREATE,
+				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Mediateca");
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -165,6 +169,7 @@ public class ViewImpl implements View {
 		ViewImpl.container.add(this.card7, CardName.REVIEW.toString());
 		ViewImpl.container.add(this.card8, CardName.USER_CREATE.toString());
 		ViewImpl.container.add(this.card9, CardName.MANAGER_LOGIN.toString());
+		ViewImpl.container.add(this.card10, CardName.ITEM_CREATE.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
@@ -278,19 +283,19 @@ public class ViewImpl implements View {
 
 	@Override
 	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {
-
-	}
-
-	@Override
-	public void setStudyRoomStatus() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public String getMenagerPassword() {
+		return ((UserLoginImpl) this.card9).getManagerPassword();
+	}
+
+	@Override
+	public void setStudyRoomStatus() {
 		// TODO Auto-generated method stub
-		return null;
+
 	}
 
 	@Override
@@ -370,5 +375,39 @@ public class ViewImpl implements View {
 	public void giveMeFilteredList() {
 		// this.c.filterList();
 
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void sendItemCreate() {
+		// this.c.itemCreate();
+
+	}
+
+	// //OK
+	@Override
+	public Object getItemInfo(final view.ItemScreenImpl.ItemInfo info) {
+		return ((ItemScreenImpl) this.card10).getItemInfo(info);
+	}
+
+	// //OK
+	@Override
+	public void setItemModifyField(final String title, final String author,
+			final String manifacturer, final String year, final String genre,
+			final String type, final String imagePath) {
+		((ItemScreenImpl) this.card10).setItemField(title, author,
+				manifacturer, year, genre, type, imagePath);
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void giveMeItemInfo() {
+		// this.c.setItemInfo();
+
+	}
+
+	@Override
+	public void sendItemModify() {
+		// this.c.itemModify();
 	}
 }

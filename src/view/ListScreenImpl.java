@@ -20,9 +20,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	private static final long serialVersionUID = 1L;
 
 	private JLabel presentation;
-	private JButton exit;
 	private String[] showedList;
-	private JList<String> list;
 
 	/**
 	 * Enumeration with types of list which can be showed.
@@ -47,6 +45,8 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 */
 	public ListScreenImpl(final View v, final int screenLenght,
 			final int screenWidth, final ListScreenType a) {
+		JButton exit;
+		final JList<String> list;
 		for (final ListScreenType i : ListScreenType.values()) {
 			if (i.equals(ListScreenType.BORROWED)) {
 				this.presentation = new JLabel(
@@ -62,15 +62,15 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 		this.presentation.setBounds(525, 33, 197, 16);
 		this.add(this.presentation);
-		this.list = new JList<String>(this.showedList);
-		this.list.setBounds(71, 43, 289, 191);
-		this.add(this.list);
+		list = new JList<String>(this.showedList);
+		list.setBounds(71, 43, 289, 191);
+		this.add(list);
 
-		this.exit = new JButton("Esci");
-		this.exit.setBounds(360, 262, 55, 25);
-		this.add(this.exit);
+		exit = new JButton("Esci");
+		exit.setBounds(360, 262, 55, 25);
+		this.add(exit);
 
-		this.exit.addActionListener(e -> {
+		exit.addActionListener(e -> {
 			v.swapView(CardName.ITEM);
 		});
 		this.setSize(screenLenght, screenWidth);

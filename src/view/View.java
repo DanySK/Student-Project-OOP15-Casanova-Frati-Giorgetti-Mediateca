@@ -2,6 +2,7 @@ package view;
 
 import java.util.ArrayList;
 
+import view.ItemScreenImpl.ItemInfo;
 import view.ViewImpl.CardName;
 import view.ViewImpl.UserInfo;
 import controller.Controller;
@@ -239,10 +240,48 @@ public interface View {
 	void giveMeFilteredList();
 
 	/**
-	 * function which allows to set filterd list.
+	 * method which allows to set filterd list.
 	 *
 	 * @param filteredList
 	 */
 	void setFilteredList(String[] filteredList);
+
+	/**
+	 * method which tells to controller to create an item.
+	 */
+	void sendItemCreate();
+
+	/**
+	 * method which gets item info.
+	 *
+	 * @param info
+	 * @return
+	 */
+	Object getItemInfo(ItemInfo info);
+
+	/**
+	 * method which allows to set item info.
+	 *
+	 * @param title
+	 * @param author
+	 * @param manifacturer
+	 * @param year
+	 * @param genre
+	 * @param type
+	 */
+	void setItemModifyField(String title, String author, String manifacturer,
+			String year, String genre, String type, String imagePath);
+
+	/**
+	 * method which asks to controller item info.
+	 */
+	void giveMeItemInfo();
+
+	/**
+	 * method which tells controller to get item modified info.
+	 *
+	 * @return
+	 */
+	void sendItemModify();
 
 }
