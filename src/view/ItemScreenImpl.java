@@ -43,6 +43,8 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private JButton send;
 	private JButton browse;
 	private String imagePath;
+	public int imageLenght = 140;
+	public int imageWidth = 100;
 
 	/**
 	 * enum for type of Item screen to show.
@@ -95,7 +97,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.add(this.manifacturerF);
 
 		this.browse = new JButton("Scegli Immagine");
-		this.browse.setBounds(341, 154, 97, 53);
+		this.browse.setBounds(336, 154, 100, 53);
 		this.add(this.browse);
 
 		this.presentation = new JLabel();
@@ -107,7 +109,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.add(this.yearF);
 		this.imageSpace = new JLabel();
 
-		this.imageSpace.setBounds(344, 129, 94, -114);
+		this.imageSpace.setBounds(336, 11, 100, 140);
 		this.add(this.imageSpace);
 		// http://1bestcsharp.blogspot.it/2015/04/java-how-to-browse-image-file-and-And-Display-It-Using-JFileChooser-In-Java.html
 		this.browse.addActionListener(e -> {
@@ -176,7 +178,8 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 	}
 
-	private ImageIcon resizeImage(final String imagePath) {
+	@Override
+	public ImageIcon resizeImage(final String imagePath) {
 		ImageIcon myImage = new ImageIcon(imagePath);
 		Image img = myImage.getImage();
 		Image newImg = img.getScaledInstance(this.imageSpace.getWidth(),

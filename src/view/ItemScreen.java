@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.ImageIcon;
+
 import view.ItemScreenImpl.ItemInfo;
 
 /**
@@ -29,5 +31,13 @@ public interface ItemScreen {
 	 * @return
 	 */
 	Object getItemInfo(ItemInfo info);
+
+	/**
+	 * method which allows to resize image by passing path.
+	 * 
+	 * @param imagePath
+	 * @return
+	 */
+	ImageIcon resizeImage(String imagePath);
 
 }

@@ -64,6 +64,11 @@ public class ViewImpl implements View {
 	 * @author Luca Giorgetti
 	 *
 	 */
+
+	public enum ItemType {
+		BOOK, FILM
+	}
+
 	public enum UserInfo {
 		name, surname, username, password, birthDate, email, telephone
 	}
@@ -77,10 +82,10 @@ public class ViewImpl implements View {
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-						"LikeList Screen Card"), BORROWED_LIST(
-								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-												"Item Create Card"), MANAGER_MENU("Manager Menu Card");
+				"LikeList Screen Card"), BORROWED_LIST(
+				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+				"Item Create Card"), MANAGER_MENU("Manager Menu Card");
 
 		private final String name;
 
