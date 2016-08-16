@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
+import com.google.common.base.Optional;
 
 import model.Model;
 import model.ModelImpl;
@@ -140,20 +141,25 @@ public class ControllerImpl implements Controller {
 			}
 		}
 		Object searchText = this.v.getSearchText();
-		String[] list = new String[this.m.getAllItemId(ty).size()];
+		String[] array = new String[this.m.getAllItemId(ty).size()];
 		for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
-			list[index] = this.m.getRequiredItem(i).toString();
+			array[index] = this.m.getRequiredItem(i).toString();
 			index++;
 		}
-		this.v.setFilteredList(list);
+		this.v.setFilteredList(array);
 	}
 
 	public void borrowList() {
-		List<ItemImpl> list = new ArrayList<>();
-		for (Integer i : this.m.getAllUserId()) {
-			// list.add(this.m.getUserArchive().get(i).);
+		Map<Integer, Pair<Boolean, Optional<Integer>>> actualLoanArchive = this.m
+				.getRequiredUser(this.actualUser.getIdUser()).getLoanArchive();
+		int index = 0;
+		String[] array = new String[actualLoanArchive.size()];
+
+		for (Entry<Integer, Pair<Boolean, Optional<Integer>>> entry : actualLoanArchive.entrySet()) {
+			array[index] = entry.getValue().toString();
 		}
 
+		this.v.setBorrowedItemList(array);
 	}
 
 	public void sendMessage(final String string) {
