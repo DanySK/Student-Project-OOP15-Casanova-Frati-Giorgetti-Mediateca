@@ -35,6 +35,8 @@ public class ControllerImpl implements Controller {
 	private View v;
 	private Model m;
 	private UserImpl actualUser;
+	private Map<Integer, Pair<Boolean, Optional<Integer>>> actualLoanArchive = this.m
+			.getRequiredUser(this.actualUser.getIdUser()).getLoanArchive();
 	private static final String FILENAMEUSER = "archivio.utenti";
 	private static final String FILENAMEITEM = "archivio.oggetti";
 	private static final String FILENAMESTUDYROOM = "archivio.aulastudio";
@@ -150,13 +152,12 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void borrowList() {
-		Map<Integer, Pair<Boolean, Optional<Integer>>> actualLoanArchive = this.m
-				.getRequiredUser(this.actualUser.getIdUser()).getLoanArchive();
 		int index = 0;
-		String[] array = new String[actualLoanArchive.size()];
+		String[] array = new String[this.actualLoanArchive.size()];
 
-		for (Entry<Integer, Pair<Boolean, Optional<Integer>>> entry : actualLoanArchive.entrySet()) {
-			array[index] = entry.getValue().toString();
+		for (Entry<Integer, Pair<Boolean, Optional<Integer>>> entry : this.actualLoanArchive.entrySet()) {
+
+			array[index] = this.m.getItemArchive().get(entry.getKey()).toString();
 		}
 
 		this.v.setBorrowedItemList(array);
