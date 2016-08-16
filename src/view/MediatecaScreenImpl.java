@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -78,6 +81,15 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		filteredJList = new JList<String>(this.filteredList);
 		filteredJList.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		filteredJList.setBounds(21, 106, 269, 181);
+		filteredJList.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent evt) {
+				JList list = (JList) evt.getSource();
+				if (evt.getClickCount() == 2) {
+					v.showItemInfo();
+				}
+			}
+		});
 		review = new JButton("Recensisci");
 		review.setBounds(302, 160, 136, 25);
 

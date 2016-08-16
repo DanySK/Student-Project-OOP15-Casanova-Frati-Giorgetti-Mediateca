@@ -260,7 +260,7 @@ public interface View {
 	Object getItemInfo(ItemInfo info);
 
 	/**
-	 * method which allows to set item info.
+	 * method which allows to set book info.
 	 *
 	 * @param title
 	 * @param author
@@ -269,8 +269,24 @@ public interface View {
 	 * @param genre
 	 * @param type
 	 */
-	void setItemModifyField(String title, String author, String manifacturer,
-			String year, String genre, String type, String imagePath);
+	void setBookModifyField(String title, String author, String manifacturer,
+			String year, String genre, String imagePath, String isbn);
+
+	/**
+	 * method which allows to set film info.
+	 *
+	 * @param title
+	 * @param author
+	 * @param manifacturer
+	 * @param year
+	 * @param genre
+	 * @param imagePath
+	 * @param duration
+	 * @param color
+	 */
+	void setFilmModifyField(String title, String author, String manifacturer,
+			String year, String genre, String imagePath, String duration,
+			String color);
 
 	/**
 	 * method which asks to controller item info.
@@ -283,5 +299,7 @@ public interface View {
 	 * @return
 	 */
 	void sendItemModify();
+
+	void showItemInfo();
 
 }

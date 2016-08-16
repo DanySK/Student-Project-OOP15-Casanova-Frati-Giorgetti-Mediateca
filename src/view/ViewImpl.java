@@ -66,7 +66,20 @@ public class ViewImpl implements View {
 	 */
 
 	public enum ItemType {
-		BOOK, FILM
+		BOOK("Book"), FILM("Film");
+		private final String name;
+
+		/**
+		 * @param text
+		 */
+		ItemType(final String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String toString() {
+			return this.name;
+		}
 	}
 
 	public enum UserInfo {
@@ -397,11 +410,20 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void setItemModifyField(final String title, final String author,
+	public void setBookModifyField(final String title, final String author,
 			final String manifacturer, final String year, final String genre,
-			final String type, final String imagePath) {
-		((ItemScreenImpl) this.card10).setItemField(title, author,
-				manifacturer, year, genre, type, imagePath);
+			final String imagePath, final String isbn) {
+		((ItemScreenImpl) this.card10).setBookField(title, author,
+				manifacturer, year, genre, imagePath, isbn);
+	}
+
+	// //OK
+	@Override
+	public void setFilmModifyField(final String title, final String author,
+			final String manifacturer, final String year, final String genre,
+			final String imagePath, final String duration, final String color) {
+		((ItemScreenImpl) this.card10).setFilmField(title, author,
+				manifacturer, year, genre, imagePath, duration, color);
 	}
 
 	// //waiting CONTROLLER function name
