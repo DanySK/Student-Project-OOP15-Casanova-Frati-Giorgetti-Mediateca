@@ -428,4 +428,15 @@ public interface Model {
    *           in the case which user is not into the archive.
    */
   void setReccomandedList(final Integer userId) throws Exception;
+
+  /**
+   * This method @return a copy of the set of itemId borrowed by the user
+   * required.
+   *
+   * @param userId
+   *          user's identifier.
+   * @throws Exception
+   *           in the case which user is not into the archive.
+   */
+  Set<Integer> getItemBorrowed(final Integer userId) throws Exception;
 }

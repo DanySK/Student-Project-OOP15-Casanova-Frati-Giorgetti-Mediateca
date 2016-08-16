@@ -73,4 +73,5 @@ public interface User {
    * @return the reviewId if it is present.
    */
   Optional<Integer> getListReview(final Integer itemId);
+
 }

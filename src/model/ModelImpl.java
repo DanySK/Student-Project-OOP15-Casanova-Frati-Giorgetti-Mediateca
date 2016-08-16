@@ -517,4 +517,8 @@ public class ModelImpl implements Serializable, Model {
     return this.studyRoom.getStudyRoom();
   }
 
+  @Override
+  public Set<Integer> getItemBorrowed(final Integer userId) throws Exception {
+    return Collections.unmodifiableSet(this.getRequiredUser(userId).getLoanArchive().keySet());
+  }
 }

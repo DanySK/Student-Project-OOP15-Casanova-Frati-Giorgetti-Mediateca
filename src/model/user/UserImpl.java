@@ -323,4 +323,5 @@ public class UserImpl implements Serializable, User {
   public Optional<Integer> getListReview(final Integer itemId) {
     return this.loanArchive.get(itemId).getSecond();
   }
+
 }
