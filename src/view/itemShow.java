@@ -1,8 +1,10 @@
 package view;
 
+import view.ViewImpl.ItemType;
+
 /**
  * interface for showing item.
- * 
+ *
  * @author Luca Giorgetti
  *
  */
@@ -57,5 +59,7 @@ public interface ItemShow {
 	void setBookField(String title, String author, String manifacturer,
 			String year, String genre, String reviewAvarage,
 			String availability, String imagePath, String isbn);
+
+	void startItemShow(View v, ItemType type);
 
 }

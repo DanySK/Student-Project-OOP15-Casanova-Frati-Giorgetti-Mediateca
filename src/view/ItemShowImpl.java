@@ -29,7 +29,8 @@ public class ItemShowImpl implements ItemShow {
 	private String duration = new String();
 	private String imagePath = new String();
 
-	public ItemShowImpl(final View v, final ItemType type) {
+	@Override
+	public void startItemShow(final View v, final ItemType type) {
 		v.giveMeItemInfo();
 		final JFrame mainFrame = new JFrame();
 		JPanel mainPanel = new JPanel();

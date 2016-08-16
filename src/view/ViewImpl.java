@@ -279,7 +279,8 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public void getUserRegistration() {
+	public void getUserRegistration(final UserInfo info) {
+		((UserScreenImpl) this.card8).getInfo(info);
 
 	}
 
@@ -436,5 +437,16 @@ public class ViewImpl implements View {
 	@Override
 	public void sendItemModify() {
 		// this.c.itemModify();
+	}
+
+	@Override
+	public void showItemInfo(final ItemType type) {
+		ItemShow itemScreen = new ItemShowImpl();
+		itemScreen.startItemShow(null, type);
+	}
+
+	@Override
+	public void goodLogin() {
+		this.swapView(CardName.MENU);
 	}
 }

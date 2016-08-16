@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import view.ItemScreenImpl.ItemInfo;
 import view.ViewImpl.CardName;
+import view.ViewImpl.ItemType;
 import view.ViewImpl.UserInfo;
 import controller.Controller;
 
@@ -70,7 +71,7 @@ public interface View {
 	 *
 	 * method which returns informations from user registration.
 	 */
-	void getUserRegistration();
+	void getUserRegistration(UserInfo info);
 
 	/**
 	 *
@@ -300,6 +301,16 @@ public interface View {
 	 */
 	void sendItemModify();
 
-	void showItemInfo();
+	/**
+	 * method which show item info when double-clicked.
+	 *
+	 * @param type
+	 */
+	void showItemInfo(ItemType type);
+
+	/**
+	 * method which sets good login and change screen.
+	 */
+	void goodLogin();
 
 }
