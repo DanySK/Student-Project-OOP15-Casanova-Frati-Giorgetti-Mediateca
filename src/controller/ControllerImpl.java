@@ -154,13 +154,23 @@ public class ControllerImpl implements Controller {
 	public void borrowList() {
 		int index = 0;
 		String[] array = new String[this.actualLoanArchive.size()];
-
-		for (Entry<Integer, Pair<Boolean, Optional<Integer>>> entry : this.actualLoanArchive.entrySet()) {
-
-			array[index] = this.m.getItemArchive().get(entry.getKey()).toString();
+		try {
+			for (Integer i : this.m.getItemBorrowed(this.actualUser.getIdUser())) {
+				array[index] = this.m.getRequiredItem(i).toString();
+				index++;
+			}
+			this.v.setBorrowedItemList(array);
+			/*
+			 * for (Entry<Integer, Pair<Boolean, Optional<Integer>>> entry :
+			 * this.actualLoanArchive.entrySet()) {
+			 * 
+			 * array[index] =
+			 * this.m.getItemArchive().get(entry.getKey()).toString(); }
+			 */
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
-		this.v.setBorrowedItemList(array);
 	}
 
 	public void sendMessage(final String string) {
