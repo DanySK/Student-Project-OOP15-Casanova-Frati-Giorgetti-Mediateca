@@ -5,9 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import model.Model;
 import model.ModelImpl;
@@ -97,10 +98,6 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
-	public void metodo() {
-		TypeSearch.values();
-	}
-
 	@Override
 	public void login() {
 		final String username = this.v.getUsername();
@@ -126,7 +123,6 @@ public class ControllerImpl implements Controller {
 	 * @throws Exception
 	 */
 	public void itemElaboration() throws Exception {
-		int index = 0;
 		TypeItem ty = null;
 		for (ArchiveImpl.TypeItem y : ArchiveImpl.TypeItem.values()) {
 			if (y.toString().equals(this.v.getItemFilter())) {
@@ -140,20 +136,11 @@ public class ControllerImpl implements Controller {
 			}
 		}
 		Object searchText = this.v.getSearchText();
-		String[] list = new String[this.m.getAllItemId(ty).size()];
+		Set<String> set = new HashSet<>();
 		for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
-			list[index] = this.m.getRequiredItem(i).toString();
-			index++;
+			set.add(this.m.getRequiredItem(i).toString());
 		}
-		this.v.setFilteredList(list);
-	}
-
-	public void borrowList() {
-		List<ItemImpl> list = new ArrayList<>();
-		for (Integer i : this.m.getAllUserId()) {
-			// list.add(this.m.getUserArchive().get(i).);
-		}
-
+		this.v.setFilteredList(set);
 	}
 
 	public void sendMessage(final String string) {
