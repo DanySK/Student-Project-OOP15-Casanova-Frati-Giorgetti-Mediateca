@@ -444,7 +444,6 @@ public class ModelImpl implements Serializable, Model {
 
     for (ItemGenre im : this.archiveUser.getUser(userId).getMoviePreferences()) {
       all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeSearch.GENRE, im);
-      // all = this.filterItemGenre(TypeItem.MOVIE, im);
       if (all.size() != 0) {
         Integer start = 0;
         Integer best = 0;
@@ -459,7 +458,6 @@ public class ModelImpl implements Serializable, Model {
 
     for (ItemGenre ig : this.archiveUser.getUser(userId).getBookPreferences()) {
       all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeSearch.GENRE, ig);
-      // all = this.filterItemGenre(TypeItem.BOOK, ig);
       if (all.size() != 0) {
         Integer start = 0;
         Integer best = 0;
