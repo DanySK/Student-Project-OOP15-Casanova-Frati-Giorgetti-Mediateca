@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import view.ViewImpl.CardName;
-import view.ViewImpl.UserInfo;
 
 /**
  * Class which implements the UserModify interface.
@@ -18,6 +17,8 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 
 	private static final long serialVersionUID = 1L;
 
+	private JLabel presentation;
+	private JButton send;
 	private JTextField nameF;
 	private JTextField birthF;
 	private JTextField surnameF;
@@ -25,16 +26,6 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	private JTextField usernameF;
 	private JTextField emailF;
 	private JTextField cellF;
-	private JLabel nameL;
-	private JLabel surnameL;
-	private JLabel usernameL;
-	private JLabel passwordL;
-	private JLabel birthL;
-	private JLabel emailL;
-	private JLabel cellL;
-	private JLabel presentation;
-	private JButton discarge;
-	private JButton send;
 
 	public enum UserScreenType {
 		/**
@@ -56,6 +47,14 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	public UserScreenImpl(final View v, final UserScreenType type,
 			final int screenLenght, final int screenWidth) {
 
+		final JLabel nameL;
+		final JLabel surnameL;
+		final JLabel usernameL;
+		final JLabel passwordL;
+		final JLabel birthL;
+		final JLabel emailL;
+		final JLabel cellL;
+		final JButton discarge;
 		this.setLayout(null);
 
 		this.nameF = new JTextField();
@@ -93,25 +92,25 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.cellF.setBounds(181, 199, 116, 22);
 		this.add(this.cellF);
 
-		this.nameL = new JLabel("Nome:");
-		this.nameL.setBounds(64, 40, 94, 16);
-		this.add(this.nameL);
+		nameL = new JLabel("Nome:");
+		nameL.setBounds(64, 40, 94, 16);
+		this.add(nameL);
 
-		this.surnameL = new JLabel("Cognome:");
-		this.surnameL.setBounds(64, 66, 94, 16);
-		this.add(this.surnameL);
-		this.discarge = new JButton("Annulla");
+		surnameL = new JLabel("Cognome:");
+		surnameL.setBounds(64, 66, 94, 16);
+		this.add(surnameL);
+		discarge = new JButton("Annulla");
 		if (type.equals(UserScreenType.CREATE)) {
 			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
 			this.send = new JButton("Crea");
-			this.discarge.addActionListener(e -> v.swapView(CardName.MAIN));
+			discarge.addActionListener(e -> v.swapView(CardName.MAIN));
 			this.send.addActionListener(e -> v.sendUserCreate());
 		} else if (type.equals(UserScreenType.MODIFY)) {
 			this.presentation = new JLabel("Modifica qui i tuoi dati:");
 			v.giveMeUserInfo();
 			this.send = new JButton("Invio");
 			this.usernameF.setEditable(false);
-			this.discarge.addActionListener(e -> v.swapView(CardName.MENU));
+			discarge.addActionListener(e -> v.swapView(CardName.MENU));
 
 			this.send.addActionListener(e -> v.sendUserModify());
 		}
@@ -119,31 +118,31 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.presentation.setBounds(104, 11, 181, 16);
 		this.add(this.presentation);
 
-		this.discarge.setBounds(12, 262, 97, 25);
-		this.add(this.discarge);
+		discarge.setBounds(12, 262, 97, 25);
+		this.add(discarge);
 
 		this.send.setBounds(341, 262, 97, 25);
 		this.add(this.send);
 
-		this.usernameL = new JLabel("Username:");
-		this.usernameL.setBounds(64, 98, 94, 16);
-		this.add(this.usernameL);
+		usernameL = new JLabel("Username:");
+		usernameL.setBounds(64, 98, 94, 16);
+		this.add(usernameL);
 
-		this.passwordL = new JLabel("Password:");
-		this.passwordL.setBounds(64, 125, 94, 16);
-		this.add(this.passwordL);
+		passwordL = new JLabel("Password:");
+		passwordL.setBounds(64, 125, 94, 16);
+		this.add(passwordL);
 
-		this.birthL = new JLabel("Data di nascita:");
-		this.birthL.setBounds(64, 153, 94, 16);
-		this.add(this.birthL);
+		birthL = new JLabel("Data di nascita:");
+		birthL.setBounds(64, 153, 94, 16);
+		this.add(birthL);
 
-		this.emailL = new JLabel("E-mail:");
-		this.emailL.setBounds(64, 179, 94, 16);
-		this.add(this.emailL);
+		emailL = new JLabel("E-mail:");
+		emailL.setBounds(64, 179, 94, 16);
+		this.add(emailL);
 
-		this.cellL = new JLabel("Recapito:");
-		this.cellL.setBounds(64, 205, 94, 16);
-		this.add(this.cellL);
+		cellL = new JLabel("Recapito:");
+		cellL.setBounds(64, 205, 94, 16);
+		this.add(cellL);
 	}
 
 	@Override
@@ -160,22 +159,22 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	}
 
 	@Override
-	public String getInfo(final UserInfo info) {
-		for (UserInfo i : UserInfo.values()) {
+	public String getInfo(final utils.UserInfo info) {
+		for (final utils.UserInfo i : utils.UserInfo.values()) {
 			switch (info) {
-			case name:
+			case NAME:
 				return this.nameF.getText();
-			case surname:
+			case SURNAME:
 				return this.surnameF.getText();
-			case username:
+			case USERNAME:
 				return this.usernameF.getText();
-			case password:
+			case PASSWORD:
 				return this.passwordF.getText();
-			case birthDate:
+			case BIRTHDATE:
 				return this.birthF.getText();
-			case email:
+			case EMAIL:
 				return this.emailF.getText();
-			case telephone:
+			case TELEFONE:
 				return this.cellF.getText();
 			default:
 				break;

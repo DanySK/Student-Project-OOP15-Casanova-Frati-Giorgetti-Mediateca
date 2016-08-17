@@ -13,10 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import utils.TypeItem;
 import view.UserScreenImpl.UserScreenType;
 import view.ViewImpl.CardName;
-import view.ViewImpl.ItemType;
-import view.ViewImpl.UserInfo;
 
 /**
  * Class which implements the UserModify interface.
@@ -31,14 +30,15 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private JTextField titleF;
 	private JTextField authorF;
 	private JTextField manifacturerF;
-	private JComboBox genreF;
+	private JComboBox genreF = new JComboBox(utils.ItemGenre.values());
+	private JComboBox languageF = new JComboBox(utils.Language.values());
 	private JTextField yearF;
 	private String imagePath;
 	private JFileChooser imageChoose = new JFileChooser();
-	private JComboBox itemTypeF;
+	private JComboBox itemTypeF = new JComboBox(utils.TypeItem.values());
 	private JLabel imageSpace;
 	private JTextField durationF;
-	private JComboBox colorF;
+	private JComboBox colorF = new JComboBox(utils.TypeColor.values());
 	private JTextField isbnF;
 
 	public int imageLenght = 140;
@@ -55,16 +55,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		 *
 		 */
 		CREATE, MODIFY
-	}
-
-	/**
-	 * enum for Item Information.
-	 *
-	 * @author Luca Giorgetti
-	 *
-	 */
-	public enum ItemInfo {
-		title, author, manifacturer, year, genre, type, image, duration, color, isbn
 	}
 
 	/**
@@ -126,8 +116,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.add(this.durationF);
 
 		this.colorF = new JComboBox();
-		this.colorF.setBounds(499, 543, 230, 40);
+		this.colorF.setBounds(499, 596, 230, 40);
 		this.add(this.colorF);
+
+		this.languageF = new JComboBox();
+		this.languageF.setBounds(499, 543, 230, 40);
+		this.add(this.languageF);
 
 		this.isbnF = new JTextField();
 		this.isbnF.setColumns(10);
@@ -196,28 +190,30 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			send = new JButton("Invio");
 			send.addActionListener(e -> v.sendItemModify());
 		}
-		this.itemTypeF.addActionListener(e -> {
-			if (this.itemTypeF.getSelectedItem().equals(ItemType.BOOK)) {
-				this.colorF.setEnabled(false);
-				this.colorF.setVisible(false);
-				this.durationF.setEnabled(false);
-				this.durationF.setVisible(false);
-				durationL.setVisible(false);
-				this.isbnF.setEnabled(true);
-				this.isbnF.setVisible(true);
-				isbnL.setVisible(true);
+		this.itemTypeF
+				.addActionListener(e -> {
+					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+						this.colorF.setEnabled(false);
+						this.colorF.setVisible(false);
+						this.durationF.setEnabled(false);
+						this.durationF.setVisible(false);
+						durationL.setVisible(false);
+						this.isbnF.setEnabled(true);
+						this.isbnF.setVisible(true);
+						isbnL.setVisible(true);
 
-			} else if (this.itemTypeF.getSelectedItem().equals(ItemType.FILM)) {
-				this.colorF.setEnabled(true);
-				this.colorF.setVisible(true);
-				this.durationF.setEnabled(true);
-				this.durationF.setVisible(true);
-				durationL.setVisible(true);
-				this.isbnF.setEnabled(false);
-				this.isbnF.setVisible(false);
-				isbnL.setVisible(false);
-			}
-		});
+					} else if (this.itemTypeF.getSelectedItem().equals(
+							TypeItem.MOVIE)) {
+						this.colorF.setEnabled(true);
+						this.colorF.setVisible(true);
+						this.durationF.setEnabled(true);
+						this.durationF.setVisible(true);
+						durationL.setVisible(true);
+						this.isbnF.setEnabled(false);
+						this.isbnF.setVisible(false);
+						isbnL.setVisible(false);
+					}
+				});
 		presentation.setBounds(104, 11, 181, 16);
 		this.add(presentation);
 
@@ -251,21 +247,26 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 	@Override
 	public void setCommonField(final String title, final String author,
-			final String manifacturer, final String year, final String genre,
-			final String imagePath) {
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String imagePath,
+			final utils.Language language) {
 		this.titleF.setText(title);
 		this.authorF.setText(author);
 		this.manifacturerF.setText(manifacturer);
 		this.yearF.setText(year);
 		this.genreF.setSelectedItem(genre);
 		this.imagePath = imagePath;
+		this.languageF.setSelectedItem(language);
 	}
 
 	@Override
 	public void setFilmField(final String title, final String author,
-			final String manifacturer, final String year, final String genre,
-			final String imagePath, final String duration, final String color) {
-		this.setCommonField(title, author, manifacturer, year, genre, imagePath);
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String imagePath,
+			final String duration, final utils.TypeColor color,
+			final utils.Language language) {
+		this.setCommonField(title, author, manifacturer, year, genre,
+				imagePath, language);
 		this.durationF.setText(duration);
 		this.colorF.setSelectedItem(color);
 		this.isbnF.setText(null);
@@ -273,38 +274,42 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 	@Override
 	public void setBookField(final String title, final String author,
-			final String manifacturer, final String year, final String genre,
-			final String imagePath, final String isbn) {
-		this.setCommonField(title, author, manifacturer, year, genre, imagePath);
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String imagePath,
+			final String isbn, final utils.Language language) {
+		this.setCommonField(title, author, manifacturer, year, genre,
+				imagePath, language);
 		this.durationF.setText(null);
 		this.colorF.setSelectedItem(null);
 		this.isbnF.setText(isbn);
 	}
 
 	@Override
-	public Object getItemInfo(final ItemInfo info) {
-		for (UserInfo i : UserInfo.values()) {
+	public Object getItemInfo(final utils.ItemInfo info) {
+		for (utils.ItemInfo i : utils.ItemInfo.values()) {
 			switch (info) {
-			case title:
+			case TITLE:
 				return this.titleF.getText();
-			case author:
+			case AUTHOR:
 				return this.authorF.getText();
-			case manifacturer:
+			case PRODUCER:
 				return this.manifacturerF.getText();
-			case year:
+			case RELEASE_YEAR:
 				return this.yearF.getText();
-			case genre:
+			case GENRE:
 				return this.genreF.getSelectedItem();
-			case type:
+			case TYPE:
 				return this.itemTypeF.getSelectedObjects();
-			case image:
+			case IMAGE:
 				return this.imagePath;
-			case duration:
+			case DURATION:
 				return this.durationF.getText();
-			case color:
+			case COLOR:
 				return this.colorF.getSelectedItem();
-			case isbn:
+			case ISBN:
 				return this.isbnF.getText();
+			case LANGUAGE:
+				return this.languageF.getSelectedItem();
 			default:
 				break;
 

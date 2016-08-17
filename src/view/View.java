@@ -1,9 +1,10 @@
 package view;
 
-import view.ItemScreenImpl.ItemInfo;
+import utils.ItemGenre;
+import utils.Language;
+import utils.TypeColor;
+import utils.UserInfo;
 import view.ViewImpl.CardName;
-import view.ViewImpl.ItemType;
-import view.ViewImpl.UserInfo;
 import controller.Controller;
 
 /**
@@ -69,7 +70,7 @@ public interface View {
 	 *
 	 * method which returns informations from user registration.
 	 */
-	void getUserRegistration(UserInfo info);
+	void getUserRegistration(utils.UserInfo info);
 
 	/**
 	 *
@@ -237,7 +238,7 @@ public interface View {
 	 * @param info
 	 * @return
 	 */
-	Object getItemInfo(ItemInfo info);
+	Object getItemInfo(utils.ItemInfo info);
 
 	/**
 	 * method which allows to set book info.
@@ -248,9 +249,11 @@ public interface View {
 	 * @param year
 	 * @param genre
 	 * @param type
+	 * @param language
 	 */
 	void setBookModifyField(String title, String author, String manifacturer,
-			String year, String genre, String imagePath, String isbn);
+			String year, ItemGenre genre, String imagePath, String isbn,
+			Language language);
 
 	/**
 	 * method which allows to set film info.
@@ -265,8 +268,8 @@ public interface View {
 	 * @param color
 	 */
 	void setFilmModifyField(String title, String author, String manifacturer,
-			String year, String genre, String imagePath, String duration,
-			String color);
+			String year, ItemGenre genre, String imagePath, String duration,
+			TypeColor color, Language language);
 
 	/**
 	 * method which asks to controller item info.
@@ -285,7 +288,7 @@ public interface View {
 	 *
 	 * @param type
 	 */
-	void showItemInfo(ItemType type);
+	void showItemInfo(utils.TypeItem type);
 
 	/**
 	 * method which sets good login and change screen.
@@ -313,7 +316,7 @@ public interface View {
 	 * method which sets study room current status.
 	 *
 	 * @param status
-	 * 
+	 *
 	 */
 	void setStudyRoomStatus(int[] status);
 

@@ -10,8 +10,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import utils.TypeItem;
 import view.ViewImpl.CardName;
-import view.ViewImpl.ItemType;
 
 /**
  * Class for ItemScreen.
@@ -87,7 +87,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			public void mouseClicked(final MouseEvent evt) {
 				JList list = (JList) evt.getSource();
 				if (evt.getClickCount() == 2) {
-					v.showItemInfo((ItemType) itemSelect.getSelectedItem());
+					v.showItemInfo((TypeItem) itemSelect.getSelectedItem());
 				}
 			}
 		});

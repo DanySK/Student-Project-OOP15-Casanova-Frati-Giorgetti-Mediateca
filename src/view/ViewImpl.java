@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+import utils.UserInfo;
 import view.ItemScreenImpl.ItemScreenType;
 import view.ListScreenImpl.ListScreenType;
 import view.UserLoginImpl.LoginType;
@@ -63,34 +64,6 @@ public class ViewImpl implements View {
 	}
 
 	/**
-	 * enum for info of user.
-	 *
-	 * @author Luca Giorgetti
-	 *
-	 */
-
-	public enum ItemType {
-		BOOK("Book"), FILM("Film");
-		private final String name;
-
-		/**
-		 * @param text
-		 */
-		ItemType(final String name) {
-			this.name = name;
-		}
-
-		@Override
-		public String toString() {
-			return this.name;
-		}
-	}
-
-	public enum UserInfo {
-		name, surname, username, password, birthDate, email, telephone
-	}
-
-	/**
 	 * enum for card name.
 	 *
 	 * @author Luca Giorgetti
@@ -99,11 +72,11 @@ public class ViewImpl implements View {
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-						"LikeList Screen Card"), BORROWED_LIST(
-								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-														"Study Room Card");
+				"LikeList Screen Card"), BORROWED_LIST(
+				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+				"Study Room Card");
 
 		private final String name;
 
@@ -285,7 +258,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public void getUserRegistration(final UserInfo info) {
+	public void getUserRegistration(final utils.UserInfo info) {
 		((UserScreenImpl) this.card8).getInfo(info);
 
 	}
@@ -393,26 +366,30 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public Object getItemInfo(final view.ItemScreenImpl.ItemInfo info) {
+	public Object getItemInfo(final utils.ItemInfo info) {
 		return ((ItemScreenImpl) this.card10).getItemInfo(info);
 	}
 
 	// //OK
 	@Override
 	public void setBookModifyField(final String title, final String author,
-			final String manifacturer, final String year, final String genre,
-			final String imagePath, final String isbn) {
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String imagePath,
+			final String isbn, final utils.Language language) {
 		((ItemScreenImpl) this.card10).setBookField(title, author,
-				manifacturer, year, genre, imagePath, isbn);
+				manifacturer, year, genre, imagePath, isbn, language);
 	}
 
 	// //OK
 	@Override
 	public void setFilmModifyField(final String title, final String author,
-			final String manifacturer, final String year, final String genre,
-			final String imagePath, final String duration, final String color) {
-		((ItemScreenImpl) this.card10).setFilmField(title, author,
-				manifacturer, year, genre, imagePath, duration, color);
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String imagePath,
+			final String duration, final utils.TypeColor color,
+			final utils.Language language) {
+		((ItemScreenImpl) this.card10)
+		.setFilmField(title, author, manifacturer, year, genre,
+				imagePath, duration, color, language);
 	}
 
 	// //waiting CONTROLLER function name
@@ -428,7 +405,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public void showItemInfo(final ItemType type) {
+	public void showItemInfo(final utils.TypeItem type) {
 		ItemShow itemScreen = new ItemShowImpl();
 		itemScreen.startItemShow(this, type);
 	}

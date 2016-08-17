@@ -6,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import view.ViewImpl.ItemType;
+import utils.TypeItem;
 
 /**
  * class which implememts method of Item Show inteface.
@@ -30,7 +30,7 @@ public class ItemShowImpl implements ItemShow {
 	private String imagePath = new String();
 
 	@Override
-	public void startItemShow(final View v, final ItemType type) {
+	public void startItemShow(final View v, final TypeItem type) {
 		v.giveMeItemInfo();
 		final JFrame mainFrame = new JFrame();
 		JPanel mainPanel = new JPanel();
@@ -92,12 +92,12 @@ public class ItemShowImpl implements ItemShow {
 		durationL.setBounds(54, 413, 215, 37);
 		mainFrame.getContentPane().add(durationL);
 
-		if (type.equals(ItemType.BOOK)) {
+		if (type.equals(TypeItem.BOOK)) {
 			mainFrame.setTitle("Libro Selezionato");
 			durationL.setVisible(false);
 			colorL.setVisible(false);
 
-		} else if (type.equals(ItemType.FILM)) {
+		} else if (type.equals(TypeItem.MOVIE)) {
 			mainFrame.setName("Film Selezionato");
 			authorL.setText("Regista:" + this.author);
 			isbnCodeL.setVisible(false);

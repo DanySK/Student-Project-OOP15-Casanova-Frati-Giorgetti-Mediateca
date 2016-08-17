@@ -1,6 +1,6 @@
 package view;
 
-import view.ViewImpl.ItemType;
+import utils.TypeItem;
 
 /**
  * interface for showing item.
@@ -60,6 +60,6 @@ public interface ItemShow {
 			String year, String genre, String reviewAvarage,
 			String availability, String imagePath, String isbn);
 
-	void startItemShow(View v, ItemType type);
+	void startItemShow(View v, TypeItem type);
 
 }

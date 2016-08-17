@@ -1,6 +1,5 @@
 package view;
 
-import view.ViewImpl.UserInfo;
 
 /**
  * Interface whith methods for setting and getting information from UserModify
@@ -31,6 +30,6 @@ public interface UserScreen {
 	 * @param info
 	 * @return userInfo
 	 */
-	String getInfo(UserInfo info);
+	String getInfo(utils.UserInfo info);
 
 }
