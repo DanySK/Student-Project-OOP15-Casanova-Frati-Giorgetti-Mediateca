@@ -21,12 +21,9 @@ public final class Application {
 	public static void main(final String[] args) throws Exception {
 		// application starter
 		final Controller c = new ControllerImpl();
-
-		// things to implement
 		final View v = new ViewImpl();
 		v.setController(c);
 		c.setView(v);
 		v.startView();
 	}
-
 }

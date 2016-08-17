@@ -12,7 +12,6 @@ import com.google.common.base.Optional;
 
 import model.Model;
 import model.ModelImpl;
-import model.ModelImpl.TypeSearch;
 import model.Pair;
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
@@ -22,6 +21,7 @@ import model.user.User;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeSearch;
 import view.View;
 
 /**
@@ -57,7 +57,7 @@ public class ControllerImpl implements Controller {
 	 * @throws Exception
 	 */
 	public ControllerImpl() throws Exception {
-		Integer check = 1;
+		Integer check = 0;
 		if (check == 1) {
 
 			Map<Integer, UserImpl> userArchive = this.fm.readArchiveUserFromFile(ControllerImpl.FILENAMEUSER);
@@ -76,16 +76,15 @@ public class ControllerImpl implements Controller {
 
 			try {
 				this.m = new ModelImpl();
-				this.m.registerUser("Enrico", "Casanova", calendar, "Dakaiden", "Arctica64", "enrico.casanova@dadas.it",
+				this.m.registerUser("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
 						"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
 				this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
 						ItemGenre.ADVENTURE_HISTORY, "Ges�", 0011, 100000);
 				this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
 						120, true, 1000000);
 
-				User u = new UserImpl("Enrico", "Casanova", calendar, "Dakaiden", "Arctica64",
-						"enrico.casanova@dadas.it", "334534534534", new ArrayList<ItemGenre>(),
-						new ArrayList<ItemGenre>());
+				User u = new UserImpl("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
+						"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
 
 				this.m.bookSit(calendar, 1, ((UserImpl) u).getIdUser());
 				this.fm.writeObjectIntoFile("archivio.utenti", this.m);
@@ -109,6 +108,7 @@ public class ControllerImpl implements Controller {
 			if ((entry.getValue().getUsername().equals(username))
 					&& (entry.getValue().getPassword().equals(password))) {
 				this.actualUser = entry.getValue();
+
 				try {
 					this.m.setReccomandedList(this.actualUser.getIdUser());
 				} catch (Exception e) {
