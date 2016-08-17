@@ -4,6 +4,9 @@ import java.util.Formatter;
 
 import com.google.common.base.Optional;
 
+import utils.ItemGenre;
+import utils.Language;
+
 /**
  * Book extends ItemImpl taking its common field with movie. It forms the
  * archive with Movie.

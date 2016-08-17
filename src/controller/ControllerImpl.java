@@ -16,12 +16,12 @@ import model.ModelImpl.TypeSearch;
 import model.Pair;
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
-import model.item.ItemGenre;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
-import model.item.Language;
 import model.user.User;
 import model.user.UserImpl;
+import utils.ItemGenre;
+import utils.Language;
 import view.View;
 
 /**
@@ -79,7 +79,7 @@ public class ControllerImpl implements Controller {
 				this.m.registerUser("Enrico", "Casanova", calendar, "Dakaiden", "Arctica64", "enrico.casanova@dadas.it",
 						"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
 				this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
-						ItemGenre.ADVENTURE_HISTORY, "Gesù", 0011, 100000);
+						ItemGenre.ADVENTURE_HISTORY, "Gesï¿½", 0011, 100000);
 				this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
 						120, true, 1000000);
 

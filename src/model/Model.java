@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import model.ModelImpl.TypeSearch;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
-import model.item.ItemGenre;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
-import model.item.Language;
 import model.item.ReviewImpl;
 import model.user.UserImpl;
+import utils.ItemGenre;
+import utils.Language;
+import utils.TypeSearch;
 
 /**
  * Interface for a generic model. It defines the main methods of the class

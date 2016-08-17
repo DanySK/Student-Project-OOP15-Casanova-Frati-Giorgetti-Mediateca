@@ -15,14 +15,15 @@ import model.item.Archive;
 import model.item.ArchiveImpl;
 import model.item.ArchiveImpl.TypeItem;
 import model.item.ItemFactory;
-import model.item.ItemGenre;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
-import model.item.Language;
 import model.item.ReviewImpl;
 import model.user.ArchiveUser;
 import model.user.ArchiveUserImpl;
 import model.user.UserImpl;
+import utils.ItemGenre;
+import utils.Language;
+import utils.TypeSearch;
 
 /**
  * Main class of the model. It is Serializable and it has two main field, the
@@ -71,17 +72,6 @@ public class ModelImpl implements Serializable, Model {
     this.setItemArchive(initItemArchive);
     this.setUserArchive(initArchiveUser);
     this.studyRoom = new StudyRoomImpl(initStudyRoom);
-  }
-
-  /**
-   * Enum in order to simplify filter.
-   *
-   */
-  public enum TypeSearch {
-    /**
-     *
-     */
-    TITLE, AUTHOR, PUBLISHER, RELEASE_YEAR, LANGUAGE, GENRE, NAME, SURNAME, BIRTHDATE, USERNAME, PASSWORD, EMAIL, TELEPHONE_NUMBER;
   }
 
   @Override

@@ -2,6 +2,9 @@ package model.item;
 
 import java.util.Formatter;
 
+import utils.ItemGenre;
+import utils.Language;
+
 /**
  * Movie extends ItemImpl taking his common field with Book. It forms the
  * archive with Book.

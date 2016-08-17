@@ -15,7 +15,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 
 import model.Pair;
-import model.item.ItemGenre;
+import utils.ItemGenre;
 
 /**
  * User is the Mediateca client. This class saves in addition to general

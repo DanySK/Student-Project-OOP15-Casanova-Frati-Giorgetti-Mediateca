@@ -10,6 +10,9 @@ import java.util.Set;
 
 import com.google.common.base.Objects;
 
+import utils.ItemGenre;
+import utils.Language;
+
 /**
  * Item is the common part of book and movie. It implements its interface Item
  * and Serializable in order to save data.

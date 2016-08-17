@@ -1,5 +1,8 @@
 package model.item;
 
+import utils.ItemGenre;
+import utils.Language;
+
 /**
  * This class is a Item Factory, it has two methods in order to create two
  * different objects (Book and Movie).
