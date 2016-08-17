@@ -60,6 +60,8 @@ public class ControllerImpl implements Controller {
 		File fileUser = new File(this.fm.getPath() + ControllerImpl.FILENAMEUSER);
 		File fileStudyRoom = new File(this.fm.getPath() + ControllerImpl.FILENAMESTUDYROOM);
 
+		Map<Integer, UserImpl> userArchive2 = this.m.getUserArchive();
+
 		if ((fileItem.exists() && !fileItem.isDirectory()) && (fileUser.exists() && !fileUser.isDirectory())
 				&& (fileStudyRoom.exists() && !fileStudyRoom.isDirectory())) {
 			Map<Integer, UserImpl> userArchive = this.fm.readArchiveUserFromFile(ControllerImpl.FILENAMEUSER);
@@ -108,14 +110,10 @@ public class ControllerImpl implements Controller {
 		boolean check = false;
 		Map<Integer, UserImpl> map = this.m.getUserArchive();
 		for (Entry<Integer, UserImpl> entry : map.entrySet()) {
-			this.v.showError(this.v.getUsername());
-			this.v.showError(this.v.getPassword());
 			if ((entry.getValue().getUsername().equals(username))
 					&& (entry.getValue().getPassword().equals(password))) {
 				this.actualUser = entry.getValue();
-				this.v.showError("user registrato");
 				check = true;
-
 				try {
 					this.m.setReccomandedList(this.actualUser.getIdUser());
 				} catch (Exception e) {
@@ -125,12 +123,9 @@ public class ControllerImpl implements Controller {
 				break;
 			}
 		}
-		this.v.showError("user NON registrato");
-		if (check == false) {
-			this.v.showError("User not found");
+		if (!check) {
+			this.v.showError("Utente non trovato");
 		}
-		// lancia messaggio cattivo
-
 	}
 
 	/**
