@@ -22,17 +22,9 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private final JLabel mainLabel;
-	private JLabel passwordLabel;
-	private final JLabel usernameLabel;
+
 	private final JTextArea passwordTextArea;
 	private final JTextArea usernameTextArea;
-	private final JButton backToSelectAccount;
-	private final JButton send;
-
-	private String username = new String();
-	private String managerPassword = new String();
-	private String password = new String();
 
 	/**
 	 * enumeration for choosing login type.
@@ -56,63 +48,67 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	 */
 	public UserLoginImpl(final View v, final LoginType type,
 			final int screenLenght, final int screenWidth) {
-		this.mainLabel = new JLabel("Esegui l'accesso:");
-		this.mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		this.mainLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
-		this.mainLabel.setBounds(250, 44, 480, 62);
-		this.send = new JButton("Invio");
-		this.send.setBounds(295, 260, 162, 25);
-		this.add(this.send);
+		final JLabel mainLabel;
+		JLabel passwordLabel;
+		final JLabel usernameLabel;
+		final JButton backToSelectAccount;
+		final JButton send;
+
+		mainLabel = new JLabel("Esegui l'accesso:");
+		mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		mainLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
+		mainLabel.setBounds(250, 44, 480, 62);
+		send = new JButton("Invio");
+		send.setBounds(295, 260, 162, 25);
+		this.add(send);
 		this.usernameTextArea = new JTextArea();
-		this.usernameLabel = new JLabel("Username:");
-		this.passwordLabel = new JLabel("Password:");
+		usernameLabel = new JLabel("Username:");
+		passwordLabel = new JLabel("Password:");
 		if (type.equals(LoginType.USER)) {
-			this.passwordLabel.setBounds(250, 193, 76, 34);
-			this.usernameLabel.setBounds(250, 137, 76, 34);
-			this.add(this.usernameLabel);
+			passwordLabel.setBounds(250, 193, 76, 34);
+			usernameLabel.setBounds(250, 137, 76, 34);
+			this.add(usernameLabel);
 			this.usernameTextArea.setRows(1);
 			this.usernameTextArea.setBounds(322, 143, 181, 25);
 			this.add(this.usernameTextArea);
-			this.send.addActionListener(e -> v.sendLogin());
-			this.username = this.usernameTextArea.getText();
+			send.addActionListener(e -> v.sendLogin());
 		} else if (type.equals(LoginType.MANAGER)) {
 			this.usernameTextArea.setVisible(false);
-			this.passwordLabel = new JLabel("Password di Sistema:");
-			this.passwordLabel.setBounds(250, 193, 76, 34);
-			this.send.addActionListener(e -> v.sendManagerLogin());
+			passwordLabel = new JLabel("Password di Sistema:");
+			passwordLabel.setBounds(250, 193, 76, 34);
+			send.addActionListener(e -> v.sendManagerLogin());
 		}
-		this.passwordLabel.setBounds(250, 193, 76, 34);
+		passwordLabel.setBounds(250, 193, 76, 34);
 		this.passwordTextArea = new JTextArea();
 		this.passwordTextArea.setRows(1);
 		this.passwordTextArea.setBounds(322, 199, 181, 25);
-		this.backToSelectAccount = new JButton("Torna alla scelta");
-		this.backToSelectAccount.addActionListener(e -> v
+		backToSelectAccount = new JButton("Torna alla scelta");
+		backToSelectAccount.addActionListener(e -> v
 				.swapView(CardName.MAIN));
-		this.backToSelectAccount.setBounds(626, 362, 162, 25);
+		backToSelectAccount.setBounds(626, 362, 162, 25);
 		this.setLayout(null);
-		this.add(this.mainLabel);
-		this.add(this.passwordLabel);
+		this.add(mainLabel);
+		this.add(passwordLabel);
 		this.add(this.passwordTextArea);
-		this.add(this.backToSelectAccount);
+		this.add(backToSelectAccount);
 
-		this.password = this.passwordTextArea.getText();
 		this.setSize(1280, 920);
 
 	}
 
 	@Override
 	public String getUserUsername() {
-		return this.username;
+		return this.usernameTextArea.getText();
 	}
 
 	@Override
 	public String getUserPassword() {
-		return this.password;
+		return this.passwordTextArea.getText();
 	}
 
 	@Override
 	public String getManagerPassword() {
-		return this.managerPassword;
+		return this.passwordTextArea.getText();
 	}
 
 }
