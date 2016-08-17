@@ -115,7 +115,6 @@ public class ControllerImpl implements Controller {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				this.v.goodLogin();
 				break;
 			}
 		}
