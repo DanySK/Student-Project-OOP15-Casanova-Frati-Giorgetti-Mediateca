@@ -34,9 +34,11 @@ import view.View;
 public class ControllerImpl implements Controller {
 	private View v;
 	private Model m;
+	// after the login, the corrispondent user will be saved here
 	private UserImpl actualUser;
-	private Map<Integer, Pair<Boolean, Optional<Integer>>> actualLoanArchive = this.m
-			.getRequiredUser(this.actualUser.getIdUser()).getLoanArchive();
+	private Map<Integer, Pair<Boolean, Optional<Integer>>> actualLoanArchive;
+
+	// constants for I/O
 	private static final String FILENAMEUSER = "archivio.utenti";
 	private static final String FILENAMEITEM = "archivio.oggetti";
 	private static final String FILENAMESTUDYROOM = "archivio.aulastudio";
@@ -52,8 +54,6 @@ public class ControllerImpl implements Controller {
 	/**
 	 * Constructor for ControllerImpl.
 	 *
-	 * @param inputM
-	 *            Model to be initialized
 	 * @throws Exception
 	 */
 	public ControllerImpl() throws Exception {
@@ -100,10 +100,6 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
-	public void metodo() {
-		TypeSearch.values();
-	}
-
 	@Override
 	public void login() {
 		final String username = this.v.getUsername();
@@ -113,6 +109,13 @@ public class ControllerImpl implements Controller {
 			if ((entry.getValue().getUsername().equals(username))
 					&& (entry.getValue().getPassword().equals(password))) {
 				this.actualUser = entry.getValue();
+				try {
+					this.m.setReccomandedList(this.actualUser.getIdUser());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				this.v.goodLogin();
 				break;
 			}
 		}
@@ -151,30 +154,58 @@ public class ControllerImpl implements Controller {
 		this.v.setFilteredList(array);
 	}
 
-	public void borrowList() {
-		int index = 0;
-		String[] array = new String[this.actualLoanArchive.size()];
+	// first draft
+	public void addLike(final int itemId) {
 		try {
-			for (Integer i : this.m.getItemBorrowed(this.actualUser.getIdUser())) {
-				array[index] = this.m.getRequiredItem(i).toString();
-				index++;
-			}
-			this.v.setBorrowedItemList(array);
-			/*
-			 * for (Entry<Integer, Pair<Boolean, Optional<Integer>>> entry :
-			 * this.actualLoanArchive.entrySet()) {
-			 * 
-			 * array[index] =
-			 * this.m.getItemArchive().get(entry.getKey()).toString(); }
-			 */
+			this.m.addLike(itemId, this.actualUser.getIdUser());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	public void addReview(final int itemId, final Integer vote, final String note) {
+		try {
+			this.m.addReview(itemId, this.actualUser.getIdUser(), vote, note);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void borrowList() {
+
+		try {
+			this.actualLoanArchive = this.m.getRequiredUser(this.actualUser.getIdUser()).getLoanArchive();
+			String[] array = new String[this.actualLoanArchive.size()];
+			int index = 0;
+
+			for (Integer i : this.m.getItemBorrowed(this.actualUser.getIdUser())) {
+				array[index] = this.m.getRequiredItem(i).toString();
+				index++;
+			}
+			this.v.setBorrowedItemList(array);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*
+		 * for (Entry<Integer, Pair<Boolean, Optional<Integer>>> entry :
+		 * this.actualLoanArchive.entrySet()) {
+		 *
+		 * array[index] =
+		 * this.m.getItemArchive().get(entry.getKey()).toString(); }
+		 */
+	}
+
+	public void registerNewUser() {
+		// this.m.registerUser(this.v., initSurname, initBirthdate,
+		// initUsername, initPassword, initEmail, initTelephoneNumber,
+		// initBookPref, initMoviePref);
+	}
+
 	public void sendMessage(final String string) {
-		// v.setMessage(string);
+		// this.v.setMessage(string);
 	}
 
 	/**
