@@ -23,7 +23,7 @@ import model.user.UserImpl;
  */
 public class FileManager {
 
-	private String path = System.getProperty("user.dir");
+	private String path = System.getProperty("user.dir") + "\\res\\";
 
 	/**
 	 * Empty constructor
@@ -43,11 +43,7 @@ public class FileManager {
 	 * @throws IOException
 	 */
 	public void writeObjectIntoFile(final String fileName, final Model model) throws IOException {
-		/*
-		 * File myFile = new File(fileName); if (!myFile.exists()) {
-		 * myFile.createNewFile(); }
-		 */
-		FileOutputStream fos = new FileOutputStream(this.path + "\\res\\" + fileName);
+		FileOutputStream fos = new FileOutputStream(this.path + fileName);
 		ObjectOutputStream oos = new ObjectOutputStream(fos);
 
 		if (fileName.contains("utenti")) {
@@ -62,7 +58,7 @@ public class FileManager {
 
 	public Map<Integer, Pair<ItemImpl, ItemInfo>> readArchiveItemFromFile(final String fileNameItem) {
 		Map<Integer, Pair<ItemImpl, ItemInfo>> objectItem = null;
-		try (FileInputStream fisItem = new FileInputStream(this.path + "\\res\\" + fileNameItem)) {
+		try (FileInputStream fisItem = new FileInputStream(this.path + fileNameItem)) {
 			ObjectInputStream oisItem = new ObjectInputStream(fisItem);
 			objectItem = (Map<Integer, Pair<ItemImpl, ItemInfo>>) oisItem.readObject();
 		} catch (Exception e1) {
@@ -74,7 +70,7 @@ public class FileManager {
 
 	public Map<Integer, UserImpl> readArchiveUserFromFile(final String fileNameUser) {
 		Map<Integer, UserImpl> objectUser = null;
-		try (FileInputStream fisUser = new FileInputStream(this.path + "\\res\\" + fileNameUser)) {
+		try (FileInputStream fisUser = new FileInputStream(this.path + fileNameUser)) {
 			ObjectInputStream oisUser = new ObjectInputStream(fisUser);
 			objectUser = (Map<Integer, UserImpl>) oisUser.readObject();
 		} catch (Exception e2) {
@@ -86,7 +82,7 @@ public class FileManager {
 
 	public Map<GregorianCalendar, ArrayList<Integer>> readStudyRoomFromFile(final String fileNameStudyRoom) {
 		Map<GregorianCalendar, ArrayList<Integer>> objectStudyRoom = null;
-		try (FileInputStream fisStudyRoom = new FileInputStream(this.path + "\\res\\" + fileNameStudyRoom)) {
+		try (FileInputStream fisStudyRoom = new FileInputStream(this.path + fileNameStudyRoom)) {
 			ObjectInputStream oisStudyRoom = new ObjectInputStream(fisStudyRoom);
 			objectStudyRoom = (Map<GregorianCalendar, ArrayList<Integer>>) oisStudyRoom.readObject();
 		} catch (Exception e3) {
@@ -94,5 +90,9 @@ public class FileManager {
 			e3.printStackTrace();
 		}
 		return objectStudyRoom;
+	}
+
+	public String getPath() {
+		return this.path;
 	}
 }

@@ -1,7 +1,6 @@
 package controller;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -57,45 +56,48 @@ public class ControllerImpl implements Controller {
 	 * @throws Exception
 	 */
 	public ControllerImpl() throws Exception {
-		Integer check = 0;
-		if (check == 1) {
+		File fileItem = new File(this.fm.getPath() + ControllerImpl.FILENAMEITEM);
+		File fileUser = new File(this.fm.getPath() + ControllerImpl.FILENAMEUSER);
+		File fileStudyRoom = new File(this.fm.getPath() + ControllerImpl.FILENAMESTUDYROOM);
 
+		if ((fileItem.exists() && !fileItem.isDirectory()) && (fileUser.exists() && !fileUser.isDirectory())
+				&& (fileStudyRoom.exists() && !fileStudyRoom.isDirectory())) {
 			Map<Integer, UserImpl> userArchive = this.fm.readArchiveUserFromFile(ControllerImpl.FILENAMEUSER);
 			Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = this.fm
 					.readArchiveItemFromFile(ControllerImpl.FILENAMEITEM);
 			Map<GregorianCalendar, ArrayList<Integer>> studyRoomArchive = this.fm
 					.readStudyRoomFromFile(ControllerImpl.FILENAMESTUDYROOM);
 			this.m = new ModelImpl(itemArchive, userArchive, studyRoomArchive);
-
 		} else {
+			this.m = new ModelImpl();
+			this.writeOnFile();
+		}
+	}
 
-			GregorianCalendar calendar = new GregorianCalendar();
-			calendar.set(Calendar.YEAR, 1994);
-			calendar.set(Calendar.MONTH, 3);
-			calendar.set(Calendar.DAY_OF_MONTH, 6);
+	public void writeOnFile() {
+		GregorianCalendar calendar = new GregorianCalendar();
+		calendar.set(Calendar.YEAR, 1994);
+		calendar.set(Calendar.MONTH, 3);
+		calendar.set(Calendar.DAY_OF_MONTH, 6);
 
-			try {
-				this.m = new ModelImpl();
-				this.m.registerUser("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
-						"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
-				this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
-						ItemGenre.ADVENTURE_HISTORY, "Ges�", 0011, 100000);
-				this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
-						120, true, 1000000);
+		try {
+			this.m.registerUser("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
+					"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
+			this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
+					ItemGenre.ADVENTURE_HISTORY, "Ges�", 0011, 100000);
+			this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
+					120, true, 1000000);
 
-				User u = new UserImpl("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
-						"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
+			User u = new UserImpl("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
+					"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
 
-				this.m.bookSit(calendar, 1, ((UserImpl) u).getIdUser());
-				this.fm.writeObjectIntoFile("archivio.utenti", this.m);
-				this.fm.writeObjectIntoFile("archivio.oggetti", this.m);
-				this.fm.writeObjectIntoFile("archivio.aulastudio", this.m);
+			this.m.bookSit(calendar, 1, ((UserImpl) u).getIdUser());
+			this.fm.writeObjectIntoFile("archivio.utenti", this.m);
+			this.fm.writeObjectIntoFile("archivio.oggetti", this.m);
+			this.fm.writeObjectIntoFile("archivio.aulastudio", this.m);
 
-			} catch (FileNotFoundException e) { // TODO Auto-generated catch
-				e.printStackTrace();
-			} catch (IOException e) { // TODO
-				e.printStackTrace();
-			}
+		} catch (Exception e) { // TODO Auto-generated catch
+			e.printStackTrace();
 		}
 	}
 
@@ -103,11 +105,16 @@ public class ControllerImpl implements Controller {
 	public void login() {
 		final String username = this.v.getUsername();
 		final String password = this.v.getPassword();
+		boolean check = false;
 		Map<Integer, UserImpl> map = this.m.getUserArchive();
 		for (Entry<Integer, UserImpl> entry : map.entrySet()) {
+			this.v.showError(this.v.getUsername());
+			this.v.showError(this.v.getPassword());
 			if ((entry.getValue().getUsername().equals(username))
 					&& (entry.getValue().getPassword().equals(password))) {
 				this.actualUser = entry.getValue();
+				this.v.showError("user registrato");
+				check = true;
 
 				try {
 					this.m.setReccomandedList(this.actualUser.getIdUser());
@@ -118,7 +125,10 @@ public class ControllerImpl implements Controller {
 				break;
 			}
 		}
-		this.sendMessage("User not found");
+		this.v.showError("user NON registrato");
+		if (check == false) {
+			this.v.showError("User not found");
+		}
 		// lancia messaggio cattivo
 
 	}
