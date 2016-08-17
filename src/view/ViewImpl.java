@@ -95,10 +95,10 @@ public class ViewImpl implements View {
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-				"Item Create Card"), MANAGER_MENU("Manager Menu Card");
+						"LikeList Screen Card"), BORROWED_LIST(
+								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+												"Item Create Card"), MANAGER_MENU("Manager Menu Card");
 
 		private final String name;
 
@@ -120,25 +120,25 @@ public class ViewImpl implements View {
 	 */
 	@Override
 	public void startView() {
-		View v = new ViewImpl();
-		this.card1 = new UserLoginImpl(v, LoginType.USER, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH);
-		this.card2 = new UserMenuImpl(v, this.SCREEN_LENGHT, this.SCREEN_WIDTH);
-		this.card3 = new MediatecaScreenImpl(v, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH);
-		this.card4 = new UserScreenImpl(v, UserScreenType.MODIFY,
-				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
-		this.card5 = new ListScreenImpl(v, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH, ListScreenType.LIKE);
-		this.card6 = new ListScreenImpl(v, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH, ListScreenType.BORROWED);
-		this.card7 = new ReviewScreenImpl(v, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH);
-		this.card8 = new UserScreenImpl(v, UserScreenType.CREATE,
-				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
-		this.card9 = new UserLoginImpl(v, LoginType.MANAGER,
+		this.card1 = new UserLoginImpl(this, LoginType.USER,
 				this.SCREEN_LENGHT, this.SCREEN_WIDTH);
-		this.card10 = new ItemScreenImpl(v, ItemScreenType.CREATE,
+		this.card2 = new UserMenuImpl(this, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH);
+		this.card3 = new MediatecaScreenImpl(this, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH);
+		this.card4 = new UserScreenImpl(this, UserScreenType.MODIFY,
+				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
+		this.card5 = new ListScreenImpl(this, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH, ListScreenType.LIKE);
+		this.card6 = new ListScreenImpl(this, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH, ListScreenType.BORROWED);
+		this.card7 = new ReviewScreenImpl(this, this.SCREEN_LENGHT,
+				this.SCREEN_WIDTH);
+		this.card8 = new UserScreenImpl(this, UserScreenType.CREATE,
+				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
+		this.card9 = new UserLoginImpl(this, LoginType.MANAGER,
+				this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE,
 				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
 		final JFrame mainFrame = new JFrame();
 		mainFrame.setTitle("Mediateca");
@@ -172,7 +172,7 @@ public class ViewImpl implements View {
 		ManagerLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent arg0) {
-				v.swapView(CardName.MANAGER_LOGIN);
+				ViewImpl.this.swapView(CardName.MANAGER_LOGIN);
 			}
 		});
 		ManagerLogin.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -442,7 +442,7 @@ public class ViewImpl implements View {
 	@Override
 	public void showItemInfo(final ItemType type) {
 		ItemShow itemScreen = new ItemShowImpl();
-		itemScreen.startItemShow(null, type);
+		itemScreen.startItemShow(this, type);
 	}
 
 	@Override

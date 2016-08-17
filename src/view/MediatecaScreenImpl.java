@@ -14,7 +14,7 @@ import view.ViewImpl.CardName;
 import view.ViewImpl.ItemType;
 
 /**
- * Class for ItemScreen
+ * Class for ItemScreen.
  *
  * @author Luca Giorgetti
  *
