@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
@@ -44,6 +45,8 @@ public class ViewImpl implements View {
 	private JPanel card8;
 	private JPanel card9;
 	private JPanel card10;
+
+	private JFrame mainFrame = new JFrame();
 
 	/**
 	 * enum for List screen type
@@ -140,11 +143,11 @@ public class ViewImpl implements View {
 				this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE,
 				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
-		final JFrame mainFrame = new JFrame();
-		mainFrame.setTitle("Mediateca");
-		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		mainFrame.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
-		mainFrame.setResizable(false);
+
+		this.mainFrame.setTitle("Mediateca");
+		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.mainFrame.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+		this.mainFrame.setResizable(false);
 		ViewImpl.container.setLayout(ViewImpl.cl);
 		final JPanel card0 = new JPanel();
 		final JLabel welcome = new JLabel("Benvenuto in Mediateca!");
@@ -192,8 +195,8 @@ public class ViewImpl implements View {
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
 		userCreate.addActionListener(e -> this.swapView(CardName.USER_CREATE));
-		mainFrame.getContentPane().add(ViewImpl.container);
-		mainFrame.setVisible(true);
+		this.mainFrame.getContentPane().add(ViewImpl.container);
+		this.mainFrame.setVisible(true);
 	}
 
 	// //OK
@@ -298,6 +301,7 @@ public class ViewImpl implements View {
 	@Override
 	public void sendLogin() {
 		this.c.login();
+		this.goodLogin();
 	}
 
 	@Override
@@ -449,4 +453,13 @@ public class ViewImpl implements View {
 	public void goodLogin() {
 		this.swapView(CardName.MENU);
 	}
+
+	@Override
+	public void showError(final String errorMessage) {
+		JOptionPane.showMessageDialog(this.mainFrame, errorMessage);
+	}
+	/*
+	 * @Override public void showMessage(final String message) {
+	 * JOptionPane.showMessageDialog(this.mainFrame,message); }
+	 */
 }

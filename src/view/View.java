@@ -313,4 +313,11 @@ public interface View {
 	 */
 	void goodLogin();
 
+	/**
+	 * method which allows to show error messages.
+	 * 
+	 * @param errorMessage
+	 */
+	void showError(String errorMessage);
+
 }
