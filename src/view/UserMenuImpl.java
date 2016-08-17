@@ -54,7 +54,7 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		this.accountSettings.setBounds(32, 228, 163, 38);
 		this.add(this.accountSettings);
 
-		this.exitProgram.addActionListener(e -> v.swapView(CardName.MENU));
+		this.exitProgram.addActionListener(e -> v.swapView(CardName.MAIN));
 		this.mediateca.addActionListener(e -> v.swapView(CardName.ITEM));
 		// this.studyRoomServices.addActionListener(e
 		// ->

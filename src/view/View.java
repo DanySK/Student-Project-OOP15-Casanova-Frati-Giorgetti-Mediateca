@@ -1,7 +1,5 @@
 package view;
 
-import java.util.ArrayList;
-
 import view.ItemScreenImpl.ItemInfo;
 import view.ViewImpl.CardName;
 import view.ViewImpl.ItemType;
@@ -57,7 +55,7 @@ public interface View {
 	/**
 	 * method which returns the score typed by user.
 	 *
-	 * @return
+	 * @return score
 	 */
 	int getScore();
 
@@ -90,18 +88,6 @@ public interface View {
 	 * method which returns information from item removal.
 	 */
 	void getRemovedItem();
-
-	/**
-	 *
-	 * method which @return the numeber of taken sit.
-	 */
-	int getStudyRoomSitsJustTaken();
-
-	/**
-	 *
-	 * method which sets the status of study room.
-	 */
-	void setStudyRoomStatus();
 
 	/**
 	 * method which asks to borrow item.
@@ -177,13 +163,6 @@ public interface View {
 	String getModifiedInfo(UserInfo info);
 
 	/**
-	 * method which sets the status of study room.
-	 *
-	 * @param studyRoomStatus
-	 */
-	void setStudyRoomStatus(ArrayList studyRoomStatus);
-
-	/**
 	 * method which allows to switch between cards by passing the card name.
 	 *
 	 * @param name
@@ -221,7 +200,7 @@ public interface View {
 	/**
 	 * method which allows to get review typed by user.
 	 *
-	 * @return
+	 * @return review
 	 */
 	String getReview();
 
@@ -315,9 +294,27 @@ public interface View {
 
 	/**
 	 * method which allows to show error messages.
-	 * 
+	 *
 	 * @param errorMessage
 	 */
 	void showError(String errorMessage);
+
+	/**
+	 * method which ask to take sit.
+	 */
+	void takeSit();
+
+	/**
+	 * method which asks controller the study room status.
+	 */
+	void giveMeStudyRoomStatus();
+
+	/**
+	 * method which sets study room current status.
+	 *
+	 * @param status
+	 * 
+	 */
+	void setStudyRoomStatus(int[] status);
 
 }

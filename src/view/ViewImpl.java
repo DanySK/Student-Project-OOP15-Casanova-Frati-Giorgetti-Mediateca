@@ -4,7 +4,6 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -34,6 +33,7 @@ public class ViewImpl implements View {
 	private static final CardLayout cl = new CardLayout();
 	final int SCREEN_LENGHT = 1280;
 	final int SCREEN_WIDTH = 920;
+	final int STUDY_ROOM_SITS = 100;
 
 	private JPanel card1;
 	private JPanel card2;
@@ -45,6 +45,7 @@ public class ViewImpl implements View {
 	private JPanel card8;
 	private JPanel card9;
 	private JPanel card10;
+	private JPanel card11;
 
 	private JFrame mainFrame = new JFrame();
 
@@ -101,7 +102,8 @@ public class ViewImpl implements View {
 						"LikeList Screen Card"), BORROWED_LIST(
 								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
 										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-												"Item Create Card"), MANAGER_MENU("Manager Menu Card");
+												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+														"Study Room Card");
 
 		private final String name;
 
@@ -143,7 +145,7 @@ public class ViewImpl implements View {
 				this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE,
 				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
-
+		this.card11 = new StudyRoomImpl(this, this.STUDY_ROOM_SITS);
 		this.mainFrame.setTitle("Mediateca");
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.mainFrame.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
@@ -191,6 +193,7 @@ public class ViewImpl implements View {
 		ViewImpl.container.add(this.card8, CardName.USER_CREATE.toString());
 		ViewImpl.container.add(this.card9, CardName.MANAGER_LOGIN.toString());
 		ViewImpl.container.add(this.card10, CardName.ITEM_CREATE.toString());
+		ViewImpl.container.add(this.card11, CardName.STUDY_ROOM.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
@@ -301,30 +304,11 @@ public class ViewImpl implements View {
 	@Override
 	public void sendLogin() {
 		this.c.login();
-		this.goodLogin();
-	}
-
-	@Override
-	public void setStudyRoomStatus(final ArrayList studyRoomStatus) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
 	public String getMenagerPassword() {
 		return ((UserLoginImpl) this.card9).getManagerPassword();
-	}
-
-	@Override
-	public void setStudyRoomStatus() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public int getStudyRoomSitsJustTaken() {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	// //waiting CONTROLLER Function Name
@@ -458,8 +442,27 @@ public class ViewImpl implements View {
 	public void showError(final String errorMessage) {
 		JOptionPane.showMessageDialog(this.mainFrame, errorMessage);
 	}
+
 	/*
 	 * @Override public void showMessage(final String message) {
 	 * JOptionPane.showMessageDialog(this.mainFrame,message); }
 	 */
+	// //waiting CONTROLLER function name
+	@Override
+	public void takeSit() {
+		// c.takeSit();
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void giveMeStudyRoomStatus() {
+		// c.studyRoomStatus
+	}
+
+	@Override
+	public void setStudyRoomStatus(final int[] status) {
+		((StudyRoomImpl) this.card11).setStudyRoomStatus(status);
+
+	}
+
 }
