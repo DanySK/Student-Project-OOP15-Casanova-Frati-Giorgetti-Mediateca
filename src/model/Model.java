@@ -14,7 +14,7 @@ import model.item.ReviewImpl;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
-import utils.TypeSearch;
+import utils.TypeItemInfo;
 import utils.UserInfo;
 
 /**
@@ -298,7 +298,7 @@ public interface Model {
    * @throws Exception
    *           in the case which name is not into the archive.
    */
-  Set<Integer> filtersItem(final Set<Integer> set, final TypeSearch ts, final Object param)
+  Set<Integer> filtersItem(final Set<Integer> set, final TypeItemInfo ts, final Object param)
               throws Exception;
 
   /**
@@ -314,7 +314,7 @@ public interface Model {
    * @throws Exception
    *           in the case which item is not in the archive or ts is not ok.
    */
-  void changeItem(final TypeSearch ts, final Integer itemId, final Object param) throws Exception;
+  void changeItem(final TypeItemInfo ts, final Integer itemId, final Object param) throws Exception;
 
   /**
    * This method can be used by USER. This method changes required setting of

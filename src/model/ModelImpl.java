@@ -23,7 +23,7 @@ import model.user.ArchiveUserImpl;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
-import utils.TypeSearch;
+import utils.TypeItemInfo;
 import utils.UserInfo;
 
 /**
@@ -320,44 +320,44 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Set<Integer> filtersItem(final Set<Integer> set, final TypeSearch ts, final Object param)
+  public Set<Integer> filtersItem(final Set<Integer> set, final TypeItemInfo ts, final Object param)
               throws Exception {
-    if ((ts != TypeSearch.AUTHOR) && (ts != TypeSearch.TITLE) && (ts != TypeSearch.PUBLISHER)
-                && (ts != TypeSearch.RELEASE_YEAR) && (ts != TypeSearch.LANGUAGE)
-                && (ts != TypeSearch.GENRE)) {
+    if ((ts != TypeItemInfo.AUTHOR) && (ts != TypeItemInfo.TITLE) && (ts != TypeItemInfo.PRODUCER)
+                && (ts != TypeItemInfo.RELEASE_YEAR) && (ts != TypeItemInfo.LANGUAGE)
+                && (ts != TypeItemInfo.GENRE)) {
       throw new Exception("TypeSearch " + ts + "not valid");
     }
     Set<Integer> r = new HashSet<>();
     for (Integer i : set) {
-      if (ts == TypeSearch.TITLE) {
+      if (ts == TypeItemInfo.TITLE) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getTitle()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }
-      if (ts == TypeSearch.AUTHOR) {
+      if (ts == TypeItemInfo.AUTHOR) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }
-      if (ts == TypeSearch.PUBLISHER) {
+      if (ts == TypeItemInfo.PRODUCER) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }
-      if (ts == TypeSearch.RELEASE_YEAR) {
+      if (ts == TypeItemInfo.RELEASE_YEAR) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getReleaseYear() == (int) param) {
           r.add(i);
         }
       }
-      if (ts == TypeSearch.LANGUAGE) {
+      if (ts == TypeItemInfo.LANGUAGE) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getCurrentLanguage().equals(param)) {
           r.add(i);
         }
       }
-      if (ts == TypeSearch.GENRE) {
+      if (ts == TypeItemInfo.GENRE) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getGenre().equals(param)) {
           r.add(i);
         }
@@ -367,30 +367,30 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void changeItem(final TypeSearch ts, final Integer itemId, final Object param)
+  public void changeItem(final TypeItemInfo ts, final Integer itemId, final Object param)
               throws Exception {
-    if ((ts != TypeSearch.AUTHOR) && (ts != TypeSearch.TITLE) && (ts != TypeSearch.PUBLISHER)
-                && (ts != TypeSearch.RELEASE_YEAR) && (ts != TypeSearch.LANGUAGE)
-                && (ts != TypeSearch.GENRE)) {
+    if ((ts != TypeItemInfo.AUTHOR) && (ts != TypeItemInfo.TITLE) && (ts != TypeItemInfo.PRODUCER)
+                && (ts != TypeItemInfo.RELEASE_YEAR) && (ts != TypeItemInfo.LANGUAGE)
+                && (ts != TypeItemInfo.GENRE)) {
       throw new Exception("TypeSearch " + ts + "not valid to change on item");
     }
 
-    if (ts == TypeSearch.TITLE) {
+    if (ts == TypeItemInfo.TITLE) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setTitle((String) param);
     }
-    if (ts == TypeSearch.AUTHOR) {
+    if (ts == TypeItemInfo.AUTHOR) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setAuthor((String) param);
     }
-    if (ts == TypeSearch.PUBLISHER) {
+    if (ts == TypeItemInfo.PRODUCER) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setPublisher((String) param);
     }
-    if (ts == TypeSearch.RELEASE_YEAR) {
+    if (ts == TypeItemInfo.RELEASE_YEAR) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setReleaseYear((int) param);
     }
-    if (ts == TypeSearch.LANGUAGE) {
+    if (ts == TypeItemInfo.LANGUAGE) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setCurrentLanguage((Language) param);
     }
-    if (ts == TypeSearch.GENRE) {
+    if (ts == TypeItemInfo.GENRE) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setGenre((ItemGenre) param);
     }
   }
@@ -434,7 +434,7 @@ public class ModelImpl implements Serializable, Model {
     List<Integer> toAdd = new LinkedList<Integer>();
 
     for (ItemGenre im : this.archiveUser.getUser(userId).getMoviePreferences()) {
-      all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeSearch.GENRE, im);
+      all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeItemInfo.GENRE, im);
       if (all.size() != 0) {
         Integer start = 0;
         Integer best = 0;
@@ -448,7 +448,7 @@ public class ModelImpl implements Serializable, Model {
     }
 
     for (ItemGenre ig : this.archiveUser.getUser(userId).getBookPreferences()) {
-      all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeSearch.GENRE, ig);
+      all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE, ig);
       if (all.size() != 0) {
         Integer start = 0;
         Integer best = 0;
