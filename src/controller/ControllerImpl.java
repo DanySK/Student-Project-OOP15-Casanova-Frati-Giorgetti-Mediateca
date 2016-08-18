@@ -78,6 +78,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void writeOnFile() {
 		GregorianCalendar calendar = new GregorianCalendar();
 		calendar.set(Calendar.YEAR, 1994);
@@ -137,6 +138,7 @@ public class ControllerImpl implements Controller {
 	 *
 	 * @throws Exception
 	 */
+	@Override
 	public void itemElaboration() throws Exception {
 		int index = 0;
 		TypeItem ty = null;
@@ -161,6 +163,7 @@ public class ControllerImpl implements Controller {
 	}
 
 	// first draft
+	@Override
 	public void addLike(final int itemId) {
 		try {
 			this.m.addLike(itemId, this.actualUser.getIdUser());
@@ -170,6 +173,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void addReview(final int itemId, final Integer vote, final String note) {
 		try {
 			this.m.addReview(itemId, this.actualUser.getIdUser(), vote, note);
@@ -179,6 +183,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void borrowList() {
 
 		try {
@@ -204,6 +209,7 @@ public class ControllerImpl implements Controller {
 		 */
 	}
 
+	@Override
 	public void registerNewUser() {
 
 		String name = this.v.getUserRegistration(UserInfo.NAME);
@@ -216,21 +222,24 @@ public class ControllerImpl implements Controller {
 		List<ItemGenre> bookList = new ArrayList<>();
 		List<ItemGenre> movieList = new ArrayList<>();
 		this.m.registerUser(name, surname, gc, username, password, email, telephoneNumber, bookList, movieList);
-		this.v.showError("Utente " + username + " registrato con successo!");
+		this.v.showMessage("Utente " + username + " registrato con successo!");
 	}
 
+	@Override
 	public void takeSit() throws Exception {
 		Integer sit;
 		GregorianCalendar day;
 		this.m.bookSit(day, sit, this.actualUser.getIdUser());
 	}
 
+	@Override
 	public void cancelSit() throws Exception {
 		Integer sit; // == getActualSit();
 		GregorianCalendar day; // = getActualDay;
 		this.m.cancelSit(day, sit, this.actualUser.getIdUser());
 	}
 
+	@Override
 	public void studyRoomStatus() {
 		GregorianCalendar day; // = getActualDay;
 		int[] arrayint = new int[this.m.getAllUserSit(day).size()];
@@ -239,10 +248,6 @@ public class ControllerImpl implements Controller {
 			arrayint[index] = i;
 		}
 		this.v.setStudyRoomStatus(arrayint);
-	}
-
-	public void sendMessage(final String string) {
-		// this.v.setMessage(string);
 	}
 
 	/**

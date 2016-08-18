@@ -19,9 +19,76 @@ public interface Controller {
 	void setView(view.View v);
 
 	/**
-	 * Method who lets the actual user access the program if username and
+	 * Method which lets the actual user access the program if username and
 	 * password are contained into the archive.
 	 */
 	void login();
 
+	/**
+	 * Method which writes some users, items and the study room situation on
+	 * files for debug
+	 */
+	void writeOnFile();
+
+	/**
+	 *
+	 * Method which elaborates inputs from the user and set the list with items
+	 * filtered.
+	 *
+	 * @throws Exception
+	 */
+	void itemElaboration() throws Exception;
+
+	/**
+	 * Method which adds the like of the current item selected by the actual
+	 * user.
+	 * 
+	 * @param itemId
+	 *            identifier of the selected item.
+	 */
+	void addLike(final int itemId);
+
+	/**
+	 * Method which adds the numerical vote and/or a review given by the actual
+	 * user to the current selected item.
+	 * 
+	 * @param itemId
+	 *            identifier of the selected item.
+	 * @param vote
+	 *            numerical vote given to the item.
+	 * @param note
+	 *            review of the item.
+	 */
+	void addReview(final int itemId, final Integer vote, final String note);
+
+	/**
+	 * Method which sets the view's list of borrowed item of the actual user.
+	 */
+	void borrowList();
+
+	/**
+	 * Method which elaborates infos given by the user and registrates it into
+	 * the archive.
+	 */
+	void registerNewUser();
+
+	/**
+	 * Method which uses the selected sit and the actual day to book the
+	 * position in the study room.
+	 * 
+	 * @throws Exception
+	 */
+	void takeSit() throws Exception;
+
+	/**
+	 * Method which removes the booking of the selected sit in the actual day.
+	 * 
+	 * @throws Exception
+	 */
+	void cancelSit() throws Exception;
+
+	/**
+	 * Method which sets the view's status of the study room.
+	 */
+	void studyRoomStatus();
 }
