@@ -67,10 +67,12 @@ public interface View {
 	void controllerGetReview();
 
 	/**
-	 *
 	 * method which returns informations from user registration.
+	 *
+	 * @param info
+	 * @return
 	 */
-	void getUserRegistration(utils.UserInfo info);
+	String getUserRegistration(utils.UserInfo info);
 
 	/**
 	 *
@@ -319,5 +321,12 @@ public interface View {
 	 *
 	 */
 	void setStudyRoomStatus(int[] status);
+
+	/**
+	 * method which show a notification to user.
+	 * 
+	 * @param message
+	 */
+	void showMessage(String message);
 
 }

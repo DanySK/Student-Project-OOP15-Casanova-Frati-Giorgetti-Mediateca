@@ -1,5 +1,8 @@
 package view;
 
+import utils.ItemGenre;
+import utils.Language;
+import utils.TypeColor;
 import utils.TypeItem;
 
 /**
@@ -22,8 +25,8 @@ public interface ItemShow {
 	 * @param imagePath
 	 */
 	void setCommonField(String title, String author, String manifacturer,
-			String year, String genre, String reviewAvarage,
-			String availability, String imagePath);
+			String year, ItemGenre genre, String reviewAvarage,
+			String availability, String imagePath, Language language);
 
 	/**
 	 * method which sets all field for film item.
@@ -40,8 +43,9 @@ public interface ItemShow {
 	 * @param color
 	 */
 	void setFilmField(String title, String author, String manifacturer,
-			String year, String genre, String reviewAvarage,
-			String availability, String imagePath, String duration, String color);
+			String year, ItemGenre genre, String reviewAvarage,
+			String availability, String imagePath, String duration,
+			TypeColor color, Language language);
 
 	/**
 	 * method which sets all field for book item.
@@ -57,9 +61,16 @@ public interface ItemShow {
 	 * @param isbn
 	 */
 	void setBookField(String title, String author, String manifacturer,
-			String year, String genre, String reviewAvarage,
-			String availability, String imagePath, String isbn);
+			String year, ItemGenre genre, String reviewAvarage,
+			String availability, String imagePath, String isbn,
+			Language language);
 
+	/**
+	 * method which starts item show.
+	 * 
+	 * @param v
+	 * @param type
+	 */
 	void startItemShow(View v, TypeItem type);
 
 }

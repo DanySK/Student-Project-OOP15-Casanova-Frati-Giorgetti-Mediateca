@@ -30,8 +30,8 @@ import controller.Controller;
 
 public class ViewImpl implements View {
 
-	private static final JPanel container = new JPanel();
-	private static final CardLayout cl = new CardLayout();
+	private static final JPanel CONTAINER = new JPanel();
+	private static final CardLayout CL = new CardLayout();
 	final int SCREEN_LENGHT = 1280;
 	final int SCREEN_WIDTH = 920;
 	final int STUDY_ROOM_SITS = 100;
@@ -123,7 +123,7 @@ public class ViewImpl implements View {
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.mainFrame.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 		this.mainFrame.setResizable(false);
-		ViewImpl.container.setLayout(ViewImpl.cl);
+		ViewImpl.CONTAINER.setLayout(ViewImpl.CL);
 		final JPanel card0 = new JPanel();
 		final JLabel welcome = new JLabel("Benvenuto in Mediateca!");
 		welcome.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,7 +143,7 @@ public class ViewImpl implements View {
 		card0.add(userCreate);
 		this.card1.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
 
-		ViewImpl.container.add(card0, CardName.MAIN.toString());
+		ViewImpl.CONTAINER.add(card0, CardName.MAIN.toString());
 
 		JLabel ManagerLogin = new JLabel("Accedi come Gestore");
 		ManagerLogin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -156,22 +156,22 @@ public class ViewImpl implements View {
 		ManagerLogin.setFont(new Font("Tahoma", Font.BOLD, 30));
 		ManagerLogin.setBounds(40, 801, 334, 64);
 		card0.add(ManagerLogin);
-		ViewImpl.container.add(this.card1, CardName.LOGIN.toString());
-		ViewImpl.container.add(this.card2, CardName.MENU.toString());
-		ViewImpl.container.add(this.card3, CardName.ITEM.toString());
-		ViewImpl.container.add(this.card4, CardName.USER_MODIFY.toString());
-		ViewImpl.container.add(this.card5, CardName.LIKE_LIST.toString());
-		ViewImpl.container.add(this.card6, CardName.BORROWED_LIST.toString());
-		ViewImpl.container.add(this.card7, CardName.REVIEW.toString());
-		ViewImpl.container.add(this.card8, CardName.USER_CREATE.toString());
-		ViewImpl.container.add(this.card9, CardName.MANAGER_LOGIN.toString());
-		ViewImpl.container.add(this.card10, CardName.ITEM_CREATE.toString());
-		ViewImpl.container.add(this.card11, CardName.STUDY_ROOM.toString());
+		ViewImpl.CONTAINER.add(this.card1, CardName.LOGIN.toString());
+		ViewImpl.CONTAINER.add(this.card2, CardName.MENU.toString());
+		ViewImpl.CONTAINER.add(this.card3, CardName.ITEM.toString());
+		ViewImpl.CONTAINER.add(this.card4, CardName.USER_MODIFY.toString());
+		ViewImpl.CONTAINER.add(this.card5, CardName.LIKE_LIST.toString());
+		ViewImpl.CONTAINER.add(this.card6, CardName.BORROWED_LIST.toString());
+		ViewImpl.CONTAINER.add(this.card7, CardName.REVIEW.toString());
+		ViewImpl.CONTAINER.add(this.card8, CardName.USER_CREATE.toString());
+		ViewImpl.CONTAINER.add(this.card9, CardName.MANAGER_LOGIN.toString());
+		ViewImpl.CONTAINER.add(this.card10, CardName.ITEM_CREATE.toString());
+		ViewImpl.CONTAINER.add(this.card11, CardName.STUDY_ROOM.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
 		userCreate.addActionListener(e -> this.swapView(CardName.USER_CREATE));
-		this.mainFrame.getContentPane().add(ViewImpl.container);
+		this.mainFrame.getContentPane().add(ViewImpl.CONTAINER);
 		this.mainFrame.setVisible(true);
 	}
 
@@ -179,8 +179,8 @@ public class ViewImpl implements View {
 
 	@Override
 	public void swapView(final CardName name) {
-		ViewImpl.cl.show(ViewImpl.container, name.toString());
-		return;
+		ViewImpl.CL.show(ViewImpl.CONTAINER, name.toString());
+
 	}
 
 	// //OK
@@ -258,8 +258,8 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public void getUserRegistration(final utils.UserInfo info) {
-		((UserScreenImpl) this.card8).getInfo(info);
+	public String getUserRegistration(final utils.UserInfo info) {
+		return ((UserScreenImpl) this.card8).getInfo(info);
 
 	}
 
@@ -418,6 +418,11 @@ public class ViewImpl implements View {
 	@Override
 	public void showError(final String errorMessage) {
 		JOptionPane.showMessageDialog(this.mainFrame, errorMessage);
+	}
+
+	@Override
+	public void showMessage(final String message) {
+		JOptionPane.showMessageDialog(this.mainFrame, message);
 	}
 
 	/*

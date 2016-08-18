@@ -17,17 +17,18 @@ import utils.TypeItem;
 public class ItemShowImpl implements ItemShow {
 	final int FRAME_LENGHT = 600;
 	final int FRAME_WIDTH = 920;
-	private String title = new String();
-	private String author = new String();
-	private String manifacturer = new String();
-	private String year = new String();
-	private String genre = new String();
-	private String reviewAvarage = new String();
-	private String availability = new String();
-	private String isbn = new String();
-	private String color = new String();
-	private String duration = new String();
-	private String imagePath = new String();
+	private String title;
+	private String author;
+	private String manifacturer;
+	private String year;
+	private utils.ItemGenre genre;
+	private String reviewAvarage;
+	private String availability;
+	private String isbn;
+	private utils.TypeColor color;
+	private String duration;
+	private utils.Language language;
+	private String imagePath;
 
 	@Override
 	public void startItemShow(final View v, final TypeItem type) {
@@ -92,6 +93,10 @@ public class ItemShowImpl implements ItemShow {
 		durationL.setBounds(54, 413, 215, 37);
 		mainFrame.getContentPane().add(durationL);
 
+		final JLabel languageL = new JLabel("Durata: " + this.language);
+		durationL.setBounds(54, 413, 215, 37);
+		mainFrame.getContentPane().add(languageL);
+
 		if (type.equals(TypeItem.BOOK)) {
 			mainFrame.setTitle("Libro Selezionato");
 			durationL.setVisible(false);
@@ -106,9 +111,10 @@ public class ItemShowImpl implements ItemShow {
 
 	@Override
 	public void setCommonField(final String title, final String author,
-			final String manifacturer, final String year, final String genre,
-			final String reviewAvarage, final String availability,
-			final String imagePath) {
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String reviewAvarage,
+			final String availability, final String imagePath,
+			final utils.Language language) {
 		this.title = title;
 		this.author = author;
 		this.manifacturer = manifacturer;
@@ -117,15 +123,18 @@ public class ItemShowImpl implements ItemShow {
 		this.reviewAvarage = reviewAvarage;
 		this.availability = availability;
 		this.imagePath = imagePath;
+		this.language = language;
 	}
 
 	@Override
 	public void setFilmField(final String title, final String author,
-			final String manifacturer, final String year, final String genre,
-			final String reviewAvarage, final String availability,
-			final String imagePath, final String duration, final String color) {
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String reviewAvarage,
+			final String availability, final String imagePath,
+			final String duration, final utils.TypeColor color,
+			final utils.Language language) {
 		this.setCommonField(title, author, manifacturer, year, genre,
-				reviewAvarage, availability, imagePath);
+				reviewAvarage, availability, imagePath, language);
 		this.duration = duration;
 		this.color = color;
 		this.isbn = null;
@@ -133,11 +142,12 @@ public class ItemShowImpl implements ItemShow {
 
 	@Override
 	public void setBookField(final String title, final String author,
-			final String manifacturer, final String year, final String genre,
-			final String reviewAvarage, final String availability,
-			final String imagePath, final String isbn) {
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String reviewAvarage,
+			final String availability, final String imagePath,
+			final String isbn, final utils.Language language) {
 		this.setCommonField(title, author, manifacturer, year, genre,
-				reviewAvarage, availability, imagePath);
+				reviewAvarage, availability, imagePath, language);
 		this.duration = null;
 		this.color = null;
 		this.isbn = isbn;
