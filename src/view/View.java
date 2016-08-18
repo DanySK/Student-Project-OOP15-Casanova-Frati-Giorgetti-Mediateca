@@ -72,7 +72,7 @@ public interface View {
 	 * @param info
 	 * @return
 	 */
-	String getUserRegistration(utils.UserInfo info);
+	Object getUserRegistration(utils.UserInfo info);
 
 	/**
 	 *
@@ -163,7 +163,7 @@ public interface View {
 	 * @param info
 	 * @return information
 	 */
-	String getModifiedInfo(UserInfo info);
+	Object getModifiedInfo(UserInfo info);
 
 	/**
 	 * method which allows to switch between cards by passing the card name.
@@ -324,9 +324,23 @@ public interface View {
 
 	/**
 	 * method which show a notification to user.
-	 * 
+	 *
 	 * @param message
 	 */
 	void showMessage(String message);
+
+	/**
+	 * method which returns the taken sits
+	 *
+	 * @return
+	 */
+	int getTakenSits();
+
+	/**
+	 * method which returns the date selected in study room.
+	 * 
+	 * @return
+	 */
+	String getStudyRoomSelectedDate();
 
 }

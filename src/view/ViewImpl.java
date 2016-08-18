@@ -32,9 +32,9 @@ public class ViewImpl implements View {
 
 	private static final JPanel CONTAINER = new JPanel();
 	private static final CardLayout CL = new CardLayout();
-	final int SCREEN_LENGHT = 1280;
-	final int SCREEN_WIDTH = 920;
-	final int STUDY_ROOM_SITS = 100;
+	private static final int SCREEN_LENGHT = 1280;
+	private static final int SCREEN_WIDTH = 920;
+	private static final int STUDY_ROOM_SITS = 100;
 
 	private JPanel card1;
 	private JPanel card2;
@@ -99,29 +99,29 @@ public class ViewImpl implements View {
 	@Override
 	public void startView() {
 		this.card1 = new UserLoginImpl(this, LoginType.USER,
-				this.SCREEN_LENGHT, this.SCREEN_WIDTH);
-		this.card2 = new UserMenuImpl(this, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH);
-		this.card3 = new MediatecaScreenImpl(this, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH);
+				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
+		this.card2 = new UserMenuImpl(this, ViewImpl.SCREEN_LENGHT,
+				ViewImpl.SCREEN_WIDTH);
+		this.card3 = new MediatecaScreenImpl(this, ViewImpl.SCREEN_LENGHT,
+				ViewImpl.SCREEN_WIDTH);
 		this.card4 = new UserScreenImpl(this, UserScreenType.MODIFY,
-				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
-		this.card5 = new ListScreenImpl(this, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH, ListScreenType.LIKE);
-		this.card6 = new ListScreenImpl(this, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH, ListScreenType.BORROWED);
-		this.card7 = new ReviewScreenImpl(this, this.SCREEN_LENGHT,
-				this.SCREEN_WIDTH);
+				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_LENGHT);
+		this.card5 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
+				ViewImpl.SCREEN_WIDTH, ListScreenType.LIKE);
+		this.card6 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
+				ViewImpl.SCREEN_WIDTH, ListScreenType.BORROWED);
+		this.card7 = new ReviewScreenImpl(this, ViewImpl.SCREEN_LENGHT,
+				ViewImpl.SCREEN_WIDTH);
 		this.card8 = new UserScreenImpl(this, UserScreenType.CREATE,
-				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
+				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_LENGHT);
 		this.card9 = new UserLoginImpl(this, LoginType.MANAGER,
-				this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE,
-				this.SCREEN_LENGHT, this.SCREEN_LENGHT);
-		this.card11 = new StudyRoomImpl(this, this.STUDY_ROOM_SITS);
+				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_LENGHT);
+		this.card11 = new StudyRoomImpl(this, ViewImpl.STUDY_ROOM_SITS);
 		this.mainFrame.setTitle("Mediateca");
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.mainFrame.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+		this.mainFrame.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.mainFrame.setResizable(false);
 		ViewImpl.CONTAINER.setLayout(ViewImpl.CL);
 		final JPanel card0 = new JPanel();
@@ -137,11 +137,11 @@ public class ViewImpl implements View {
 		login.setBounds(299, 173, 281, 179);
 
 		card0.setLayout(null);
-		card0.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+		card0.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		card0.add(welcome);
 		card0.add(login);
 		card0.add(userCreate);
-		this.card1.setSize(this.SCREEN_LENGHT, this.SCREEN_WIDTH);
+		this.card1.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 
 		ViewImpl.CONTAINER.add(card0, CardName.MAIN.toString());
 
@@ -258,7 +258,7 @@ public class ViewImpl implements View {
 	}
 
 	@Override
-	public String getUserRegistration(final utils.UserInfo info) {
+	public Object getUserRegistration(final utils.UserInfo info) {
 		return ((UserScreenImpl) this.card8).getInfo(info);
 
 	}
@@ -307,7 +307,7 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public String getModifiedInfo(final UserInfo info) {
+	public Object getModifiedInfo(final UserInfo info) {
 		return ((UserScreenImpl) this.card4).getInfo(info);
 	}
 
@@ -339,7 +339,7 @@ public class ViewImpl implements View {
 	// //waiting CONTROLLER function name
 	@Override
 	public void sendUserCreate() {
-		// this.c.userCreate();
+		this.c.registerNewUser();
 
 	}
 
@@ -353,8 +353,7 @@ public class ViewImpl implements View {
 	// //waiting CONTROLLER function name
 	@Override
 	public void giveMeFilteredList() {
-		// this.c.filterList();
-
+		// this.c.itemElaboration();
 	}
 
 	// //waiting CONTROLLER function name
@@ -425,20 +424,16 @@ public class ViewImpl implements View {
 		JOptionPane.showMessageDialog(this.mainFrame, message);
 	}
 
-	/*
-	 * @Override public void showMessage(final String message) {
-	 * JOptionPane.showMessageDialog(this.mainFrame,message); }
-	 */
 	// //waiting CONTROLLER function name
 	@Override
 	public void takeSit() {
-		// c.takeSit();
+		// this.c.takeSit();
 	}
 
 	// //waiting CONTROLLER function name
 	@Override
 	public void giveMeStudyRoomStatus() {
-		// c.studyRoomStatus
+		this.c.studyRoomStatus();
 	}
 
 	@Override
@@ -447,4 +442,13 @@ public class ViewImpl implements View {
 
 	}
 
+	@Override
+	public int getTakenSits() {
+		return ((StudyRoomImpl) this.card11).getTakenSit();
+	}
+
+	@Override
+	public String getStudyRoomSelectedDate() {
+		return ((StudyRoomImpl) this.card11).getDate();
+	}
 }

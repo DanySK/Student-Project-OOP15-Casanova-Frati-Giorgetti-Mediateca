@@ -1,6 +1,5 @@
 package view;
 
-
 /**
  * Interface whith methods for setting and getting information from UserModify
  * card.
@@ -30,6 +29,6 @@ public interface UserScreen {
 	 * @param info
 	 * @return userInfo
 	 */
-	String getInfo(utils.UserInfo info);
+	Object getInfo(utils.UserInfo info);
 
 }
