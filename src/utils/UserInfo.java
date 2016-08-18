@@ -7,8 +7,8 @@ package utils;
  *
  */
 public enum UserInfo {
-	/**
-	 * enum of user information.
-	 */
-	NAME, SURNAME, USERNAME, PASSWORD, BIRTHDATE, EMAIL, TELEFONE
+  /**
+   * enum of user information.
+   */
+  NAME, SURNAME, USERNAME, PASSWORD, BIRTHDATE, EMAIL, TELEPHONE_NUMBER
 }

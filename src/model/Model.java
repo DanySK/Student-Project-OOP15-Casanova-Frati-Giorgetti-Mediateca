@@ -15,6 +15,7 @@ import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
 import utils.TypeSearch;
+import utils.UserInfo;
 
 /**
  * Interface for a generic model. It defines the main methods of the class
@@ -328,7 +329,7 @@ public interface Model {
    * @throws Exception
    *           in the case which user is not in the archive or ts is not ok.
    */
-  void changeUser(final TypeSearch ts, final Integer userId, final Object param) throws Exception;
+  void changeUser(final UserInfo ts, final Integer userId, final Object param) throws Exception;
 
   /**
    * This method can be used by USER, MANAGER. This method update all userId's

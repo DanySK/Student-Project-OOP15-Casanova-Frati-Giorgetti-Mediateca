@@ -24,6 +24,7 @@ import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
 import utils.TypeSearch;
+import utils.UserInfo;
 
 /**
  * Main class of the model. It is Serializable and it has two main field, the
@@ -395,33 +396,33 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void changeUser(final TypeSearch ts, final Integer userId, final Object param)
+  public void changeUser(final UserInfo ts, final Integer userId, final Object param)
               throws Exception {
-    if ((ts != TypeSearch.NAME) && (ts != TypeSearch.SURNAME) && (ts != TypeSearch.BIRTHDATE)
-                && (ts != TypeSearch.USERNAME) && (ts != TypeSearch.PASSWORD)
-                && (ts != TypeSearch.EMAIL) && (ts != TypeSearch.TELEPHONE_NUMBER)) {
+    if ((ts != UserInfo.NAME) && (ts != UserInfo.SURNAME) && (ts != UserInfo.BIRTHDATE)
+                && (ts != UserInfo.USERNAME) && (ts != UserInfo.PASSWORD) && (ts != UserInfo.EMAIL)
+                && (ts != UserInfo.TELEPHONE_NUMBER)) {
       throw new Exception("TypeSearch " + ts + "not valid to change on User");
     }
-    if (ts == TypeSearch.NAME) {
+    if (ts == UserInfo.NAME) {
       this.archiveUser.getUser(userId).setName((String) param);
     }
-    if (ts == TypeSearch.SURNAME) {
+    if (ts == UserInfo.SURNAME) {
       this.archiveUser.getUser(userId).setSurname((String) param);
     }
 
-    if (ts == TypeSearch.BIRTHDATE) {
+    if (ts == UserInfo.BIRTHDATE) {
       this.archiveUser.getUser(userId).setBirthdate((GregorianCalendar) param);
     }
-    if (ts == TypeSearch.USERNAME) {
+    if (ts == UserInfo.USERNAME) {
       this.archiveUser.getUser(userId).setUsername((String) param);
     }
-    if (ts == TypeSearch.PASSWORD) {
+    if (ts == UserInfo.PASSWORD) {
       this.archiveUser.getUser(userId).setPassword((String) param);
     }
-    if (ts == TypeSearch.EMAIL) {
+    if (ts == UserInfo.EMAIL) {
       this.archiveUser.getUser(userId).setEmail((String) param);
     }
-    if (ts == TypeSearch.TELEPHONE_NUMBER) {
+    if (ts == UserInfo.TELEPHONE_NUMBER) {
       this.archiveUser.getUser(userId).setTelephoneNumber((String) param);
     }
   }
