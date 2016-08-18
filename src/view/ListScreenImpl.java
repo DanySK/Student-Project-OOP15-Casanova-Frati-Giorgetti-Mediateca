@@ -62,6 +62,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 			} else if (i.equals(ListScreenType.WISH)) {
 				this.presentation = new JLabel("Ecco gli oggetti che desideri");
 				remove.addActionListener(e -> v.removeFromWishlist());
+				v.giveMeWishlist();
 			}
 		}
 
@@ -72,13 +73,15 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		this.add(this.list);
 
 		exit = new JButton("Esci");
-		exit.setBounds(360, 262, 55, 25);
+		exit.setBounds(390, 312, 55, 25);
 		this.add(exit);
-
+		remove.setBounds(360, 262, 55, 25);
+		this.add(remove);
 		exit.addActionListener(e -> {
 			v.swapView(CardName.ITEM);
 		});
-		this.setSize(screenLenght, screenWidth);
+
+		this.setSize(1280, 920);
 		this.setLayout(null);
 
 	}

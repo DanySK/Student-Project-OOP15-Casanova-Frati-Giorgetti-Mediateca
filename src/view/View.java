@@ -377,9 +377,14 @@ public interface View {
 
 	/**
 	 * return item to remove from Likelist, Borrowedlist or Wishlist.
-	 * 
+	 *
 	 * @return
 	 */
 	String getItemToRemoveFromLikeBorrowWish();
+
+	/**
+	 * method which asks controller to set wishlist.
+	 */
+	void giveMeWishlist();
 
 }

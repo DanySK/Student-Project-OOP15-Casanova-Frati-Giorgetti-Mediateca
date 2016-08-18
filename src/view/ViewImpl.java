@@ -501,4 +501,12 @@ public class ViewImpl implements View {
 	public String getItemToRemoveFromLikeBorrowWish() {
 		return ((ListScreenImpl) this.card12).getSelectedItem();
 	}
+
+	// //waiting CONTROLLER function name
+
+	@Override
+	public void giveMeWishlist() {
+		// c.wishlist();
+
+	}
 }
