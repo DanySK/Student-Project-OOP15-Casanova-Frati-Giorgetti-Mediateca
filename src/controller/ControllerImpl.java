@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -20,7 +21,8 @@ import model.user.User;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
-import utils.TypeSearch;
+import utils.TypeItemInfo;
+import utils.UserInfo;
 import view.View;
 
 /**
@@ -60,7 +62,7 @@ public class ControllerImpl implements Controller {
 		File fileUser = new File(this.fm.getPath() + ControllerImpl.FILENAMEUSER);
 		File fileStudyRoom = new File(this.fm.getPath() + ControllerImpl.FILENAMESTUDYROOM);
 
-		Map<Integer, UserImpl> userArchive2 = this.m.getUserArchive();
+		// Map<Integer, UserImpl> userArchive2 = this.m.getUserArchive();
 
 		if ((fileItem.exists() && !fileItem.isDirectory()) && (fileUser.exists() && !fileUser.isDirectory())
 				&& (fileStudyRoom.exists() && !fileStudyRoom.isDirectory())) {
@@ -143,8 +145,8 @@ public class ControllerImpl implements Controller {
 				ty = y;
 			}
 		}
-		TypeSearch ts = null;
-		for (TypeSearch s : TypeSearch.values()) {
+		TypeItemInfo ts = null;
+		for (TypeItemInfo s : TypeItemInfo.values()) {
 			if (s.toString().equals(this.v.getSearchFilter())) {
 				ts = s;
 			}
@@ -203,9 +205,40 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void registerNewUser() {
-		// this.m.registerUser(this.v., initSurname, initBirthdate,
-		// initUsername, initPassword, initEmail, initTelephoneNumber,
-		// initBookPref, initMoviePref);
+
+		String name = this.v.getUserRegistration(UserInfo.NAME);
+		String surname = this.v.getUserRegistration(UserInfo.SURNAME);
+		GregorianCalendar gc = (GregorianCalendar) this.v.getUserRegistration(UserInfo.BIRTHDATE);
+		String username = this.v.getUserRegistration(UserInfo.USERNAME);
+		String password = this.v.getUserRegistration(UserInfo.PASSWORD);
+		String email = this.v.getUserRegistration(UserInfo.EMAIL);
+		String telephoneNumber = this.v.getUserRegistration(UserInfo.TELEPHONE_NUMBER);
+		List<ItemGenre> bookList = new ArrayList<>();
+		List<ItemGenre> movieList = new ArrayList<>();
+		this.m.registerUser(name, surname, gc, username, password, email, telephoneNumber, bookList, movieList);
+		this.v.showError("Utente " + username + " registrato con successo!");
+	}
+
+	public void takeSit() throws Exception {
+		Integer sit;
+		GregorianCalendar day;
+		this.m.bookSit(day, sit, this.actualUser.getIdUser());
+	}
+
+	public void cancelSit() throws Exception {
+		Integer sit; // == getActualSit();
+		GregorianCalendar day; // = getActualDay;
+		this.m.cancelSit(day, sit, this.actualUser.getIdUser());
+	}
+
+	public void studyRoomStatus() {
+		GregorianCalendar day; // = getActualDay;
+		int[] arrayint = new int[this.m.getAllUserSit(day).size()];
+		int index = 0;
+		for (Integer i : this.m.getAllUserSit(day)) {
+			arrayint[index] = i;
+		}
+		this.v.setStudyRoomStatus(arrayint);
 	}
 
 	public void sendMessage(final String string) {
