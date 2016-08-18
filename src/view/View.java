@@ -238,7 +238,7 @@ public interface View {
 	 * @param info
 	 * @return
 	 */
-	Object getItemInfo(utils.ItemInfo info);
+	Object getItemInfo(utils.TypeItemInfo info);
 
 	/**
 	 * method which allows to set book info.

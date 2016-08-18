@@ -174,7 +174,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 				return this.birthF.getText();
 			case EMAIL:
 				return this.emailF.getText();
-			case TELEFONE:
+			case TELEPHONE_NUMBER:
 				return this.cellF.getText();
 			default:
 				break;

@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 import utils.ItemGenre;
 import utils.Language;
 import utils.TypeColor;
+import utils.TypeItemInfo;
 
 /**
  * inteface for item screen.
@@ -19,7 +20,7 @@ public interface ItemScreen {
 	 * @param info
 	 * @return
 	 */
-	Object getItemInfo(utils.ItemInfo info);
+	Object getItemInfo(TypeItemInfo info);
 
 	/**
 	 * method which allows to resize image by passing path.

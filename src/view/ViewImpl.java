@@ -72,11 +72,11 @@ public class ViewImpl implements View {
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-				"Study Room Card");
+						"LikeList Screen Card"), BORROWED_LIST(
+								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+														"Study Room Card");
 
 		private final String name;
 
@@ -366,7 +366,7 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public Object getItemInfo(final utils.ItemInfo info) {
+	public Object getItemInfo(final utils.TypeItemInfo info) {
 		return ((ItemScreenImpl) this.card10).getItemInfo(info);
 	}
 
@@ -388,8 +388,8 @@ public class ViewImpl implements View {
 			final String duration, final utils.TypeColor color,
 			final utils.Language language) {
 		((ItemScreenImpl) this.card10)
-		.setFilmField(title, author, manifacturer, year, genre,
-				imagePath, duration, color, language);
+				.setFilmField(title, author, manifacturer, year, genre,
+						imagePath, duration, color, language);
 	}
 
 	// //waiting CONTROLLER function name

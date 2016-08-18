@@ -6,7 +6,7 @@ package utils;
  * @author Luca Giorgetti
  *
  */
-public enum ItemInfo {
+public enum TypeItemInfo {
 	/**
 	 * enum of item infomration.
 	 */
