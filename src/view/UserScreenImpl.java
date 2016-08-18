@@ -62,6 +62,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public UserScreenImpl(final View v, final UserScreenType type,
 			final int screenLenght, final int screenWidth) {
 		this.setSize(1280, 920);

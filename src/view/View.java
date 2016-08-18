@@ -338,9 +338,48 @@ public interface View {
 
 	/**
 	 * method which returns the date selected in study room.
-	 * 
+	 *
 	 * @return
 	 */
 	String getStudyRoomSelectedDate();
+
+	/**
+	 * method which tells to controller to wish an item.
+	 */
+	void wishItem();
+
+	/**
+	 * method which tells to controller to remove a sit.
+	 */
+	void removeSit();
+
+	/**
+	 * method which asks controller to set SuggestedBooksList.
+	 */
+	void giveMeSuggestedBooks();
+
+	/**
+	 * method which asks controller to set SuggestedMoviesList.
+	 */
+	void giveMeSuggestedMovies();
+
+	/**
+	 * method which asks controller to remove like form an item.
+	 */
+	void removeLike();
+
+	/**
+	 * method which asks controller to remove item form wishlist.
+	 *
+	 * @return
+	 */
+	void removeFromWishlist();
+
+	/**
+	 * return item to remove from Likelist, Borrowedlist or Wishlist.
+	 * 
+	 * @return
+	 */
+	String getItemToRemoveFromLikeBorrowWish();
 
 }

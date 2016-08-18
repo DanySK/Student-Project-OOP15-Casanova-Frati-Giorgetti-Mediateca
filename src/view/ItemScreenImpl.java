@@ -14,7 +14,6 @@ import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utils.TypeItem;
-import view.UserScreenImpl.UserScreenType;
 import view.ViewImpl.CardName;
 
 /**
@@ -30,15 +29,15 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private JTextField titleF;
 	private JTextField authorF;
 	private JTextField manifacturerF;
-	private JComboBox genreF = new JComboBox(utils.ItemGenre.values());
-	private JComboBox languageF = new JComboBox(utils.Language.values());
+	private JComboBox<?> genreF = new JComboBox(utils.ItemGenre.values());
+	private JComboBox<?> languageF = new JComboBox(utils.Language.values());
 	private JTextField yearF;
 	private String imagePath;
 	private JFileChooser imageChoose = new JFileChooser();
-	private JComboBox itemTypeF = new JComboBox(utils.TypeItem.values());
+	private JComboBox<?> itemTypeF = new JComboBox(utils.TypeItem.values());
 	private JLabel imageSpace;
 	private JTextField durationF;
-	private JComboBox colorF = new JComboBox(utils.TypeColor.values());
+	private JComboBox<?> colorF = new JComboBox(utils.TypeColor.values());
 	private JTextField isbnF;
 
 	public int imageLenght = 140;
@@ -179,12 +178,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		discarge = new JButton("Annulla");
 		discarge.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		if (type.equals(UserScreenType.CREATE)) {
+		if (type.equals(ItemScreenType.CREATE)) {
 			presentation = new JLabel("Inserisci il nuovo oggetto");
 			send = new JButton("Crea");
 			discarge.addActionListener(e -> v.swapView(CardName.MANAGER_MENU));
 			send.addActionListener(e -> v.sendItemCreate());
-		} else if (type.equals(UserScreenType.MODIFY)) {
+		} else if (type.equals(ItemScreenType.MODIFY)) {
 			presentation = new JLabel("Modifica qui il tuo oggetto:");
 			v.giveMeItemInfo();
 			send = new JButton("Invio");

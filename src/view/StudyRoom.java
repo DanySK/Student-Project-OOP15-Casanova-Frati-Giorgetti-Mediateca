@@ -22,4 +22,18 @@ public interface StudyRoom {
 	 */
 	String getDate();
 
+	/**
+	 * method which sets the list of taken sits.
+	 *
+	 * @param list
+	 */
+	void setTakenSitsList(String[] list);
+
+	/**
+	 * method which return the selected value in JustTakenSitsList.
+	 *
+	 * @return
+	 */
+	String getSelectedSit();
+
 }

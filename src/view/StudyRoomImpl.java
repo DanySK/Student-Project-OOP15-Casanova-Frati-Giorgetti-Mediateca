@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import org.jdatepicker.impl.JDatePanelImpl;
@@ -27,8 +28,9 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	private static final long serialVersionUID = 1L;
 	private int takenSit;
 	private final JButton[] buttons;
-	JDatePickerImpl datePicker;
-	UtilDateModel model = new UtilDateModel();
+	private JDatePickerImpl datePicker;
+	private UtilDateModel model = new UtilDateModel();
+	JList<String> takenSitsList = new JList<String>();
 
 	/**
 	 * builder for StudyRoomImpl.
@@ -39,7 +41,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	public StudyRoomImpl(final View v, final int sitsNumber) {
 		this.setSize(1280, 920);
 		JLabel presentation = new JLabel("Clicca sul posto che vuoi prenotare");
-		presentation.setBounds(391, 5, 705, 49);
+		presentation.setBounds(311, 13, 705, 49);
 		presentation.setFont(new Font("Tahoma", Font.BOLD, 40));
 		this.buttons = new JButton[sitsNumber];
 		int i;
@@ -55,8 +57,10 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		this.datePicker = new JDatePickerImpl(datePanel,
 				new DateLabelFormatter());
 		this.datePicker.setSize(202, 25);
-		this.datePicker.setLocation(98, 127);
-
+		this.datePicker.setLocation(979, 107);
+		this.takenSitsList.setSize(826, 89);
+		this.takenSitsList.setLocation(56, 740);
+		this.add(this.takenSitsList);
 		this.add(this.datePicker);
 
 		final ActionListener listener = e -> {
@@ -68,7 +72,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 			}
 		};
 
-		for (i = 0; i < sitsNumber; i++) {
+		for (i = 0; i < 50; i++) {
 			this.buttons[i] = new JButton(String.valueOf(i));
 			this.buttons[i].addActionListener(listener);
 			this.buttons[i].setBackground(Color.GREEN);
@@ -77,6 +81,12 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 
 		this.add(presentation);
 		v.giveMeStudyRoomStatus();
+		JButton remove = new JButton("Rimuovi");
+		remove.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		remove.setBounds(920, 737, 229, 92);
+		this.add(remove);
+		remove.addActionListener(e -> v.removeSit());
+
 	}
 
 	@Override
@@ -95,5 +105,15 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	@Override
 	public String getDate() {
 		return (String) this.datePicker.getModel().getValue();
+	}
+
+	@Override
+	public void setTakenSitsList(final String[] list) {
+		this.takenSitsList = new JList<String>(list);
+	}
+
+	@Override
+	public String getSelectedSit() {
+		return this.takenSitsList.getSelectedValue();
 	}
 }

@@ -47,6 +47,7 @@ public class ViewImpl implements View {
 	private JPanel card9;
 	private JPanel card10;
 	private JPanel card11;
+	private JPanel card12;
 
 	private JFrame mainFrame = new JFrame();
 
@@ -59,8 +60,8 @@ public class ViewImpl implements View {
 	private Controller c;
 
 	@Override
-	public void setController(final Controller c) {
-		this.c = c;
+	public void setController(final Controller a) {
+		this.c = a;
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class ViewImpl implements View {
 								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
 										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
 												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-														"Study Room Card");
+														"Study Room Card"), WISHLIST("Wishlist Card");
 
 		private final String name;
 
@@ -119,7 +120,9 @@ public class ViewImpl implements View {
 		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE,
 				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_LENGHT);
 		this.card11 = new StudyRoomImpl(this, ViewImpl.STUDY_ROOM_SITS);
-		this.mainFrame.setTitle("Mediateca");
+		this.card12 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
+				ViewImpl.SCREEN_WIDTH, ListScreenType.WISH);
+
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.mainFrame.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.mainFrame.setResizable(false);
@@ -145,17 +148,17 @@ public class ViewImpl implements View {
 
 		ViewImpl.CONTAINER.add(card0, CardName.MAIN.toString());
 
-		JLabel ManagerLogin = new JLabel("Accedi come Gestore");
-		ManagerLogin.setHorizontalAlignment(SwingConstants.CENTER);
-		ManagerLogin.addMouseListener(new MouseAdapter() {
+		JLabel managerLogin = new JLabel("Accedi come Gestore");
+		managerLogin.setHorizontalAlignment(SwingConstants.CENTER);
+		managerLogin.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent arg0) {
 				ViewImpl.this.swapView(CardName.MANAGER_LOGIN);
 			}
 		});
-		ManagerLogin.setFont(new Font("Tahoma", Font.BOLD, 30));
-		ManagerLogin.setBounds(40, 801, 334, 64);
-		card0.add(ManagerLogin);
+		managerLogin.setFont(new Font("Tahoma", Font.BOLD, 30));
+		managerLogin.setBounds(40, 801, 334, 64);
+		card0.add(managerLogin);
 		ViewImpl.CONTAINER.add(this.card1, CardName.LOGIN.toString());
 		ViewImpl.CONTAINER.add(this.card2, CardName.MENU.toString());
 		ViewImpl.CONTAINER.add(this.card3, CardName.ITEM.toString());
@@ -167,6 +170,7 @@ public class ViewImpl implements View {
 		ViewImpl.CONTAINER.add(this.card9, CardName.MANAGER_LOGIN.toString());
 		ViewImpl.CONTAINER.add(this.card10, CardName.ITEM_CREATE.toString());
 		ViewImpl.CONTAINER.add(this.card11, CardName.STUDY_ROOM.toString());
+		ViewImpl.CONTAINER.add(this.card12, CardName.WISHLIST.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
@@ -450,5 +454,51 @@ public class ViewImpl implements View {
 	@Override
 	public String getStudyRoomSelectedDate() {
 		return ((StudyRoomImpl) this.card11).getDate();
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void wishItem() {
+		// c.wishItem();
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void removeSit() {
+		// c.removeSit();
+
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void giveMeSuggestedBooks() {
+		// c.suggestedBooks();
+
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void giveMeSuggestedMovies() {
+		// c.suggestedMovies();
+
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void removeLike() {
+		// c.removeLike();
+
+	}
+
+	// //waiting CONTROLLER function name
+	@Override
+	public void removeFromWishlist() {
+		// c.removeFromWishlist();
+
+	}
+
+	@Override
+	public String getItemToRemoveFromLikeBorrowWish() {
+		return ((ListScreenImpl) this.card12).getSelectedItem();
 	}
 }

@@ -20,7 +20,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	private static final long serialVersionUID = 1L;
 
 	private JLabel presentation;
-	private String[] showedList;
+	private JList<String> list;
 
 	/**
 	 * Enumeration with types of list which can be showed.
@@ -32,7 +32,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		/**
 		 *
 		 */
-		BORROWED, LIKE
+		BORROWED, LIKE, WISH
 	}
 
 	/**
@@ -45,26 +45,31 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 */
 	public ListScreenImpl(final View v, final int screenLenght,
 			final int screenWidth, final ListScreenType a) {
-		JButton exit;
-		final JList<String> list;
+		JButton exit = new JButton();
+		JButton remove = new JButton();
 		for (final ListScreenType i : ListScreenType.values()) {
 			if (i.equals(ListScreenType.BORROWED)) {
 				this.presentation = new JLabel(
 						"Ecco gli oggetti che hai in prestito:");
+				remove.addActionListener(e -> v.giveBackItem());
 				v.giveMeBorrowList();
 
 			} else if (i.equals(ListScreenType.LIKE)) {
 				this.presentation = new JLabel(
-						"Ecco gli oggetti che ti interessano:");
+						"Ecco gli oggetti che ti piacciono:");
+				remove.addActionListener(e -> v.removeLike());
 				v.giveMeLikeList();
+			} else if (i.equals(ListScreenType.WISH)) {
+				this.presentation = new JLabel("Ecco gli oggetti che desideri");
+				remove.addActionListener(e -> v.removeFromWishlist());
 			}
 		}
 
 		this.presentation.setBounds(525, 33, 197, 16);
 		this.add(this.presentation);
-		list = new JList<String>(this.showedList);
-		list.setBounds(71, 43, 289, 191);
-		this.add(list);
+
+		this.list.setBounds(71, 43, 289, 191);
+		this.add(this.list);
 
 		exit = new JButton("Esci");
 		exit.setBounds(360, 262, 55, 25);
@@ -80,11 +85,21 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 	@Override
 	public void setBorrowedList(final String[] bList) {
-		this.showedList = bList;
+		this.list = new JList<String>(bList);
 	}
 
 	@Override
 	public void setLikeList(final String[] lList) {
-		this.showedList = lList;
+		this.list = new JList<String>(lList);
+	}
+
+	@Override
+	public void setWishlist(final String[] wishlist) {
+		this.list = new JList<String>(wishlist);
+	}
+
+	@Override
+	public String getSelectedItem() {
+		return this.list.getSelectedValue();
 	}
 }

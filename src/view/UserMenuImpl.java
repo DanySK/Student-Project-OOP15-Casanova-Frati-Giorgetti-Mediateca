@@ -2,6 +2,7 @@ package view;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import view.ViewImpl.CardName;
@@ -14,11 +15,6 @@ import view.ViewImpl.CardName;
  */
 public class UserMenuImpl extends JPanel implements UserMenu {
 	private static final long serialVersionUID = 1L;
-	private final JButton exitProgram;
-	private JLabel mainLabel;
-	private JButton mediateca;
-	private JButton studyRoomServices;
-	private JButton accountSettings;
 
 	/**
 	 * Create the panel.
@@ -27,40 +23,67 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
+
+	private JList<String> suggestedBooks = new JList<String>();
+	private JList<String> suggestedMovies = new JList<String>();
+
 	public UserMenuImpl(final View v, final int screenLenght,
 			final int screenWidth) {
 		this.setLayout(null);
+		final JButton exitProgram;
+		final JLabel mainLabel;
+		final JButton mediateca;
+		final JButton studyRoomServices;
+		final JButton accountSettings;
 
-		this.mainLabel = new JLabel(
+		mainLabel = new JLabel(
 				"Seleziona il tipo di serviziovuoi accedere: a cui vuoi accedere");
-		this.mainLabel.setBounds(12, 25, 414, 16);
-		this.add(this.mainLabel);
+		mainLabel.setBounds(12, 25, 414, 16);
+		this.add(mainLabel);
+		v.giveMeSuggestedBooks();
+		v.giveMeSuggestedMovies();
+		this.suggestedBooks.setSize(163, 130);
+		this.suggestedBooks.setLocation(32, 156);
+		this.add(this.suggestedBooks);
+		this.suggestedMovies.setSize(163, 130);
+		this.suggestedMovies.setLocation(246, 156);
 
-		this.exitProgram = new JButton("Esci");
-		this.exitProgram.setBounds(246, 228, 163, 38);
-		this.add(this.exitProgram);
+		this.add(this.suggestedMovies);
 
-		this.mediateca = new JButton("Mediateca");
-		this.mediateca.setBounds(32, 54, 163, 65);
-		this.add(this.mediateca);
+		exitProgram = new JButton("Esci");
+		exitProgram.setBounds(246, 105, 163, 38);
+		this.add(exitProgram);
 
-		this.studyRoomServices = new JButton("Sala studio");
-		this.studyRoomServices.setBounds(246, 54, 163, 65);
-		this.add(this.studyRoomServices);
+		mediateca = new JButton("Mediateca");
+		mediateca.setBounds(32, 54, 163, 38);
+		this.add(mediateca);
 
-		this.accountSettings = new JButton("Impostazioni Account");
-		this.accountSettings.addActionListener(arg0 -> {
+		studyRoomServices = new JButton("Sala studio");
+		studyRoomServices.setBounds(246, 54, 163, 38);
+		this.add(studyRoomServices);
+
+		accountSettings = new JButton("Impostazioni Account");
+		accountSettings.addActionListener(arg0 -> {
 		});
-		this.accountSettings.setBounds(32, 228, 163, 38);
-		this.add(this.accountSettings);
+		accountSettings.setBounds(32, 105, 163, 38);
+		this.add(accountSettings);
 
-		this.exitProgram.addActionListener(e -> v.swapView(CardName.MAIN));
-		this.mediateca.addActionListener(e -> v.swapView(CardName.ITEM));
-		// this.studyRoomServices.addActionListener(e
-		// ->
-		// );
-		// this.accountSettings.addActionListener(e -> );
+		exitProgram.addActionListener(e -> v.swapView(CardName.MAIN));
+		mediateca.addActionListener(e -> v.swapView(CardName.ITEM));
+		studyRoomServices.addActionListener(e -> v
+				.swapView(CardName.STUDY_ROOM));
+		accountSettings
+		.addActionListener(e -> v.swapView(CardName.USER_MODIFY));
 
 	}
 
+	@Override
+	public void setSuggestedBooks(final String[] bList) {
+		this.suggestedBooks = new JList<String>(bList);
+	}
+
+	@Override
+	public void setSuggestedMovies(final String[] mList) {
+		this.suggestedMovies = new JList<String>(mList);
+	}
 }

@@ -20,4 +20,18 @@ public interface ListScreen {
 	 */
 	void setLikeList(String[] lList);
 
+	/**
+	 * method which sets the like list taken by controller.
+	 *
+	 * @param whishlist
+	 */
+	void setWishlist(String[] wishlist);
+
+	/**
+	 * return selected item.
+	 * 
+	 * @return
+	 */
+	String getSelectedItem();
+
 }

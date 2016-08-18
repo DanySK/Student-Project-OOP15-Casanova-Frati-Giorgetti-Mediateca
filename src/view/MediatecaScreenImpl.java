@@ -24,9 +24,9 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private static final int ELEMENTS_TO_SHOW = 25;
 	private String textToSearch;
 	private String selectedFilter;
-	private String filteredList[];
 	private String itemSelectedFromList;
 	private String itemType;
+	private JList<String> filteredJList = new JList<String>();
 
 	/**
 	 * Builder for MediatecaScreen.
@@ -35,8 +35,10 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	 * @param screenLenght
 	 * @param screenWidth
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public MediatecaScreenImpl(final View v, final int screenLenght,
 			final int screenWidth) {
+		this.setSize(1280, 920);
 		final JLabel mainLabel;
 		final JButton borrowItem;
 		final JButton giveBackItem;
@@ -45,11 +47,10 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		final JTextField searchField;
 
 		final JButton backToMenu;
-		final JList<String> filteredJList;
-		final JPanel bookMenuPanel = new JPanel();
-		final JComboBox filterSelect;
-		final JComboBox itemSelect;
+		final JComboBox<utils.TypeItemInfo> filterSelect;
+		final JComboBox<utils.TypeItem> itemSelect;
 		final JButton search;
+		final JButton wishItem;
 		final JButton review;
 
 		mainLabel = new JLabel(
@@ -58,34 +59,36 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		giveBackItem = new JButton("Restituisci ");
 		giveBackItem.setBounds(302, 133, 136, 25);
 		likeItem = new JButton("Mi Piace");
-		likeItem.setBounds(302, 187, 136, 25);
+		likeItem.setBounds(302, 212, 136, 25);
+		wishItem = new JButton("Aggiungi a WhishList");
+		wishItem.setBounds(302, 187, 136, 25);
 		seeBorrowedItem = new JButton("In prestito");
 		seeBorrowedItem.setBounds(302, 236, 136, 25);
-		bookMenuPanel.setLayout(null);
+		this.setLayout(null);
 		borrowItem = new JButton("Prendi ");
 		borrowItem.setBounds(302, 106, 136, 25);
 		searchField = new JTextField();
 		searchField.setText("Inserisci una o pi\u00F9 parole da cercare");
 		searchField.setBounds(21, 67, 269, 22);
-		filterSelect = new JComboBox();
+		filterSelect = new JComboBox(utils.TypeItemInfo.values());
 		filterSelect.setToolTipText("Dove ricercare");
 		filterSelect.setBounds(169, 38, 136, 22);
-		itemSelect = new JComboBox();
+		itemSelect = new JComboBox(utils.TypeItem.values());
 		itemSelect.setToolTipText("Libro o Film");
 		itemSelect.setBounds(21, 38, 136, 22);
-		bookMenuPanel.add(filterSelect);
+		this.add(filterSelect);
 		search = new JButton("Cerca");
 		search.setBounds(302, 66, 80, 25);
 		backToMenu = new JButton("Torna al Menu");
-		backToMenu.setBounds(302, 262, 136, 25);
+		backToMenu.setBounds(302, 292, 136, 25);
 		v.giveMeFilteredList();
-		filteredJList = new JList<String>(this.filteredList);
-		filteredJList.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
-		filteredJList.setBounds(21, 106, 269, 181);
-		filteredJList.addMouseListener(new MouseAdapter() {
+		this.filteredJList
+				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+		this.filteredJList.setBounds(21, 106, 269, 181);
+		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
-				JList list = (JList) evt.getSource();
+				JList<String> list = (JList) evt.getSource();
 				if (evt.getClickCount() == 2) {
 					v.showItemInfo((TypeItem) itemSelect.getSelectedItem());
 				}
@@ -94,26 +97,32 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		review = new JButton("Recensisci");
 		review.setBounds(302, 160, 136, 25);
 
-		bookMenuPanel.add(borrowItem);
+		this.add(borrowItem);
 
-		bookMenuPanel.add(mainLabel);
-		bookMenuPanel.add(giveBackItem);
-		bookMenuPanel.add(likeItem);
-		bookMenuPanel.add(seeBorrowedItem);
-		bookMenuPanel.add(searchField);
-		bookMenuPanel.add(search);
-		bookMenuPanel.add(backToMenu);
-		bookMenuPanel.add(itemSelect);
-		bookMenuPanel.add(filteredJList);
-		bookMenuPanel.add(review);
+		this.add(mainLabel);
+		this.add(giveBackItem);
+		this.add(likeItem);
+		this.add(seeBorrowedItem);
+		this.add(searchField);
+		this.add(search);
+		this.add(backToMenu);
+		this.add(itemSelect);
+		this.add(wishItem);
+		this.add(this.filteredJList);
+		this.add(review);
 
 		backToMenu.addActionListener(e -> v.swapView(CardName.MENU));
 		this.textToSearch = searchField.getText();
 		this.selectedFilter = (String) filterSelect.getSelectedItem();
 		this.itemType = (String) itemSelect.getSelectedItem();
-		this.itemSelectedFromList = filteredJList.getSelectedValue();
+		this.itemSelectedFromList = this.filteredJList.getSelectedValue();
+
+		JButton seeWishlist = new JButton("Wishlist");
+		seeWishlist.addActionListener(arg0 -> {
+		});
+		seeWishlist.setBounds(302, 262, 136, 25);
+		this.add(seeWishlist);
 		borrowItem.addActionListener(e -> v.borrowItem());
-		giveBackItem.addActionListener(e -> v.giveBackItem());
 		likeItem.addActionListener(e -> v.likeItem());
 		review.addActionListener(e -> {
 			v.reviewItem();
@@ -122,6 +131,10 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		seeBorrowedItem.addActionListener(e -> {
 			v.swapView(CardName.BORROWED_LIST);
 		});
+		wishItem.addActionListener(e -> {
+			v.wishItem();
+		});
+		seeWishlist.addActionListener(e -> v.swapView(CardName.WISHLIST));
 	}
 
 	@Override
@@ -146,7 +159,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 	@Override
 	public void setFilteredList(final String[] list) {
-		this.filteredList = list;
+		this.filteredJList = new JList<String>(list);
 	}
-
 }
