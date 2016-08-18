@@ -1,17 +1,15 @@
 package utils;
 
-import java.io.Serializable;
-
 /**
  * Enum of languages.
  *
  * @author Edoardo
  *
  */
-public enum Language implements Serializable {
+public enum Language {
 
-    /**
-     *
-     */
-    ITALIAN, ENGLISH, SPANISH, FRENCH, RUSSIAN, AMERICAN
+  /**
+   *
+   */
+  ITALIAN, ENGLISH, SPANISH, FRENCH, RUSSIAN, AMERICAN
 }

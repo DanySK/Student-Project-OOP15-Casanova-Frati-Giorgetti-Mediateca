@@ -1,7 +1,5 @@
 package utils;
 
-import java.io.Serializable;
-
 /**
  * Enum of film and book genre taken from the web.
  * https://it.wikipedia.org/wiki/Generi_cinematografici
@@ -10,7 +8,7 @@ import java.io.Serializable;
  * @author Edoardo
  *
  */
-public enum ItemGenre implements Serializable {
+public enum ItemGenre {
 
   /**
    *
