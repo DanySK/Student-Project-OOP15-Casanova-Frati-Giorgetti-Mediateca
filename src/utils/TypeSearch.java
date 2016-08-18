@@ -4,6 +4,7 @@ package utils;
  * Enum in order to simplify filter.
  *
  */
+@Deprecated
 public enum TypeSearch {
   /**
    *
