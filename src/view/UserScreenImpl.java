@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Font;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -7,6 +8,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -32,14 +35,15 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	private JTextField usernameF;
 	private JTextField emailF;
 	private JTextField cellF;
-	JDatePickerImpl datePicker;
-	UtilDateModel model = new UtilDateModel();
-	private JComboBox bookPref1;
-	private JComboBox bookPref2;
-	private JComboBox bookPref3;
-	private JComboBox filmPref1;
-	private JComboBox filmPref2;
-	private JComboBox filmPref3;
+	private JDatePickerImpl datePicker;
+	private UtilDateModel model = new UtilDateModel();
+	private JComboBox<?> bookPref1;
+	private JComboBox<?> bookPref2;
+	private JComboBox<?> bookPref3;
+	private JComboBox<?> filmPref1;
+	private JComboBox<?> filmPref2;
+	private JComboBox<?> filmPref3;
+	private SpringLayout springLayout;
 
 	public enum UserScreenType {
 		/**
@@ -72,43 +76,47 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.setLayout(null);
 
 		this.nameF = new JTextField();
-		this.nameF.setBounds(181, 34, 116, 22);
+		this.nameF.setBounds(282, 99, 289, 38);
 		this.add(this.nameF);
 		this.nameF.setColumns(10);
 
 		this.surnameF = new JTextField();
-		this.surnameF.setBounds(181, 63, 116, 22);
+		this.surnameF.setBounds(282, 150, 289, 37);
 		this.surnameF.setColumns(10);
 		this.add(this.surnameF);
 
 		this.passwordF = new JTextField();
 		this.passwordF.setColumns(10);
-		this.passwordF.setBounds(181, 119, 116, 22);
+		this.passwordF.setBounds(282, 252, 289, 38);
 		this.add(this.passwordF);
 
 		this.usernameF = new JTextField();
 		this.usernameF.setColumns(10);
-		this.usernameF.setBounds(181, 92, 116, 22);
+		this.usernameF.setBounds(282, 201, 289, 38);
 		this.add(this.usernameF);
 
 		this.emailF = new JTextField();
 		this.emailF.setColumns(10);
-		this.emailF.setBounds(181, 173, 116, 22);
+		this.emailF.setBounds(282, 352, 289, 38);
 		this.add(this.emailF);
 
 		this.cellF = new JTextField();
 		this.cellF.setColumns(10);
-		this.cellF.setBounds(181, 199, 116, 22);
+		this.cellF.setBounds(282, 403, 289, 38);
 		this.add(this.cellF);
 
 		nameL = new JLabel("Nome:");
-		nameL.setBounds(64, 40, 94, 16);
+		nameL.setBounds(64, 99, 206, 38);
+		nameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(nameL);
 
 		surnameL = new JLabel("Cognome:");
-		surnameL.setBounds(64, 66, 94, 16);
+		surnameL.setBounds(64, 150, 206, 38);
+		surnameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(surnameL);
 		discarge = new JButton("Annulla");
+		discarge.setFont(new Font("Tahoma", Font.PLAIN, 30));
+
 		if (type.equals(UserScreenType.CREATE)) {
 			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
 			this.send = new JButton("Crea");
@@ -124,33 +132,41 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			this.send.addActionListener(e -> v.sendUserModify());
 		}
 
-		this.presentation.setBounds(104, 11, 181, 16);
+		this.presentation.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		this.presentation.setHorizontalAlignment(SwingConstants.CENTER);
+		this.presentation.setBounds(12, 11, 1256, 52);
 		this.add(this.presentation);
 
-		discarge.setBounds(12, 709, 97, 25);
+		discarge.setBounds(68, 806, 202, 74);
 		this.add(discarge);
 
-		this.send.setBounds(341, 262, 97, 25);
+		this.send.setBounds(1024, 806, 202, 74);
+		this.send.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(this.send);
 
 		usernameL = new JLabel("Username:");
-		usernameL.setBounds(64, 98, 94, 16);
+		usernameL.setBounds(64, 201, 206, 38);
+		usernameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(usernameL);
 
 		passwordL = new JLabel("Password:");
-		passwordL.setBounds(64, 125, 94, 16);
+		passwordL.setBounds(64, 252, 206, 38);
+		passwordL.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(passwordL);
 
-		birthL = new JLabel("Data di nascita:");
-		birthL.setBounds(64, 153, 94, 16);
+		birthL = new JLabel("Data nascita:");
+		birthL.setBounds(64, 303, 206, 38);
+		birthL.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(birthL);
 
 		emailL = new JLabel("E-mail:");
-		emailL.setBounds(64, 179, 94, 16);
+		emailL.setBounds(64, 352, 206, 38);
+		emailL.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(emailL);
 
 		cellL = new JLabel("Recapito:");
-		cellL.setBounds(64, 205, 94, 16);
+		cellL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		cellL.setBounds(64, 402, 206, 38);
 		this.add(cellL);
 
 		Properties p = new Properties();
@@ -158,44 +174,66 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
 
-		UtilDateModel model = new UtilDateModel();
-		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel,
+		this.model = new UtilDateModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(this.model, p);
+		this.datePicker = new JDatePickerImpl(datePanel,
 				new DateLabelFormatter());
-		datePicker.setSize(206, 22);
-		datePicker.setLocation(181, 147);
+		this.springLayout.putConstraint(SpringLayout.NORTH,
+				this.datePicker.getJFormattedTextField(), 0,
+				SpringLayout.NORTH, this.datePicker);
+		this.springLayout = (SpringLayout) this.datePicker.getLayout();
+		this.springLayout.putConstraint(SpringLayout.SOUTH,
+				this.datePicker.getJFormattedTextField(), 0,
+				SpringLayout.SOUTH, this.datePicker);
+		this.datePicker.setSize(289, 38);
+		this.datePicker.setLocation(282, 303);
 
-		this.add(datePicker);
+		this.add(this.datePicker);
 
-		JComboBox bookPref1 = new JComboBox(utils.ItemGenre.values());
-		bookPref1.setSelectedIndex(-1);
-		bookPref1.setBounds(181, 234, 116, 22);
-		this.add(bookPref1);
+		this.bookPref1 = new JComboBox(utils.ItemGenre.values());
+		this.bookPref1.setSelectedIndex(-1);
+		this.bookPref1.setBounds(282, 552, 289, 38);
+		this.add(this.bookPref1);
 
-		JComboBox bookPref2 = new JComboBox(utils.ItemGenre.values());
-		bookPref2.setSelectedIndex(-1);
-		bookPref2.setBounds(309, 234, 116, 22);
-		this.add(bookPref2);
+		this.bookPref2 = new JComboBox(utils.ItemGenre.values());
+		this.bookPref2.setSelectedIndex(-1);
+		this.bookPref2.setBounds(583, 552, 289, 38);
+		this.add(this.bookPref2);
 
-		JComboBox bookPref3 = new JComboBox(utils.ItemGenre.values());
-		bookPref3.setSelectedIndex(-1);
-		bookPref3.setBounds(437, 234, 116, 22);
-		this.add(bookPref3);
+		this.bookPref3 = new JComboBox(utils.ItemGenre.values());
+		this.bookPref3.setSelectedIndex(-1);
+		this.bookPref3.setBounds(884, 552, 289, 38);
+		this.add(this.bookPref3);
 
-		JComboBox filmPref1 = new JComboBox(utils.ItemGenre.values());
-		filmPref1.setSelectedIndex(-1);
-		filmPref1.setBounds(181, 269, 116, 22);
-		this.add(filmPref1);
+		this.filmPref1 = new JComboBox(utils.ItemGenre.values());
+		this.filmPref1.setSelectedIndex(-1);
+		this.filmPref1.setBounds(282, 603, 289, 38);
+		this.add(this.filmPref1);
 
-		JComboBox filmPref2 = new JComboBox(utils.ItemGenre.values());
-		filmPref2.setSelectedIndex(-1);
-		filmPref2.setBounds(309, 269, 116, 22);
-		this.add(filmPref2);
+		this.filmPref2 = new JComboBox(utils.ItemGenre.values());
+		this.filmPref2.setSelectedIndex(-1);
+		this.filmPref2.setBounds(583, 603, 289, 38);
+		this.add(this.filmPref2);
 
-		JComboBox filmPref3 = new JComboBox(utils.ItemGenre.values());
-		filmPref3.setSelectedIndex(-1);
-		filmPref3.setBounds(437, 269, 116, 22);
-		this.add(filmPref3);
+		this.filmPref3 = new JComboBox(utils.ItemGenre.values());
+		this.filmPref3.setSelectedIndex(-1);
+		this.filmPref3.setBounds(884, 603, 289, 38);
+		this.add(this.filmPref3);
+
+		JLabel prefL = new JLabel("Preferenze generi:\r\n");
+		prefL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		prefL.setBounds(64, 500, 449, 38);
+		this.add(prefL);
+
+		JLabel bookL = new JLabel("Libri:\r\n");
+		bookL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		bookL.setBounds(64, 552, 206, 38);
+		this.add(bookL);
+
+		JLabel filmL = new JLabel("Film:");
+		filmL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		filmL.setBounds(64, 603, 206, 38);
+		this.add(filmL);
 	}
 
 	@Override
