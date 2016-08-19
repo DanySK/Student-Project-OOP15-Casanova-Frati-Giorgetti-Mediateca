@@ -16,7 +16,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 	private static final long serialVersionUID = 3947236683472052024L;
 	private JList<String> list = new JList<String>();
-	private TypeList type;
+	private TypeList type = TypeList.USER;
 
 	/**
 	 * Enum for the type of list can be.

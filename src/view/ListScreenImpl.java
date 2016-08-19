@@ -20,7 +20,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	private static final long serialVersionUID = 1L;
 
 	private JLabel presentation;
-	private JList<String> list;
+	private JList<String> list = new JList<String>();
 
 	/**
 	 * Enumeration with types of list which can be showed.

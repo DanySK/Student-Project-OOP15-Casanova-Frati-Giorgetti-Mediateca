@@ -43,7 +43,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	private JComboBox<?> filmPref1;
 	private JComboBox<?> filmPref2;
 	private JComboBox<?> filmPref3;
-	private SpringLayout springLayout;
+	private SpringLayout springLayout = new SpringLayout();
 
 	public enum UserScreenType {
 		/**

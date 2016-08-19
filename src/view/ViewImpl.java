@@ -74,12 +74,12 @@ public class ViewImpl implements View {
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-				"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
-				"Item Modify Card");
+						"LikeList Screen Card"), BORROWED_LIST(
+								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
+																"Item Modify Card");
 
 		private final String name;
 
@@ -382,8 +382,8 @@ public class ViewImpl implements View {
 			final String duration, final utils.TypeColor color,
 			final utils.Language language) {
 		((ItemScreenImpl) this.card10)
-		.setFilmField(title, author, manifacturer, year, genre,
-				imagePath, duration, color, language);
+				.setFilmField(title, author, manifacturer, year, genre,
+						imagePath, duration, color, language);
 	}
 
 	// //waiting CONTROLLER function name
@@ -428,7 +428,7 @@ public class ViewImpl implements View {
 	// //waiting CONTROLLER function name
 	@Override
 	public void giveMeStudyRoomStatus() {
-		this.c.studyRoomStatus();
+		// this.c.studyRoomStatus();
 	}
 
 	@Override
@@ -552,10 +552,10 @@ public class ViewImpl implements View {
 	public void showGiveBackOptionMessage(final String book) {
 		// Custom button text
 		final Object[] options = { "Consegna",
-				"Aumenta il prestito di un altro mese" };
+		"Aumenta il prestito di un altro mese" };
 		int choose = JOptionPane.showOptionDialog(this.mainFrame,
 				"Dovresti consegare il seguente libro:" + book
-				+ "Cosa vuoi fare?", "Notifica di consegna",
+						+ "Cosa vuoi fare?", "Notifica di consegna",
 				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
 		if (choose == 0) {
