@@ -116,6 +116,7 @@ public class ControllerImpl implements Controller {
 					&& (entry.getValue().getPassword().equals(password))) {
 				this.actualUser = entry.getValue();
 				this.v.goodLogin();
+				// inserire showGiveBackOption
 				check = true;
 				try {
 					this.m.setReccomandedList(this.actualUser.getIdUser());
@@ -132,8 +133,11 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void managerLogin() {
-		if (this.m.getSystemPassword()) {
-
+		if (this.m.getSystemPassword().equals(this.v.getMenagerPassword())) {
+			// esegui login manager
+			this.v.showMessage("Login effettuato");
+		} else {
+			this.v.showMessage("Password errata");
 		}
 	}
 
@@ -237,6 +241,32 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void registerNewBook(){
+		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
+		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
+		String author = (String) this.v.getItemInfo(TypeItemInfo.AUTHOR);
+		Language language = (Language) this.v.getItemInfo(TypeItemInfo.LANGUAGE);
+		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);
+		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
+		String publisher = (String) this.v.getItemInfo(TypeItemInfo.PRODUCER);
+		Integer numRelease = (Integer) this.v.getItemInfo(TypeItemInfo.);
+		Integer numCopy = (Integer);
+		this.m.registerBook(title, releaseYear, author, language, isbn, genre, publisher, initNumRelease, initNumCopy);
+	}
+
+	public void registerNewMovie() {
+		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
+		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
+		String publisher = (String) this.v.getItemInfo(TypeItemInfo.PRODUCER);
+		String author = (String) this.v.getItemInfo(TypeItemInfo.AUTHOR);
+		Language language = (Language) this.v.getItemInfo(TypeItemInfo.LANGUAGE);
+		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
+		Integer duration = (Integer) this.v.getItemInfo(TypeItemInfo.DURATION);
+		Boolean color = (Boolean) this.v.getItemInfo(TypeItemInfo.COLOR);
+		Integer numCopy = (Integer);
+		this.m.registerMovie(title, releaseYear, publisher, author, language, genre, duration, color, numCopy);
 	}
 
 	@Override
