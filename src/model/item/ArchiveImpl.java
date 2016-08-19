@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import model.Pair;
+import utils.TypeItem;
 
 /**
  * This class implements Serializable and Archive. This class is the 'real
@@ -28,19 +29,6 @@ public final class ArchiveImpl implements Serializable, Archive {
   private static final long serialVersionUID = 3943672353334594237L;
   private static ArchiveImpl singleton = null;
   private Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = new HashMap<>();
-
-  /**
-   * Simple enum in order to know if item is a book or a movie.
-   *
-   * @author Edoardo
-   *
-   */
-  public enum TypeItem {
-    /**
-     * Item's types.
-     */
-    MOVIE, BOOK
-  }
 
   private ArchiveImpl() {
   }

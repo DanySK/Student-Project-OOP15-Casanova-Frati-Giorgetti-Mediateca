@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Set;
 
 import model.Pair;
-import model.item.ArchiveImpl.TypeItem;
+import utils.TypeItem;
 
 /**
  * This interface contains methods to communicate with the item archives.

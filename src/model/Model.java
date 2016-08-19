@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import model.item.ArchiveImpl.TypeItem;
 import model.item.Item;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
@@ -14,6 +13,7 @@ import model.item.ReviewImpl;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeItem;
 import utils.TypeItemInfo;
 import utils.UserInfo;
 

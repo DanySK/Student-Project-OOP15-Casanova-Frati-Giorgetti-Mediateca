@@ -13,7 +13,6 @@ import java.util.Set;
 
 import model.item.Archive;
 import model.item.ArchiveImpl;
-import model.item.ArchiveImpl.TypeItem;
 import model.item.ItemFactory;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
@@ -23,6 +22,7 @@ import model.user.ArchiveUserImpl;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeItem;
 import utils.TypeItemInfo;
 import utils.UserInfo;
 
