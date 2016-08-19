@@ -45,13 +45,13 @@ public interface View {
 	 *
 	 * method which @return the filter in which the user wants to search.
 	 */
-	String getSearchFilter();
+	utils.TypeItemInfo getSearchFilter();
 
 	/**
 	 *
 	 * method which @return the type (Book or Movie) the user wants o search in.
 	 */
-	String getItemFilter();
+	utils.TypeItem getItemFilter();
 
 	/**
 	 * method which returns the score typed by user.
@@ -187,13 +187,6 @@ public interface View {
 	void giveMeBorrowList();
 
 	/**
-	 * method which calls controller for setting like list.
-	 *
-	 * @return
-	 */
-	void giveMeLikeList();
-
-	/**
 	 * method which allows to get review typed by user.
 	 *
 	 * @return review
@@ -246,7 +239,7 @@ public interface View {
 	 * @param type
 	 * @param language
 	 */
-	void setBookModifyField(String title, String author, String manifacturer,
+	void setBookField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String isbn,
 			Language language);
 
@@ -262,7 +255,7 @@ public interface View {
 	 * @param duration
 	 * @param color
 	 */
-	void setFilmModifyField(String title, String author, String manifacturer,
+	void setFilmField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String duration,
 			TypeColor color, Language language);
 
@@ -426,5 +419,40 @@ public interface View {
 	 * method which tells to controller to extend borrow.
 	 */
 	void extendBorrow();
+
+	/**
+	 * method which sets the wishlist.
+	 *
+	 * @param list
+	 */
+	void setWishlist(String[] list);
+
+	/**
+	 * method which sets the list of all users.
+	 *
+	 * @param list
+	 */
+	void setUserList(String[] list);
+
+	/**
+	 * method which sets the list of all item.
+	 *
+	 * @param list
+	 */
+	void setItemList(String[] list);
+
+	/**
+	 * method which sets Suggested Books list.
+	 *
+	 * @param bList
+	 */
+	void setSuggestedBooks(String[] bList);
+
+	/**
+	 * method which sets Suggested Movies list.
+	 *
+	 * @param mList
+	 */
+	void setSuggestedMovies(String[] mList);
 
 }

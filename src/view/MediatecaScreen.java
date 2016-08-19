@@ -1,6 +1,5 @@
 package view;
 
-
 /**
  *
  * Interface of panel of Book Screen.
@@ -20,14 +19,14 @@ public interface MediatecaScreen {
 	 *
 	 * @return String selectedFilter
 	 */
-	String getSearchFilter();
+	utils.TypeItemInfo getSearchFilter();
 
 	/**
 	 * method which returns the item type selected by user.
 	 *
 	 * @return String itemType
 	 */
-	String getItemType();
+	utils.TypeItem getItemType();
 
 	/**
 	 * method which returns the string of the item selected from filtered list.

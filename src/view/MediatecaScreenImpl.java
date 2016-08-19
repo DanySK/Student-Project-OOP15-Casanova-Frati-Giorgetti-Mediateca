@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import utils.TypeItem;
+import utils.TypeItemInfo;
 import view.ViewImpl.CardName;
 
 /**
@@ -23,9 +24,9 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private static final long serialVersionUID = 1L;
 	private static final int ELEMENTS_TO_SHOW = 25;
 	private String textToSearch;
-	private String selectedFilter;
+	private utils.TypeItemInfo selectedFilter;
 	private String itemSelectedFromList;
-	private String itemType;
+	private utils.TypeItem itemType;
 	private JList<String> filteredJList = new JList<String>();
 
 	/**
@@ -80,7 +81,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		backToMenu.setBounds(302, 292, 136, 25);
 		v.giveMeFilteredList();
 		this.filteredJList
-		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.filteredJList.setBounds(21, 106, 269, 181);
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
@@ -109,8 +110,8 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 		backToMenu.addActionListener(e -> v.swapView(CardName.MENU));
 		this.textToSearch = searchField.getText();
-		this.selectedFilter = (String) filterSelect.getSelectedItem();
-		this.itemType = (String) itemSelect.getSelectedItem();
+		this.selectedFilter = (TypeItemInfo) filterSelect.getSelectedItem();
+		this.itemType = (TypeItem) itemSelect.getSelectedItem();
 		this.itemSelectedFromList = this.filteredJList.getSelectedValue();
 
 		JButton seeWishlist = new JButton("Wishlist");
@@ -142,12 +143,12 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	}
 
 	@Override
-	public String getSearchFilter() {
+	public TypeItemInfo getSearchFilter() {
 		return this.selectedFilter;
 	}
 
 	@Override
-	public String getItemType() {
+	public TypeItem getItemType() {
 		return this.itemType;
 	}
 
