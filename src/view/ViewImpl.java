@@ -32,9 +32,12 @@ public class ViewImpl implements View {
 
 	private static final JPanel CONTAINER = new JPanel();
 	private static final CardLayout CL = new CardLayout();
-	private static final int SCREEN_LENGHT = 1280;
-	private static final int SCREEN_WIDTH = 920;
+	static final int SCREEN_LENGHT = 800;
+	static final int SCREEN_WIDTH = 600;
 	private static final int STUDY_ROOM_SITS = 100;
+	static final int FONT_SIZE = 25;
+	static final int TITLE_SIZE = 40;
+	static final int SMALL_SIZE = 20;
 
 	private JPanel card1;
 	private JPanel card2;
@@ -108,16 +111,14 @@ public class ViewImpl implements View {
 				ViewImpl.SCREEN_WIDTH);
 		this.card3 = new MediatecaScreenImpl(this, ViewImpl.SCREEN_LENGHT,
 				ViewImpl.SCREEN_WIDTH);
-		this.card4 = new UserScreenImpl(this, UserScreenType.MODIFY,
-				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_LENGHT);
+		this.card4 = new UserScreenImpl(this, UserScreenType.MODIFY);
 		this.card5 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
 				ViewImpl.SCREEN_WIDTH, ListScreenType.WISH);
 		this.card6 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
 				ViewImpl.SCREEN_WIDTH, ListScreenType.BORROWED);
 		this.card7 = new ReviewScreenImpl(this, ViewImpl.SCREEN_LENGHT,
 				ViewImpl.SCREEN_WIDTH);
-		this.card8 = new UserScreenImpl(this, UserScreenType.CREATE,
-				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_LENGHT);
+		this.card8 = new UserScreenImpl(this, UserScreenType.CREATE);
 		this.card9 = new UserLoginImpl(this, LoginType.MANAGER,
 				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE,
@@ -129,19 +130,19 @@ public class ViewImpl implements View {
 
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.mainFrame.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
-		this.mainFrame.setResizable(true);
+		this.mainFrame.setResizable(false);
 		ViewImpl.CONTAINER.setLayout(ViewImpl.CL);
 		final JPanel card0 = new JPanel();
 		final JLabel welcome = new JLabel("Benvenuto in Mediateca!");
 		welcome.setHorizontalAlignment(SwingConstants.CENTER);
-		welcome.setFont(new Font("Tahoma", Font.BOLD, 40));
-		welcome.setBounds(325, 63, 615, 82);
+		welcome.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.TITLE_SIZE));
+		welcome.setBounds(12, 13, 776, 82);
 		final JButton login = new JButton("Login");
-		login.setFont(new Font("Tahoma", Font.BOLD, 30));
+		login.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.FONT_SIZE));
 		final JButton userCreate = new JButton("Registrati");
-		userCreate.setFont(new Font("Tahoma", Font.BOLD, 30));
-		userCreate.setBounds(670, 173, 281, 179);
-		login.setBounds(299, 173, 281, 179);
+		userCreate.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.FONT_SIZE));
+		userCreate.setBounds(435, 164, 281, 138);
+		login.setBounds(70, 164, 281, 138);
 
 		card0.setLayout(null);
 		card0.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
@@ -160,8 +161,8 @@ public class ViewImpl implements View {
 				ViewImpl.this.swapView(CardName.MANAGER_LOGIN);
 			}
 		});
-		managerLogin.setFont(new Font("Tahoma", Font.BOLD, 30));
-		managerLogin.setBounds(40, 801, 334, 64);
+		managerLogin.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.FONT_SIZE));
+		managerLogin.setBounds(27, 490, 334, 64);
 		card0.add(managerLogin);
 		ViewImpl.CONTAINER.add(this.card1, CardName.LOGIN.toString());
 		ViewImpl.CONTAINER.add(this.card2, CardName.MENU.toString());

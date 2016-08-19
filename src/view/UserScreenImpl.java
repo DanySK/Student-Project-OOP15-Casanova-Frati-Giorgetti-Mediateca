@@ -63,9 +63,8 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	 * @param screenLenght
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public UserScreenImpl(final View v, final UserScreenType type,
-			final int screenLenght, final int screenWidth) {
-		this.setSize(1280, 920);
+	public UserScreenImpl(final View v, final UserScreenType type) {
+		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		final JLabel nameL;
 		final JLabel surnameL;
 		final JLabel usernameL;
@@ -76,51 +75,51 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		final JButton discarge;
 		this.setLayout(null);
 		final JButton deleteUser = new JButton("Elimina utente");
-		deleteUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		deleteUser.setSize(313, 74);
+		deleteUser.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		deleteUser.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		deleteUser.setLocation(428, 806);
 
 		this.nameF = new JTextField();
-		this.nameF.setBounds(282, 99, 289, 38);
+		this.nameF.setBounds(246, 84, 241, 25);
 		this.add(this.nameF);
 		this.nameF.setColumns(10);
 
 		this.surnameF = new JTextField();
-		this.surnameF.setBounds(282, 150, 289, 37);
+		this.surnameF.setBounds(246, 122, 241, 25);
 		this.surnameF.setColumns(10);
 		this.add(this.surnameF);
 
 		this.passwordF = new JTextField();
 		this.passwordF.setColumns(10);
-		this.passwordF.setBounds(282, 252, 289, 38);
+		this.passwordF.setBounds(246, 198, 241, 25);
 		this.add(this.passwordF);
 
 		this.usernameF = new JTextField();
 		this.usernameF.setColumns(10);
-		this.usernameF.setBounds(282, 201, 289, 38);
+		this.usernameF.setBounds(246, 160, 241, 25);
 		this.add(this.usernameF);
 
 		this.emailF = new JTextField();
 		this.emailF.setColumns(10);
-		this.emailF.setBounds(282, 352, 289, 38);
+		this.emailF.setBounds(246, 277, 241, 25);
 		this.add(this.emailF);
 
 		this.cellF = new JTextField();
 		this.cellF.setColumns(10);
-		this.cellF.setBounds(282, 403, 289, 38);
+		this.cellF.setBounds(246, 315, 241, 25);
 		this.add(this.cellF);
 
 		nameL = new JLabel("Nome:");
-		nameL.setBounds(64, 99, 206, 38);
-		nameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		nameL.setBounds(47, 84, 187, 25);
+		nameL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(nameL);
 
 		surnameL = new JLabel("Cognome:");
-		surnameL.setBounds(64, 150, 206, 38);
-		surnameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		surnameL.setBounds(47, 122, 187, 25);
+		surnameL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(surnameL);
 		discarge = new JButton("Annulla");
-		discarge.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 
 		if (type.equals(UserScreenType.CREATE)) {
 			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
@@ -138,41 +137,42 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			this.send.addActionListener(e -> v.sendUserModify());
 		}
 
-		this.presentation.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		this.presentation.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.TITLE_SIZE));
 		this.presentation.setHorizontalAlignment(SwingConstants.CENTER);
-		this.presentation.setBounds(12, 11, 1256, 52);
+		this.presentation.setBounds(47, 13, 720, 58);
 		this.add(this.presentation);
 
-		discarge.setBounds(68, 806, 202, 74);
+		discarge.setBounds(30, 538, 120, 49);
 		this.add(discarge);
 
-		this.send.setBounds(1024, 806, 202, 74);
-		this.send.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		this.send.setBounds(647, 522, 120, 49);
+		this.send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(this.send);
 
 		usernameL = new JLabel("Username:");
-		usernameL.setBounds(64, 201, 206, 38);
-		usernameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		usernameL.setBounds(47, 160, 187, 25);
+		usernameL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(usernameL);
 
 		passwordL = new JLabel("Password:");
-		passwordL.setBounds(64, 252, 206, 38);
-		passwordL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		passwordL.setBounds(47, 198, 187, 25);
+		passwordL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(passwordL);
 
 		birthL = new JLabel("Data nascita:");
-		birthL.setBounds(64, 303, 206, 38);
-		birthL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		birthL.setBounds(47, 236, 187, 25);
+		birthL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(birthL);
 
 		emailL = new JLabel("E-mail:");
-		emailL.setBounds(64, 352, 206, 38);
-		emailL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		emailL.setBounds(47, 274, 187, 25);
+		emailL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(emailL);
 
 		cellL = new JLabel("Recapito:");
-		cellL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		cellL.setBounds(64, 402, 206, 38);
+		cellL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		cellL.setBounds(47, 315, 187, 25);
 		this.add(cellL);
 
 		Properties p = new Properties();
@@ -191,54 +191,54 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.springLayout.putConstraint(SpringLayout.SOUTH,
 				this.datePicker.getJFormattedTextField(), 0,
 				SpringLayout.SOUTH, this.datePicker);
-		this.datePicker.setSize(289, 38);
-		this.datePicker.setLocation(282, 303);
+		this.datePicker.setSize(241, 25);
+		this.datePicker.setLocation(246, 236);
 
 		this.add(this.datePicker);
 
 		this.bookPref1 = new JComboBox(utils.ItemGenre.values());
 		this.bookPref1.setSelectedIndex(-1);
-		this.bookPref1.setBounds(282, 552, 289, 38);
+		this.bookPref1.setBounds(212, 420, 177, 25);
 		this.add(this.bookPref1);
 
 		this.bookPref2 = new JComboBox(utils.ItemGenre.values());
 		this.bookPref2.setSelectedIndex(-1);
-		this.bookPref2.setBounds(583, 552, 289, 38);
+		this.bookPref2.setBounds(401, 420, 177, 25);
 		this.add(this.bookPref2);
 
 		this.bookPref3 = new JComboBox(utils.ItemGenre.values());
 		this.bookPref3.setSelectedIndex(-1);
-		this.bookPref3.setBounds(884, 552, 289, 38);
+		this.bookPref3.setBounds(590, 420, 177, 25);
 		this.add(this.bookPref3);
 
 		this.filmPref1 = new JComboBox(utils.ItemGenre.values());
 		this.filmPref1.setSelectedIndex(-1);
-		this.filmPref1.setBounds(282, 603, 289, 38);
+		this.filmPref1.setBounds(212, 458, 177, 25);
 		this.add(this.filmPref1);
 
 		this.filmPref2 = new JComboBox(utils.ItemGenre.values());
 		this.filmPref2.setSelectedIndex(-1);
-		this.filmPref2.setBounds(583, 603, 289, 38);
+		this.filmPref2.setBounds(401, 458, 177, 25);
 		this.add(this.filmPref2);
 
 		this.filmPref3 = new JComboBox(utils.ItemGenre.values());
 		this.filmPref3.setSelectedIndex(-1);
-		this.filmPref3.setBounds(884, 603, 289, 38);
+		this.filmPref3.setBounds(590, 458, 177, 25);
 		this.add(this.filmPref3);
 
 		JLabel prefL = new JLabel("Preferenze generi:\r\n");
-		prefL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		prefL.setBounds(64, 500, 449, 38);
+		prefL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		prefL.setBounds(72, 382, 296, 25);
 		this.add(prefL);
 
 		JLabel bookL = new JLabel("Libri:\r\n");
-		bookL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		bookL.setBounds(64, 552, 206, 38);
+		bookL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		bookL.setBounds(47, 420, 147, 25);
 		this.add(bookL);
 
 		JLabel filmL = new JLabel("Film:");
-		filmL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		filmL.setBounds(64, 603, 206, 38);
+		filmL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		filmL.setBounds(47, 458, 147, 25);
 		this.add(filmL);
 	}
 
