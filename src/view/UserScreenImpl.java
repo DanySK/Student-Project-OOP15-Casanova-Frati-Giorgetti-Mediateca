@@ -75,6 +75,10 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		final JLabel cellL;
 		final JButton discarge;
 		this.setLayout(null);
+		final JButton deleteUser = new JButton("Elimina utente");
+		deleteUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		deleteUser.setSize(313, 74);
+		deleteUser.setLocation(428, 806);
 
 		this.nameF = new JTextField();
 		this.nameF.setBounds(282, 99, 289, 38);
@@ -129,7 +133,8 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			this.send = new JButton("Invio");
 			this.usernameF.setEditable(false);
 			discarge.addActionListener(e -> v.swapView(CardName.MENU));
-
+			this.add(deleteUser);
+			deleteUser.addActionListener(e -> v.deleteUser());
 			this.send.addActionListener(e -> v.sendUserModify());
 		}
 
