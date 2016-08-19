@@ -40,9 +40,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private JComboBox<?> colorF = new JComboBox(utils.TypeColor.values());
 	private final JTextField isbnF;
 
-	public int imageLenght = 140;
-	public int imageWidth = 100;
-
 	/**
 	 * enum for type of Item screen to show.
 	 *
@@ -77,7 +74,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		final JButton browse;
 
 		this.setLayout(null);
-		this.setSize(1280, 920);
+		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 
 		this.titleF = new JTextField();
 		this.titleF.setBounds(499, 157, 230, 40);
@@ -190,29 +187,29 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			send.addActionListener(e -> v.sendItemModify());
 		}
 		this.itemTypeF
-		.addActionListener(e -> {
-			if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
-				this.colorF.setEnabled(false);
-				this.colorF.setVisible(false);
-				this.durationF.setEnabled(false);
-				this.durationF.setVisible(false);
-				durationL.setVisible(false);
-				this.isbnF.setEnabled(true);
-				this.isbnF.setVisible(true);
-				isbnL.setVisible(true);
+				.addActionListener(e -> {
+					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+						this.colorF.setEnabled(false);
+						this.colorF.setVisible(false);
+						this.durationF.setEnabled(false);
+						this.durationF.setVisible(false);
+						durationL.setVisible(false);
+						this.isbnF.setEnabled(true);
+						this.isbnF.setVisible(true);
+						isbnL.setVisible(true);
 
-			} else if (this.itemTypeF.getSelectedItem().equals(
-					TypeItem.MOVIE)) {
-				this.colorF.setEnabled(true);
-				this.colorF.setVisible(true);
-				this.durationF.setEnabled(true);
-				this.durationF.setVisible(true);
-				durationL.setVisible(true);
-				this.isbnF.setEnabled(false);
-				this.isbnF.setVisible(false);
-				isbnL.setVisible(false);
-			}
-		});
+					} else if (this.itemTypeF.getSelectedItem().equals(
+							TypeItem.MOVIE)) {
+						this.colorF.setEnabled(true);
+						this.colorF.setVisible(true);
+						this.durationF.setEnabled(true);
+						this.durationF.setVisible(true);
+						durationL.setVisible(true);
+						this.isbnF.setEnabled(false);
+						this.isbnF.setVisible(false);
+						isbnL.setVisible(false);
+					}
+				});
 		presentation.setBounds(104, 11, 181, 16);
 		this.add(presentation);
 

@@ -17,9 +17,8 @@ import utils.TypeItem;
  *
  */
 public class ItemShowImpl implements ItemShow {
-	static final int FRAME_LENGHT = 920;
-	static final int FRAME_WIDTH = 920;
-	static final int FONT_DIM = 30;
+	static final int FRAME_LENGHT = 600;
+	static final int FRAME_WIDTH = 600;
 	private String title;
 	private String author;
 	private String manifacturer;
@@ -51,73 +50,71 @@ public class ItemShowImpl implements ItemShow {
 		mainPanel.setLayout(null);
 
 		final JLabel titleL = new JLabel("Titolo: " + this.title);
-		titleL.setFont(new Font("Tahoma", Font.PLAIN, ItemShowImpl.FONT_DIM));
-		titleL.setBounds(54, 64, 480, 37);
+		titleL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		titleL.setBounds(23, 14, 480, 30);
 		mainFrame.getContentPane().add(titleL);
 
 		final JLabel authorL = new JLabel();
-		authorL.setFont(new Font("Tahoma", Font.PLAIN, ItemShowImpl.FONT_DIM));
-		authorL.setBounds(54, 114, 480, 37);
+		authorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		authorL.setBounds(23, 44, 480, 30);
 		authorL.setText("Autore:" + this.author);
 		mainFrame.getContentPane().add(authorL);
 
 		final ImageIcon image = new ImageIcon(this.imagePath);
 		JLabel imageSpace = new JLabel(image);
-		imageSpace.setBounds(734, 64, 100, 140);
+		imageSpace.setBounds(325, 14, ViewImpl.IMAGE_WIDTH,
+				ViewImpl.IMAGE_LENGHT);
 		mainFrame.getContentPane().add(imageSpace);
 
 		final JLabel manifacturerL = new JLabel("Prodotto da: "
 				+ this.manifacturer);
 		manifacturerL.setFont(new Font("Tahoma", Font.PLAIN,
-				ItemShowImpl.FONT_DIM));
-		manifacturerL.setBounds(54, 164, 480, 37);
+				ViewImpl.SMALL_SIZE));
+		manifacturerL.setBounds(23, 78, 480, 30);
 		mainFrame.getContentPane().add(manifacturerL);
 
 		final JLabel yearL = new JLabel("Anno di uscita: " + this.year);
-		yearL.setFont(new Font("Tahoma", Font.PLAIN, ItemShowImpl.FONT_DIM));
-		yearL.setBounds(54, 313, 480, 37);
+		yearL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		yearL.setBounds(23, 178, 480, 30);
 		mainFrame.getContentPane().add(yearL);
 
 		final JLabel genreL = new JLabel("Genere: " + this.genre);
-		genreL.setFont(new Font("Tahoma", Font.PLAIN, ItemShowImpl.FONT_DIM));
-		genreL.setBounds(54, 214, 480, 37);
+		genreL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		genreL.setBounds(23, 113, 480, 30);
 		mainFrame.getContentPane().add(genreL);
 
 		final JLabel reviewAvarageL = new JLabel("Media recensioni: "
 				+ this.reviewAvarage);
 		reviewAvarageL.setFont(new Font("Tahoma", Font.PLAIN,
-				ItemShowImpl.FONT_DIM));
-		reviewAvarageL.setBounds(54, 264, 480, 37);
+				ViewImpl.SMALL_SIZE));
+		reviewAvarageL.setBounds(23, 148, 480, 30);
 		mainFrame.getContentPane().add(reviewAvarageL);
 
 		final JLabel availabilityL = new JLabel("Disponibile: "
 				+ this.availability);
 		availabilityL.setFont(new Font("Tahoma", Font.PLAIN,
-				ItemShowImpl.FONT_DIM));
-		availabilityL.setBounds(54, 363, 480, 37);
+				ViewImpl.SMALL_SIZE));
+		availabilityL.setBounds(23, 210, 480, 30);
 		mainFrame.getContentPane().add(availabilityL);
 
 		final JLabel isbnCodeL = new JLabel("Codice ISBN: " + this.isbn);
-		isbnCodeL
-				.setFont(new Font("Tahoma", Font.PLAIN, ItemShowImpl.FONT_DIM));
-		isbnCodeL.setBounds(54, 413, 480, 37);
+		isbnCodeL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		isbnCodeL.setBounds(23, 279, 480, 30);
 		mainFrame.getContentPane().add(isbnCodeL);
 
 		final JLabel colorL = new JLabel("Colore: " + this.color);
-		colorL.setFont(new Font("Tahoma", Font.PLAIN, ItemShowImpl.FONT_DIM));
-		colorL.setBounds(54, 463, 480, 37);
+		colorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		colorL.setBounds(23, 313, 480, 37);
 		mainFrame.getContentPane().add(colorL);
 
 		final JLabel durationL = new JLabel("Durata: " + this.duration);
-		durationL
-				.setFont(new Font("Tahoma", Font.PLAIN, ItemShowImpl.FONT_DIM));
-		durationL.setBounds(54, 413, 480, 37);
+		durationL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		durationL.setBounds(23, 279, 480, 30);
 		mainFrame.getContentPane().add(durationL);
 
-		final JLabel languageL = new JLabel("Durata: " + this.language);
-		languageL
-				.setFont(new Font("Tahoma", Font.PLAIN, ItemShowImpl.FONT_DIM));
-		languageL.setBounds(54, 413, 215, 37);
+		final JLabel languageL = new JLabel("Lingua:" + this.language);
+		languageL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		languageL.setBounds(23, 241, 215, 37);
 		mainFrame.getContentPane().add(languageL);
 
 		if (type.equals(TypeItem.BOOK)) {
