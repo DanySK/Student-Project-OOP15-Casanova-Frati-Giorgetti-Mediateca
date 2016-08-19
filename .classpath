@@ -5,6 +5,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="ExternalLibraries/guava-11.0.1.jar"/>
 	<classpathentry kind="lib" path="ExternalLibraries/junit-4.10.jar"/>
-	<classpathentry kind="lib" path="C:/oop2015-mediateca/ExternalLibraries/jdatepicker-1.3.4.jar"/>
+	<classpathentry kind="lib" path="ExternalLibraries/jdatepicker-1.3.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
