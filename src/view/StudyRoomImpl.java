@@ -103,8 +103,18 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	}
 
 	@Override
-	public String getDate() {
-		return (String) this.datePicker.getModel().getValue();
+	public int getDateDay() {
+		return this.datePicker.getModel().getDay();
+	}
+
+	@Override
+	public int getDateMonth() {
+		return this.datePicker.getModel().getMonth();
+	}
+
+	@Override
+	public int getDateYear() {
+		return this.datePicker.getModel().getYear();
 	}
 
 	@Override

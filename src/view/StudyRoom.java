@@ -16,11 +16,25 @@ public interface StudyRoom {
 	void setStudyRoomStatus(int[] status);
 
 	/**
-	 * method which return the selected date.
+	 * method which return the selected day.
 	 *
 	 * @return
 	 */
-	String getDate();
+	int getDateDay();
+
+	/**
+	 * method which return the selected day.
+	 *
+	 * @return
+	 */
+	int getDateMonth();
+
+	/**
+	 * method which return the selected day.
+	 *
+	 * @return
+	 */
+	int getDateYear();
 
 	/**
 	 * method which sets the list of taken sits.

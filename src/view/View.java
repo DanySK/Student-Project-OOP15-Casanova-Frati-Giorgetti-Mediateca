@@ -323,11 +323,25 @@ public interface View {
 	int getTakenSits();
 
 	/**
-	 * method which returns the date selected in study room.
+	 * method which returns the day selected in study room.
 	 *
 	 * @return
 	 */
-	String getStudyRoomSelectedDate();
+	int getStudyRoomSelectedDay();
+
+	/**
+	 * method which returns the month selected in study room.
+	 *
+	 * @return
+	 */
+	int getStudyRoomSelectedMonth();
+
+	/**
+	 * method which returns the year selected in study room.
+	 *
+	 * @return
+	 */
+	int getStudyRoomSelectedYear();
 
 	/**
 	 * method which tells to controller to remove a sit.
@@ -457,7 +471,7 @@ public interface View {
 
 	/**
 	 * method which get item to delete or modify.
-	 * 
+	 *
 	 * @return
 	 */
 	String getItemToRemoveModify();
