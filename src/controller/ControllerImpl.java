@@ -13,7 +13,6 @@ import com.google.common.base.Optional;
 import model.Model;
 import model.ModelImpl;
 import model.Pair;
-import model.item.ArchiveImpl;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
 import model.user.User;
@@ -214,7 +213,9 @@ public class ControllerImpl implements Controller {
 
 		String name = (String) this.v.getUserRegistration(UserInfo.NAME);
 		String surname = (String) this.v.getUserRegistration(UserInfo.SURNAME);
-		GregorianCalendar gc = (GregorianCalendar) this.v.getUserRegistration(UserInfo.BIRTHDATE);
+		GregorianCalendar day = new GregorianCalendar();
+		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+				this.v.getStudyRoomSelectedDay());
 		String username = (String) this.v.getUserRegistration(UserInfo.USERNAME);
 		String password = (String) this.v.getUserRegistration(UserInfo.PASSWORD);
 		String email = (String) this.v.getUserRegistration(UserInfo.EMAIL);
@@ -222,32 +223,37 @@ public class ControllerImpl implements Controller {
 		List<ItemGenre> bookList = new ArrayList<>();
 		List<ItemGenre> movieList = new ArrayList<>();
 		try {
-			this.m.registerUser(name, surname, gc, username, password, email, telephoneNumber, bookList, movieList);
+			this.m.registerUser(name, surname, day, username, password, email, telephoneNumber, bookList, movieList);
 			this.v.showMessage("Utente " + username + " registrato con successo!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public void takeSit() throws Exception {
-		Integer sit;
-		GregorianCalendar day;
+		Integer sit = this.v.getTakenSits();
+		GregorianCalendar day = new GregorianCalendar();
+		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+				this.v.getStudyRoomSelectedDay());
 		this.m.bookSit(day, sit, this.actualUser.getIdUser());
 	}
 
 	@Override
 	public void cancelSit() throws Exception {
-		Integer sit; // == getActualSit();
-		GregorianCalendar day; // = getActualDay;
+		Integer sit = this.v.getTakenSits();
+		GregorianCalendar day = new GregorianCalendar();
+		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+				this.v.getStudyRoomSelectedDay());
 		this.m.cancelSit(day, sit, this.actualUser.getIdUser());
 	}
 
 	@Override
 	public void studyRoomStatus() {
-		GregorianCalendar day; // = getActualDay;
+		GregorianCalendar day = new GregorianCalendar();
+		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+				this.v.getStudyRoomSelectedDay());
 		int[] arrayint = new int[this.m.getAllUserSit(day).size()];
 		int index = 0;
 		for (Integer i : this.m.getAllUserSit(day)) {
@@ -265,7 +271,6 @@ public class ControllerImpl implements Controller {
 			index++;
 		}
 		this.v.setWishlist(array);
-
 	}
 
 	public void removeFromWishList() {
@@ -297,16 +302,32 @@ public class ControllerImpl implements Controller {
 
 	public void deleteItem() {
 		// manca v.getItem()
-		this.m.deleteItem(this.v.getItem());
+		int itemIdReceived = 0;
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemToRemoveModify())) {
+				itemIdReceived = i;
+			}
+		}
+		try {
+			this.m.deleteItem(itemIdReceived);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void deleteUser() {
 		// manca v.getUser()
-		this.m.deleteUser(this.v.getUser());
+		try {
+			this.m.deleteUser(this.actualUser.getIdUser());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	public void extendBorrow(){
-		this.actualUser.getLoanArchive()
+	public void extendBorrow() {
+
 	}
 
 	@Override
