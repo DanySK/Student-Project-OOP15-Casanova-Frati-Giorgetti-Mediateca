@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -36,18 +38,16 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		this.setSize(1280, 920);
 		this.setLayout(null);
 
-		JButton modifyItem = new JButton("Modifica");
-		modifyItem.setBounds(847, 115, 147, 25);
-		this.add(modifyItem);
-
 		JButton newItem = new JButton("Crea Nuovo Oggetto");
+		newItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		newItem.addActionListener(arg0 -> {
 		});
-		newItem.setBounds(847, 77, 147, 25);
+		newItem.setBounds(822, 92, 376, 45);
 		this.add(newItem);
 
 		JButton showUserList = new JButton("Lista Utenti");
-		showUserList.setBounds(847, 186, 147, 25);
+		showUserList.setBounds(822, 262, 376, 45);
+		showUserList.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(showUserList);
 		showUserList.addActionListener(e -> {
 			v.giveMeUserList();
@@ -55,7 +55,8 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		});
 
 		JButton showItemList = new JButton("Lista Oggetti");
-		showItemList.setBounds(847, 224, 147, 25);
+		showItemList.setBounds(822, 320, 376, 45);
+		showItemList.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		this.add(showItemList);
 		showItemList.addActionListener(e -> {
 			v.giveMeItemList();
@@ -63,10 +64,12 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		});
 
 		JButton delete = new JButton("Elimina");
+		delete.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		JButton modify = new JButton("Modifica");
-		delete.setBounds(847, 153, 147, 25);
+		modify.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		delete.setBounds(822, 208, 376, 45);
 		this.add(delete);
-		modify.setBounds(847, 115, 147, 25);
+		modify.setBounds(822, 150, 376, 45);
 		this.add(modify);
 		if (this.type.equals(TypeList.USER)) {
 			delete.setEnabled(false);
@@ -85,8 +88,10 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		this.add(this.list);
 
 		JButton exit = new JButton("Esci");
-		exit.setBounds(847, 262, 147, 25);
+		exit.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		exit.setBounds(1015, 799, 183, 72);
 		this.add(exit);
+		exit.addActionListener(e -> v.swapView(CardName.MAIN));
 
 		newItem.addActionListener(e -> v.swapView(CardName.ITEM_CREATE));
 

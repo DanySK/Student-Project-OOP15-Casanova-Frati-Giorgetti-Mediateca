@@ -1,9 +1,12 @@
 package view;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import view.ViewImpl.CardName;
 
@@ -21,6 +24,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 	private JLabel presentation;
 	private JList<String> list = new JList<String>();
+	private JButton exit_1;
 
 	/**
 	 * Enumeration with types of list which can be showed.
@@ -47,32 +51,41 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 			final int screenWidth, final ListScreenType a) {
 		JButton exit = new JButton();
 		JButton remove = new JButton();
+		remove.addActionListener(arg0 -> {
+		});
+		remove.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		for (final ListScreenType i : ListScreenType.values()) {
 			if (i.equals(ListScreenType.BORROWED)) {
 				this.presentation = new JLabel(
 						"Ecco gli oggetti che hai in prestito:");
 				remove.addActionListener(e -> v.giveBackItem());
+				remove.setText("Restituisci");
 				v.giveMeBorrowList();
 
 			} else if (i.equals(ListScreenType.WISH)) {
 				this.presentation = new JLabel("Ecco gli oggetti che desideri");
 				remove.addActionListener(e -> v.removeFromWishlist());
+				remove.setText("Rimuovi da WishList");
 				v.giveMeWishlist();
 			}
 		}
 
-		this.presentation.setBounds(525, 33, 197, 16);
+		this.presentation.setHorizontalAlignment(SwingConstants.CENTER);
+		this.presentation.setFont(new Font("Tahoma", Font.PLAIN, 40));
+
+		this.presentation.setBounds(173, 13, 898, 50);
 		this.add(this.presentation);
 
-		this.list.setBounds(71, 43, 289, 191);
+		this.list.setBounds(173, 76, 898, 528);
 		this.add(this.list);
 
-		exit = new JButton("Esci");
-		exit.setBounds(390, 312, 55, 25);
-		this.add(exit);
-		remove.setBounds(360, 262, 55, 25);
+		this.exit_1 = new JButton("Esci");
+		this.exit_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		this.exit_1.setBounds(1054, 810, 166, 70);
+		this.add(this.exit_1);
+		remove.setBounds(411, 617, 464, 46);
 		this.add(remove);
-		exit.addActionListener(e -> {
+		this.exit_1.addActionListener(e -> {
 			v.swapView(CardName.ITEM);
 		});
 
