@@ -46,13 +46,12 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 * @param screenWidth
 	 * @param a
 	 */
-	public ListScreenImpl(final View v, final int screenLenght,
-			final int screenWidth, final ListScreenType a) {
+	public ListScreenImpl(final View v, final ListScreenType a) {
 		JButton exit = new JButton();
 		JButton remove = new JButton();
 		remove.addActionListener(arg0 -> {
 		});
-		remove.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		for (final ListScreenType i : ListScreenType.values()) {
 			if (i.equals(ListScreenType.BORROWED)) {
 				this.presentation = new JLabel(
@@ -64,31 +63,32 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 			} else if (i.equals(ListScreenType.WISH)) {
 				this.presentation = new JLabel("Ecco gli oggetti che desideri");
 				remove.addActionListener(e -> v.removeFromWishlist());
-				remove.setText("Rimuovi da WishList");
+				remove.setText("Rimuovi da Wishlist");
 				v.giveMeWishlist();
 			}
 		}
 
 		this.presentation.setHorizontalAlignment(SwingConstants.CENTER);
-		this.presentation.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		this.presentation.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.FONT_SIZE));
 
-		this.presentation.setBounds(173, 13, 898, 50);
+		this.presentation.setBounds(12, 13, 776, 50);
 		this.add(this.presentation);
 
-		this.list.setBounds(173, 76, 898, 528);
+		this.list.setBounds(42, 76, 704, 376);
 		this.add(this.list);
 
 		exit = new JButton("Esci");
-		exit.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		exit.setBounds(1054, 810, 166, 70);
+		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		exit.setBounds(603, 548, 166, 39);
 		this.add(exit);
-		remove.setBounds(411, 617, 464, 46);
+		remove.setBounds(215, 462, 353, 35);
 		this.add(remove);
 		exit.addActionListener(e -> {
 			v.swapView(CardName.ITEM);
 		});
 
-		this.setSize(1280, 920);
+		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.setLayout(null);
 
 	}

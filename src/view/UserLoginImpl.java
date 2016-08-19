@@ -46,8 +46,7 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
-	public UserLoginImpl(final View v, final LoginType type,
-			final int screenLenght, final int screenWidth) {
+	public UserLoginImpl(final View v, final LoginType type) {
 		final JLabel mainLabel;
 		JLabel passwordLabel;
 		final JLabel usernameLabel;
@@ -65,11 +64,11 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.usernameTextArea = new JTextArea();
 		usernameLabel = new JLabel("Username:");
 		usernameLabel
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		passwordLabel = new JLabel("Password:");
 		passwordLabel
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		this.add(passwordLabel);
 		if (type.equals(LoginType.USER)) {

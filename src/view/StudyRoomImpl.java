@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
+import javax.swing.SwingConstants;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
@@ -40,12 +41,14 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	 * @param v
 	 * @param sitsNumber
 	 */
-	public StudyRoomImpl(final View v, final int sitsNumber) {
-		this.setSize(1280, 920);
+	public StudyRoomImpl(final View v) {
+		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		JLabel presentation = new JLabel("Clicca sul posto che vuoi prenotare");
-		presentation.setBounds(311, 13, 705, 49);
-		presentation.setFont(new Font("Tahoma", Font.BOLD, 40));
-		this.buttons = new JButton[sitsNumber];
+		presentation.setHorizontalAlignment(SwingConstants.CENTER);
+		presentation.setBounds(12, 13, 776, 49);
+		presentation
+		.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.TITLE_SIZE));
+		this.buttons = new JButton[ViewImpl.STUDY_ROOM_SITS];
 		int i;
 
 		Properties p = new Properties();
@@ -72,9 +75,9 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 				this.datePicker.getJFormattedTextField(), 0, SpringLayout.WEST,
 				this.datePicker);
 		this.datePicker.setSize(229, 25);
-		this.datePicker.setLocation(56, 116);
-		this.takenSitsList.setSize(826, 166);
-		this.takenSitsList.setLocation(56, 741);
+		this.datePicker.setLocation(530, 67);
+		this.takenSitsList.setSize(620, 161);
+		this.takenSitsList.setLocation(12, 415);
 		this.add(this.takenSitsList);
 		this.add(this.datePicker);
 
@@ -97,14 +100,14 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		this.add(presentation);
 		v.giveMeStudyRoomStatus();
 		JButton remove = new JButton("Rimuovi");
-		remove.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		remove.setBounds(915, 797, 229, 55);
+		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		remove.setBounds(644, 471, 127, 55);
 		this.add(remove);
 
 		JLabel instruction = new JLabel(
 				"Inserisci la data in cui vuoi prendere posto:");
-		instruction.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		instruction.setBounds(56, 70, 603, 33);
+		instruction.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		instruction.setBounds(22, 67, 603, 25);
 		this.add(instruction);
 		remove.addActionListener(e -> v.removeSit());
 

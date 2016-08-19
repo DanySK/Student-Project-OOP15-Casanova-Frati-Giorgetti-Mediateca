@@ -30,10 +30,9 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	private JList<String> suggestedBooks = new JList<String>();
 	private JList<String> suggestedMovies = new JList<String>();
 
-	public UserMenuImpl(final View v, final int screenLenght,
-			final int screenWidth) {
+	public UserMenuImpl(final View v) {
 		this.setLayout(null);
-		this.setSize(1280, 920);
+		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		final JButton exitProgram;
 		final JLabel mainLabel;
 		final JButton mediateca;
@@ -42,49 +41,53 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 
 		mainLabel = new JLabel("Accedi ai nostri servizi\r\n");
 		mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		mainLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		mainLabel.setBounds(48, 36, 1186, 49);
+		mainLabel.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.TITLE_SIZE));
+		mainLabel.setBounds(27, 24, 761, 49);
 		this.add(mainLabel);
 		v.giveMeSuggestedBooks();
 		v.giveMeSuggestedMovies();
-		this.suggestedBooks.setSize(437, 322);
-		this.suggestedBooks.setLocation(151, 318);
+		this.suggestedBooks.setSize(375, 289);
+		this.suggestedBooks.setLocation(27, 197);
 		this.add(this.suggestedBooks);
-		this.suggestedMovies.setSize(437, 322);
-		this.suggestedMovies.setLocation(611, 318);
+		this.suggestedMovies.setSize(349, 289);
+		this.suggestedMovies.setLocation(439, 197);
 
 		this.add(this.suggestedMovies);
 
 		exitProgram = new JButton("Esci");
-		exitProgram.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		exitProgram.setBounds(1062, 843, 172, 49);
+		exitProgram.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		exitProgram.setBounds(616, 519, 172, 49);
 		this.add(exitProgram);
 
 		mediateca = new JButton("Mediateca");
-		mediateca.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		mediateca.setBounds(288, 117, 300, 64);
+		mediateca.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		mediateca.setBounds(102, 86, 300, 64);
 		this.add(mediateca);
 
 		studyRoomServices = new JButton("Sala studio");
-		studyRoomServices.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		studyRoomServices.setBounds(611, 117, 300, 64);
+		studyRoomServices.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.FONT_SIZE));
+		studyRoomServices.setBounds(424, 86, 300, 64);
 		this.add(studyRoomServices);
 
 		accountSettings = new JButton("Impostazioni Account");
-		accountSettings.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		accountSettings.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.FONT_SIZE));
 		accountSettings.addActionListener(arg0 -> {
 		});
-		accountSettings.setBounds(27, 843, 348, 49);
+		accountSettings.setBounds(27, 519, 348, 49);
 		this.add(accountSettings);
 
 		JLabel suggestedBooksLabel = new JLabel("Libri consigliati:");
-		suggestedBooksLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		suggestedBooksLabel.setBounds(151, 256, 300, 49);
+		suggestedBooksLabel.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.FONT_SIZE));
+		suggestedBooksLabel.setBounds(27, 151, 300, 49);
 		this.add(suggestedBooksLabel);
 
 		JLabel suggestedMoviesLabel = new JLabel("Film consigliati:");
-		suggestedMoviesLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		suggestedMoviesLabel.setBounds(611, 256, 300, 49);
+		suggestedMoviesLabel.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.FONT_SIZE));
+		suggestedMoviesLabel.setBounds(439, 151, 300, 49);
 		this.add(suggestedMoviesLabel);
 
 		exitProgram.addActionListener(e -> v.swapView(CardName.MAIN));
@@ -92,7 +95,7 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		studyRoomServices.addActionListener(e -> v
 				.swapView(CardName.STUDY_ROOM));
 		accountSettings
-				.addActionListener(e -> v.swapView(CardName.USER_MODIFY));
+		.addActionListener(e -> v.swapView(CardName.USER_MODIFY));
 
 	}
 

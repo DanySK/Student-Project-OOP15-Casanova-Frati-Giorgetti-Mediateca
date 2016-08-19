@@ -37,9 +37,8 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	 * @param screenWidth
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public MediatecaScreenImpl(final View v, final int screenLenght,
-			final int screenWidth) {
-		this.setSize(1280, 920);
+	public MediatecaScreenImpl(final View v) {
+		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		final JButton borrowItem;
 		final JButton giveBackItem;
 		final JButton likeItem;
@@ -52,36 +51,38 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		final JButton search;
 		final JButton review;
 		giveBackItem = new JButton("Restituisci ");
-		giveBackItem.setBounds(952, 212, 248, 45);
-		giveBackItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		giveBackItem.setBounds(586, 188, 178, 27);
+		giveBackItem
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		likeItem = new JButton("Mi Piace");
-		likeItem.setBounds(952, 328, 248, 45);
-		likeItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		likeItem.setBounds(586, 228, 178, 27);
+		likeItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeBorrowedItem = new JButton("In prestito");
-		seeBorrowedItem.setBounds(952, 386, 248, 45);
-		seeBorrowedItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		seeBorrowedItem.setBounds(586, 270, 178, 27);
+		seeBorrowedItem.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.SMALL_SIZE));
 		borrowItem = new JButton("Prendi ");
-		borrowItem.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		borrowItem.setBounds(952, 160, 248, 45);
+		borrowItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		borrowItem.setBounds(586, 148, 178, 27);
 		searchField = new JTextField();
-		searchField.setBounds(21, 102, 919, 45);
+		searchField.setBounds(21, 84, 521, 27);
 		searchField.setText("Inserisci una o pi\u00F9 parole da cercare");
 		filterSelect = new JComboBox(utils.TypeItemInfo.values());
-		filterSelect.setBounds(351, 44, 300, 45);
+		filterSelect.setBounds(232, 44, 200, 27);
 		filterSelect.setToolTipText("Dove ricercare");
 		itemSelect = new JComboBox(utils.TypeItem.values());
-		itemSelect.setBounds(21, 44, 300, 45);
+		itemSelect.setBounds(21, 44, 200, 27);
 		itemSelect.setToolTipText("Libro o Film");
 		this.setLayout(null);
 		this.add(filterSelect);
 		search = new JButton("Cerca");
-		search.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		search.setBounds(952, 102, 248, 45);
+		search.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		search.setBounds(586, 84, 178, 27);
 		backToMenu = new JButton("Torna al Menu");
-		backToMenu.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		backToMenu.setBounds(952, 836, 248, 45);
+		backToMenu.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		backToMenu.setBounds(586, 539, 178, 27);
 		v.giveMeFilteredList();
-		this.filteredJList.setBounds(21, 162, 919, 627);
+		this.filteredJList.setBounds(21, 148, 521, 418);
 		this.filteredJList
 				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.filteredJList.addMouseListener(new MouseAdapter() {
@@ -94,8 +95,8 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			}
 		});
 		review = new JButton("Recensisci");
-		review.setBounds(952, 270, 248, 45);
-		review.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		review.setBounds(586, 310, 178, 27);
+		review.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 
 		this.add(borrowItem);
 		this.add(giveBackItem);
@@ -115,8 +116,9 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.itemSelectedFromList = this.filteredJList.getSelectedValue();
 
 		JButton seeWishlist = new JButton("Wishlist");
-		seeWishlist.setBounds(952, 444, 248, 45);
-		seeWishlist.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		seeWishlist.setBounds(586, 350, 178, 27);
+		seeWishlist
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 		});
 		this.add(seeWishlist);
