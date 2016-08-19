@@ -1,8 +1,11 @@
 package view;
 
+import java.awt.Font;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
 public class UserShowImpl implements UserShow {
@@ -40,65 +43,88 @@ public class UserShowImpl implements UserShow {
 		mainPanel.setLayout(null);
 
 		final JLabel nameL = new JLabel("Name: " + this.name);
-		nameL.setBounds(54, 64, 215, 37);
+		nameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		nameL.setBounds(54, 55, 475, 45);
+
 		mainFrame.getContentPane().add(nameL);
 
 		final JLabel surnameL = new JLabel();
-		surnameL.setBounds(54, 114, 215, 37);
+		surnameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		surnameL.setBounds(54, 113, 475, 45);
 		surnameL.setText("Cognome: " + this.surname);
 		mainFrame.getContentPane().add(surnameL);
 
 		final JLabel usernameL = new JLabel("Username: " + this.username);
-		usernameL.setBounds(54, 164, 215, 37);
+		usernameL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		usernameL.setBounds(54, 171, 475, 45);
 		mainFrame.getContentPane().add(usernameL);
 
 		final JLabel passwordL = new JLabel("Password: " + this.password);
-		passwordL.setBounds(54, 214, 215, 37);
+		passwordL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		passwordL.setBounds(54, 229, 475, 45);
 		mainFrame.getContentPane().add(passwordL);
 
 		final JLabel telephoneL = new JLabel("Telefono: " + this.telephone);
-		telephoneL.setBounds(54, 357, 215, 37);
+		telephoneL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		telephoneL.setBounds(54, 403, 475, 45);
 		mainFrame.getContentPane().add(telephoneL);
 
 		final JLabel emailL = new JLabel("Email: " + this.email);
-		emailL.setBounds(54, 264, 215, 37);
+		emailL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		emailL.setBounds(54, 287, 475, 45);
 		mainFrame.getContentPane().add(emailL);
 
 		final JLabel birthDateL = new JLabel("Data di nascita: "
 				+ this.birthDate);
-		birthDateL.setBounds(54, 314, 215, 37);
+		birthDateL.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		birthDateL.setBounds(54, 345, 475, 45);
 		mainFrame.getContentPane().add(birthDateL);
 
 		final JLabel bookPref1L = new JLabel(this.bookPref1.toString());
-		bookPref1L.setBounds(202, 407, 168, 37);
+		bookPref1L.setHorizontalAlignment(SwingConstants.CENTER);
+		bookPref1L.setBounds(54, 519, 475, 37);
+		bookPref1L.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		mainFrame.getContentPane().add(bookPref1L);
 
 		final JLabel bookPref2L = new JLabel(this.bookPref2.toString());
-		bookPref2L.setBounds(202, 446, 215, 37);
+		bookPref2L.setHorizontalAlignment(SwingConstants.CENTER);
+		bookPref2L.setBounds(54, 557, 475, 37);
+		bookPref2L.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		mainFrame.getContentPane().add(bookPref2L);
 
 		final JLabel bookPref3L = new JLabel(this.bookPref3.toString());
-		bookPref3L.setBounds(202, 483, 215, 37);
+		bookPref3L.setHorizontalAlignment(SwingConstants.CENTER);
+		bookPref3L.setBounds(54, 596, 475, 37);
+		bookPref3L.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		mainFrame.getContentPane().add(bookPref3L);
 
 		final JLabel filmPref1L = new JLabel(this.filmPref1.toString());
-		filmPref1L.setBounds(202, 523, 215, 37);
+		filmPref1L.setHorizontalAlignment(SwingConstants.CENTER);
+		filmPref1L.setBounds(54, 698, 475, 37);
+		filmPref1L.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		mainFrame.getContentPane().add(filmPref1L);
 
 		final JLabel filmPref2L = new JLabel(this.filmPref2.toString());
-		filmPref2L.setBounds(202, 560, 215, 37);
+		filmPref2L.setHorizontalAlignment(SwingConstants.CENTER);
+		filmPref2L.setBounds(54, 737, 475, 37);
+		filmPref2L.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		mainFrame.getContentPane().add(filmPref2L);
 
 		final JLabel filmPref3L = new JLabel(this.filmPref3.toString());
-		filmPref3L.setBounds(202, 598, 215, 37);
+		filmPref3L.setHorizontalAlignment(SwingConstants.CENTER);
+		filmPref3L.setBounds(54, 775, 475, 37);
+		filmPref3L.setFont(new Font("Tahoma", Font.PLAIN, 30));
+
 		mainFrame.getContentPane().add(filmPref3L);
 
 		JLabel bookPreferences = new JLabel("Preferenze genere libri:");
-		bookPreferences.setBounds(54, 407, 136, 37);
+		bookPreferences.setBounds(54, 461, 475, 45);
+		bookPreferences.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		mainFrame.getContentPane().add(bookPreferences);
 
 		JLabel filmPreferences = new JLabel("Preferenze genere film:");
-		filmPreferences.setBounds(54, 523, 136, 37);
+		filmPreferences.setBounds(54, 646, 475, 45);
+		filmPreferences.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		mainFrame.getContentPane().add(filmPreferences);
 
 	}

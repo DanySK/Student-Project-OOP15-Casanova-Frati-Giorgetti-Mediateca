@@ -1,9 +1,12 @@
 package view;
 
+import java.awt.Font;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import view.ViewImpl.CardName;
 
@@ -30,50 +33,66 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	public UserMenuImpl(final View v, final int screenLenght,
 			final int screenWidth) {
 		this.setLayout(null);
+		this.setSize(1280, 920);
 		final JButton exitProgram;
 		final JLabel mainLabel;
 		final JButton mediateca;
 		final JButton studyRoomServices;
 		final JButton accountSettings;
 
-		mainLabel = new JLabel(
-				"Seleziona il tipo di serviziovuoi accedere: a cui vuoi accedere");
-		mainLabel.setBounds(12, 25, 414, 16);
+		mainLabel = new JLabel("Accedi ai nostri servizi\r\n");
+		mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		mainLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		mainLabel.setBounds(48, 36, 1186, 49);
 		this.add(mainLabel);
 		v.giveMeSuggestedBooks();
 		v.giveMeSuggestedMovies();
-		this.suggestedBooks.setSize(163, 130);
-		this.suggestedBooks.setLocation(32, 156);
+		this.suggestedBooks.setSize(437, 322);
+		this.suggestedBooks.setLocation(151, 318);
 		this.add(this.suggestedBooks);
-		this.suggestedMovies.setSize(163, 130);
-		this.suggestedMovies.setLocation(246, 156);
+		this.suggestedMovies.setSize(437, 322);
+		this.suggestedMovies.setLocation(611, 318);
 
 		this.add(this.suggestedMovies);
 
 		exitProgram = new JButton("Esci");
-		exitProgram.setBounds(246, 105, 163, 38);
+		exitProgram.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		exitProgram.setBounds(1062, 843, 172, 49);
 		this.add(exitProgram);
 
 		mediateca = new JButton("Mediateca");
-		mediateca.setBounds(32, 54, 163, 38);
+		mediateca.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		mediateca.setBounds(288, 117, 300, 64);
 		this.add(mediateca);
 
 		studyRoomServices = new JButton("Sala studio");
-		studyRoomServices.setBounds(246, 54, 163, 38);
+		studyRoomServices.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		studyRoomServices.setBounds(611, 117, 300, 64);
 		this.add(studyRoomServices);
 
 		accountSettings = new JButton("Impostazioni Account");
+		accountSettings.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		accountSettings.addActionListener(arg0 -> {
 		});
-		accountSettings.setBounds(32, 105, 163, 38);
+		accountSettings.setBounds(27, 843, 348, 49);
 		this.add(accountSettings);
+
+		JLabel suggestedBooksLabel = new JLabel("Libri consigliati:");
+		suggestedBooksLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		suggestedBooksLabel.setBounds(151, 256, 300, 49);
+		this.add(suggestedBooksLabel);
+
+		JLabel suggestedMoviesLabel = new JLabel("Film consigliati:");
+		suggestedMoviesLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		suggestedMoviesLabel.setBounds(611, 256, 300, 49);
+		this.add(suggestedMoviesLabel);
 
 		exitProgram.addActionListener(e -> v.swapView(CardName.MAIN));
 		mediateca.addActionListener(e -> v.swapView(CardName.ITEM));
 		studyRoomServices.addActionListener(e -> v
 				.swapView(CardName.STUDY_ROOM));
 		accountSettings
-		.addActionListener(e -> v.swapView(CardName.USER_MODIFY));
+				.addActionListener(e -> v.swapView(CardName.USER_MODIFY));
 
 	}
 
