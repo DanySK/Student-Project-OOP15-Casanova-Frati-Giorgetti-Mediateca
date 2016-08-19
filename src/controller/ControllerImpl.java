@@ -163,22 +163,30 @@ public class ControllerImpl implements Controller {
 
 	// first draft
 	@Override
-	public void addLike(final int itemId) {
-		try {
-			this.m.addLike(itemId, this.actualUser.getIdUser());
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void addLike() {
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
+				try {
+					this.m.addLike(i, this.actualUser.getIdUser());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
 	@Override
-	public void addReview(final int itemId, final Integer vote, final String note) {
-		try {
-			this.m.addReview(itemId, this.actualUser.getIdUser(), vote, note);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void addReview() {
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
+				try {
+					this.m.addReview(i, this.actualUser.getIdUser(), vote, note);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
@@ -210,7 +218,6 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void registerNewUser() {
-
 		String name = (String) this.v.getUserRegistration(UserInfo.NAME);
 		String surname = (String) this.v.getUserRegistration(UserInfo.SURNAME);
 		GregorianCalendar day = new GregorianCalendar();
@@ -274,7 +281,7 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void removeFromWishList() {
-		this.actualUser.removeFromWishList(this.v.get);
+		// this.actualUser.removeFromWishList(this.v.get);
 	}
 
 	public void setAllUserList() {
@@ -324,6 +331,10 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void checkDeadlines() {
+
 	}
 
 	public void extendBorrow() {

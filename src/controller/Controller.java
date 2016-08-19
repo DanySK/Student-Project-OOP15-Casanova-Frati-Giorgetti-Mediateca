@@ -42,24 +42,14 @@ public interface Controller {
 	/**
 	 * Method which adds the like of the current item selected by the actual
 	 * user.
-	 * 
-	 * @param itemId
-	 *            identifier of the selected item.
 	 */
-	void addLike(final int itemId);
+	void addLike();
 
 	/**
 	 * Method which adds the numerical vote and/or a review given by the actual
 	 * user to the current selected item.
-	 * 
-	 * @param itemId
-	 *            identifier of the selected item.
-	 * @param vote
-	 *            numerical vote given to the item.
-	 * @param note
-	 *            review of the item.
 	 */
-	void addReview(final int itemId, final Integer vote, final String note);
+	void addReview();
 
 	/**
 	 * Method which sets the view's list of borrowed item of the actual user.
@@ -75,14 +65,14 @@ public interface Controller {
 	/**
 	 * Method which uses the selected sit and the actual day to book the
 	 * position in the study room.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	void takeSit() throws Exception;
 
 	/**
 	 * Method which removes the booking of the selected sit in the actual day.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	void cancelSit() throws Exception;
