@@ -75,12 +75,12 @@ public class ViewImpl implements View {
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-						"LikeList Screen Card"), BORROWED_LIST(
-								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
-																"Item Modify Card");
+				"LikeList Screen Card"), BORROWED_LIST(
+				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+				"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
+				"Item Modify Card");
 
 		private final String name;
 
@@ -111,7 +111,7 @@ public class ViewImpl implements View {
 		this.card4 = new UserScreenImpl(this, UserScreenType.MODIFY,
 				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_LENGHT);
 		this.card5 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
-				ViewImpl.SCREEN_WIDTH, ListScreenType.LIKE);
+				ViewImpl.SCREEN_WIDTH, ListScreenType.WISH);
 		this.card6 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
 				ViewImpl.SCREEN_WIDTH, ListScreenType.BORROWED);
 		this.card7 = new ReviewScreenImpl(this, ViewImpl.SCREEN_LENGHT,
@@ -123,8 +123,6 @@ public class ViewImpl implements View {
 		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE,
 				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_LENGHT);
 		this.card11 = new StudyRoomImpl(this, ViewImpl.STUDY_ROOM_SITS);
-		this.card12 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
-				ViewImpl.SCREEN_WIDTH, ListScreenType.WISH);
 		this.card13 = new ItemScreenImpl(this, ItemScreenType.MODIFY,
 				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.card14 = new ManagerScreenImpl(this);
@@ -168,16 +166,15 @@ public class ViewImpl implements View {
 		ViewImpl.CONTAINER.add(this.card2, CardName.MENU.toString());
 		ViewImpl.CONTAINER.add(this.card3, CardName.ITEM.toString());
 		ViewImpl.CONTAINER.add(this.card4, CardName.USER_MODIFY.toString());
-		ViewImpl.CONTAINER.add(this.card5, CardName.LIKE_LIST.toString());
+		ViewImpl.CONTAINER.add(this.card5, CardName.WISHLIST.toString());
 		ViewImpl.CONTAINER.add(this.card6, CardName.BORROWED_LIST.toString());
 		ViewImpl.CONTAINER.add(this.card7, CardName.REVIEW.toString());
 		ViewImpl.CONTAINER.add(this.card8, CardName.USER_CREATE.toString());
 		ViewImpl.CONTAINER.add(this.card9, CardName.MANAGER_LOGIN.toString());
 		ViewImpl.CONTAINER.add(this.card10, CardName.ITEM_CREATE.toString());
 		ViewImpl.CONTAINER.add(this.card11, CardName.STUDY_ROOM.toString());
-		ViewImpl.CONTAINER.add(this.card12, CardName.WISHLIST.toString());
 		ViewImpl.CONTAINER.add(this.card13, CardName.ITEM_MODIFY.toString());
-		ViewImpl.CONTAINER.add(this.card14, CardName.MANAGER_MENU.toString());
+		ViewImpl.CONTAINER.add(this.card12, CardName.MANAGER_MENU.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
@@ -322,12 +319,6 @@ public class ViewImpl implements View {
 		return ((UserScreenImpl) this.card4).getInfo(info);
 	}
 
-	// //OK
-	@Override
-	public void setLikeItemList(final String[] likeList) {
-		((ListScreenImpl) this.card5).setLikeList(likeList);
-	}
-
 	// //waiting CONTROLLER function name
 	@Override
 	public void giveMeBorrowList() {
@@ -398,8 +389,8 @@ public class ViewImpl implements View {
 			final String duration, final utils.TypeColor color,
 			final utils.Language language) {
 		((ItemScreenImpl) this.card10)
-				.setFilmField(title, author, manifacturer, year, genre,
-						imagePath, duration, color, language);
+		.setFilmField(title, author, manifacturer, year, genre,
+				imagePath, duration, color, language);
 	}
 
 	// //waiting CONTROLLER function name
@@ -465,12 +456,6 @@ public class ViewImpl implements View {
 
 	// //waiting CONTROLLER function name
 	@Override
-	public void wishItem() {
-		// c.wishItem();
-	}
-
-	// //waiting CONTROLLER function name
-	@Override
 	public void removeSit() {
 		// c.removeSit();
 
@@ -506,35 +491,38 @@ public class ViewImpl implements View {
 
 	@Override
 	public String getItemToRemoveFromLikeBorrowWish() {
-		return ((ListScreenImpl) this.card12).getSelectedItem();
+		return ((ListScreenImpl) this.card5).getSelectedItem();
 	}
 
 	// //waiting CONTROLLER function name
-
 	@Override
 	public void giveMeWishlist() {
 		// c.wishlist();
 
 	}
 
+	// //waiting CONTROLLER function name
 	@Override
 	public void giveMeUserList() {
 		// c.setAllUserList();
 
 	}
 
+	// //waiting CONTROLLER function name
 	@Override
 	public void giveMeItemList() {
 		// c.setAllItemList();
 
 	}
 
+	// //waiting CONTROLLER function name
 	@Override
 	public void deleteUser() {
 		// c.deleteUser;
 
 	}
 
+	// //waiting CONTROLLER function name
 	@Override
 	public void deleteItem() {
 		// c.deleteItem();
@@ -556,10 +544,10 @@ public class ViewImpl implements View {
 	public void showGiveBackOptionMessage(final String book) {
 		// Custom button text
 		final Object[] options = { "Consegna",
-		"Aumenta il prestito di un altro mese" };
+				"Aumenta il prestito di un altro mese" };
 		int choose = JOptionPane.showOptionDialog(this.mainFrame,
 				"Dovresti consegare il seguente libro:" + book
-						+ "Cosa vuoi fare?", "Notifica di consegna",
+				+ "Cosa vuoi fare?", "Notifica di consegna",
 				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
 		if (choose == 0) {
@@ -570,6 +558,7 @@ public class ViewImpl implements View {
 
 	}
 
+	// //waiting CONTROLLER function name
 	@Override
 	public void extendBorrow() {
 		// c.extendBorrow();
@@ -584,4 +573,5 @@ public class ViewImpl implements View {
 				"Notifica di consegna", JOptionPane.WARNING_MESSAGE);
 
 	}
+
 }

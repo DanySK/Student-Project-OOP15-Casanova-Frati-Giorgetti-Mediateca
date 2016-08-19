@@ -32,7 +32,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		/**
 		 *
 		 */
-		BORROWED, LIKE, WISH
+		BORROWED, WISH
 	}
 
 	/**
@@ -54,11 +54,6 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 				remove.addActionListener(e -> v.giveBackItem());
 				v.giveMeBorrowList();
 
-			} else if (i.equals(ListScreenType.LIKE)) {
-				this.presentation = new JLabel(
-						"Ecco gli oggetti che ti piacciono:");
-				remove.addActionListener(e -> v.removeLike());
-				v.giveMeLikeList();
 			} else if (i.equals(ListScreenType.WISH)) {
 				this.presentation = new JLabel("Ecco gli oggetti che desideri");
 				remove.addActionListener(e -> v.removeFromWishlist());
@@ -89,11 +84,6 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	@Override
 	public void setBorrowedList(final String[] bList) {
 		this.list = new JList<String>(bList);
-	}
-
-	@Override
-	public void setLikeList(final String[] lList) {
-		this.list = new JList<String>(lList);
 	}
 
 	@Override

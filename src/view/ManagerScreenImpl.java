@@ -69,12 +69,8 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		modify.setBounds(847, 115, 147, 25);
 		this.add(modify);
 		if (this.type.equals(TypeList.USER)) {
-			delete.addActionListener(e -> {
-				v.deleteUser();
-			});
-			modify.addActionListener(e -> {
-				v.swapView(CardName.USER_MODIFY);
-			});
+			delete.setEnabled(false);
+			modify.setEnabled(false);
 		} else if (this.type.equals(TypeList.ITEM)) {
 			delete.addActionListener(e -> {
 				v.deleteItem();

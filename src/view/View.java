@@ -180,13 +180,6 @@ public interface View {
 	void setBorrowedItemList(String[] borrowedItemsList);
 
 	/**
-	 * method which allows to sets the list containing items liked by user.
-	 *
-	 * @param likeList
-	 */
-	void setLikeItemList(String[] likeList);
-
-	/**
 	 * method which calls controller for setting borrow list.
 	 *
 	 * @return
@@ -342,11 +335,6 @@ public interface View {
 	 * @return
 	 */
 	String getStudyRoomSelectedDate();
-
-	/**
-	 * method which tells to controller to wish an item.
-	 */
-	void wishItem();
 
 	/**
 	 * method which tells to controller to remove a sit.
