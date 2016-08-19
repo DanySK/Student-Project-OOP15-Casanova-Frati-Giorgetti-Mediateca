@@ -143,7 +143,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.presentation.setBounds(47, 13, 720, 58);
 		this.add(this.presentation);
 
-		discarge.setBounds(30, 538, 120, 49);
+		discarge.setBounds(30, 521, 120, 49);
 		this.add(discarge);
 
 		this.send.setBounds(647, 522, 120, 49);

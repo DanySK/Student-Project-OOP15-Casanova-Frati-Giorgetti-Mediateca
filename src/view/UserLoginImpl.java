@@ -60,7 +60,7 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		mainLabel.setBounds(12, 13, 776, 62);
 		send = new JButton("Invio");
 		send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		send.setBounds(297, 293, 230, 45);
+		send.setBounds(277, 225, 230, 45);
 		this.add(send);
 		this.usernameTextArea = new JTextArea();
 		usernameLabel = new JLabel("Username:");
@@ -73,11 +73,11 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 
 		this.add(passwordLabel);
 		if (type.equals(LoginType.USER)) {
-			passwordLabel.setBounds(154, 194, 162, 45);
-			usernameLabel.setBounds(154, 136, 162, 45);
+			passwordLabel.setBounds(142, 151, 162, 45);
+			usernameLabel.setBounds(142, 88, 162, 45);
 			this.add(usernameLabel);
 			this.usernameTextArea.setRows(1);
-			this.usernameTextArea.setBounds(328, 136, 329, 45);
+			this.usernameTextArea.setBounds(315, 88, 329, 45);
 			this.add(this.usernameTextArea);
 			send.addActionListener(e -> v.sendLogin());
 		} else if (type.equals(LoginType.MANAGER)) {
@@ -85,18 +85,18 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 			passwordLabel = new JLabel("Password di Sistema:");
 			passwordLabel.setFont(new Font("Tahoma", Font.PLAIN,
 					ViewImpl.FONT_SIZE));
-			passwordLabel.setBounds(109, 124, 275, 45);
+			passwordLabel.setBounds(54, 151, 252, 45);
 			send.addActionListener(e -> v.sendManagerLogin());
 		}
 
 		this.passwordTextArea = new JTextArea();
 		this.passwordTextArea.setRows(1);
-		this.passwordTextArea.setBounds(393, 124, 329, 45);
+		this.passwordTextArea.setBounds(316, 151, 329, 45);
 		backToSelectAccount = new JButton("Torna alla scelta");
 		backToSelectAccount.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.FONT_SIZE));
 		backToSelectAccount.addActionListener(e -> v.swapView(CardName.MAIN));
-		backToSelectAccount.setBounds(505, 521, 252, 45);
+		backToSelectAccount.setBounds(505, 503, 252, 45);
 		this.setLayout(null);
 		this.add(mainLabel);
 		this.add(passwordLabel);
