@@ -268,8 +268,12 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 				return this.usernameF.getText();
 			case PASSWORD:
 				return this.passwordF.getText();
-			case BIRTHDATE:
-				return this.datePicker.getModel().getValue();
+			case BIRTHDATE_DAY:
+				return this.datePicker.getModel().getDay();
+			case BIRTHDATE_MONTH:
+				return this.datePicker.getModel().getDay();
+			case BIRTHDATE_YEAR:
+				return this.datePicker.getModel().getDay();
 			case EMAIL:
 				return this.emailF.getText();
 			case TELEPHONE_NUMBER:
