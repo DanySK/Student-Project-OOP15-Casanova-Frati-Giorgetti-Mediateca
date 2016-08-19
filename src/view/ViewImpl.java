@@ -551,4 +551,37 @@ public class ViewImpl implements View {
 		UserShow userScreen = new UserShowImpl();
 		userScreen.startUserShow(this);
 	}
+
+	@Override
+	public void showGiveBackOptionMessage(final String book) {
+		// Custom button text
+		final Object[] options = { "Consegna",
+		"Aumenta il prestito di un altro mese" };
+		int choose = JOptionPane.showOptionDialog(this.mainFrame,
+				"Dovresti consegare il seguente libro:" + book
+						+ "Cosa vuoi fare?", "Notifica di consegna",
+				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
+
+		if (choose == 0) {
+			this.giveBackItem();
+		} else if (choose == 1) {
+			this.extendBorrow();
+		}
+
+	}
+
+	@Override
+	public void extendBorrow() {
+		// c.extendBorrow();
+
+	}
+
+	@Override
+	public void showGiveBackMessage(final String book) {
+
+		JOptionPane.showMessageDialog(this.mainFrame,
+				"Devi consegare il seguente libro:" + book,
+				"Notifica di consegna", JOptionPane.WARNING_MESSAGE);
+
+	}
 }

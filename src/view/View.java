@@ -420,4 +420,23 @@ public interface View {
 	 */
 	void showUserInfo();
 
+	/**
+	 * send notification of forced give back for a book.
+	 *
+	 * @param book
+	 */
+	void showGiveBackMessage(String book);
+
+	/**
+	 * send notification with options for a book.
+	 *
+	 * @param book
+	 */
+	void showGiveBackOptionMessage(String book);
+
+	/**
+	 * method which tells to controller to extend borrow.
+	 */
+	void extendBorrow();
+
 }
