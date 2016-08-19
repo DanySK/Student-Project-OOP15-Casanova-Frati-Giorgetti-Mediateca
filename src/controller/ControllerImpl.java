@@ -212,17 +212,23 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void registerNewUser() {
 
-		String name = this.v.getUserRegistration(UserInfo.NAME);
-		String surname = this.v.getUserRegistration(UserInfo.SURNAME);
+		String name = (String) this.v.getUserRegistration(UserInfo.NAME);
+		String surname = (String) this.v.getUserRegistration(UserInfo.SURNAME);
 		GregorianCalendar gc = (GregorianCalendar) this.v.getUserRegistration(UserInfo.BIRTHDATE);
-		String username = this.v.getUserRegistration(UserInfo.USERNAME);
-		String password = this.v.getUserRegistration(UserInfo.PASSWORD);
-		String email = this.v.getUserRegistration(UserInfo.EMAIL);
-		String telephoneNumber = this.v.getUserRegistration(UserInfo.TELEPHONE_NUMBER);
+		String username = (String) this.v.getUserRegistration(UserInfo.USERNAME);
+		String password = (String) this.v.getUserRegistration(UserInfo.PASSWORD);
+		String email = (String) this.v.getUserRegistration(UserInfo.EMAIL);
+		String telephoneNumber = (String) this.v.getUserRegistration(UserInfo.TELEPHONE_NUMBER);
 		List<ItemGenre> bookList = new ArrayList<>();
 		List<ItemGenre> movieList = new ArrayList<>();
-		this.m.registerUser(name, surname, gc, username, password, email, telephoneNumber, bookList, movieList);
-		this.v.showMessage("Utente " + username + " registrato con successo!");
+		try {
+			this.m.registerUser(name, surname, gc, username, password, email, telephoneNumber, bookList, movieList);
+			this.v.showMessage("Utente " + username + " registrato con successo!");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	@Override
