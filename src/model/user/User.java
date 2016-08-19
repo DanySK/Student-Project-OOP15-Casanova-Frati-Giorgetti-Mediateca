@@ -29,6 +29,14 @@ public interface User {
   void addToWishList(final Integer initWishList);
 
   /**
+   * This method removes from the wishlist the requiredItem.
+   *
+   * @param itemId
+   *          item's identifier.
+   */
+  void removeFromWishList(final Integer itemId);
+
+  /**
    * This method adds an itemId to the user's map.
    *
    * @param itemId

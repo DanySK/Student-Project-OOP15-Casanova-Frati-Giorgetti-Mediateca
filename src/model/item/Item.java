@@ -33,11 +33,19 @@ public interface Item {
   void addReview(ReviewImpl rev);
 
   /**
-   * Add userId to set of like to the Item.
+   * Add userId from the set which contains the user that likes it.
    *
    * @param userId
    *          user's identifier that likes this item.
    */
   void addLike(final Integer userId);
+
+  /**
+   * Remove userId from the set which contains the user that likes it.
+   *
+   * @param userId
+   *          user's identifier.
+   */
+  void removeLike(final Integer userId);
 
 }

@@ -260,6 +260,13 @@ public class ItemImpl implements Item, Serializable {
     }
   }
 
+  @Override
+  public void removeLike(final Integer userId) {
+    if (this.like.contains(userId)) {
+      this.like.remove(userId);
+    }
+  }
+
   /**
    * This method set the item's average vote.
    */

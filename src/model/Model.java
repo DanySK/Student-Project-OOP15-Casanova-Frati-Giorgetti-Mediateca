@@ -440,4 +440,18 @@ public interface Model {
    *           in the case which user is not into the archive.
    */
   Set<Integer> getItemBorrowed(final Integer userId) throws Exception;
+
+  /**
+   * This method can be used by USER. This method removes a like to the itemId
+   * by userId.
+   *
+   * @param itemId
+   *          item's identifier.
+   * @param userId
+   *          user's identifier.
+   * @throws Exception
+   *           in the which itemId or userId is not contained into their
+   *           archives.
+   */
+  void removeLike(final Integer itemId, final Integer userId) throws Exception;
 }

@@ -239,6 +239,23 @@ public class ModelImpl implements Serializable, Model {
     }
   }
 
+  public void removeLike(final Integer itemId, final Integer userId) throws Exception {
+    if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
+      if (this.getRequiredUser(userId).getWishlist().contains(itemId)) {
+        this.archiveItem.getItem(itemId).removeLike(userId);
+        this.archiveUser.getUser(userId).removeFromWishList(itemId);
+        System.out.println("UserId: " + userId + "doesn't like itemId: " + itemId);
+      } else {
+        throw new Exception(
+                    "ItemId: " + itemId + " not contained into the userId" + userId + "wishlist.");
+      }
+    } else {
+      throw new Exception("ItemId: " + itemId + " or userId" + userId
+                  + "are not contained into the archive");
+    }
+
+  }
+
   @Override
   public void addReview(final Integer itemId, final Integer userId, final Integer vote,
               final String note) throws Exception {

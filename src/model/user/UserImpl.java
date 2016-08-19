@@ -109,6 +109,12 @@ public class UserImpl implements Serializable, User {
     System.out.println("UserId: " + this.idUser + " adds to its wishlist itemId: " + itemId);
   }
 
+  public void removeFromWishList(final Integer itemId) {
+    if (this.wishList.contains(itemId)) {
+      this.wishList.remove(itemId);
+    }
+  }
+
   /**
    * @return the bookPreferences
    */
