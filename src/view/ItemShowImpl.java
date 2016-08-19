@@ -15,8 +15,8 @@ import utils.TypeItem;
  *
  */
 public class ItemShowImpl implements ItemShow {
-	final int FRAME_LENGHT = 600;
-	final int FRAME_WIDTH = 920;
+	static final int FRAME_LENGHT = 600;
+	static final int FRAME_WIDTH = 920;
 	private String title;
 	private String author;
 	private String manifacturer;
@@ -36,7 +36,7 @@ public class ItemShowImpl implements ItemShow {
 		final JFrame mainFrame = new JFrame();
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBounds(0, 0, 594, 1);
-		mainFrame.setSize(this.FRAME_LENGHT, this.FRAME_WIDTH);
+		mainFrame.setSize(ItemShowImpl.FRAME_LENGHT, ItemShowImpl.FRAME_WIDTH);
 		mainFrame.setResizable(false);
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
@@ -110,47 +110,47 @@ public class ItemShowImpl implements ItemShow {
 	}
 
 	@Override
-	public void setCommonField(final String title, final String author,
-			final String manifacturer, final String year,
-			final utils.ItemGenre genre, final String reviewAvarage,
-			final String availability, final String imagePath,
-			final utils.Language language) {
-		this.title = title;
-		this.author = author;
-		this.manifacturer = manifacturer;
-		this.year = year;
-		this.genre = genre;
-		this.reviewAvarage = reviewAvarage;
-		this.availability = availability;
-		this.imagePath = imagePath;
-		this.language = language;
+	public void setCommonField(final String titleS, final String authorS,
+			final String manifacturerS, final String yearS,
+			final utils.ItemGenre genreS, final String reviewAvarageS,
+			final String availabilityS, final String imagePathS,
+			final utils.Language languageS) {
+		this.title = titleS;
+		this.author = authorS;
+		this.manifacturer = manifacturerS;
+		this.year = yearS;
+		this.genre = genreS;
+		this.reviewAvarage = reviewAvarageS;
+		this.availability = availabilityS;
+		this.imagePath = imagePathS;
+		this.language = languageS;
 	}
 
 	@Override
-	public void setFilmField(final String title, final String author,
-			final String manifacturer, final String year,
-			final utils.ItemGenre genre, final String reviewAvarage,
-			final String availability, final String imagePath,
-			final String duration, final utils.TypeColor color,
-			final utils.Language language) {
-		this.setCommonField(title, author, manifacturer, year, genre,
-				reviewAvarage, availability, imagePath, language);
-		this.duration = duration;
-		this.color = color;
+	public void setFilmField(final String titleS, final String authorS,
+			final String manifacturerS, final String yearS,
+			final utils.ItemGenre genreS, final String reviewAvarageS,
+			final String availabilityS, final String imagePathS,
+			final String durationS, final utils.TypeColor colorS,
+			final utils.Language languageS) {
+		this.setCommonField(titleS, authorS, manifacturerS, yearS, genreS,
+				reviewAvarageS, availabilityS, imagePathS, languageS);
+		this.duration = durationS;
+		this.color = colorS;
 		this.isbn = null;
 	}
 
 	@Override
-	public void setBookField(final String title, final String author,
-			final String manifacturer, final String year,
-			final utils.ItemGenre genre, final String reviewAvarage,
-			final String availability, final String imagePath,
-			final String isbn, final utils.Language language) {
-		this.setCommonField(title, author, manifacturer, year, genre,
-				reviewAvarage, availability, imagePath, language);
+	public void setBookField(final String titleS, final String authorS,
+			final String manifacturerS, final String yearS,
+			final utils.ItemGenre genreS, final String reviewAvarageS,
+			final String availabilityS, final String imagePathS,
+			final String isbnS, final utils.Language languageS) {
+		this.setCommonField(titleS, authorS, manifacturerS, yearS, genreS,
+				reviewAvarageS, availabilityS, imagePathS, languageS);
 		this.duration = null;
 		this.color = null;
-		this.isbn = isbn;
+		this.isbn = isbnS;
 	}
 
 }

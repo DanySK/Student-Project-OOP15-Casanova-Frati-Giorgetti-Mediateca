@@ -14,12 +14,12 @@ import view.ViewImpl.CardName;
  */
 public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
-	private static final long serialVersionUID = 1L;
-	JList<String> list;
-	TypeList type;
+	private static final long serialVersionUID = 3947236683472052024L;
+	private JList<String> list = new JList<String>();
+	private TypeList type;
 
 	/**
-	 * Enum for the type of llist can be.
+	 * Enum for the type of list can be.
 	 *
 	 * @author Luca Giorgetti
 	 *
@@ -31,7 +31,6 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 	/**
 	 * Builder for ManagerScreenImpl.
 	 */
-
 	public ManagerScreenImpl(final View v) {
 
 		this.setSize(1280, 920);
@@ -97,14 +96,17 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 	}
 
+	@Override
 	public void setUserList(final String[] userList) {
 		this.list = new JList<String>(userList);
 	}
 
+	@Override
 	public void setItemList(final String[] itemList) {
 		this.list = new JList<String>(itemList);
 	}
 
+	@Override
 	public String getSelected() {
 		return this.list.getSelectedValue();
 	}

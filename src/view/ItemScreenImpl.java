@@ -190,29 +190,29 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			send.addActionListener(e -> v.sendItemModify());
 		}
 		this.itemTypeF
-				.addActionListener(e -> {
-					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
-						this.colorF.setEnabled(false);
-						this.colorF.setVisible(false);
-						this.durationF.setEnabled(false);
-						this.durationF.setVisible(false);
-						durationL.setVisible(false);
-						this.isbnF.setEnabled(true);
-						this.isbnF.setVisible(true);
-						isbnL.setVisible(true);
+		.addActionListener(e -> {
+			if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+				this.colorF.setEnabled(false);
+				this.colorF.setVisible(false);
+				this.durationF.setEnabled(false);
+				this.durationF.setVisible(false);
+				durationL.setVisible(false);
+				this.isbnF.setEnabled(true);
+				this.isbnF.setVisible(true);
+				isbnL.setVisible(true);
 
-					} else if (this.itemTypeF.getSelectedItem().equals(
-							TypeItem.MOVIE)) {
-						this.colorF.setEnabled(true);
-						this.colorF.setVisible(true);
-						this.durationF.setEnabled(true);
-						this.durationF.setVisible(true);
-						durationL.setVisible(true);
-						this.isbnF.setEnabled(false);
-						this.isbnF.setVisible(false);
-						isbnL.setVisible(false);
-					}
-				});
+			} else if (this.itemTypeF.getSelectedItem().equals(
+					TypeItem.MOVIE)) {
+				this.colorF.setEnabled(true);
+				this.colorF.setVisible(true);
+				this.durationF.setEnabled(true);
+				this.durationF.setVisible(true);
+				durationL.setVisible(true);
+				this.isbnF.setEnabled(false);
+				this.isbnF.setVisible(false);
+				isbnL.setVisible(false);
+			}
+		});
 		presentation.setBounds(104, 11, 181, 16);
 		this.add(presentation);
 
