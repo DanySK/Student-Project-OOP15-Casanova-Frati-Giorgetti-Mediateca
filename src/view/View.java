@@ -81,18 +81,6 @@ public interface View {
 	String getMenagerPassword();
 
 	/**
-	 *
-	 * method which returns information from item creation.
-	 */
-	void getAddedItem();
-
-	/**
-	 *
-	 * method which returns information from item removal.
-	 */
-	void getRemovedItem();
-
-	/**
 	 * method which asks to borrow item.
 	 *
 	 * @param selectedItem
@@ -478,7 +466,7 @@ public interface View {
 
 	/**
 	 * method which returns the item selected by user in mediateca.
-	 * 
+	 *
 	 * @return
 	 */
 	String getItemSelectedByUser();

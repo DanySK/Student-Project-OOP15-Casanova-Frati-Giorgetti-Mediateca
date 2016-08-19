@@ -60,8 +60,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
-	public ItemScreenImpl(final View v, final ItemScreenType type,
-			final int screenLenght, final int screenWidth) {
+	public ItemScreenImpl(final View v, final ItemScreenType type) {
 		final JLabel titleL;
 		final JLabel authorL;
 		final JLabel manifacturerL;
@@ -77,54 +76,54 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 
 		this.titleF = new JTextField();
-		this.titleF.setBounds(499, 157, 230, 40);
+		this.titleF.setBounds(229, 107, 230, 30);
 		this.add(this.titleF);
 		this.titleF.setColumns(10);
 
 		this.authorF = new JTextField();
-		this.authorF.setBounds(499, 216, 230, 40);
+		this.authorF.setBounds(229, 150, 230, 30);
 		this.authorF.setColumns(10);
 		this.add(this.authorF);
 
 		this.manifacturerF = new JTextField();
-		this.manifacturerF.setBounds(497, 279, 232, 40);
+		this.manifacturerF.setBounds(229, 193, 232, 30);
 		this.manifacturerF.setColumns(10);
 		this.add(this.manifacturerF);
 
 		browse = new JButton("Scegli Immagine");
-		browse.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		browse.setBounds(897, 561, 279, 53);
+		browse.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		browse.setBounds(493, 405, 272, 39);
 		this.add(browse);
 
 		presentation = new JLabel();
 		send = new JButton();
-		send.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		this.yearF = new JTextField();
 		this.yearF.setColumns(10);
-		this.yearF.setBounds(499, 332, 230, 40);
+		this.yearF.setBounds(229, 233, 230, 30);
 		this.add(this.yearF);
 		this.imageSpace = new JLabel();
 
 		this.durationF = new JTextField();
 		this.durationF.setColumns(10);
-		this.durationF.setBounds(499, 490, 230, 40);
+		this.durationF.setBounds(229, 341, 230, 30);
 		this.add(this.durationF);
 
 		this.colorF = new JComboBox();
-		this.colorF.setBounds(499, 596, 230, 40);
+		this.colorF.setBounds(229, 414, 230, 30);
 		this.add(this.colorF);
 
 		this.languageF = new JComboBox();
-		this.languageF.setBounds(499, 543, 230, 40);
+		this.languageF.setBounds(229, 378, 230, 30);
 		this.add(this.languageF);
 
 		this.isbnF = new JTextField();
 		this.isbnF.setColumns(10);
-		this.isbnF.setBounds(499, 438, 230, 40);
+		this.isbnF.setBounds(229, 306, 230, 30);
 		this.add(this.isbnF);
 
-		this.imageSpace.setBounds(866, 56, 338, 474);
+		this.imageSpace.setBounds(510, 79, 100, 140);
 		this.add(this.imageSpace);
 		// http://1bestcsharp.blogspot.it/2015/04/java-how-to-browse-image-file-and-And-Display-It-Using-JFileChooser-In-Java.html
 		browse.addActionListener(e -> {
@@ -145,36 +144,36 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		this.itemTypeF = new JComboBox();
 		this.itemTypeF.setToolTipText("Tipo");
-		this.itemTypeF.setBounds(499, 98, 230, 40);
+		this.itemTypeF.setBounds(229, 64, 230, 30);
 		this.add(this.itemTypeF);
 
 		this.genreF = new JComboBox();
 		this.genreF.setToolTipText("Genere");
-		this.genreF.setBounds(499, 385, 230, 40);
+		this.genreF.setBounds(229, 271, 230, 30);
 		this.add(this.genreF);
 
 		titleL = new JLabel("Titolo:");
-		titleL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		titleL.setBounds(253, 157, 223, 40);
+		titleL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		titleL.setBounds(50, 107, 167, 30);
 		this.add(titleL);
 
 		durationL = new JLabel("Durata:");
-		durationL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		durationL.setBounds(253, 438, 223, 40);
+		durationL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		durationL.setBounds(50, 306, 167, 30);
 		this.add(durationL);
 
 		isbnL = new JLabel("ISBN:");
-		isbnL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		isbnL.setBounds(253, 490, 223, 40);
+		isbnL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		isbnL.setBounds(50, 341, 167, 30);
 		this.add(isbnL);
 
 		authorL = new JLabel("Autore:");
-		authorL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		authorL.setBounds(253, 216, 223, 40);
+		authorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		authorL.setBounds(50, 150, 167, 30);
 		this.add(authorL);
 
 		discarge = new JButton("Annulla");
-		discarge.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		if (type.equals(ItemScreenType.CREATE)) {
 			presentation = new JLabel("Inserisci il nuovo oggetto");
 			send = new JButton("Crea");
@@ -187,46 +186,47 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			send.addActionListener(e -> v.sendItemModify());
 		}
 		this.itemTypeF
-				.addActionListener(e -> {
-					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
-						this.colorF.setEnabled(false);
-						this.colorF.setVisible(false);
-						this.durationF.setEnabled(false);
-						this.durationF.setVisible(false);
-						durationL.setVisible(false);
-						this.isbnF.setEnabled(true);
-						this.isbnF.setVisible(true);
-						isbnL.setVisible(true);
+		.addActionListener(e -> {
+			if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+				this.colorF.setEnabled(false);
+				this.colorF.setVisible(false);
+				this.durationF.setEnabled(false);
+				this.durationF.setVisible(false);
+				durationL.setVisible(false);
+				this.isbnF.setEnabled(true);
+				this.isbnF.setVisible(true);
+				isbnL.setVisible(true);
 
-					} else if (this.itemTypeF.getSelectedItem().equals(
-							TypeItem.MOVIE)) {
-						this.colorF.setEnabled(true);
-						this.colorF.setVisible(true);
-						this.durationF.setEnabled(true);
-						this.durationF.setVisible(true);
-						durationL.setVisible(true);
-						this.isbnF.setEnabled(false);
-						this.isbnF.setVisible(false);
-						isbnL.setVisible(false);
-					}
-				});
-		presentation.setBounds(104, 11, 181, 16);
+			} else if (this.itemTypeF.getSelectedItem().equals(
+					TypeItem.MOVIE)) {
+				this.colorF.setEnabled(true);
+				this.colorF.setVisible(true);
+				this.durationF.setEnabled(true);
+				this.durationF.setVisible(true);
+				durationL.setVisible(true);
+				this.isbnF.setEnabled(false);
+				this.isbnF.setVisible(false);
+				isbnL.setVisible(false);
+			}
+		});
+		presentation.setBounds(50, 13, 692, 38);
 		this.add(presentation);
 
-		discarge.setBounds(37, 826, 202, 53);
+		discarge.setBounds(39, 508, 178, 53);
 		this.add(discarge);
 
-		send.setBounds(1001, 826, 203, 53);
+		send.setBounds(582, 508, 178, 53);
 		this.add(send);
 
 		manifacturerL = new JLabel("Produttore:");
-		manifacturerL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		manifacturerL.setBounds(253, 279, 181, 40);
+		manifacturerL.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.SMALL_SIZE));
+		manifacturerL.setBounds(50, 193, 167, 30);
 		this.add(manifacturerL);
 
 		yearL = new JLabel("Anno:");
-		yearL.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		yearL.setBounds(253, 332, 223, 40);
+		yearL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		yearL.setBounds(50, 233, 167, 30);
 		this.add(yearL);
 
 	}

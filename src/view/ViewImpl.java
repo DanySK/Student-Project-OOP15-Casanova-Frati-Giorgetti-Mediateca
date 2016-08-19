@@ -269,16 +269,6 @@ public class ViewImpl implements View {
 
 	}
 
-	@Override
-	public void getAddedItem() {
-
-	}
-
-	@Override
-	public void getRemovedItem() {
-
-	}
-
 	// //OK
 	@Override
 	public void sendLogin() {
