@@ -455,4 +455,11 @@ public interface View {
 	 */
 	void setSuggestedMovies(String[] mList);
 
+	/**
+	 * method which get item to delete or modify.
+	 * 
+	 * @return
+	 */
+	String getItemToRemoveModify();
+
 }
