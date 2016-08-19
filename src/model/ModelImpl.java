@@ -239,6 +239,7 @@ public class ModelImpl implements Serializable, Model {
     }
   }
 
+  @Override
   public void removeLike(final Integer itemId, final Integer userId) throws Exception {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       if (this.getRequiredUser(userId).getWishlist().contains(itemId)) {
