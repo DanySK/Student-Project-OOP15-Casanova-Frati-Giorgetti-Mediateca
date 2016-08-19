@@ -115,6 +115,7 @@ public class ControllerImpl implements Controller {
 			if ((entry.getValue().getUsername().equals(username))
 					&& (entry.getValue().getPassword().equals(password))) {
 				this.actualUser = entry.getValue();
+				this.v.goodLogin();
 				check = true;
 				try {
 					this.m.setReccomandedList(this.actualUser.getIdUser());
@@ -127,6 +128,12 @@ public class ControllerImpl implements Controller {
 		}
 		if (!check) {
 			this.v.showError("Utente non trovato");
+		}
+	}
+
+	public void managerLogin() {
+		if (this.m.getSystemPassword()) {
+
 		}
 	}
 
@@ -192,7 +199,6 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void borrowList() {
-
 		try {
 			this.actualLoanArchive = this.m.getRequiredUser(this.actualUser.getIdUser()).getLoanArchive();
 			String[] array = new String[this.actualLoanArchive.size()];
@@ -220,8 +226,10 @@ public class ControllerImpl implements Controller {
 		String password = (String) this.v.getUserRegistration(UserInfo.PASSWORD);
 		String email = (String) this.v.getUserRegistration(UserInfo.EMAIL);
 		String telephoneNumber = (String) this.v.getUserRegistration(UserInfo.TELEPHONE_NUMBER);
-		List<ItemGenre> bookList = new ArrayList<>();
-		List<ItemGenre> movieList = new ArrayList<>();
+		List<ItemGenre> bookList = new ArrayList<>(); // METTERE I GET DELLA
+														// VIEW
+		List<ItemGenre> movieList = new ArrayList<>(); // METTERE I GET DELLA
+														// VIEW
 		try {
 			this.m.registerUser(name, surname, day, username, password, email, telephoneNumber, bookList, movieList);
 			this.v.showMessage("Utente " + username + " registrato con successo!");
@@ -271,7 +279,18 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void removeFromWishList() {
-		this.m.removeLike(itemId, this.actualUser.getIdUser());
+		// String[] array = new String[this.actualUser.getWishlist().size()];
+		// int index = 0;
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemToRemoveFromLikeBorrowWish())) {
+				try {
+					this.m.removeLike(i, this.actualUser.getIdUser());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	public void setAllUserList() {
@@ -306,8 +325,10 @@ public class ControllerImpl implements Controller {
 		}
 		try {
 			this.m.deleteItem(itemIdReceived);
+			this.v.showMessage("Oggetto " + itemIdReceived + " cancellato");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
+			this.v.showError("Errore ID oggetto");
 			e.printStackTrace();
 		}
 	}
@@ -315,13 +336,30 @@ public class ControllerImpl implements Controller {
 	public void deleteUser() {
 		try {
 			this.m.deleteUser(this.actualUser.getIdUser());
+			this.v.showMessage("Utente " + this.actualUser.getIdUser() + " cancellato");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			this.v.showError("Errore cancellazione utente");
+		}
+	}
+
+	public void checkDeadlines() {
+		try {
+			Map<Integer, Double> map = this.m.checkDeadlineas(this.actualUser.getIdUser());
+			for (Integer i : this.actualUser.getLoanArchive().keySet()) {
+				// DA COMPLETARE
+				if (map.get(i) > 30) {
+					this.v.showMessage("Oggetto " + i + "ha superata la data massima, estendere di 30 giorni?");
+				}
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void checkDeadlines() {
+	public void itemCreate() {
 
 	}
 
