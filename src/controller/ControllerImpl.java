@@ -14,13 +14,13 @@ import model.Model;
 import model.ModelImpl;
 import model.Pair;
 import model.item.ArchiveImpl;
-import model.item.ArchiveImpl.TypeItem;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
 import model.user.User;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeItem;
 import utils.TypeItemInfo;
 import utils.UserInfo;
 import view.View;
@@ -142,14 +142,14 @@ public class ControllerImpl implements Controller {
 	public void itemElaboration() throws Exception {
 		int index = 0;
 		TypeItem ty = null;
-		for (ArchiveImpl.TypeItem y : ArchiveImpl.TypeItem.values()) {
-			if (y.toString().equals(this.v.getItemFilter())) {
+		for (TypeItem y : TypeItem.values()) {
+			if (y.equals(this.v.getItemFilter())) {
 				ty = y;
 			}
 		}
 		TypeItemInfo ts = null;
 		for (TypeItemInfo s : TypeItemInfo.values()) {
-			if (s.toString().equals(this.v.getSearchFilter())) {
+			if (s.equals(this.v.getSearchFilter())) {
 				ts = s;
 			}
 		}
@@ -256,13 +256,61 @@ public class ControllerImpl implements Controller {
 		this.v.setStudyRoomStatus(arrayint);
 	}
 
-	/**
-	 * Method who sets the View for the Controller.
-	 *
-	 */
+	public void wishlist() {
+		// manca setWishlist()
+		String[] array = new String[this.actualUser.getWishlist().size()];
+		int index = 0;
+		for (Integer i : this.actualUser.getWishlist()) {
+			array[index] = this.m.getItemArchive().get(i).toString();
+			index++;
+		}
+		this.v.setWishlist(array);
+
+	}
+
+	public void removeFromWishList() {
+		this.actualUser.removeFromWishList(this.v.get);
+	}
+
+	public void setAllUserList() {
+		// forse sbagliato
+		// manca v.setAllUserList
+		int index = 0;
+		String[] array = new String[this.m.getUserArchive().size()];
+		for (Integer i : this.m.getUserArchive().keySet()) {
+			array[index] = this.m.getUserArchive().get(i).toString();
+		}
+		this.v.setUserList(array);
+	}
+
+	public void setAllItemList() {
+		// forse sbagliato
+		// manca v.setAllItemList
+		// manca v.getItemType
+		int index = 0;
+		String[] array = new String[this.m.getItemArchive().size()];
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			array[index] = this.m.getItemArchive().get(i).toString();
+		}
+		this.v.setItemList(array);
+	}
+
+	public void deleteItem() {
+		// manca v.getItem()
+		this.m.deleteItem(this.v.getItem());
+	}
+
+	public void deleteUser() {
+		// manca v.getUser()
+		this.m.deleteUser(this.v.getUser());
+	}
+
+	public void extendBorrow(){
+		this.actualUser.getLoanArchive()
+	}
+
 	@Override
 	public void setView(final view.View v) {
-		// TODO Auto-generated method stub
 		this.v = v;
 	}
 }
