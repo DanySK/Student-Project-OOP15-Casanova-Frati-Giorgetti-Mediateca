@@ -314,7 +314,7 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception {
     Map<Integer, Double> mmap = new HashMap<>();
-    if (this.archiveItem.containsItem(userId)) {
+    if (this.archiveUser.contains(userId)) {
       for (Integer i : this.archiveUser.getUser(userId).getLoanArchive().keySet()) {
         if (!this.archiveUser.getUser(userId).itWasReturned(i)) {
           mmap.put(i, this.archiveItem.calculateDifferenceDays(i, userId));
