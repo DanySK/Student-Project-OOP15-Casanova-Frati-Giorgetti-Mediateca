@@ -286,7 +286,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void sendLogin() {
-		this.c.login();
+		this.c.userLogin();
 	}
 
 	@Override

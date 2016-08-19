@@ -22,7 +22,7 @@ public interface Controller {
 	 * Method which lets the actual user access the program if username and
 	 * password are contained into the archive.
 	 */
-	void login();
+	void userLogin();
 
 	/**
 	 * Method which writes some users, items and the study room situation on

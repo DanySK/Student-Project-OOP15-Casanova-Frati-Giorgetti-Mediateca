@@ -106,7 +106,7 @@ public class ControllerImpl implements Controller {
 	}
 
 	@Override
-	public void login() {
+	public void userLogin() {
 		final String username = this.v.getUsername();
 		final String password = this.v.getPassword();
 		boolean check = false;
@@ -181,7 +181,7 @@ public class ControllerImpl implements Controller {
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
 				try {
-					this.m.addReview(i, this.actualUser.getIdUser(), vote, note);
+					this.m.addReview(i, this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -207,13 +207,6 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		/*
-		 * for (Entry<Integer, Pair<Boolean, Optional<Integer>>> entry :
-		 * this.actualLoanArchive.entrySet()) {
-		 *
-		 * array[index] =
-		 * this.m.getItemArchive().get(entry.getKey()).toString(); }
-		 */
 	}
 
 	@Override
@@ -240,20 +233,18 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void takeSit() throws Exception {
-		Integer sit = this.v.getTakenSits();
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
-		this.m.bookSit(day, sit, this.actualUser.getIdUser());
+		this.m.bookSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
 	}
 
 	@Override
 	public void cancelSit() throws Exception {
-		Integer sit = this.v.getTakenSits();
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
-		this.m.cancelSit(day, sit, this.actualUser.getIdUser());
+		this.m.cancelSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
 	}
 
 	@Override
@@ -270,7 +261,6 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void wishlist() {
-		// manca setWishlist()
 		String[] array = new String[this.actualUser.getWishlist().size()];
 		int index = 0;
 		for (Integer i : this.actualUser.getWishlist()) {
@@ -281,7 +271,7 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void removeFromWishList() {
-		// this.actualUser.removeFromWishList(this.v.get);
+		this.m.removeLike(itemId, this.actualUser.getIdUser());
 	}
 
 	public void setAllUserList() {
@@ -308,7 +298,6 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void deleteItem() {
-		// manca v.getItem()
 		int itemIdReceived = 0;
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemToRemoveModify())) {
@@ -324,7 +313,6 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void deleteUser() {
-		// manca v.getUser()
 		try {
 			this.m.deleteUser(this.actualUser.getIdUser());
 		} catch (Exception e) {
