@@ -32,7 +32,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	private JDatePickerImpl datePicker;
 	private UtilDateModel model = new UtilDateModel();
 	JList<String> takenSitsList = new JList<String>();
-	private SpringLayout springLayout;
+	private SpringLayout springLayout = new SpringLayout();
 
 	/**
 	 * builder for StudyRoomImpl.

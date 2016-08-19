@@ -24,7 +24,7 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	private static final long serialVersionUID = 1L;
 
 	private final JTextArea passwordTextArea;
-	private final JTextArea usernameTextArea;
+	private JTextArea usernameTextArea;
 
 	/**
 	 * enumeration for choosing login type.
@@ -57,35 +57,42 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		mainLabel = new JLabel("Esegui l'accesso:");
 		mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		mainLabel.setFont(new Font("Tahoma", Font.BOLD, 40));
-		mainLabel.setBounds(250, 44, 480, 62);
+		mainLabel.setBounds(35, 45, 1233, 62);
 		send = new JButton("Invio");
-		send.setBounds(295, 260, 162, 25);
+		send.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		send.setBounds(512, 295, 313, 45);
 		this.add(send);
 		this.usernameTextArea = new JTextArea();
 		usernameLabel = new JLabel("Username:");
+		usernameLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+
 		passwordLabel = new JLabel("Password:");
+		passwordLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+
+		this.add(passwordLabel);
 		if (type.equals(LoginType.USER)) {
-			passwordLabel.setBounds(250, 193, 76, 34);
-			usernameLabel.setBounds(250, 137, 76, 34);
+			passwordLabel.setBounds(373, 182, 223, 45);
+			usernameLabel.setBounds(373, 124, 223, 45);
 			this.add(usernameLabel);
 			this.usernameTextArea.setRows(1);
-			this.usernameTextArea.setBounds(322, 143, 181, 25);
+			this.usernameTextArea.setBounds(608, 124, 329, 45);
 			this.add(this.usernameTextArea);
 			send.addActionListener(e -> v.sendLogin());
 		} else if (type.equals(LoginType.MANAGER)) {
 			this.usernameTextArea.setVisible(false);
 			passwordLabel = new JLabel("Password di Sistema:");
-			passwordLabel.setBounds(250, 193, 76, 34);
+			passwordLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+			passwordLabel.setBounds(250, 182, 329, 45);
 			send.addActionListener(e -> v.sendManagerLogin());
 		}
-		passwordLabel.setBounds(250, 193, 76, 34);
+
 		this.passwordTextArea = new JTextArea();
 		this.passwordTextArea.setRows(1);
-		this.passwordTextArea.setBounds(322, 199, 181, 25);
+		this.passwordTextArea.setBounds(608, 182, 329, 45);
 		backToSelectAccount = new JButton("Torna alla scelta");
-		backToSelectAccount.addActionListener(e -> v
-				.swapView(CardName.MAIN));
-		backToSelectAccount.setBounds(626, 362, 162, 25);
+		backToSelectAccount.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		backToSelectAccount.addActionListener(e -> v.swapView(CardName.MAIN));
+		backToSelectAccount.setBounds(905, 833, 342, 45);
 		this.setLayout(null);
 		this.add(mainLabel);
 		this.add(passwordLabel);
