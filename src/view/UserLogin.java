@@ -10,21 +10,21 @@ public interface UserLogin {
 	/**
 	 * Method which returns username inserted by user.
 	 *
-	 * @return username
+	 * @return typed username
 	 */
 	String getUserUsername();
 
 	/**
 	 * Method which returns password inserted by user.
 	 *
-	 * @return password
+	 * @return typed password
 	 */
 	String getUserPassword();
 
 	/**
 	 * Method which returns password inserted by manager.
 	 *
-	 * @return managerPassword
+	 * @return typed system password
 	 */
 	String getManagerPassword();
 

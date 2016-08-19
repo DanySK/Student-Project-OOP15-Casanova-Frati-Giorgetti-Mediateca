@@ -15,47 +15,65 @@ import utils.TypeItemInfo;
  */
 public interface ItemScreen {
 	/**
-	 * method which allows to get item info by passing the info type you want.
+	 * Allows to get item info by passing the info type you want.
 	 *
 	 * @param info
-	 * @return
+	 *            info type you want
+	 * @return information requested
 	 */
 	Object getItemInfo(TypeItemInfo info);
 
 	/**
-	 * method which allows to resize image by passing path.
+	 * Allows to resize image by passing path.
 	 *
 	 * @param imagePath
-	 * @return
+	 *            the path of the image you want to resize
+	 * @return ImageIcon of the image
 	 */
 	ImageIcon resizeImage(String imagePath);
 
 	/**
-	 * method which sets common field.
+	 * Sets common field.
 	 *
 	 * @param title
+	 *            the title of item
 	 * @param author
+	 *            the author of item
 	 * @param manifacturer
+	 *            the producer of item
 	 * @param year
+	 *            the year of release of item
 	 * @param genre
+	 *            the genre of item
 	 * @param imagePath
+	 *            the path of item image
 	 * @param language
+	 *            the language of item
 	 */
 	void setCommonField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, Language language);
 
 	/**
-	 * method which sets all film field.
+	 * Sets all film field.
 	 *
 	 * @param title
+	 *            the title of movie
 	 * @param author
+	 *            the author of movie
 	 * @param manifacturer
+	 *            the producer of movie
 	 * @param year
+	 *            the year of release of movie
 	 * @param genre
+	 *            the genre of movie
 	 * @param imagePath
+	 *            the path of movie image
 	 * @param duration
+	 *            the duration of movie
 	 * @param color
+	 *            the color type of movie
 	 * @param language
+	 *            the language of movie
 	 */
 
 	void setFilmField(String title, String author, String manifacturer,
@@ -63,16 +81,24 @@ public interface ItemScreen {
 			TypeColor color, Language language);
 
 	/**
-	 * method which sets all book fields.
+	 * Sets all book fields.
 	 *
 	 * @param title
+	 *            the title of book
 	 * @param author
+	 *            the author of book
 	 * @param manifacturer
+	 *            the producer of book
 	 * @param year
+	 *            the year of release of book
 	 * @param genre
+	 *            the genre of book
 	 * @param imagePath
+	 *            the path of mobookvie image
 	 * @param isbn
+	 *            the isbn code of book
 	 * @param language
+	 *            the language of book
 	 */
 	void setBookField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String isbn,

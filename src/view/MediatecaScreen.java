@@ -8,37 +8,38 @@ package view;
  */
 public interface MediatecaScreen {
 	/**
-	 * method which returns text to search typed by user.
+	 * Returns text to search typed by user.
 	 *
-	 * @return String textToSearch
+	 * @return the text to search
 	 */
 	String getSearchText();
 
 	/**
-	 * method which returns the filter selected by user.
+	 * Returns the filter selected by user.
 	 *
-	 * @return String selectedFilter
+	 * @return the selected Filter
 	 */
 	utils.TypeItemInfo getSearchFilter();
 
 	/**
-	 * method which returns the item type selected by user.
+	 * Returns the item type selected by user.
 	 *
-	 * @return String itemType
+	 * @return the type of item
 	 */
 	utils.TypeItem getItemType();
 
 	/**
-	 * method which returns the string of the item selected from filtered list.
+	 * Returns the item selected from filtered list.
 	 *
-	 * @return selectedItem
+	 * @return the selected item
 	 */
 	String getSelectedItemFromList();
 
 	/**
-	 * method which sets the filter list.
+	 * Sets the filter list.
 	 *
 	 * @param list
+	 *            list filtered by controller
 	 */
 	void setFilteredList(String[] list);
 }

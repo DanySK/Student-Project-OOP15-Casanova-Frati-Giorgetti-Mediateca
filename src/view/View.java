@@ -17,458 +17,536 @@ import controller.Controller;
 public interface View {
 
 	/**
-	 *
-	 * method to invoke at the start of the program. It sets the main frame and
-	 * the starting screen
+	 * Invoke at the start of the program. It sets the main frame and the
+	 * starting screen
 	 */
 	void startView();
 
 	/**
+	 * Return the username typed by user at login.
 	 *
-	 * method which @return the typed Username in login.
+	 * @return username typed by user.
 	 */
 	String getUsername();
 
 	/**
+	 * Return the password typed by user at login.
 	 *
-	 * method which @return the typed Password in login.
+	 * @return password typed by user.
 	 */
 	String getPassword();
 
 	/**
+	 * Return the text typed by user to serach in lists.
 	 *
-	 * method which @return the string user wants to search.
+	 * @return text to search
 	 */
 	String getSearchText();
 
 	/**
+	 * Return the filter for filtering the list showed in Mediateca Screen.
 	 *
-	 * method which @return the filter in which the user wants to search.
+	 * @return TypeItemInfo filter.
 	 */
 	utils.TypeItemInfo getSearchFilter();
 
 	/**
+	 * Return the type of item to filter (Book or Movie).
 	 *
-	 * method which @return the type (Book or Movie) the user wants o search in.
+	 * @return TypeItem type.
 	 */
 	utils.TypeItem getItemFilter();
 
 	/**
-	 * method which returns the score typed by user.
+	 * Returns the score assigned to a review of item, item taked by
+	 * getItemSelectedByUser().
 	 *
-	 * @return score
+	 * @return score assigned to a review
 	 */
 	int getScore();
 
 	/**
-	 *
-	 * method which calls the controller for taking review.
+	 * Calls controller for asking to get review with getScore() e getReview().
 	 */
 	void controllerGetReview();
 
 	/**
-	 * method which returns informations from user registration.
+	 * Multigetter which return all the information typed by user during
+	 * registration.
 	 *
 	 * @param info
-	 * @return
+	 *            the type of info you want to get
+	 * @return information typed by user
 	 */
 	Object getUserRegistration(utils.UserInfo info);
 
 	/**
+	 * Return the system password typed by manager.
 	 *
-	 * method which @return the password typed by manager.
+	 * @return system password typed.
 	 */
 	String getMenagerPassword();
 
 	/**
-	 * method which asks to borrow item.
+	 * Asks controller to borrow item.
 	 *
-	 * @param selectedItem
 	 */
 	void borrowItem();
 
 	/**
-	 * method which asks to give back item.
+	 * Asks controller to give back item.
 	 *
-	 * @param selectedItem
 	 */
 	void giveBackItem();
 
 	/**
-	 * method which asks to review item.
+	 * Asks controller to review item.
 	 *
-	 * @param selectedItem
 	 */
 	void reviewItem();
 
 	/**
-	 * method which asks to put user's like to item.
+	 * Asks controller to put user's like to item.
 	 *
-	 * @param selectedItem
 	 */
 	void likeItem();
 
 	/**
-	 * method which sets the program controller.
+	 * Sets the program controller. Necessary for the program.
 	 *
 	 * @param c
+	 *            the controller name
 	 */
 	void setController(Controller c);
 
 	/**
-	 * method which asks to controller to get login info.
+	 * Asks to controller to get login info.
 	 */
 	void sendLogin();
 
 	/**
-	 * method which told to controller to get modified user info.
+	 * Told controller to get modified user info with getModifiedInfo();.
 	 */
 	void sendUserModify();
 
 	/**
-	 * method which told to controller to set user info.
+	 * Told controller to set user info in screen with setUserModifyInfo();.
 	 */
-
 	void giveMeUserInfo();
 
 	/**
-	 * method which sets in field the user info.
+	 * Sets user inforation in screen.
 	 *
 	 * @param name
+	 *            the user name
 	 * @param surname
+	 *            the user surname
 	 * @param username
+	 *            the user username
 	 * @param password
+	 *            the user password
 	 * @param birthDate
+	 *            the user birthDate
 	 * @param email
+	 *            the user email
 	 * @param telephone
+	 *            the user telephone number
 	 */
 	void setUserModifyField(String name, String surname, String username,
 			String password, String birthDate, String email, String telephone);
 
 	/**
-	 * method which gets info modified by user. Needs a info type passed.
+	 * Gets information by UserScreen. Needs a parameter for the information
+	 * type.
 	 *
 	 * @param info
-	 * @return information
+	 *            the type of info you want
+	 * @return the information requested
 	 */
 	Object getModifiedInfo(UserInfo info);
 
 	/**
-	 * method which allows to switch between cards by passing the card name.
+	 * Allow to change screen by passing the panel name.
 	 *
 	 * @param name
+	 *            panel name present in CardName
 	 */
 	void swapView(CardName name);
 
 	/**
-	 * method which allows to sets the list containin items borrowed by user.
+	 * Sets the list of borrowed item asked with giveMeBorrowList();.
 	 *
 	 * @param borrowedItemsList
+	 *            the list of borrowed item by a user
 	 */
 	void setBorrowedItemList(String[] borrowedItemsList);
 
 	/**
-	 * method which calls controller for setting borrow list.
-	 *
-	 * @return
+	 * Asks controller for setting borrow list.
 	 */
 	void giveMeBorrowList();
 
 	/**
-	 * method which allows to get review typed by user.
+	 * Allows to get review typed by user.
 	 *
-	 * @return review
+	 * @return review typed by user
 	 */
 	String getReview();
 
 	/**
-	 * method which tells controller to take user creation info.
+	 * Tells controller to take user creation info with getUserRegistration().
 	 */
 	void sendUserCreate();
 
 	/**
-	 * method which tells controller to take manager login.
+	 * Tells controller to take manager login with getManagerPassword().
 	 */
 	void sendManagerLogin();
 
 	/**
-	 * method which calls controller for setting filtered list.
+	 * Calls controller for setting list.
 	 */
 	void giveMeFilteredList();
 
 	/**
-	 * method which allows to set filterd list.
+	 * method which allows to set list filtered with filter from
+	 * getSearchFilter, getSearchText(), getItemType().
 	 *
 	 * @param filteredList
+	 *            list filterd with taken filters.
 	 */
 	void setFilteredList(String[] filteredList);
 
 	/**
-	 * method which tells to controller to create an item.
+	 * Tells controller to create an item.
 	 */
 	void sendItemCreate();
 
 	/**
-	 * method which gets item info.
+	 * Gets item info after creation or modify.
 	 *
 	 * @param info
-	 * @return
+	 *            the type of info you want
+	 * @return the information requested
 	 */
 	Object getItemInfo(utils.TypeItemInfo info);
 
 	/**
-	 * method which allows to set book info.
+	 * Sets information of books requested with giveMeItemInfo().
 	 *
 	 * @param title
+	 *            the title of item
 	 * @param author
+	 *            the author of item
 	 * @param manifacturer
+	 *            the producer of item
 	 * @param year
+	 *            the year of release of item
 	 * @param genre
-	 * @param type
+	 *            the genre of item
+	 * @param imagePath
+	 *            the path of item image.
+	 * @param isbn
+	 *            the isbn code of item
 	 * @param language
+	 *            the language of item
 	 */
 	void setBookField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String isbn,
 			Language language);
 
 	/**
-	 * method which allows to set film info.
+	 * Sets information of movies requested with giveMeItemInfo().
 	 *
 	 * @param title
+	 *            the title of item
 	 * @param author
+	 *            the author of item
 	 * @param manifacturer
+	 *            the producer of item
 	 * @param year
+	 *            the year of release of item
 	 * @param genre
+	 *            the genre of item
 	 * @param imagePath
+	 *            the path of item image
 	 * @param duration
+	 *            the duration of item
 	 * @param color
+	 *            the color type of item
+	 * @param language
+	 *            the language of item
 	 */
 	void setFilmField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String duration,
 			TypeColor color, Language language);
 
 	/**
-	 * method which asks to controller item info.
+	 * Asks controller to set item info.
 	 */
 	void giveMeItemInfo();
 
 	/**
-	 * method which tells controller to get item modified info.
+	 * Tells controller to get item modified info.
 	 *
-	 * @return
 	 */
 	void sendItemModify();
 
 	/**
-	 * method which show item info when double-clicked.
+	 * Show item info when double-clicked.
 	 *
 	 * @param type
+	 *            the type of item (book or movie)
 	 */
 	void showItemInfo(utils.TypeItem type);
 
 	/**
-	 * method which sets good login and change screen.
+	 * Sets good login and change screen.
 	 */
 	void goodLogin();
 
 	/**
-	 * method which allows to show error messages.
+	 * Allows to show error messages.
 	 *
 	 * @param errorMessage
+	 *            the error message you want to show
 	 */
 	void showError(String errorMessage);
 
 	/**
-	 * method which ask to take sit.
+	 * Asks controller to take sit.
 	 */
 	void takeSit();
 
 	/**
-	 * method which asks controller the study room status.
+	 * Asks controller to set the study room status.
 	 */
 	void giveMeStudyRoomStatus();
 
 	/**
-	 * method which sets study room current status.
+	 * Sets the status (array of taken sits) in a determined day.
 	 *
 	 * @param status
-	 *
+	 *            array of taken sits
 	 */
 	void setStudyRoomStatus(int[] status);
 
 	/**
-	 * method which show a notification to user.
+	 * Allows to show a notification to user.
 	 *
 	 * @param message
+	 *            the message you want to show
 	 */
 	void showMessage(String message);
 
 	/**
-	 * method which returns the taken sits
+	 * Returns the sit taken by user.
 	 *
-	 * @return
+	 * @return just taken sit
 	 */
 	int getTakenSits();
 
 	/**
-	 * method which returns the day selected in study room.
+	 * Returns the day selected in study room.
 	 *
-	 * @return
+	 * @return selected day
 	 */
 	int getStudyRoomSelectedDay();
 
 	/**
-	 * method which returns the month selected in study room.
+	 * Returns the month selected in study room.
 	 *
-	 * @return
+	 * @return selected month
 	 */
 	int getStudyRoomSelectedMonth();
 
 	/**
-	 * method which returns the year selected in study room.
+	 * Returns the year selected in study room.
 	 *
-	 * @return
+	 * @return selected year
 	 */
 	int getStudyRoomSelectedYear();
 
 	/**
-	 * method which tells to controller to remove a sit.
+	 * Tells controller to remove the sits selected.
 	 */
 	void removeSit();
 
 	/**
-	 * method which asks controller to set SuggestedBooksList.
+	 * Asks controller to set SuggestedBooksList.
 	 */
 	void giveMeSuggestedBooks();
 
 	/**
-	 * method which asks controller to set SuggestedMoviesList.
+	 * Asks controller to set SuggestedMoviesList.
 	 */
 	void giveMeSuggestedMovies();
 
 	/**
-	 * method which asks controller to remove like form an item.
+	 * Asks controller to remove like from an item getted by
+	 * getItemToremoveFromLikeBorrowWish().
 	 */
 	void removeLike();
 
 	/**
-	 * method which asks controller to remove item form wishlist.
+	 * Asks controller to remove from wishlist an item getted by
+	 * getItemToremoveFromLikeBorrowWish().
 	 *
-	 * @return
 	 */
 	void removeFromWishlist();
 
 	/**
-	 * return item to remove from Likelist, Borrowedlist or Wishlist.
+	 * Returns item to remove from Likelist, Borrowedlist or Wishlist.
 	 *
-	 * @return
+	 * @return item to remove
 	 */
 	String getItemToRemoveFromLikeBorrowWish();
 
 	/**
-	 * method which asks controller to set wishlist.
+	 * Asks controller to set wishlist.
 	 */
 	void giveMeWishlist();
 
 	/**
-	 * method which asks controller to set allUserList.
+	 * Asks controller to set allUserList.
 	 */
 	void giveMeUserList();
 
 	/**
-	 * method which asks controller to set allItemList.
+	 * Asks controller to set allItemList.
 	 */
 	void giveMeItemList();
 
 	/**
-	 * method which asks controller to delete selectedUser.
+	 * Asks controller to delete the current user.
 	 */
 	void deleteUser();
 
 	/**
-	 * method which asks controller to delete selectedUser.
+	 * Asks controller to delete getted by getUserItemSelectedByManager().
 	 */
 	void deleteItem();
 
 	/**
-	 * method which returns the item/user delected by manager to be
-	 * deleted/modified/show.
+	 * Returns the item/user selected by manager to be deleted/modified/shown.
 	 *
-	 * @return
+	 * @return selected item by manager
 	 */
 	String getUserItemSelectedByManager();
 
 	/**
-	 * method which starts the screen with user info.
+	 * Starts the screen with user info.
 	 */
 	void showUserInfo();
 
 	/**
-	 * send notification of forced give back for a book.
+	 * Send notification of forced give back for a book.
 	 *
 	 * @param book
+	 *            the book the user have to give back
 	 */
 	void showGiveBackMessage(String book);
 
 	/**
-	 * send notification with options for a book.
+	 * Send notification with options for a book.
 	 *
 	 * @param book
+	 *            the book the user should give back
 	 */
 	void showGiveBackOptionMessage(String book);
 
 	/**
-	 * method which tells to controller to extend borrow.
+	 * Tells controller to extend borrow.
 	 */
 	void extendBorrow();
 
 	/**
-	 * method which sets the wishlist.
+	 * Sets the wishlist.
 	 *
 	 * @param list
+	 *            the list of item liked by user.
 	 */
 	void setWishlist(String[] list);
 
 	/**
-	 * method which sets the list of all users.
+	 * Sets the list of all users.
 	 *
 	 * @param list
+	 *            the list of all users.
 	 */
 	void setUserList(String[] list);
 
 	/**
-	 * method which sets the list of all item.
+	 * Sets the list of all item.
 	 *
 	 * @param list
+	 *            the list of all item.
 	 */
 	void setItemList(String[] list);
 
 	/**
-	 * method which sets Suggested Books list.
+	 * Sets Suggested Books list.
 	 *
 	 * @param bList
+	 *            the list of book suggested
 	 */
 	void setSuggestedBooks(String[] bList);
 
 	/**
-	 * method which sets Suggested Movies list.
+	 * Sets Suggested Movies list.
 	 *
 	 * @param mList
+	 *            the list of movie suggested
 	 */
 	void setSuggestedMovies(String[] mList);
 
 	/**
-	 * method which get item to delete or modify.
+	 * Get item to delete or modify.
 	 *
-	 * @return
+	 * @return item to remove or modify
 	 */
 	String getItemToRemoveModify();
 
 	/**
-	 * method which returns the item selected by user in mediateca.
+	 * Returns the item selected by user in Mediateca.
 	 *
-	 * @return
+	 * @return selected item
 	 */
 	String getItemSelectedByUser();
+
+	/**
+	 * Returns the sit to remove.
+	 *
+	 * @return the sits selected
+	 */
+	String getSelectedSit();
+
+	/**
+	 * Tells controller to sets the list of item borrowed by user.
+	 */
+	void giveManagerBorrowList();
+
+	/**
+	 * Sets the list of item borrowed by user taken with
+	 * getUserItemSelectedByManager().
+	 *
+	 * @param borrowedList
+	 *            the list of item borrowed by selected user
+	 */
+	void setManagerBorrowList(String[] borrowedList);
+
+	/**
+	 * Asks controller to sets all reviews of item getted from
+	 * getItemSelectedByUser().
+	 */
+	void giveMeAllItemReviews();
+
+	/**
+	 * Sets the reviews list of item.
+	 *
+	 * @param reviewsList
+	 *            the list of reviews of selected item
+	 */
+	void setItemReviewsList(String[] reviewsList);
 
 }

@@ -122,6 +122,14 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		seeWishlist.addActionListener(arg0 -> {
 		});
 		this.add(seeWishlist);
+
+		JButton reviews = new JButton("Recensioni");
+		reviews.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		reviews.setBounds(586, 390, 178, 27);
+		this.add(reviews);
+		reviews.addActionListener(e -> {
+			v.swapView(CardName.ALL_REVIEWS);
+		});
 		borrowItem.addActionListener(e -> v.borrowItem());
 		likeItem.addActionListener(e -> v.likeItem());
 		review.addActionListener(e -> {

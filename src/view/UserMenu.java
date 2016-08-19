@@ -1,17 +1,25 @@
 package view;
 
+/**
+ * interface for user menu.
+ * 
+ * @author Luca Giorgetti
+ *
+ */
 public interface UserMenu {
 	/**
-	 * method which allows to set Suggested books list.
+	 * Allows to set Suggested books list.
 	 *
 	 * @param bList
+	 *            list of suggested books
 	 */
 	void setSuggestedBooks(String[] bList);
 
 	/**
-	 * method which allows to set Suggested movies list.
+	 * Allows to set Suggested movies list.
 	 *
 	 * @param mList
+	 *            list of suggested movies
 	 */
 	void setSuggestedMovies(String[] mList);
 

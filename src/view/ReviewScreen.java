@@ -9,17 +9,16 @@ package view;
 
 public interface ReviewScreen {
 	/**
-	 * method which returns the score typed by user.
+	 * Returns the score typed by user.
 	 *
-	 * @param scoreGroup
-	 * @return int
+	 * @return the selected score
 	 */
 	int getSelectedScore();
 
 	/**
-	 * method which returns the review typed by user.
+	 * Returns the review typed by user.
 	 *
-	 * @return
+	 * @return the review typed
 	 */
 	String getReview();
 }

@@ -1,52 +1,60 @@
 package view;
 
+/**
+ * Interface for Study Room.
+ * 
+ * @author Luca Giorgetti
+ *
+ */
 public interface StudyRoom {
 	/**
-	 * return the taken sit.
+	 * Return the taken sit.
 	 *
-	 * @return
+	 * @return the taken sit
 	 */
 	int getTakenSit();
 
 	/**
-	 * method which sets the current study room status (occupied sits).
+	 * Sets the current study room status (occupied sits).
 	 *
 	 * @param status
+	 *            array of occupied sits
 	 */
 	void setStudyRoomStatus(int[] status);
 
 	/**
-	 * method which return the selected day.
+	 * Returns the selected day.
 	 *
-	 * @return
+	 * @return the selected day
 	 */
 	int getDateDay();
 
 	/**
-	 * method which return the selected day.
+	 * Returns the selected month.
 	 *
-	 * @return
+	 * @return the selected month
 	 */
 	int getDateMonth();
 
 	/**
-	 * method which return the selected day.
+	 * Returns the selected day.
 	 *
-	 * @return
+	 * @return the selected year
 	 */
 	int getDateYear();
 
 	/**
-	 * method which sets the list of taken sits.
+	 * Sets the list of taken sits.
 	 *
 	 * @param list
+	 *            list of occupied sits
 	 */
 	void setTakenSitsList(String[] list);
 
 	/**
-	 * method which return the selected value in JustTakenSitsList.
+	 * Returns the selected value in just taken sits list.
 	 *
-	 * @return
+	 * @return selected sit
 	 */
 	String getSelectedSit();
 

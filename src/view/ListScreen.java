@@ -7,24 +7,34 @@ package view;
  */
 public interface ListScreen {
 	/**
-	 * method which sets the borrowed list taken by controller.
+	 * Sets the borrowed list taken by controller.
 	 *
 	 * @param bList
+	 *            list of borrowed item
 	 */
 	void setBorrowedList(String[] bList);
 
 	/**
-	 * method which sets the like list taken by controller.
+	 * Sets the like list taken by controller.
 	 *
-	 * @param whishlist
+	 * @param wishlist
+	 *            list of liked item
 	 */
 	void setWishlist(String[] wishlist);
 
 	/**
-	 * return selected item.
+	 * Returns selected item.
 	 *
-	 * @return
+	 * @return selected item from list
 	 */
 	String getSelectedItem();
+
+	/**
+	 * Sets the reviews list taken by controller.
+	 *
+	 * @param reviewsList
+	 *            the list of reviews
+	 */
+	void setReviewslist(String[] reviewsList);
 
 }

@@ -35,7 +35,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		/**
 		 *
 		 */
-		BORROWED, WISH
+		BORROWED, WISH, REVIEWS
 	}
 
 	/**
@@ -65,6 +65,11 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 				remove.addActionListener(e -> v.removeFromWishlist());
 				remove.setText("Rimuovi da Wishlist");
 				v.giveMeWishlist();
+			} else if (i.equals(ListScreenType.REVIEWS)) {
+				this.presentation = new JLabel("Ecco tutte le recensioni");
+				remove.setVisible(false);
+				v.giveMeAllItemReviews();
+
 			}
 		}
 
@@ -101,6 +106,11 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	@Override
 	public void setWishlist(final String[] wishlist) {
 		this.list = new JList<String>(wishlist);
+	}
+
+	@Override
+	public void setReviewslist(final String[] reviewsList) {
+		this.list = new JList<String>(reviewsList);
 	}
 
 	@Override

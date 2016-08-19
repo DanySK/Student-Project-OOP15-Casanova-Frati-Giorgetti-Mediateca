@@ -8,24 +8,34 @@ package view;
  */
 public interface ManagerScreen {
 	/**
-	 * method which allow to set the list of all user.
+	 * Allow to set the list of all user.
 	 *
 	 * @param userList
+	 *            the lst of all user
 	 */
 	void setUserList(String[] userList);
 
 	/**
-	 * method which allow to set the list of all item.
+	 * Allow to set the list of all item.
 	 *
 	 * @param itemList
+	 *            the list of all itemm
 	 */
 	void setItemList(String[] itemList);
 
 	/**
 	 * method which allows to get the selected User/Item.
 	 *
-	 * @return
+	 * @return selected item/user by manager
 	 */
 	String getSelected();
+
+	/**
+	 * Sets the list of item borrowed by user.
+	 *
+	 * @param borrowedList
+	 *            list of item borrowed by user
+	 */
+	void setUserBorrowedList(String[] borrowedList);
 
 }
