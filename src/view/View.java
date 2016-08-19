@@ -476,4 +476,11 @@ public interface View {
 	 */
 	String getItemToRemoveModify();
 
+	/**
+	 * method which returns the item selected by user in mediateca.
+	 * 
+	 * @return
+	 */
+	String getItemSelectedByUser();
+
 }

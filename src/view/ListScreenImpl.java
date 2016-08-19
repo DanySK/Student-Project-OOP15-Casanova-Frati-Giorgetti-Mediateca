@@ -24,7 +24,6 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 	private JLabel presentation;
 	private JList<String> list = new JList<String>();
-	private JButton exit_1;
 
 	/**
 	 * Enumeration with types of list which can be showed.
@@ -79,13 +78,13 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		this.list.setBounds(173, 76, 898, 528);
 		this.add(this.list);
 
-		this.exit_1 = new JButton("Esci");
-		this.exit_1.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		this.exit_1.setBounds(1054, 810, 166, 70);
-		this.add(this.exit_1);
+		exit = new JButton("Esci");
+		exit.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		exit.setBounds(1054, 810, 166, 70);
+		this.add(exit);
 		remove.setBounds(411, 617, 464, 46);
 		this.add(remove);
-		this.exit_1.addActionListener(e -> {
+		exit.addActionListener(e -> {
 			v.swapView(CardName.ITEM);
 		});
 
