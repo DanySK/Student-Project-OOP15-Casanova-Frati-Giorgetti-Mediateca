@@ -48,6 +48,8 @@ public class ViewImpl implements View {
 	private JPanel card10;
 	private JPanel card11;
 	private JPanel card12;
+	private JPanel card13;
+	private JPanel card14;
 
 	private JFrame mainFrame = new JFrame();
 
@@ -77,7 +79,8 @@ public class ViewImpl implements View {
 								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
 										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
 												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-														"Study Room Card"), WISHLIST("Wishlist Card");
+														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
+																"Item Modify Card");
 
 		private final String name;
 
@@ -122,7 +125,9 @@ public class ViewImpl implements View {
 		this.card11 = new StudyRoomImpl(this, ViewImpl.STUDY_ROOM_SITS);
 		this.card12 = new ListScreenImpl(this, ViewImpl.SCREEN_LENGHT,
 				ViewImpl.SCREEN_WIDTH, ListScreenType.WISH);
-
+		this.card13 = new ItemScreenImpl(this, ItemScreenType.MODIFY,
+				ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
+		this.card14 = new ManagerScreenImpl(this);
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.mainFrame.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.mainFrame.setResizable(false);
@@ -171,6 +176,8 @@ public class ViewImpl implements View {
 		ViewImpl.CONTAINER.add(this.card10, CardName.ITEM_CREATE.toString());
 		ViewImpl.CONTAINER.add(this.card11, CardName.STUDY_ROOM.toString());
 		ViewImpl.CONTAINER.add(this.card12, CardName.WISHLIST.toString());
+		ViewImpl.CONTAINER.add(this.card13, CardName.ITEM_MODIFY.toString());
+		ViewImpl.CONTAINER.add(this.card14, CardName.MANAGER_MENU.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));
@@ -508,5 +515,40 @@ public class ViewImpl implements View {
 	public void giveMeWishlist() {
 		// c.wishlist();
 
+	}
+
+	@Override
+	public void giveMeUserList() {
+		// c.setAllUserList();
+
+	}
+
+	@Override
+	public void giveMeItemList() {
+		// c.setAllItemList();
+
+	}
+
+	@Override
+	public void deleteUser() {
+		// c.deleteUser;
+
+	}
+
+	@Override
+	public void deleteItem() {
+		// c.deleteItem();
+
+	}
+
+	@Override
+	public String getUserItemSelectedByManager() {
+		return ((ManagerScreenImpl) this.card14).getSelected();
+	}
+
+	@Override
+	public void showUserInfo() {
+		UserShow userScreen = new UserShowImpl();
+		userScreen.startUserShow(this);
 	}
 }

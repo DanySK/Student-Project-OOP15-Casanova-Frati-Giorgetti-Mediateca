@@ -8,7 +8,7 @@ import javax.swing.JFormattedTextField.AbstractFormatter;
 
 /**
  * Class which set the date formattation.
- * 
+ *
  * @author Luca Giorgetti
  *
  */
@@ -18,8 +18,8 @@ public class DateLabelFormatter extends AbstractFormatter {
 	 *
 	 */
 	private static final long serialVersionUID = -8832972662884810321L;
-	private String datePattern = "dd-MM-yyyy";
-	private SimpleDateFormat dateFormatter = new SimpleDateFormat(
+	final String datePattern = "dd-MM-yyyy";
+	private final SimpleDateFormat dateFormatter = new SimpleDateFormat(
 			this.datePattern);
 
 	@Override
@@ -30,7 +30,7 @@ public class DateLabelFormatter extends AbstractFormatter {
 	@Override
 	public String valueToString(final Object value) throws ParseException {
 		if (value != null) {
-			Calendar cal = (Calendar) value;
+			final Calendar cal = (Calendar) value;
 			return this.dateFormatter.format(cal.getTime());
 		}
 

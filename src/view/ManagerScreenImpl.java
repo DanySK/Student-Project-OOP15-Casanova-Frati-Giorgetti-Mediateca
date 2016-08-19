@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JList;
 import javax.swing.JPanel;
 
 import view.ViewImpl.CardName;
@@ -14,15 +15,29 @@ import view.ViewImpl.CardName;
 public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 	private static final long serialVersionUID = 1L;
+	JList<String> list;
+	TypeList type;
+
+	/**
+	 * Enum for the type of llist can be.
+	 *
+	 * @author Luca Giorgetti
+	 *
+	 */
+	public enum TypeList {
+		ITEM, USER;
+	}
 
 	/**
 	 * Builder for ManagerScreenImpl.
 	 */
+
 	public ManagerScreenImpl(final View v) {
+
 		this.setSize(1280, 920);
 		this.setLayout(null);
 
-		JButton modifyItem = new JButton("Modifica Oggetto");
+		JButton modifyItem = new JButton("Modifica");
 		modifyItem.setBounds(847, 115, 147, 25);
 		this.add(modifyItem);
 
@@ -32,10 +47,66 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		newItem.setBounds(847, 77, 147, 25);
 		this.add(newItem);
 
-		JButton deleteItem = new JButton("Elimina Oggetto");
-		deleteItem.setBounds(847, 153, 147, 25);
-		this.add(deleteItem);
+		JButton showUserList = new JButton("Lista Utenti");
+		showUserList.setBounds(847, 186, 147, 25);
+		this.add(showUserList);
+		showUserList.addActionListener(e -> {
+			v.giveMeUserList();
+			this.type = TypeList.USER;
+		});
+
+		JButton showItemList = new JButton("Lista Oggetti");
+		showItemList.setBounds(847, 224, 147, 25);
+		this.add(showItemList);
+		showItemList.addActionListener(e -> {
+			v.giveMeItemList();
+			this.type = TypeList.ITEM;
+		});
+
+		JButton delete = new JButton("Elimina");
+		JButton modify = new JButton("Modifica");
+		delete.setBounds(847, 153, 147, 25);
+		this.add(delete);
+		modify.setBounds(847, 115, 147, 25);
+		this.add(modify);
+		if (this.type.equals(TypeList.USER)) {
+			delete.addActionListener(e -> {
+				v.deleteUser();
+			});
+			modify.addActionListener(e -> {
+				v.swapView(CardName.USER_MODIFY);
+			});
+		} else if (this.type.equals(TypeList.ITEM)) {
+			delete.addActionListener(e -> {
+				v.deleteItem();
+			});
+			modify.addActionListener(e -> {
+				v.swapView(CardName.ITEM_MODIFY);
+			});
+
+		}
+
+		this.list.setBounds(114, 877, 523, -782);
+		this.add(this.list);
+
+		JButton exit = new JButton("Esci");
+		exit.setBounds(847, 262, 147, 25);
+		this.add(exit);
 
 		newItem.addActionListener(e -> v.swapView(CardName.ITEM_CREATE));
+
 	}
+
+	public void setUserList(final String[] userList) {
+		this.list = new JList<String>(userList);
+	}
+
+	public void setItemList(final String[] itemList) {
+		this.list = new JList<String>(itemList);
+	}
+
+	public String getSelected() {
+		return this.list.getSelectedValue();
+	}
+
 }

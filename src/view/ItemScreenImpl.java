@@ -26,19 +26,19 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 	private static final long serialVersionUID = 1L;
 
-	private JTextField titleF;
-	private JTextField authorF;
-	private JTextField manifacturerF;
+	private final JTextField titleF;
+	private final JTextField authorF;
+	private final JTextField manifacturerF;
 	private JComboBox<?> genreF = new JComboBox(utils.ItemGenre.values());
 	private JComboBox<?> languageF = new JComboBox(utils.Language.values());
-	private JTextField yearF;
+	private final JTextField yearF;
 	private String imagePath;
-	private JFileChooser imageChoose = new JFileChooser();
+	private final JFileChooser imageChoose = new JFileChooser();
 	private JComboBox<?> itemTypeF = new JComboBox(utils.TypeItem.values());
-	private JLabel imageSpace;
-	private JTextField durationF;
+	private final JLabel imageSpace;
+	private final JTextField durationF;
 	private JComboBox<?> colorF = new JComboBox(utils.TypeColor.values());
-	private JTextField isbnF;
+	private final JTextField isbnF;
 
 	public int imageLenght = 140;
 	public int imageWidth = 100;
@@ -133,12 +133,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		browse.addActionListener(e -> {
 			this.imageChoose.setCurrentDirectory(new File(System
 					.getProperty("user.home")));
-			FileNameExtensionFilter filter = new FileNameExtensionFilter(
+			final FileNameExtensionFilter filter = new FileNameExtensionFilter(
 					"*.images", "jpg", "gif", "png");
 			this.imageChoose.addChoosableFileFilter(filter);
-			int result = this.imageChoose.showSaveDialog(null);
+			final int result = this.imageChoose.showSaveDialog(null);
 			if (result == JFileChooser.APPROVE_OPTION) {
-				File selectedImage = this.imageChoose.getSelectedFile();
+				final File selectedImage = this.imageChoose.getSelectedFile();
 				this.imagePath = selectedImage.getAbsolutePath();
 				this.imageSpace.setIcon(this.resizeImage(this.imagePath));
 			} else if (result == JFileChooser.CANCEL_OPTION) {
@@ -190,29 +190,29 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			send.addActionListener(e -> v.sendItemModify());
 		}
 		this.itemTypeF
-		.addActionListener(e -> {
-			if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
-				this.colorF.setEnabled(false);
-				this.colorF.setVisible(false);
-				this.durationF.setEnabled(false);
-				this.durationF.setVisible(false);
-				durationL.setVisible(false);
-				this.isbnF.setEnabled(true);
-				this.isbnF.setVisible(true);
-				isbnL.setVisible(true);
+				.addActionListener(e -> {
+					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+						this.colorF.setEnabled(false);
+						this.colorF.setVisible(false);
+						this.durationF.setEnabled(false);
+						this.durationF.setVisible(false);
+						durationL.setVisible(false);
+						this.isbnF.setEnabled(true);
+						this.isbnF.setVisible(true);
+						isbnL.setVisible(true);
 
-			} else if (this.itemTypeF.getSelectedItem().equals(
-					TypeItem.MOVIE)) {
-				this.colorF.setEnabled(true);
-				this.colorF.setVisible(true);
-				this.durationF.setEnabled(true);
-				this.durationF.setVisible(true);
-				durationL.setVisible(true);
-				this.isbnF.setEnabled(false);
-				this.isbnF.setVisible(false);
-				isbnL.setVisible(false);
-			}
-		});
+					} else if (this.itemTypeF.getSelectedItem().equals(
+							TypeItem.MOVIE)) {
+						this.colorF.setEnabled(true);
+						this.colorF.setVisible(true);
+						this.durationF.setEnabled(true);
+						this.durationF.setVisible(true);
+						durationL.setVisible(true);
+						this.isbnF.setEnabled(false);
+						this.isbnF.setVisible(false);
+						isbnL.setVisible(false);
+					}
+				});
 		presentation.setBounds(104, 11, 181, 16);
 		this.add(presentation);
 
@@ -285,34 +285,32 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 	@Override
 	public Object getItemInfo(final utils.TypeItemInfo info) {
-		for (utils.TypeItemInfo i : utils.TypeItemInfo.values()) {
-			switch (info) {
-			case TITLE:
-				return this.titleF.getText();
-			case AUTHOR:
-				return this.authorF.getText();
-			case PRODUCER:
-				return this.manifacturerF.getText();
-			case RELEASE_YEAR:
-				return this.yearF.getText();
-			case GENRE:
-				return this.genreF.getSelectedItem();
-			case TYPE:
-				return this.itemTypeF.getSelectedObjects();
-			case IMAGE:
-				return this.imagePath;
-			case DURATION:
-				return this.durationF.getText();
-			case COLOR:
-				return this.colorF.getSelectedItem();
-			case ISBN:
-				return this.isbnF.getText();
-			case LANGUAGE:
-				return this.languageF.getSelectedItem();
-			default:
-				break;
+		switch (info) {
+		case TITLE:
+			return this.titleF.getText();
+		case AUTHOR:
+			return this.authorF.getText();
+		case PRODUCER:
+			return this.manifacturerF.getText();
+		case RELEASE_YEAR:
+			return this.yearF.getText();
+		case GENRE:
+			return this.genreF.getSelectedItem();
+		case TYPE:
+			return this.itemTypeF.getSelectedObjects();
+		case IMAGE:
+			return this.imagePath;
+		case DURATION:
+			return this.durationF.getText();
+		case COLOR:
+			return this.colorF.getSelectedItem();
+		case ISBN:
+			return this.isbnF.getText();
+		case LANGUAGE:
+			return this.languageF.getSelectedItem();
+		default:
+			break;
 
-			}
 		}
 		return null;
 	}

@@ -387,4 +387,37 @@ public interface View {
 	 */
 	void giveMeWishlist();
 
+	/**
+	 * method which asks controller to set allUserList.
+	 */
+	void giveMeUserList();
+
+	/**
+	 * method which asks controller to set allItemList.
+	 */
+	void giveMeItemList();
+
+	/**
+	 * method which asks controller to delete selectedUser.
+	 */
+	void deleteUser();
+
+	/**
+	 * method which asks controller to delete selectedUser.
+	 */
+	void deleteItem();
+
+	/**
+	 * method which returns the item/user delected by manager to be
+	 * deleted/modified/show.
+	 *
+	 * @return
+	 */
+	String getUserItemSelectedByManager();
+
+	/**
+	 * method which starts the screen with user info.
+	 */
+	void showUserInfo();
+
 }
