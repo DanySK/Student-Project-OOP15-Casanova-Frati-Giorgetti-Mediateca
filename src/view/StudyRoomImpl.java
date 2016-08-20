@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionListener;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -80,24 +79,14 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		southPanel.setLayout(null);
 		this.takenSitsList.setBounds(12, 110, 605, -103);
 		southPanel.add(this.takenSitsList);
-		int a;
-		int i;
-		ActionListener listener = e -> {
-			for (i = 1; i <= 50; i++) {
-				if (e.getSource() == this.buttons[i]) {
-					// this.takenSit = i;
-					v.takeSit();
-					this.buttons[this.takenSit].setBackground(Color.RED);
-					this.buttons[this.takenSit].setText("Mine");
-					v.giveMeStudyRoomStatus();
-				}
-			}
 
-		};
+		int i;
 
 		for (i = 1; i <= 50; i++) {
 			this.buttons[i] = new JButton(String.valueOf(i));
-			this.buttons[i].addActionListener(listener);
+			this.buttons[i].addActionListener(e -> {
+				this.takenSit = (int) e.getSource();
+			});
 			this.buttons[i].setBackground(Color.GREEN);
 			this.buttons[i].setSize(80, 80);
 			this.buttons[i].setFont(new Font("Tahoma", Font.PLAIN,
