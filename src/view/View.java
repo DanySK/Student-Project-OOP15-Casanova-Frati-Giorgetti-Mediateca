@@ -561,4 +561,12 @@ public interface View {
 	 */
 	void setItemReviewsList(String[] reviewsList);
 
+	/**
+	 * Tell to controller to give back selected item.
+	 *
+	 * @param item
+	 *            item you have to give back
+	 */
+	void giveBackItemAfterNotify(String item);
+
 }

@@ -96,12 +96,12 @@ public class ViewImpl implements View {
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-						"LikeList Screen Card"), BORROWED_LIST(
-								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
-																"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
+				"LikeList Screen Card"), BORROWED_LIST(
+				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+				"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
+				"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
 
 		private final String name;
 
@@ -595,10 +595,10 @@ public class ViewImpl implements View {
 	public void showGiveBackOptionMessage(final String book) {
 		// Custom button text
 		final Object[] options = { "Consegna",
-		"Aumenta il prestito di un altro mese" };
+				"Aumenta il prestito di un altro mese" };
 		int choose = JOptionPane.showOptionDialog(this.mainFrame,
 				"Dovresti consegare il seguente libro:" + book
-						+ "Cosa vuoi fare?", "Notifica di consegna",
+				+ "Cosa vuoi fare?", "Notifica di consegna",
 				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
 		if (choose == 0) {
@@ -616,6 +616,8 @@ public class ViewImpl implements View {
 
 	}
 
+	// //OK
+
 	@Override
 	public void showGiveBackMessage(final String book) {
 
@@ -625,26 +627,31 @@ public class ViewImpl implements View {
 
 	}
 
+	// //OK
 	@Override
 	public void setUserList(final String[] list) {
 		((ManagerScreenImpl) this.card12).setUserList(list);
 	}
 
+	// //OK
 	@Override
 	public void setItemList(final String[] list) {
 		((ManagerScreenImpl) this.card12).setItemList(list);
 	}
 
+	// //OK
 	@Override
 	public String getItemToRemoveModify() {
 		return ((ManagerScreenImpl) this.card12).getSelected();
 	}
 
+	// //OK
 	@Override
 	public String getItemSelectedByUser() {
 		return ((MediatecaScreenImpl) this.card3).getSelectedItemFromList();
 	}
 
+	// //OK
 	@Override
 	public String getSelectedSit() {
 		return ((StudyRoomImpl) this.card11).getSelectedSit();
@@ -671,5 +678,10 @@ public class ViewImpl implements View {
 	@Override
 	public void setItemReviewsList(final String[] reviewsList) {
 		((ListScreenImpl) this.card14).setReviewslist(reviewsList);
+	}
+
+	@Override
+	public void giveBackItemAfterNotify(final String item) {
+		// c.giveBack(item);
 	}
 }
