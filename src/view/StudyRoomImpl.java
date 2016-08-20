@@ -34,7 +34,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	private final JButton[] buttons;
 	private JDatePickerImpl datePicker;
 	private UtilDateModel model = new UtilDateModel();
-	JList<String> takenSitsList = new JList<String>();
+	private JList<String> takenSitsList = new JList<String>();
 	private SpringLayout springLayout = new SpringLayout();
 
 	/**
@@ -79,7 +79,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		northPanel.add(this.datePicker);
 
 		southPanel.setLayout(null);
-		this.takenSitsList.setBounds(12, 110, 605, -86);
+		this.takenSitsList.setBounds(12, 110, 605, -103);
 		southPanel.add(this.takenSitsList);
 
 		final ActionListener listener = e -> {
@@ -92,11 +92,13 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 			}
 		};
 
-		for (i = 0; i < 50; i++) {
+		for (i = 1; i <= 50; i++) {
 			this.buttons[i] = new JButton(String.valueOf(i));
 			this.buttons[i].addActionListener(listener);
 			this.buttons[i].setBackground(Color.GREEN);
-			this.buttons[i].setSize(40, 40);
+			this.buttons[i].setSize(80, 80);
+			this.buttons[i].setFont(new Font("Tahoma", Font.PLAIN,
+					ViewImpl.FONT_SIZE));
 			centerPanel.add(this.buttons[i]);
 		}
 		v.giveMeStudyRoomStatus();
@@ -104,7 +106,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		this.setLayout(null);
 		this.add(southPanel);
 		JButton remove = new JButton("Rimuovi");
-		remove.setBounds(639, 50, 121, 39);
+		remove.setBounds(667, 28, 121, 39);
 		southPanel.add(remove);
 		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		remove.addActionListener(e -> v.removeSit());
