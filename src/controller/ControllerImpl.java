@@ -15,6 +15,7 @@ import model.ModelImpl;
 import model.Pair;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
+import model.item.ReviewImpl;
 import model.user.User;
 import model.user.UserImpl;
 import utils.ItemGenre;
@@ -223,7 +224,7 @@ public class ControllerImpl implements Controller {
 			int index = 0;
 
 			for (Integer i : this.m.getItemBorrowed(this.actualUser.getIdUser())) {
-				array[index] = this.m.getRequiredItem(i).toString();
+				array[index] = this.m.getItemArchive().get(i).getFirst().toString();
 				index++;
 			}
 			this.v.setBorrowedItemList(array);
@@ -231,6 +232,86 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore ritrovamento oggetto prestato");
 		}
+	}
+
+	public void borrowItem() {
+		// DA FARE
+		// oggetto da prenotare
+		item id = this.v.getItemSelectedByUser(); // viene da lista oggetti
+													// filtrati
+		this.m.borrowItem(itemId, this.actualUser.getIdUser());
+	}
+
+	public void userModify() {
+		// for per ogni tipo di userinfo e fare changeUser totale
+		for (UserInfo ui : UserInfo.values()) {
+			try {
+				this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				this.v.showError("Errore nell'UserInfo");
+			}
+		}
+	}
+
+	public void itemModify() {
+		// getItemToRemoveModify ottiene la stringa da setAllItemList!!!
+		Integer itemId = null;
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemToRemoveModify())) {
+				itemId = i;
+			}
+		}
+		for (TypeItemInfo ti : TypeItemInfo.values()) {
+			try {
+				switch (ti) {
+				case TITLE:
+					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					break;
+				case RELEASE_YEAR:
+					this.m.changeItem(ti, itemId, (int) this.v.getItemInfo(ti));
+					break;
+				case AUTHOR:
+					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					break;
+				case LANGUAGE:
+					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					break;
+				case GENRE:
+					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					break;
+				case PRODUCER:
+					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					break;
+				default:
+					break;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				this.v.showError("Errore nell'TypeItemInfo o itemId");
+			}
+		}
+	}
+
+	public void setItemInfo() {
+		item id = this.v.getItemSelectedByUser();
+		// determinare il tipo book o movie in base all'id
+		this.v.setBookField(title, author, manifacturer, year, genre, imagePath, isbn, language, copies, release);
+		this.v.setFilmField(title, author, manifacturer, year, genre, imagePath, duration, color, language, copies,
+				release);
+	}
+
+	public void suggestedbook(){
+		// stampa 3 libri di 3 preferenze
+		this.m.getUserArchive().get(this.actualUser.getIdUser()).getBookPreferences()
+		this.v.setSuggestedBooks();
+	}
+
+	public void suggestedfilm() {
+		this.m.getUserArchive().get(this.actualUser.getIdUser()).getMoviePreferences();
+		// controllare ogni oggetto di quel genere e fare la media recensioni,
+		// questo per i 3 generi preferiti dall'utente
+		this.v.setSuggestedFilms(bList);
 	}
 
 	@Override
@@ -347,6 +428,17 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	public void giveBackItemSelectedByUser() {
+		this.giveBackItem(this.v.getItemSelectedByUser());
+	}
+
+	public void settakensitslist() {
+		for (GregorianCalendar gc : this.m.getStudyRoom().keySet()) {
+
+		}
+		// ritorna array di stringhe che mostra data e posto occupati
+	}
+
 	@Override
 	public void takeSit() {
 		GregorianCalendar day = new GregorianCalendar();
@@ -362,9 +454,11 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void cancelSit() {
-		GregorianCalendar day = new GregorianCalendar();
-		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
-				this.v.getStudyRoomSelectedDay());
+
+		this.v.getSelectedSit(); // convertire per ottenere nel posto da
+									// cancellare e il giorno
+		// mi ritorna un pair con posto, giorno e devo fare il cast inverso
+
 		try {
 			this.m.cancelSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
 		} catch (Exception e) {
@@ -484,7 +578,23 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void extendBorrow() {
+		// fai comparire solo uan finestra che dice che è stato esteso
 
+		// se block user è true, manda la schermata solo per restituire
+		this.v.showGiveBackMessage(book);
+	}
+
+	public void allItemReviews() {
+		this.v.getItemSelectedByUser(); // lista di oggetti filtrati
+		String[] array = new String[this.m.getAllItemReview(null).size()];
+		int index = 0;
+		for (ReviewImpl r : this.m.getAllItemReview(itemId)) {
+			array[index] = r.toString();
+			// aggiungere anche get vote?
+			index++;
+
+		}
+		this.v.setItemReviewsList(array);
 	}
 
 	@Override
