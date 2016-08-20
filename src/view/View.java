@@ -583,7 +583,7 @@ public interface View {
 
 	/**
 	 * Allows to set the list of just taken sits.
-	 * 
+	 *
 	 * @param sitslist
 	 *            the list of sits just tken by user
 	 */

@@ -717,4 +717,5 @@ public class ViewImpl implements View {
 	public void setTakenSitsList(final String[] sitslist) {
 		((StudyRoomImpl) this.card11).setTakenSitsList(sitslist);
 	}
+
 }
