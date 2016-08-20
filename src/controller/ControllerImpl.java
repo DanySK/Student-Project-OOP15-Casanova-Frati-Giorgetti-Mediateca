@@ -2,6 +2,7 @@ package controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -34,8 +35,9 @@ import view.ViewImpl;
 public class ControllerImpl implements Controller {
 	private View v;
 	private Model m;
-	// after the login, the corrispondent user will be saved here
+	// after the login, the corrispondent user will be saved here...
 	private UserImpl actualUser;
+	// ...and its LoanArchive will be saved here
 	private Map<Integer, Pair<Boolean, Optional<Integer>>> actualLoanArchive;
 
 	// constants for I/O
@@ -44,12 +46,6 @@ public class ControllerImpl implements Controller {
 	private static final String FILENAMESTUDYROOM = "archivio.aulastudio";
 
 	private FileManager fm = new FileManager();
-
-	/*
-	 * template per i futuri getter
-	 *
-	 * public void getValore(){ view.setValore("valore"); }
-	 */
 
 	/**
 	 * Constructor for ControllerImpl.
@@ -248,10 +244,14 @@ public class ControllerImpl implements Controller {
 		String password = (String) this.v.getUserRegistration(UserInfo.PASSWORD);
 		String email = (String) this.v.getUserRegistration(UserInfo.EMAIL);
 		String telephoneNumber = (String) this.v.getUserRegistration(UserInfo.TELEPHONE_NUMBER);
-		List<ItemGenre> bookList = new ArrayList<>(); // METTERE I GET DELLA
-														// VIEW
-		List<ItemGenre> movieList = new ArrayList<>(); // METTERE I GET DELLA
-														// VIEW
+		ItemGenre bookPref1 = (ItemGenre) this.v.getUserRegistration(UserInfo.BOOK_PREF1);
+		ItemGenre bookPref2 = (ItemGenre) this.v.getUserRegistration(UserInfo.BOOK_PREF2);
+		ItemGenre bookPref3 = (ItemGenre) this.v.getUserRegistration(UserInfo.BOOK_PREF3);
+		List<ItemGenre> bookList = new ArrayList<>(Arrays.asList(bookPref1, bookPref2, bookPref3));
+		ItemGenre moviePref1 = (ItemGenre) this.v.getUserRegistration(UserInfo.FILM_PREF1);
+		ItemGenre moviePref2 = (ItemGenre) this.v.getUserRegistration(UserInfo.FILM_PREF2);
+		ItemGenre moviePref3 = (ItemGenre) this.v.getUserRegistration(UserInfo.FILM_PREF3);
+		List<ItemGenre> movieList = new ArrayList<>(Arrays.asList(moviePref1, moviePref2, moviePref3));
 		try {
 			this.m.registerUser(name, surname, day, username, password, email, telephoneNumber, bookList, movieList);
 			this.v.showMessage("Utente " + username + " registrato con successo!");
@@ -261,6 +261,9 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	/**
+	 * Method which adds a new Book to the archive.
+	 */
 	public void registerNewBook() {
 		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
 		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
@@ -279,6 +282,9 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	/**
+	 * Method which adds a new Movie to the archive.
+	 */
 	public void registerNewMovie() {
 		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
 		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
