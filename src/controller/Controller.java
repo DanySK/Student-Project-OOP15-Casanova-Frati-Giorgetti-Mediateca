@@ -82,10 +82,10 @@ public interface Controller {
 	 */
 	void cancelSit() throws Exception;
 
-	/**
-	 * Method which sets the view's status of the study room.
+	/*
+	 * 
+	 * void studyRoomStatus();
 	 */
-	void studyRoomStatus();
 
 	/**
 	 * Method which extends the borrowing of an object.

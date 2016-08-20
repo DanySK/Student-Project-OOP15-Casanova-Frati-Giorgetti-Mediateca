@@ -563,14 +563,19 @@ public class ControllerImpl implements Controller {
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
-		String[] array = new String[this.m.getStudyRoom().get(day).size()];
-		int index;
+		String[] array = new String[50];
+		int index = 0;
 		for (Integer i : this.m.getStudyRoom().get(day)) {
 			if ((i == null) || (i == 0)) {
 				array[index] = "0";
 				index++;
 			} else {
-				array[index] = this.m.getRequiredUser(i).getUsername();
+				try {
+					array[index] = this.m.getRequiredUser(i).getUsername();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					this.v.showError("Errore! Utente non presente nell'archivio");
+				}
 				index++;
 			}
 		}
@@ -614,18 +619,14 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
-	@Override
-	public void studyRoomStatus() {
-		GregorianCalendar day = new GregorianCalendar();
-		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
-				this.v.getStudyRoomSelectedDay());
-		int[] arrayint = new int[this.m.getAllUserSit(day).size()];
-		int index = 0;
-		for (Integer i : this.m.getAllUserSit(day)) {
-			arrayint[index] = i;
-		}
-		this.v.setStudyRoomStatus(arrayint);
-	}
+	/*
+	 * @Override public void studyRoomStatus() { GregorianCalendar day = new
+	 * GregorianCalendar(); day.set(this.v.getStudyRoomSelectedYear(),
+	 * this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay());
+	 * int[] arrayint = new int[this.m.getAllUserSit(day).size()]; int index =
+	 * 0; for (Integer i : this.m.getAllUserSit(day)) { arrayint[index] = i; }
+	 * this.v.setStudyRoomStatus(arrayint); }
+	 */
 
 	@Override
 	public void setWishlist() {
