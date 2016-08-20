@@ -263,9 +263,7 @@ public class ModelImpl implements Serializable, Model {
               final String note) throws Exception {
     ReviewImpl rev = new ReviewImpl(vote, note);
     if (this.archiveUser.contains(userId) && this.archiveItem.containsItem(itemId)) {
-
       if (this.getRequiredUser(userId).getLoanArchive().containsKey(itemId)) {
-        System.out.println("Qui ci sono");
         this.getRequiredUser(userId).setItemReview(itemId, (int) rev.getId());
         this.archiveItem.getItem(itemId).addReview(rev);
         System.out.println(rev.toString() + " adds.");
