@@ -3,8 +3,10 @@ package view;
 import utils.ItemGenre;
 import utils.Language;
 import utils.TypeColor;
+import utils.TypeItemInfo;
 import utils.UserInfo;
 import view.ViewImpl.CardName;
+import view.ViewImpl.OtherItemFilter;
 import controller.Controller;
 
 /**
@@ -227,9 +229,11 @@ public interface View {
 	 *
 	 * @param info
 	 *            the type of info you want
+	 * @param info2
+	 *            the type of info (release or copies number)
 	 * @return the information requested
 	 */
-	Object getItemInfo(utils.TypeItemInfo info);
+	Object getItemInfo(TypeItemInfo info, OtherItemFilter info2);
 
 	/**
 	 * Sets information of books requested with giveMeItemInfo().
@@ -250,10 +254,14 @@ public interface View {
 	 *            the isbn code of item
 	 * @param language
 	 *            the language of item
+	 * @param copies
+	 *            the copies number of item
+	 * @param release
+	 *            the release number of item
 	 */
 	void setBookField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String isbn,
-			Language language);
+			Language language, int copies, int release);
 
 	/**
 	 * Sets information of movies requested with giveMeItemInfo().
@@ -276,10 +284,14 @@ public interface View {
 	 *            the color type of item
 	 * @param language
 	 *            the language of item
+	 * @param copies
+	 *            the copies number of item
+	 * @param release
+	 *            the release number of item
 	 */
 	void setFilmField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String duration,
-			TypeColor color, Language language);
+			TypeColor color, Language language, int copies, int release);
 
 	/**
 	 * Asks controller to set item info.

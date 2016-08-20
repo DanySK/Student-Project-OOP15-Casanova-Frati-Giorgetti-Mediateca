@@ -59,8 +59,9 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	 * Create the panel.
 	 *
 	 * @param v
-	 * @param screenWidth
-	 * @param screenLenght
+	 *            the calling view name
+	 * @param type
+	 *            the type of screen (create or modify)
 	 */
 	public ItemScreenImpl(final View v, final ItemScreenType type) {
 		final JLabel titleL;
@@ -265,7 +266,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	public void setCommonField(final String title, final String author,
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final String imagePath,
-			final utils.Language language) {
+			final utils.Language language, final int copies, final int release) {
 		this.titleF.setText(title);
 		this.authorF.setText(author);
 		this.manifacturerF.setText(manifacturer);
@@ -273,6 +274,8 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.genreF.setSelectedItem(genre);
 		this.imagePath = imagePath;
 		this.languageF.setSelectedItem(language);
+		this.numCopiesF.setText(Integer.toString(copies));
+		this.numReleaseF.setText(Integer.toString(release));
 	}
 
 	@Override
@@ -280,9 +283,9 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final String imagePath,
 			final String duration, final utils.TypeColor color,
-			final utils.Language language) {
+			final utils.Language language, final int copies, final int release) {
 		this.setCommonField(title, author, manifacturer, year, genre,
-				imagePath, language);
+				imagePath, language, copies, release);
 		this.durationF.setText(duration);
 		this.colorF.setSelectedItem(color);
 		this.isbnF.setText(null);
@@ -292,16 +295,18 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	public void setBookField(final String title, final String author,
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final String imagePath,
-			final String isbn, final utils.Language language) {
+			final String isbn, final utils.Language language, final int copies,
+			final int release) {
 		this.setCommonField(title, author, manifacturer, year, genre,
-				imagePath, language);
+				imagePath, language, copies, release);
 		this.durationF.setText(null);
 		this.colorF.setSelectedItem(null);
 		this.isbnF.setText(isbn);
 	}
 
 	@Override
-	public Object getItemInfo(final utils.TypeItemInfo info) {
+	public Object getItemInfo(final utils.TypeItemInfo info,
+			final ViewImpl.OtherItemFilter info2) {
 		switch (info) {
 		case TITLE:
 			return this.titleF.getText();
@@ -325,13 +330,17 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			return this.isbnF.getText();
 		case LANGUAGE:
 			return this.languageF.getSelectedItem();
-		case RELEASE_NUMBER:
-			return this.languageF.getSelectedItem();
-		case COPIES_NUMBER:
-			return this.languageF.getSelectedItem();
 		default:
 			break;
 
+		}
+		switch (info2) {
+		case RELEASE_NUMBER:
+			return this.numReleaseF;
+		case COPIES_NUMBER:
+			return this.numCopiesF;
+		default:
+			break;
 		}
 		return null;
 	}
