@@ -175,7 +175,7 @@ public class ViewImpl implements View {
 			}
 		});
 		managerLogin.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.FONT_SIZE));
-		managerLogin.setBounds(27, 490, 334, 64);
+		managerLogin.setBounds(17, 484, 334, 64);
 		this.card0.add(managerLogin);
 		ViewImpl.CONTAINER.add(this.card0, CardName.START.toString());
 		ViewImpl.CONTAINER.add(this.card1, CardName.LOGIN.toString());
