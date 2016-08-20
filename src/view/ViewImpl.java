@@ -46,7 +46,8 @@ public class ViewImpl implements View {
 
 	StringWriter sw = new StringWriter();
 	PrintWriter pw = new PrintWriter(this.sw);
-
+	static boolean logged = false;
+	private JPanel card0;
 	private JPanel card1;
 	private JPanel card2;
 	private JPanel card3;
@@ -94,8 +95,8 @@ public class ViewImpl implements View {
 	 *
 	 */
 	public enum CardName {
-		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
-				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
+		START("Start Card"), MAIN("Main Card"), LOGIN("Login Card"), MENU(
+				"Menu Card"), ITEM("Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
 						"LikeList Screen Card"), BORROWED_LIST(
 								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
 										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
@@ -138,12 +139,13 @@ public class ViewImpl implements View {
 		this.card13 = new ItemScreenImpl(this, ItemScreenType.MODIFY);
 		this.card12 = new ManagerScreenImpl(this);
 		this.card14 = new ListScreenImpl(this, ListScreenType.REVIEWS);
+		this.card0 = new JPanel();
 
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.mainFrame.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.mainFrame.setResizable(false);
 		ViewImpl.CONTAINER.setLayout(ViewImpl.CL);
-		final JPanel card0 = new JPanel();
+		this.card0 = new JPanel();
 		final JLabel welcome = new JLabel("Benvenuto in Mediateca!");
 		welcome.setHorizontalAlignment(SwingConstants.CENTER);
 		welcome.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.TITLE_SIZE));
@@ -155,14 +157,14 @@ public class ViewImpl implements View {
 		userCreate.setBounds(435, 164, 281, 138);
 		login.setBounds(70, 164, 281, 138);
 
-		card0.setLayout(null);
-		card0.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
-		card0.add(welcome);
-		card0.add(login);
-		card0.add(userCreate);
+		this.card0.setLayout(null);
+		this.card0.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
+		this.card0.add(welcome);
+		this.card0.add(login);
+		this.card0.add(userCreate);
 		this.card1.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 
-		ViewImpl.CONTAINER.add(card0, CardName.MAIN.toString());
+		ViewImpl.CONTAINER.add(this.card0, CardName.MAIN.toString());
 
 		JLabel managerLogin = new JLabel("Accedi come Gestore");
 		managerLogin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -174,7 +176,8 @@ public class ViewImpl implements View {
 		});
 		managerLogin.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.FONT_SIZE));
 		managerLogin.setBounds(27, 490, 334, 64);
-		card0.add(managerLogin);
+		this.card0.add(managerLogin);
+		ViewImpl.CONTAINER.add(this.card0, CardName.START.toString());
 		ViewImpl.CONTAINER.add(this.card1, CardName.LOGIN.toString());
 		ViewImpl.CONTAINER.add(this.card2, CardName.MENU.toString());
 		ViewImpl.CONTAINER.add(this.card3, CardName.ITEM.toString());
@@ -333,7 +336,9 @@ public class ViewImpl implements View {
 
 	@Override
 	public void giveMeBorrowList() {
-		this.c.borrowList();
+		if (ViewImpl.logged) {
+			this.c.borrowList();
+		}
 	}
 
 	// //waiting CONTROLLER function name
@@ -360,12 +365,14 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeFilteredList() {
-		try {
-			this.c.itemElaboration();
-		} catch (Exception e) {
+		if (ViewImpl.logged) {
+			try {
+				this.c.itemElaboration();
+			} catch (Exception e) {
 
-			e.printStackTrace(this.pw);
-			this.showError(this.sw.toString());
+				e.printStackTrace(this.pw);
+				this.showError(this.sw.toString());
+			}
 		}
 	}
 
@@ -431,6 +438,7 @@ public class ViewImpl implements View {
 
 	@Override
 	public void goodLogin() {
+		ViewImpl.logged = true;
 		this.swapView(CardName.MENU);
 	}
 
@@ -464,8 +472,9 @@ public class ViewImpl implements View {
 
 	@Override
 	public void setStudyRoomStatus(final int[] status) {
-		((StudyRoomImpl) this.card11).setStudyRoomStatus(status);
-
+		if (ViewImpl.logged) {
+			((StudyRoomImpl) this.card11).setStudyRoomStatus(status);
+		}
 	}
 
 	@Override
@@ -475,17 +484,26 @@ public class ViewImpl implements View {
 
 	@Override
 	public int getStudyRoomSelectedDay() {
-		return ((StudyRoomImpl) this.card11).getDateDay();
+		if (ViewImpl.logged) {
+			return ((StudyRoomImpl) this.card11).getDateDay();
+		}
+		return 0;
 	}
 
 	@Override
 	public int getStudyRoomSelectedMonth() {
-		return ((StudyRoomImpl) this.card11).getDateMonth();
+		if (ViewImpl.logged) {
+			return ((StudyRoomImpl) this.card11).getDateMonth();
+		}
+		return 0;
 	}
 
 	@Override
 	public int getStudyRoomSelectedYear() {
-		return ((StudyRoomImpl) this.card11).getDateYear();
+		if (ViewImpl.logged) {
+			return ((StudyRoomImpl) this.card11).getDateYear();
+		}
+		return 0;
 	}
 
 	// //OK
