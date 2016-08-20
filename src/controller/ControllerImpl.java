@@ -20,6 +20,7 @@ import model.user.User;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeColor;
 import utils.TypeItem;
 import utils.TypeItemInfo;
 import utils.UserInfo;
@@ -304,7 +305,7 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void setItemInfo() {
 		// getItemSelectedByuSer lo prendo da setFilteredList
-		Integer itemId;
+		Integer itemId = 0;
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
 				itemId = i;
@@ -314,19 +315,22 @@ public class ControllerImpl implements Controller {
 		int releaseYear = this.m.getItemArchive().get(itemId).getFirst().getReleaseYear();
 		String author = this.m.getItemArchive().get(itemId).getFirst().getAuthor();
 		Language language = this.m.getItemArchive().get(itemId).getFirst().getCurrentLanguage();
-		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);// mancante
+		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);
 		ItemGenre genre = this.m.getItemArchive().get(itemId).getFirst().getGenre();
 		String publisher = this.m.getItemArchive().get(itemId).getFirst().getPublisher();
 		Integer numRelease = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER);
 		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
 		String duration = (String) this.v.getItemInfo(TypeItemInfo.DURATION);
-		String color = (String) this.v.getItemInfo(TypeItemInfo.COLOR);
+		TypeColor color = (TypeColor) this.v.getItemInfo(TypeItemInfo.COLOR);
 
 		if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-			this.v.setBookField(title, author, publisher, releaseYear, genre, isbn, language, numCopy, numRelease);
-		} else {
-			this.v.setFilmField(title, author, publisher, releaseYear, genre, duration, color, language, numCopy,
+			this.v.setBookField(title, author, publisher, Integer.toString(releaseYear), genre, isbn, language, numCopy,
 					numRelease);
+		} else if (this.m.getAllItemId(TypeItem.MOVIE).contains(itemId)) {
+			this.v.setFilmField(title, author, publisher, Integer.toString(releaseYear), genre, duration, color,
+					language, numCopy, numRelease);
+		} else {
+			this.v.showError("Errore! Id oggetto non presente nell'archivio");
 		}
 	}
 
