@@ -64,11 +64,11 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.usernameTextArea = new JTextArea();
 		usernameLabel = new JLabel("Username:");
 		usernameLabel
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		passwordLabel = new JLabel("Password:");
 		passwordLabel
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		this.add(passwordLabel);
 		if (type.equals(LoginType.USER)) {
@@ -94,7 +94,7 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		backToSelectAccount = new JButton("Torna alla scelta");
 		backToSelectAccount.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.FONT_SIZE));
-		backToSelectAccount.addActionListener(e -> v.swapView(CardName.MAIN));
+		backToSelectAccount.addActionListener(e -> v.swapView(CardName.START));
 		backToSelectAccount.setBounds(505, 503, 252, 45);
 		this.setLayout(null);
 		this.add(mainLabel);
