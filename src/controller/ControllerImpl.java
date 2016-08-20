@@ -243,7 +243,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
-	public void registerNewBook(){
+	public void registerNewBook() {
 		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
 		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
 		String author = (String) this.v.getItemInfo(TypeItemInfo.AUTHOR);
@@ -251,9 +251,14 @@ public class ControllerImpl implements Controller {
 		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);
 		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
 		String publisher = (String) this.v.getItemInfo(TypeItemInfo.PRODUCER);
-		Integer numRelease = (Integer) this.v.getItemInfo(TypeItemInfo.);
-		Integer numCopy = (Integer);
-		this.m.registerBook(title, releaseYear, author, language, isbn, genre, publisher, initNumRelease, initNumCopy);
+		Integer numRelease = (Integer) this.v.getItemInfo(TypeItemInfo.RELEASE_NUMBER);
+		Integer numCopy = (Integer) this.v.getItemInfo(TypeItemInfo.COPIES_NUMBER);
+		try {
+			this.m.registerBook(title, releaseYear, author, language, isbn, genre, publisher, numRelease, numCopy);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void registerNewMovie() {
@@ -265,24 +270,81 @@ public class ControllerImpl implements Controller {
 		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
 		Integer duration = (Integer) this.v.getItemInfo(TypeItemInfo.DURATION);
 		Boolean color = (Boolean) this.v.getItemInfo(TypeItemInfo.COLOR);
-		Integer numCopy = (Integer);
-		this.m.registerMovie(title, releaseYear, publisher, author, language, genre, duration, color, numCopy);
+		Integer numCopy = (Integer) this.v.getItemInfo(TypeItemInfo.COPIES_NUMBER);
+		try {
+			this.m.registerMovie(title, releaseYear, publisher, author, language, genre, duration, color, numCopy);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void itemCreate() {
+		if (this.v.getItemInfo(TypeItemInfo.TYPE) == TypeItem.BOOK) {
+			this.registerNewBook();
+		} else if (this.v.getItemInfo(TypeItemInfo.TYPE) == TypeItem.MOVIE) {
+			this.registerNewMovie();
+		}
+	}
+
+	public void elaborateLoans() {
+		Map<Integer, Double> map;
+		try {
+			map = this.m.checkDeadlineas(this.actualUser.getIdUser());
+
+			map.keySet().stream().filter(i -> map.get(i) > 30)
+					.forEach(i -> this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).toString()));
+
+			/*
+			 * for (Integer i : map.keySet()) { if (map.get(i) > 30) {
+			 * this.v.showGiveBackOptionMessage(i.toString()); } }
+			 */
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void giveBackItem(final String item) {
+		// DA RIVEDERE
+		for (Integer i : this.actualUser.getLoanArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(item)) {
+				try {
+					this.m.returnItem(i, this.actualUser.getIdUser());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			} else {
+				this.v.showMessage("Oggetto da restituire non trovato!");
+			}
+		}
 	}
 
 	@Override
-	public void takeSit() throws Exception {
+	public void takeSit() {
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
-		this.m.bookSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
+		try {
+			this.m.bookSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void cancelSit() throws Exception {
+	public void cancelSit() {
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
-		this.m.cancelSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
+		try {
+			this.m.cancelSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -387,10 +449,6 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	public void itemCreate() {
-
 	}
 
 	public void extendBorrow() {
