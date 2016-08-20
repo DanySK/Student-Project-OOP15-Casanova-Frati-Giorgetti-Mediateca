@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.common.base.Optional;
 
@@ -56,6 +55,7 @@ public class ControllerImpl implements Controller {
 	 * Constructor for ControllerImpl.
 	 *
 	 * @throws Exception
+	 *             in the case which singleton already exist.
 	 */
 	public ControllerImpl() throws Exception {
 		File fileItem = new File(this.fm.getPath() + ControllerImpl.FILENAMEITEM);
@@ -90,51 +90,61 @@ public class ControllerImpl implements Controller {
 					ItemGenre.ADVENTURE_HISTORY, "Gesï¿½", 0011, 100000);
 			this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
 					120, true, 1000000);
-
 			User u = new UserImpl("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
 					"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
 
 			this.m.bookSit(calendar, 1, ((UserImpl) u).getIdUser());
-			this.fm.writeObjectIntoFile("archivio.utenti", this.m);
-			this.fm.writeObjectIntoFile("archivio.oggetti", this.m);
-			this.fm.writeObjectIntoFile("archivio.aulastudio", this.m);
-
-		} catch (Exception e) { // TODO Auto-generated catch
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.fm.writeObjectIntoFile("archivio.utenti", this.m);
+		this.fm.writeObjectIntoFile("archivio.oggetti", this.m);
+		this.fm.writeObjectIntoFile("archivio.aulastudio", this.m);
 	}
 
 	@Override
 	public void userLogin() {
 		final String username = this.v.getUsername();
 		final String password = this.v.getPassword();
-		boolean check = false;
 		Map<Integer, UserImpl> map = this.m.getUserArchive();
-		for (Entry<Integer, UserImpl> entry : map.entrySet()) {
-			if ((entry.getValue().getUsername().equals(username))
-					&& (entry.getValue().getPassword().equals(password))) {
-				this.actualUser = entry.getValue();
-				this.v.goodLogin();
-				// inserire showGiveBackOption
-				check = true;
-				try {
-					this.m.setReccomandedList(this.actualUser.getIdUser());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				break;
+		java.util.Optional<UserImpl> user = map.entrySet().stream()
+				.filter(e -> e.getValue().getUsername().equals(username))
+				.filter(e -> e.getValue().getPassword().equals(password)).map(e -> e.getValue()).findFirst();
+		if (user.isPresent()) {
+			this.actualUser = user.get();
+			this.v.goodLogin();
+			// mettere metodo
+
+			try {
+				this.m.setReccomandedList(this.actualUser.getIdUser());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		}
-		if (!check) {
+		} else {
 			this.v.showError("Utente non trovato");
 		}
+
+		/*
+		 * for (Entry<Integer, UserImpl> entry : map.entrySet()) { if
+		 * ((entry.getValue().getUsername().equals(username)) &&
+		 * (entry.getValue().getPassword().equals(password))) { this.actualUser
+		 * = entry.getValue(); this.v.goodLogin(); // inserire
+		 * showGiveBackOption check = true; try {
+		 * this.m.setReccomandedList(this.actualUser.getIdUser()); } catch
+		 * (Exception e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); } break; } } if (!check) { this.v.showError(
+		 * "Utente non trovato"); }
+		 */
 	}
 
+	@Override
 	public void managerLogin() {
 		if (this.m.getSystemPassword().equals(this.v.getMenagerPassword())) {
 			// esegui login manager
 			this.v.showMessage("Login effettuato");
+			// inserire metodo
 		} else {
 			this.v.showMessage("Password errata");
 		}
@@ -148,7 +158,7 @@ public class ControllerImpl implements Controller {
 	 * @throws Exception
 	 */
 	@Override
-	public void itemElaboration() throws Exception {
+	public void itemElaboration() {
 		int index = 0;
 		TypeItem ty = null;
 		for (TypeItem y : TypeItem.values()) {
@@ -164,9 +174,14 @@ public class ControllerImpl implements Controller {
 		}
 		Object searchText = this.v.getSearchText();
 		String[] array = new String[this.m.getAllItemId(ty).size()];
-		for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
-			array[index] = this.m.getRequiredItem(i).toString();
-			index++;
+		try {
+			for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
+				array[index] = this.m.getRequiredItem(i).toString();
+				index++;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			this.v.showError("Filtraggio oggetti fallito");
 		}
 		this.v.setFilteredList(array);
 	}
@@ -174,13 +189,15 @@ public class ControllerImpl implements Controller {
 	// first draft
 	@Override
 	public void addLike() {
+		// DA CONTROLLARE
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
 				try {
 					this.m.addLike(i, this.actualUser.getIdUser());
+					this.v.showMessage("Oggetto " + this.m.getItemArchive().get(i) + " messo in wishlist");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					this.v.showError("Errore inserimento oggetto in wishlist");
 				}
 			}
 		}
@@ -188,13 +205,15 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void addReview() {
+		// DA CONTROLLARE
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
 				try {
 					this.m.addReview(i, this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
+					this.v.showMessage("Recensione per l'oggetto " + this.m.getItemArchive().get(i) + "inserita");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					this.v.showError("Errore inserimento recensione oggetto");
 				}
 			}
 		}
@@ -203,8 +222,6 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void borrowList() {
 		try {
-
-			System.out.println(this.actualUser.getLoanArchive());
 			this.actualLoanArchive = this.actualUser.getLoanArchive();
 			String[] array = new String[this.actualLoanArchive.size()];
 			int index = 0;
@@ -216,7 +233,7 @@ public class ControllerImpl implements Controller {
 			this.v.setBorrowedItemList(array);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("Errore ritrovamento oggetto prestato");
 		}
 	}
 
@@ -240,7 +257,7 @@ public class ControllerImpl implements Controller {
 			this.v.showMessage("Utente " + username + " registrato con successo!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("Errore! Utente già presente nell'archivio");
 		}
 	}
 
@@ -258,7 +275,7 @@ public class ControllerImpl implements Controller {
 			this.m.registerBook(title, releaseYear, author, language, isbn, genre, publisher, numRelease, numCopy);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("Errore! Numero di copie inferiori a 0");
 		}
 	}
 
@@ -276,10 +293,11 @@ public class ControllerImpl implements Controller {
 			this.m.registerMovie(title, releaseYear, publisher, author, language, genre, duration, color, numCopy);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("Errore! Numero di copie inferiori a 0");
 		}
 	}
 
+	@Override
 	public void itemCreate() {
 		if (this.v.getItemInfo(TypeItemInfo.TYPE) == TypeItem.BOOK) {
 			this.registerNewBook();
@@ -288,6 +306,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void elaborateLoans() {
 		Map<Integer, Double> map;
 		try {
@@ -295,17 +314,17 @@ public class ControllerImpl implements Controller {
 
 			map.keySet().stream().filter(i -> map.get(i) > 30).forEach(
 					i -> this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).getFirst().getTitle()));
-
 			/*
 			 * for (Integer i : map.keySet()) { if (map.get(i) > 30) {
 			 * this.v.showGiveBackOptionMessage(i.toString()); } }
 			 */
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("Errore! Utente non presente nell'archivio");
 		}
 	}
 
+	@Override
 	public void giveBackItem(final String item) {
 		// DA RIVEDERE
 		for (Integer i : this.actualUser.getLoanArchive().keySet()) {
@@ -314,7 +333,7 @@ public class ControllerImpl implements Controller {
 					this.m.returnItem(i, this.actualUser.getIdUser());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					this.v.showError("Errore! Id utente e oggetto non associati");
 				}
 			} else {
 				this.v.showMessage("Oggetto da restituire non trovato!");
@@ -331,7 +350,7 @@ public class ControllerImpl implements Controller {
 			this.m.bookSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("Errore! Posto o Id utente non validi");
 		}
 	}
 
@@ -344,7 +363,7 @@ public class ControllerImpl implements Controller {
 			this.m.cancelSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("Errore! Posto selezionato non valido per la cancellazione");
 		}
 	}
 
@@ -361,7 +380,8 @@ public class ControllerImpl implements Controller {
 		this.v.setStudyRoomStatus(arrayint);
 	}
 
-	public void wishlist() {
+	@Override
+	public void setWishlist() {
 		String[] array = new String[this.actualUser.getWishlist().size()];
 		int index = 0;
 		for (Integer i : this.actualUser.getWishlist()) {
@@ -371,21 +391,21 @@ public class ControllerImpl implements Controller {
 		this.v.setWishlist(array);
 	}
 
+	@Override
 	public void removeFromWishList() {
-		// String[] array = new String[this.actualUser.getWishlist().size()];
-		// int index = 0;
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemToRemoveFromLikeBorrowWish())) {
 				try {
 					this.m.removeLike(i, this.actualUser.getIdUser());
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
+					this.v.showError("Errore! ID utente o oggetto non valido");
 				}
 			}
 		}
 	}
 
+	@Override
 	public void setAllUserList() {
 		// forse sbagliato
 		// manca v.setAllUserList
@@ -393,10 +413,12 @@ public class ControllerImpl implements Controller {
 		String[] array = new String[this.m.getUserArchive().size()];
 		for (Integer i : this.m.getUserArchive().keySet()) {
 			array[index] = this.m.getUserArchive().get(i).toString();
+			index++;
 		}
 		this.v.setUserList(array);
 	}
 
+	@Override
 	public void setAllItemList() {
 		// forse sbagliato
 		// manca v.setAllItemList
@@ -405,10 +427,12 @@ public class ControllerImpl implements Controller {
 		String[] array = new String[this.m.getItemArchive().size()];
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			array[index] = this.m.getItemArchive().get(i).toString();
+			index++;
 		}
 		this.v.setItemList(array);
 	}
 
+	@Override
 	public void deleteItem() {
 		int itemIdReceived = 0;
 		for (Integer i : this.m.getItemArchive().keySet()) {
@@ -421,29 +445,29 @@ public class ControllerImpl implements Controller {
 			this.v.showMessage("Oggetto " + itemIdReceived + " cancellato");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			this.v.showError("Errore ID oggetto");
-			e.printStackTrace();
+			this.v.showError("Errore! Oggetto non presente nell'archivio");
 		}
 	}
 
+	@Override
 	public void deleteUser() {
 		try {
 			this.m.deleteUser(this.actualUser.getIdUser());
 			this.v.showMessage("Utente " + this.actualUser.getIdUser() + " cancellato");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			this.v.showError("Errore cancellazione utente");
+			this.v.showError("Errore! Utente non presente nell'archivio");
 		}
 	}
 
+	@Override
 	public void checkDeadlines() {
 		try {
 			Map<Integer, Double> map = this.m.checkDeadlineas(this.actualUser.getIdUser());
 			for (Integer i : this.actualUser.getLoanArchive().keySet()) {
 				// DA COMPLETARE
 				if (map.get(i) > 30) {
-					this.v.showMessage("Oggetto " + i + "ha superata la data massima, estendere di 30 giorni?");
+
 				}
 			}
 		} catch (Exception e) {
@@ -452,6 +476,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void extendBorrow() {
 
 	}

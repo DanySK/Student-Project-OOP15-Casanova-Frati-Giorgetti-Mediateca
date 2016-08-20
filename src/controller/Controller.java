@@ -25,6 +25,11 @@ public interface Controller {
 	void userLogin();
 
 	/**
+	 * Method which lets the manager access the program.
+	 */
+	void managerLogin();
+
+	/**
 	 * Method which writes some users, items and the study room situation on
 	 * files for debug
 	 */
@@ -81,4 +86,62 @@ public interface Controller {
 	 * Method which sets the view's status of the study room.
 	 */
 	void studyRoomStatus();
+
+	/**
+	 * Method which extends the borrowing of an object.
+	 */
+	void extendBorrow();
+
+	/**
+	 * Method which checks the status of the loans of the user.
+	 */
+	void checkDeadlines();
+
+	/**
+	 * Method which deletes the actual user from the archive.
+	 */
+	void deleteUser();
+
+	/**
+	 * Method which deletes an item selected by the user.
+	 */
+	void deleteItem();
+
+	/**
+	 * Method which sets the list of items for the View.
+	 */
+	void setAllItemList();
+
+	/**
+	 * Method which sets the list of users for the View.
+	 */
+	void setAllUserList();
+
+	/**
+	 * Method which removes the selected item from the wishlist.
+	 */
+	void removeFromWishList();
+
+	/**
+	 * Method which sets the wishlist of the actual user for the View.
+	 */
+	void setWishlist();
+
+	/**
+	 * Method which returns an item borrowed by the user.
+	 * 
+	 * @param item
+	 *            item to be returned.
+	 */
+	void giveBackItem(final String item);
+
+	/**
+	 * Method which elaborates the loans of the user.
+	 */
+	void elaborateLoans();
+
+	/**
+	 * Method which creates an item based on its type.
+	 */
+	void itemCreate();
 }
