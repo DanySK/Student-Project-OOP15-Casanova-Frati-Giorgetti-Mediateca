@@ -1,6 +1,7 @@
 package model.user;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.google.common.base.Optional;
 
@@ -82,4 +83,10 @@ public interface User {
    */
   Optional<Integer> getListReview(final Integer itemId);
 
+  /**
+   * This method return a list of item now borrowed. ( out of mediateca )
+   * 
+   * @return list of item id which are out of mediateca
+   */
+  Set<Integer> getNowOnLoan();
 }

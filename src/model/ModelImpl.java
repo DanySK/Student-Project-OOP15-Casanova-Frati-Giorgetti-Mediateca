@@ -220,6 +220,7 @@ public class ModelImpl implements Serializable, Model {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.removeUser(itemId, userId);
       this.archiveUser.getUser(userId).removeItem(itemId);
+      System.out.println("UserId " + userId + "returns itemId " + itemId);
     } else {
       throw new Exception("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive");

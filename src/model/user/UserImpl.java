@@ -316,6 +316,17 @@ public class UserImpl implements Serializable, User {
   }
 
   @Override
+  public Set<Integer> getNowOnLoan() {
+    Set<Integer> l = new HashSet<>();
+    for (Integer i : this.loanArchive.keySet()) {
+      if (!this.loanArchive.get(i).getFirst()) {
+        l.add(i);
+      }
+    }
+    return Collections.unmodifiableSet(l);
+  }
+
+  @Override
   public void setItemReview(final Integer itemId, final Integer reviewId) {
     this.loanArchive.put(itemId, new Pair<Boolean, Optional<Integer>>(
                 this.loanArchive.get(itemId).getFirst(), Optional.of(reviewId)));
