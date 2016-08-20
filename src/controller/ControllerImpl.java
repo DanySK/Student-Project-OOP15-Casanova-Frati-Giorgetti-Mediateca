@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -12,6 +13,8 @@ import com.google.common.base.Optional;
 import model.Model;
 import model.ModelImpl;
 import model.Pair;
+import model.item.ItemImpl;
+import model.item.ItemInfo;
 import model.item.ReviewImpl;
 import model.user.User;
 import model.user.UserImpl;
@@ -53,28 +56,22 @@ public class ControllerImpl implements Controller {
 	 *             in the case which singleton already exist.
 	 */
 	public ControllerImpl() throws Exception {
-		/*
-		 * File fileItem = new File(this.fm.getPath() +
-		 * ControllerImpl.FILENAMEITEM); File fileUser = new
-		 * File(this.fm.getPath() + ControllerImpl.FILENAMEUSER); File
-		 * fileStudyRoom = new File(this.fm.getPath() +
-		 * ControllerImpl.FILENAMESTUDYROOM);
-		 *
-		 * if ((fileItem.exists() && !fileItem.isDirectory()) &&
-		 * (fileUser.exists() && !fileUser.isDirectory()) &&
-		 * (fileStudyRoom.exists() && !fileStudyRoom.isDirectory())) {
-		 * Map<Integer, UserImpl> userArchive =
-		 * this.fm.readArchiveUserFromFile(ControllerImpl.FILENAMEUSER);
-		 * Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = this.fm
-		 * .readArchiveItemFromFile(ControllerImpl.FILENAMEITEM);
-		 * Map<GregorianCalendar, ArrayList<Integer>> studyRoomArchive = this.fm
-		 * .readStudyRoomFromFile(ControllerImpl.FILENAMESTUDYROOM); this.m =
-		 * new ModelImpl(itemArchive, userArchive, studyRoomArchive); } else {
-		 */
-		this.m = new ModelImpl();
 
-		// }
+		File fileItem = new File(this.fm.getPath() + ControllerImpl.FILENAMEITEM);
+		File fileUser = new File(this.fm.getPath() + ControllerImpl.FILENAMEUSER);
+		File fileStudyRoom = new File(this.fm.getPath() + ControllerImpl.FILENAMESTUDYROOM);
 
+		if ((fileItem.exists() && !fileItem.isDirectory()) && (fileUser.exists() && !fileUser.isDirectory())
+				&& (fileStudyRoom.exists() && !fileStudyRoom.isDirectory())) {
+			Map<Integer, UserImpl> userArchive = this.fm.readArchiveUserFromFile(ControllerImpl.FILENAMEUSER);
+			Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = this.fm
+					.readArchiveItemFromFile(ControllerImpl.FILENAMEITEM);
+			Map<GregorianCalendar, ArrayList<Integer>> studyRoomArchive = this.fm
+					.readStudyRoomFromFile(ControllerImpl.FILENAMESTUDYROOM);
+			this.m = new ModelImpl(itemArchive, userArchive, studyRoomArchive);
+		} else {
+			this.m = new ModelImpl();
+		}
 	}
 
 	@Override
@@ -163,7 +160,7 @@ public class ControllerImpl implements Controller {
 			this.v.showMessage("Utenti creati");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("Utente già presente nell'archivio");
 		}
 		this.fm.writeObjectIntoFile("archivio.utenti", this.m);
 		this.fm.writeObjectIntoFile("archivio.oggetti", this.m);
@@ -209,7 +206,7 @@ public class ControllerImpl implements Controller {
 	public void managerLogin() {
 		if (this.m.getSystemPassword().equals(this.v.getMenagerPassword())) {
 			// esegui login manager
-
+			this.v.goodManagerLogin();
 			this.v.showMessage("Login manager effettuato");
 			// inserire metodo
 		} else {
@@ -323,7 +320,12 @@ public class ControllerImpl implements Controller {
 		// for per ogni tipo di userinfo e fare changeUser totale
 		for (UserInfo ui : UserInfo.values()) {
 			try {
-				this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
+				if ((ui != UserInfo.USERNAME) && (ui != UserInfo.BIRTHDATE_DAY) && (ui != UserInfo.BIRTHDATE_MONTH)
+						&& (ui != UserInfo.BIRTHDATE_YEAR) && (ui != UserInfo.BOOK_PREF1) && (ui != UserInfo.BOOK_PREF2)
+						&& (ui != UserInfo.BOOK_PREF3) && (ui != UserInfo.FILM_PREF1) && (ui != UserInfo.FILM_PREF2)
+						&& (ui != UserInfo.FILM_PREF3)) {
+					this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				this.v.showError("Errore nell'UserInfo");
