@@ -2,7 +2,7 @@ package view;
 
 /**
  * Interface for Study Room.
- * 
+ *
  * @author Luca Giorgetti
  *
  */
@@ -20,7 +20,7 @@ public interface StudyRoom {
 	 * @param status
 	 *            array of occupied sits
 	 */
-	void setStudyRoomStatus(int[] status);
+	void setStudyRoomStatus(String[] status);
 
 	/**
 	 * Returns the selected day.

@@ -326,10 +326,10 @@ public interface View {
 	/**
 	 * Sets the status (array of taken sits) in a determined day.
 	 *
-	 * @param status
+	 * @param array
 	 *            array of taken sits
 	 */
-	void setStudyRoomStatus(int[] status);
+	void setStudyRoomStatus(String[] array);
 
 	/**
 	 * Allows to show a notification to user.
@@ -559,11 +559,6 @@ public interface View {
 	 * @return the requeste information
 	 */
 	Object getOtherItemInfo(OtherItemFilter info2);
-
-	/**
-	 * Asks to controller to set taken sits list.
-	 */
-	void giveMeTakenSits();
 
 	/**
 	 * Allows to set the list of just taken sits.

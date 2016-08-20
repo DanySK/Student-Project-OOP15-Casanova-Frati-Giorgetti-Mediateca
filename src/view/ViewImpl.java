@@ -479,7 +479,7 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void setStudyRoomStatus(final int[] status) {
+	public void setStudyRoomStatus(final String[] status) {
 		if (this.logged) {
 			((StudyRoom) this.card11).setStudyRoomStatus(status);
 		}
@@ -726,12 +726,6 @@ public class ViewImpl implements View {
 	@Override
 	public void giveBackItemAfterNotify(final String item) {
 		this.c.giveBackItem(item);
-	}
-
-	// //waiting CONTROLLER function name
-	@Override
-	public void giveMeTakenSits() {
-		// c.takenSitsList();
 	}
 
 	// //OK
