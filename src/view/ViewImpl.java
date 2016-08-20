@@ -44,8 +44,8 @@ public class ViewImpl implements View {
 	static final int IMAGE_LENGHT = 140;
 	static final int IMAGE_WIDTH = 100;
 
-	StringWriter sw = new StringWriter();
-	PrintWriter pw = new PrintWriter(this.sw);
+	private StringWriter sw = new StringWriter();
+	private PrintWriter pw = new PrintWriter(this.sw);
 	private boolean logged;
 
 	private JPanel card0;
@@ -64,7 +64,7 @@ public class ViewImpl implements View {
 	private JPanel card13;
 	private JPanel card14;
 
-	private JFrame mainFrame = new JFrame();
+	private final JFrame mainFrame = new JFrame();
 
 	/**
 	 * enum for List screen type
@@ -98,12 +98,12 @@ public class ViewImpl implements View {
 	public enum CardName {
 		START("Start Card"), MAIN("Main Card"), LOGIN("Login Card"), MENU(
 				"Menu Card"), ITEM("Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-				"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
-				"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
+						"LikeList Screen Card"), BORROWED_LIST(
+								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
+																"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
 
 		private final String name;
 
@@ -258,13 +258,13 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void setFilteredList(final String[] filteredList) {
-		((MediatecaScreenImpl) this.card3).setFilteredList(filteredList);
+		((MediatecaScreen) this.card3).setFilteredList(filteredList);
 	}
 
 	// //OK
 	@Override
 	public void setBorrowedItemList(final String[] borrowedItemsList) {
-		((ListScreenImpl) this.card6).setBorrowedList(borrowedItemsList);
+		((ListScreen) this.card6).setBorrowedList(borrowedItemsList);
 	}
 
 	@Override
@@ -279,12 +279,6 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void reviewItem() {
-		this.c.addReview();
-	}
-
-	// //OK
-	@Override
 	public void likeItem() {
 		this.c.addLike();
 	}
@@ -292,7 +286,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public Object getUserRegistration(final utils.UserInfo info) {
-		return ((UserScreenImpl) this.card8).getInfo(info);
+		return ((UserScreen) this.card8).getInfo(info);
 
 	}
 
@@ -305,13 +299,13 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public String getMenagerPassword() {
-		return ((UserLoginImpl) this.card9).getManagerPassword();
+		return ((UserLogin) this.card9).getManagerPassword();
 	}
 
-	// //waiting CONTROLLER Function Name
+	// //OK
 	@Override
 	public void sendUserModify() {
-		// ViewImpl.c.userModify();
+		this.c.userModify();
 	}
 
 	// //OK
@@ -319,8 +313,8 @@ public class ViewImpl implements View {
 	public void setUserModifyField(final String name, final String surname,
 			final String username, final String password,
 			final String birthDate, final String email, final String telephone) {
-		((UserScreenImpl) this.card4).setField(name, surname, username,
-				password, birthDate, email, telephone);
+		((UserScreen) this.card4).setField(name, surname, username, password,
+				birthDate, email, telephone);
 	}
 
 	// //OK
@@ -332,7 +326,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public Object getModifiedInfo(final UserInfo info) {
-		return ((UserScreenImpl) this.card4).getInfo(info);
+		return ((UserScreen) this.card4).getInfo(info);
 	}
 
 	@Override
@@ -342,10 +336,10 @@ public class ViewImpl implements View {
 		}
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void controllerGetReview() {
-		// ViewImpl.c.review();
+		this.c.addReview();
 
 	}
 
@@ -377,46 +371,44 @@ public class ViewImpl implements View {
 		}
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void sendItemCreate() {
-		// this.c.itemCreate();
+		this.c.itemCreate();
 
 	}
 
 	// //OK
 	@Override
 	public Object getItemInfo(final utils.TypeItemInfo info) {
-		return ((ItemScreenImpl) this.card10).getItemInfo(info);
+		return ((ItemScreen) this.card10).getItemInfo(info);
 	}
 
+	// //OK
 	@Override
 	public Object getOtherItemInfo(final view.ViewImpl.OtherItemFilter info2) {
-		return ((ItemScreenImpl) this.card10).getItemInfo(info2);
+		return ((ItemScreen) this.card10).getItemInfo(info2);
 	}
 
 	// //OK
 	@Override
 	public void setBookField(final String title, final String author,
 			final String manifacturer, final String year,
-			final utils.ItemGenre genre, final String imagePath,
-			final String isbn, final utils.Language language, final int copies,
-			final int release) {
-		((ItemScreenImpl) this.card10).setBookField(title, author,
-				manifacturer, year, genre, imagePath, isbn, language, copies,
-				release);
+			final utils.ItemGenre genre, final String isbn,
+			final utils.Language language, final int copies, final int release) {
+		((ItemScreen) this.card10).setBookField(title, author, manifacturer,
+				year, genre, isbn, language, copies, release);
 	}
 
 	// //OK
 	@Override
 	public void setFilmField(final String title, final String author,
 			final String manifacturer, final String year,
-			final utils.ItemGenre genre, final String imagePath,
-			final String duration, final utils.TypeColor color,
-			final utils.Language language, final int copies, final int release) {
-		((ItemScreenImpl) this.card10).setFilmField(title, author,
-				manifacturer, year, genre, imagePath, duration, color,
-				language, copies, release);
+			final utils.ItemGenre genre, final String duration,
+			final utils.TypeColor color, final utils.Language language,
+			final int copies, final int release) {
+		((ItemScreen) this.card10).setFilmField(title, author, manifacturer,
+				year, genre, duration, color, language, copies, release);
 	}
 
 	// //waiting CONTROLLER function name
@@ -426,28 +418,40 @@ public class ViewImpl implements View {
 
 	}
 
+	// //OK
 	@Override
 	public void sendItemModify() {
-		// this.c.itemModify();
+		this.c.itemModify();
 	}
 
+	// //OK
 	@Override
 	public void showItemInfo(final utils.TypeItem type) {
 		ItemShow itemScreen = new ItemShowImpl();
 		itemScreen.startItemShow(this, type);
 	}
 
+	// //OK
 	@Override
 	public void goodLogin() {
 		this.logged = true;
 		this.swapView(CardName.MENU);
 	}
 
+	// //OK
+	@Override
+	public void goodManagerLogin() {
+		this.logged = true;
+		this.swapView(CardName.MANAGER_MENU);
+	}
+
+	// //OK
 	@Override
 	public void showError(final String errorMessage) {
 		JOptionPane.showMessageDialog(this.mainFrame, errorMessage);
 	}
 
+	// //OK
 	@Override
 	public void showMessage(final String message) {
 		JOptionPane.showMessageDialog(this.mainFrame, message);
@@ -475,21 +479,21 @@ public class ViewImpl implements View {
 	@Override
 	public void setStudyRoomStatus(final int[] status) {
 		if (this.logged) {
-			((StudyRoomImpl) this.card11).setStudyRoomStatus(status);
+			((StudyRoom) this.card11).setStudyRoomStatus(status);
 		}
 	}
 
 	// //OK
 	@Override
 	public int getTakenSits() {
-		return ((StudyRoomImpl) this.card11).getTakenSit();
+		return ((StudyRoom) this.card11).getTakenSit();
 	}
 
 	// //OK
 	@Override
 	public int getStudyRoomSelectedDay() {
 		if (this.logged) {
-			return ((StudyRoomImpl) this.card11).getDateDay();
+			return ((StudyRoom) this.card11).getDateDay();
 		}
 		return 0;
 	}
@@ -498,7 +502,7 @@ public class ViewImpl implements View {
 	@Override
 	public int getStudyRoomSelectedMonth() {
 		if (this.logged) {
-			return ((StudyRoomImpl) this.card11).getDateMonth();
+			return ((StudyRoom) this.card11).getDateMonth();
 		}
 		return 0;
 	}
@@ -507,7 +511,7 @@ public class ViewImpl implements View {
 	@Override
 	public int getStudyRoomSelectedYear() {
 		if (this.logged) {
-			return ((StudyRoomImpl) this.card11).getDateYear();
+			return ((StudyRoom) this.card11).getDateYear();
 		}
 		return 0;
 	}
@@ -539,17 +543,17 @@ public class ViewImpl implements View {
 
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void removeFromWishlist() {
-		// c.removeFromWishlist();
+		this.c.removeFromWishList();
 
 	}
 
 	// //OK
 	@Override
 	public String getItemToRemoveFromLikeBorrowWish() {
-		return ((ListScreenImpl) this.card5).getSelectedItem();
+		return ((ListScreen) this.card5).getSelectedItem();
 	}
 
 	// //OK
@@ -563,19 +567,19 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void setWishlist(final String[] list) {
-		((ListScreenImpl) this.card5).setWishlist(list);
+		((ListScreen) this.card5).setWishlist(list);
 	}
 
 	// //OK
 	@Override
 	public void setSuggestedBooks(final String[] bList) {
-		((UserMenuImpl) this.card2).setSuggestedBooks(bList);
+		((UserMenu) this.card2).setSuggestedBooks(bList);
 	}
 
 	// //OK
 	@Override
 	public void setSuggestedMovies(final String[] mList) {
-		((UserMenuImpl) this.card2).setSuggestedMovies(mList);
+		((UserMenu) this.card2).setSuggestedMovies(mList);
 	}
 
 	// //OK
@@ -606,25 +610,28 @@ public class ViewImpl implements View {
 
 	}
 
+	// //OK
 	@Override
 	public String getUserItemSelectedByManager() {
-		return ((ManagerScreenImpl) this.card12).getSelected();
+		return ((ManagerScreen) this.card12).getSelected();
 	}
 
+	// //OK
 	@Override
 	public void showUserInfo() {
 		UserShow userScreen = new UserShowImpl();
 		userScreen.startUserShow(this);
 	}
 
+	// //OK
 	@Override
 	public void showGiveBackOptionMessage(final String book) {
 		// Custom button text
 		final Object[] options = { "Consegna",
-				"Aumenta il prestito di un altro mese" };
+		"Aumenta il prestito di un altro mese" };
 		int choose = JOptionPane.showOptionDialog(this.mainFrame,
 				"Dovresti consegare il seguente libro:" + book
-						+ "Cosa vuoi fare?", "Notifica di consegna",
+				+ "Cosa vuoi fare?", "Notifica di consegna",
 				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
 		if (choose == 0) {
@@ -635,10 +642,10 @@ public class ViewImpl implements View {
 
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void extendBorrow() {
-		// c.extendBorrow();
+		this.c.extendBorrow();
 
 	}
 
@@ -656,31 +663,31 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void setUserList(final String[] list) {
-		((ManagerScreenImpl) this.card12).setUserList(list);
+		((ManagerScreen) this.card12).setUserList(list);
 	}
 
 	// //OK
 	@Override
 	public void setItemList(final String[] list) {
-		((ManagerScreenImpl) this.card12).setItemList(list);
+		((ManagerScreen) this.card12).setItemList(list);
 	}
 
 	// //OK
 	@Override
 	public String getItemToRemoveModify() {
-		return ((ManagerScreenImpl) this.card12).getSelected();
+		return ((ManagerScreen) this.card12).getSelected();
 	}
 
 	// //OK
 	@Override
 	public String getItemSelectedByUser() {
-		return ((MediatecaScreenImpl) this.card3).getSelectedItemFromList();
+		return ((MediatecaScreen) this.card3).getSelectedItemFromList();
 	}
 
 	// //OK
 	@Override
 	public String getSelectedSit() {
-		return ((StudyRoomImpl) this.card11).getSelectedSit();
+		return ((StudyRoom) this.card11).getSelectedSit();
 	}
 
 	// //OK
@@ -692,7 +699,7 @@ public class ViewImpl implements View {
 
 	@Override
 	public void setManagerBorrowList(final String[] borrowedList) {
-		((ManagerScreenImpl) this.card12).setUserBorrowedList(borrowedList);
+		((ManagerScreen) this.card12).setUserBorrowedList(borrowedList);
 	}
 
 	// //waiting CONTROLLER function name
@@ -701,24 +708,28 @@ public class ViewImpl implements View {
 		// c.itemReviews();
 	}
 
+	// //OK
 	@Override
 	public void setItemReviewsList(final String[] reviewsList) {
-		((ListScreenImpl) this.card14).setReviewslist(reviewsList);
+		((ListScreen) this.card14).setReviewslist(reviewsList);
 	}
 
+	// //OK
 	@Override
 	public void giveBackItemAfterNotify(final String item) {
 		this.c.giveBackItem(item);
 	}
 
+	// //waiting CONTROLLER function name
 	@Override
 	public void giveMeTakenSits() {
 		// c.takenSitsList();
 	}
 
+	// //OK
 	@Override
 	public void setTakenSitsList(final String[] sitslist) {
-		((StudyRoomImpl) this.card11).setTakenSitsList(sitslist);
+		((StudyRoom) this.card11).setTakenSitsList(sitslist);
 	}
 
 }

@@ -52,7 +52,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		giveBackItem = new JButton("Restituisci ");
 		giveBackItem.setBounds(586, 188, 178, 27);
 		giveBackItem
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		likeItem = new JButton("Mi Piace");
 		likeItem.setBounds(586, 228, 178, 27);
 		likeItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
@@ -83,7 +83,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		v.giveMeFilteredList();
 		this.filteredJList.setBounds(21, 148, 521, 418);
 		this.filteredJList
-		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
@@ -117,7 +117,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 350, 178, 27);
 		seeWishlist
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 		});
 		this.add(seeWishlist);
@@ -132,7 +132,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		borrowItem.addActionListener(e -> v.borrowItem());
 		likeItem.addActionListener(e -> v.likeItem());
 		review.addActionListener(e -> {
-			v.reviewItem();
 			v.swapView(CardName.REVIEW);
 		});
 		seeBorrowedItem.addActionListener(e -> {

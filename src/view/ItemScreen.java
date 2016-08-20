@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.ImageIcon;
-
 import utils.ItemGenre;
 import utils.Language;
 import utils.TypeColor;
@@ -25,37 +23,6 @@ public interface ItemScreen {
 	Object getItemInfo(TypeItemInfo info);
 
 	/**
-	 * Allows to resize image by passing path.
-	 *
-	 * @param imagePath
-	 *            the path of the image you want to resize
-	 * @return ImageIcon of the image
-	 */
-	ImageIcon resizeImage(String imagePath);
-
-	/**
-	 * Sets common field.
-	 *
-	 * @param title
-	 *            the title of item
-	 * @param author
-	 *            the author of item
-	 * @param manifacturer
-	 *            the producer of item
-	 * @param year
-	 *            the year of release of item
-	 * @param genre
-	 *            the genre of item
-	 * @param imagePath
-	 *            the path of item image
-	 * @param language
-	 *            the language of item
-	 */
-	void setCommonField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String imagePath, Language language,
-			int copies, int release);
-
-	/**
 	 * Sets all film field.
 	 *
 	 * @param title
@@ -68,8 +35,6 @@ public interface ItemScreen {
 	 *            the year of release of movie
 	 * @param genre
 	 *            the genre of movie
-	 * @param imagePath
-	 *            the path of movie image
 	 * @param duration
 	 *            the duration of movie
 	 * @param color
@@ -83,8 +48,8 @@ public interface ItemScreen {
 	 */
 
 	void setFilmField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String imagePath, String duration,
-			TypeColor color, Language language, int copies, int release);
+			String year, ItemGenre genre, String duration, TypeColor color,
+			Language language, int copies, int release);
 
 	/**
 	 * Sets all book fields.
@@ -99,20 +64,18 @@ public interface ItemScreen {
 	 *            the year of release of book
 	 * @param genre
 	 *            the genre of book
-	 * @param imagePath
-	 *            the path of mobookvie image
 	 * @param isbn
 	 *            the isbn code of book
 	 * @param language
 	 *            the language of book
-	 * @param copies
-	 *            the number of copies of book
 	 * @param release
 	 *            the number of release of book
+	 * @param copies
+	 *            the number of copies of book
 	 */
 	void setBookField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String imagePath, String isbn,
-			Language language, int copies, int release);
+			String year, ItemGenre genre, String isbn, Language language,
+			int copies, int release);
 
 	/**
 	 * Return information about release and copies number.

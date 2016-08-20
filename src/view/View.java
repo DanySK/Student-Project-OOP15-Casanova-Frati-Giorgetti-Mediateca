@@ -102,12 +102,6 @@ public interface View {
 	void giveBackItem();
 
 	/**
-	 * Asks controller to review item.
-	 *
-	 */
-	void reviewItem();
-
-	/**
 	 * Asks controller to put user's like to item.
 	 *
 	 */
@@ -246,8 +240,6 @@ public interface View {
 	 *            the year of release of item
 	 * @param genre
 	 *            the genre of item
-	 * @param imagePath
-	 *            the path of item image.
 	 * @param isbn
 	 *            the isbn code of item
 	 * @param language
@@ -258,8 +250,8 @@ public interface View {
 	 *            the release number of item
 	 */
 	void setBookField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String imagePath, String isbn,
-			Language language, int copies, int release);
+			String year, ItemGenre genre, String isbn, Language language,
+			int copies, int release);
 
 	/**
 	 * Sets information of movies requested with giveMeItemInfo().
@@ -274,8 +266,6 @@ public interface View {
 	 *            the year of release of item
 	 * @param genre
 	 *            the genre of item
-	 * @param imagePath
-	 *            the path of item image
 	 * @param duration
 	 *            the duration of item
 	 * @param color
@@ -288,8 +278,8 @@ public interface View {
 	 *            the release number of item
 	 */
 	void setFilmField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String imagePath, String duration,
-			TypeColor color, Language language, int copies, int release);
+			String year, ItemGenre genre, String duration, TypeColor color,
+			Language language, int copies, int release);
 
 	/**
 	 * Asks controller to set item info.
@@ -582,5 +572,10 @@ public interface View {
 	 *            the list of sits just tken by user
 	 */
 	void setTakenSitsList(String[] sitslist);
+
+	/**
+	 * Sets logged variable and change screen after login.
+	 */
+	void goodManagerLogin();
 
 }

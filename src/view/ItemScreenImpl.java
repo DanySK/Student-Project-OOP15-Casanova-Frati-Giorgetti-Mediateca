@@ -1,17 +1,12 @@
 package view;
 
 import java.awt.Font;
-import java.awt.Image;
-import java.io.File;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 import utils.TypeItem;
 import view.ViewImpl.CardName;
@@ -32,10 +27,8 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private JComboBox<?> genreF = new JComboBox(utils.ItemGenre.values());
 	private JComboBox<?> languageF = new JComboBox(utils.Language.values());
 	private final JTextField yearF;
-	private String imagePath;
-	private final JFileChooser imageChoose = new JFileChooser();
+	// private final JFileChooser imageChoose = new JFileChooser();
 	private JComboBox<?> itemTypeF = new JComboBox(utils.TypeItem.values());
-	private final JLabel imageSpace;
 	private final JTextField durationF;
 	private JComboBox<?> colorF = new JComboBox(utils.TypeColor.values());
 	private final JTextField isbnF;
@@ -73,30 +66,24 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		JLabel presentation;
 		final JButton discarge;
 		JButton send;
-		final JButton browse;
 
 		this.setLayout(null);
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 
 		this.titleF = new JTextField();
-		this.titleF.setBounds(229, 107, 230, 30);
+		this.titleF.setBounds(338, 107, 230, 30);
 		this.add(this.titleF);
 		this.titleF.setColumns(10);
 
 		this.authorF = new JTextField();
-		this.authorF.setBounds(229, 150, 230, 30);
+		this.authorF.setBounds(338, 150, 230, 30);
 		this.authorF.setColumns(10);
 		this.add(this.authorF);
 
 		this.manifacturerF = new JTextField();
-		this.manifacturerF.setBounds(229, 193, 232, 30);
+		this.manifacturerF.setBounds(338, 193, 232, 30);
 		this.manifacturerF.setColumns(10);
 		this.add(this.manifacturerF);
-
-		browse = new JButton("Scegli Immagine");
-		browse.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		browse.setBounds(493, 405, 272, 39);
-		this.add(browse);
 
 		presentation = new JLabel();
 		send = new JButton();
@@ -104,81 +91,61 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		this.yearF = new JTextField();
 		this.yearF.setColumns(10);
-		this.yearF.setBounds(229, 233, 230, 30);
+		this.yearF.setBounds(338, 233, 230, 30);
 		this.add(this.yearF);
-		this.imageSpace = new JLabel();
 
 		this.durationF = new JTextField();
 		this.durationF.setColumns(10);
-		this.durationF.setBounds(229, 341, 230, 30);
+		this.durationF.setBounds(338, 341, 230, 30);
 		this.add(this.durationF);
 
 		this.colorF = new JComboBox();
-		this.colorF.setBounds(229, 414, 230, 30);
+		this.colorF.setBounds(338, 414, 230, 30);
 		this.add(this.colorF);
 
 		this.languageF = new JComboBox();
-		this.languageF.setBounds(229, 378, 230, 30);
+		this.languageF.setBounds(338, 378, 230, 30);
 		this.add(this.languageF);
 
 		this.isbnF = new JTextField();
 		this.isbnF.setColumns(10);
-		this.isbnF.setBounds(229, 306, 230, 30);
+		this.isbnF.setBounds(338, 306, 230, 30);
 		this.add(this.isbnF);
-
-		this.imageSpace.setBounds(510, 79, 100, 140);
-		this.add(this.imageSpace);
-		// http://1bestcsharp.blogspot.it/2015/04/java-how-to-browse-image-file-and-And-Display-It-Using-JFileChooser-In-Java.html
-		browse.addActionListener(e -> {
-			this.imageChoose.setCurrentDirectory(new File(System
-					.getProperty("user.home")));
-			final FileNameExtensionFilter filter = new FileNameExtensionFilter(
-					"*.images", "jpg", "gif", "png");
-			this.imageChoose.addChoosableFileFilter(filter);
-			final int result = this.imageChoose.showSaveDialog(null);
-			if (result == JFileChooser.APPROVE_OPTION) {
-				final File selectedImage = this.imageChoose.getSelectedFile();
-				this.imagePath = selectedImage.getAbsolutePath();
-				this.imageSpace.setIcon(this.resizeImage(this.imagePath));
-			} else if (result == JFileChooser.CANCEL_OPTION) {
-				this.imageSpace.setIcon(null);
-			}
-		});
 
 		this.itemTypeF = new JComboBox();
 		this.itemTypeF.setToolTipText("Tipo");
-		this.itemTypeF.setBounds(229, 64, 230, 30);
+		this.itemTypeF.setBounds(338, 64, 230, 30);
 		this.add(this.itemTypeF);
 
 		this.genreF = new JComboBox();
 		this.genreF.setToolTipText("Genere");
-		this.genreF.setBounds(229, 271, 230, 30);
+		this.genreF.setBounds(338, 271, 230, 30);
 		this.add(this.genreF);
 
 		titleL = new JLabel("Titolo:");
 		titleL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		titleL.setBounds(50, 107, 167, 30);
+		titleL.setBounds(159, 107, 167, 30);
 		this.add(titleL);
 
 		durationL = new JLabel("Durata:");
 		durationL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		durationL.setBounds(50, 306, 167, 30);
+		durationL.setBounds(159, 306, 167, 30);
 		this.add(durationL);
 
 		isbnL = new JLabel("ISBN:");
 		isbnL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		isbnL.setBounds(50, 341, 167, 30);
+		isbnL.setBounds(159, 341, 167, 30);
 		this.add(isbnL);
 
 		authorL = new JLabel("Autore:");
 		authorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		authorL.setBounds(50, 150, 167, 30);
+		authorL.setBounds(159, 150, 167, 30);
 		this.add(authorL);
 		this.numCopiesF = new JTextField();
 		this.numCopiesF.setSize(78, 30);
-		this.numCopiesF.setLocation(229, 450);
+		this.numCopiesF.setLocation(338, 450);
 		this.numReleaseF = new JTextField();
-		this.numReleaseF.setLocation(229, 485);
+		this.numReleaseF.setLocation(338, 485);
 		this.numReleaseF.setSize(78, 30);
 		this.add(this.numCopiesF);
 		this.add(this.numReleaseF);
@@ -231,48 +198,44 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		manifacturerL = new JLabel("Produttore:");
 		manifacturerL.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.SMALL_SIZE));
-		manifacturerL.setBounds(50, 193, 167, 30);
+		manifacturerL.setBounds(159, 193, 167, 30);
 		this.add(manifacturerL);
 
 		yearL = new JLabel("Anno:");
 		yearL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		yearL.setBounds(50, 233, 167, 30);
+		yearL.setBounds(159, 233, 167, 30);
 		this.add(yearL);
 
 		JLabel numCopiesL = new JLabel("Copie:");
 		numCopiesL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		numCopiesL.setBounds(50, 450, 167, 30);
+		numCopiesL.setBounds(159, 450, 167, 30);
 		this.add(numCopiesL);
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
 		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		numReleaseL.setBounds(50, 485, 167, 30);
+		numReleaseL.setBounds(159, 485, 167, 30);
 		this.add(numReleaseL);
 
 	}
 
-	@Override
-	public ImageIcon resizeImage(final String imagePath) {
-		ImageIcon myImage = new ImageIcon(imagePath);
-		Image img = myImage.getImage();
-		Image newImg = img.getScaledInstance(this.imageSpace.getWidth(),
-				this.imageSpace.getHeight(), Image.SCALE_SMOOTH);
-		ImageIcon image = new ImageIcon(newImg);
-		return image;
-	}
-
-	@Override
-	public void setCommonField(final String title, final String author,
+	/*
+	 * @Override public ImageIcon resizeImage(final String imagePath) {
+	 * ImageIcon myImage = new ImageIcon(imagePath); Image img =
+	 * myImage.getImage(); Image newImg =
+	 * img.getScaledInstance(this.imageSpace.getWidth(),
+	 * this.imageSpace.getHeight(), Image.SCALE_SMOOTH); ImageIcon image = new
+	 * ImageIcon(newImg); return image; }
+	 */
+	private void setCommonField(final String title, final String author,
 			final String manifacturer, final String year,
-			final utils.ItemGenre genre, final String imagePath,
-			final utils.Language language, final int copies, final int release) {
+			final utils.ItemGenre genre, final utils.Language language,
+			final int copies, final int release) {
 		this.titleF.setText(title);
 		this.authorF.setText(author);
 		this.manifacturerF.setText(manifacturer);
 		this.yearF.setText(year);
 		this.genreF.setSelectedItem(genre);
-		this.imagePath = imagePath;
 		this.languageF.setSelectedItem(language);
 		this.numCopiesF.setText(Integer.toString(copies));
 		this.numReleaseF.setText(Integer.toString(release));
@@ -281,11 +244,11 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	@Override
 	public void setFilmField(final String title, final String author,
 			final String manifacturer, final String year,
-			final utils.ItemGenre genre, final String imagePath,
-			final String duration, final utils.TypeColor color,
-			final utils.Language language, final int copies, final int release) {
-		this.setCommonField(title, author, manifacturer, year, genre,
-				imagePath, language, copies, release);
+			final utils.ItemGenre genre, final String duration,
+			final utils.TypeColor color, final utils.Language language,
+			final int copies, final int release) {
+		this.setCommonField(title, author, manifacturer, year, genre, language,
+				copies, release);
 		this.durationF.setText(duration);
 		this.colorF.setSelectedItem(color);
 		this.isbnF.setText(null);
@@ -294,11 +257,10 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	@Override
 	public void setBookField(final String title, final String author,
 			final String manifacturer, final String year,
-			final utils.ItemGenre genre, final String imagePath,
-			final String isbn, final utils.Language language, final int copies,
-			final int release) {
-		this.setCommonField(title, author, manifacturer, year, genre,
-				imagePath, language, copies, release);
+			final utils.ItemGenre genre, final String isbn,
+			final utils.Language language, final int copies, final int release) {
+		this.setCommonField(title, author, manifacturer, year, genre, language,
+				copies, release);
 		this.durationF.setText(null);
 		this.colorF.setSelectedItem(null);
 		this.isbnF.setText(isbn);
@@ -319,8 +281,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			return this.genreF.getSelectedItem();
 		case TYPE:
 			return this.itemTypeF.getSelectedObjects();
-		case IMAGE:
-			return this.imagePath;
 		case DURATION:
 			return this.durationF.getText();
 		case COLOR:
@@ -349,4 +309,8 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		}
 		return null;
 	}
+	/*
+	 * @Override public ImageIcon resizeImage(String imagePath) { // TODO
+	 * Auto-generated method stub return null; }
+	 */
 }

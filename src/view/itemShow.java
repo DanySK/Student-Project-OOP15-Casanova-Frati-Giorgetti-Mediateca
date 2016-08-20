@@ -12,91 +12,61 @@ import utils.TypeItem;
  *
  */
 public interface ItemShow {
-	/**
-	 * Sets common fields in item show.
-	 *
-	 * @param title
-	 *            the title of item
-	 * @param author
-	 *            the authot of item
-	 * @param manifacturer
-	 *            the producer of item
-	 * @param year
-	 *            the year of release of item
-	 * @param genre
-	 *            the genre of item
-	 * @param reviewAvarage
-	 *            the avarage review of item
-	 * @param availability
-	 *            the availability of item
-	 * @param imagePath
-	 *            the path of item image
-	 * @param language
-	 *            the language of item
-	 */
-	void setCommonField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String reviewAvarage,
-			String availability, String imagePath, Language language);
 
 	/**
 	 * Sets all field for film item.
 	 *
-	 * @param title
+	 * @param titleS
 	 *            the title of movie
-	 * @param author
+	 * @param authorS
 	 *            the author of movie
-	 * @param manifacturer
+	 * @param manifacturerS
 	 *            the producer of movie
-	 * @param year
+	 * @param yearS
 	 *            the year of release of movie
-	 * @param genre
+	 * @param genreS
 	 *            the genre of movie
-	 * @param reviewAvarage
+	 * @param reviewAvarageS
 	 *            the avarage review of movie
-	 * @param availability
+	 * @param availabilityS
 	 *            the availability of movie
-	 * @param imagePath
-	 *            the path of movie image
-	 * @param duration
+	 * @param durationS
 	 *            the duration of movie
-	 * @param color
+	 * @param colorS
 	 *            the color type of movie
-	 * @param language
+	 * @param languageS
 	 *            the language of movie
 	 */
-	void setFilmField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String reviewAvarage,
-			String availability, String imagePath, String duration,
-			TypeColor color, Language language);
+	void setFilmField(String titleS, String authorS, String manifacturerS,
+			String yearS, ItemGenre genreS, String reviewAvarageS,
+			String availabilityS, String durationS, TypeColor colorS,
+			Language languageS);
 
 	/**
 	 * Sets all field for book item.
 	 *
-	 * @param title
+	 * @param titleS
 	 *            the title of book
-	 * @param author
+	 * @param authorS
 	 *            the author of book
-	 * @param manifacturer
+	 * @param manifacturerS
 	 *            the producer of book
-	 * @param year
+	 * @param yearS
 	 *            the year of release of book
-	 * @param genre
+	 * @param genreS
 	 *            the genre of book
-	 * @param reviewAvarage
+	 * @param reviewAvarageS
 	 *            the avarage review of book
-	 * @param availability
+	 * @param availabilityS
 	 *            the availability of book
-	 * @param imagePath
-	 *            the path of book image
-	 * @param isbn
+	 * @param isbnS
 	 *            the isbn code of book
-	 * @param language
+	 * @param languageS
 	 *            the language of movie
 	 */
-	void setBookField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String reviewAvarage,
-			String availability, String imagePath, String isbn,
-			Language language);
+	void setBookField(String titleS, String authorS, String manifacturerS,
+			String yearS, ItemGenre genreS, String reviewAvarageS,
+			String availabilityS, String isbnS, Language languageS);
 
 	/**
 	 * Starts item show.

@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Font;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,11 +29,7 @@ public class ItemShowImpl implements ItemShow {
 	private utils.TypeColor color;
 	private String duration;
 	private utils.Language language;
-	private String imagePath;
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
 	@Override
 	public void startItemShow(final View v, final TypeItem type) {
 		v.giveMeItemInfo();
@@ -59,12 +54,6 @@ public class ItemShowImpl implements ItemShow {
 		authorL.setBounds(23, 44, 480, 30);
 		authorL.setText("Autore:" + this.author);
 		mainFrame.getContentPane().add(authorL);
-
-		final ImageIcon image = new ImageIcon(this.imagePath);
-		JLabel imageSpace = new JLabel(image);
-		imageSpace.setBounds(325, 14, ViewImpl.IMAGE_WIDTH,
-				ViewImpl.IMAGE_LENGHT);
-		mainFrame.getContentPane().add(imageSpace);
 
 		final JLabel manifacturerL = new JLabel("Prodotto da: "
 				+ this.manifacturer);
@@ -129,12 +118,10 @@ public class ItemShowImpl implements ItemShow {
 		}
 	}
 
-	@Override
-	public void setCommonField(final String titleS, final String authorS,
+	private void setCommonField(final String titleS, final String authorS,
 			final String manifacturerS, final String yearS,
 			final utils.ItemGenre genreS, final String reviewAvarageS,
-			final String availabilityS, final String imagePathS,
-			final utils.Language languageS) {
+			final String availabilityS, final utils.Language languageS) {
 		this.title = titleS;
 		this.author = authorS;
 		this.manifacturer = manifacturerS;
@@ -142,7 +129,6 @@ public class ItemShowImpl implements ItemShow {
 		this.genre = genreS;
 		this.reviewAvarage = reviewAvarageS;
 		this.availability = availabilityS;
-		this.imagePath = imagePathS;
 		this.language = languageS;
 	}
 
@@ -150,11 +136,10 @@ public class ItemShowImpl implements ItemShow {
 	public void setFilmField(final String titleS, final String authorS,
 			final String manifacturerS, final String yearS,
 			final utils.ItemGenre genreS, final String reviewAvarageS,
-			final String availabilityS, final String imagePathS,
-			final String durationS, final utils.TypeColor colorS,
-			final utils.Language languageS) {
+			final String availabilityS, final String durationS,
+			final utils.TypeColor colorS, final utils.Language languageS) {
 		this.setCommonField(titleS, authorS, manifacturerS, yearS, genreS,
-				reviewAvarageS, availabilityS, imagePathS, languageS);
+				reviewAvarageS, availabilityS, languageS);
 		this.duration = durationS;
 		this.color = colorS;
 		this.isbn = null;
@@ -164,10 +149,10 @@ public class ItemShowImpl implements ItemShow {
 	public void setBookField(final String titleS, final String authorS,
 			final String manifacturerS, final String yearS,
 			final utils.ItemGenre genreS, final String reviewAvarageS,
-			final String availabilityS, final String imagePathS,
-			final String isbnS, final utils.Language languageS) {
+			final String availabilityS, final String isbnS,
+			final utils.Language languageS) {
 		this.setCommonField(titleS, authorS, manifacturerS, yearS, genreS,
-				reviewAvarageS, availabilityS, imagePathS, languageS);
+				reviewAvarageS, availabilityS, languageS);
 		this.duration = null;
 		this.color = null;
 		this.isbn = isbnS;
