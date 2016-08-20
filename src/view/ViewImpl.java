@@ -96,12 +96,12 @@ public class ViewImpl implements View {
 	public enum CardName {
 		MAIN("Main Card"), LOGIN("Login Card"), MENU("Menu Card"), ITEM(
 				"Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-				"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
-				"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
+						"LikeList Screen Card"), BORROWED_LIST(
+								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
+																"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
 
 		private final String name;
 
@@ -378,9 +378,13 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public Object getItemInfo(final utils.TypeItemInfo info,
-			final view.ViewImpl.OtherItemFilter info2) {
-		return ((ItemScreenImpl) this.card10).getItemInfo(info, info2);
+	public Object getItemInfo(final utils.TypeItemInfo info) {
+		return ((ItemScreenImpl) this.card10).getItemInfo(info);
+	}
+
+	@Override
+	public Object getOtherItemInfo(final view.ViewImpl.OtherItemFilter info2) {
+		return ((ItemScreenImpl) this.card10).getItemInfo(info2);
 	}
 
 	// //OK
@@ -595,7 +599,7 @@ public class ViewImpl implements View {
 	public void showGiveBackOptionMessage(final String book) {
 		// Custom button text
 		final Object[] options = { "Consegna",
-				"Aumenta il prestito di un altro mese" };
+		"Aumenta il prestito di un altro mese" };
 		int choose = JOptionPane.showOptionDialog(this.mainFrame,
 				"Dovresti consegare il seguente libro:" + book
 				+ "Cosa vuoi fare?", "Notifica di consegna",

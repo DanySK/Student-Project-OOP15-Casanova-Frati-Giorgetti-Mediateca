@@ -196,29 +196,29 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			send.addActionListener(e -> v.sendItemModify());
 		}
 		this.itemTypeF
-				.addActionListener(e -> {
-					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
-						this.colorF.setEnabled(false);
-						this.colorF.setVisible(false);
-						this.durationF.setEnabled(false);
-						this.durationF.setVisible(false);
-						durationL.setVisible(false);
-						this.isbnF.setEnabled(true);
-						this.isbnF.setVisible(true);
-						isbnL.setVisible(true);
+		.addActionListener(e -> {
+			if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+				this.colorF.setEnabled(false);
+				this.colorF.setVisible(false);
+				this.durationF.setEnabled(false);
+				this.durationF.setVisible(false);
+				durationL.setVisible(false);
+				this.isbnF.setEnabled(true);
+				this.isbnF.setVisible(true);
+				isbnL.setVisible(true);
 
-					} else if (this.itemTypeF.getSelectedItem().equals(
-							TypeItem.MOVIE)) {
-						this.colorF.setEnabled(true);
-						this.colorF.setVisible(true);
-						this.durationF.setEnabled(true);
-						this.durationF.setVisible(true);
-						durationL.setVisible(true);
-						this.isbnF.setEnabled(false);
-						this.isbnF.setVisible(false);
-						isbnL.setVisible(false);
-					}
-				});
+			} else if (this.itemTypeF.getSelectedItem().equals(
+					TypeItem.MOVIE)) {
+				this.colorF.setEnabled(true);
+				this.colorF.setVisible(true);
+				this.durationF.setEnabled(true);
+				this.durationF.setVisible(true);
+				durationL.setVisible(true);
+				this.isbnF.setEnabled(false);
+				this.isbnF.setVisible(false);
+				isbnL.setVisible(false);
+			}
+		});
 		presentation.setBounds(50, 13, 692, 38);
 		this.add(presentation);
 
@@ -305,8 +305,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	}
 
 	@Override
-	public Object getItemInfo(final utils.TypeItemInfo info,
-			final ViewImpl.OtherItemFilter info2) {
+	public Object getItemInfo(final utils.TypeItemInfo info) {
 		switch (info) {
 		case TITLE:
 			return this.titleF.getText();
@@ -334,6 +333,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			break;
 
 		}
+
+		return null;
+	}
+
+	@Override
+	public Object getItemInfo(final ViewImpl.OtherItemFilter info2) {
 		switch (info2) {
 		case RELEASE_NUMBER:
 			return this.numReleaseF;

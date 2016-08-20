@@ -229,11 +229,9 @@ public interface View {
 	 *
 	 * @param info
 	 *            the type of info you want
-	 * @param info2
-	 *            the type of info (release or copies number)
 	 * @return the information requested
 	 */
-	Object getItemInfo(TypeItemInfo info, OtherItemFilter info2);
+	Object getItemInfo(TypeItemInfo info);
 
 	/**
 	 * Sets information of books requested with giveMeItemInfo().
@@ -568,5 +566,14 @@ public interface View {
 	 *            item you have to give back
 	 */
 	void giveBackItemAfterNotify(String item);
+
+	/**
+	 * Returns the item information about release or copies number.
+	 * 
+	 * @param info2
+	 *            the type of info (release or copies number)
+	 * @return the requeste information
+	 */
+	Object getOtherItemInfo(OtherItemFilter info2);
 
 }

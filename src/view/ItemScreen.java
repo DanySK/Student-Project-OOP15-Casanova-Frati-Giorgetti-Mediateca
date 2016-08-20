@@ -22,7 +22,7 @@ public interface ItemScreen {
 	 *            info type you want
 	 * @return information requested
 	 */
-	Object getItemInfo(TypeItemInfo info, OtherItemFilter info2);
+	Object getItemInfo(TypeItemInfo info);
 
 	/**
 	 * Allows to resize image by passing path.
@@ -76,6 +76,10 @@ public interface ItemScreen {
 	 *            the color type of movie
 	 * @param language
 	 *            the language of movie
+	 * @param copies
+	 *            the number of copies of movie
+	 * @param release
+	 *            the number of release of movie
 	 */
 
 	void setFilmField(String title, String author, String manifacturer,
@@ -101,9 +105,22 @@ public interface ItemScreen {
 	 *            the isbn code of book
 	 * @param language
 	 *            the language of book
+	 * @param copies
+	 *            the number of copies of book
+	 * @param release
+	 *            the number of release of book
 	 */
 	void setBookField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String isbn,
 			Language language, int copies, int release);
+
+	/**
+	 * Return information about release and copies number.
+	 *
+	 * @param info2
+	 *            the info type you want
+	 * @return information requested
+	 */
+	Object getItemInfo(OtherItemFilter info2);
 
 }
