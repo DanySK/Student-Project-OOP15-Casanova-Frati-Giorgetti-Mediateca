@@ -39,6 +39,8 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private final JTextField durationF;
 	private JComboBox<?> colorF = new JComboBox(utils.TypeColor.values());
 	private final JTextField isbnF;
+	private final JTextField numCopiesF;
+	private final JTextField numReleaseF;
 
 	/**
 	 * enum for type of Item screen to show.
@@ -171,7 +173,14 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		authorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		authorL.setBounds(50, 150, 167, 30);
 		this.add(authorL);
-
+		this.numCopiesF = new JTextField();
+		this.numCopiesF.setSize(78, 30);
+		this.numCopiesF.setLocation(229, 450);
+		this.numReleaseF = new JTextField();
+		this.numReleaseF.setLocation(229, 485);
+		this.numReleaseF.setSize(78, 30);
+		this.add(this.numCopiesF);
+		this.add(this.numReleaseF);
 		discarge = new JButton("Annulla");
 		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		if (type.equals(ItemScreenType.CREATE)) {
@@ -186,33 +195,33 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			send.addActionListener(e -> v.sendItemModify());
 		}
 		this.itemTypeF
-		.addActionListener(e -> {
-			if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
-				this.colorF.setEnabled(false);
-				this.colorF.setVisible(false);
-				this.durationF.setEnabled(false);
-				this.durationF.setVisible(false);
-				durationL.setVisible(false);
-				this.isbnF.setEnabled(true);
-				this.isbnF.setVisible(true);
-				isbnL.setVisible(true);
+				.addActionListener(e -> {
+					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+						this.colorF.setEnabled(false);
+						this.colorF.setVisible(false);
+						this.durationF.setEnabled(false);
+						this.durationF.setVisible(false);
+						durationL.setVisible(false);
+						this.isbnF.setEnabled(true);
+						this.isbnF.setVisible(true);
+						isbnL.setVisible(true);
 
-			} else if (this.itemTypeF.getSelectedItem().equals(
-					TypeItem.MOVIE)) {
-				this.colorF.setEnabled(true);
-				this.colorF.setVisible(true);
-				this.durationF.setEnabled(true);
-				this.durationF.setVisible(true);
-				durationL.setVisible(true);
-				this.isbnF.setEnabled(false);
-				this.isbnF.setVisible(false);
-				isbnL.setVisible(false);
-			}
-		});
+					} else if (this.itemTypeF.getSelectedItem().equals(
+							TypeItem.MOVIE)) {
+						this.colorF.setEnabled(true);
+						this.colorF.setVisible(true);
+						this.durationF.setEnabled(true);
+						this.durationF.setVisible(true);
+						durationL.setVisible(true);
+						this.isbnF.setEnabled(false);
+						this.isbnF.setVisible(false);
+						isbnL.setVisible(false);
+					}
+				});
 		presentation.setBounds(50, 13, 692, 38);
 		this.add(presentation);
 
-		discarge.setBounds(39, 508, 178, 53);
+		discarge.setBounds(28, 531, 125, 30);
 		this.add(discarge);
 
 		send.setBounds(582, 508, 178, 53);
@@ -228,6 +237,17 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		yearL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		yearL.setBounds(50, 233, 167, 30);
 		this.add(yearL);
+
+		JLabel numCopiesL = new JLabel("Copie:");
+		numCopiesL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		numCopiesL.setBounds(50, 450, 167, 30);
+		this.add(numCopiesL);
+
+		JLabel numReleaseL = new JLabel("Release:");
+		numReleaseL
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		numReleaseL.setBounds(50, 485, 167, 30);
+		this.add(numReleaseL);
 
 	}
 
@@ -304,6 +324,10 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		case ISBN:
 			return this.isbnF.getText();
 		case LANGUAGE:
+			return this.languageF.getSelectedItem();
+		case RELEASE_NUMBER:
+			return this.languageF.getSelectedItem();
+		case COPIES_NUMBER:
 			return this.languageF.getSelectedItem();
 		default:
 			break;
