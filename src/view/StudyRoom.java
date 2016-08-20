@@ -42,20 +42,4 @@ public interface StudyRoom {
 	 * @return the selected year
 	 */
 	int getDateYear();
-
-	/**
-	 * Sets the list of taken sits.
-	 *
-	 * @param list
-	 *            list of occupied sits
-	 */
-	void setTakenSitsList(String[] list);
-
-	/**
-	 * Returns the selected value in just taken sits list.
-	 *
-	 * @return selected sit
-	 */
-	String getSelectedSit();
-
 }

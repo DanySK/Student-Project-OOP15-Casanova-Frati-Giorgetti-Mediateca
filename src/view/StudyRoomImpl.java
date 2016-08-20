@@ -8,7 +8,6 @@ import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
@@ -33,7 +32,6 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	private final JButton[] buttons;
 	private JDatePickerImpl datePicker;
 	private UtilDateModel model = new UtilDateModel();
-	private JList<String> takenSitsList = new JList<String>();
 	private SpringLayout springLayout = new SpringLayout();
 
 	/**
@@ -77,8 +75,6 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		northPanel.add(this.datePicker);
 
 		southPanel.setLayout(null);
-		this.takenSitsList.setBounds(12, 110, 605, -103);
-		southPanel.add(this.takenSitsList);
 
 		int i;
 
@@ -97,11 +93,10 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		new BorderLayout();
 		this.setLayout(null);
 		this.add(southPanel);
-		JButton remove = new JButton("Rimuovi");
-		remove.setBounds(667, 28, 121, 39);
+		JButton remove = new JButton("Rimuovi posto");
+		remove.setBounds(498, 13, 258, 39);
 		southPanel.add(remove);
 		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		remove.addActionListener(e -> v.removeSit());
 
 		this.add(northPanel);
 		northPanel.setLayout(null);
@@ -153,15 +148,5 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	@Override
 	public int getDateYear() {
 		return this.datePicker.getModel().getYear();
-	}
-
-	@Override
-	public void setTakenSitsList(final String[] list) {
-		this.takenSitsList = new JList<String>(list);
-	}
-
-	@Override
-	public String getSelectedSit() {
-		return this.takenSitsList.getSelectedValue();
 	}
 }
