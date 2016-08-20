@@ -393,12 +393,6 @@ public interface View {
 	void giveMeSuggestedMovies();
 
 	/**
-	 * Asks controller to remove like from an item getted by
-	 * getItemToremoveFromLikeBorrowWish().
-	 */
-	void removeLike();
-
-	/**
 	 * Asks controller to remove from wishlist an item getted by
 	 * getItemToremoveFromLikeBorrowWish().
 	 *

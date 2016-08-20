@@ -46,7 +46,7 @@ public class ViewImpl implements View {
 
 	StringWriter sw = new StringWriter();
 	PrintWriter pw = new PrintWriter(this.sw);
-	private static boolean logged = false;
+	private boolean logged;
 
 	private JPanel card0;
 	private JPanel card1;
@@ -337,7 +337,7 @@ public class ViewImpl implements View {
 
 	@Override
 	public void giveMeBorrowList() {
-		if (ViewImpl.logged) {
+		if (this.logged) {
 			this.c.borrowList();
 		}
 	}
@@ -356,17 +356,17 @@ public class ViewImpl implements View {
 
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void sendManagerLogin() {
-		// this.c.managerLogin();
+		this.c.managerLogin();
 
 	}
 
 	// //OK
 	@Override
 	public void giveMeFilteredList() {
-		if (ViewImpl.logged) {
+		if (this.logged) {
 			try {
 				this.c.itemElaboration();
 			} catch (Exception e) {
@@ -439,7 +439,7 @@ public class ViewImpl implements View {
 
 	@Override
 	public void goodLogin() {
-		ViewImpl.logged = true;
+		this.logged = true;
 		this.swapView(CardName.MENU);
 	}
 
@@ -471,37 +471,42 @@ public class ViewImpl implements View {
 		this.c.studyRoomStatus();
 	}
 
+	// //OK
 	@Override
 	public void setStudyRoomStatus(final int[] status) {
-		if (ViewImpl.logged) {
+		if (this.logged) {
 			((StudyRoomImpl) this.card11).setStudyRoomStatus(status);
 		}
 	}
 
+	// //OK
 	@Override
 	public int getTakenSits() {
 		return ((StudyRoomImpl) this.card11).getTakenSit();
 	}
 
+	// //OK
 	@Override
 	public int getStudyRoomSelectedDay() {
-		if (ViewImpl.logged) {
+		if (this.logged) {
 			return ((StudyRoomImpl) this.card11).getDateDay();
 		}
 		return 0;
 	}
 
+	// //OK
 	@Override
 	public int getStudyRoomSelectedMonth() {
-		if (ViewImpl.logged) {
+		if (this.logged) {
 			return ((StudyRoomImpl) this.card11).getDateMonth();
 		}
 		return 0;
 	}
 
+	// //OK
 	@Override
 	public int getStudyRoomSelectedYear() {
-		if (ViewImpl.logged) {
+		if (this.logged) {
 			return ((StudyRoomImpl) this.card11).getDateYear();
 		}
 		return 0;
@@ -541,58 +546,63 @@ public class ViewImpl implements View {
 
 	}
 
+	// //OK
 	@Override
 	public String getItemToRemoveFromLikeBorrowWish() {
 		return ((ListScreenImpl) this.card5).getSelectedItem();
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void giveMeWishlist() {
-		// c.wishlist();
-
+		if (this.logged) {
+			this.c.setWishlist();
+		}
 	}
 
+	// //OK
 	@Override
 	public void setWishlist(final String[] list) {
 		((ListScreenImpl) this.card5).setWishlist(list);
 	}
 
+	// //OK
 	@Override
 	public void setSuggestedBooks(final String[] bList) {
 		((UserMenuImpl) this.card2).setSuggestedBooks(bList);
 	}
 
+	// //OK
 	@Override
 	public void setSuggestedMovies(final String[] mList) {
 		((UserMenuImpl) this.card2).setSuggestedMovies(mList);
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void giveMeUserList() {
-		// c.setAllUserList();
+		this.c.setAllUserList();
 
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void giveMeItemList() {
-		// c.setAllItemList();
+		this.c.setAllItemList();
 
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void deleteUser() {
-		// this.c.deleteUser();
+		this.c.deleteUser();
 
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void deleteItem() {
-		// c.deleteItem();
+		this.c.deleteItem();
 
 	}
 
@@ -673,10 +683,10 @@ public class ViewImpl implements View {
 		return ((StudyRoomImpl) this.card11).getSelectedSit();
 	}
 
-	// //waiting CONTROLLER function name
+	// //OK
 	@Override
 	public void giveManagerBorrowList() {
-		// c.userBorrowList();
+		this.c.borrowList();
 
 	}
 
@@ -698,7 +708,7 @@ public class ViewImpl implements View {
 
 	@Override
 	public void giveBackItemAfterNotify(final String item) {
-		// c.giveBack(item);
+		this.c.giveBackItem(item);
 	}
 
 	@Override
