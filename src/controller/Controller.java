@@ -129,7 +129,7 @@ public interface Controller {
 
 	/**
 	 * Method which returns an item borrowed by the user.
-	 * 
+	 *
 	 * @param item
 	 *            item to be returned.
 	 */
@@ -144,4 +144,14 @@ public interface Controller {
 	 * Method which creates an item based on its type.
 	 */
 	void itemCreate();
+
+	/**
+	 * Method which changes the fields of the user.
+	 */
+	void userModify();
+
+	/**
+	 * Method which changes the fields of the item.
+	 */
+	void itemModify();
 }

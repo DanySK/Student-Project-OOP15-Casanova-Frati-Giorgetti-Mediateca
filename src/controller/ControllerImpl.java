@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.print.Book;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -173,7 +174,7 @@ public class ControllerImpl implements Controller {
 		String[] array = new String[this.m.getAllItemId(ty).size()];
 		try {
 			for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
-				array[index] = this.m.getRequiredItem(i).toString();
+				array[index] = this.m.getItemArchive().get(i).toString();
 				index++;
 			}
 		} catch (Exception e) {
@@ -242,6 +243,7 @@ public class ControllerImpl implements Controller {
 		this.m.borrowItem(itemId, this.actualUser.getIdUser());
 	}
 
+	@Override
 	public void userModify() {
 		// for per ogni tipo di userinfo e fare changeUser totale
 		for (UserInfo ui : UserInfo.values()) {
@@ -254,6 +256,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void itemModify() {
 		// getItemToRemoveModify ottiene la stringa da setAllItemList!!!
 		Integer itemId = null;
@@ -294,17 +297,55 @@ public class ControllerImpl implements Controller {
 	}
 
 	public void setItemInfo() {
-		item id = this.v.getItemSelectedByUser();
+		// getItemSelectedByuSer lo prendo da setFilteredList
+		Integer itemId;
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
+				itemId = i;
+			}
+		}
+		String title = this.m.getItemArchive().get(itemId).getFirst().getTitle();
+		int releaseYear = this.m.getItemArchive().get(itemId).getFirst().getReleaseYear();
+		String author = this.m.getItemArchive().get(itemId).getFirst().getAuthor();
+		Language language = this.m.getItemArchive().get(itemId).getFirst().getCurrentLanguage();
+		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);// mancante
+		ItemGenre genre = this.m.getItemArchive().get(itemId).getFirst().getGenre();
+		String publisher = this.m.getItemArchive().get(itemId).getFirst().getPublisher();
+		Integer numRelease = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER);
+		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
+		String duration = (String) this.v.getItemInfo(TypeItemInfo.DURATION);
+		String color = (String) this.v.getItemInfo(TypeItemInfo.COLOR);
+
 		// determinare il tipo book o movie in base all'id
-		this.v.setBookField(title, author, manifacturer, year, genre, imagePath, isbn, language, copies, release);
-		this.v.setFilmField(title, author, manifacturer, year, genre, imagePath, duration, color, language, copies,
-				release);
+		if (TypeItem.BOOK.getClass().isInstance(this.m.getItemArchive().get(itemId).getFirst()){
+		this.v.setBookField(title, author, publisher, releaseYear, genre, isbn, language, numCopy, numRelease);
+		} else {
+			this.v.setFilmField(title, author, publisher, releaseYear, genre, duration, color, language, numCopy,
+				numRelease);
+		}
 	}
 
-	public void suggestedbook(){
+	public void suggestedBook(){
 		// stampa 3 libri di 3 preferenze
-		this.m.getUserArchive().get(this.actualUser.getIdUser()).getBookPreferences()
-		this.v.setSuggestedBooks();
+		int index = 0;
+		float big = 0;
+		String[] array = new String[3];
+		for (ItemGenre ig : this.m.getUserArchive().get(this.actualUser.getIdUser()).getBookPreferences()){
+		for (Integer i : this.m.getItemArchive().keySet()){
+			this.m.getItemArchive().get(i).getFirst().setAverageVote();
+			if (this.m.getItemArchive().get(i).getFirst().getGenre() == ig){
+				if (this.m.getItemArchive().get(i).getFirst().getAverageVote() > big){
+					big = this.m.getItemArchive().get(i).getFirst().getAverageVote();
+				}
+
+			}
+		}
+		}
+
+			array[index] = this.m.get
+
+
+		this.v.setSuggestedBooks(array);
 	}
 
 	public void suggestedfilm() {
