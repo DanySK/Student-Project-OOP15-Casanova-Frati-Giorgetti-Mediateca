@@ -513,7 +513,7 @@ public interface View {
 	 *
 	 * @return the sits selected
 	 */
-	String getSelectedSit();
+	int getSelectedSit();
 
 	/**
 	 * Tells controller to sets the list of item borrowed by user.
@@ -559,14 +559,6 @@ public interface View {
 	 * @return the requeste information
 	 */
 	Object getOtherItemInfo(OtherItemFilter info2);
-
-	/**
-	 * Allows to set the list of just taken sits.
-	 *
-	 * @param sitslist
-	 *            the list of sits just tken by user
-	 */
-	void setTakenSitsList(String[] sitslist);
 
 	/**
 	 * Sets logged variable and change screen after login.

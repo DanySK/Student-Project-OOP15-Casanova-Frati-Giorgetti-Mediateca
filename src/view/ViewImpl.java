@@ -695,8 +695,8 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public String getSelectedSit() {
-		return ((StudyRoom) this.card11).getSelectedSit();
+	public int getSelectedSit() {
+		return ((StudyRoom) this.card11).getTakenSit();
 	}
 
 	// //OK
@@ -728,12 +728,6 @@ public class ViewImpl implements View {
 	@Override
 	public void giveBackItemAfterNotify(final String item) {
 		this.c.giveBackItem(item);
-	}
-
-	// //OK
-	@Override
-	public void setTakenSitsList(final String[] sitslist) {
-		((StudyRoom) this.card11).setTakenSitsList(sitslist);
 	}
 
 }
