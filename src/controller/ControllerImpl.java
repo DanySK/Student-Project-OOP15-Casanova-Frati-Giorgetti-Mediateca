@@ -23,6 +23,7 @@ import utils.TypeItem;
 import utils.TypeItemInfo;
 import utils.UserInfo;
 import view.View;
+import view.ViewImpl;
 
 /**
  * Class which implements the controller interface.
@@ -60,8 +61,6 @@ public class ControllerImpl implements Controller {
 		File fileItem = new File(this.fm.getPath() + ControllerImpl.FILENAMEITEM);
 		File fileUser = new File(this.fm.getPath() + ControllerImpl.FILENAMEUSER);
 		File fileStudyRoom = new File(this.fm.getPath() + ControllerImpl.FILENAMESTUDYROOM);
-
-		// Map<Integer, UserImpl> userArchive2 = this.m.getUserArchive();
 
 		if ((fileItem.exists() && !fileItem.isDirectory()) && (fileUser.exists() && !fileUser.isDirectory())
 				&& (fileStudyRoom.exists() && !fileStudyRoom.isDirectory())) {
@@ -204,7 +203,9 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void borrowList() {
 		try {
-			this.actualLoanArchive = this.m.getRequiredUser(this.actualUser.getIdUser()).getLoanArchive();
+
+			System.out.println(this.actualUser.getLoanArchive());
+			this.actualLoanArchive = this.actualUser.getLoanArchive();
 			String[] array = new String[this.actualLoanArchive.size()];
 			int index = 0;
 
@@ -251,8 +252,8 @@ public class ControllerImpl implements Controller {
 		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);
 		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
 		String publisher = (String) this.v.getItemInfo(TypeItemInfo.PRODUCER);
-		Integer numRelease = (Integer) this.v.getItemInfo(TypeItemInfo.RELEASE_NUMBER);
-		Integer numCopy = (Integer) this.v.getItemInfo(TypeItemInfo.COPIES_NUMBER);
+		Integer numRelease = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER);
+		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
 		try {
 			this.m.registerBook(title, releaseYear, author, language, isbn, genre, publisher, numRelease, numCopy);
 		} catch (Exception e) {
@@ -270,7 +271,7 @@ public class ControllerImpl implements Controller {
 		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
 		Integer duration = (Integer) this.v.getItemInfo(TypeItemInfo.DURATION);
 		Boolean color = (Boolean) this.v.getItemInfo(TypeItemInfo.COLOR);
-		Integer numCopy = (Integer) this.v.getItemInfo(TypeItemInfo.COPIES_NUMBER);
+		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
 		try {
 			this.m.registerMovie(title, releaseYear, publisher, author, language, genre, duration, color, numCopy);
 		} catch (Exception e) {
@@ -292,8 +293,8 @@ public class ControllerImpl implements Controller {
 		try {
 			map = this.m.checkDeadlineas(this.actualUser.getIdUser());
 
-			map.keySet().stream().filter(i -> map.get(i) > 30)
-					.forEach(i -> this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).toString()));
+			map.keySet().stream().filter(i -> map.get(i) > 30).forEach(
+					i -> this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).getFirst().getTitle()));
 
 			/*
 			 * for (Integer i : map.keySet()) { if (map.get(i) > 30) {
@@ -308,7 +309,7 @@ public class ControllerImpl implements Controller {
 	public void giveBackItem(final String item) {
 		// DA RIVEDERE
 		for (Integer i : this.actualUser.getLoanArchive().keySet()) {
-			if (this.m.getItemArchive().get(i).toString().equals(item)) {
+			if (this.m.getItemArchive().get(i).getFirst().getTitle().equals(item)) {
 				try {
 					this.m.returnItem(i, this.actualUser.getIdUser());
 				} catch (Exception e) {
