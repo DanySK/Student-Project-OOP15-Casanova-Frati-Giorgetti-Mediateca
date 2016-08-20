@@ -140,7 +140,7 @@ public class ControllerImpl implements Controller {
 		if (this.m.getSystemPassword().equals(this.v.getMenagerPassword())) {
 			// esegui login manager
 
-			this.v.showMessage("Login effettuato");
+			this.v.showMessage("Login manager effettuato");
 			// inserire metodo
 		} else {
 			this.v.showMessage("Password errata");
