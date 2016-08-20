@@ -15,6 +15,8 @@ import model.Pair;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
 import model.user.UserImpl;
+import view.View;
+import view.ViewImpl;
 
 /**
  * Class which does the operations of I/O.
@@ -24,6 +26,7 @@ import model.user.UserImpl;
  */
 public class FileManager {
 
+	private View v = new ViewImpl();
 	private String path = System.getProperty("user.dir") + "\\res\\";
 
 	/**
@@ -56,10 +59,10 @@ public class FileManager {
 			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.v.showError("File " + fileName + " non trovato per la scrittura");
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			this.v.showError("Errore I/O");
 		}
 	}
 
@@ -76,7 +79,7 @@ public class FileManager {
 			objectItem = (Map<Integer, Pair<ItemImpl, ItemInfo>>) oisItem.readObject();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			this.v.showError("File .oggetti non trovato");
 		}
 		return objectItem;
 	}
@@ -94,7 +97,7 @@ public class FileManager {
 			objectUser = (Map<Integer, UserImpl>) oisUser.readObject();
 		} catch (Exception e2) {
 			// TODO Auto-generated catch block
-			e2.printStackTrace();
+			this.v.showError("File .utenti non trovato");
 		}
 		return objectUser;
 	}
@@ -113,7 +116,7 @@ public class FileManager {
 			objectStudyRoom = (Map<GregorianCalendar, ArrayList<Integer>>) oisStudyRoom.readObject();
 		} catch (Exception e3) {
 			// TODO Auto-generated catch block
-			e3.printStackTrace();
+			this.v.showError("File .aulastudio non trovato");
 		}
 		return objectStudyRoom;
 	}

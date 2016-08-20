@@ -1,6 +1,5 @@
 package controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -13,8 +12,6 @@ import com.google.common.base.Optional;
 import model.Model;
 import model.ModelImpl;
 import model.Pair;
-import model.item.ItemImpl;
-import model.item.ItemInfo;
 import model.item.ReviewImpl;
 import model.user.User;
 import model.user.UserImpl;
@@ -56,29 +53,35 @@ public class ControllerImpl implements Controller {
 	 *             in the case which singleton already exist.
 	 */
 	public ControllerImpl() throws Exception {
-		File fileItem = new File(this.fm.getPath() + ControllerImpl.FILENAMEITEM);
-		File fileUser = new File(this.fm.getPath() + ControllerImpl.FILENAMEUSER);
-		File fileStudyRoom = new File(this.fm.getPath() + ControllerImpl.FILENAMESTUDYROOM);
+		/*
+		 * File fileItem = new File(this.fm.getPath() +
+		 * ControllerImpl.FILENAMEITEM); File fileUser = new
+		 * File(this.fm.getPath() + ControllerImpl.FILENAMEUSER); File
+		 * fileStudyRoom = new File(this.fm.getPath() +
+		 * ControllerImpl.FILENAMESTUDYROOM);
+		 *
+		 * if ((fileItem.exists() && !fileItem.isDirectory()) &&
+		 * (fileUser.exists() && !fileUser.isDirectory()) &&
+		 * (fileStudyRoom.exists() && !fileStudyRoom.isDirectory())) {
+		 * Map<Integer, UserImpl> userArchive =
+		 * this.fm.readArchiveUserFromFile(ControllerImpl.FILENAMEUSER);
+		 * Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = this.fm
+		 * .readArchiveItemFromFile(ControllerImpl.FILENAMEITEM);
+		 * Map<GregorianCalendar, ArrayList<Integer>> studyRoomArchive = this.fm
+		 * .readStudyRoomFromFile(ControllerImpl.FILENAMESTUDYROOM); this.m =
+		 * new ModelImpl(itemArchive, userArchive, studyRoomArchive); } else {
+		 */
+		this.m = new ModelImpl();
 
-		if ((fileItem.exists() && !fileItem.isDirectory()) && (fileUser.exists() && !fileUser.isDirectory())
-				&& (fileStudyRoom.exists() && !fileStudyRoom.isDirectory())) {
-			Map<Integer, UserImpl> userArchive = this.fm.readArchiveUserFromFile(ControllerImpl.FILENAMEUSER);
-			Map<Integer, Pair<ItemImpl, ItemInfo>> itemArchive = this.fm
-					.readArchiveItemFromFile(ControllerImpl.FILENAMEITEM);
-			Map<GregorianCalendar, ArrayList<Integer>> studyRoomArchive = this.fm
-					.readStudyRoomFromFile(ControllerImpl.FILENAMESTUDYROOM);
-			this.m = new ModelImpl(itemArchive, userArchive, studyRoomArchive);
-		} else {
-			this.m = new ModelImpl();
-			this.writeOnFile();
-		}
+		// }
+
 	}
 
 	@Override
 	public void writeOnFile() {
 
 		try {
-			this.v.showMessage("Creati vari utenti");
+
 			GregorianCalendar cal = new GregorianCalendar();
 			cal.set(Calendar.YEAR, 1994);
 			cal.set(Calendar.MONTH, 3);
@@ -88,6 +91,12 @@ public class ControllerImpl implements Controller {
 					new ArrayList<ItemGenre>(
 							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
 					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.HUMOR)));
+			this.m.registerUser("Edoardo", "Frati", cal, "animefan", "fullmetalalchemist", "edoardo.frati@gmail.it",
+					"321342111",
+					new ArrayList<ItemGenre>(
+							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
+					new ArrayList<ItemGenre>(
+							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
 			this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
 					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0011, 100);
 			this.m.registerBook("Lo hobbit", 1953, "J.R.R. Tolkien", Language.ENGLISH, "23123100",
@@ -151,6 +160,7 @@ public class ControllerImpl implements Controller {
 			this.m.bookSit(cal2, 7, ((UserImpl) u2).getIdUser());
 			this.m.bookSit(cal2, 8, ((UserImpl) u2).getIdUser());
 			this.m.bookSit(cal2, 9, ((UserImpl) u2).getIdUser());
+			this.v.showMessage("Utenti creati");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -739,12 +749,13 @@ public class ControllerImpl implements Controller {
 			this.v.setItemReviewsList(array);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			this.v.showError("Errore! Oggetto non trovato nell'archivio");
+			this.v.showError("Errore! Oggetto con recensione non trovato nell'archivio");
 		}
 	}
 
 	@Override
 	public void setView(final view.View v) {
 		this.v = v;
+		this.writeOnFile();
 	}
 }
