@@ -1,6 +1,5 @@
 package controller;
 
-import java.awt.print.Book;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,14 +111,13 @@ public class ControllerImpl implements Controller {
 		if (user.isPresent()) {
 			this.actualUser = user.get();
 			this.v.goodLogin();
-			// mettere metodo
-
 			try {
 				this.m.setReccomandedList(this.actualUser.getIdUser());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			this.elaborateLoans();
 		} else {
 			this.v.showError("Utente non trovato");
 		}
@@ -141,6 +139,7 @@ public class ControllerImpl implements Controller {
 	public void managerLogin() {
 		if (this.m.getSystemPassword().equals(this.v.getMenagerPassword())) {
 			// esegui login manager
+
 			this.v.showMessage("Login effettuato");
 			// inserire metodo
 		} else {
@@ -235,12 +234,18 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void borrowItem() {
-		// DA FARE
-		// oggetto da prenotare
-		item id = this.v.getItemSelectedByUser(); // viene da lista oggetti
-													// filtrati
-		this.m.borrowItem(itemId, this.actualUser.getIdUser());
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
+				try {
+					this.m.borrowItem(i, this.actualUser.getIdUser());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					this.v.showError("Errore! itemId o userId non presente nell'archivio");
+				}
+			}
+		}
 	}
 
 	@Override
@@ -296,6 +301,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void setItemInfo() {
 		// getItemSelectedByuSer lo prendo da setFilteredList
 		Integer itemId;
@@ -316,43 +322,67 @@ public class ControllerImpl implements Controller {
 		String duration = (String) this.v.getItemInfo(TypeItemInfo.DURATION);
 		String color = (String) this.v.getItemInfo(TypeItemInfo.COLOR);
 
-		// determinare il tipo book o movie in base all'id
-		if (TypeItem.BOOK.getClass().isInstance(this.m.getItemArchive().get(itemId).getFirst()){
-		this.v.setBookField(title, author, publisher, releaseYear, genre, isbn, language, numCopy, numRelease);
+		if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
+			this.v.setBookField(title, author, publisher, releaseYear, genre, isbn, language, numCopy, numRelease);
 		} else {
 			this.v.setFilmField(title, author, publisher, releaseYear, genre, duration, color, language, numCopy,
-				numRelease);
+					numRelease);
 		}
 	}
 
-	public void suggestedBook(){
+	@Override
+	public void suggestedBooks() {
 		// stampa 3 libri di 3 preferenze
+		String[] array = new String[this.actualUser.getBookPreferences().size()];
 		int index = 0;
-		float big = 0;
-		String[] array = new String[3];
-		for (ItemGenre ig : this.m.getUserArchive().get(this.actualUser.getIdUser()).getBookPreferences()){
-		for (Integer i : this.m.getItemArchive().keySet()){
-			this.m.getItemArchive().get(i).getFirst().setAverageVote();
-			if (this.m.getItemArchive().get(i).getFirst().getGenre() == ig){
-				if (this.m.getItemArchive().get(i).getFirst().getAverageVote() > big){
-					big = this.m.getItemArchive().get(i).getFirst().getAverageVote();
-				}
-
+		for (Integer i : this.actualUser.getRecommendedList()) {
+			if (this.m.getAllItemId(TypeItem.BOOK).contains(i)) {
+				array[index] = i.toString();
+				index++;
 			}
 		}
-		}
-
-			array[index] = this.m.get
-
-
 		this.v.setSuggestedBooks(array);
+		/*
+		 * int index = 0; float big = 0; Integer idWithBigVote = 0; String[]
+		 * array = new String[3]; for (ItemGenre ig :
+		 * this.m.getUserArchive().get(this.actualUser.getIdUser()).
+		 * getBookPreferences()) { for (Integer i :
+		 * this.m.getItemArchive().keySet()) {
+		 * this.m.getItemArchive().get(i).getFirst().setAverageVote(); if
+		 * (this.m.getItemArchive().get(i).getFirst().getGenre() == ig) { if
+		 * (this.m.getItemArchive().get(i).getFirst().getAverageVote() > big) {
+		 * big = this.m.getItemArchive().get(i).getFirst().getAverageVote();
+		 * idWithBigVote = i; } } } array[index] =
+		 * this.m.getItemArchive().get(idWithBigVote).toString(); index++;
+		 *
+		 * }
+		 */
 	}
 
-	public void suggestedfilm() {
-		this.m.getUserArchive().get(this.actualUser.getIdUser()).getMoviePreferences();
-		// controllare ogni oggetto di quel genere e fare la media recensioni,
-		// questo per i 3 generi preferiti dall'utente
-		this.v.setSuggestedFilms(bList);
+	@Override
+	public void suggestedFilms() {
+		int index = 0;
+		String[] array = new String[this.actualUser.getRecommendedList().size()];
+		for (Integer i : this.actualUser.getRecommendedList()) {
+			if (this.m.getAllItemId(TypeItem.MOVIE).contains(i)) {
+				array[index] = i.toString();
+				index++;
+			}
+		}
+		this.v.setSuggestedMovies(array);
+		/*
+		 * int index = 0; float big = 0; Integer idWithBigVote = 0; String[]
+		 * array = new String[3]; for (ItemGenre ig :
+		 * this.m.getUserArchive().get(this.actualUser.getIdUser()).
+		 * getMoviePreferences()) { for (Integer i :
+		 * this.m.getItemArchive().keySet()) {
+		 * this.m.getItemArchive().get(i).getFirst().setAverageVote(); if
+		 * (this.m.getItemArchive().get(i).getFirst().getGenre() == ig) { if
+		 * (this.m.getItemArchive().get(i).getFirst().getAverageVote() > big) {
+		 * big = this.m.getItemArchive().get(i).getFirst().getAverageVote();
+		 * idWithBigVote = i; } } } array[index] =
+		 * this.m.getItemArchive().get(idWithBigVote).toString(); index++; }
+		 */
 	}
 
 	@Override
@@ -440,12 +470,19 @@ public class ControllerImpl implements Controller {
 		try {
 			map = this.m.checkDeadlineas(this.actualUser.getIdUser());
 
-			map.keySet().stream().filter(i -> map.get(i) > 30).forEach(
-					i -> this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).getFirst().getTitle()));
 			/*
-			 * for (Integer i : map.keySet()) { if (map.get(i) > 30) {
-			 * this.v.showGiveBackOptionMessage(i.toString()); } }
+			 * map.keySet().stream().filter(i -> map.get(i) > 30).forEach( i ->
+			 * this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).
+			 * getFirst().getTitle()));
 			 */
+			for (Integer i : map.keySet()) {
+				if (map.get(i) > 60) {
+					this.v.showGiveBackMessage(this.m.getItemArchive().get(i).getFirst().getTitle());
+				} else if (map.get(i) > 30) {
+					this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).getFirst().getTitle());
+				}
+			}
+
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Utente non presente nell'archivio");
@@ -469,14 +506,31 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void giveBackItemSelectedByUser() {
 		this.giveBackItem(this.v.getItemSelectedByUser());
 	}
 
-	public void settakensitslist() {
-		for (GregorianCalendar gc : this.m.getStudyRoom().keySet()) {
-
+	@Override
+	public void setTakenSitsList() {
+		GregorianCalendar day = new GregorianCalendar();
+		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+				this.v.getStudyRoomSelectedDay());
+		String[] array = new String[this.m.getStudyRoom().get(day).size()];
+		int index;
+		for (Integer i : this.m.getStudyRoom().get(day)) {
+			if ((i == null) || (i == 0)) {
+				array[index] = "0";
+				index++;
+			} else {
+				array[index] = this.m.getRequiredUser(i).getUsername();
+				index++;
+			}
 		}
+		this.v.setStudyRoomStatus(array);
+		// array di stringhe per i posto a sedere dove il posto vuoto è 0 e il
+		// posto occupato è username
+
 		// ritorna array di stringhe che mostra data e posto occupati
 	}
 
@@ -499,6 +553,11 @@ public class ControllerImpl implements Controller {
 		this.v.getSelectedSit(); // convertire per ottenere nel posto da
 									// cancellare e il giorno
 		// mi ritorna un pair con posto, giorno e devo fare il cast inverso
+
+		// elaborare la stringa per ottenere la data
+		GregorianCalendar day = new GregorianCalendar();
+		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+				this.v.getStudyRoomSelectedDay());
 
 		try {
 			this.m.cancelSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
@@ -622,20 +681,31 @@ public class ControllerImpl implements Controller {
 		// fai comparire solo uan finestra che dice che è stato esteso
 
 		// se block user è true, manda la schermata solo per restituire
-		this.v.showGiveBackMessage(book);
+		this.v.showMessage("Prestito esteso per l'oggetto");
+
 	}
 
+	@Override
 	public void allItemReviews() {
-		this.v.getItemSelectedByUser(); // lista di oggetti filtrati
-		String[] array = new String[this.m.getAllItemReview(null).size()];
 		int index = 0;
-		for (ReviewImpl r : this.m.getAllItemReview(itemId)) {
-			array[index] = r.toString();
-			// aggiungere anche get vote?
-			index++;
-
+		int id = 0;
+		for (Integer i : this.m.getItemArchive().keySet()) {
+			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
+				id = i;
+			}
 		}
-		this.v.setItemReviewsList(array);
+		String[] array;
+		try {
+			array = new String[this.m.getAllItemReview(id).size()];
+			for (ReviewImpl r : this.m.getAllItemReview(id)) {
+				array[index] = r.toString();
+				index++;
+			}
+			this.v.setItemReviewsList(array);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			this.v.showError("Errore! Oggetto non trovato nell'archivio");
+		}
 	}
 
 	@Override

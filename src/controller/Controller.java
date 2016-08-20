@@ -154,4 +154,43 @@ public interface Controller {
 	 * Method which changes the fields of the item.
 	 */
 	void itemModify();
+
+	/**
+	 * Method which borrow an item selected by the actual user.
+	 */
+	void borrowItem();
+
+	/**
+	 * Method which elaborates the infos of an item to be showed in a new
+	 * screen.
+	 */
+	void setItemInfo();
+
+	/**
+	 * Method which returns to the View the books suggested to the user based on
+	 * his preferences.
+	 */
+	void suggestedBooks();
+
+	/**
+	 * Method which returns to the View the movies suggested to the user based
+	 * on his preferences.
+	 */
+	void suggestedFilms();
+
+	/**
+	 * Method which dissociates an item to the user selected by himself.
+	 */
+	void giveBackItemSelectedByUser();
+
+	/**
+	 * Method which sets a field of the View with the taken sits of the
+	 * StudyRoom in a given day.
+	 */
+	void setTakenSitsList();
+
+	/**
+	 * Method which sets a field of the View with the reviews of a given Item.
+	 */
+	void allItemReviews();
 }
