@@ -167,7 +167,7 @@ public final class ArchiveImpl implements Serializable, Archive {
                   .containsKey(userId)) {
         ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList().remove(userId,
                     this.getToDay());
-        System.out.println("User " + userId + " adds to item list " + itemId + " in date "
+        System.out.println("User " + userId + " removes from the item list " + itemId + " in date "
                     + this.getToDay());
       } else {
         throw new Exception(("userId is not in the item's list"));
