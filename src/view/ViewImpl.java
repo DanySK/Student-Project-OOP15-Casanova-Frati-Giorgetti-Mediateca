@@ -46,7 +46,8 @@ public class ViewImpl implements View {
 
 	StringWriter sw = new StringWriter();
 	PrintWriter pw = new PrintWriter(this.sw);
-	static boolean logged = false;
+	private static boolean logged = false;
+
 	private JPanel card0;
 	private JPanel card1;
 	private JPanel card2;
@@ -705,5 +706,15 @@ public class ViewImpl implements View {
 	@Override
 	public void giveBackItemAfterNotify(final String item) {
 		// c.giveBack(item);
+	}
+
+	@Override
+	public void giveMeTakenSits() {
+		// c.takenSitsList();
+	}
+
+	@Override
+	public void setTakenSitsList(final String[] sitslist) {
+		((StudyRoomImpl) this.card11).setTakenSitsList(sitslist);
 	}
 }

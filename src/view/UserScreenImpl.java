@@ -120,10 +120,10 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.add(surnameL);
 		discarge = new JButton("Annulla");
 		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-
+		this.send = new JButton();
 		if (type.equals(UserScreenType.CREATE)) {
 			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
-			this.send = new JButton("Crea");
+			this.send.setText("Crea");
 			discarge.addActionListener(e -> v.swapView(CardName.START));
 			this.send.addActionListener(e -> {
 				v.sendUserCreate();
@@ -132,7 +132,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		} else if (type.equals(UserScreenType.MODIFY)) {
 			this.presentation = new JLabel("Modifica qui i tuoi dati:");
 			v.giveMeUserInfo();
-			this.send = new JButton("Invio");
+			this.send.setText("Invio");
 			this.usernameF.setEditable(false);
 			discarge.addActionListener(e -> v.swapView(CardName.LOGIN));
 			this.add(deleteUser);
@@ -146,10 +146,10 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.presentation.setBounds(47, 13, 720, 58);
 		this.add(this.presentation);
 
-		discarge.setBounds(30, 521, 120, 49);
+		discarge.setBounds(30, 496, 120, 49);
 		this.add(discarge);
 
-		this.send.setBounds(647, 522, 120, 49);
+		this.send.setBounds(647, 496, 120, 49);
 		this.send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(this.send);
 

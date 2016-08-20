@@ -569,11 +569,24 @@ public interface View {
 
 	/**
 	 * Returns the item information about release or copies number.
-	 * 
+	 *
 	 * @param info2
 	 *            the type of info (release or copies number)
 	 * @return the requeste information
 	 */
 	Object getOtherItemInfo(OtherItemFilter info2);
+
+	/**
+	 * Asks to controller to set taken sits list.
+	 */
+	void giveMeTakenSits();
+
+	/**
+	 * Allows to set the list of just taken sits.
+	 * 
+	 * @param sitslist
+	 *            the list of sits just tken by user
+	 */
+	void setTakenSitsList(String[] sitslist);
 
 }

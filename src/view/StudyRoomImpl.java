@@ -1,6 +1,8 @@
 package view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.util.Properties;
@@ -42,12 +44,16 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	 * @param sitsNumber
 	 */
 	public StudyRoomImpl(final View v) {
+		JPanel southPanel = new JPanel();
+		southPanel.setBounds(0, 465, 800, 135);
+		JPanel northPanel = new JPanel();
+		northPanel.setBounds(0, 0, 800, 135);
+
+		JPanel centerPanel = new JPanel();
+		centerPanel.setBounds(0, 134, 800, 331);
+		this.add(centerPanel);
+
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
-		JLabel presentation = new JLabel("Clicca sul posto che vuoi prenotare");
-		presentation.setHorizontalAlignment(SwingConstants.CENTER);
-		presentation.setBounds(12, 13, 776, 49);
-		presentation
-		.setFont(new Font("Tahoma", Font.BOLD, ViewImpl.TITLE_SIZE));
 		this.buttons = new JButton[ViewImpl.STUDY_ROOM_SITS];
 		int i;
 
@@ -58,28 +64,23 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 
 		this.model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(this.model, p);
-		this.setLayout(null);
 		this.datePicker = new JDatePickerImpl(datePanel,
 				new DateLabelFormatter());
 		this.springLayout.putConstraint(SpringLayout.NORTH,
 				this.datePicker.getJFormattedTextField(), 0,
 				SpringLayout.NORTH, this.datePicker);
-		this.springLayout.putConstraint(SpringLayout.SOUTH,
-				this.datePicker.getJFormattedTextField(), -15,
-				SpringLayout.SOUTH, this.datePicker);
-		this.springLayout.putConstraint(SpringLayout.EAST,
-				this.datePicker.getJFormattedTextField(), -27,
-				SpringLayout.EAST, this.datePicker);
 		this.springLayout = (SpringLayout) this.datePicker.getLayout();
-		this.springLayout.putConstraint(SpringLayout.WEST,
-				this.datePicker.getJFormattedTextField(), 0, SpringLayout.WEST,
-				this.datePicker);
-		this.datePicker.setSize(229, 25);
-		this.datePicker.setLocation(530, 67);
-		this.takenSitsList.setSize(620, 161);
-		this.takenSitsList.setLocation(12, 415);
-		this.add(this.takenSitsList);
-		this.add(this.datePicker);
+		this.springLayout.putConstraint(SpringLayout.SOUTH,
+				this.datePicker.getJFormattedTextField(), 0,
+				SpringLayout.SOUTH, this.datePicker);
+		this.datePicker.setSize(241, 25);
+		this.datePicker.setLocation(278, 97);
+
+		northPanel.add(this.datePicker);
+
+		southPanel.setLayout(null);
+		this.takenSitsList.setBounds(12, 110, 605, -86);
+		southPanel.add(this.takenSitsList);
 
 		final ActionListener listener = e -> {
 			if (e.getSource() instanceof JButton) {
@@ -87,6 +88,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 				v.takeSit();
 				StudyRoomImpl.this.takenSit = sit;
 				v.giveMeStudyRoomStatus();
+				v.giveMeTakenSits();
 			}
 		};
 
@@ -94,22 +96,30 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 			this.buttons[i] = new JButton(String.valueOf(i));
 			this.buttons[i].addActionListener(listener);
 			this.buttons[i].setBackground(Color.GREEN);
-			this.add(this.buttons[i]);
+			this.buttons[i].setSize(40, 40);
+			centerPanel.add(this.buttons[i]);
 		}
-
-		this.add(presentation);
 		v.giveMeStudyRoomStatus();
+		new BorderLayout();
+		this.setLayout(null);
+		this.add(southPanel);
 		JButton remove = new JButton("Rimuovi");
+		remove.setBounds(639, 50, 121, 39);
+		southPanel.add(remove);
 		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		remove.setBounds(644, 471, 127, 55);
-		this.add(remove);
-
-		JLabel instruction = new JLabel(
-				"Inserisci la data in cui vuoi prendere posto:");
-		instruction.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		instruction.setBounds(22, 67, 603, 25);
-		this.add(instruction);
 		remove.addActionListener(e -> v.removeSit());
+
+		this.add(northPanel);
+		northPanel.setLayout(null);
+		this.add(centerPanel);
+		centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		northPanel.setLayout(null);
+		JLabel presentation = new JLabel(
+				"Clicca una data e il posto che vuoi prenotare");
+		presentation.setHorizontalAlignment(SwingConstants.CENTER);
+		presentation.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		presentation.setBounds(12, 13, 776, 71);
+		northPanel.add(presentation);
 
 	}
 
