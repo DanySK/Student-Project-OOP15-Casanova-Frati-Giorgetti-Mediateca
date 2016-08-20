@@ -6,6 +6,7 @@ import utils.ItemGenre;
 import utils.Language;
 import utils.TypeColor;
 import utils.TypeItemInfo;
+import view.ViewImpl.OtherItemFilter;
 
 /**
  * inteface for item screen.
@@ -21,7 +22,7 @@ public interface ItemScreen {
 	 *            info type you want
 	 * @return information requested
 	 */
-	Object getItemInfo(TypeItemInfo info);
+	Object getItemInfo(TypeItemInfo info, OtherItemFilter info2);
 
 	/**
 	 * Allows to resize image by passing path.
@@ -51,7 +52,8 @@ public interface ItemScreen {
 	 *            the language of item
 	 */
 	void setCommonField(String title, String author, String manifacturer,
-			String year, ItemGenre genre, String imagePath, Language language);
+			String year, ItemGenre genre, String imagePath, Language language,
+			int copies, int release);
 
 	/**
 	 * Sets all film field.
@@ -78,7 +80,7 @@ public interface ItemScreen {
 
 	void setFilmField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String duration,
-			TypeColor color, Language language);
+			TypeColor color, Language language, int copies, int release);
 
 	/**
 	 * Sets all book fields.
@@ -102,6 +104,6 @@ public interface ItemScreen {
 	 */
 	void setBookField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String imagePath, String isbn,
-			Language language);
+			Language language, int copies, int release);
 
 }
