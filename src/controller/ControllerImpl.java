@@ -76,22 +76,81 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void writeOnFile() {
-		GregorianCalendar calendar = new GregorianCalendar();
-		calendar.set(Calendar.YEAR, 1994);
-		calendar.set(Calendar.MONTH, 3);
-		calendar.set(Calendar.DAY_OF_MONTH, 6);
 
 		try {
-			this.m.registerUser("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
-					"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
+			this.v.showMessage("Creati vari utenti");
+			GregorianCalendar cal = new GregorianCalendar();
+			cal.set(Calendar.YEAR, 1994);
+			cal.set(Calendar.MONTH, 3);
+			cal.set(Calendar.DAY_OF_MONTH, 6);
+			this.m.registerUser("Enrico", "Casanova", cal, "csharplover", "graffeallineate", "enrico.casanova@gmail.it",
+					"334534534534",
+					new ArrayList<ItemGenre>(
+							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
+					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.HUMOR)));
 			this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
-					ItemGenre.ADVENTURE_HISTORY, "Ges�", 0011, 100000);
+					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0011, 100);
+			this.m.registerBook("Lo hobbit", 1953, "J.R.R. Tolkien", Language.ENGLISH, "23123100",
+					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0012, 50);
+			this.m.registerBook("Il Silmarillion", 1939, "J.R.R. Tolkien", Language.ENGLISH, "23123000",
+					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0013, 30);
+			this.m.registerBook("Shining", 1960, "Stephen King", Language.ENGLISH, "23121000", ItemGenre.HORROR,
+					"Mondadori", 0017, 1);
+			this.m.registerBook("Misery non deve morire", 1966, "Stephen King", Language.ENGLISH, "23121007",
+					ItemGenre.HORROR, "Mondadori", 0111, 2);
+			this.m.registerBook("La macchina fantasma", 1970, "Stephen Cronenberg", Language.ENGLISH, "23111007",
+					ItemGenre.HORROR, "Mondadori", 0110, 3);
+			this.m.registerBook("Il vecchio e il mare", 1956, "Ernest Hemingway", Language.ENGLISH, "23521007",
+					ItemGenre.FANTASY, "Mondadori", 0101, 2);
+			this.m.registerBook("Il vecchio e il mare 2", 1986, "Ernest Hemingway", Language.ENGLISH, "33521007",
+					ItemGenre.FANTASY, "Mondadori", 0301, 12);
+			this.m.registerBook("Misery non deve morire", 1966, "Stephen King", Language.ENGLISH, "23121007",
+					ItemGenre.HORROR, "Mondadori", 0111, 2);
+			this.m.registerBook("Misery non deve morire", 1966, "Stephen King", Language.ENGLISH, "23121007",
+					ItemGenre.HORROR, "Mondadori", 0111, 2);
 			this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
-					120, true, 1000000);
-			User u = new UserImpl("Enrico", "Casanova", calendar, "asd", "asd", "enrico.casanova@dadas.it",
-					"334534534534", new ArrayList<ItemGenre>(), new ArrayList<ItemGenre>());
-
-			this.m.bookSit(calendar, 1, ((UserImpl) u).getIdUser());
+					120, true, 10);
+			this.m.registerMovie("Star Trek: Into Darkness", 2012, "Bad Robot", "J.J. Abrams", Language.ENGLISH,
+					ItemGenre.FANTASY, 130, true, 8);
+			this.m.registerMovie("Star Trek: Beyond", 2015, "Bad Robot", "J.J. Abrams", Language.ENGLISH,
+					ItemGenre.FANTASY, 144, true, 2);
+			this.m.registerMovie("Non aprite quella porta", 2006, "Legendary", "John Nispel", Language.ENGLISH,
+					ItemGenre.HORROR, 100, true, 10);
+			this.m.registerMovie("Saw 80: la fine", 2012, "Medusa film", "Carlo Vanzina", Language.ENGLISH,
+					ItemGenre.HORROR, 180, true, 1);
+			this.m.registerMovie("Mamma mia!", 2008, "Warner Bros", "Meryl Streep", Language.ENGLISH, ItemGenre.MUSICAL,
+					100, true, 1000);
+			this.m.registerMovie("The Rocky Horror Picture Show", 1977, "01 Distribution", "Tim Curry",
+					Language.ENGLISH, ItemGenre.MUSICAL, 120, true, 7);
+			this.m.registerMovie("Tarzan", 1966, "Disney Pictures", "Walt Disney", Language.ENGLISH,
+					ItemGenre.ANIMATION, 90, true, 1);
+			this.m.registerMovie("Aladdin", 1986, "Disney Pictures", "Walt Disney", Language.ENGLISH,
+					ItemGenre.ANIMATION, 100, true, 2);
+			User u = new UserImpl("Enrico", "Casanova", cal, "csharplover", "graffeallineate",
+					"enrico.casanova@gmail.it", "334534534534",
+					new ArrayList<ItemGenre>(
+							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
+					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.FANTASY, ItemGenre.MUSICAL)));
+			User u2 = new UserImpl("Edoardo", "Frati", cal, "animefan", "fullmetalalchemist", "edoardo.frati@gmail.it",
+					"321342111",
+					new ArrayList<ItemGenre>(
+							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
+					new ArrayList<ItemGenre>(
+							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
+			GregorianCalendar cal2 = new GregorianCalendar();
+			cal.set(Calendar.YEAR, 1994);
+			cal.set(Calendar.MONTH, 3);
+			cal.set(Calendar.DAY_OF_MONTH, 7);
+			this.m.bookSit(cal, 1, ((UserImpl) u).getIdUser());
+			this.m.bookSit(cal, 2, ((UserImpl) u2).getIdUser());
+			this.m.bookSit(cal2, 1, ((UserImpl) u).getIdUser());
+			this.m.bookSit(cal2, 2, ((UserImpl) u).getIdUser());
+			this.m.bookSit(cal2, 3, ((UserImpl) u).getIdUser());
+			this.m.bookSit(cal2, 4, ((UserImpl) u).getIdUser());
+			this.m.bookSit(cal2, 6, ((UserImpl) u2).getIdUser());
+			this.m.bookSit(cal2, 7, ((UserImpl) u2).getIdUser());
+			this.m.bookSit(cal2, 8, ((UserImpl) u2).getIdUser());
+			this.m.bookSit(cal2, 9, ((UserImpl) u2).getIdUser());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -346,21 +405,6 @@ public class ControllerImpl implements Controller {
 			}
 		}
 		this.v.setSuggestedBooks(array);
-		/*
-		 * int index = 0; float big = 0; Integer idWithBigVote = 0; String[]
-		 * array = new String[3]; for (ItemGenre ig :
-		 * this.m.getUserArchive().get(this.actualUser.getIdUser()).
-		 * getBookPreferences()) { for (Integer i :
-		 * this.m.getItemArchive().keySet()) {
-		 * this.m.getItemArchive().get(i).getFirst().setAverageVote(); if
-		 * (this.m.getItemArchive().get(i).getFirst().getGenre() == ig) { if
-		 * (this.m.getItemArchive().get(i).getFirst().getAverageVote() > big) {
-		 * big = this.m.getItemArchive().get(i).getFirst().getAverageVote();
-		 * idWithBigVote = i; } } } array[index] =
-		 * this.m.getItemArchive().get(idWithBigVote).toString(); index++;
-		 *
-		 * }
-		 */
 	}
 
 	@Override
@@ -374,19 +418,6 @@ public class ControllerImpl implements Controller {
 			}
 		}
 		this.v.setSuggestedMovies(array);
-		/*
-		 * int index = 0; float big = 0; Integer idWithBigVote = 0; String[]
-		 * array = new String[3]; for (ItemGenre ig :
-		 * this.m.getUserArchive().get(this.actualUser.getIdUser()).
-		 * getMoviePreferences()) { for (Integer i :
-		 * this.m.getItemArchive().keySet()) {
-		 * this.m.getItemArchive().get(i).getFirst().setAverageVote(); if
-		 * (this.m.getItemArchive().get(i).getFirst().getGenre() == ig) { if
-		 * (this.m.getItemArchive().get(i).getFirst().getAverageVote() > big) {
-		 * big = this.m.getItemArchive().get(i).getFirst().getAverageVote();
-		 * idWithBigVote = i; } } } array[index] =
-		 * this.m.getItemArchive().get(idWithBigVote).toString(); index++; }
-		 */
 	}
 
 	@Override
