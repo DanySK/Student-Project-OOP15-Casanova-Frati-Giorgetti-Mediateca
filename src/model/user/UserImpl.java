@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import com.google.common.base.Objects;
@@ -318,9 +319,9 @@ public class UserImpl implements Serializable, User {
   @Override
   public Set<Integer> getNowOnLoan() {
     Set<Integer> l = new HashSet<>();
-    for (Integer i : this.loanArchive.keySet()) {
-      if (!this.loanArchive.get(i).getFirst()) {
-        l.add(i);
+    for (Entry<Integer, Pair<Boolean, Optional<Integer>>> i : this.loanArchive.entrySet()) {
+      if (!i.getValue().getFirst()) {
+        l.add(i.getKey());
       }
     }
     return Collections.unmodifiableSet(l);
