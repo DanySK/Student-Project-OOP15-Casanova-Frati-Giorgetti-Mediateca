@@ -56,7 +56,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		giveBackItem = new JButton("Restituisci ");
 		giveBackItem.setBounds(586, 164, 178, 27);
 		giveBackItem
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		likeItem = new JButton("Mi Piace");
 		likeItem.setBounds(586, 204, 178, 27);
 		likeItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
@@ -94,7 +94,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filteredJList.setModel(this.model);
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
-				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
@@ -135,7 +135,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 326, 178, 27);
 		seeWishlist
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);
@@ -147,11 +147,11 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		reviews.setBounds(586, 366, 178, 27);
 		this.add(reviews);
 
-		JLabel lblCercaTraLibri = new JLabel("Cerca tra libri e film!");
-		lblCercaTraLibri.setHorizontalAlignment(SwingConstants.CENTER);
-		lblCercaTraLibri.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblCercaTraLibri.setBounds(42, 13, 722, 27);
-		this.add(lblCercaTraLibri);
+		JLabel pres = new JLabel("Cerca tra libri e film!");
+		pres.setHorizontalAlignment(SwingConstants.CENTER);
+		pres.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		pres.setBounds(42, 13, 722, 27);
+		this.add(pres);
 		reviews.addActionListener(e -> {
 			v.giveMeAllItemReviews();
 			v.swapView(CardName.ALL_REVIEWS);

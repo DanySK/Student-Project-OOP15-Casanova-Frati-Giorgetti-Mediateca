@@ -1,9 +1,8 @@
 package view;
 
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -19,8 +18,9 @@ import view.ViewImpl.CardName;
 public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 	private static final long serialVersionUID = 3947236683472052024L;
-	private JList<String> list = new JList<String>();
+	private JList<String> list;
 	private TypeList type = TypeList.USER;
+	private DefaultListModel<String> model = new DefaultListModel<String>();
 
 	/**
 	 * Enum for the type of list can be.
@@ -48,7 +48,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(515, 117, 273, 39);
 		showUserList
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
@@ -60,7 +60,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(515, 164, 273, 39);
 		showItemList
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
@@ -70,6 +70,8 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		});
 
 		JButton delete = new JButton("Elimina");
+		delete.addActionListener(arg0 -> {
+		});
 		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		JButton modify = new JButton("Modifica");
@@ -83,6 +85,10 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 				ViewImpl.FONT_SIZE));
 		seeBorrowedList.setBounds(515, 300, 273, 39);
 		this.add(seeBorrowedList);
+		this.list = new JList();
+		this.list.setModel(this.model);
+		this.list.setBounds(50, 71, 414, 438);
+		this.add(this.list);
 
 		if (this.type.equals(TypeList.USER)) {
 			delete.setEnabled(false);
@@ -106,26 +112,6 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		}
 
-		this.list.setBounds(30, 572, 449, -497);
-		this.add(this.list);
-		this.list.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(final MouseEvent evt) {
-				JList<String> list = (JList) evt.getSource();
-				if (evt.getClickCount() == 2) {
-					if (ManagerScreenImpl.this.type.equals(TypeList.USER)) {
-						v.giveMeUserInfo();
-						v.showUserInfo();
-					} else if (ManagerScreenImpl.this.type
-							.equals(TypeList.ITEM)) {
-						v.giveMeItemInfo();
-						v.showItemInfo();
-					}
-
-				}
-			}
-		});
-
 		JButton exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		exit.setBounds(616, 503, 151, 60);
@@ -139,21 +125,31 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 	@Override
 	public void setUserList(final String[] userList) {
-		this.list = new JList<String>(userList);
+		this.model.clear();
+		for (String element : userList) {
+			this.model.addElement(element);
+		}
 	}
 
 	@Override
 	public void setItemList(final String[] itemList) {
-		this.list = new JList<String>(itemList);
+		this.model.clear();
+		for (String element : itemList) {
+			this.model.addElement(element);
+		}
 	}
 
 	@Override
 	public void setUserBorrowedList(final String[] borrowedList) {
-		this.list = new JList<String>(borrowedList);
+		this.model.clear();
+		for (String element : borrowedList) {
+			this.model.addElement(element);
+		}
 	}
 
 	@Override
 	public String getSelected() {
 		return this.list.getSelectedValue();
 	}
+
 }

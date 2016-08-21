@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import utils.ItemGenre;
 import utils.TypeItem;
 import view.ViewImpl.CardName;
 
@@ -24,17 +25,17 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private final JTextField titleF;
 	private final JTextField authorF;
 	private final JTextField manifacturerF;
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private JComboBox<?> genreF = new JComboBox(utils.ItemGenre.values());
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private JComboBox<?> languageF = new JComboBox(utils.Language.values());
+
+	private JComboBox<?> genreF;
+
+	private JComboBox<?> languageF;
 	private final JTextField yearF;
 	// private final JFileChooser imageChoose = new JFileChooser();
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private JComboBox<?> itemTypeF = new JComboBox(utils.TypeItem.values());
+
+	private JComboBox<?> itemTypeF;
 	private final JTextField durationF;
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private JComboBox<?> colorF = new JComboBox(utils.TypeColor.values());
+
+	private JComboBox<?> colorF;
 	private final JTextField isbnF;
 	private final JTextField numCopiesF;
 	private final JTextField numReleaseF;
@@ -91,6 +92,9 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.add(this.manifacturerF);
 
 		presentation = new JLabel();
+		presentation
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+
 		send = new JButton();
 		send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
@@ -104,11 +108,11 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.durationF.setBounds(338, 341, 230, 30);
 		this.add(this.durationF);
 
-		this.colorF = new JComboBox();
+		this.colorF = new JComboBox(utils.TypeColor.values());
 		this.colorF.setBounds(338, 414, 230, 30);
 		this.add(this.colorF);
 
-		this.languageF = new JComboBox();
+		this.languageF = new JComboBox(utils.Language.values());
 		this.languageF.setBounds(338, 378, 230, 30);
 		this.add(this.languageF);
 
@@ -117,12 +121,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.isbnF.setBounds(338, 306, 230, 30);
 		this.add(this.isbnF);
 
-		this.itemTypeF = new JComboBox();
+		this.itemTypeF = new JComboBox(utils.TypeItem.values());
 		this.itemTypeF.setToolTipText("Tipo");
 		this.itemTypeF.setBounds(338, 64, 230, 30);
 		this.add(this.itemTypeF);
 
-		this.genreF = new JComboBox();
+		this.genreF = new JComboBox<ItemGenre>(utils.ItemGenre.values());
 		this.genreF.setToolTipText("Genere");
 		this.genreF.setBounds(338, 271, 230, 30);
 		this.add(this.genreF);
@@ -160,7 +164,11 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			presentation = new JLabel("Inserisci il nuovo oggetto");
 			send = new JButton("Crea");
 			discarge.addActionListener(e -> v.swapView(CardName.MANAGER_MENU));
-			send.addActionListener(e -> v.sendItemCreate());
+			send.addActionListener(e -> {
+				v.sendItemCreate();
+				v.giveMeItemList();
+				v.swapView(CardName.MANAGER_MENU);
+			});
 		} else if (type.equals(ItemScreenType.MODIFY)) {
 			presentation = new JLabel("Modifica qui il tuo oggetto:");
 			v.giveMeItemInfo();

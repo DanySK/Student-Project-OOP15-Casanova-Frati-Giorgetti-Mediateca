@@ -119,6 +119,7 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		for (String element : bList) {
 			this.modelB.addElement(element);
 		}
+
 	}
 
 	@Override
