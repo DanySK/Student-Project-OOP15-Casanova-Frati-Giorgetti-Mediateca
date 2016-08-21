@@ -565,4 +565,9 @@ public interface View {
 	 */
 	void goodManagerLogin();
 
+	/**
+	 * Asks controller to cancel sit.
+	 */
+	void cancelSit();
+
 }

@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Font;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -26,11 +27,17 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
+	String[] prova = { "baci", "baci" };
 
+	DefaultListModel model;
 	private JList<String> suggestedBooks = new JList<String>();
 	private JList<String> suggestedMovies = new JList<String>();
 
 	public UserMenuImpl(final View v) {
+		this.model = new DefaultListModel();
+		this.model.addElement("gatto");
+		this.model.addElement("two");
+		this.suggestedBooks.setModel(this.model);
 		this.setLayout(null);
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		final JButton exitProgram;
@@ -45,7 +52,9 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		mainLabel.setBounds(27, 24, 761, 49);
 		this.add(mainLabel);
 		v.giveMeSuggestedBooks();
+
 		v.giveMeSuggestedMovies();
+		this.suggestedBooks.setModel(this.model);
 		this.suggestedBooks.setSize(375, 289);
 		this.suggestedBooks.setLocation(27, 197);
 		this.add(this.suggestedBooks);
@@ -95,13 +104,15 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		studyRoomServices.addActionListener(e -> v
 				.swapView(CardName.STUDY_ROOM));
 		accountSettings
-		.addActionListener(e -> v.swapView(CardName.USER_MODIFY));
+				.addActionListener(e -> v.swapView(CardName.USER_MODIFY));
 
 	}
 
 	@Override
 	public void setSuggestedBooks(final String[] bList) {
-		this.suggestedBooks = new JList<String>(bList);
+		for (String element : bList) {
+			this.model.addElement("pesce");
+		}
 	}
 
 	@Override
