@@ -45,8 +45,9 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	 * Create the panel. Need the calling class
 	 *
 	 * @param v
-	 * @param screenWidth
-	 * @param screenLenght
+	 *            the calling class
+	 * @param type
+	 *            the type of login, user o manager
 	 */
 	public UserLoginImpl(final View v, final LoginType type) {
 		final JLabel mainLabel;

@@ -57,11 +57,9 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	 * Create the panel.
 	 *
 	 * @param v
-	 * @param r
-	 * @param l
-	 *
-	 * @param screenWidth
-	 * @param screenLenght
+	 *            the calling class
+	 * @param type
+	 *            the type of user screen
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public UserScreenImpl(final View v, final UserScreenType type) {
@@ -262,43 +260,41 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 
 	@Override
 	public Object getInfo(final utils.UserInfo info) {
-		for (final utils.UserInfo i : utils.UserInfo.values()) {
-			switch (info) {
-			case NAME:
-				return this.nameF.getText();
-			case SURNAME:
-				return this.surnameF.getText();
-			case USERNAME:
-				return this.usernameF.getText();
-			case PASSWORD:
-				String pwd = new String(this.passwordF.getPassword());
-				return pwd;
-			case BIRTHDATE_DAY:
-				return this.datePicker.getModel().getDay();
-			case BIRTHDATE_MONTH:
-				return this.datePicker.getModel().getDay();
-			case BIRTHDATE_YEAR:
-				return this.datePicker.getModel().getDay();
-			case EMAIL:
-				return this.emailF.getText();
-			case TELEPHONE_NUMBER:
-				return this.cellF.getText();
-			case BOOK_PREF1:
-				return this.bookPref1.getSelectedItem();
-			case BOOK_PREF2:
-				return this.bookPref2.getSelectedItem();
-			case BOOK_PREF3:
-				return this.bookPref3.getSelectedItem();
-			case FILM_PREF1:
-				return this.filmPref1.getSelectedItem();
-			case FILM_PREF2:
-				return this.filmPref2.getSelectedItem();
-			case FILM_PREF3:
-				return this.filmPref3.getSelectedItem();
-			default:
-				break;
+		switch (info) {
+		case NAME:
+			return this.nameF.getText();
+		case SURNAME:
+			return this.surnameF.getText();
+		case USERNAME:
+			return this.usernameF.getText();
+		case PASSWORD:
+			String pwd = new String(this.passwordF.getPassword());
+			return pwd;
+		case BIRTHDATE_DAY:
+			return this.datePicker.getModel().getDay();
+		case BIRTHDATE_MONTH:
+			return this.datePicker.getModel().getDay();
+		case BIRTHDATE_YEAR:
+			return this.datePicker.getModel().getDay();
+		case EMAIL:
+			return this.emailF.getText();
+		case TELEPHONE_NUMBER:
+			return this.cellF.getText();
+		case BOOK_PREF1:
+			return this.bookPref1.getSelectedItem();
+		case BOOK_PREF2:
+			return this.bookPref2.getSelectedItem();
+		case BOOK_PREF3:
+			return this.bookPref3.getSelectedItem();
+		case FILM_PREF1:
+			return this.filmPref1.getSelectedItem();
+		case FILM_PREF2:
+			return this.filmPref2.getSelectedItem();
+		case FILM_PREF3:
+			return this.filmPref3.getSelectedItem();
+		default:
+			break;
 
-			}
 		}
 		return null;
 	}

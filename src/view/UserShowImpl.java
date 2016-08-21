@@ -8,9 +8,15 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+/**
+ * Class which implements methods for user showing interface.
+ *
+ * @author Luca Giorgetti
+ *
+ */
 public class UserShowImpl implements UserShow {
-	final int FRAME_LENGHT = 400;
-	final int FRAME_WIDTH = 600;
+	private static final int FRAME_LENGHT = 400;
+	private static final int FRAME_WIDTH = 600;
 	private String name;
 	private String surname;
 	private String password;
@@ -34,7 +40,7 @@ public class UserShowImpl implements UserShow {
 		final JFrame mainFrame = new JFrame();
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBounds(0, 0, 594, 1);
-		mainFrame.setSize(this.FRAME_LENGHT, this.FRAME_WIDTH);
+		mainFrame.setSize(UserShowImpl.FRAME_LENGHT, UserShowImpl.FRAME_WIDTH);
 		mainFrame.setResizable(false);
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
@@ -134,25 +140,26 @@ public class UserShowImpl implements UserShow {
 	}
 
 	@Override
-	public void setUserField(final String name, final String surname,
-			final String username, final String password,
-			final String birthDate, final String email, final String telephone,
-			final utils.ItemGenre bookPref1, final utils.ItemGenre bookPref2,
-			final utils.ItemGenre bookPref3, final utils.ItemGenre filmPref1,
-			final utils.ItemGenre filmPref2, final utils.ItemGenre filmPref3) {
-		this.name = name;
-		this.surname = surname;
-		this.username = username;
-		this.password = password;
-		this.birthDate = birthDate;
-		this.email = email;
-		this.telephone = telephone;
-		this.bookPref1 = bookPref1;
-		this.bookPref2 = bookPref2;
-		this.bookPref3 = bookPref3;
-		this.filmPref1 = filmPref1;
-		this.filmPref2 = filmPref2;
-		this.filmPref3 = filmPref3;
+	public void setUserField(final String nameS, final String surnameS,
+			final String usernameS, final String passwordS,
+			final String birthDateS, final String emailS,
+			final String telephoneS, final utils.ItemGenre bookPref1I,
+			final utils.ItemGenre bookPref2I, final utils.ItemGenre bookPref3I,
+			final utils.ItemGenre filmPref1I, final utils.ItemGenre filmPref2I,
+			final utils.ItemGenre filmPref3I) {
+		this.name = nameS;
+		this.surname = surnameS;
+		this.username = usernameS;
+		this.password = passwordS;
+		this.birthDate = birthDateS;
+		this.email = emailS;
+		this.telephone = telephoneS;
+		this.bookPref1 = bookPref1I;
+		this.bookPref2 = bookPref2I;
+		this.bookPref3 = bookPref3I;
+		this.filmPref1 = filmPref1I;
+		this.filmPref2 = filmPref2I;
+		this.filmPref3 = filmPref3I;
 
 	}
 

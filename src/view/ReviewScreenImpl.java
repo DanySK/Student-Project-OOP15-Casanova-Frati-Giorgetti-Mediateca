@@ -35,8 +35,7 @@ public class ReviewScreenImpl extends JPanel implements ReviewScreen {
 	 * Builder for ReviewScreen.
 	 *
 	 * @param v
-	 * @param sreenWidth
-	 * @param screenLenght
+	 *            the calling class
 	 */
 	public ReviewScreenImpl(final View v) {
 
@@ -120,10 +119,10 @@ public class ReviewScreenImpl extends JPanel implements ReviewScreen {
 	public int getSelectedScore() {
 		for (Enumeration<AbstractButton> scores = this.scoreGroup.getElements(); scores
 				.hasMoreElements();) {
-			AbstractButton score = scores.nextElement();
+			AbstractButton scoreB = scores.nextElement();
 
-			if (score.isSelected()) {
-				ReviewScreenImpl.score = Integer.parseInt(score.getText());
+			if (scoreB.isSelected()) {
+				ReviewScreenImpl.score = Integer.parseInt(scoreB.getText());
 			}
 		}
 		return ReviewScreenImpl.score;

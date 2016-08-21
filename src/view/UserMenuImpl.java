@@ -33,6 +33,12 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	private JList<String> suggestedBooks = new JList<String>();
 	private JList<String> suggestedMovies = new JList<String>();
 
+	/**
+	 * Builder for User Menu.
+	 *
+	 * @param v
+	 *            the calling class
+	 */
 	public UserMenuImpl(final View v) {
 		this.suggestedBooks.setModel(this.modelB);
 		this.suggestedMovies.setModel(this.modelM);

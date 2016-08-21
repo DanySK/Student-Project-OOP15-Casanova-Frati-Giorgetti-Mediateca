@@ -24,12 +24,16 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private final JTextField titleF;
 	private final JTextField authorF;
 	private final JTextField manifacturerF;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private JComboBox<?> genreF = new JComboBox(utils.ItemGenre.values());
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private JComboBox<?> languageF = new JComboBox(utils.Language.values());
 	private final JTextField yearF;
 	// private final JFileChooser imageChoose = new JFileChooser();
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private JComboBox<?> itemTypeF = new JComboBox(utils.TypeItem.values());
 	private final JTextField durationF;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private JComboBox<?> colorF = new JComboBox(utils.TypeColor.values());
 	private final JTextField isbnF;
 	private final JTextField numCopiesF;
@@ -56,6 +60,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	 * @param type
 	 *            the type of screen (create or modify)
 	 */
+	@SuppressWarnings("rawtypes")
 	public ItemScreenImpl(final View v, final ItemScreenType type) {
 		final JLabel titleL;
 		final JLabel authorL;
@@ -316,7 +321,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		return null;
 	}
 	/*
-	 * @Override public ImageIcon resizeImage(String imagePath) { // TODO
-	 * Auto-generated method stub return null; }
+	 * @Override public ImageIcon resizeImage(String imagePath);
 	 */
 }
