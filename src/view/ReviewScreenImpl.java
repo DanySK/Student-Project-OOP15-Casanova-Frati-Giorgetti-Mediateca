@@ -43,7 +43,7 @@ public class ReviewScreenImpl extends JPanel implements ReviewScreen {
 				"Inserisci qui una recensione per l'oggetto selezionato:");
 		insertReview.setBounds(43, 110, 745, 45);
 		insertReview
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		final JLabel insertMark = new JLabel("Inserisci qui un voto (da 1 a "
 				+ ReviewScreenImpl.MAX_MARK + ") per l'oggetto selezionato:");
 		insertMark.setBounds(43, 13, 745, 45);
@@ -86,13 +86,13 @@ public class ReviewScreenImpl extends JPanel implements ReviewScreen {
 		this.add(score5);
 
 		this.discard = new JButton("Annulla");
-		this.discard.setBounds(37, 523, 156, 45);
+		this.discard.setBounds(37, 496, 156, 45);
 		this.discard
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(this.discard);
 
 		this.send = new JButton("Invia Recensione");
-		this.send.setBounds(491, 523, 275, 45);
+		this.send.setBounds(492, 496, 275, 45);
 		this.send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(this.send);
 

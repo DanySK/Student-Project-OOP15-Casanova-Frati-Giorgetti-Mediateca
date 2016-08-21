@@ -98,12 +98,12 @@ public class ViewImpl implements View {
 	public enum CardName {
 		START("Start Card"), MAIN("Main Card"), LOGIN("Login Card"), MENU(
 				"Menu Card"), ITEM("Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-				"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
-				"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
+						"LikeList Screen Card"), BORROWED_LIST(
+								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
+																"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
 
 		private final String name;
 
@@ -641,10 +641,10 @@ public class ViewImpl implements View {
 	public void showGiveBackOptionMessage(final String book) {
 		// Custom button text
 		final Object[] options = { "Consegna",
-				"Aumenta il prestito di un altro mese" };
+		"Aumenta il prestito di un altro mese" };
 		int choose = JOptionPane.showOptionDialog(this.mainFrame,
 				"Dovresti consegare il seguente libro:" + book
-						+ "Cosa vuoi fare?", "Notifica di consegna",
+				+ "Cosa vuoi fare?", "Notifica di consegna",
 				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
 		if (choose == 0) {
@@ -742,6 +742,12 @@ public class ViewImpl implements View {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	// WAITING CONTROLLER FUNCTION NAME
+	@Override
+	public void logOut() {
+		// c.logOut();
 	}
 
 }

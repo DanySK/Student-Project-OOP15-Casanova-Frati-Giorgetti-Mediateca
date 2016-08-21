@@ -53,36 +53,36 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		mainLabel = new JLabel("Accedi ai nostri servizi\r\n");
 		mainLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		mainLabel.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.TITLE_SIZE));
-		mainLabel.setBounds(27, 24, 761, 49);
+		mainLabel.setBounds(12, 24, 761, 49);
 		this.add(mainLabel);
-		this.suggestedBooks.setSize(375, 289);
-		this.suggestedBooks.setLocation(27, 197);
+		this.suggestedBooks.setSize(375, 122);
+		this.suggestedBooks.setLocation(12, 197);
 		this.add(this.suggestedBooks);
-		this.suggestedMovies.setSize(349, 289);
-		this.suggestedMovies.setLocation(439, 197);
+		this.suggestedMovies.setSize(349, 122);
+		this.suggestedMovies.setLocation(424, 197);
 
 		this.add(this.suggestedMovies);
 
 		exitProgram = new JButton("Esci");
 		exitProgram.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		exitProgram.setBounds(616, 519, 172, 49);
+		exitProgram.setBounds(601, 485, 172, 49);
 		this.add(exitProgram);
 
 		mediateca = new JButton("Mediateca");
 		mediateca.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		mediateca.setBounds(102, 86, 300, 64);
+		mediateca.setBounds(12, 86, 377, 64);
 		this.add(mediateca);
 
 		studyRoomServices = new JButton("Sala studio");
 		studyRoomServices.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.FONT_SIZE));
-		studyRoomServices.setBounds(424, 86, 300, 64);
+		studyRoomServices.setBounds(424, 86, 349, 64);
 		this.add(studyRoomServices);
 
 		accountSettings = new JButton("Impostazioni Account");
 		accountSettings.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.FONT_SIZE));
-		accountSettings.setBounds(27, 519, 348, 49);
+		accountSettings.setBounds(12, 485, 306, 49);
 		this.add(accountSettings);
 
 		JLabel suggestedBooksLabel = new JLabel("Libri consigliati:");
@@ -99,6 +99,7 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 
 		exitProgram.addActionListener(e -> v.swapView(CardName.MAIN));
 		mediateca.addActionListener(e -> {
+			v.logOut();
 			v.swapView(CardName.ITEM);
 		});
 		studyRoomServices.addActionListener(e -> {
@@ -107,8 +108,8 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		});
 
 		accountSettings.addActionListener(e -> {
-			v.swapView(CardName.USER_MODIFY);
 			v.giveMeUserInfo();
+			v.swapView(CardName.USER_MODIFY);
 		});
 	}
 

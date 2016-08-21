@@ -570,4 +570,9 @@ public interface View {
 	 */
 	void cancelSit();
 
+	/**
+	 * Tell controller the login out.
+	 */
+	void logOut();
+
 }

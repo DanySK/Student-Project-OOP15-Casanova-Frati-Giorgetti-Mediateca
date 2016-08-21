@@ -43,41 +43,41 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 * builder for ListScreen.
 	 *
 	 * @param v
-	 * @param screenLenght
-	 * @param screenWidth
-	 * @param a
+	 *            the calling class
+	 * @param i
+	 *            the type of list to show
 	 */
-	public ListScreenImpl(final View v, final ListScreenType a) {
+	public ListScreenImpl(final View v, final ListScreenType i) {
 		JButton exit = new JButton();
 		JButton remove = new JButton();
-		remove.addActionListener(arg0 -> {
-		});
+
 		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		for (final ListScreenType i : ListScreenType.values()) {
-			if (i.equals(ListScreenType.BORROWED)) {
-				this.presentation = new JLabel(
-						"Ecco gli oggetti che hai in prestito:");
-				remove.addActionListener(e -> {
-					v.giveBackItem();
-					v.giveMeBorrowList();
-					v.swapView(CardName.BORROWED_LIST);
-				});
-				remove.setText("Restituisci");
+		this.presentation = new JLabel();
+		switch (i) {
+		case BORROWED:
+			this.presentation.setText("Ecco gli oggetti che hai in prestito:");
+			remove.addActionListener(e -> {
+				v.giveBackItem();
+				v.giveMeBorrowList();
+				v.swapView(CardName.BORROWED_LIST);
+			});
+			remove.setText("Restituisci");
 
-			} else if (i.equals(ListScreenType.WISH)) {
-				this.presentation = new JLabel("Ecco gli oggetti che desideri");
-				remove.setText("Rimuovi da Wishlist");
-				remove.addActionListener(e -> {
-					v.removeFromWishlist();
-					v.giveMeBorrowList();
-					v.swapView(CardName.WISHLIST);
-				});
+		case WISH:
+			this.presentation.setText("Ecco gli oggetti che desideri");
+			remove.setText("Rimuovi da Wishlist");
+			remove.addActionListener(e -> {
+				v.removeFromWishlist();
+				v.giveMeBorrowList();
+				v.swapView(CardName.WISHLIST);
+			});
 
-			} else if (i.equals(ListScreenType.REVIEWS)) {
-				this.presentation = new JLabel("Ecco tutte le recensioni");
-				remove.setVisible(false);
+		case REVIEWS:
+			this.presentation.setText("Ecco tutte le recensioni");
+			remove.setVisible(false);
+		default:
+			break;
 
-			}
 		}
 
 		this.presentation.setHorizontalAlignment(SwingConstants.CENTER);
@@ -93,7 +93,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 		exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		exit.setBounds(603, 548, 166, 39);
+		exit.setBounds(603, 511, 166, 39);
 		this.add(exit);
 		remove.setBounds(215, 462, 353, 35);
 		this.add(remove);

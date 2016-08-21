@@ -16,6 +16,8 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import view.ViewImpl.CardName;
+
 /**
  * Class which implements methods of StudyRoom interface.
  *
@@ -33,6 +35,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	private JDatePickerImpl datePicker;
 	private UtilDateModel model = new UtilDateModel();
 	private SpringLayout springLayout = new SpringLayout();
+	private JPanel centerPanel;
 
 	/**
 	 * builder for StudyRoomImpl.
@@ -46,9 +49,9 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		JPanel northPanel = new JPanel();
 		northPanel.setBounds(0, 0, 800, 135);
 
-		JPanel centerPanel = new JPanel();
-		centerPanel.setBounds(0, 134, 800, 331);
-		this.add(centerPanel);
+		this.centerPanel = new JPanel();
+		this.centerPanel.setBounds(0, 134, 800, 331);
+		this.add(this.centerPanel);
 
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.buttons = new JButton[ViewImpl.STUDY_ROOM_SITS];
@@ -70,15 +73,23 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 				this.datePicker.getJFormattedTextField(), 0,
 				SpringLayout.SOUTH, this.datePicker);
 		this.datePicker.setSize(241, 25);
-		this.datePicker.setLocation(278, 97);
+		this.datePicker.setLocation(158, 86);
 
 		northPanel.add(this.datePicker);
 
 		southPanel.setLayout(null);
 
 		int i;
+		for (i = 1; i <= 50; i++) {
+			this.buttons[i] = new JButton();
+			this.buttons[i].setSize(200, 200);
+			this.buttons[i].setBackground(Color.GREEN);
+			this.centerPanel.add(this.buttons[i]);
 
-		for (i = 1; i < 50; i++) {
+		}
+		v.giveMeStudyRoomStatus();
+		// v.swapView(CardName.STUDY_ROOM);
+		for (i = 1; i <= 50; i++) {
 			this.buttons[i] = new JButton();
 			this.buttons[i].setText(String.valueOf(i));
 			if (this.buttons[i].getBackground() == Color.GREEN) {
@@ -96,18 +107,37 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		this.setLayout(null);
 		this.add(southPanel);
 
+		JButton exit = new JButton("Esci");
+		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		exit.setBounds(629, 24, 128, 49);
+		exit.addActionListener(e -> {
+			v.giveMeSuggestedBooks();
+			v.giveMeSuggestedMovies();
+			v.swapView(CardName.MENU);
+		});
+		southPanel.add(exit);
+
 		this.add(northPanel);
 		northPanel.setLayout(null);
-		this.add(centerPanel);
-		centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		this.add(this.centerPanel);
+		this.centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		northPanel.setLayout(null);
 		JLabel presentation = new JLabel(
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
+
+		JButton sendDate = new JButton("Invia Data");
+		sendDate.addActionListener(e -> {
+			v.giveMeStudyRoomStatus();
+			v.swapView(CardName.STUDY_ROOM);
+		});
+		sendDate.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		sendDate.setBounds(427, 82, 158, 40);
+		northPanel.add(sendDate);
 
 	}
 
@@ -120,6 +150,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	public void setStudyRoomStatus(final String[] status) {
 		int i;
 		for (i = 0; i < status.length; i++) {
+			this.centerPanel.add(this.buttons[i]);
 			this.buttons[i].setText(String.valueOf(i));
 			if (status[i].equals("0")) {
 				this.buttons[i].setBackground(Color.GREEN);
