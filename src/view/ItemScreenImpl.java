@@ -161,6 +161,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			v.giveMeItemInfo();
 			send = new JButton("Invio");
 			send.addActionListener(e -> v.sendItemModify());
+			this.itemTypeF.setEnabled(false);
+			this.durationF.setEditable(false);
+			this.colorF.setEnabled(false);
+			this.isbnF.setEnabled(false);
+			this.numCopiesF.setEnabled(false);
+			this.numReleaseF.setEnabled(false);
 		}
 		this.itemTypeF
 		.addActionListener(e -> {

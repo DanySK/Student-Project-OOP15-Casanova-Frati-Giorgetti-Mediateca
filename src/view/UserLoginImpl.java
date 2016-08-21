@@ -5,7 +5,8 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import view.ViewImpl.CardName;
@@ -23,8 +24,9 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private final JTextArea passwordTextArea;
-	private JTextArea usernameTextArea;
+	private final JPasswordField passwordTextField;
+	private JTextField usernameTextField;
+	private char[] password;
 
 	/**
 	 * enumeration for choosing login type.
@@ -61,26 +63,27 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		send.setBounds(277, 225, 230, 45);
 		this.add(send);
-		this.usernameTextArea = new JTextArea();
+		this.usernameTextField = new JTextField();
+		this.usernameTextField.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.FONT_SIZE));
 		usernameLabel = new JLabel("Username:");
 		usernameLabel
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		passwordLabel = new JLabel("Password:");
 		passwordLabel
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		this.add(passwordLabel);
 		if (type.equals(LoginType.USER)) {
 			passwordLabel.setBounds(142, 151, 162, 45);
 			usernameLabel.setBounds(142, 88, 162, 45);
 			this.add(usernameLabel);
-			this.usernameTextArea.setRows(1);
-			this.usernameTextArea.setBounds(315, 88, 329, 45);
-			this.add(this.usernameTextArea);
+			this.usernameTextField.setBounds(315, 88, 329, 45);
+			this.add(this.usernameTextField);
 			send.addActionListener(e -> v.sendLogin());
 		} else if (type.equals(LoginType.MANAGER)) {
-			this.usernameTextArea.setVisible(false);
+			this.usernameTextField.setVisible(false);
 			passwordLabel = new JLabel("Password di Sistema:");
 			passwordLabel.setFont(new Font("Tahoma", Font.PLAIN,
 					ViewImpl.FONT_SIZE));
@@ -88,9 +91,10 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 			send.addActionListener(e -> v.sendManagerLogin());
 		}
 
-		this.passwordTextArea = new JTextArea();
-		this.passwordTextArea.setRows(1);
-		this.passwordTextArea.setBounds(316, 151, 329, 45);
+		this.passwordTextField = new JPasswordField();
+		this.passwordTextField.setBounds(316, 151, 329, 45);
+		this.passwordTextField.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.FONT_SIZE));
 		backToSelectAccount = new JButton("Torna alla scelta");
 		backToSelectAccount.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.FONT_SIZE));
@@ -99,7 +103,7 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 		this.setLayout(null);
 		this.add(mainLabel);
 		this.add(passwordLabel);
-		this.add(this.passwordTextArea);
+		this.add(this.passwordTextField);
 		this.add(backToSelectAccount);
 
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
@@ -108,17 +112,21 @@ public class UserLoginImpl extends JPanel implements UserLogin {
 
 	@Override
 	public String getUserUsername() {
-		return this.usernameTextArea.getText();
+		return this.usernameTextField.getText();
 	}
 
 	@Override
 	public String getUserPassword() {
-		return this.passwordTextArea.getText();
+		this.password = this.passwordTextField.getPassword();
+		String pwd = new String(this.password);
+		return pwd;
 	}
 
 	@Override
 	public String getManagerPassword() {
-		return this.passwordTextArea.getText();
+		this.password = this.passwordTextField.getPassword();
+		String pwd = new String(this.password);
+		return pwd;
 	}
 
 }

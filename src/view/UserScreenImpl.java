@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
@@ -31,7 +32,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	private JButton send;
 	private JTextField nameF;
 	private JTextField surnameF;
-	private JTextField passwordF;
+	private JPasswordField passwordF;
 	private JTextField usernameF;
 	private JTextField emailF;
 	private JTextField cellF;
@@ -89,7 +90,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.surnameF.setColumns(10);
 		this.add(this.surnameF);
 
-		this.passwordF = new JTextField();
+		this.passwordF = new JPasswordField();
 		this.passwordF.setColumns(10);
 		this.passwordF.setBounds(246, 198, 241, 25);
 		this.add(this.passwordF);
@@ -270,7 +271,8 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			case USERNAME:
 				return this.usernameF.getText();
 			case PASSWORD:
-				return this.passwordF.getText();
+				String pwd = new String(this.passwordF.getPassword());
+				return pwd;
 			case BIRTHDATE_DAY:
 				return this.datePicker.getModel().getDay();
 			case BIRTHDATE_MONTH:
