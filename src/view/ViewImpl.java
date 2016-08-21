@@ -428,15 +428,17 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void showItemInfo(final utils.TypeItem type) {
+	public void showItemInfo() {
 		ItemShow itemScreen = new ItemShowImpl();
-		itemScreen.startItemShow(this, type);
+		itemScreen.startItemShow(this);
 	}
 
 	// //OK
 	@Override
 	public void goodLogin() {
 		this.logged = true;
+		this.giveMeSuggestedMovies();
+		this.giveMeSuggestedBooks();
 		this.swapView(CardName.MENU);
 	}
 
@@ -590,7 +592,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void setSuggestedMovies(final String[] mList) {
-		((UserMenu) this.card2).setSuggestedMovies(this.prova);
+		((UserMenu) this.card2).setSuggestedMovies(mList);
 	}
 
 	// //OK
@@ -730,6 +732,16 @@ public class ViewImpl implements View {
 	@Override
 	public void giveBackItemAfterNotify(final String item) {
 		this.c.giveBackItem(item);
+	}
+
+	@Override
+	public void cancelSit() {
+		try {
+			this.c.cancelSit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

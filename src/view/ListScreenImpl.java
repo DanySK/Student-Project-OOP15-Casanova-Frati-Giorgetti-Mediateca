@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Font;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -21,7 +22,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-
+	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private JLabel presentation;
 	private JList<String> list = new JList<String>();
 
@@ -56,19 +57,25 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 			if (i.equals(ListScreenType.BORROWED)) {
 				this.presentation = new JLabel(
 						"Ecco gli oggetti che hai in prestito:");
-				remove.addActionListener(e -> v.giveBackItem());
+				remove.addActionListener(e -> {
+					v.giveBackItem();
+					v.giveMeBorrowList();
+					v.swapView(CardName.BORROWED_LIST);
+				});
 				remove.setText("Restituisci");
-				v.giveMeBorrowList();
 
 			} else if (i.equals(ListScreenType.WISH)) {
 				this.presentation = new JLabel("Ecco gli oggetti che desideri");
-				remove.addActionListener(e -> v.removeFromWishlist());
 				remove.setText("Rimuovi da Wishlist");
-				v.giveMeWishlist();
+				remove.addActionListener(e -> {
+					v.removeFromWishlist();
+					v.giveMeBorrowList();
+					v.swapView(CardName.WISHLIST);
+				});
+
 			} else if (i.equals(ListScreenType.REVIEWS)) {
 				this.presentation = new JLabel("Ecco tutte le recensioni");
 				remove.setVisible(false);
-				v.giveMeAllItemReviews();
 
 			}
 		}
@@ -80,6 +87,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		this.presentation.setBounds(12, 13, 776, 50);
 		this.add(this.presentation);
 
+		this.list.setModel(this.model);
 		this.list.setBounds(42, 76, 704, 376);
 		this.add(this.list);
 
@@ -90,6 +98,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		remove.setBounds(215, 462, 353, 35);
 		this.add(remove);
 		exit.addActionListener(e -> {
+			v.giveMeFilteredList();
 			v.swapView(CardName.ITEM);
 		});
 
@@ -100,17 +109,26 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 	@Override
 	public void setBorrowedList(final String[] bList) {
-		this.list = new JList<String>(bList);
+		this.model.clear();
+		for (String element : bList) {
+			this.model.addElement(element);
+		}
 	}
 
 	@Override
 	public void setWishlist(final String[] wishlist) {
-		this.list = new JList<String>(wishlist);
+		this.model.clear();
+		for (String element : wishlist) {
+			this.model.addElement(element);
+		}
 	}
 
 	@Override
 	public void setReviewslist(final String[] reviewsList) {
-		this.list = new JList<String>(reviewsList);
+		this.model.clear();
+		for (String element : reviewsList) {
+			this.model.addElement(element);
+		}
 	}
 
 	@Override

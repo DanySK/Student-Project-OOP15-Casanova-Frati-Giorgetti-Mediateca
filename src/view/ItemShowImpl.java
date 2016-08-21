@@ -7,8 +7,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import utils.TypeItem;
-
 /**
  * class which implememts method of Item Show inteface.
  *
@@ -31,7 +29,7 @@ public class ItemShowImpl implements ItemShow {
 	private utils.Language language;
 
 	@Override
-	public void startItemShow(final View v, final TypeItem type) {
+	public void startItemShow(final View v) {
 		v.giveMeItemInfo();
 		final JFrame mainFrame = new JFrame("Oggetto Selezionato");
 		JPanel mainPanel = new JPanel();
@@ -106,16 +104,9 @@ public class ItemShowImpl implements ItemShow {
 		languageL.setBounds(23, 241, 215, 37);
 		mainFrame.getContentPane().add(languageL);
 
-		if (type.equals(TypeItem.BOOK)) {
-			mainFrame.setTitle("Libro Selezionato");
-			durationL.setVisible(false);
-			colorL.setVisible(false);
+		mainFrame.setTitle("Oggetto Selezionato");
+		authorL.setText("Regista:" + this.author);
 
-		} else if (type.equals(TypeItem.MOVIE)) {
-			mainFrame.setName("Film Selezionato");
-			authorL.setText("Regista:" + this.author);
-			isbnCodeL.setVisible(false);
-		}
 	}
 
 	private void setCommonField(final String titleS, final String authorS,

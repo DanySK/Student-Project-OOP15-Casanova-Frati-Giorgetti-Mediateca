@@ -27,17 +27,15 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	 * @param screenWidth
 	 * @param screenLenght
 	 */
-	String[] prova = { "baci", "baci" };
 
-	DefaultListModel model;
+	private DefaultListModel<String> modelM = new DefaultListModel<String>();
+	private DefaultListModel<String> modelB = new DefaultListModel<String>();
 	private JList<String> suggestedBooks = new JList<String>();
 	private JList<String> suggestedMovies = new JList<String>();
 
 	public UserMenuImpl(final View v) {
-		this.model = new DefaultListModel();
-		this.model.addElement("gatto");
-		this.model.addElement("two");
-		this.suggestedBooks.setModel(this.model);
+		this.suggestedBooks.setModel(this.modelB);
+		this.suggestedMovies.setModel(this.modelM);
 		this.setLayout(null);
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		final JButton exitProgram;
@@ -51,10 +49,6 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		mainLabel.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.TITLE_SIZE));
 		mainLabel.setBounds(27, 24, 761, 49);
 		this.add(mainLabel);
-		v.giveMeSuggestedBooks();
-
-		v.giveMeSuggestedMovies();
-		this.suggestedBooks.setModel(this.model);
 		this.suggestedBooks.setSize(375, 289);
 		this.suggestedBooks.setLocation(27, 197);
 		this.add(this.suggestedBooks);
@@ -82,8 +76,6 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		accountSettings = new JButton("Impostazioni Account");
 		accountSettings.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.FONT_SIZE));
-		accountSettings.addActionListener(arg0 -> {
-		});
 		accountSettings.setBounds(27, 519, 348, 49);
 		this.add(accountSettings);
 
@@ -100,23 +92,34 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		this.add(suggestedMoviesLabel);
 
 		exitProgram.addActionListener(e -> v.swapView(CardName.MAIN));
-		mediateca.addActionListener(e -> v.swapView(CardName.ITEM));
-		studyRoomServices.addActionListener(e -> v
-				.swapView(CardName.STUDY_ROOM));
-		accountSettings
-				.addActionListener(e -> v.swapView(CardName.USER_MODIFY));
+		mediateca.addActionListener(e -> {
+			v.swapView(CardName.ITEM);
+		});
+		studyRoomServices.addActionListener(e -> {
+			v.giveMeStudyRoomStatus();
+			v.swapView(CardName.STUDY_ROOM);
+		});
 
+		accountSettings.addActionListener(e -> {
+			v.swapView(CardName.USER_MODIFY);
+			v.giveMeUserInfo();
+		});
 	}
 
 	@Override
 	public void setSuggestedBooks(final String[] bList) {
+		this.modelB.clear();
 		for (String element : bList) {
-			this.model.addElement("pesce");
+			this.modelB.addElement(element);
 		}
 	}
 
 	@Override
 	public void setSuggestedMovies(final String[] mList) {
-		this.suggestedMovies = new JList<String>(mList);
+		this.modelM.clear();
+		for (String element : mList) {
+			this.modelM.addElement(element);
+		}
+
 	}
 }

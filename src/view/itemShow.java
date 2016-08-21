@@ -3,7 +3,6 @@ package view;
 import utils.ItemGenre;
 import utils.Language;
 import utils.TypeColor;
-import utils.TypeItem;
 
 /**
  * interface for showing item.
@@ -73,9 +72,7 @@ public interface ItemShow {
 	 *
 	 * @param v
 	 *            the name of the calling View
-	 * @param type
-	 *            the item type
 	 */
-	void startItemShow(View v, TypeItem type);
+	void startItemShow(View v);
 
 }

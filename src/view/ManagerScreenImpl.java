@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -40,8 +42,6 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		JButton newItem = new JButton("Crea Nuovo Oggetto");
 		newItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		newItem.addActionListener(arg0 -> {
-		});
 		newItem.setBounds(515, 71, 273, 39);
 		this.add(newItem);
 
@@ -50,9 +50,11 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		showUserList
 		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
+		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
 			v.giveMeUserList();
 			this.type = TypeList.USER;
+			v.swapView(CardName.MANAGER_MENU);
 		});
 
 		JButton showItemList = new JButton("Lista Oggetti");
@@ -60,9 +62,11 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		showItemList
 		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
+		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
 			v.giveMeItemList();
 			this.type = TypeList.ITEM;
+			v.swapView(CardName.MANAGER_MENU);
 		});
 
 		JButton delete = new JButton("Elimina");
@@ -83,10 +87,16 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		if (this.type.equals(TypeList.USER)) {
 			delete.setEnabled(false);
 			modify.setEnabled(false);
-			seeBorrowedList.addActionListener(e -> v.giveManagerBorrowList());
+			// SEE BORROWED LIST -> REFRESH
+			seeBorrowedList.addActionListener(e -> {
+				v.giveManagerBorrowList();
+				v.swapView(CardName.MANAGER_MENU);
+			});
 		} else if (this.type.equals(TypeList.ITEM)) {
 			delete.addActionListener(e -> {
 				v.deleteItem();
+				v.giveMeItemList();
+				v.swapView(CardName.MANAGER_MENU);
 
 			});
 			modify.addActionListener(e -> {
@@ -98,6 +108,23 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		this.list.setBounds(30, 572, 449, -497);
 		this.add(this.list);
+		this.list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent evt) {
+				JList<String> list = (JList) evt.getSource();
+				if (evt.getClickCount() == 2) {
+					if (ManagerScreenImpl.this.type.equals(TypeList.USER)) {
+						v.giveMeUserInfo();
+						v.showUserInfo();
+					} else if (ManagerScreenImpl.this.type
+							.equals(TypeList.ITEM)) {
+						v.giveMeItemInfo();
+						v.showItemInfo();
+					}
+
+				}
+			}
+		});
 
 		JButton exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));

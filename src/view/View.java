@@ -298,7 +298,7 @@ public interface View {
 	 * @param type
 	 *            the type of item (book or movie)
 	 */
-	void showItemInfo(utils.TypeItem type);
+	void showItemInfo();
 
 	/**
 	 * Sets good login and change screen.
