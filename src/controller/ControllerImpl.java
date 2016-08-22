@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import com.google.common.base.Optional;
 
@@ -158,6 +159,21 @@ public class ControllerImpl implements Controller {
 			this.m.bookSit(cal2, 7, ((UserImpl) u2).getIdUser());
 			this.m.bookSit(cal2, 8, ((UserImpl) u2).getIdUser());
 			this.m.bookSit(cal2, 9, ((UserImpl) u2).getIdUser());
+
+			Random random = new Random();
+			int n = 5;
+			int index = 0;
+
+			for (Integer i : this.m.getItemArchive().keySet()) {
+				int k = random.nextInt(n);
+
+				this.m.addReview(i, ((UserImpl) u).getIdUser(), k, "recensione numero " + index);
+				if ((index % 2) == 0) {
+					this.m.addLike(i, ((UserImpl) u).getIdUser());
+				}
+				index++;
+			}
+
 			this.v.showMessage("Utenti creati");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -781,6 +797,6 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void setView(final view.View v) {
 		this.v = v;
-		// this.writeOnFile();
+		this.writeOnFile();
 	}
 }
