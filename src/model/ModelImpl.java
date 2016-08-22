@@ -386,28 +386,28 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void changeItem(final TypeItemInfo ts, final Integer itemId, final Object param)
               throws Exception {
-    if ((ts != TypeItemInfo.AUTHOR) && (ts != TypeItemInfo.TITLE) && (ts != TypeItemInfo.PRODUCER)
-                && (ts != TypeItemInfo.RELEASE_YEAR) && (ts != TypeItemInfo.LANGUAGE)
-                && (ts != TypeItemInfo.GENRE)) {
+    if ((!ts.equals(TypeItemInfo.AUTHOR)) && (!ts.equals(TypeItemInfo.TITLE))
+                && (!ts.equals(TypeItemInfo.PRODUCER)) && (!ts.equals(TypeItemInfo.RELEASE_YEAR))
+                && (!ts.equals(TypeItemInfo.LANGUAGE)) && (!ts.equals(TypeItemInfo.GENRE))) {
       throw new Exception("TypeSearch " + ts + "not valid to change on item");
     }
 
-    if (ts == TypeItemInfo.TITLE) {
+    if (ts.equals(TypeItemInfo.TITLE)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setTitle((String) param);
     }
-    if (ts == TypeItemInfo.AUTHOR) {
+    if (ts.equals(TypeItemInfo.AUTHOR)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setAuthor((String) param);
     }
-    if (ts == TypeItemInfo.PRODUCER) {
+    if (ts.equals(TypeItemInfo.PRODUCER)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setPublisher((String) param);
     }
-    if (ts == TypeItemInfo.RELEASE_YEAR) {
+    if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setReleaseYear((int) param);
     }
-    if (ts == TypeItemInfo.LANGUAGE) {
+    if (ts.equals(TypeItemInfo.LANGUAGE)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setCurrentLanguage((Language) param);
     }
-    if (ts == TypeItemInfo.GENRE) {
+    if (ts.equals(TypeItemInfo.GENRE)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setGenre((ItemGenre) param);
     }
   }
