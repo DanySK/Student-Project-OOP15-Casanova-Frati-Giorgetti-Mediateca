@@ -323,7 +323,7 @@ public class ViewImpl implements View {
 	// //WAITING FOR CONTROLLER FUNCTION NAME
 	@Override
 	public void giveMeUserInfo() {
-		// c.setUserInfo();
+		this.c.setUserInfo();
 	}
 
 	// //OK
@@ -363,7 +363,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeFilteredList() {
-		// c.itemElaboration();
+		this.c.itemElaboration();
 	}
 
 	// //OK
@@ -457,13 +457,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void takeSit() {
-		try {
-			this.c.takeSit();
-		} catch (Exception e) {
-
-			e.printStackTrace(this.pw);
-			this.showError(this.sw.toString());
-		}
+		this.c.takeSit();
 	}
 
 	// //OK
@@ -715,13 +709,13 @@ public class ViewImpl implements View {
 	// WAITING CONTROLLER FUNCTION NAME
 	@Override
 	public void cancelSit() {
-		// c.cancelSit();
+		this.c.cancelSit();
 	}
 
 	// WAITING CONTROLLER FUNCTION NAME
 	@Override
 	public void logOut() {
-		// c.logOut();
+		this.c.logOut();
 	}
 
 }
