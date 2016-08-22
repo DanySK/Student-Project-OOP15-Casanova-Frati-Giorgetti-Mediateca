@@ -457,7 +457,9 @@ public class ModelImpl implements Serializable, Model {
         Integer best = 0;
         for (Integer v : all) {
           if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
+            start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
             best = v;
+
           }
         }
         toAdd.add(best);
@@ -471,6 +473,7 @@ public class ModelImpl implements Serializable, Model {
         Integer best = 0;
         for (Integer v : all) {
           if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
+            start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
             best = v;
           }
         }
