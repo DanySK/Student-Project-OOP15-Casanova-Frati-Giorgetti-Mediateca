@@ -92,11 +92,21 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 			this.buttons[i] = new JButton();
 			this.buttons[i].setText(String.valueOf(i));
 			if (this.buttons[i].getBackground() == Color.GREEN) {
-				this.buttons[i].addActionListener(e -> v.takeSit());
-				this.selectedSit = Integer.parseInt(this.buttons[i].getText());
+				this.buttons[i].addActionListener(e -> {
+					this.selectedSit = Integer.parseInt(((JButton) e
+							.getSource()).getText());
+					v.takeSit();
+					v.swapView(CardName.STUDY_ROOM);
+				});
+
 			} else if (this.buttons[i].getBackground() == Color.CYAN) {
-				this.buttons[i].addActionListener(e -> v.cancelSit());
-				this.selectedSit = Integer.parseInt(this.buttons[i].getText());
+				this.buttons[i].addActionListener(e -> {
+					this.selectedSit = Integer.parseInt(((JButton) e
+							.getSource()).getText());
+					v.cancelSit();
+					v.swapView(CardName.STUDY_ROOM);
+				});
+
 			} else {
 				this.buttons[i].setEnabled(false);
 			}
@@ -125,7 +135,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 

@@ -61,7 +61,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 				v.swapView(CardName.BORROWED_LIST);
 			});
 			remove.setText("Restituisci");
-
+			break;
 		case WISH:
 			presentation.setText("Ecco gli oggetti che desideri");
 			remove.setText("Rimuovi da Wishlist");
@@ -70,10 +70,12 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 				v.giveMeBorrowList();
 				v.swapView(CardName.WISHLIST);
 			});
+			break;
 
 		case REVIEWS:
 			presentation.setText("Ecco tutte le recensioni");
 			remove.setVisible(false);
+			break;
 		default:
 			break;
 
@@ -81,7 +83,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		presentation.setBounds(12, 13, 776, 50);
 		this.add(presentation);

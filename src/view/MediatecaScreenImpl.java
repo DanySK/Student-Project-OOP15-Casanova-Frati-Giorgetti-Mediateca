@@ -69,7 +69,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		borrowItem.setBounds(586, 124, 178, 27);
 		searchField = new JTextField();
 		searchField.setBounds(21, 84, 521, 27);
-		searchField.setText("Inserisci una o pi\u00F9 parole da cercare");
 		filterSelect = new JComboBox(utils.TypeItemInfo.values());
 		filterSelect.setBounds(232, 44, 200, 27);
 		filterSelect.setToolTipText("Dove ricercare");
@@ -90,11 +89,12 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		backToMenu = new JButton("Torna al Menu");
 		backToMenu.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		backToMenu.setBounds(586, 495, 178, 27);
-		v.giveMeFilteredList();
+
 		this.filteredJList.setModel(this.model);
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
 		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
@@ -170,7 +170,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 	@Override
 	public String getSelectedItemFromList() {
-		return this.itemSelectedFromList;
+		return this.filteredJList.getSelectedValue();
 	}
 
 	@Override

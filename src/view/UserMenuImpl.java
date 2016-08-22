@@ -106,7 +106,6 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 			v.swapView(CardName.ITEM);
 		});
 		studyRoomServices.addActionListener(e -> {
-			v.giveMeStudyRoomStatus();
 			v.swapView(CardName.STUDY_ROOM);
 		});
 
