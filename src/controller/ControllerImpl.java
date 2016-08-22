@@ -221,6 +221,9 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void userLogout() {
+		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
+		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 		this.actualUser = null;
 	}
 
@@ -431,6 +434,10 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	public void setUserInfo() {
+
+	}
+
 	// Modificare questi due metodi e renderlo uno solo con un parametro
 	@Override
 	public void suggestedBooks() {
@@ -601,11 +608,13 @@ public class ControllerImpl implements Controller {
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
-		String[] array = new String[50];
+		String[] array = new String[100];
 		Integer[] arrayInt = (Integer[]) this.m.getStudyRoom().get(day).toArray();
 		for (int index = 0; index < arrayInt.length; index++) {
 			if ((arrayInt[index] == null) || (arrayInt[index] == 0)) {
 				array[index] = "0";
+			} else if (arrayInt[index].equals(this.actualUser.getIdUser())) {
+				array[index] = "1";
 			} else {
 				try {
 					array[index] = this.m.getRequiredUser(arrayInt[index]).getUsername();
@@ -631,6 +640,7 @@ public class ControllerImpl implements Controller {
 				this.v.getStudyRoomSelectedDay());
 		try {
 			this.m.bookSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
+			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Posto o Id utente non validi");
@@ -651,6 +661,7 @@ public class ControllerImpl implements Controller {
 				this.v.getStudyRoomSelectedDay());
 		try {
 			this.m.cancelSit(day, this.v.getSelectedSit(), this.actualUser.getIdUser());
+			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Posto selezionato non valido per la cancellazione");
