@@ -657,9 +657,10 @@ public class ControllerImpl implements Controller {
 
 		// elaborare la stringa per ottenere la data
 		GregorianCalendar day = new GregorianCalendar();
-		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
-				this.v.getStudyRoomSelectedDay());
+
 		try {
+			day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+					this.v.getStudyRoomSelectedDay());
 			this.m.cancelSit(day, this.v.getSelectedSit(), this.actualUser.getIdUser());
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 		} catch (Exception e) {
