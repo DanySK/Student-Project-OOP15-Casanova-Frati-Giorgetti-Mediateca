@@ -339,42 +339,42 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public Set<Integer> filtersItem(final Set<Integer> set, final TypeItemInfo ts, final Object param)
               throws Exception {
-    if ((ts != TypeItemInfo.AUTHOR) && (ts != TypeItemInfo.TITLE) && (ts != TypeItemInfo.PRODUCER)
-                && (ts != TypeItemInfo.RELEASE_YEAR) && (ts != TypeItemInfo.LANGUAGE)
-                && (ts != TypeItemInfo.GENRE)) {
+    if ((!ts.equals(TypeItemInfo.AUTHOR)) && (ts.equals(TypeItemInfo.TITLE))
+                && (ts.equals(TypeItemInfo.PRODUCER)) && (ts.equals(TypeItemInfo.RELEASE_YEAR))
+                && (ts.equals(TypeItemInfo.LANGUAGE)) && (ts.equals(TypeItemInfo.GENRE))) {
       throw new Exception("TypeSearch " + ts + "not valid");
     }
     Set<Integer> r = new HashSet<>();
     for (Integer i : set) {
-      if (ts == TypeItemInfo.TITLE) {
+      if (ts.equals(TypeItemInfo.TITLE)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getTitle()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }
-      if (ts == TypeItemInfo.AUTHOR) {
+      if (ts.equals(TypeItemInfo.AUTHOR)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }
-      if (ts == TypeItemInfo.PRODUCER) {
+      if (ts.equals(TypeItemInfo.PRODUCER)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       }
-      if (ts == TypeItemInfo.RELEASE_YEAR) {
+      if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getReleaseYear() == (int) param) {
           r.add(i);
         }
       }
-      if (ts == TypeItemInfo.LANGUAGE) {
+      if (ts.equals(TypeItemInfo.LANGUAGE)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getCurrentLanguage().equals(param)) {
           r.add(i);
         }
       }
-      if (ts == TypeItemInfo.GENRE) {
+      if (ts.equals(TypeItemInfo.GENRE)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getGenre().equals(param)) {
           r.add(i);
         }
