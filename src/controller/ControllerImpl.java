@@ -544,9 +544,9 @@ public class ControllerImpl implements Controller {
 			 */
 			for (Integer i : map.keySet()) {
 				if (map.get(i) > 60) {
-					this.v.showGiveBackMessage(this.m.getItemArchive().get(i).getFirst().getTitle());
+					this.v.showGiveBackMessage(this.m.getItemArchive().get(i).getFirst().toString());
 				} else if (map.get(i) > 30) {
-					this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).getFirst().getTitle());
+					this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).getFirst().toString());
 				}
 			}
 
@@ -564,6 +564,7 @@ public class ControllerImpl implements Controller {
 			if (this.m.getItemArchive().get(i).getFirst().toString().equals(item)) {
 				try {
 					this.m.returnItem(i, this.actualUser.getIdUser());
+					this.v.showMessage("Oggetto " + this.m.getRequiredItem(i));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					this.v.showError("Errore! Id utente e oggetto non associati");
