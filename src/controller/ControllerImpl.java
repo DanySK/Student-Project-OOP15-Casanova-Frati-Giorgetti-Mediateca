@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -203,12 +204,15 @@ public class ControllerImpl implements Controller {
 	}
 
 	@Override
+	public void userLogout() {
+		this.actualUser = null;
+	}
+
+	@Override
 	public void managerLogin() {
 		if (this.m.getSystemPassword().equals(this.v.getMenagerPassword())) {
-			// esegui login manager
 			this.v.goodManagerLogin();
 			this.v.showMessage("Login manager effettuato");
-			// inserire metodo
 		} else {
 			this.v.showMessage("Password errata");
 		}
@@ -241,6 +245,7 @@ public class ControllerImpl implements Controller {
 		try {
 			for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
 				array[index] = this.m.getItemArchive().get(i).toString();
+				this.v.showMessage(array[index]);
 				index++;
 			}
 		} catch (Exception e) {
@@ -318,19 +323,24 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void userModify() {
 		// for per ogni tipo di userinfo e fare changeUser totale
-		for (UserInfo ui : UserInfo.values()) {
-			try {
-				if ((ui != UserInfo.USERNAME) && (ui != UserInfo.BIRTHDATE_DAY) && (ui != UserInfo.BIRTHDATE_MONTH)
-						&& (ui != UserInfo.BIRTHDATE_YEAR) && (ui != UserInfo.BOOK_PREF1) && (ui != UserInfo.BOOK_PREF2)
-						&& (ui != UserInfo.BOOK_PREF3) && (ui != UserInfo.FILM_PREF1) && (ui != UserInfo.FILM_PREF2)
-						&& (ui != UserInfo.FILM_PREF3)) {
-					this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
-				}
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				this.v.showError("Errore nell'UserInfo");
-			}
-		}
+		Arrays.stream(UserInfo.values())
+				.filter(ui -> !ui.equals(UserInfo.BIRTHDATE_DAY) && !ui.equals(UserInfo.BIRTHDATE_MONTH)
+						&& !ui.equals(UserInfo.BIRTHDATE_YEAR) && !ui.equals(UserInfo.BOOK_PREF1)
+						&& !ui.equals(UserInfo.BOOK_PREF2) && !ui.equals(UserInfo.BOOK_PREF3)
+						&& !ui.equals(UserInfo.FILM_PREF1) && !ui.equals(UserInfo.FILM_PREF2)
+						&& !ui.equals(UserInfo.FILM_PREF3))
+				.forEach(ui -> {
+					try {
+						this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
+					} catch (Exception e) {
+						this.v.showError("Utente non presente nell'archivio per la modifica");
+					}
+				});
+		/*
+		 * for (UserInfo ui : listU) { try { ; } } catch (Exception e) { // TODO
+		 * Auto-generated catch block this.v.showError("Errore nell'UserInfo");
+		 * } }
+		 */
 	}
 
 	@Override
@@ -405,6 +415,7 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	// Modificare questi due metodi e renderlo uno solo con un parametro
 	@Override
 	public void suggestedBooks() {
 		// stampa 3 libri di 3 preferenze
@@ -453,7 +464,10 @@ public class ControllerImpl implements Controller {
 		List<ItemGenre> movieList = new ArrayList<>(Arrays.asList(moviePref1, moviePref2, moviePref3));
 		try {
 			this.m.registerUser(name, surname, day, username, password, email, telephoneNumber, bookList, movieList);
+			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 			this.v.showMessage("Utente " + username + " registrato con successo!");
+		} catch (IOException e2) {
+			this.v.showError("File " + ControllerImpl.FILENAMEUSER + " non trovato per il salvataggio");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Utente già presente nell'archivio");
@@ -475,6 +489,9 @@ public class ControllerImpl implements Controller {
 		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
 		try {
 			this.m.registerBook(title, releaseYear, author, language, isbn, genre, publisher, numRelease, numCopy);
+			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+		} catch (IOException e2) {
+			this.v.showError("File " + ControllerImpl.FILENAMEITEM + " non trovato per il salvataggio");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Numero di copie inferiori a 0");
@@ -496,6 +513,9 @@ public class ControllerImpl implements Controller {
 		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
 		try {
 			this.m.registerMovie(title, releaseYear, publisher, author, language, genre, duration, color, numCopy);
+			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+		} catch (IOException e2) {
+			this.v.showError("File " + ControllerImpl.FILENAMEITEM + " non trovato per il salvataggio");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Numero di copie inferiori a 0");
@@ -504,9 +524,9 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void itemCreate() {
-		if (this.v.getItemInfo(TypeItemInfo.TYPE) == TypeItem.BOOK) {
+		if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.BOOK)) {
 			this.registerNewBook();
-		} else if (this.v.getItemInfo(TypeItemInfo.TYPE) == TypeItem.MOVIE) {
+		} else if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.MOVIE)) {
 			this.registerNewMovie();
 		}
 	}
@@ -538,9 +558,10 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void giveBackItem(final String item) {
-		// DA RIVEDERE
+		// DA RIVEDERE, edit 22 agosto, dovrebbe essere corretto
+		// tolto getFirst().getTitle() e sostituito con getFirst().toString()
 		for (Integer i : this.actualUser.getLoanArchive().keySet()) {
-			if (this.m.getItemArchive().get(i).getFirst().getTitle().equals(item)) {
+			if (this.m.getItemArchive().get(i).getFirst().toString().equals(item)) {
 				try {
 					this.m.returnItem(i, this.actualUser.getIdUser());
 				} catch (Exception e) {
@@ -564,21 +585,20 @@ public class ControllerImpl implements Controller {
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
 		String[] array = new String[50];
-		int index = 0;
-		for (Integer i : this.m.getStudyRoom().get(day)) {
-			if ((i == null) || (i == 0)) {
+		Integer[] arrayInt = (Integer[]) this.m.getStudyRoom().get(day).toArray();
+		for (int index = 0; index < arrayInt.length; index++) {
+			if ((arrayInt[index] == null) || (arrayInt[index] == 0)) {
 				array[index] = "0";
-				index++;
 			} else {
 				try {
-					array[index] = this.m.getRequiredUser(i).getUsername();
+					array[index] = this.m.getRequiredUser(arrayInt[index]).getUsername();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					this.v.showError("Errore! Utente non presente nell'archivio");
 				}
-				index++;
 			}
 		}
+		System.out.println(array);
 		this.v.setStudyRoomStatus(array);
 		// array di stringhe per i posto a sedere dove il posto vuoto è 0 e il
 		// posto occupato è username
@@ -588,6 +608,7 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void takeSit() {
+
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
@@ -601,18 +622,18 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void cancelSit() {
+		// rivisto 22 agosto
 
-		this.v.getSelectedSit(); // convertire per ottenere nel posto da
-									// cancellare e il giorno
+		// this.v.getSelectedSit(); // convertire per ottenere nel posto da
+		// cancellare e il giorno
 		// mi ritorna un pair con posto, giorno e devo fare il cast inverso
 
 		// elaborare la stringa per ottenere la data
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
-
 		try {
-			this.m.cancelSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
+			this.m.cancelSit(day, this.v.getSelectedSit(), this.actualUser.getIdUser());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Posto selezionato non valido per la cancellazione");
@@ -759,6 +780,6 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void setView(final view.View v) {
 		this.v = v;
-		this.writeOnFile();
+		// this.writeOnFile();
 	}
 }

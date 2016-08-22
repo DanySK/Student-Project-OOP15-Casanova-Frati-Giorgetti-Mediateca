@@ -83,7 +83,7 @@ public interface Controller {
 	void cancelSit() throws Exception;
 
 	/*
-	 * 
+	 *
 	 * void studyRoomStatus();
 	 */
 
@@ -193,4 +193,10 @@ public interface Controller {
 	 * Method which sets a field of the View with the reviews of a given Item.
 	 */
 	void allItemReviews();
+
+	/**
+	 * Method which eliminates the reference to the last user logged in the
+	 * Controller
+	 */
+	void userLogout();
 }

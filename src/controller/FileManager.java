@@ -27,7 +27,8 @@ import view.ViewImpl;
 public class FileManager {
 
 	private View v = new ViewImpl();
-	private String path = System.getProperty("user.dir") + "\\res\\";
+	private String path = System.getProperty("user.dir") + System.getProperty("file.separator") + "res"
+			+ System.getProperty("file.separator");
 
 	/**
 	 * Empty constructor.
