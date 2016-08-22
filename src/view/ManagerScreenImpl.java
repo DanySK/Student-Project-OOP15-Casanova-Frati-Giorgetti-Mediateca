@@ -42,57 +42,58 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		JButton newItem = new JButton("Crea Nuovo Oggetto");
 		newItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		newItem.setBounds(515, 71, 273, 39);
+		newItem.setBounds(498, 39, 273, 39);
 		this.add(newItem);
+		JButton delete = new JButton("Elimina");
+
+		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		JButton modify = new JButton("Modifica");
+		modify.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		delete.setBounds(498, 179, 273, 39);
+		this.add(delete);
+		modify.setBounds(498, 224, 273, 39);
+		this.add(modify);
 
 		JButton showUserList = new JButton("Lista Utenti");
-		showUserList.setBounds(515, 117, 273, 39);
+		showUserList.setBounds(498, 85, 273, 39);
 		showUserList
 		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
-			v.giveMeUserList();
 			this.type = TypeList.USER;
+			v.giveMeUserList();
+			delete.setEnabled(false);
+			modify.setEnabled(false);
 			v.swapView(CardName.MANAGER_MENU);
 		});
 
 		JButton showItemList = new JButton("Lista Oggetti");
-		showItemList.setBounds(515, 164, 273, 39);
+		showItemList.setBounds(498, 132, 273, 39);
 		showItemList
 		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
-			v.giveMeItemList();
 			this.type = TypeList.ITEM;
+			delete.setEnabled(true);
+			modify.setEnabled(true);
+			v.giveMeItemList();
 			v.swapView(CardName.MANAGER_MENU);
 		});
 
-		JButton delete = new JButton("Elimina");
-		delete.addActionListener(arg0 -> {
-		});
-		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		JButton modify = new JButton("Modifica");
-		modify.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		delete.setBounds(515, 211, 273, 39);
-		this.add(delete);
-		modify.setBounds(515, 256, 273, 39);
-		this.add(modify);
 		JButton seeBorrowedList = new JButton("Vedi prestiti");
 		seeBorrowedList.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.FONT_SIZE));
-		seeBorrowedList.setBounds(515, 300, 273, 39);
+		seeBorrowedList.setBounds(498, 268, 273, 39);
 		this.add(seeBorrowedList);
 		this.list = new JList();
 		this.list.setModel(this.model);
-		this.list.setBounds(50, 71, 414, 438);
+		this.list.setBounds(33, 39, 414, 438);
 		this.add(this.list);
 
 		if (this.type.equals(TypeList.USER)) {
-			delete.setEnabled(false);
-			modify.setEnabled(false);
 			// SEE BORROWED LIST -> REFRESH
 			seeBorrowedList.addActionListener(e -> {
 				v.giveManagerBorrowList();
@@ -106,6 +107,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 			});
 			modify.addActionListener(e -> {
+				v.giveMeItemInfo();
 				v.swapView(CardName.ITEM_MODIFY);
 			});
 			seeBorrowedList.setEnabled(false);
@@ -114,7 +116,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		JButton exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		exit.setBounds(616, 503, 151, 60);
+		exit.setBounds(620, 474, 151, 60);
 		this.add(exit);
 
 		exit.addActionListener(e -> v.swapView(CardName.MAIN));

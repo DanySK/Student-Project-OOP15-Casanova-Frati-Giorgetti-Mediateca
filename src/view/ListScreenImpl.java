@@ -23,7 +23,6 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 */
 	private static final long serialVersionUID = 1L;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
-	private JLabel presentation;
 	private JList<String> list = new JList<String>();
 
 	/**
@@ -48,14 +47,14 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	 *            the type of list to show
 	 */
 	public ListScreenImpl(final View v, final ListScreenType i) {
+		JLabel presentation;
 		JButton exit = new JButton();
 		JButton remove = new JButton();
-
 		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		this.presentation = new JLabel();
+		presentation = new JLabel();
 		switch (i) {
 		case BORROWED:
-			this.presentation.setText("Ecco gli oggetti che hai in prestito:");
+			presentation.setText("Ecco gli oggetti che hai in prestito:");
 			remove.addActionListener(e -> {
 				v.giveBackItem();
 				v.giveMeBorrowList();
@@ -64,7 +63,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 			remove.setText("Restituisci");
 
 		case WISH:
-			this.presentation.setText("Ecco gli oggetti che desideri");
+			presentation.setText("Ecco gli oggetti che desideri");
 			remove.setText("Rimuovi da Wishlist");
 			remove.addActionListener(e -> {
 				v.removeFromWishlist();
@@ -73,19 +72,19 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 			});
 
 		case REVIEWS:
-			this.presentation.setText("Ecco tutte le recensioni");
+			presentation.setText("Ecco tutte le recensioni");
 			remove.setVisible(false);
 		default:
 			break;
 
 		}
 
-		this.presentation.setHorizontalAlignment(SwingConstants.CENTER);
-		this.presentation.setFont(new Font("Tahoma", Font.PLAIN,
-				ViewImpl.FONT_SIZE));
+		presentation.setHorizontalAlignment(SwingConstants.CENTER);
+		presentation
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
-		this.presentation.setBounds(12, 13, 776, 50);
-		this.add(this.presentation);
+		presentation.setBounds(12, 13, 776, 50);
+		this.add(presentation);
 
 		this.list.setModel(this.model);
 		this.list.setBounds(42, 76, 704, 376);

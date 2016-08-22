@@ -63,6 +63,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public UserScreenImpl(final View v, final UserScreenType type) {
+
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		final JLabel nameL;
 		final JLabel surnameL;
@@ -79,47 +80,48 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		deleteUser.setLocation(428, 806);
 
 		this.nameF = new JTextField();
-		this.nameF.setBounds(246, 84, 241, 25);
+		this.nameF.setBounds(246, 85, 241, 25);
 		this.add(this.nameF);
 		this.nameF.setColumns(10);
 
 		this.surnameF = new JTextField();
-		this.surnameF.setBounds(246, 122, 241, 25);
+		this.surnameF.setBounds(246, 125, 241, 25);
 		this.surnameF.setColumns(10);
 		this.add(this.surnameF);
 
 		this.passwordF = new JPasswordField();
 		this.passwordF.setColumns(10);
-		this.passwordF.setBounds(246, 198, 241, 25);
+		this.passwordF.setBounds(246, 205, 241, 25);
 		this.add(this.passwordF);
 
 		this.usernameF = new JTextField();
 		this.usernameF.setColumns(10);
-		this.usernameF.setBounds(246, 160, 241, 25);
+		this.usernameF.setBounds(246, 165, 241, 25);
 		this.add(this.usernameF);
 
 		this.emailF = new JTextField();
 		this.emailF.setColumns(10);
-		this.emailF.setBounds(246, 277, 241, 25);
+		this.emailF.setBounds(246, 285, 241, 25);
 		this.add(this.emailF);
 
 		this.cellF = new JTextField();
 		this.cellF.setColumns(10);
-		this.cellF.setBounds(246, 315, 241, 25);
+		this.cellF.setBounds(246, 325, 241, 25);
 		this.add(this.cellF);
 
 		nameL = new JLabel("Nome:");
-		nameL.setBounds(47, 84, 187, 25);
+		nameL.setBounds(47, 85, 187, 25);
 		nameL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(nameL);
 
 		surnameL = new JLabel("Cognome:");
-		surnameL.setBounds(47, 122, 187, 25);
+		surnameL.setBounds(47, 125, 187, 25);
 		surnameL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(surnameL);
 		discarge = new JButton("Annulla");
 		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.send = new JButton();
+
 		if (type.equals(UserScreenType.CREATE)) {
 			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
 			this.send.setText("Crea");
@@ -167,28 +169,28 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.add(this.send);
 
 		usernameL = new JLabel("Username:");
-		usernameL.setBounds(47, 160, 187, 25);
+		usernameL.setBounds(47, 165, 187, 25);
 		usernameL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(usernameL);
 
 		passwordL = new JLabel("Password:");
-		passwordL.setBounds(47, 198, 187, 25);
+		passwordL.setBounds(47, 205, 187, 25);
 		passwordL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(passwordL);
 
 		birthL = new JLabel("Data nascita:");
-		birthL.setBounds(47, 236, 187, 25);
+		birthL.setBounds(47, 245, 187, 25);
 		birthL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(birthL);
 
 		emailL = new JLabel("E-mail:");
-		emailL.setBounds(47, 274, 187, 25);
+		emailL.setBounds(47, 285, 187, 25);
 		emailL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(emailL);
 
 		cellL = new JLabel("Recapito:");
 		cellL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		cellL.setBounds(47, 315, 187, 25);
+		cellL.setBounds(47, 325, 187, 25);
 		this.add(cellL);
 
 		Properties p = new Properties();
@@ -208,7 +210,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 				this.datePicker.getJFormattedTextField(), 0,
 				SpringLayout.SOUTH, this.datePicker);
 		this.datePicker.setSize(241, 25);
-		this.datePicker.setLocation(246, 236);
+		this.datePicker.setLocation(246, 245);
 
 		this.add(this.datePicker);
 

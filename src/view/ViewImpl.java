@@ -98,12 +98,12 @@ public class ViewImpl implements View {
 	public enum CardName {
 		START("Start Card"), MAIN("Main Card"), LOGIN("Login Card"), MENU(
 				"Menu Card"), ITEM("Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-						"LikeList Screen Card"), BORROWED_LIST(
-								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
-																"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
+				"LikeList Screen Card"), BORROWED_LIST(
+				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+				"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
+				"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
+				"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
+				"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
 
 		private final String name;
 
@@ -145,6 +145,7 @@ public class ViewImpl implements View {
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.mainFrame.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.mainFrame.setResizable(false);
+		this.mainFrame.setTitle("Mediateca");
 		ViewImpl.CONTAINER.setLayout(ViewImpl.CL);
 		this.card0 = new JPanel();
 		final JLabel welcome = new JLabel("Benvenuto in Mediateca!");
@@ -319,10 +320,10 @@ public class ViewImpl implements View {
 				birthDate, email, telephone);
 	}
 
-	// //OK
+	// //WAITING FOR CONTROLLER FUNCTION NAME
 	@Override
 	public void giveMeUserInfo() {
-
+		// c.setUserInfo();
 	}
 
 	// //OK
@@ -362,15 +363,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeFilteredList() {
-		if (this.logged) {
-			try {
-				this.c.itemElaboration();
-			} catch (Exception e) {
-
-				e.printStackTrace(this.pw);
-				this.showError(this.sw.toString());
-			}
-		}
+		// c.itemElaboration();
 	}
 
 	// //OK
@@ -416,7 +409,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeItemInfo() {
-		// this.c.setItemInfo();
+		this.c.setItemInfo();
 
 	}
 
@@ -524,23 +517,9 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void removeSit() {
-		try {
-			this.c.itemElaboration();
-		} catch (Exception e) {
-
-			e.printStackTrace(this.pw);
-			this.showError(this.sw.toString());
-		}
-
-	}
-
-	// //OK
-	@Override
 	public void giveMeSuggestedBooks() {
 		if (this.logged) {
-			// this.c.suggestedBooks();
-			this.setSuggestedBooks(this.prova);
+			this.c.suggestedBooks();
 		}
 
 	}
@@ -549,8 +528,7 @@ public class ViewImpl implements View {
 	@Override
 	public void giveMeSuggestedMovies() {
 		if (this.logged) {
-			// this.c.suggestedFilms();
-			this.setSuggestedMovies(this.prova);
+			this.c.suggestedFilms();
 		}
 	}
 
@@ -641,10 +619,10 @@ public class ViewImpl implements View {
 	public void showGiveBackOptionMessage(final String book) {
 		// Custom button text
 		final Object[] options = { "Consegna",
-		"Aumenta il prestito di un altro mese" };
+				"Aumenta il prestito di un altro mese" };
 		int choose = JOptionPane.showOptionDialog(this.mainFrame,
 				"Dovresti consegare il seguente libro:" + book
-				+ "Cosa vuoi fare?", "Notifica di consegna",
+						+ "Cosa vuoi fare?", "Notifica di consegna",
 				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
 		if (choose == 0) {
@@ -734,14 +712,10 @@ public class ViewImpl implements View {
 		this.c.giveBackItem(item);
 	}
 
+	// WAITING CONTROLLER FUNCTION NAME
 	@Override
 	public void cancelSit() {
-		try {
-			this.c.cancelSit();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// c.cancelSit();
 	}
 
 	// WAITING CONTROLLER FUNCTION NAME

@@ -97,9 +97,12 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		suggestedMoviesLabel.setBounds(439, 151, 300, 49);
 		this.add(suggestedMoviesLabel);
 
-		exitProgram.addActionListener(e -> v.swapView(CardName.MAIN));
-		mediateca.addActionListener(e -> {
+		exitProgram.addActionListener(e -> {
 			v.logOut();
+			v.swapView(CardName.LOGIN);
+		});
+		mediateca.addActionListener(e -> {
+			v.giveMeFilteredList();
 			v.swapView(CardName.ITEM);
 		});
 		studyRoomServices.addActionListener(e -> {

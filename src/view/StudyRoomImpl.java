@@ -80,16 +80,15 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		southPanel.setLayout(null);
 
 		int i;
-		for (i = 1; i <= 50; i++) {
+		for (i = 0; i < 100; i++) {
 			this.buttons[i] = new JButton();
-			this.buttons[i].setSize(200, 200);
+			this.buttons[i].setSize(80, 80);
 			this.buttons[i].setBackground(Color.GREEN);
 			this.centerPanel.add(this.buttons[i]);
 
 		}
 		v.giveMeStudyRoomStatus();
-		// v.swapView(CardName.STUDY_ROOM);
-		for (i = 1; i <= 50; i++) {
+		for (i = 0; i < 100; i++) {
 			this.buttons[i] = new JButton();
 			this.buttons[i].setText(String.valueOf(i));
 			if (this.buttons[i].getBackground() == Color.GREEN) {
@@ -120,7 +119,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		this.add(northPanel);
 		northPanel.setLayout(null);
 		this.add(this.centerPanel);
-		this.centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		this.centerPanel.setLayout(new FlowLayout());
 		northPanel.setLayout(null);
 		JLabel presentation = new JLabel(
 				"Clicca una data e il posto che vuoi prenotare");
@@ -154,7 +153,6 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 			this.buttons[i].setText(String.valueOf(i));
 			if (status[i].equals("0")) {
 				this.buttons[i].setBackground(Color.GREEN);
-
 			} else if (status[i].equals("1")) {
 				this.buttons[i].setBackground(Color.CYAN);
 			} else {

@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import utils.ItemGenre;
 import utils.TypeItem;
 import view.ViewImpl.CardName;
 
@@ -61,7 +60,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	 * @param type
 	 *            the type of screen (create or modify)
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public ItemScreenImpl(final View v, final ItemScreenType type) {
 		final JLabel titleL;
 		final JLabel authorL;
@@ -77,48 +76,45 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 
 		this.titleF = new JTextField();
-		this.titleF.setBounds(338, 107, 230, 30);
+		this.titleF.setBounds(338, 104, 230, 30);
 		this.add(this.titleF);
 		this.titleF.setColumns(10);
 
 		this.authorF = new JTextField();
-		this.authorF.setBounds(338, 150, 230, 30);
+		this.authorF.setBounds(338, 144, 230, 30);
 		this.authorF.setColumns(10);
 		this.add(this.authorF);
 
 		this.manifacturerF = new JTextField();
-		this.manifacturerF.setBounds(338, 193, 232, 30);
+		this.manifacturerF.setBounds(338, 184, 230, 30);
 		this.manifacturerF.setColumns(10);
 		this.add(this.manifacturerF);
 
 		presentation = new JLabel();
-		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-
 		send = new JButton();
 		send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		this.yearF = new JTextField();
 		this.yearF.setColumns(10);
-		this.yearF.setBounds(338, 233, 230, 30);
+		this.yearF.setBounds(338, 224, 230, 30);
 		this.add(this.yearF);
 
 		this.durationF = new JTextField();
 		this.durationF.setColumns(10);
-		this.durationF.setBounds(338, 341, 230, 30);
+		this.durationF.setBounds(338, 344, 230, 30);
 		this.add(this.durationF);
 
 		this.colorF = new JComboBox(utils.TypeColor.values());
-		this.colorF.setBounds(338, 414, 230, 30);
+		this.colorF.setBounds(338, 424, 230, 30);
 		this.add(this.colorF);
 
 		this.languageF = new JComboBox(utils.Language.values());
-		this.languageF.setBounds(338, 378, 230, 30);
+		this.languageF.setBounds(338, 384, 230, 30);
 		this.add(this.languageF);
 
 		this.isbnF = new JTextField();
 		this.isbnF.setColumns(10);
-		this.isbnF.setBounds(338, 306, 230, 30);
+		this.isbnF.setBounds(338, 304, 230, 30);
 		this.add(this.isbnF);
 
 		this.itemTypeF = new JComboBox(utils.TypeItem.values());
@@ -126,35 +122,35 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.itemTypeF.setBounds(338, 64, 230, 30);
 		this.add(this.itemTypeF);
 
-		this.genreF = new JComboBox<ItemGenre>(utils.ItemGenre.values());
+		this.genreF = new JComboBox(utils.ItemGenre.values());
 		this.genreF.setToolTipText("Genere");
-		this.genreF.setBounds(338, 271, 230, 30);
+		this.genreF.setBounds(338, 264, 230, 30);
 		this.add(this.genreF);
 
 		titleL = new JLabel("Titolo:");
 		titleL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		titleL.setBounds(159, 107, 167, 30);
+		titleL.setBounds(159, 104, 167, 30);
 		this.add(titleL);
 
 		durationL = new JLabel("Durata:");
 		durationL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		durationL.setBounds(159, 306, 167, 30);
+		durationL.setBounds(159, 304, 167, 30);
 		this.add(durationL);
 
 		isbnL = new JLabel("ISBN:");
 		isbnL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		isbnL.setBounds(159, 341, 167, 30);
+		isbnL.setBounds(159, 344, 167, 30);
 		this.add(isbnL);
 
 		authorL = new JLabel("Autore:");
 		authorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		authorL.setBounds(159, 150, 167, 30);
+		authorL.setBounds(159, 144, 167, 30);
 		this.add(authorL);
 		this.numCopiesF = new JTextField();
 		this.numCopiesF.setSize(78, 30);
-		this.numCopiesF.setLocation(338, 450);
+		this.numCopiesF.setLocation(338, 464);
 		this.numReleaseF = new JTextField();
-		this.numReleaseF.setLocation(338, 485);
+		this.numReleaseF.setLocation(338, 504);
 		this.numReleaseF.setSize(78, 30);
 		this.add(this.numCopiesF);
 		this.add(this.numReleaseF);
@@ -171,9 +167,11 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			});
 		} else if (type.equals(ItemScreenType.MODIFY)) {
 			presentation = new JLabel("Modifica qui il tuo oggetto:");
-			v.giveMeItemInfo();
 			send = new JButton("Invio");
-			send.addActionListener(e -> v.sendItemModify());
+			send.addActionListener(e -> {
+				v.sendItemModify();
+				v.swapView(CardName.MANAGER_MENU);
+			});
 			this.itemTypeF.setEnabled(false);
 			this.durationF.setEditable(false);
 			this.colorF.setEnabled(false);
@@ -205,35 +203,40 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 				isbnL.setVisible(false);
 			}
 		});
+
 		presentation.setBounds(50, 13, 692, 38);
+		presentation
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
-		discarge.setBounds(28, 531, 125, 30);
+		discarge.setBounds(474, 504, 143, 53);
+		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(discarge);
 
-		send.setBounds(582, 508, 178, 53);
+		send.setBounds(629, 504, 143, 53);
+		send.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(send);
 
 		manifacturerL = new JLabel("Produttore:");
 		manifacturerL.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.SMALL_SIZE));
-		manifacturerL.setBounds(159, 193, 167, 30);
+		manifacturerL.setBounds(159, 184, 167, 30);
 		this.add(manifacturerL);
 
 		yearL = new JLabel("Anno:");
 		yearL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		yearL.setBounds(159, 233, 167, 30);
+		yearL.setBounds(159, 224, 167, 30);
 		this.add(yearL);
 
 		JLabel numCopiesL = new JLabel("Copie:");
 		numCopiesL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		numCopiesL.setBounds(159, 450, 167, 30);
+		numCopiesL.setBounds(159, 464, 167, 30);
 		this.add(numCopiesL);
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
 		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		numReleaseL.setBounds(159, 485, 167, 30);
+		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
 
 	}

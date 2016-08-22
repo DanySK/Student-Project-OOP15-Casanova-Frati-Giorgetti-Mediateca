@@ -368,11 +368,6 @@ public interface View {
 	int getStudyRoomSelectedYear();
 
 	/**
-	 * Tells controller to remove the sits selected.
-	 */
-	void removeSit();
-
-	/**
 	 * Asks controller to set SuggestedBooksList.
 	 */
 	void giveMeSuggestedBooks();
