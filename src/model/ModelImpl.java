@@ -339,9 +339,9 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public Set<Integer> filtersItem(final Set<Integer> set, final TypeItemInfo ts, final Object param)
               throws Exception {
-    if ((!ts.equals(TypeItemInfo.AUTHOR)) && (ts.equals(TypeItemInfo.TITLE))
-                && (ts.equals(TypeItemInfo.PRODUCER)) && (ts.equals(TypeItemInfo.RELEASE_YEAR))
-                && (ts.equals(TypeItemInfo.LANGUAGE)) && (ts.equals(TypeItemInfo.GENRE))) {
+    if ((!ts.equals(TypeItemInfo.AUTHOR)) && (!ts.equals(TypeItemInfo.TITLE))
+                && (!ts.equals(TypeItemInfo.PRODUCER)) && (!ts.equals(TypeItemInfo.RELEASE_YEAR))
+                && (!ts.equals(TypeItemInfo.LANGUAGE)) && (!ts.equals(TypeItemInfo.GENRE))) {
       throw new Exception("TypeSearch " + ts + "not valid");
     }
     Set<Integer> r = new HashSet<>();
@@ -351,30 +351,25 @@ public class ModelImpl implements Serializable, Model {
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
-      }
-      if (ts.equals(TypeItemInfo.AUTHOR)) {
+      } else if (ts.equals(TypeItemInfo.AUTHOR)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
-      }
-      if (ts.equals(TypeItemInfo.PRODUCER)) {
+      } else if (ts.equals(TypeItemInfo.PRODUCER)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
-      }
-      if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
+      } else if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getReleaseYear() == (int) param) {
           r.add(i);
         }
-      }
-      if (ts.equals(TypeItemInfo.LANGUAGE)) {
+      } else if (ts.equals(TypeItemInfo.LANGUAGE)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getCurrentLanguage().equals(param)) {
           r.add(i);
         }
-      }
-      if (ts.equals(TypeItemInfo.GENRE)) {
+      } else if (ts.equals(TypeItemInfo.GENRE)) {
         if (((ItemImpl) this.archiveItem.getItem(i)).getGenre().equals(param)) {
           r.add(i);
         }
@@ -394,20 +389,15 @@ public class ModelImpl implements Serializable, Model {
 
     if (ts.equals(TypeItemInfo.TITLE)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setTitle((String) param);
-    }
-    if (ts.equals(TypeItemInfo.AUTHOR)) {
+    } else if (ts.equals(TypeItemInfo.AUTHOR)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setAuthor((String) param);
-    }
-    if (ts.equals(TypeItemInfo.PRODUCER)) {
+    } else if (ts.equals(TypeItemInfo.PRODUCER)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setPublisher((String) param);
-    }
-    if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
+    } else if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setReleaseYear((int) param);
-    }
-    if (ts.equals(TypeItemInfo.LANGUAGE)) {
+    } else if (ts.equals(TypeItemInfo.LANGUAGE)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setCurrentLanguage((Language) param);
-    }
-    if (ts.equals(TypeItemInfo.GENRE)) {
+    } else if (ts.equals(TypeItemInfo.GENRE)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setGenre((ItemGenre) param);
     }
   }
@@ -415,31 +405,25 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void changeUser(final UserInfo ts, final Integer userId, final Object param)
               throws Exception {
-    if ((ts != UserInfo.NAME) && (ts != UserInfo.SURNAME) && (ts != UserInfo.BIRTHDATE)
-                && (ts != UserInfo.USERNAME) && (ts != UserInfo.PASSWORD) && (ts != UserInfo.EMAIL)
-                && (ts != UserInfo.TELEPHONE_NUMBER)) {
+    if ((!ts.equals(UserInfo.NAME)) && (!ts.equals(UserInfo.SURNAME))
+                && (!ts.equals(UserInfo.BIRTHDATE)) && (!ts.equals(UserInfo.USERNAME))
+                && (!ts.equals(UserInfo.PASSWORD)) && (!ts.equals(UserInfo.EMAIL))
+                && (!ts.equals(UserInfo.TELEPHONE_NUMBER))) {
       throw new Exception("TypeSearch " + ts + "not valid to change on User");
     }
-    if (ts == UserInfo.NAME) {
+    if (ts.equals(UserInfo.NAME)) {
       this.archiveUser.getUser(userId).setName((String) param);
-    }
-    if (ts == UserInfo.SURNAME) {
+    } else if (ts.equals(UserInfo.SURNAME)) {
       this.archiveUser.getUser(userId).setSurname((String) param);
-    }
-
-    if (ts == UserInfo.BIRTHDATE) {
+    } else if (ts.equals(UserInfo.BIRTHDATE)) {
       this.archiveUser.getUser(userId).setBirthdate((GregorianCalendar) param);
-    }
-    if (ts == UserInfo.USERNAME) {
+    } else if (ts.equals(UserInfo.USERNAME)) {
       this.archiveUser.getUser(userId).setUsername((String) param);
-    }
-    if (ts == UserInfo.PASSWORD) {
+    } else if (ts.equals(UserInfo.PASSWORD)) {
       this.archiveUser.getUser(userId).setPassword((String) param);
-    }
-    if (ts == UserInfo.EMAIL) {
+    } else if (ts.equals(UserInfo.EMAIL)) {
       this.archiveUser.getUser(userId).setEmail((String) param);
-    }
-    if (ts == UserInfo.TELEPHONE_NUMBER) {
+    } else if (ts.equals(UserInfo.TELEPHONE_NUMBER)) {
       this.archiveUser.getUser(userId).setTelephoneNumber((String) param);
     }
   }
