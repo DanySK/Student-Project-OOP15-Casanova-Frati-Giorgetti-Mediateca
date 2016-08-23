@@ -260,7 +260,8 @@ public class ControllerImpl implements Controller {
 		}
 		Object searchText = this.v.getSearchText();
 
-		if (ts == null) {
+		if (ts != null) {
+			array = new String[0];
 			this.v.showError("Impossibile filtrare senza informazione di riferimento");
 		} else {
 			if ((ty == null) && ((searchText == null) || searchText.equals(""))) {
@@ -494,10 +495,25 @@ public class ControllerImpl implements Controller {
 		if (this.actualUser == null) {
 			this.v.showError("Errore! Utente corrente non ancora inizializzato");
 		} else {
+			/*
+			 * this.v.setUserModifyField(this.actualUser.getName(),
+			 * this.actualUser.getSurname(), this.actualUser.getUsername(),
+			 * this.actualUser.getPassword(),
+			 * this.actualUser.getBirthdate().toString(),
+			 * this.actualUser.getEmail(),
+			 * this.actualUser.getTelephoneNumber());
+			 */
 			this.v.setUserModifyField(this.actualUser.getName(), this.actualUser.getSurname(),
 					this.actualUser.getUsername(), this.actualUser.getPassword(),
-					this.actualUser.getBirthdate().toString(), this.actualUser.getEmail(),
-					this.actualUser.getTelephoneNumber());
+					Integer.toString(this.actualUser.getBirthdate().get(Calendar.DAY_OF_MONTH)),
+					Integer.toString(this.actualUser.getBirthdate().get(Calendar.MONTH)),
+					Integer.toString(this.actualUser.getBirthdate().get(Calendar.YEAR)), this.actualUser.getEmail(),
+					this.actualUser.getTelephoneNumber(), this.actualUser.getBookPreferences().get(1).toString(),
+					this.actualUser.getBookPreferences().get(2).toString(),
+					this.actualUser.getBookPreferences().get(3).toString(),
+					this.actualUser.getMoviePreferences().get(1).toString(),
+					this.actualUser.getMoviePreferences().get(2).toString(),
+					this.actualUser.getMoviePreferences().get(3).toString());
 		}
 	}
 
