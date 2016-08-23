@@ -55,7 +55,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		giveBackItem = new JButton("Restituisci ");
 		giveBackItem.setBounds(586, 164, 178, 27);
 		giveBackItem
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		likeItem = new JButton("Mi Piace");
 		likeItem.setBounds(586, 204, 178, 27);
 		likeItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
@@ -94,13 +94,16 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filteredJList.setModel(this.model);
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
-				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
 				JList<String> list = (JList) evt.getSource();
 				if (evt.getClickCount() == 2) {
+					System.out.println("Cliccato"
+							+ ((JList) evt.getSource()).getSelectedValue()
+							.toString());
 					v.giveMeItemInfo();
 					v.showItemInfo();
 				}
@@ -135,7 +138,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 326, 178, 27);
 		seeWishlist
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);
@@ -156,8 +159,20 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			v.giveMeAllItemReviews();
 			v.swapView(CardName.ALL_REVIEWS);
 		});
-		borrowItem.addActionListener(e -> v.borrowItem());
-		likeItem.addActionListener(e -> v.likeItem());
+		borrowItem.addActionListener(e -> {
+			System.out.println("Prendi "
+					+ this.filteredJList.getSelectedValue());
+			v.borrowItem();
+		});
+		giveBackItem.addActionListener(e -> {
+			System.out.println("Consegna "
+					+ this.filteredJList.getSelectedValue());
+			v.giveBackItem();
+		});
+		likeItem.addActionListener(e -> {
+			System.out.println("Like " + this.filteredJList.getSelectedValue());
+			v.likeItem();
+		});
 		review.addActionListener(e -> {
 			v.swapView(CardName.REVIEW);
 		});

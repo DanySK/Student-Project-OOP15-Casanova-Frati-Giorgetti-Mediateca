@@ -589,4 +589,10 @@ public interface View {
 	 */
 	void logOut();
 
+	/**
+	 * Asks controller info from a user clicked in ManagerScreen. User taken by
+	 * getItemToRemoveOrModify().
+	 */
+	void giveMeOtherUserInfo();
+
 }

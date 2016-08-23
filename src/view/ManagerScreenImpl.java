@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -18,7 +20,7 @@ import view.ViewImpl.CardName;
 public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 	private static final long serialVersionUID = 3947236683472052024L;
-	private JList<String> list;
+	private JList<String> list = new JList<String>();
 	private TypeList type = TypeList.USER;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 
@@ -57,7 +59,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 85, 273, 39);
 		showUserList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
@@ -71,7 +73,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(498, 132, 273, 39);
 		showItemList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
@@ -87,8 +89,22 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 				ViewImpl.FONT_SIZE));
 		seeBorrowedList.setBounds(498, 268, 273, 39);
 		this.add(seeBorrowedList);
-		this.list = new JList();
+		this.list = new JList<String>();
 		this.list.setModel(this.model);
+		this.list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent evt) {
+				@SuppressWarnings("unchecked")
+				JList<String> elist = (JList<String>) evt.getSource();
+				if (evt.getClickCount() == 2) {
+					System.out.println("Cliccato utente"
+							+ ((JList) evt.getSource()).getSelectedValue()
+									.toString());
+					v.giveMeOtherUserInfo();
+					v.showUserInfo();
+				}
+			}
+		});
 		this.list.setBounds(33, 39, 414, 438);
 		this.add(this.list);
 
