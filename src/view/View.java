@@ -572,7 +572,7 @@ public interface View {
 	 *            the type of info (release or copies number)
 	 * @return the requeste information
 	 */
-	Object getOtherItemInfo(OtherItemFilter info2);
+	String getOtherItemInfo(OtherItemFilter info2);
 
 	/**
 	 * Sets logged variable and change screen after login.
