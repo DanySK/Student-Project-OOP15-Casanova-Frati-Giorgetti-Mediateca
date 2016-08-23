@@ -275,7 +275,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	}
 
 	@Override
-	public Object getInfo(final utils.UserInfo info) {
+	public String getInfo(final utils.UserInfo info) {
 		switch (info) {
 		case NAME:
 			return this.nameF.getText();
@@ -287,27 +287,27 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			String pwd = new String(this.passwordF.getPassword());
 			return pwd;
 		case BIRTHDATE_DAY:
-			return this.datePicker.getModel().getDay();
+			return String.valueOf(this.datePicker.getModel().getDay());
 		case BIRTHDATE_MONTH:
-			return this.datePicker.getModel().getDay();
+			return String.valueOf(this.datePicker.getModel().getMonth());
 		case BIRTHDATE_YEAR:
-			return this.datePicker.getModel().getDay();
+			return String.valueOf(this.datePicker.getModel().getYear());
 		case EMAIL:
 			return this.emailF.getText();
 		case TELEPHONE_NUMBER:
 			return this.cellF.getText();
 		case BOOK_PREF1:
-			return this.bookPref1.getSelectedItem();
+			return this.bookPref1.getSelectedItem().toString();
 		case BOOK_PREF2:
-			return this.bookPref2.getSelectedItem();
+			return this.bookPref2.getSelectedItem().toString();
 		case BOOK_PREF3:
-			return this.bookPref3.getSelectedItem();
+			return this.bookPref3.getSelectedItem().toString();
 		case FILM_PREF1:
-			return this.filmPref1.getSelectedItem();
+			return this.filmPref1.getSelectedItem().toString();
 		case FILM_PREF2:
-			return this.filmPref2.getSelectedItem();
+			return this.filmPref2.getSelectedItem().toString();
 		case FILM_PREF3:
-			return this.filmPref3.getSelectedItem();
+			return this.filmPref3.getSelectedItem().toString();
 		default:
 			break;
 

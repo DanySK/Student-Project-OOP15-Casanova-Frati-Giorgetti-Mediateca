@@ -1,8 +1,5 @@
 package view;
 
-import utils.ItemGenre;
-import utils.Language;
-import utils.TypeColor;
 
 /**
  * interface for showing item.
@@ -37,9 +34,9 @@ public interface ItemShow {
 	 *            the language of movie
 	 */
 	void setFilmField(String titleS, String authorS, String manifacturerS,
-			String yearS, ItemGenre genreS, String reviewAvarageS,
-			String availabilityS, String durationS, TypeColor colorS,
-			Language languageS);
+			String yearS, String genreS, String reviewAvarageS,
+			String availabilityS, String durationS, String colorS,
+			String languageS);
 
 	/**
 	 * Sets all field for book item.
@@ -64,8 +61,8 @@ public interface ItemShow {
 	 *            the language of movie
 	 */
 	void setBookField(String titleS, String authorS, String manifacturerS,
-			String yearS, ItemGenre genreS, String reviewAvarageS,
-			String availabilityS, String isbnS, Language languageS);
+			String yearS, String genreS, String reviewAvarageS,
+			String availabilityS, String isbnS, String languageS);
 
 	/**
 	 * Starts item show.

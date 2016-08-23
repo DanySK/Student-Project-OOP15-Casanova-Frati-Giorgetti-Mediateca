@@ -21,12 +21,12 @@ public class UserShowImpl implements UserShow {
 	private String surname;
 	private String password;
 	private String username;
-	private utils.ItemGenre bookPref1;
-	private utils.ItemGenre bookPref2;
-	private utils.ItemGenre bookPref3;
-	private utils.ItemGenre filmPref1;
-	private utils.ItemGenre filmPref2;
-	private utils.ItemGenre filmPref3;
+	private String bookPref1;
+	private String bookPref2;
+	private String bookPref3;
+	private String filmPref1;
+	private String filmPref2;
+	private String filmPref3;
 	private String telephone;
 	private String email;
 	private String birthDate;
@@ -143,10 +143,10 @@ public class UserShowImpl implements UserShow {
 	public void setUserField(final String nameS, final String surnameS,
 			final String usernameS, final String passwordS,
 			final String birthDateS, final String emailS,
-			final String telephoneS, final utils.ItemGenre bookPref1I,
-			final utils.ItemGenre bookPref2I, final utils.ItemGenre bookPref3I,
-			final utils.ItemGenre filmPref1I, final utils.ItemGenre filmPref2I,
-			final utils.ItemGenre filmPref3I) {
+			final String telephoneS, final String bookPref1I,
+			final String bookPref2I, final String bookPref3I,
+			final String filmPref1I, final String filmPref2I,
+			final String filmPref3I) {
 		this.name = nameS;
 		this.surname = surnameS;
 		this.username = usernameS;
@@ -162,5 +162,4 @@ public class UserShowImpl implements UserShow {
 		this.filmPref3 = filmPref3I;
 
 	}
-
 }

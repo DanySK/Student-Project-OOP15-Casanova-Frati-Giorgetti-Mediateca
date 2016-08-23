@@ -20,7 +20,7 @@ public interface ItemScreen {
 	 *            info type you want
 	 * @return information requested
 	 */
-	Object getItemInfo(TypeItemInfo info);
+	String getItemInfo(TypeItemInfo info);
 
 	/**
 	 * Sets all film field.
@@ -84,6 +84,6 @@ public interface ItemScreen {
 	 *            the info type you want
 	 * @return information requested
 	 */
-	Object getItemInfo(OtherItemFilter info2);
+	String getItemInfo(OtherItemFilter info2);
 
 }

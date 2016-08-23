@@ -1,6 +1,5 @@
 package view;
 
-import utils.ItemGenre;
 
 /**
  * Interface for user show.
@@ -47,9 +46,10 @@ public interface UserShow {
 	 * @param filmPref3
 	 *            the user third movie genre preferred
 	 */
-	void setUserField(String name, String surname, String username,
-			String password, String birthDate, String email, String telephone,
-			ItemGenre bookPref1, ItemGenre bookPref2, ItemGenre bookPref3,
-			ItemGenre filmPref1, ItemGenre filmPref2, ItemGenre filmPref3);
+	void setUserField(String nameS, String surnameS, String usernameS,
+			String passwordS, String birthDateS, String emailS,
+			String telephoneS, String bookPref1I, String bookPref2I,
+			String bookPref3I, String filmPref1I, String filmPref2I,
+			String filmPref3I);
 
 }

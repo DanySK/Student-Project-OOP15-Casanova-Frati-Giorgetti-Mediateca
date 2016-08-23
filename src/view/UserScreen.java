@@ -37,6 +37,6 @@ public interface UserScreen {
 	 *            the type of info you want
 	 * @return user information requestd
 	 */
-	Object getInfo(utils.UserInfo info);
+	String getInfo(utils.UserInfo info);
 
 }

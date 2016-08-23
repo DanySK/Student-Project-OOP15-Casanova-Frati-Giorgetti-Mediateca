@@ -4,8 +4,6 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -44,8 +42,7 @@ public class ViewImpl implements View {
 	static final int IMAGE_LENGHT = 140;
 	static final int IMAGE_WIDTH = 100;
 	String[] prova = { "casa", "gatto", "cuccia" };
-	private StringWriter sw = new StringWriter();
-	private PrintWriter pw = new PrintWriter(this.sw);
+
 	private boolean logged;
 
 	private JPanel card0;
@@ -288,7 +285,7 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public Object getUserRegistration(final utils.UserInfo info) {
+	public String getUserRegistration(final utils.UserInfo info) {
 		return ((UserScreen) this.card8).getInfo(info);
 
 	}
@@ -320,7 +317,7 @@ public class ViewImpl implements View {
 				birthDate, email, telephone);
 	}
 
-	// //WAITING FOR CONTROLLER FUNCTION NAME
+	// //OK
 	@Override
 	public void giveMeUserInfo() {
 		this.c.setUserInfo();
@@ -328,10 +325,11 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public Object getModifiedInfo(final UserInfo info) {
+	public String getModifiedInfo(final UserInfo info) {
 		return ((UserScreen) this.card4).getInfo(info);
 	}
 
+	// //OK
 	@Override
 	public void giveMeBorrowList() {
 		if (this.logged) {
@@ -375,13 +373,13 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public Object getItemInfo(final utils.TypeItemInfo info) {
+	public String getItemInfo(final utils.TypeItemInfo info) {
 		return ((ItemScreen) this.card10).getItemInfo(info);
 	}
 
 	// //OK
 	@Override
-	public Object getOtherItemInfo(final view.ViewImpl.OtherItemFilter info2) {
+	public String getOtherItemInfo(final view.ViewImpl.OtherItemFilter info2) {
 		return ((ItemScreen) this.card10).getItemInfo(info2);
 	}
 

@@ -180,33 +180,33 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			this.numReleaseF.setEnabled(false);
 		}
 		this.itemTypeF
-		.addActionListener(e -> {
-			if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
-				this.colorF.setEnabled(false);
-				this.colorF.setVisible(false);
-				this.durationF.setEnabled(false);
-				this.durationF.setVisible(false);
-				durationL.setVisible(false);
-				this.isbnF.setEnabled(true);
-				this.isbnF.setVisible(true);
-				isbnL.setVisible(true);
+				.addActionListener(e -> {
+					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+						this.colorF.setEnabled(false);
+						this.colorF.setVisible(false);
+						this.durationF.setEnabled(false);
+						this.durationF.setVisible(false);
+						durationL.setVisible(false);
+						this.isbnF.setEnabled(true);
+						this.isbnF.setVisible(true);
+						isbnL.setVisible(true);
 
-			} else if (this.itemTypeF.getSelectedItem().equals(
-					TypeItem.MOVIE)) {
-				this.colorF.setEnabled(true);
-				this.colorF.setVisible(true);
-				this.durationF.setEnabled(true);
-				this.durationF.setVisible(true);
-				durationL.setVisible(true);
-				this.isbnF.setEnabled(false);
-				this.isbnF.setVisible(false);
-				isbnL.setVisible(false);
-			}
-		});
+					} else if (this.itemTypeF.getSelectedItem().equals(
+							TypeItem.MOVIE)) {
+						this.colorF.setEnabled(true);
+						this.colorF.setVisible(true);
+						this.durationF.setEnabled(true);
+						this.durationF.setVisible(true);
+						durationL.setVisible(true);
+						this.isbnF.setEnabled(false);
+						this.isbnF.setVisible(false);
+						isbnL.setVisible(false);
+					}
+				});
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -235,7 +235,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
 
@@ -289,7 +289,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	}
 
 	@Override
-	public Object getItemInfo(final utils.TypeItemInfo info) {
+	public String getItemInfo(final utils.TypeItemInfo info) {
 		switch (info) {
 		case TITLE:
 			return this.titleF.getText();
@@ -300,17 +300,17 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		case RELEASE_YEAR:
 			return this.yearF.getText();
 		case GENRE:
-			return this.genreF.getSelectedItem();
+			return this.genreF.getSelectedItem().toString();
 		case TYPE:
-			return this.itemTypeF.getSelectedObjects();
+			return this.itemTypeF.getSelectedItem().toString();
 		case DURATION:
 			return this.durationF.getText();
 		case COLOR:
-			return this.colorF.getSelectedItem();
+			return this.colorF.getSelectedItem().toString();
 		case ISBN:
 			return this.isbnF.getText();
 		case LANGUAGE:
-			return this.languageF.getSelectedItem();
+			return this.languageF.getSelectedItem().toString();
 		default:
 			break;
 
@@ -320,12 +320,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	}
 
 	@Override
-	public Object getItemInfo(final ViewImpl.OtherItemFilter info2) {
+	public String getItemInfo(final ViewImpl.OtherItemFilter info2) {
 		switch (info2) {
 		case RELEASE_NUMBER:
-			return this.numReleaseF;
+			return String.valueOf(this.numReleaseF);
 		case COPIES_NUMBER:
-			return this.numCopiesF;
+			return String.valueOf(this.numCopiesF);
 		default:
 			break;
 		}

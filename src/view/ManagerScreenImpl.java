@@ -47,7 +47,6 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton delete = new JButton("Elimina");
 
 		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		JButton modify = new JButton("Modifica");
 		modify.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		delete.setBounds(498, 179, 273, 39);
@@ -58,7 +57,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 85, 273, 39);
 		showUserList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
@@ -72,7 +71,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(498, 132, 273, 39);
 		showItemList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
@@ -119,7 +118,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		exit.setBounds(620, 474, 151, 60);
 		this.add(exit);
 
-		exit.addActionListener(e -> v.swapView(CardName.MAIN));
+		exit.addActionListener(e -> v.swapView(CardName.MANAGER_LOGIN));
 
 		newItem.addActionListener(e -> v.swapView(CardName.ITEM_CREATE));
 

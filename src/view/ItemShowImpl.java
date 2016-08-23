@@ -20,13 +20,13 @@ public class ItemShowImpl implements ItemShow {
 	private String author;
 	private String manifacturer;
 	private String year;
-	private utils.ItemGenre genre;
+	private String genre;
 	private String reviewAvarage;
 	private String availability;
 	private String isbn;
-	private utils.TypeColor color;
+	private String color;
 	private String duration;
-	private utils.Language language;
+	private String language;
 
 	@Override
 	public void startItemShow(final View v) {
@@ -106,13 +106,14 @@ public class ItemShowImpl implements ItemShow {
 
 		mainFrame.setTitle("Oggetto Selezionato");
 		authorL.setText("Regista:" + this.author);
+		mainFrame.setVisible(true);
 
 	}
 
 	private void setCommonField(final String titleS, final String authorS,
 			final String manifacturerS, final String yearS,
-			final utils.ItemGenre genreS, final String reviewAvarageS,
-			final String availabilityS, final utils.Language languageS) {
+			final String genreS, final String reviewAvarageS,
+			final String availabilityS, final String languageS) {
 		this.title = titleS;
 		this.author = authorS;
 		this.manifacturer = manifacturerS;
@@ -126,9 +127,9 @@ public class ItemShowImpl implements ItemShow {
 	@Override
 	public void setFilmField(final String titleS, final String authorS,
 			final String manifacturerS, final String yearS,
-			final utils.ItemGenre genreS, final String reviewAvarageS,
+			final String genreS, final String reviewAvarageS,
 			final String availabilityS, final String durationS,
-			final utils.TypeColor colorS, final utils.Language languageS) {
+			final String colorS, final String languageS) {
 		this.setCommonField(titleS, authorS, manifacturerS, yearS, genreS,
 				reviewAvarageS, availabilityS, languageS);
 		this.duration = durationS;
@@ -139,9 +140,9 @@ public class ItemShowImpl implements ItemShow {
 	@Override
 	public void setBookField(final String titleS, final String authorS,
 			final String manifacturerS, final String yearS,
-			final utils.ItemGenre genreS, final String reviewAvarageS,
+			final String genreS, final String reviewAvarageS,
 			final String availabilityS, final String isbnS,
-			final utils.Language languageS) {
+			final String languageS) {
 		this.setCommonField(titleS, authorS, manifacturerS, yearS, genreS,
 				reviewAvarageS, availabilityS, languageS);
 		this.duration = null;
