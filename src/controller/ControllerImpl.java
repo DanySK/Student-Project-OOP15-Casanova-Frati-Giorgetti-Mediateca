@@ -9,6 +9,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import com.google.common.base.Optional;
 
@@ -283,33 +284,53 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void addLike() {
 		// DA CONTROLLARE
-		for (Integer i : this.m.getItemArchive().keySet()) {
-			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
-				try {
-					this.m.addLike(i, this.actualUser.getIdUser());
-					this.v.showMessage("Oggetto " + this.m.getItemArchive().get(i) + " messo in wishlist");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					this.v.showError("Errore inserimento oggetto in wishlist");
-				}
-			}
-		}
+		this.m.getItemArchive().keySet().stream()
+				.filter(i -> this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser()))
+				.forEach(i -> {
+					try {
+						this.m.addLike(i, this.actualUser.getIdUser());
+						this.v.showMessage("Oggetto " + this.m.getItemArchive().get(i) + " messo in wishlist");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						this.v.showError("Errore inserimento oggetto in wishlist");
+					}
+				});
+		/*
+		 * for (Integer i : this.m.getItemArchive().keySet()) { if
+		 * (this.m.getItemArchive().get(i).toString().equals(this.v.
+		 * getItemSelectedByUser())) { try { this.m.addLike(i,
+		 * this.actualUser.getIdUser()); this.v.showMessage("Oggetto " +
+		 * this.m.getItemArchive().get(i) + " messo in wishlist"); } catch
+		 * (Exception e) { // TODO Auto-generated catch block this.v.showError(
+		 * "Errore inserimento oggetto in wishlist"); } } }
+		 */
 	}
 
 	@Override
 	public void addReview() {
 		// DA CONTROLLARE
-		for (Integer i : this.m.getItemArchive().keySet()) {
-			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
-				try {
-					this.m.addReview(i, this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
-					this.v.showMessage("Recensione per l'oggetto " + this.m.getItemArchive().get(i) + "inserita");
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					this.v.showError("Errore inserimento recensione oggetto");
-				}
-			}
-		}
+		this.m.getItemArchive().keySet().stream()
+				.filter(i -> this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser()))
+				.forEach(i -> {
+					try {
+						this.m.addReview(i, this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
+						this.v.showMessage("Recensione per l'oggetto " + this.m.getItemArchive().get(i) + "inserita");
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						this.v.showError("Errore inserimento recensione oggetto");
+					}
+				});
+		/*
+		 * for (Integer i : this.m.getItemArchive().keySet()) { if
+		 * (this.m.getItemArchive().get(i).toString().equals(this.v.
+		 * getItemSelectedByUser())) { try { this.m.addReview(i,
+		 * this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
+		 * this.v.showMessage("Recensione per l'oggetto " +
+		 * this.m.getItemArchive().get(i) + "inserita"); } catch (Exception e) {
+		 * // TODO Auto-generated catch block this.v.showError(
+		 * "Errore inserimento recensione oggetto"); } } }
+		 */
+
 	}
 
 	@Override
@@ -319,10 +340,16 @@ public class ControllerImpl implements Controller {
 			String[] array = new String[this.actualLoanArchive.size()];
 			int index = 0;
 
-			for (Integer i : this.m.getItemBorrowed(this.actualUser.getIdUser())) {
-				array[index] = this.m.getItemArchive().get(i).getFirst().toString();
-				index++;
-			}
+			array = this.m.getItemBorrowed(this.actualUser.getIdUser()).stream()
+					.map(i -> this.m.getItemArchive().get(i).getFirst().toString()).collect(Collectors.toList())
+					.toArray(array);
+
+			/*
+			 * for (Integer i :
+			 * this.m.getItemBorrowed(this.actualUser.getIdUser())) {
+			 * array[index] =
+			 * this.m.getItemArchive().get(i).getFirst().toString(); index++; }
+			 */
 			this.v.setBorrowedItemList(array);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -460,7 +487,7 @@ public class ControllerImpl implements Controller {
 		int index = 0;
 		for (Integer i : this.actualUser.getRecommendedList()) {
 			if (this.m.getAllItemId(TypeItem.BOOK).contains(i)) {
-				array[index] = i.toString();
+				array[index] = this.m.getItemArchive().get(i).toString();
 				index++;
 			}
 		}
@@ -473,7 +500,7 @@ public class ControllerImpl implements Controller {
 		String[] array = new String[this.actualUser.getRecommendedList().size()];
 		for (Integer i : this.actualUser.getRecommendedList()) {
 			if (this.m.getAllItemId(TypeItem.MOVIE).contains(i)) {
-				array[index] = i.toString();
+				array[index] = this.m.getItemArchive().get(i).toString();
 				index++;
 			}
 		}
