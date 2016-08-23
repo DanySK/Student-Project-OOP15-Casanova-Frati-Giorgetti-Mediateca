@@ -73,9 +73,8 @@ public class ItemImpl implements Item, Serializable {
   public String toString() {
     StringBuilder stringBuilder = new StringBuilder();
     Formatter formatter = new Formatter(stringBuilder);
-    String template = "%20s | %20s | %30s | %10s | %5s";
-    formatter.format(template, this.getTitle(), this.getAuthor(), this.getGenre(),
-                this.getCurrentLanguage(), this.getReleaseYear());
+    String template = "%20s | %20s |  %5s";
+    formatter.format(template, this.getTitle(), this.getAuthor(), this.getReleaseYear());
     formatter.close();
     return stringBuilder.toString();
   }

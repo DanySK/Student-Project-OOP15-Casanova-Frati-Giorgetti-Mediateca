@@ -1,7 +1,5 @@
 package model.item;
 
-import java.util.Formatter;
-
 import utils.ItemGenre;
 import utils.Language;
 
@@ -20,18 +18,7 @@ public class Movie extends ItemImpl {
 
   @Override
   public String toString() {
-    StringBuilder stringBuilder = new StringBuilder();
-    Formatter formatter = new Formatter(stringBuilder);
-    String str;
-    if (this.color) {
-      str = "COLOR";
-    } else {
-      str = "B/W";
-    }
-    String template = " | %13s";
-    formatter.format(template, str);
-    formatter.close();
-    return super.toString() + stringBuilder.toString();
+    return "MOVIE: " + super.toString();
   }
 
   /**
