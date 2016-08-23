@@ -260,43 +260,38 @@ public class ControllerImpl implements Controller {
 		}
 		Object searchText = this.v.getSearchText();
 
-		if (ts != null) {
-			array = new String[0];
-			this.v.showError("Impossibile filtrare senza informazione di riferimento");
+		if ((ty == null) && ((searchText == null) || searchText.equals(""))) {
+			array = new String[this.m.getItemArchive().size()];
+			try {
+				for (Integer i : this.m.getItemArchive().keySet()) {
+					array[index] = this.m.getItemArchive().get(i).toString();
+					index++;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				this.v.showError("Filtraggio oggetti fallito");
+			}
+		} else if (ty == null) {
+			array = new String[this.m.getItemArchive().size()];
+			try {
+				for (Integer i : this.m.filtersItem(this.m.getItemArchive().keySet(), ts, searchText)) {
+					array[index] = this.m.getItemArchive().get(i).toString();
+					index++;
+				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				this.v.showError("Filtraggio oggetti fallito");
+			}
 		} else {
-			if ((ty == null) && ((searchText == null) || searchText.equals(""))) {
-				array = new String[this.m.getItemArchive().size()];
-				try {
-					for (Integer i : this.m.getItemArchive().keySet()) {
-						array[index] = this.m.getItemArchive().get(i).toString();
-						index++;
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					this.v.showError("Filtraggio oggetti fallito");
+			array = new String[this.m.getAllItemId(ty).size()];
+			try {
+				for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
+					array[index] = this.m.getItemArchive().get(i).toString();
+					index++;
 				}
-			} else if (ty == null) {
-				array = new String[this.m.getItemArchive().size()];
-				try {
-					for (Integer i : this.m.filtersItem(this.m.getItemArchive().keySet(), ts, searchText)) {
-						array[index] = this.m.getItemArchive().get(i).toString();
-						index++;
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					this.v.showError("Filtraggio oggetti fallito");
-				}
-			} else {
-				array = new String[this.m.getAllItemId(ty).size()];
-				try {
-					for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
-						array[index] = this.m.getItemArchive().get(i).toString();
-						index++;
-					}
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
 
-				}
 			}
 		}
 
