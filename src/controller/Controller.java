@@ -31,7 +31,7 @@ public interface Controller {
 
 	/**
 	 * Method which writes some users, items and the study room situation on
-	 * files for debug
+	 * files for debug.
 	 */
 	void writeOnFile();
 
@@ -42,7 +42,7 @@ public interface Controller {
 	 *
 	 * @throws Exception
 	 */
-	void itemElaboration() throws Exception;
+	void itemElaboration();
 
 	/**
 	 * Method which adds the like of the current item selected by the actual
@@ -73,14 +73,14 @@ public interface Controller {
 	 *
 	 * @throws Exception
 	 */
-	void takeSit() throws Exception;
+	void takeSit();
 
 	/**
 	 * Method which removes the booking of the selected sit in the actual day.
 	 *
 	 * @throws Exception
 	 */
-	void cancelSit() throws Exception;
+	void cancelSit();
 
 	/*
 	 *
@@ -196,7 +196,12 @@ public interface Controller {
 
 	/**
 	 * Method which eliminates the reference to the last user logged in the
-	 * Controller
+	 * Controller.
 	 */
-	void userLogout();
+	void logOut();
+
+	/**
+	 * Method which sets the user info.
+	 */
+	void setUserInfo();
 }

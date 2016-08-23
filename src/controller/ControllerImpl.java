@@ -220,7 +220,7 @@ public class ControllerImpl implements Controller {
 	}
 
 	@Override
-	public void userLogout() {
+	public void logOut() {
 		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
 		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
@@ -238,15 +238,13 @@ public class ControllerImpl implements Controller {
 	}
 
 	/**
-	 *
 	 * Method who elaborates inputs from the user and set the list with items
 	 * filtered.
-	 *
-	 * @throws Exception
 	 */
 	@Override
 	public void itemElaboration() {
 		int index = 0;
+		String[] array;
 		TypeItem ty = null;
 		for (TypeItem y : TypeItem.values()) {
 			if (y.equals(this.v.getItemFilter())) {
@@ -260,7 +258,13 @@ public class ControllerImpl implements Controller {
 			}
 		}
 		Object searchText = this.v.getSearchText();
-		String[] array = new String[this.m.getAllItemId(ty).size()];
+		if (ty == null) {
+			array = new String[this.m.getItemArchive().size()];
+		}
+		array = new String[this.m.getAllItemId(ty).size()];
+		if ((ty == null) || (ts == null)) {
+
+		}
 		try {
 			for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
 				array[index] = this.m.getItemArchive().get(i).toString();
@@ -434,8 +438,16 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
+	@Override
 	public void setUserInfo() {
-
+		if (this.actualUser == null) {
+			this.v.showError("Errore! Utente corrente non ancora inizializzato");
+		} else {
+			this.v.setUserModifyField(this.actualUser.getName(), this.actualUser.getSurname(),
+					this.actualUser.getUsername(), this.actualUser.getPassword(),
+					this.actualUser.getBirthdate().toString(), this.actualUser.getEmail(),
+					this.actualUser.getTelephoneNumber());
+		}
 	}
 
 	// Modificare questi due metodi e renderlo uno solo con un parametro
