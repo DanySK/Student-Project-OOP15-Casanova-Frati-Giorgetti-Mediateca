@@ -270,7 +270,6 @@ public class ControllerImpl implements Controller {
 		try {
 			for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
 				array[index] = this.m.getItemArchive().get(i).toString();
-				this.v.showMessage(array[index]);
 				index++;
 			}
 		} catch (Exception e) {
