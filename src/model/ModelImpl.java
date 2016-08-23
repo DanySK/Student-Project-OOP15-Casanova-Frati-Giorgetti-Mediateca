@@ -347,21 +347,33 @@ public class ModelImpl implements Serializable, Model {
     Set<Integer> r = new HashSet<>();
     for (Integer i : set) {
       if (ts.equals(TypeItemInfo.TITLE)) {
+        if (param.equals("")) {
+          return set;
+        }
         if (((ItemImpl) this.archiveItem.getItem(i)).getTitle()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       } else if (ts.equals(TypeItemInfo.AUTHOR)) {
+        if (param.equals("")) {
+          return set;
+        }
         if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       } else if (ts.equals(TypeItemInfo.PRODUCER)) {
+        if (param.equals("")) {
+          return set;
+        }
         if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher()
                     .equals(((String) param).toUpperCase())) {
           r.add(i);
         }
       } else if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
+        if (param.equals("")) {
+          return set;
+        }
         if (((ItemImpl) this.archiveItem.getItem(i)).getReleaseYear() == (int) param) {
           r.add(i);
         }
@@ -374,8 +386,10 @@ public class ModelImpl implements Serializable, Model {
           r.add(i);
         }
       }
+
     }
     return r;
+
   }
 
   @Override
