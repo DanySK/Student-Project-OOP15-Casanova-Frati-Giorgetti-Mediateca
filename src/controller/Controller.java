@@ -93,11 +93,6 @@ public interface Controller {
 	void extendBorrow();
 
 	/**
-	 * Method which checks the status of the loans of the user.
-	 */
-	void checkDeadlines();
-
-	/**
 	 * Method which deletes the actual user from the archive.
 	 */
 	void deleteUser();

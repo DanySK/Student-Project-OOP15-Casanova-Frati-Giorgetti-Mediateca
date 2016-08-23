@@ -260,8 +260,9 @@ public class ControllerImpl implements Controller {
 		Object searchText = this.v.getSearchText();
 		if (ty == null) {
 			array = new String[this.m.getItemArchive().size()];
+		} else {
+			array = new String[this.m.getAllItemId(ty).size()];
 		}
-		array = new String[this.m.getAllItemId(ty).size()];
 		if ((ty == null) || (ts == null)) {
 
 		}
@@ -382,7 +383,8 @@ public class ControllerImpl implements Controller {
 					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
 					break;
 				case RELEASE_YEAR:
-					this.m.changeItem(ti, itemId, (int) this.v.getItemInfo(ti));
+					int var = (int) this.v.getItemInfo(ti);
+					this.m.changeItem(ti, itemId, var);
 					break;
 				case AUTHOR:
 					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
@@ -571,20 +573,13 @@ public class ControllerImpl implements Controller {
 		Map<Integer, Double> map;
 		try {
 			map = this.m.checkDeadlineas(this.actualUser.getIdUser());
-
-			/*
-			 * map.keySet().stream().filter(i -> map.get(i) > 30).forEach( i ->
-			 * this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).
-			 * getFirst().getTitle()));
-			 */
-			for (Integer i : map.keySet()) {
+			map.keySet().stream().forEach(i -> {
 				if (map.get(i) > 60) {
 					this.v.showGiveBackMessage(this.m.getItemArchive().get(i).getFirst().toString());
 				} else if (map.get(i) > 30) {
 					this.v.showGiveBackOptionMessage(this.m.getItemArchive().get(i).getFirst().toString());
 				}
-			}
-
+			});
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Utente non presente nell'archivio");
@@ -636,7 +631,6 @@ public class ControllerImpl implements Controller {
 				}
 			}
 		}
-		System.out.println(array);
 		this.v.setStudyRoomStatus(array);
 		// array di stringhe per i posto a sedere dove il posto vuoto è 0 e il
 		// posto occupato è username
@@ -767,22 +761,6 @@ public class ControllerImpl implements Controller {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Utente non presente nell'archivio");
-		}
-	}
-
-	@Override
-	public void checkDeadlines() {
-		try {
-			Map<Integer, Double> map = this.m.checkDeadlineas(this.actualUser.getIdUser());
-			for (Integer i : this.actualUser.getLoanArchive().keySet()) {
-				// DA COMPLETARE
-				if (map.get(i) > 30) {
-
-				}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
