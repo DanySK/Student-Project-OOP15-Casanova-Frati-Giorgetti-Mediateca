@@ -28,6 +28,9 @@ public class ItemShowImpl implements ItemShow {
 	private String duration;
 	private String language;
 
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	public void startItemShow(final View v) {
 		v.giveMeItemInfo();

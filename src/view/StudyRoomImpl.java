@@ -82,7 +82,8 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		int i;
 		for (i = 0; i < 100; i++) {
 			this.buttons[i] = new JButton();
-			this.buttons[i].setSize(80, 160);
+			this.buttons[i].setSize(25, 25);
+			this.buttons[i].setText(String.valueOf(i));
 			this.buttons[i].setBackground(Color.GREEN);
 			this.centerPanel.add(this.buttons[i]);
 
@@ -129,13 +130,13 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		this.add(northPanel);
 		northPanel.setLayout(null);
 		this.add(this.centerPanel);
-		this.centerPanel.setLayout(new FlowLayout());
+		this.centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		northPanel.setLayout(null);
 		JLabel presentation = new JLabel(
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 
@@ -159,8 +160,6 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	public void setStudyRoomStatus(final String[] status) {
 		int i;
 		for (i = 0; i < status.length; i++) {
-			this.centerPanel.add(this.buttons[i]);
-			this.buttons[i].setText(String.valueOf(i));
 			if (status[i].equals("0")) {
 				this.buttons[i].setBackground(Color.GREEN);
 			} else if (status[i].equals("1")) {
