@@ -245,7 +245,7 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void itemElaboration() {
 		int index = 0;
-		String[] array;
+		String[] array = null;
 		TypeItem ty = null;
 		for (TypeItem y : TypeItem.values()) {
 			if (y.equals(this.v.getItemFilter())) {
@@ -259,23 +259,46 @@ public class ControllerImpl implements Controller {
 			}
 		}
 		Object searchText = this.v.getSearchText();
-		if (ty == null) {
-			array = new String[this.m.getItemArchive().size()];
-		} else {
-			array = new String[this.m.getAllItemId(ty).size()];
-		}
-		if ((ty == null) || (ts == null)) {
 
-		}
-		try {
-			for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
-				array[index] = this.m.getItemArchive().get(i).toString();
-				index++;
+		if (ts == null) {
+			this.v.showError("Impossibile filtrare senza informazione di riferimento");
+		} else {
+			if ((ty == null) && ((searchText == null) || searchText.equals(""))) {
+				array = new String[this.m.getItemArchive().size()];
+				try {
+					for (Integer i : this.m.getItemArchive().keySet()) {
+						array[index] = this.m.getItemArchive().get(i).toString();
+						index++;
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					this.v.showError("Filtraggio oggetti fallito");
+				}
+			} else if (ty == null) {
+				array = new String[this.m.getItemArchive().size()];
+				try {
+					for (Integer i : this.m.filtersItem(this.m.getItemArchive().keySet(), ts, searchText)) {
+						array[index] = this.m.getItemArchive().get(i).toString();
+						index++;
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					this.v.showError("Filtraggio oggetti fallito");
+				}
+			} else {
+				array = new String[this.m.getAllItemId(ty).size()];
+				try {
+					for (Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
+						array[index] = this.m.getItemArchive().get(i).toString();
+						index++;
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+
+				}
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			this.v.showError("Filtraggio oggetti fallito");
 		}
+
 		this.v.setFilteredList(array);
 	}
 
@@ -642,7 +665,8 @@ public class ControllerImpl implements Controller {
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
 		String[] array = new String[100];
-		Integer[] arrayInt = (Integer[]) this.m.getStudyRoom().get(day).toArray();
+		Integer[] arrayInt = new Integer[this.m.getStudyRoom().get(day).size()];
+		arrayInt = this.m.getStudyRoom().get(day).toArray(arrayInt);
 		for (int index = 0; index < arrayInt.length; index++) {
 			if ((arrayInt[index] == null) || (arrayInt[index] == 0)) {
 				array[index] = "0";
@@ -825,6 +849,6 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void setView(final view.View v) {
 		this.v = v;
-		this.writeOnFile();
+		// this.writeOnFile();
 	}
 }
