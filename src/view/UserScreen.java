@@ -28,7 +28,10 @@ public interface UserScreen {
 	 *            the user telephone number
 	 */
 	void setField(String name, String surname, String username,
-			String password, String birthDate, String email, String telephone);
+			String password, String birthDate_day, String birthDate_month,
+			String birthDate_year, String email, String telephone,
+			String bPref1, String bPref2, String bPref3, String fPref1,
+			String fPref2, String fPref3);
 
 	/**
 	 * Method which returns the info requested by passing a info type.

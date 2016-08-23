@@ -312,9 +312,14 @@ public class ViewImpl implements View {
 	@Override
 	public void setUserModifyField(final String name, final String surname,
 			final String username, final String password,
-			final String birthDate, final String email, final String telephone) {
+			final String birthDate_day, final String birthDate_month,
+			final String birthDate_year, final String email,
+			final String telephone, final String bPref1, final String bPref2,
+			final String bPref3, final String fPref1, final String fPref2,
+			final String fPref3) {
 		((UserScreen) this.card4).setField(name, surname, username, password,
-				birthDate, email, telephone);
+				birthDate_day, birthDate_month, birthDate_year, email,
+				telephone, bPref1, bPref2, bPref3, fPref1, fPref2, fPref3);
 	}
 
 	// //OK

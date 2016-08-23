@@ -263,15 +263,27 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	@Override
 	public void setField(final String name, final String surname,
 			final String username, final String password,
-			final String birthDate, final String email, final String telephone) {
+			final String birthDate_day, final String birthDate_month,
+			final String birthDate_year, final String email,
+			final String telephone, final String bPref1, final String bPref2,
+			final String bPref3, final String fPref1, final String fPref2,
+			final String fPref3) {
 		this.nameF.setText(name);
 		this.surnameF.setText(surname);
 		this.usernameF.setText(username);
 		this.passwordF.setText(password);
-		this.model.setDate(1990, 01, 01);
+		this.model.setDate(Integer.parseInt(birthDate_year),
+				Integer.parseInt(birthDate_month),
+				Integer.parseInt(birthDate_day));
 		this.model.setSelected(true);
 		this.emailF.setText(email);
 		this.cellF.setText(telephone);
+		this.bookPref1.setSelectedItem(bPref1);
+		this.bookPref2.setSelectedItem(bPref2);
+		this.bookPref3.setSelectedItem(bPref3);
+		this.filmPref1.setSelectedItem(fPref1);
+		this.filmPref2.setSelectedItem(fPref2);
+		this.filmPref3.setSelectedItem(fPref3);
 	}
 
 	@Override

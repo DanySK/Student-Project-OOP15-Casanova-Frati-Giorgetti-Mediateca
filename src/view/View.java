@@ -141,15 +141,34 @@ public interface View {
 	 *            the user username
 	 * @param password
 	 *            the user password
-	 * @param birthDate
-	 *            the user birthDate
+	 * @param birthDate_day
+	 *            the user birthDate day
+	 * @param birthDate_month
+	 *            the user birthDate month
+	 * @param birthDate_year
+	 *            the user birthDate year
 	 * @param email
 	 *            the user email
 	 * @param telephone
 	 *            the user telephone number
+	 * @param bPref1
+	 *            the user book preference 1
+	 * @param bPref2
+	 *            the user book preference 2
+	 * @param bPref3
+	 *            the user book preference 3
+	 * @param fPref1
+	 *            the user film preference 1
+	 * @param fPref2
+	 *            the user film preference 2
+	 * @param fPref3
+	 *            the user film preference 3
 	 */
 	void setUserModifyField(String name, String surname, String username,
-			String password, String birthDate, String email, String telephone);
+			String password, String birthDate_day, String birthDate_month,
+			String birthDate_year, String email, String telephone,
+			String bPref1, String bPref2, String bPref3, String fPref1,
+			String fPref2, String fPref3);
 
 	/**
 	 * Gets information by UserScreen. Needs a parameter for the information
