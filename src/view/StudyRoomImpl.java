@@ -24,11 +24,13 @@ import view.ViewImpl.CardName;
  * @author Luca Giorgetti
  *
  */
-public class StudyRoomImpl extends JPanel implements StudyRoom {
+
+class StudyRoomImpl extends JPanel implements StudyRoom {
 
 	/**
 	 *
 	 */
+
 	private static final long serialVersionUID = 1L;
 	private int selectedSit;
 	private final JButton[] buttons;
@@ -78,39 +80,44 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		northPanel.add(this.datePicker);
 
 		southPanel.setLayout(null);
+		JButton sendDate = new JButton("Invia Data");
+
+		sendDate.addActionListener(e -> {
+			v.giveMeStudyRoomStatus();
+			System.out.println("Invia data cliccato");
+			v.swapView(CardName.STUDY_ROOM);
+		});
 
 		int i;
 		for (i = 0; i < 100; i++) {
 			this.buttons[i] = new JButton();
 			this.buttons[i].setSize(25, 25);
-			this.buttons[i].setText(String.valueOf(i));
-			this.buttons[i].setBackground(Color.GREEN);
+			this.buttons[i].setText(String.valueOf(i + 1));
 			this.centerPanel.add(this.buttons[i]);
 
 		}
-		v.giveMeStudyRoomStatus();
+
 		for (i = 0; i < 100; i++) {
-			this.buttons[i] = new JButton();
-			this.buttons[i].setText(String.valueOf(i));
-			if (this.buttons[i].getBackground() == Color.GREEN) {
-				this.buttons[i].addActionListener(e -> {
-					this.selectedSit = Integer.parseInt(((JButton) e
-							.getSource()).getText());
-					v.takeSit();
-					v.swapView(CardName.STUDY_ROOM);
-				});
-
-			} else if (this.buttons[i].getBackground() == Color.CYAN) {
-				this.buttons[i].addActionListener(e -> {
-					this.selectedSit = Integer.parseInt(((JButton) e
-							.getSource()).getText());
-					v.cancelSit();
-					v.swapView(CardName.STUDY_ROOM);
-				});
-
-			} else {
-				this.buttons[i].setEnabled(false);
-			}
+			this.buttons[i]
+					.addActionListener(e -> {
+						if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
+							this.selectedSit = Integer.parseInt(((JButton) e
+									.getSource()).getText());
+							v.takeSit();
+							System.out.println("preso posto"
+									+ String.valueOf(this.selectedSit));
+							v.giveMeStudyRoomStatus();
+							v.swapView(CardName.STUDY_ROOM);
+						} else if (((JButton) e.getSource()).getBackground() == Color.GREEN) {
+							this.selectedSit = Integer.parseInt(((JButton) e
+									.getSource()).getText());
+							v.cancelSit();
+							System.out.println("cancellato posto"
+									+ String.valueOf(this.selectedSit));
+							v.giveMeStudyRoomStatus();
+							v.swapView(CardName.STUDY_ROOM);
+						}
+					});
 		}
 
 		new BorderLayout();
@@ -140,11 +147,6 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 
-		JButton sendDate = new JButton("Invia Data");
-		sendDate.addActionListener(e -> {
-			v.giveMeStudyRoomStatus();
-			v.swapView(CardName.STUDY_ROOM);
-		});
 		sendDate.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		sendDate.setBounds(427, 82, 158, 40);
 		northPanel.add(sendDate);
@@ -162,8 +164,10 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		for (i = 0; i < status.length; i++) {
 			if (status[i].equals("0")) {
 				this.buttons[i].setBackground(Color.GREEN);
+				this.buttons[i].setEnabled(true);
 			} else if (status[i].equals("1")) {
 				this.buttons[i].setBackground(Color.CYAN);
+				this.buttons[i].setEnabled(true);
 			} else {
 				this.buttons[i].setBackground(Color.RED);
 				this.buttons[i].setEnabled(false);
@@ -185,4 +189,5 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 	public int getDateYear() {
 		return this.datePicker.getModel().getYear();
 	}
+
 }

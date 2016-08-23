@@ -184,33 +184,47 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			this.numReleaseF.setEnabled(false);
 		}
 		this.itemTypeF
-		.addActionListener(e -> {
-			if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
-				this.colorF.setEnabled(false);
-				this.colorF.setVisible(false);
-				this.durationF.setEnabled(false);
-				this.durationF.setVisible(false);
-				durationL.setVisible(false);
-				this.isbnF.setEnabled(true);
-				this.isbnF.setVisible(true);
-				isbnL.setVisible(true);
+				.addActionListener(e -> {
+					if (this.itemTypeF.getSelectedItem().equals(TypeItem.BOOK)) {
+						this.colorF.setEnabled(false);
+						this.colorF.setVisible(false);
+						this.durationF.setEnabled(false);
+						this.durationF.setVisible(false);
+						durationL.setVisible(false);
+						this.isbnF.setEnabled(true);
+						this.isbnF.setVisible(true);
+						isbnL.setVisible(true);
+						if (type == ItemScreenType.CREATE) {
+							v.giveMeItemInfo();
+							v.swapView(CardName.ITEM_CREATE);
+						} else if (type == ItemScreenType.MODIFY) {
+							v.giveMeItemInfo();
+							v.swapView(CardName.ITEM_MODIFY);
+						}
 
-			} else if (this.itemTypeF.getSelectedItem().equals(
-					TypeItem.MOVIE)) {
-				this.colorF.setEnabled(true);
-				this.colorF.setVisible(true);
-				this.durationF.setEnabled(true);
-				this.durationF.setVisible(true);
-				durationL.setVisible(true);
-				this.isbnF.setEnabled(false);
-				this.isbnF.setVisible(false);
-				isbnL.setVisible(false);
-			}
-		});
+					} else if (this.itemTypeF.getSelectedItem().equals(
+							TypeItem.MOVIE)) {
+						this.colorF.setEnabled(true);
+						this.colorF.setVisible(true);
+						this.durationF.setEnabled(true);
+						this.durationF.setVisible(true);
+						durationL.setVisible(true);
+						this.isbnF.setEnabled(false);
+						this.isbnF.setVisible(false);
+						isbnL.setVisible(false);
+						if (type == ItemScreenType.CREATE) {
+							v.giveMeItemInfo();
+							v.swapView(CardName.ITEM_CREATE);
+						} else if (type == ItemScreenType.MODIFY) {
+							v.giveMeItemInfo();
+							v.swapView(CardName.ITEM_MODIFY);
+						}
+					}
+				});
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -239,7 +253,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
 
