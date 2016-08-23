@@ -82,7 +82,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 		int i;
 		for (i = 0; i < 100; i++) {
 			this.buttons[i] = new JButton();
-			this.buttons[i].setSize(80, 80);
+			this.buttons[i].setSize(80, 160);
 			this.buttons[i].setBackground(Color.GREEN);
 			this.centerPanel.add(this.buttons[i]);
 
@@ -135,7 +135,7 @@ public class StudyRoomImpl extends JPanel implements StudyRoom {
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 

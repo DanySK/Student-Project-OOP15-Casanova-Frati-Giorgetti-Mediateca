@@ -41,7 +41,6 @@ public class UserShowImpl implements UserShow {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBounds(0, 0, 594, 1);
 		mainFrame.setSize(UserShowImpl.FRAME_LENGHT, UserShowImpl.FRAME_WIDTH);
-		mainFrame.setResizable(false);
 		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
 		mainFrame.setResizable(false);
@@ -136,6 +135,7 @@ public class UserShowImpl implements UserShow {
 		filmPreferences.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.SMALL_SIZE));
 		mainFrame.getContentPane().add(filmPreferences);
+		mainFrame.setVisible(true);
 
 	}
 

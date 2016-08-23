@@ -28,7 +28,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private static final int ELEMENTS_TO_SHOW = 25;
 	private String textToSearch;
 	private utils.TypeItemInfo selectedFilter;
-	private String itemSelectedFromList;
 	private utils.TypeItem itemType;
 	private JList<String> filteredJList = new JList<String>();
 	private DefaultListModel<String> model = new DefaultListModel<String>();
@@ -56,7 +55,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		giveBackItem = new JButton("Restituisci ");
 		giveBackItem.setBounds(586, 164, 178, 27);
 		giveBackItem
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		likeItem = new JButton("Mi Piace");
 		likeItem.setBounds(586, 204, 178, 27);
 		likeItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
@@ -70,9 +69,11 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		searchField = new JTextField();
 		searchField.setBounds(21, 84, 521, 27);
 		filterSelect = new JComboBox(utils.TypeItemInfo.values());
+		filterSelect.setSelectedIndex(-1);
 		filterSelect.setBounds(232, 44, 200, 27);
 		filterSelect.setToolTipText("Dove ricercare");
 		itemSelect = new JComboBox(utils.TypeItem.values());
+		itemSelect.setSelectedIndex(-1);
 		itemSelect.setBounds(21, 44, 200, 27);
 		itemSelect.setToolTipText("Libro o Film");
 		this.setLayout(null);
@@ -93,7 +94,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filteredJList.setModel(this.model);
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
-		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
@@ -130,12 +131,11 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.textToSearch = searchField.getText();
 		this.selectedFilter = (TypeItemInfo) filterSelect.getSelectedItem();
 		this.itemType = (TypeItem) itemSelect.getSelectedItem();
-		this.itemSelectedFromList = this.filteredJList.getSelectedValue();
 
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 326, 178, 27);
 		seeWishlist
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);
