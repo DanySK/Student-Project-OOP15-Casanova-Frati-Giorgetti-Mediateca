@@ -90,7 +90,7 @@ public class ControllerImpl implements Controller {
 					"334534534534",
 					new ArrayList<ItemGenre>(
 							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
-					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.HUMOR)));
+					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.FANTASY, ItemGenre.HORROR, ItemGenre.ANIMATION)));
 			this.m.registerUser("Edoardo", "Frati", cal, "animefan", "fullmetalalchemist", "edoardo.frati@gmail.it",
 					"321342111",
 					new ArrayList<ItemGenre>(
@@ -147,9 +147,9 @@ public class ControllerImpl implements Controller {
 					new ArrayList<ItemGenre>(
 							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
 			GregorianCalendar cal2 = new GregorianCalendar();
-			cal.set(Calendar.YEAR, 1994);
-			cal.set(Calendar.MONTH, 3);
-			cal.set(Calendar.DAY_OF_MONTH, 7);
+			cal2.set(Calendar.YEAR, 2016);
+			cal2.set(Calendar.MONTH, 8);
+			cal2.set(Calendar.DAY_OF_MONTH, 23);
 			this.m.bookSit(cal, 1, ((UserImpl) u).getIdUser());
 			this.m.bookSit(cal, 2, ((UserImpl) u2).getIdUser());
 			this.m.bookSit(cal2, 1, ((UserImpl) u).getIdUser());
@@ -222,10 +222,12 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void logOut() {
+		System.out.println("logOut: entrato");
 		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
 		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 		this.actualUser = null;
+		System.out.println("logOut operazioni eseguite");
 	}
 
 	@Override
@@ -244,22 +246,28 @@ public class ControllerImpl implements Controller {
 	 */
 	@Override
 	public void itemElaboration() {
+		System.out.println("itemElaboration: entrato");
 		int index = 0;
 		String[] array = null;
+		System.out.println("itemElaboration: v.getitemfilter " + this.v.getItemFilter());
 		TypeItem ty = null;
 		for (TypeItem y : TypeItem.values()) {
 			if (y.equals(this.v.getItemFilter())) {
 				ty = y;
 			}
 		}
+		System.out.println("itemElaboration: ty =" + ty);
+		System.out.println("itemElaboration: v.getsearchfilter = " + this.v.getSearchFilter());
 		TypeItemInfo ts = null;
 		for (TypeItemInfo s : TypeItemInfo.values()) {
 			if (s.equals(this.v.getSearchFilter())) {
 				ts = s;
 			}
 		}
+		System.out.println("itemElaboration: ts = " + ts);
+		System.out.println("itemElaboration: this.v.getsearchtext =" + this.v.getSearchText());
 		Object searchText = this.v.getSearchText();
-
+		System.out.println("itemElaboration: searchtext=" + searchText);
 		if ((ty == null) && ((searchText == null) || searchText.equals(""))) {
 			array = new String[this.m.getItemArchive().size()];
 			try {
@@ -267,6 +275,7 @@ public class ControllerImpl implements Controller {
 					array[index] = this.m.getItemArchive().get(i).toString();
 					index++;
 				}
+				System.out.println("itemElaboration: dentro al try");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				this.v.showError("Filtraggio oggetti fallito");
@@ -296,18 +305,23 @@ public class ControllerImpl implements Controller {
 		}
 
 		this.v.setFilteredList(array);
+		System.out.println("itemElaboration: restituita lista");
 	}
 
 	// first draft
 	@Override
 	public void addLike() {
 		// DA CONTROLLARE
+		System.out.println("addLike: entrato");
+		System.out.println("addLike: " + this.v.getItemSelectedByUser());
+
 		this.m.getItemArchive().keySet().stream()
 				.filter(i -> this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser()))
 				.forEach(i -> {
 					try {
 						this.m.addLike(i, this.actualUser.getIdUser());
 						this.v.showMessage("Oggetto " + this.m.getItemArchive().get(i) + " messo in wishlist");
+						System.out.println("addLike: entrato nel try");
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						this.v.showError("Errore inserimento oggetto in wishlist");
@@ -327,6 +341,9 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void addReview() {
 		// DA CONTROLLARE
+		System.out.println("addReview: entrato");
+		System.out.println("addReview: " + this.v.getItemSelectedByUser());
+		System.out.println("addReview: score e review " + this.v.getScore() + this.v.getReview());
 		this.m.getItemArchive().keySet().stream()
 				.filter(i -> this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser()))
 				.forEach(i -> {
@@ -353,6 +370,7 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void borrowList() {
+		System.out.println("borrowList: entrato");
 		try {
 			this.actualLoanArchive = this.actualUser.getLoanArchive();
 			String[] array = new String[this.actualLoanArchive.size()];
@@ -377,34 +395,61 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void borrowItem() {
+		System.out.println("borrowItem: entrato");
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
 				try {
 					this.m.borrowItem(i, this.actualUser.getIdUser());
+					System.out.println("userModify: entrato nel try");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					this.v.showError("Errore! itemId o userId non presente nell'archivio");
 				}
 			}
 		}
+		System.out.println("userModify: " + this.v.getItemSelectedByUser());
 	}
 
 	@Override
 	public void userModify() {
 		// for per ogni tipo di userinfo e fare changeUser totale
+		GregorianCalendar cal = new GregorianCalendar();
+
+		System.out.println("userModify: entrato");
 		Arrays.stream(UserInfo.values())
-				.filter(ui -> !ui.equals(UserInfo.BIRTHDATE_DAY) && !ui.equals(UserInfo.BIRTHDATE_MONTH)
-						&& !ui.equals(UserInfo.BIRTHDATE_YEAR) && !ui.equals(UserInfo.BOOK_PREF1)
+				.filter(ui -> !ui.equals(UserInfo.BIRTHDATE) && !ui.equals(UserInfo.BOOK_PREF1)
 						&& !ui.equals(UserInfo.BOOK_PREF2) && !ui.equals(UserInfo.BOOK_PREF3)
 						&& !ui.equals(UserInfo.FILM_PREF1) && !ui.equals(UserInfo.FILM_PREF2)
 						&& !ui.equals(UserInfo.FILM_PREF3))
 				.forEach(ui -> {
-					try {
-						this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
-					} catch (Exception e) {
-						this.v.showError("Utente non presente nell'archivio per la modifica");
+					System.out.println("userModify: " + ui + " " + this.v.getModifiedInfo(ui));
+
+					if (ui.equals(UserInfo.BIRTHDATE_DAY)) {
+						cal.set(Calendar.DAY_OF_MONTH, (int) this.v.getModifiedInfo(UserInfo.BIRTHDATE_DAY));
+					} else if (ui.equals(UserInfo.BIRTHDATE_MONTH)) {
+						cal.set(Calendar.MONTH, (int) this.v.getModifiedInfo(UserInfo.BIRTHDATE_MONTH));
+					} else if (ui.equals(UserInfo.BIRTHDATE_YEAR)) {
+						cal.set(Calendar.YEAR, (int) this.v.getModifiedInfo(UserInfo.BIRTHDATE_YEAR));
+					}
+
+					if ((this.v.getModifiedInfo(ui) != null) && (this.v.getModifiedInfo(ui) != "")
+							&& !ui.equals(UserInfo.BIRTHDATE_DAY) && !ui.equals(UserInfo.BIRTHDATE_MONTH)
+							&& !ui.equals(UserInfo.BIRTHDATE_YEAR)) {
+						try {
+							this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
+						} catch (Exception e) {
+							this.v.showError("Utente non presente nell'archivio per la modifica");
+						}
 					}
 				});
+
+		// cambio inserito all'esterno dello stream per BIRTHDATE
+		try {
+			this.m.changeUser(UserInfo.BIRTHDATE, this.actualUser.getIdUser(), cal);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			this.v.showError("Utente non presente nell'archivio per la modifica");
+		}
 		/*
 		 * for (UserInfo ui : listU) { try { ; } } catch (Exception e) { // TODO
 		 * Auto-generated catch block this.v.showError("Errore nell'UserInfo");
@@ -415,12 +460,14 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void itemModify() {
 		// getItemToRemoveModify ottiene la stringa da setAllItemList!!!
+		System.out.println("itemModify: entrato");
 		Integer itemId = null;
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemToRemoveModify())) {
 				itemId = i;
 			}
 		}
+		System.out.println("itemModify: " + this.v.getItemToRemoveModify());
 		for (TypeItemInfo ti : TypeItemInfo.values()) {
 			try {
 				switch (ti) {
@@ -455,7 +502,9 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void setItemInfo() {
+		System.out.println("setItemInfo: entrato");
 		// getItemSelectedByuSer lo prendo da setFilteredList
+		System.out.println("setItemInfo: getItemSelectedByUser=" + this.v.getItemSelectedByUser());
 		Integer itemId = 0;
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
@@ -469,8 +518,8 @@ public class ControllerImpl implements Controller {
 		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);
 		ItemGenre genre = this.m.getItemArchive().get(itemId).getFirst().getGenre();
 		String publisher = this.m.getItemArchive().get(itemId).getFirst().getPublisher();
-		Integer numRelease = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER);
-		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
+		Integer numRelease = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
+		Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 		String duration = (String) this.v.getItemInfo(TypeItemInfo.DURATION);
 		TypeColor color = (TypeColor) this.v.getItemInfo(TypeItemInfo.COLOR);
 
@@ -487,28 +536,28 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void setUserInfo() {
+		System.out.println("setUserInfo: entrato");
+
 		if (this.actualUser == null) {
 			this.v.showError("Errore! Utente corrente non ancora inizializzato");
 		} else {
-			/*
-			 * this.v.setUserModifyField(this.actualUser.getName(),
-			 * this.actualUser.getSurname(), this.actualUser.getUsername(),
-			 * this.actualUser.getPassword(),
-			 * this.actualUser.getBirthdate().toString(),
-			 * this.actualUser.getEmail(),
-			 * this.actualUser.getTelephoneNumber());
-			 */
 			this.v.setUserModifyField(this.actualUser.getName(), this.actualUser.getSurname(),
 					this.actualUser.getUsername(), this.actualUser.getPassword(),
-					Integer.toString(this.actualUser.getBirthdate().get(Calendar.DAY_OF_MONTH)),
-					Integer.toString(this.actualUser.getBirthdate().get(Calendar.MONTH)),
-					Integer.toString(this.actualUser.getBirthdate().get(Calendar.YEAR)), this.actualUser.getEmail(),
-					this.actualUser.getTelephoneNumber(), this.actualUser.getBookPreferences().get(1).toString(),
+					String.valueOf(this.actualUser.getBirthdate().get(Calendar.DAY_OF_MONTH)),
+					String.valueOf(this.actualUser.getBirthdate().get(Calendar.MONTH)),
+					String.valueOf(this.actualUser.getBirthdate().get(Calendar.YEAR)), this.actualUser.getEmail(),
+					this.actualUser.getTelephoneNumber(), this.actualUser.getBookPreferences().get(0).toString(),
+					this.actualUser.getBookPreferences().get(1).toString(),
 					this.actualUser.getBookPreferences().get(2).toString(),
-					this.actualUser.getBookPreferences().get(3).toString(),
+					this.actualUser.getMoviePreferences().get(0).toString(),
 					this.actualUser.getMoviePreferences().get(1).toString(),
-					this.actualUser.getMoviePreferences().get(2).toString(),
-					this.actualUser.getMoviePreferences().get(3).toString());
+					this.actualUser.getMoviePreferences().get(2).toString());
+			try {
+				this.m.setReccomandedList(this.actualUser.getIdUser());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				this.v.showError("Errore! Impossibile aggiornare lista dopo modifica utente");
+			}
 		}
 	}
 
@@ -516,11 +565,14 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void suggestedBooks() {
 		// stampa 3 libri di 3 preferenze
+		System.out.println("suggestedBooks: entrato");
 		String[] array = new String[this.actualUser.getBookPreferences().size()];
+		System.out.println("suggestedFilms: getBookPreferences.size=" + this.actualUser.getBookPreferences().size());
 		int index = 0;
 		for (Integer i : this.actualUser.getRecommendedList()) {
 			if (this.m.getAllItemId(TypeItem.BOOK).contains(i)) {
 				array[index] = this.m.getItemArchive().get(i).toString();
+				System.out.println("suggestedBooks: inserito elemento " + index);
 				index++;
 			}
 		}
@@ -529,11 +581,15 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void suggestedFilms() {
+		System.out.println("suggestedFilms: entrato");
 		int index = 0;
-		String[] array = new String[this.actualUser.getRecommendedList().size()];
+		String[] array = new String[this.actualUser.getMoviePreferences().size()];
+		System.out.println("suggestedFilms: getMoviePreferences.size=" + this.actualUser.getMoviePreferences().size());
 		for (Integer i : this.actualUser.getRecommendedList()) {
+			System.out.println("suggestedFilms: reccomended list=" + this.m.getItemArchive().get(i).toString());
 			if (this.m.getAllItemId(TypeItem.MOVIE).contains(i)) {
 				array[index] = this.m.getItemArchive().get(i).toString();
+				System.out.println("suggestedFilms: inserito elemento " + index);
 				index++;
 			}
 		}
@@ -542,6 +598,7 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void registerNewUser() {
+		System.out.println("registerNewUser: entrato");
 		String name = (String) this.v.getUserRegistration(UserInfo.NAME);
 		String surname = (String) this.v.getUserRegistration(UserInfo.SURNAME);
 		GregorianCalendar day = new GregorianCalendar();
@@ -560,6 +617,7 @@ public class ControllerImpl implements Controller {
 		ItemGenre moviePref3 = (ItemGenre) this.v.getUserRegistration(UserInfo.FILM_PREF3);
 		List<ItemGenre> movieList = new ArrayList<>(Arrays.asList(moviePref1, moviePref2, moviePref3));
 		try {
+			System.out.println("registerNewUser: prima di aver registrato e salvato");
 			this.m.registerUser(name, surname, day, username, password, email, telephoneNumber, bookList, movieList);
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 			this.v.showMessage("Utente " + username + " registrato con successo!");
@@ -575,6 +633,7 @@ public class ControllerImpl implements Controller {
 	 * Method which adds a new Book to the archive.
 	 */
 	public void registerNewBook() {
+		System.out.println("registerNewBook: entrato");
 		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
 		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
 		String author = (String) this.v.getItemInfo(TypeItemInfo.AUTHOR);
@@ -582,11 +641,13 @@ public class ControllerImpl implements Controller {
 		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);
 		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
 		String publisher = (String) this.v.getItemInfo(TypeItemInfo.PRODUCER);
-		Integer numRelease = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER);
-		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
+		Integer numRelease = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
+		Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 		try {
+			System.out.println("registerNewBook: prima di aver registrato e salvato");
 			this.m.registerBook(title, releaseYear, author, language, isbn, genre, publisher, numRelease, numCopy);
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+			System.out.println("registerNewBook: registrato e salvato");
 		} catch (IOException e2) {
 			this.v.showError("File " + ControllerImpl.FILENAMEITEM + " non trovato per il salvataggio");
 		} catch (Exception e) {
@@ -599,6 +660,7 @@ public class ControllerImpl implements Controller {
 	 * Method which adds a new Movie to the archive.
 	 */
 	public void registerNewMovie() {
+		System.out.println("registerNewMovie: entrato");
 		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
 		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
 		String publisher = (String) this.v.getItemInfo(TypeItemInfo.PRODUCER);
@@ -607,10 +669,12 @@ public class ControllerImpl implements Controller {
 		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
 		Integer duration = (Integer) this.v.getItemInfo(TypeItemInfo.DURATION);
 		Boolean color = (Boolean) this.v.getItemInfo(TypeItemInfo.COLOR);
-		Integer numCopy = (Integer) this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER);
+		Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 		try {
+			System.out.println("registerNewMovie: prima di aver registrato e salvato");
 			this.m.registerMovie(title, releaseYear, publisher, author, language, genre, duration, color, numCopy);
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+			System.out.println("registerNewMovie: registrato e salvato");
 		} catch (IOException e2) {
 			this.v.showError("File " + ControllerImpl.FILENAMEITEM + " non trovato per il salvataggio");
 		} catch (Exception e) {
@@ -621,18 +685,23 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void itemCreate() {
+		System.out.println("itemCreate: entrato");
 		if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.BOOK)) {
 			this.registerNewBook();
+			System.out.println("itemCreate: dentro al libro");
 		} else if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.MOVIE)) {
 			this.registerNewMovie();
+			System.out.println("itemCreate: dentro al film");
 		}
 	}
 
 	@Override
 	public void elaborateLoans() {
+		System.out.println("elaborateLoans: entrato");
 		Map<Integer, Double> map;
 		try {
 			map = this.m.checkDeadlineas(this.actualUser.getIdUser());
+			System.out.println("elaborateLoans: dentro al try");
 			map.keySet().stream().forEach(i -> {
 				if (map.get(i) > 60) {
 					this.v.showGiveBackMessage(this.m.getItemArchive().get(i).getFirst().toString());
@@ -650,11 +719,13 @@ public class ControllerImpl implements Controller {
 	public void giveBackItem(final String item) {
 		// DA RIVEDERE, edit 22 agosto, dovrebbe essere corretto
 		// tolto getFirst().getTitle() e sostituito con getFirst().toString()
+		System.out.println("giveBackItem: entrato");
 		for (Integer i : this.actualUser.getLoanArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).getFirst().toString().equals(item)) {
 				try {
 					this.m.returnItem(i, this.actualUser.getIdUser());
 					this.v.showMessage("Oggetto " + this.m.getRequiredItem(i));
+					System.out.println("giveBackItem: try eseguito");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					this.v.showError("Errore! Id utente e oggetto non associati");
@@ -667,16 +738,19 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void giveBackItemSelectedByUser() {
+		System.out.println("giveBackItemSelectedByUser: entrato");
+		System.out.println("giveBackItemSelectedByUser: " + this.v.getItemSelectedByUser());
 		this.giveBackItem(this.v.getItemSelectedByUser());
 	}
 
 	@Override
 	public void setTakenSitsList() {
+		System.out.println("setTakenSitsList: entrato");
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
 		String[] array = new String[100];
-		Integer[] arrayInt = new Integer[this.m.getStudyRoom().get(day).size()];
+		Integer[] arrayInt = new Integer[100];
 		arrayInt = this.m.getStudyRoom().get(day).toArray(arrayInt);
 		for (int index = 0; index < arrayInt.length; index++) {
 			if ((arrayInt[index] == null) || (arrayInt[index] == 0)) {
@@ -701,10 +775,11 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void takeSit() {
-
+		System.out.println("takeSit: entrato");
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
+		System.out.println("takeSit: " + this.v.getTakenSits());
 		try {
 			this.m.bookSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
@@ -723,6 +798,7 @@ public class ControllerImpl implements Controller {
 		// mi ritorna un pair con posto, giorno e devo fare il cast inverso
 
 		// elaborare la stringa per ottenere la data
+		System.out.println("cancelSit: entrato");
 		GregorianCalendar day = new GregorianCalendar();
 
 		try {
@@ -747,6 +823,7 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void setWishlist() {
+		System.out.println("setWishList: entrato");
 		String[] array = new String[this.actualUser.getWishlist().size()];
 		int index = 0;
 		for (Integer i : this.actualUser.getWishlist()) {
@@ -758,10 +835,13 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void removeFromWishList() {
+		System.out.println("removeFromWishlist: entrato");
 		for (Integer i : this.m.getItemArchive().keySet()) {
+			System.out.println("removeFromWishList: entrato nel for");
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemToRemoveFromLikeBorrowWish())) {
 				try {
 					this.m.removeLike(i, this.actualUser.getIdUser());
+					System.out.println("removeFromWishlist: entrato dopo op");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					this.v.showError("Errore! ID utente o oggetto non valido");
@@ -780,6 +860,7 @@ public class ControllerImpl implements Controller {
 			array[index] = this.m.getUserArchive().get(i).toString();
 			index++;
 		}
+		System.out.println("setAllUserList: entrato, restituisco array");
 		this.v.setUserList(array);
 	}
 
@@ -794,14 +875,18 @@ public class ControllerImpl implements Controller {
 			array[index] = this.m.getItemArchive().get(i).toString();
 			index++;
 		}
+		System.out.println("setAllItemList: entrato, restituisco array");
 		this.v.setItemList(array);
 	}
 
 	@Override
 	public void deleteItem() {
 		int itemIdReceived = 0;
+		System.out.println("deleteItem: entrato");
+		System.out.println("deleteItem: " + this.v.getItemToRemoveModify() + " restituito");
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemToRemoveModify())) {
+				System.out.println("deleteItem: entrato nell'if e init la var");
 				itemIdReceived = i;
 			}
 		}
@@ -838,19 +923,24 @@ public class ControllerImpl implements Controller {
 	public void allItemReviews() {
 		int index = 0;
 		int id = 0;
+		System.out.println("AllItemReviews: entrato");
+		System.out.println("AllItemReviews: " + this.v.getItemSelectedByUser());
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			if (this.m.getItemArchive().get(i).toString().equals(this.v.getItemSelectedByUser())) {
 				id = i;
+				System.out.println("AllItemReviews: id registrato");
 			}
 		}
 		String[] array;
 		try {
+
 			array = new String[this.m.getAllItemReview(id).size()];
 			for (ReviewImpl r : this.m.getAllItemReview(id)) {
 				array[index] = r.toString();
 				index++;
 			}
 			this.v.setItemReviewsList(array);
+			System.out.println("AllItemReviews: try passato");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Oggetto con recensione non trovato nell'archivio");
