@@ -195,14 +195,14 @@ public class ControllerImpl implements Controller {
 				.filter(e -> e.getValue().getPassword().equals(password)).map(e -> e.getValue()).findFirst();
 		if (user.isPresent()) {
 			this.actualUser = user.get();
-			this.v.goodLogin();
 			try {
 				this.m.setReccomandedList(this.actualUser.getIdUser());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				this.v.showError("Lista consigli utente corrente non inizializzata");
 			}
 			this.elaborateLoans();
+			this.v.goodLogin();
 		} else {
 			this.v.showError("Utente non trovato");
 		}
@@ -569,10 +569,12 @@ public class ControllerImpl implements Controller {
 		// stampa 3 libri di 3 preferenze
 		System.out.println("suggestedBooks: entrato");
 		String[] array = new String[this.actualUser.getBookPreferences().size()];
-		System.out.println("suggestedFilms: getBookPreferences.size=" + this.actualUser.getBookPreferences().size());
+		System.out.println("suggestedBooks: getBooksPreferences.size=" + this.actualUser.getBookPreferences().size());
 		int index = 0;
 		for (Integer i : this.actualUser.getRecommendedList()) {
+			System.out.println("suggestedBooks: " + i);
 			if (this.m.getAllItemId(TypeItem.BOOK).contains(i)) {
+				System.out.println("suggestedBooks: entrato nell if grazie a " + i);
 				array[index] = this.m.getItemArchive().get(i).toString();
 				System.out.println("suggestedBooks: inserito elemento " + index);
 				index++;
