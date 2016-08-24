@@ -80,7 +80,7 @@ public interface View {
 	 *            the type of info you want to get
 	 * @return information typed by user
 	 */
-	Object getUserRegistration(utils.UserInfo info);
+	String getUserRegistration(utils.UserInfo info);
 
 	/**
 	 * Return the system password typed by manager.
@@ -178,7 +178,7 @@ public interface View {
 	 *            the type of info you want
 	 * @return the information requested
 	 */
-	Object getModifiedInfo(UserInfo info);
+	String getModifiedInfo(UserInfo info);
 
 	/**
 	 * Allow to change screen by passing the panel name.
@@ -244,7 +244,7 @@ public interface View {
 	 *            the type of info you want
 	 * @return the information requested
 	 */
-	Object getItemInfo(TypeItemInfo info);
+	String getItemInfo(TypeItemInfo info);
 
 	/**
 	 * Sets information of books requested with giveMeItemInfo().
