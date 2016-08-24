@@ -91,7 +91,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		int i;
 		for (i = 0; i < 100; i++) {
 			this.buttons[i] = new JButton();
-			this.buttons[i].setSize(25, 25);
+			this.buttons[i].setSize(30, 30);
 			this.buttons[i].setText(String.valueOf(i + 1));
 			this.centerPanel.add(this.buttons[i]);
 
@@ -126,13 +126,41 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 
 		JButton exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		exit.setBounds(629, 24, 128, 49);
+		exit.setBounds(567, 19, 128, 49);
 		exit.addActionListener(e -> {
 			v.giveMeSuggestedBooks();
 			v.giveMeSuggestedMovies();
 			v.swapView(CardName.MENU);
 		});
 		southPanel.add(exit);
+
+		JLabel freeSit = new JLabel("Posto libero, clicca per prenderlo");
+		freeSit.setHorizontalAlignment(SwingConstants.CENTER);
+		freeSit.setOpaque(true);
+		freeSit.setBackground(Color.WHITE);
+		freeSit.setForeground(Color.GREEN);
+		freeSit.setFont(new Font("Tahoma", Font.BOLD, 20));
+		freeSit.setBounds(28, 0, 430, 30);
+		southPanel.add(freeSit);
+
+		JLabel justTakenSit = new JLabel(
+				"Posto gi\u00E0 prenotato, clicca per liberarlo");
+		justTakenSit.setHorizontalAlignment(SwingConstants.CENTER);
+		justTakenSit.setOpaque(true);
+		justTakenSit.setBackground(Color.WHITE);
+		justTakenSit.setForeground(Color.CYAN);
+		justTakenSit.setFont(new Font("Tahoma", Font.BOLD, 20));
+		justTakenSit.setBounds(28, 30, 430, 30);
+		southPanel.add(justTakenSit);
+
+		JLabel occupiedSit = new JLabel("Posto occupato da un altro utente\r\n");
+		occupiedSit.setHorizontalAlignment(SwingConstants.CENTER);
+		occupiedSit.setOpaque(true);
+		occupiedSit.setBackground(Color.WHITE);
+		occupiedSit.setForeground(Color.RED);
+		occupiedSit.setFont(new Font("Tahoma", Font.BOLD, 20));
+		occupiedSit.setBounds(28, 60, 430, 30);
+		southPanel.add(occupiedSit);
 
 		this.add(northPanel);
 		northPanel.setLayout(null);
@@ -189,5 +217,4 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 	public int getDateYear() {
 		return this.datePicker.getModel().getYear();
 	}
-
 }
