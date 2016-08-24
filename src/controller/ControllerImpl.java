@@ -425,11 +425,12 @@ public class ControllerImpl implements Controller {
 					System.out.println("userModify: " + ui + " " + this.v.getModifiedInfo(ui));
 
 					if (ui.equals(UserInfo.BIRTHDATE_DAY)) {
-						cal.set(Calendar.DAY_OF_MONTH, (int) this.v.getModifiedInfo(UserInfo.BIRTHDATE_DAY));
+						cal.set(Calendar.DAY_OF_MONTH,
+								Integer.parseInt(this.v.getModifiedInfo(UserInfo.BIRTHDATE_DAY)));
 					} else if (ui.equals(UserInfo.BIRTHDATE_MONTH)) {
-						cal.set(Calendar.MONTH, (int) this.v.getModifiedInfo(UserInfo.BIRTHDATE_MONTH));
+						cal.set(Calendar.MONTH, Integer.parseInt(this.v.getModifiedInfo(UserInfo.BIRTHDATE_MONTH)));
 					} else if (ui.equals(UserInfo.BIRTHDATE_YEAR)) {
-						cal.set(Calendar.YEAR, (int) this.v.getModifiedInfo(UserInfo.BIRTHDATE_YEAR));
+						cal.set(Calendar.YEAR, Integer.parseInt(this.v.getModifiedInfo(UserInfo.BIRTHDATE_YEAR)));
 					}
 
 					if ((this.v.getModifiedInfo(ui) != null) && (this.v.getModifiedInfo(ui) != "")
@@ -475,7 +476,7 @@ public class ControllerImpl implements Controller {
 					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
 					break;
 				case RELEASE_YEAR:
-					int var = (int) this.v.getItemInfo(ti);
+					int var = Integer.parseInt(this.v.getItemInfo(ti));
 					this.m.changeItem(ti, itemId, var);
 					break;
 				case AUTHOR:
@@ -515,13 +516,14 @@ public class ControllerImpl implements Controller {
 		int releaseYear = this.m.getItemArchive().get(itemId).getFirst().getReleaseYear();
 		String author = this.m.getItemArchive().get(itemId).getFirst().getAuthor();
 		Language language = this.m.getItemArchive().get(itemId).getFirst().getCurrentLanguage();
-		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);
+		String isbn = this.v.getItemInfo(TypeItemInfo.ISBN);
 		ItemGenre genre = this.m.getItemArchive().get(itemId).getFirst().getGenre();
 		String publisher = this.m.getItemArchive().get(itemId).getFirst().getPublisher();
 		Integer numRelease = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
 		Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
-		String duration = (String) this.v.getItemInfo(TypeItemInfo.DURATION);
-		TypeColor color = (TypeColor) this.v.getItemInfo(TypeItemInfo.COLOR);
+		String duration = this.v.getItemInfo(TypeItemInfo.DURATION);
+
+		TypeColor color = CastManager.castToTypeColor(this.v.getItemInfo(TypeItemInfo.COLOR));
 
 		if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
 			this.v.setBookField(title, author, publisher, Integer.toString(releaseYear), genre, isbn, language, numCopy,
@@ -599,22 +601,22 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void registerNewUser() {
 		System.out.println("registerNewUser: entrato");
-		String name = (String) this.v.getUserRegistration(UserInfo.NAME);
-		String surname = (String) this.v.getUserRegistration(UserInfo.SURNAME);
+		String name = this.v.getUserRegistration(UserInfo.NAME);
+		String surname = this.v.getUserRegistration(UserInfo.SURNAME);
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
-		String username = (String) this.v.getUserRegistration(UserInfo.USERNAME);
-		String password = (String) this.v.getUserRegistration(UserInfo.PASSWORD);
-		String email = (String) this.v.getUserRegistration(UserInfo.EMAIL);
-		String telephoneNumber = (String) this.v.getUserRegistration(UserInfo.TELEPHONE_NUMBER);
-		ItemGenre bookPref1 = (ItemGenre) this.v.getUserRegistration(UserInfo.BOOK_PREF1);
-		ItemGenre bookPref2 = (ItemGenre) this.v.getUserRegistration(UserInfo.BOOK_PREF2);
-		ItemGenre bookPref3 = (ItemGenre) this.v.getUserRegistration(UserInfo.BOOK_PREF3);
+		String username = this.v.getUserRegistration(UserInfo.USERNAME);
+		String password = this.v.getUserRegistration(UserInfo.PASSWORD);
+		String email = this.v.getUserRegistration(UserInfo.EMAIL);
+		String telephoneNumber = this.v.getUserRegistration(UserInfo.TELEPHONE_NUMBER);
+		ItemGenre bookPref1 = CastManager.castToItemGenre(this.v.getUserRegistration(UserInfo.BOOK_PREF1));
+		ItemGenre bookPref2 = CastManager.castToItemGenre(this.v.getUserRegistration(UserInfo.BOOK_PREF2));
+		ItemGenre bookPref3 = CastManager.castToItemGenre(this.v.getUserRegistration(UserInfo.BOOK_PREF3));
 		List<ItemGenre> bookList = new ArrayList<>(Arrays.asList(bookPref1, bookPref2, bookPref3));
-		ItemGenre moviePref1 = (ItemGenre) this.v.getUserRegistration(UserInfo.FILM_PREF1);
-		ItemGenre moviePref2 = (ItemGenre) this.v.getUserRegistration(UserInfo.FILM_PREF2);
-		ItemGenre moviePref3 = (ItemGenre) this.v.getUserRegistration(UserInfo.FILM_PREF3);
+		ItemGenre moviePref1 = CastManager.castToItemGenre(this.v.getUserRegistration(UserInfo.FILM_PREF1));
+		ItemGenre moviePref2 = CastManager.castToItemGenre(this.v.getUserRegistration(UserInfo.FILM_PREF2));
+		ItemGenre moviePref3 = CastManager.castToItemGenre(this.v.getUserRegistration(UserInfo.FILM_PREF3));
 		List<ItemGenre> movieList = new ArrayList<>(Arrays.asList(moviePref1, moviePref2, moviePref3));
 		try {
 			System.out.println("registerNewUser: prima di aver registrato e salvato");
@@ -634,13 +636,13 @@ public class ControllerImpl implements Controller {
 	 */
 	public void registerNewBook() {
 		System.out.println("registerNewBook: entrato");
-		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
-		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
-		String author = (String) this.v.getItemInfo(TypeItemInfo.AUTHOR);
-		Language language = (Language) this.v.getItemInfo(TypeItemInfo.LANGUAGE);
-		String isbn = (String) this.v.getItemInfo(TypeItemInfo.ISBN);
-		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
-		String publisher = (String) this.v.getItemInfo(TypeItemInfo.PRODUCER);
+		String title = this.v.getItemInfo(TypeItemInfo.TITLE);
+		int releaseYear = Integer.parseInt(this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR));
+		String author = this.v.getItemInfo(TypeItemInfo.AUTHOR);
+		Language language = CastManager.castToLanguage(this.v.getItemInfo(TypeItemInfo.LANGUAGE));
+		String isbn = this.v.getItemInfo(TypeItemInfo.ISBN);
+		ItemGenre genre = CastManager.castToItemGenre(this.v.getItemInfo(TypeItemInfo.GENRE));
+		String publisher = this.v.getItemInfo(TypeItemInfo.PRODUCER);
 		Integer numRelease = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
 		Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 		try {
@@ -661,14 +663,14 @@ public class ControllerImpl implements Controller {
 	 */
 	public void registerNewMovie() {
 		System.out.println("registerNewMovie: entrato");
-		String title = (String) this.v.getItemInfo(TypeItemInfo.TITLE);
-		int releaseYear = (int) this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR);
-		String publisher = (String) this.v.getItemInfo(TypeItemInfo.PRODUCER);
-		String author = (String) this.v.getItemInfo(TypeItemInfo.AUTHOR);
-		Language language = (Language) this.v.getItemInfo(TypeItemInfo.LANGUAGE);
-		ItemGenre genre = (ItemGenre) this.v.getItemInfo(TypeItemInfo.GENRE);
-		Integer duration = (Integer) this.v.getItemInfo(TypeItemInfo.DURATION);
-		Boolean color = (Boolean) this.v.getItemInfo(TypeItemInfo.COLOR);
+		String title = this.v.getItemInfo(TypeItemInfo.TITLE);
+		int releaseYear = Integer.parseInt(this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR));
+		String publisher = this.v.getItemInfo(TypeItemInfo.PRODUCER);
+		String author = this.v.getItemInfo(TypeItemInfo.AUTHOR);
+		Language language = CastManager.castToLanguage(this.v.getItemInfo(TypeItemInfo.LANGUAGE));
+		ItemGenre genre = CastManager.castToItemGenre(this.v.getItemInfo(TypeItemInfo.GENRE));
+		Integer duration = Integer.parseInt(this.v.getItemInfo(TypeItemInfo.DURATION));
+		Boolean color = Boolean.valueOf(this.v.getItemInfo(TypeItemInfo.COLOR));
 		Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 		try {
 			System.out.println("registerNewMovie: prima di aver registrato e salvato");
