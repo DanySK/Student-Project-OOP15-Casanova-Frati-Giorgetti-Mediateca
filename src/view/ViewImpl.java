@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 
+import utils.TypeItem;
 import utils.UserInfo;
 import view.ItemScreenImpl.ItemScreenType;
 import view.ListScreenImpl.ListScreenType;
@@ -60,6 +61,8 @@ public class ViewImpl implements View {
 	private JPanel card12;
 	private JPanel card13;
 	private JPanel card14;
+	private JPanel card15;
+	private JPanel card16;
 
 	private final JFrame mainFrame = new JFrame();
 
@@ -97,10 +100,11 @@ public class ViewImpl implements View {
 				"Menu Card"), ITEM("Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
 						"LikeList Screen Card"), BORROWED_LIST(
 								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-										"User Create Card"), MANAGER_LOGIN("Manager Login"), ITEM_CREATE(
-												"Item Create Card"), MANAGER_MENU("Manager Menu Card"), STUDY_ROOM(
-														"Study Room Card"), WISHLIST("Wishlist Card"), ITEM_MODIFY(
-																"Item Modify Card"), ALL_REVIEWS("All Reviews Card");
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), BOOK_CREATE(
+												"Book Create Card"), FILM_CREATE("Film Create Card"), MANAGER_MENU(
+														"Manager Menu Card"), STUDY_ROOM("Study Room Card"), WISHLIST(
+																"Wishlist Card"), BOOK_MODIFY("Book Modify Card"), FILM_MODIFY(
+				"Film Modify Card"), ALL_REVIEWS("All Reviews Card");
 
 		private final String name;
 
@@ -132,9 +136,15 @@ public class ViewImpl implements View {
 		this.card7 = new ReviewScreenImpl(this);
 		this.card8 = new UserScreenImpl(this, UserScreenType.CREATE);
 		this.card9 = new UserLoginImpl(this, LoginType.MANAGER);
-		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE);
+		this.card10 = new ItemScreenImpl(this, ItemScreenType.CREATE,
+				TypeItem.BOOK);
+		this.card15 = new ItemScreenImpl(this, ItemScreenType.CREATE,
+				TypeItem.MOVIE);
 		this.card11 = new view.StudyRoomImpl(this);
-		this.card13 = new ItemScreenImpl(this, ItemScreenType.MODIFY);
+		this.card13 = new ItemScreenImpl(this, ItemScreenType.MODIFY,
+				TypeItem.BOOK);
+		this.card16 = new ItemScreenImpl(this, ItemScreenType.MODIFY,
+				TypeItem.MOVIE);
 		this.card12 = new ManagerScreenImpl(this);
 		this.card14 = new ListScreenImpl(this, ListScreenType.REVIEWS);
 		this.card0 = new JPanel();
@@ -186,9 +196,11 @@ public class ViewImpl implements View {
 		ViewImpl.CONTAINER.add(this.card7, CardName.REVIEW.toString());
 		ViewImpl.CONTAINER.add(this.card8, CardName.USER_CREATE.toString());
 		ViewImpl.CONTAINER.add(this.card9, CardName.MANAGER_LOGIN.toString());
-		ViewImpl.CONTAINER.add(this.card10, CardName.ITEM_CREATE.toString());
+		ViewImpl.CONTAINER.add(this.card10, CardName.BOOK_CREATE.toString());
+		ViewImpl.CONTAINER.add(this.card15, CardName.FILM_CREATE.toString());
 		ViewImpl.CONTAINER.add(this.card11, CardName.STUDY_ROOM.toString());
-		ViewImpl.CONTAINER.add(this.card13, CardName.ITEM_MODIFY.toString());
+		ViewImpl.CONTAINER.add(this.card13, CardName.BOOK_MODIFY.toString());
+		ViewImpl.CONTAINER.add(this.card16, CardName.FILM_MODIFY.toString());
 		ViewImpl.CONTAINER.add(this.card12, CardName.MANAGER_MENU.toString());
 		ViewImpl.CONTAINER.add(this.card14, CardName.ALL_REVIEWS.toString());
 

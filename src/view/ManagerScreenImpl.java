@@ -42,44 +42,54 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.setLayout(null);
 
-		JButton newItem = new JButton("Crea Nuovo Oggetto");
-		newItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		newItem.setBounds(498, 39, 273, 39);
-		this.add(newItem);
+		JButton newBook = new JButton("Crea Nuovo Libro");
+		newBook.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		newBook.setBounds(498, 50, 273, 40);
+		this.add(newBook);
 		JButton delete = new JButton("Elimina");
 
 		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		JButton modify = new JButton("Modifica");
-		modify.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		delete.setBounds(498, 179, 273, 39);
+		JButton modifyBook = new JButton("Modifica Libro");
+		modifyBook.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		delete.setBounds(498, 250, 273, 40);
 		this.add(delete);
-		modify.setBounds(498, 224, 273, 39);
-		this.add(modify);
+		modifyBook.setBounds(498, 300, 273, 40);
+		this.add(modifyBook);
+		JButton newMovie = new JButton("Crea Nuovo Film\r\n");
+		newMovie.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		newMovie.setBounds(498, 100, 273, 40);
+		this.add(newMovie);
 
+		JButton modifyMovie = new JButton("Modifica Film");
+		modifyMovie.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		modifyMovie.setBounds(498, 350, 273, 40);
+		this.add(modifyMovie);
 		JButton showUserList = new JButton("Lista Utenti");
-		showUserList.setBounds(498, 85, 273, 39);
+		showUserList.setBounds(498, 150, 273, 40);
 		showUserList
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
 			this.type = TypeList.USER;
 			v.giveMeUserList();
 			delete.setEnabled(false);
-			modify.setEnabled(false);
+			modifyBook.setEnabled(false);
+			modifyMovie.setEnabled(false);
 			v.swapView(CardName.MANAGER_MENU);
 		});
 
 		JButton showItemList = new JButton("Lista Oggetti");
-		showItemList.setBounds(498, 132, 273, 39);
+		showItemList.setBounds(498, 200, 273, 40);
 		showItemList
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
 			this.type = TypeList.ITEM;
 			delete.setEnabled(true);
-			modify.setEnabled(true);
+			modifyBook.setEnabled(true);
+			modifyMovie.setEnabled(true);
 			v.giveMeItemList();
 			v.swapView(CardName.MANAGER_MENU);
 		});
@@ -87,7 +97,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton seeBorrowedList = new JButton("Vedi prestiti");
 		seeBorrowedList.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.FONT_SIZE));
-		seeBorrowedList.setBounds(498, 268, 273, 39);
+		seeBorrowedList.setBounds(498, 400, 273, 40);
 		this.add(seeBorrowedList);
 		this.list = new JList<String>();
 		this.list.setModel(this.model);
@@ -99,13 +109,13 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 				if (evt.getClickCount() == 2) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-									.toString());
+							.toString());
 					v.giveMeOtherUserInfo();
 					v.showUserInfo();
 				}
 			}
 		});
-		this.list.setBounds(33, 39, 414, 438);
+		this.list.setBounds(33, 50, 414, 484);
 		this.add(this.list);
 
 		if (this.type.equals(TypeList.USER)) {
@@ -121,9 +131,13 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 				v.swapView(CardName.MANAGER_MENU);
 
 			});
-			modify.addActionListener(e -> {
+			modifyBook.addActionListener(e -> {
 				v.giveMeItemInfo();
-				v.swapView(CardName.ITEM_MODIFY);
+				v.swapView(CardName.BOOK_MODIFY);
+			});
+			modifyMovie.addActionListener(e -> {
+				v.giveMeItemInfo();
+				v.swapView(CardName.FILM_MODIFY);
 			});
 			seeBorrowedList.setEnabled(false);
 
@@ -136,7 +150,8 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		exit.addActionListener(e -> v.swapView(CardName.MANAGER_LOGIN));
 
-		newItem.addActionListener(e -> v.swapView(CardName.ITEM_CREATE));
+		newMovie.addActionListener(e -> v.swapView(CardName.FILM_CREATE));
+		newBook.addActionListener(e -> v.swapView(CardName.BOOK_CREATE));
 
 	}
 
@@ -168,5 +183,4 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 	public String getSelected() {
 		return this.list.getSelectedValue();
 	}
-
 }
