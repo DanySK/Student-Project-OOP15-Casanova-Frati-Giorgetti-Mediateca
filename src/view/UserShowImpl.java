@@ -31,9 +31,6 @@ public class UserShowImpl implements UserShow {
 	private String email;
 	private String birthDate;
 
-	/**
-	 * @wbp.parser.entryPoint
-	 */
 	@Override
 	public void startUserShow(final View v) {
 		v.giveMeItemInfo();

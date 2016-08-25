@@ -20,12 +20,29 @@ public interface UserScreen {
 	 *            the user username
 	 * @param password
 	 *            the user password
-	 * @param birthDate
-	 *            the user birthDate
+	 * @param birthDate_day
+	 *            the user birthDate day
+	 * @param birthDate_month
+	 *            the user birthDate month
+	 * @param birthDate_year
+	 *            the user birthDate year
+	 * 
 	 * @param email
 	 *            the user email
 	 * @param telephone
 	 *            the user telephone number
+	 * @param bPref1
+	 *            the user book preference number 1
+	 * @param bPref2
+	 *            the user book preference number 2
+	 * @param bPref3
+	 *            the user book preference number 3
+	 * @param fPref1
+	 *            the user film preference number 1
+	 * @param fPref2
+	 *            the user film preference number 2
+	 * @param fPref3
+	 *            the user film preference number 3
 	 */
 	void setField(String name, String surname, String username,
 			String password, String birthDate_day, String birthDate_month,

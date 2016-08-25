@@ -1,6 +1,5 @@
 package view;
 
-
 /**
  * Interface for user show.
  *
@@ -19,37 +18,37 @@ public interface UserShow {
 	/**
 	 * Sets user info.
 	 *
-	 * @param name
+	 * @param nameS
 	 *            the user name
-	 * @param surname
+	 * @param surnameS
 	 *            the user surname
-	 * @param username
+	 * @param usernameS
 	 *            the user username
-	 * @param password
+	 * @param passwordS
 	 *            the user password
-	 * @param birthDate
+	 * @param birthDateS
 	 *            the user birtdate
-	 * @param email
+	 * @param emailS
 	 *            the user email
-	 * @param telephone
+	 * @param telephoneS
 	 *            the user telephone number
-	 * @param bookPref1
+	 * @param bookPref1S
 	 *            the user first book genre preferred
-	 * @param bookPref2
+	 * @param bookPref2S
 	 *            the user second book genre preferred
-	 * @param bookPref3
+	 * @param bookPref3S
 	 *            the user third book genre preferred
-	 * @param filmPref1
+	 * @param filmPref1S
 	 *            the user first movie genre preferred
-	 * @param filmPref2
+	 * @param filmPref2S
 	 *            the user second movie genre preferred
-	 * @param filmPref3
+	 * @param filmPref3S
 	 *            the user third movie genre preferred
 	 */
 	void setUserField(String nameS, String surnameS, String usernameS,
 			String passwordS, String birthDateS, String emailS,
-			String telephoneS, String bookPref1I, String bookPref2I,
-			String bookPref3I, String filmPref1I, String filmPref2I,
-			String filmPref3I);
+			String telephoneS, String bookPref1S, String bookPref2S,
+			String bookPref3S, String filmPref1S, String filmPref2S,
+			String filmPref3S);
 
 }

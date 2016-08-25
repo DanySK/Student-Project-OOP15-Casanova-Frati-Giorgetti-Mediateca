@@ -509,13 +509,6 @@ public interface View {
 	void setSuggestedMovies(String[] mList);
 
 	/**
-	 * Get item to delete or modify.
-	 *
-	 * @return item to remove or modify
-	 */
-	String getSelectedInManager();
-
-	/**
 	 * Returns the item selected by user in Mediateca.
 	 *
 	 * @return selected item
