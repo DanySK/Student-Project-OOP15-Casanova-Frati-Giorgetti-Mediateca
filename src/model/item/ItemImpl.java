@@ -79,150 +79,87 @@ public class ItemImpl implements Item, Serializable {
     return stringBuilder.toString();
   }
 
-  /**
-   *
-   * @return the item's publisher.
-   */
+  @Override
   public String getPublisher() {
     return this.publisher;
   }
 
-  /**
-   *
-   * @return the item's language.
-   */
+  @Override
   public Language getCurrentLanguage() {
     return this.currentLanguage;
   }
 
-  /**
-   *
-   * @return the item's identifier.
-   */
+  @Override
   public int getiD() {
     return this.iD;
   }
 
-  /**
-   *
-   * @return the item's title.
-   */
+  @Override
   public String getTitle() {
     return this.title;
   }
 
-  /**
-   *
-   * @return the item's release year.
-   */
+  @Override
   public int getReleaseYear() {
     return this.releaseYear;
   }
 
-  /**
-   *
-   * @return the item's author.
-   */
+  @Override
   public String getAuthor() {
     return this.author;
   }
 
-  /**
-   *
-   * @return the item's set Review.
-   */
+  @Override
   public List<ReviewImpl> getSetReview() {
     return Collections.unmodifiableList(this.setReview);
   }
 
-  /**
-   *
-   * @return the item's num of like.
-   */
+  @Override
   public int getLike() {
     return this.like.size();
   }
 
-  /**
-   *
-   * @return the set of user that put like on that item.
-   */
+  @Override
   public Set<Integer> getLikeUser() {
     return Collections.unmodifiableSet(this.like);
   }
 
-  /**
-   *
-   * @return the item's average vote.
-   */
+  @Override
   public float getAverageVote() {
     return this.averageVote;
   }
 
-  /**
-   *
-   * @return the item's genre.
-   */
+  @Override
   public ItemGenre getGenre() {
     return this.genre;
   }
 
-  /**
-   * This method set the item's title.
-   *
-   * @param initTitle
-   *          item's title.
-   */
+  @Override
   public void setTitle(final String initTitle) {
     this.title = initTitle.toUpperCase();
   }
 
-  /**
-   * This method set the item's release year.
-   *
-   * @param initReleaseYear
-   *          item's release year.
-   */
+  @Override
   public void setReleaseYear(final int initReleaseYear) {
     this.releaseYear = initReleaseYear;
   }
 
-  /**
-   * This method set the item's publisher.
-   *
-   * @param initPublisher
-   *          item's publisher.
-   */
+  @Override
   public void setPublisher(final String initPublisher) {
     this.publisher = initPublisher;
   }
 
-  /**
-   * This method set the item's author.
-   *
-   * @param initAuthor
-   *          item's author.
-   */
+  @Override
   public void setAuthor(final String initAuthor) {
     this.author = initAuthor.toUpperCase();
   }
 
-  /**
-   * This method set the item's language.
-   *
-   * @param initCurrentLanguage
-   *          item's langauige.
-   */
+  @Override
   public void setCurrentLanguage(final Language initCurrentLanguage) {
     this.currentLanguage = initCurrentLanguage;
   }
 
-  /**
-   * This method set the item's genre.
-   *
-   * @param initGenre
-   *          item's genre.
-   */
+  @Override
   public void setGenre(final ItemGenre initGenre) {
     this.genre = initGenre;
   }
