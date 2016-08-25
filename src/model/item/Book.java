@@ -12,7 +12,7 @@ import utils.Language;
  * @author Edoardo
  *
  */
-public abstract class Book extends ItemImpl {
+public class Book extends ItemImpl {
 
   @Override
   public String toString() {
@@ -79,5 +79,15 @@ public abstract class Book extends ItemImpl {
   @Override
   public boolean equals(final Object o) {
     return super.equals(o);
+  }
+
+  @Override
+  public Integer getDuration() {
+    return 0;
+  }
+
+  @Override
+  public Boolean getColour() {
+    return false;
   }
 }

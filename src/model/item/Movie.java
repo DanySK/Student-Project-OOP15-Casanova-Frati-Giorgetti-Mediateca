@@ -1,5 +1,7 @@
 package model.item;
 
+import com.google.common.base.Optional;
+
 import utils.ItemGenre;
 import utils.Language;
 
@@ -10,7 +12,7 @@ import utils.Language;
  * @author Edoardo
  *
  */
-public abstract class Movie extends ItemImpl {
+public class Movie extends ItemImpl {
 
   private static final long serialVersionUID = 856227185802047288L;
   private final Integer duration;
@@ -75,5 +77,15 @@ public abstract class Movie extends ItemImpl {
   @Override
   public boolean equals(final Object o) {
     return super.equals(o);
+  }
+
+  @Override
+  public Optional<Integer> getNumRelease() {
+    return Optional.absent();
+  }
+
+  @Override
+  public String getIsbn() {
+    return "";
   }
 }
