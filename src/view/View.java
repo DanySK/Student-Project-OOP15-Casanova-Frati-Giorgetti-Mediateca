@@ -50,14 +50,14 @@ public interface View {
 	 *
 	 * @return TypeItemInfo filter.
 	 */
-	utils.TypeItemInfo getSearchFilter();
+	String getSearchFilter();
 
 	/**
 	 * Return the type of item to filter (Book or Movie).
 	 *
 	 * @return TypeItem type.
 	 */
-	utils.TypeItem getItemFilter();
+	String getItemFilter();
 
 	/**
 	 * Returns the score assigned to a review of item, item taked by
@@ -513,7 +513,7 @@ public interface View {
 	 *
 	 * @return item to remove or modify
 	 */
-	String getItemToRemoveModify();
+	String getSelectedInManager();
 
 	/**
 	 * Returns the item selected by user in Mediateca.
@@ -591,8 +591,19 @@ public interface View {
 
 	/**
 	 * Asks controller info from a user clicked in ManagerScreen. User taken by
-	 * getItemToRemoveOrModify().
+	 * getSelectedInManager().
 	 */
 	void giveMeOtherUserInfo();
+
+	/**
+	 * Asks controller to take item with GetSelectedItemFromList() before
+	 * changing screen.
+	 */
+	void controllerTakeItemBeforeChangeScreen();
+
+	/**
+	 * Tells to controller to take item info from getSelectedInManager().
+	 */
+	void giveMeItemInfoFromManager();
 
 }

@@ -102,7 +102,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		this.durationF = new JTextField();
 		this.durationF.setColumns(10);
-		this.durationF.setBounds(338, 344, 230, 30);
+		this.durationF.setBounds(338, 304, 230, 30);
 		this.add(this.durationF);
 
 		this.colorF = new JComboBox(utils.TypeColor.values());
@@ -117,7 +117,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		this.isbnF = new JTextField();
 		this.isbnF.setColumns(10);
-		this.isbnF.setBounds(338, 304, 230, 30);
+		this.isbnF.setBounds(338, 344, 230, 30);
 		this.add(this.isbnF);
 
 		this.itemTypeF = new JComboBox(utils.TypeItem.values());
@@ -185,22 +185,27 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			this.numReleaseF.setEnabled(false);
 		}
 		if (item.equals(TypeItem.BOOK)) {
+			this.itemTypeF.setSelectedItem(TypeItem.BOOK);
+			this.itemTypeF.setEnabled(false);
 			this.colorF.setVisible(false);
 			this.durationF.setVisible(false);
 			durationL.setVisible(false);
 			this.isbnF.setVisible(true);
 			isbnL.setVisible(true);
 		} else if (item.equals(TypeItem.MOVIE)) {
+			this.itemTypeF.setSelectedItem(TypeItem.MOVIE);
+			this.itemTypeF.setEnabled(false);
 			this.colorF.setVisible(true);
 			this.durationF.setVisible(true);
 			durationL.setVisible(true);
 			this.isbnF.setVisible(false);
+			this.add(this.isbnF);
 			isbnL.setVisible(false);
 		}
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -229,7 +234,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
 
@@ -317,9 +322,9 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	public String getItemInfo(final ViewImpl.OtherItemFilter info2) {
 		switch (info2) {
 		case RELEASE_NUMBER:
-			return String.valueOf(this.numReleaseF);
+			return this.numReleaseF.getText();
 		case COPIES_NUMBER:
-			return String.valueOf(this.numCopiesF);
+			return this.numCopiesF.getText();
 		default:
 			break;
 		}

@@ -104,7 +104,7 @@ public class ViewImpl implements View {
 												"Book Create Card"), FILM_CREATE("Film Create Card"), MANAGER_MENU(
 														"Manager Menu Card"), STUDY_ROOM("Study Room Card"), WISHLIST(
 																"Wishlist Card"), BOOK_MODIFY("Book Modify Card"), FILM_MODIFY(
-				"Film Modify Card"), ALL_REVIEWS("All Reviews Card");
+																		"Film Modify Card"), ALL_REVIEWS("All Reviews Card");
 
 		private final String name;
 
@@ -234,14 +234,14 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public utils.TypeItemInfo getSearchFilter() {
+	public String getSearchFilter() {
 		return ((MediatecaScreen) this.card3).getSearchFilter();
 
 	}
 
 	// //OK
 	@Override
-	public utils.TypeItem getItemFilter() {
+	public String getItemFilter() {
 		return ((MediatecaScreen) this.card3).getItemType();
 
 	}
@@ -337,7 +337,9 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeUserInfo() {
-		this.c.setUserInfo();
+		if (this.logged) {
+			this.c.setUserInfo();
+		}
 	}
 
 	// //OK
@@ -675,7 +677,7 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public String getItemToRemoveModify() {
+	public String getSelectedInManager() {
 		return ((ManagerScreen) this.card12).getSelected();
 	}
 
@@ -734,11 +736,22 @@ public class ViewImpl implements View {
 		this.c.logOut();
 	}
 
-	// WAITING CONTROLLER FUNCTION NAME
+	// //OK
 	@Override
 	public void giveMeOtherUserInfo() {
 		this.c.giveOtherUserInfo();
 
 	}
 
+	// //WAITING FOR CONTROLLER FUNCTION NAME
+	@Override
+	public void controllerTakeItemBeforeChangeScreen() {
+		this.c.takeItemBefore();
+	}
+
+	// //WAITING FOR CCONTROLLER FUNCTION NAME
+	@Override
+	public void giveMeItemInfoFromManager() {
+		this.c.elementSelectedInManager();
+	}
 }

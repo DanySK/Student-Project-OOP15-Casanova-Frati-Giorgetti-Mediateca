@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import utils.TypeItem;
-import utils.TypeItemInfo;
 import view.ViewImpl.CardName;
 
 /**
@@ -27,10 +25,10 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private static final long serialVersionUID = 1L;
 	private static final int ELEMENTS_TO_SHOW = 25;
 	private String textToSearch;
-	private utils.TypeItemInfo selectedFilter;
-	private utils.TypeItem itemType;
 	private JList<String> filteredJList = new JList<String>();
 	private DefaultListModel<String> model = new DefaultListModel<String>();
+	final JComboBox<utils.TypeItemInfo> filterSelect;
+	final JComboBox<utils.TypeItem> itemSelect;
 
 	/**
 	 * Builder for MediatecaScreen.
@@ -48,14 +46,13 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		final JTextField searchField;
 
 		final JButton backToMenu;
-		final JComboBox<utils.TypeItemInfo> filterSelect;
-		final JComboBox<utils.TypeItem> itemSelect;
+
 		final JButton search;
 		final JButton review;
 		giveBackItem = new JButton("Restituisci ");
 		giveBackItem.setBounds(586, 164, 178, 27);
 		giveBackItem
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		likeItem = new JButton("Mi Piace");
 		likeItem.setBounds(586, 204, 178, 27);
 		likeItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
@@ -68,16 +65,16 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		borrowItem.setBounds(586, 124, 178, 27);
 		searchField = new JTextField();
 		searchField.setBounds(21, 84, 521, 27);
-		filterSelect = new JComboBox(utils.TypeItemInfo.values());
-		filterSelect.setSelectedIndex(-1);
-		filterSelect.setBounds(232, 44, 200, 27);
-		filterSelect.setToolTipText("Dove ricercare");
-		itemSelect = new JComboBox(utils.TypeItem.values());
-		itemSelect.setSelectedIndex(-1);
-		itemSelect.setBounds(21, 44, 200, 27);
-		itemSelect.setToolTipText("Libro o Film");
+		this.filterSelect = new JComboBox(utils.TypeItemInfo.values());
+		this.filterSelect.setSelectedIndex(-1);
+		this.filterSelect.setBounds(232, 44, 200, 27);
+		this.filterSelect.setToolTipText("Dove ricercare");
+		this.itemSelect = new JComboBox(utils.TypeItem.values());
+		this.itemSelect.setSelectedIndex(-1);
+		this.itemSelect.setBounds(21, 44, 200, 27);
+		this.itemSelect.setToolTipText("Libro o Film");
 		this.setLayout(null);
-		this.add(filterSelect);
+		this.add(this.filterSelect);
 		search = new JButton("Cerca");
 		search.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		search.setBounds(586, 84, 178, 27);
@@ -94,7 +91,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filteredJList.setModel(this.model);
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
-				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
@@ -103,7 +100,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 				if (evt.getClickCount() == 2) {
 					System.out.println("Cliccato"
 							+ ((JList) evt.getSource()).getSelectedValue()
-									.toString());
+							.toString());
 					v.giveMeItemInfo();
 					v.showItemInfo();
 				}
@@ -120,7 +117,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.add(searchField);
 		this.add(search);
 		this.add(backToMenu);
-		this.add(itemSelect);
+		this.add(this.itemSelect);
 		this.add(this.filteredJList);
 		this.add(review);
 
@@ -132,13 +129,11 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		});
 
 		this.textToSearch = searchField.getText();
-		this.selectedFilter = (TypeItemInfo) filterSelect.getSelectedItem();
-		this.itemType = (TypeItem) itemSelect.getSelectedItem();
 
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 326, 178, 27);
 		seeWishlist
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);
@@ -174,13 +169,18 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			v.likeItem();
 		});
 		review.addActionListener(e -> {
+			v.controllerTakeItemBeforeChangeScreen();
 			v.swapView(CardName.REVIEW);
 		});
 		seeBorrowedItem.addActionListener(e -> {
+			v.giveMeBorrowList();
 			v.swapView(CardName.BORROWED_LIST);
 		});
 
-		seeWishlist.addActionListener(e -> v.swapView(CardName.WISHLIST));
+		seeWishlist.addActionListener(e -> {
+			v.controllerTakeItemBeforeChangeScreen();
+			v.swapView(CardName.WISHLIST);
+		});
 	}
 
 	@Override
@@ -194,13 +194,13 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	}
 
 	@Override
-	public TypeItemInfo getSearchFilter() {
-		return this.selectedFilter;
+	public String getSearchFilter() {
+		return this.filterSelect.getSelectedItem().toString();
 	}
 
 	@Override
-	public TypeItem getItemType() {
-		return this.itemType;
+	public String getItemType() {
+		return this.itemSelect.getSelectedItem().toString();
 	}
 
 	@Override

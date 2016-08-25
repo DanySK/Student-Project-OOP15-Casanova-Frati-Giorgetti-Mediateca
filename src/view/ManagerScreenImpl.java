@@ -101,23 +101,49 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		this.add(seeBorrowedList);
 		this.list = new JList<String>();
 		this.list.setModel(this.model);
+		this.add(this.list);
+
 		this.list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
 				@SuppressWarnings("unchecked")
 				JList<String> elist = (JList<String>) evt.getSource();
-				if (evt.getClickCount() == 2) {
+				if ((evt.getClickCount() == 2)
+						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
 							.toString());
 					v.giveMeOtherUserInfo();
 					v.showUserInfo();
+				} else if ((evt.getClickCount() == 2)
+						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
+					System.out.println("Cliccato utente"
+							+ ((JList) evt.getSource()).getSelectedValue()
+							.toString());
+					v.giveMeItemInfoFromManager();
+					v.showItemInfo();
 				}
 			}
 		});
 		this.list.setBounds(33, 50, 414, 484);
-		this.add(this.list);
 
+		delete.addActionListener(e -> {
+			System.out.println("Elima Selezionato");
+			v.deleteItem();
+			v.giveMeItemList();
+			v.swapView(CardName.MANAGER_MENU);
+
+		});
+		modifyBook.addActionListener(e -> {
+			System.out.println("Modifica Libro Selezionato");
+			v.giveMeItemInfoFromManager();
+			v.swapView(CardName.BOOK_MODIFY);
+		});
+		modifyMovie.addActionListener(e -> {
+			System.out.println("Modifica Film Selezionato");
+			v.giveMeItemInfoFromManager();
+			v.swapView(CardName.FILM_MODIFY);
+		});
 		if (this.type.equals(TypeList.USER)) {
 			// SEE BORROWED LIST -> REFRESH
 			seeBorrowedList.addActionListener(e -> {
@@ -125,20 +151,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 				v.swapView(CardName.MANAGER_MENU);
 			});
 		} else if (this.type.equals(TypeList.ITEM)) {
-			delete.addActionListener(e -> {
-				v.deleteItem();
-				v.giveMeItemList();
-				v.swapView(CardName.MANAGER_MENU);
 
-			});
-			modifyBook.addActionListener(e -> {
-				v.giveMeItemInfo();
-				v.swapView(CardName.BOOK_MODIFY);
-			});
-			modifyMovie.addActionListener(e -> {
-				v.giveMeItemInfo();
-				v.swapView(CardName.FILM_MODIFY);
-			});
 			seeBorrowedList.setEnabled(false);
 
 		}

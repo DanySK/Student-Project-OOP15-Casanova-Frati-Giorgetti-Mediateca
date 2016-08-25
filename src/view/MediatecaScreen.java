@@ -19,14 +19,14 @@ public interface MediatecaScreen {
 	 *
 	 * @return the selected Filter
 	 */
-	utils.TypeItemInfo getSearchFilter();
+	String getSearchFilter();
 
 	/**
 	 * Returns the item type selected by user.
 	 *
 	 * @return the type of item
 	 */
-	utils.TypeItem getItemType();
+	String getItemType();
 
 	/**
 	 * Returns the item selected from filtered list.
