@@ -199,4 +199,10 @@ public interface Controller {
 	 * Method which sets the user info.
 	 */
 	void setUserInfo();
+
+	/**
+	 * Method which sets the selected user informations to be seen by the actual
+	 * user
+	 */
+	void giveOtherUserInfo();
 }

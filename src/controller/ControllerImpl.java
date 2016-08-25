@@ -234,9 +234,8 @@ public class ControllerImpl implements Controller {
 	public void managerLogin() {
 		if (this.m.getSystemPassword().equals(this.v.getMenagerPassword())) {
 			this.v.goodManagerLogin();
-			this.v.showMessage("Login manager effettuato");
 		} else {
-			this.v.showMessage("Password errata");
+			this.v.showMessage("Password manager errata");
 		}
 	}
 
@@ -371,6 +370,7 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void borrowList() {
 		System.out.println("borrowList: entrato");
+		System.out.println("borrowList: dimensione archivio prestiti=" + this.actualUser.getLoanArchive().size());
 		try {
 			this.actualLoanArchive = this.actualUser.getLoanArchive();
 			String[] array = new String[this.actualLoanArchive.size()];
@@ -645,6 +645,8 @@ public class ControllerImpl implements Controller {
 		String isbn = this.v.getItemInfo(TypeItemInfo.ISBN);
 		ItemGenre genre = CastManager.castToItemGenre(this.v.getItemInfo(TypeItemInfo.GENRE));
 		String publisher = this.v.getItemInfo(TypeItemInfo.PRODUCER);
+		System.out.println(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
+		System.out.println(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 		Integer numRelease = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
 		Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 		try {
@@ -690,12 +692,14 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void itemCreate() {
 		System.out.println("itemCreate: entrato");
-		if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.BOOK)) {
-			this.registerNewBook();
+		if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.BOOK.toString())) {
 			System.out.println("itemCreate: dentro al libro");
-		} else if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.MOVIE)) {
-			this.registerNewMovie();
+			this.registerNewBook();
+
+		} else if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.MOVIE.toString())) {
 			System.out.println("itemCreate: dentro al film");
+			this.registerNewMovie();
+
 		}
 	}
 
@@ -750,13 +754,15 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void setTakenSitsList() {
 		System.out.println("setTakenSitsList: entrato");
+
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
 		String[] array = new String[100];
 		Integer[] arrayInt = new Integer[100];
+		System.out.println(arrayInt.length);
 		arrayInt = this.m.getStudyRoom().get(day).toArray(arrayInt);
-		for (int index = 0; index < arrayInt.length; index++) {
+		for (int index = 0; index < (arrayInt.length - 1); index++) {
 			if ((arrayInt[index] == null) || (arrayInt[index] == 0)) {
 				array[index] = "0";
 			} else if (arrayInt[index].equals(this.actualUser.getIdUser())) {
@@ -829,12 +835,15 @@ public class ControllerImpl implements Controller {
 	public void setWishlist() {
 		System.out.println("setWishList: entrato");
 		String[] array = new String[this.actualUser.getWishlist().size()];
+		System.out.println("setWishList: getWishList.size=" + this.actualUser.getWishlist().size());
 		int index = 0;
 		for (Integer i : this.actualUser.getWishlist()) {
 			array[index] = this.m.getItemArchive().get(i).toString();
+			System.out.println("setWishList: aggiunta elemento " + i);
 			index++;
 		}
 		this.v.setWishlist(array);
+		System.out.println("setWishList: array restituito");
 	}
 
 	@Override
@@ -949,6 +958,13 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Oggetto con recensione non trovato nell'archivio");
 		}
+	}
+
+	@Override
+	public void giveOtherUserInfo() {
+
+		this.v.setUserModifyField(name, surname, username, password, birthDate_day, birthDate_month, birthDate_year,
+				email, telephone, bPref1, bPref2, bPref3, fPref1, fPref2, fPref3);
 	}
 
 	@Override
