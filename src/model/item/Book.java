@@ -12,7 +12,7 @@ import utils.Language;
  * @author Edoardo
  *
  */
-public class Book extends ItemImpl {
+public abstract class Book extends ItemImpl {
 
   @Override
   public String toString() {
@@ -56,6 +56,7 @@ public class Book extends ItemImpl {
    *
    * @return num of release.
    */
+  @Override
   public Optional<Integer> getNumRelease() {
     return this.numRelease;
   }
@@ -64,6 +65,7 @@ public class Book extends ItemImpl {
    *
    * @return ISBN code.
    */
+  @Override
   public String getIsbn() {
     return this.isbn;
   }

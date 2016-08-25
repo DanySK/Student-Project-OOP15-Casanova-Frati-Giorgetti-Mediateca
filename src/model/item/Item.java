@@ -3,6 +3,8 @@ package model.item;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.base.Optional;
+
 import utils.ItemGenre;
 import utils.Language;
 
@@ -167,5 +169,29 @@ public interface Item {
    *          user's identifier.
    */
   void removeLike(final Integer userId);
+
+  /**
+   *
+   * @return num of release.
+   */
+  Optional<Integer> getNumRelease();
+
+  /**
+   *
+   * @return ISBN code.
+   */
+  String getIsbn();
+
+  /**
+   *
+   * @return movie's duration.
+   */
+  Integer getDuration();
+
+  /**
+   *
+   * @return true == color, false == b/w.
+   */
+  Boolean getColour();
 
 }

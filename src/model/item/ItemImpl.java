@@ -20,7 +20,7 @@ import utils.Language;
  * @author Edoardo
  *
  */
-public class ItemImpl implements Item, Serializable {
+public abstract class ItemImpl implements Item, Serializable {
 
   /**
    *
@@ -214,4 +214,5 @@ public class ItemImpl implements Item, Serializable {
     }
     this.averageVote = (float) total / div;
   }
+
 }

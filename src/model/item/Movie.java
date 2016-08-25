@@ -10,7 +10,7 @@ import utils.Language;
  * @author Edoardo
  *
  */
-public class Movie extends ItemImpl {
+public abstract class Movie extends ItemImpl {
 
   private static final long serialVersionUID = 856227185802047288L;
   private final Integer duration;
@@ -53,6 +53,7 @@ public class Movie extends ItemImpl {
    *
    * @return movie's duration.
    */
+  @Override
   public Integer getDuration() {
     return this.duration;
   }
@@ -61,6 +62,7 @@ public class Movie extends ItemImpl {
    *
    * @return true == color, false == b/w.
    */
+  @Override
   public Boolean getColour() {
     return this.color;
   }
