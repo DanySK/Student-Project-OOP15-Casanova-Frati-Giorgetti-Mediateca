@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import utils.TypeItemInfo;
 import view.ViewImpl.CardName;
 
 /**
@@ -25,10 +26,11 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private static final long serialVersionUID = 1L;
 	private static final int ELEMENTS_TO_SHOW = 25;
 	private String textToSearch;
+	private String typeSelected;
 	private JList<String> filteredJList = new JList<String>();
 	private DefaultListModel<String> model = new DefaultListModel<String>();
-	final JComboBox<utils.TypeItemInfo> filterSelect;
-	final JComboBox<utils.TypeItem> itemSelect;
+	private JComboBox<utils.TypeItemInfo> filterSelect = new JComboBox<TypeItemInfo>();
+	private JComboBox<TypeItemInfo> itemSelect = new JComboBox<TypeItemInfo>();
 	private String dClicked;
 
 	/**
@@ -67,13 +69,15 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		searchField = new JTextField();
 		searchField.setBounds(21, 84, 521, 27);
 		this.filterSelect = new JComboBox(utils.TypeItemInfo.values());
-		this.filterSelect.setSelectedIndex(-1);
+		this.filterSelect.setSelectedIndex(0);
 		this.filterSelect.setBounds(232, 44, 200, 27);
 		this.filterSelect.setToolTipText("Dove ricercare");
 		this.itemSelect = new JComboBox(utils.TypeItem.values());
-		this.itemSelect.setSelectedIndex(-1);
+		this.itemSelect.setSelectedIndex(0);
 		this.itemSelect.setBounds(21, 44, 200, 27);
 		this.itemSelect.setToolTipText("Libro o Film");
+		this.add(this.itemSelect);
+		this.add(this.filteredJList);
 		this.setLayout(null);
 		this.add(this.filterSelect);
 		search = new JButton("Cerca");
@@ -119,8 +123,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.add(searchField);
 		this.add(search);
 		this.add(backToMenu);
-		this.add(this.itemSelect);
-		this.add(this.filteredJList);
 		this.add(review);
 
 		// BACK ACTION LISTENER -> SUGGESTED LIST
