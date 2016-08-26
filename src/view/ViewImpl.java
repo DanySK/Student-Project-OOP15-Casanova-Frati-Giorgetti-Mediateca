@@ -42,6 +42,8 @@ public class ViewImpl implements View {
 
 	static final int IMAGE_LENGHT = 140;
 	static final int IMAGE_WIDTH = 100;
+	UserShow userScreen;
+	ItemShow itemScreen;
 	String[] prova = { "1", "0", "casa", "0", "1", "2", "....", };
 
 	private boolean logged;
@@ -98,13 +100,13 @@ public class ViewImpl implements View {
 	public enum CardName {
 		START("Start Card"), MAIN("Main Card"), LOGIN("Login Card"), MENU(
 				"Menu Card"), ITEM("Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-				"LikeList Screen Card"), BORROWED_LIST(
-				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-				"User Create Card"), MANAGER_LOGIN("Manager Login"), BOOK_CREATE(
-				"Book Create Card"), FILM_CREATE("Film Create Card"), MANAGER_MENU(
-				"Manager Menu Card"), STUDY_ROOM("Study Room Card"), WISHLIST(
-				"Wishlist Card"), BOOK_MODIFY("Book Modify Card"), FILM_MODIFY(
-				"Film Modify Card"), ALL_REVIEWS("All Reviews Card");
+						"LikeList Screen Card"), BORROWED_LIST(
+								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+										"User Create Card"), MANAGER_LOGIN("Manager Login"), BOOK_CREATE(
+												"Book Create Card"), FILM_CREATE("Film Create Card"), MANAGER_MENU(
+														"Manager Menu Card"), STUDY_ROOM("Study Room Card"), WISHLIST(
+																"Wishlist Card"), BOOK_MODIFY("Book Modify Card"), FILM_MODIFY(
+																		"Film Modify Card"), ALL_REVIEWS("All Reviews Card");
 
 		private final String name;
 
@@ -310,7 +312,7 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public String getMenagerPassword() {
+	public String getManagerPassword() {
 		return ((UserLogin) this.card9).getManagerPassword();
 	}
 
@@ -439,8 +441,9 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void showItemInfo() {
-		ItemShow itemScreen = new ItemShowImpl();
-		itemScreen.startItemShow(this);
+		this.itemScreen = new ItemShowImpl();
+		this.giveMeItemInfoFromManager();
+		this.itemScreen.startItemShow(this);
 	}
 
 	// //OK
@@ -622,8 +625,9 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void showUserInfo() {
-		UserShow userScreen = new UserShowImpl();
-		userScreen.startUserShow(this);
+		this.userScreen = new UserShowImpl();
+		this.giveMeOtherUserInfo();
+		this.userScreen.startUserShow(this);
 	}
 
 	// //OK
@@ -631,10 +635,10 @@ public class ViewImpl implements View {
 	public void showGiveBackOptionMessage(final String book) {
 		// Custom button text
 		final Object[] options = { "Consegna",
-				"Aumenta il prestito di un altro mese" };
+		"Aumenta il prestito di un altro mese" };
 		int choose = JOptionPane.showOptionDialog(this.mainFrame,
 				"Dovresti consegare il seguente libro:" + book
-						+ "Cosa vuoi fare?", "Notifica di consegna",
+				+ "Cosa vuoi fare?", "Notifica di consegna",
 				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
 		if (choose == 0) {
@@ -743,9 +747,57 @@ public class ViewImpl implements View {
 		this.c.takeItemBefore();
 	}
 
-	// //WAITING FOR CCONTROLLER FUNCTION NAME
+	// //WAITING FOR CONTROLLER FUNCTION NAME
 	@Override
 	public void giveMeItemInfoFromManager() {
 		this.c.elementSelectedInManager();
 	}
+
+	// //OK
+	@Override
+	public void setUserInfoDoubleClick(final String nameS,
+			final String surnameS, final String usernameS,
+			final String passwordS, final String birthDateS,
+			final String emailS, final String telephoneS,
+			final String bookPref1S, final String bookPref2S,
+			final String bookPref3S, final String filmPref1S,
+			final String filmPref2S, final String filmPref3S) {
+		this.userScreen.setUserField(nameS, surnameS, usernameS, passwordS,
+				birthDateS, emailS, telephoneS, bookPref1S, bookPref2S,
+				bookPref3S, filmPref1S, filmPref2S, filmPref3S);
+	}
+
+	// //OK
+	@Override
+	public void setBookInfoDoubleClick(final String titleS,
+			final String authorS, final String manifacturerS,
+			final String yearS, final String genreS,
+			final String reviewAvarageS, final String availabilityS,
+			final String isbnS, final String languageS) {
+		this.itemScreen.setBookField(titleS, authorS, manifacturerS, yearS,
+				genreS, reviewAvarageS, availabilityS, isbnS, languageS);
+	}
+
+	// //OK
+	@Override
+	public void setFilmInfoDoubleClick(final String titleS,
+			final String authorS, final String manifacturerS,
+			final String yearS, final String genreS,
+			final String reviewAvarageS, final String availabilityS,
+			final String durationS, final String colorS, final String languageS) {
+		this.itemScreen.setFilmField(titleS, authorS, manifacturerS, yearS,
+				genreS, reviewAvarageS, availabilityS, durationS, colorS,
+				languageS);
+	}
+
+	@Override
+	public String getDoubleClickedInManager() {
+		return ((ManagerScreen) this.card12).getDClicked();
+	}
+
+	@Override
+	public String getDoubleClickedItemInMediateca() {
+		return ((MediatecaScreen) this.card3).getDClicked();
+	}
+
 }

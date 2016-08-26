@@ -23,6 +23,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 	private JList<String> list = new JList<String>();
 	private TypeList type = TypeList.USER;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
+	private String dClicked;
 
 	/**
 	 * Enum for the type of list can be.
@@ -67,7 +68,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 150, 273, 40);
 		showUserList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
@@ -82,7 +83,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(498, 200, 273, 40);
 		showItemList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
@@ -112,15 +113,17 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-							.toString());
-					v.giveMeOtherUserInfo();
+									.toString());
+					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
+							.getSelectedValue().toString();
 					v.showUserInfo();
 				} else if ((evt.getClickCount() == 2)
 						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-							.toString());
-					v.giveMeItemInfoFromManager();
+									.toString());
+					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
+							.getSelectedValue().toString();
 					v.showItemInfo();
 				}
 			}
@@ -195,5 +198,10 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 	@Override
 	public String getSelected() {
 		return this.list.getSelectedValue();
+	}
+
+	@Override
+	public String getDClicked() {
+		return this.dClicked;
 	}
 }

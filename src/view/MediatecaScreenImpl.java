@@ -29,6 +29,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	final JComboBox<utils.TypeItemInfo> filterSelect;
 	final JComboBox<utils.TypeItem> itemSelect;
+	private String dClicked;
 
 	/**
 	 * Builder for MediatecaScreen.
@@ -101,7 +102,8 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 					System.out.println("Cliccato"
 							+ ((JList) evt.getSource()).getSelectedValue()
 							.toString());
-					v.giveMeItemInfo();
+					MediatecaScreenImpl.this.dClicked = ((JList) evt
+							.getSource()).getSelectedValue().toString();
 					v.showItemInfo();
 				}
 			}
@@ -209,5 +211,10 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		for (String element : list) {
 			this.model.addElement(element);
 		}
+	}
+
+	@Override
+	public String getDClicked() {
+		return this.dClicked;
 	}
 }

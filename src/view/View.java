@@ -87,7 +87,7 @@ public interface View {
 	 *
 	 * @return system password typed.
 	 */
-	String getMenagerPassword();
+	String getManagerPassword();
 
 	/**
 	 * Asks controller to borrow item.
@@ -598,5 +598,111 @@ public interface View {
 	 * Tells to controller to take item info from getSelectedInManager().
 	 */
 	void giveMeItemInfoFromManager();
+
+	/**
+	 * Allows to set info about a book double clicked.
+	 *
+	 * @param titleS
+	 *            the title of book
+	 * @param authorS
+	 *            the author of book
+	 * @param manifacturerS
+	 *            the manifacturer of book
+	 * @param yearS
+	 *            the release year of book
+	 * @param genreS
+	 *            the book genre
+	 * @param reviewAvarageS
+	 *            the avarage score of book
+	 * @param availabilityS
+	 *            the book availability
+	 * @param isbnS
+	 *            the isbn code of book
+	 * @param languageS
+	 *            the book language
+	 */
+	void setBookInfoDoubleClick(String titleS, String authorS,
+			String manifacturerS, String yearS, String genreS,
+			String reviewAvarageS, String availabilityS, String isbnS,
+			String languageS);
+
+	/**
+	 * Allows to set info about a film double clicked.
+	 *
+	 * @param titleS
+	 *            the title of film
+	 * @param authorS
+	 *            the author of film
+	 * @param manifacturerS
+	 *            the manifacturer of film
+	 * @param yearS
+	 *            the release year of film
+	 * @param genreS
+	 *            the film genre
+	 * @param reviewAvarageS
+	 *            the avarage score of film
+	 * @param availabilityS
+	 *            the book availability
+	 * @param durationS
+	 *            the duration of film
+	 * @param colorS
+	 *            the color of film
+	 * @param languageS
+	 *            the film language
+	 */
+	void setFilmInfoDoubleClick(String titleS, String authorS,
+			String manifacturerS, String yearS, String genreS,
+			String reviewAvarageS, String availabilityS, String durationS,
+			String colorS, String languageS);
+
+	/**
+	 * Allows to set info to show in UserShow
+	 *
+	 * @param nameS
+	 *            the user name
+	 * @param surnameS
+	 *            the user surname
+	 * @param usernameS
+	 *            the user username
+	 * @param passwordS
+	 *            the user password
+	 * @param birthDateS
+	 *            the user birth date
+	 * @param emailS
+	 *            the user email
+	 * @param telephoneS
+	 *            the user telephone number
+	 * @param bookPref1S
+	 *            the user book preference 1
+	 * @param bookPref2S
+	 *            the user book preference 2
+	 * @param bookPref3S
+	 *            the user book preference 3
+	 * @param filmPref1S
+	 *            the user film preference 1
+	 * @param filmPref2S
+	 *            the user film preference 2
+	 * @param filmPref3S
+	 *            the user film preference 3
+	 */
+	void setUserInfoDoubleClick(String nameS, String surnameS,
+			String usernameS, String passwordS, String birthDateS,
+			String emailS, String telephoneS, String bookPref1S,
+			String bookPref2S, String bookPref3S, String filmPref1S,
+			String filmPref2S, String filmPref3S);
+
+	/**
+	 * Returns the object double clicked in manager screen.
+	 *
+	 * @return the double clicked object
+	 */
+	String getDoubleClickedInManager();
+
+	/**
+	 * Returns the item double clicked in mediateca screen.
+	 *
+	 * @return the double clicked item
+	 */
+	String getDoubleClickedItemInMediateca();
 
 }

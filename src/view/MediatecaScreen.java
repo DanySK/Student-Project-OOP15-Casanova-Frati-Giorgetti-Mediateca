@@ -42,4 +42,11 @@ public interface MediatecaScreen {
 	 *            list filtered by controller
 	 */
 	void setFilteredList(String[] list);
+
+	/**
+	 * Returns the item double clicked.
+	 * 
+	 * @return
+	 */
+	String getDClicked();
 }

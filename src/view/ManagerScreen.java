@@ -38,4 +38,11 @@ public interface ManagerScreen {
 	 */
 	void setUserBorrowedList(String[] borrowedList);
 
+	/**
+	 * Returns the double clicked object in Manager Screen.
+	 * 
+	 * @return double clicked object
+	 */
+	String getDClicked();
+
 }
