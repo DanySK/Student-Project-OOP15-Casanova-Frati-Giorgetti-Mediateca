@@ -16,6 +16,7 @@ import javax.swing.WindowConstants;
 public class ItemShowImpl implements ItemShow {
 	static final int FRAME_LENGHT = 600;
 	static final int FRAME_WIDTH = 600;
+	private String type;
 	private String title;
 	private String author;
 	private String manifacturer;
@@ -109,14 +110,25 @@ public class ItemShowImpl implements ItemShow {
 
 		mainFrame.setTitle("Oggetto Selezionato");
 		authorL.setText("Regista:" + this.author);
+		if (this.type.equals("BOOK")) {
+			isbnCodeL.setVisible(true);
+			durationL.setVisible(false);
+			colorL.setVisible(false);
+		} else if (this.type.equals("MOVIE")) {
+			isbnCodeL.setVisible(false);
+			durationL.setVisible(true);
+			colorL.setVisible(true);
+		}
 		mainFrame.setVisible(true);
 
 	}
 
-	private void setCommonField(final String titleS, final String authorS,
-			final String manifacturerS, final String yearS,
-			final String genreS, final String reviewAvarageS,
-			final String availabilityS, final String languageS) {
+	private void setCommonField(final String types, final String titleS,
+			final String authorS, final String manifacturerS,
+			final String yearS, final String genreS,
+			final String reviewAvarageS, final String availabilityS,
+			final String languageS) {
+		this.type = types;
 		this.title = titleS;
 		this.author = authorS;
 		this.manifacturer = manifacturerS;
@@ -133,8 +145,9 @@ public class ItemShowImpl implements ItemShow {
 			final String genreS, final String reviewAvarageS,
 			final String availabilityS, final String durationS,
 			final String colorS, final String languageS) {
-		this.setCommonField(titleS, authorS, manifacturerS, yearS, genreS,
-				reviewAvarageS, availabilityS, languageS);
+
+		this.setCommonField("MOVIE", titleS, authorS, manifacturerS, yearS,
+				genreS, reviewAvarageS, availabilityS, languageS);
 		this.duration = durationS;
 		this.color = colorS;
 		this.isbn = null;
@@ -146,8 +159,8 @@ public class ItemShowImpl implements ItemShow {
 			final String genreS, final String reviewAvarageS,
 			final String availabilityS, final String isbnS,
 			final String languageS) {
-		this.setCommonField(titleS, authorS, manifacturerS, yearS, genreS,
-				reviewAvarageS, availabilityS, languageS);
+		this.setCommonField("BOOK", titleS, authorS, manifacturerS, yearS,
+				genreS, reviewAvarageS, availabilityS, languageS);
 		this.duration = null;
 		this.color = null;
 		this.isbn = isbnS;
