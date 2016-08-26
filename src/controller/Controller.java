@@ -205,4 +205,8 @@ public interface Controller {
 	 * user
 	 */
 	void giveOtherUserInfo();
+
+	void elementSelectedInManager();
+
+	void takeItemBefore();
 }
