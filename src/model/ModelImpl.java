@@ -337,7 +337,7 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Set<Integer> filtersItem(final Set<Integer> set, final TypeItemInfo ts, final Object param)
+  public Set<Integer> filtersItem(final Set<Integer> set, final TypeItemInfo ts, final String param)
               throws Exception {
     if ((!ts.equals(TypeItemInfo.AUTHOR)) && (!ts.equals(TypeItemInfo.TITLE))
                 && (!ts.equals(TypeItemInfo.PRODUCER)) && (!ts.equals(TypeItemInfo.RELEASE_YEAR))
@@ -350,39 +350,37 @@ public class ModelImpl implements Serializable, Model {
         if (param.equals("")) {
           return set;
         }
-        if (((ItemImpl) this.archiveItem.getItem(i)).getTitle()
-                    .equals(((String) param).toUpperCase())) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getTitle().equals(param.toUpperCase())) {
           r.add(i);
         }
       } else if (ts.equals(TypeItemInfo.AUTHOR)) {
         if (param.equals("")) {
           return set;
         }
-        if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor()
-                    .equals(((String) param).toUpperCase())) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getAuthor().equals(param.toUpperCase())) {
           r.add(i);
         }
       } else if (ts.equals(TypeItemInfo.PRODUCER)) {
         if (param.equals("")) {
           return set;
         }
-        if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher()
-                    .equals(((String) param).toUpperCase())) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getPublisher().equals(param.toUpperCase())) {
           r.add(i);
         }
       } else if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
         if (param.equals("")) {
           return set;
         }
-        if (((ItemImpl) this.archiveItem.getItem(i)).getReleaseYear() == (int) param) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getReleaseYear() == Integer.parseInt(param)) {
           r.add(i);
         }
       } else if (ts.equals(TypeItemInfo.LANGUAGE)) {
-        if (((ItemImpl) this.archiveItem.getItem(i)).getCurrentLanguage().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getCurrentLanguage().toString()
+                    .equals(param)) {
           r.add(i);
         }
       } else if (ts.equals(TypeItemInfo.GENRE)) {
-        if (((ItemImpl) this.archiveItem.getItem(i)).getGenre().equals(param)) {
+        if (((ItemImpl) this.archiveItem.getItem(i)).getGenre().toString().equals(param)) {
           r.add(i);
         }
       }
@@ -449,7 +447,7 @@ public class ModelImpl implements Serializable, Model {
     List<Integer> toAdd = new LinkedList<Integer>();
 
     for (ItemGenre im : this.archiveUser.getUser(userId).getMoviePreferences()) {
-      all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeItemInfo.GENRE, im);
+      all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeItemInfo.GENRE, im.toString());
       if (all.size() != 0) {
         Integer start = 0;
         Integer best = 0;
@@ -465,7 +463,7 @@ public class ModelImpl implements Serializable, Model {
     }
 
     for (ItemGenre ig : this.archiveUser.getUser(userId).getBookPreferences()) {
-      all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE, ig);
+      all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE, ig.toString());
       if (all.size() != 0) {
         Integer start = 0;
         Integer best = 0;

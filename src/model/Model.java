@@ -298,7 +298,7 @@ public interface Model {
    * @throws Exception
    *           in the case which name is not into the archive.
    */
-  Set<Integer> filtersItem(final Set<Integer> set, final TypeItemInfo ts, final Object param)
+  Set<Integer> filtersItem(final Set<Integer> set, final TypeItemInfo ts, final String param)
               throws Exception;
 
   /**
