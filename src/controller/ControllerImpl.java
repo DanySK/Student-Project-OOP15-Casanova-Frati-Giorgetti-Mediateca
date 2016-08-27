@@ -253,7 +253,7 @@ public class ControllerImpl implements Controller {
 
 		TypeItem ty = null;
 		for (TypeItem y : TypeItem.values()) {
-			if (y.equals(this.v.getItemFilter())) {
+			if (y.toString().equals(this.v.getItemFilter())) {
 				ty = y;
 			}
 		}
@@ -263,7 +263,7 @@ public class ControllerImpl implements Controller {
 
 		TypeItemInfo ts = null;
 		for (TypeItemInfo s : TypeItemInfo.values()) {
-			if (s.equals(this.v.getSearchFilter())) {
+			if (s.toString().equals(this.v.getSearchFilter())) {
 				ts = s;
 			}
 		}
