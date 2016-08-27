@@ -53,10 +53,13 @@ public class TestFilters {
                   ItemGenre.ADVENTURE, "Elleci", 1, 3);
 
       org.junit.Assert.assertEquals(m.filtersItem(m.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE,
-                  ItemGenre.ADVENTURE).size(), 2);
+                  ItemGenre.ADVENTURE.toString()).size(), 2);
 
-      org.junit.Assert.assertEquals(m.filtersItem(m.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE,
-                  ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT).size(), 4);
+      org.junit.Assert
+                  .assertEquals(
+                              m.filtersItem(m.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE,
+                                          ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT.toString()).size(),
+                              4);
 
       org.junit.Assert.assertEquals(m
                   .filtersItem(m.getAllItemId(TypeItem.BOOK), TypeItemInfo.AUTHOR, "Autore").size(),
