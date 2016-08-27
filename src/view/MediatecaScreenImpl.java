@@ -25,13 +25,12 @@ import view.ViewImpl.CardName;
 public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private static final long serialVersionUID = 1L;
 	private static final int ELEMENTS_TO_SHOW = 25;
-	private String textToSearch;
-	private String typeSelected;
 	private JList<String> filteredJList = new JList<String>();
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private JComboBox<utils.TypeItemInfo> filterSelect = new JComboBox<TypeItemInfo>();
 	private JComboBox<TypeItemInfo> itemSelect = new JComboBox<TypeItemInfo>();
 	private String dClicked;
+	private JTextField searchField;
 
 	/**
 	 * Builder for MediatecaScreen.
@@ -46,7 +45,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		final JButton giveBackItem;
 		final JButton likeItem;
 		final JButton seeBorrowedItem;
-		final JTextField searchField;
 
 		final JButton backToMenu;
 
@@ -66,8 +64,8 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		borrowItem = new JButton("Prendi ");
 		borrowItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		borrowItem.setBounds(586, 124, 178, 27);
-		searchField = new JTextField();
-		searchField.setBounds(21, 84, 521, 27);
+		this.searchField = new JTextField();
+		this.searchField.setBounds(21, 84, 521, 27);
 		this.filterSelect = new JComboBox(utils.TypeItemInfo.values());
 		this.filterSelect.setSelectedIndex(0);
 		this.filterSelect.setBounds(232, 44, 200, 27);
@@ -120,7 +118,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.add(giveBackItem);
 		this.add(likeItem);
 		this.add(seeBorrowedItem);
-		this.add(searchField);
+		this.add(this.searchField);
 		this.add(search);
 		this.add(backToMenu);
 		this.add(review);
@@ -131,8 +129,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			v.giveMeSuggestedBooks();
 			v.giveMeSuggestedMovies();
 		});
-
-		this.textToSearch = searchField.getText();
 
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 326, 178, 27);
@@ -194,7 +190,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 	@Override
 	public String getSearchText() {
-		return this.textToSearch;
+		return this.searchField.getText();
 	}
 
 	@Override

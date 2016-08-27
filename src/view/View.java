@@ -705,4 +705,9 @@ public interface View {
 	 */
 	String getDoubleClickedItemInMediateca();
 
+	/**
+	 * Starts the showing of Item information.
+	 */
+	void showItemInfoMediateca();
+
 }

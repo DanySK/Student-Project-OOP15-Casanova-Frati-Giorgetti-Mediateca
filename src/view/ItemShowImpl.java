@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import utils.TypeItem;
+
 /**
  * class which implememts method of Item Show inteface.
  *
@@ -16,7 +18,7 @@ import javax.swing.WindowConstants;
 public class ItemShowImpl implements ItemShow {
 	static final int FRAME_LENGHT = 600;
 	static final int FRAME_WIDTH = 600;
-	private String type;
+	private TypeItem type;
 	private String title;
 	private String author;
 	private String manifacturer;
@@ -110,11 +112,11 @@ public class ItemShowImpl implements ItemShow {
 
 		mainFrame.setTitle("Oggetto Selezionato");
 		authorL.setText("Regista:" + this.author);
-		if (this.type.equals("BOOK")) {
+		if (this.type.equals(TypeItem.BOOK)) {
 			isbnCodeL.setVisible(true);
 			durationL.setVisible(false);
 			colorL.setVisible(false);
-		} else if (this.type.equals("MOVIE")) {
+		} else if (this.type.equals(TypeItem.MOVIE)) {
 			isbnCodeL.setVisible(false);
 			durationL.setVisible(true);
 			colorL.setVisible(true);
@@ -123,12 +125,13 @@ public class ItemShowImpl implements ItemShow {
 
 	}
 
-	private void setCommonField(final String types, final String titleS,
+	private void setCommonField(final TypeItem types, final String titleS,
 			final String authorS, final String manifacturerS,
 			final String yearS, final String genreS,
 			final String reviewAvarageS, final String availabilityS,
 			final String languageS) {
 		this.type = types;
+		System.out.println(this.type);
 		this.title = titleS;
 		this.author = authorS;
 		this.manifacturer = manifacturerS;
@@ -146,8 +149,8 @@ public class ItemShowImpl implements ItemShow {
 			final String availabilityS, final String durationS,
 			final String colorS, final String languageS) {
 
-		this.setCommonField("MOVIE", titleS, authorS, manifacturerS, yearS,
-				genreS, reviewAvarageS, availabilityS, languageS);
+		this.setCommonField(TypeItem.MOVIE, titleS, authorS, manifacturerS,
+				yearS, genreS, reviewAvarageS, availabilityS, languageS);
 		this.duration = durationS;
 		this.color = colorS;
 		this.isbn = null;
@@ -159,8 +162,8 @@ public class ItemShowImpl implements ItemShow {
 			final String genreS, final String reviewAvarageS,
 			final String availabilityS, final String isbnS,
 			final String languageS) {
-		this.setCommonField("BOOK", titleS, authorS, manifacturerS, yearS,
-				genreS, reviewAvarageS, availabilityS, languageS);
+		this.setCommonField(TypeItem.BOOK, titleS, authorS, manifacturerS,
+				yearS, genreS, reviewAvarageS, availabilityS, languageS);
 		this.duration = null;
 		this.color = null;
 		this.isbn = isbnS;
