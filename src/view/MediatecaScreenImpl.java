@@ -125,6 +125,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 		// BACK ACTION LISTENER -> SUGGESTED LIST
 		backToMenu.addActionListener(e -> {
+			this.searchField.setText(null);
 			v.swapView(CardName.MENU);
 			v.giveMeSuggestedBooks();
 			v.giveMeSuggestedMovies();
