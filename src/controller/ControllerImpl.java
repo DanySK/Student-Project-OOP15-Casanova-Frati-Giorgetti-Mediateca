@@ -231,7 +231,7 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void managerLogin() {
-		if (this.m.getSystemPassword().equals(this.v.getMenagerPassword())) {
+		if (this.m.getSystemPassword().equals(this.v.getManagerPassword())) {
 			this.v.goodManagerLogin();
 		} else {
 			this.v.showMessage("Password manager errata");
@@ -270,7 +270,7 @@ public class ControllerImpl implements Controller {
 		System.out.println("itemElaboration: ts = " + ts);
 		System.out.println("itemElaboration: this.v.getsearchtext =" + this.v.getSearchText());
 
-		Object searchText = this.v.getSearchText();
+		String searchText = this.v.getSearchText();
 
 		System.out.println("itemElaboration: searchtext=" + searchText);
 
@@ -822,17 +822,17 @@ public class ControllerImpl implements Controller {
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
 		String[] array = new String[100];
-		Integer[] arrayInt = new Integer[100];
-		System.out.println(arrayInt.length);
-		arrayInt = this.m.getStudyRoom().get(day).toArray(arrayInt);
-		for (int index = 0; index < (arrayInt.length - 1); index++) {
-			if ((arrayInt[index] == null) || (arrayInt[index] == 0)) {
+		List<Integer> arrayInt = this.m.getAllUserSit(day);
+		System.out.println("setTakenSitsList: " + arrayInt.size());
+
+		for (int index = 0; index < (arrayInt.size()); index++) {
+			if ((arrayInt.get(index) == null) || (arrayInt.get(index) == 0)) {
 				array[index] = "0";
-			} else if (arrayInt[index].equals(this.actualUser.getIdUser())) {
+			} else if (arrayInt.get(index).equals(this.actualUser.getIdUser())) {
 				array[index] = "1";
 			} else {
 				try {
-					array[index] = this.m.getRequiredUser(arrayInt[index]).getUsername();
+					array[index] = this.m.getRequiredUser(arrayInt.get(index)).getUsername();
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					this.v.showError("Errore! Utente non presente nell'archivio");
