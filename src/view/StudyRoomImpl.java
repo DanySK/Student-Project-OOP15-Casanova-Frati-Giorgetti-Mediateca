@@ -100,7 +100,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		for (i = 0; i < 100; i++) {
 			this.buttons[i]
 					.addActionListener(e -> {
-						if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
+						if (((JButton) e.getSource()).getBackground() == Color.GREEN) {
 							this.selectedSit = Integer.parseInt(((JButton) e
 									.getSource()).getText());
 							v.takeSit();
@@ -108,7 +108,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 									+ String.valueOf(this.selectedSit));
 							v.giveMeStudyRoomStatus();
 							v.swapView(CardName.STUDY_ROOM);
-						} else if (((JButton) e.getSource()).getBackground() == Color.GREEN) {
+						} else if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
 							this.selectedSit = Integer.parseInt(((JButton) e
 									.getSource()).getText());
 							v.cancelSit();
@@ -171,7 +171,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 
