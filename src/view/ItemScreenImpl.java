@@ -24,16 +24,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private final JTextField titleF;
 	private final JTextField authorF;
 	private final JTextField manifacturerF;
-
 	private JComboBox<?> genreF;
-
 	private JComboBox<?> languageF;
 	private final JTextField yearF;
 	// private final JFileChooser imageChoose = new JFileChooser();
-
 	private JComboBox<?> itemTypeF;
 	private final JTextField durationF;
-
 	private JComboBox<?> colorF;
 	private final JTextField isbnF;
 	private final JTextField numCopiesF;
@@ -205,7 +201,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -234,7 +230,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
 

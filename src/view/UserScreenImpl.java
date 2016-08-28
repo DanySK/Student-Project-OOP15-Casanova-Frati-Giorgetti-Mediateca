@@ -128,9 +128,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			discarge.addActionListener(e -> v.swapView(CardName.START));
 			this.send.addActionListener(e -> {
 				v.sendUserCreate();
-				v.giveMeSuggestedBooks();
-				v.giveMeSuggestedMovies();
-				v.swapView(CardName.MENU);
+				v.swapView(CardName.LOGIN);
 			});
 		} else if (type.equals(UserScreenType.MODIFY)) {
 			this.presentation = new JLabel("Modifica qui i tuoi dati:");
