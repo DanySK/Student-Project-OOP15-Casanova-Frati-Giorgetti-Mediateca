@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -10,7 +11,9 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import utils.TypeItemInfo;
@@ -33,6 +36,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private String dClicked;
 	private JTextField searchField;
 	private String selected;
+	private JScrollPane scroll;
 
 	/**
 	 * Builder for MediatecaScreen.
@@ -66,12 +70,13 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filterSelect.setSelectedIndex(0);
 		this.filterSelect.setBounds(232, 44, 200, 27);
 		this.filterSelect.setToolTipText("Dove ricercare");
+
 		this.itemSelect = new JComboBox(utils.TypeItem.values());
 		this.itemSelect.setSelectedIndex(0);
 		this.itemSelect.setBounds(21, 44, 200, 27);
 		this.itemSelect.setToolTipText("Libro o Film");
 		this.add(this.itemSelect);
-		this.add(this.filteredJList);
+
 		this.setLayout(null);
 		this.add(this.filterSelect);
 		search = new JButton("Cerca");
@@ -100,7 +105,12 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
 		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
-
+		this.scroll = new JScrollPane(this.filteredJList,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scroll.setBounds(21, 164, 521, 358);
+		this.scroll.setMinimumSize(new Dimension(300, 200));
+		this.add(this.scroll);
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {

@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -8,6 +9,8 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 import view.ViewImpl.CardName;
 
@@ -39,6 +42,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 	 * Builder for ManagerScreenImpl.
 	 */
 	public ManagerScreenImpl(final View v) {
+		JScrollPane scroll;
 
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.setLayout(null);
@@ -74,7 +78,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 150, 273, 40);
 		showUserList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
@@ -90,7 +94,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(498, 200, 273, 40);
 		showItemList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
@@ -105,7 +109,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		this.list = new JList<String>();
 		this.list.setModel(this.model);
-		this.add(this.list);
+
 		this.list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
@@ -115,7 +119,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-							.toString());
+									.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
 					v.showUserInfo();
@@ -123,15 +127,20 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-							.toString());
+									.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
 					v.showItemInfo();
 				}
 			}
 		});
-		this.list.setBounds(33, 50, 414, 484);
 
+		scroll = new JScrollPane(this.list,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scroll.setBounds(35, 50, 436, 484);
+		scroll.setMinimumSize(new Dimension(300, 200));
+		this.add(scroll);
 		delete.addActionListener(e -> {
 			System.out.println("Elimina Selezionato");
 			v.deleteItem();

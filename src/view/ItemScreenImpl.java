@@ -173,6 +173,9 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 				v.sendItemModify();
 				v.swapView(CardName.MANAGER_MENU);
 			});
+			discarge.addActionListener(e -> {
+				v.swapView(CardName.MANAGER_MENU);
+			});
 			this.itemTypeF.setEnabled(false);
 			this.durationF.setEditable(false);
 			this.colorF.setEnabled(false);
@@ -201,7 +204,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -230,7 +233,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
 
