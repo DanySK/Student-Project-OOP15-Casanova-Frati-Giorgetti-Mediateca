@@ -85,18 +85,29 @@ public class ControllerImpl implements Controller {
 			cal.set(Calendar.YEAR, 1994);
 			cal.set(Calendar.MONTH, 3);
 			cal.set(Calendar.DAY_OF_MONTH, 6);
-			this.m.registerUser("Enrico", "Casanova", cal, "csharplover", "graffeallineate", "enrico.casanova@gmail.it",
-					"334534534534",
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
-					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.FANTASY, ItemGenre.HORROR, ItemGenre.ANIMATION)));
-			this.m.registerUser("Edoardo", "Frati", cal, "animefan", "fullmetalalchemist", "edoardo.frati@gmail.it",
-					"321342111",
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
-			this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
+			/*
+			 * this.m.registerUser("Enrico", "Casanova", cal, "csharplover",
+			 * "graffeallineate", "enrico.casanova@gmail.it", "334534534534",
+			 * new ArrayList<ItemGenre>(
+			 * Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY,
+			 * ItemGenre.HORROR)), new
+			 * ArrayList<ItemGenre>(Arrays.asList(ItemGenre.FANTASY,
+			 * ItemGenre.HORROR, ItemGenre.ANIMATION)));
+			 * this.m.registerUser("Edoardo", "Frati", cal, "animefan",
+			 * "fullmetalalchemist", "edoardo.frati@gmail.it", "321342111", new
+			 * ArrayList<ItemGenre>( Arrays.asList(ItemGenre.ADVENTURE_HISTORY,
+			 * ItemGenre.FANTASY, ItemGenre.HORROR)), new ArrayList<ItemGenre>(
+			 * Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE,
+			 * ItemGenre.ANIMATION))); System.out.println(
+			 * "writeonfile: utente zxc sta per essere registrato");
+			 * this.m.registerUser("Giacomo", "Giacomelli", cal, "zxc", "zxc",
+			 * "edoardo.frati@gmail.it", "321342111", new ArrayList<ItemGenre>(
+			 * Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY,
+			 * ItemGenre.HORROR)), new ArrayList<ItemGenre>(
+			 * Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE,
+			 * ItemGenre.ANIMATION))); System.out.println(
+			 * "writeonfile: utente zxc registrato");
+			 */this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
 					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0011, 100);
 			this.m.registerBook("Lo hobbit", 1953, "J.R.R. Tolkien", Language.ENGLISH, "23123100",
 					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0012, 50);
@@ -104,18 +115,63 @@ public class ControllerImpl implements Controller {
 					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0013, 30);
 			this.m.registerBook("Shining", 1960, "Stephen King", Language.ENGLISH, "23121000", ItemGenre.HORROR,
 					"Mondadori", 0017, 1);
-			this.m.registerBook("Misery non deve morire", 1966, "Stephen King", Language.ENGLISH, "23121007",
+			this.m.registerBook("Misery non deve morire", 1966, "Stephen King", Language.ENGLISH, "231210072",
 					ItemGenre.HORROR, "Mondadori", 0111, 2);
-			this.m.registerBook("La macchina fantasma", 1970, "Stephen Cronenberg", Language.ENGLISH, "23111007",
+			this.m.registerBook("La macchina fantasma", 1970, "Stephen Cronenberg", Language.ENGLISH, "231110073",
 					ItemGenre.HORROR, "Mondadori", 0110, 3);
-			this.m.registerBook("Il vecchio e il mare", 1956, "Ernest Hemingway", Language.ENGLISH, "23521007",
+			this.m.registerBook("Il vecchio e il mare", 1956, "Ernest Hemingway", Language.ENGLISH, "235210074",
 					ItemGenre.FANTASY, "Mondadori", 0101, 2);
-			this.m.registerBook("Il vecchio e il mare 2", 1986, "Ernest Hemingway", Language.ENGLISH, "33521007",
+			this.m.registerBook("Il vecchio e il mare 2", 1986, "Ernest Hemingway", Language.ENGLISH, "335210075",
 					ItemGenre.FANTASY, "Mondadori", 0301, 12);
-			this.m.registerBook("Misery non deve morire", 1966, "Stephen King", Language.ENGLISH, "23121007",
-					ItemGenre.HORROR, "Mondadori", 0111, 2);
-			this.m.registerBook("Misery non deve morire", 1966, "Stephen King", Language.ENGLISH, "23121007",
-					ItemGenre.HORROR, "Mondadori", 0111, 2);
+			this.m.registerBook("IT", 1966, "Stephen King", Language.ENGLISH, "231210076", ItemGenre.HORROR,
+					"Mondadori", 0111, 2);
+			this.m.registerBook("Il settimo sigillo", 1966, "Stephen King", Language.ENGLISH, "231210077",
+					ItemGenre.HORROR, "Mondadori", 0113, 2);
+
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "231210078", ItemGenre.ADVENTURE,
+					"Mondadori", 0114, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "231110079",
+					ItemGenre.ADVENTURE, "Mondadori", 0115, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "123121007", ItemGenre.ANIMATION,
+					"Mondadori", 0116, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "223111007",
+					ItemGenre.ANIMATION, "Mondadori", 0117, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "323121007",
+					ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT, "Mondadori", 0001, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "423111007",
+					ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT, "Mondadori", 0002, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "523121007", ItemGenre.BIOGRAPHICAL,
+					"Mondadori", 0003, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "623111007",
+					ItemGenre.BIOGRAPHICAL, "Mondadori", 0004, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "723121007", ItemGenre.BIOGRAPHIES,
+					"Mondadori", 0005, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "823111007",
+					ItemGenre.BIOGRAPHIES, "Mondadori", 0006, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "923121007",
+					ItemGenre.CLASSICAL_CRITICISM, "Mondadori", 0007, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "213111007",
+					ItemGenre.CLASSICAL_CRITICISM, "Mondadori", 0010, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "223121007", ItemGenre.COMEDY,
+					"Mondadori", 0011, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "233111007", ItemGenre.COMEDY,
+					"Mondadori", 0012, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "243121007",
+					ItemGenre.CURRENT_NEWS_REPORTS, "Mondadori", 0013, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "253111007",
+					ItemGenre.CURRENT_NEWS_REPORTS, "Mondadori", 0014, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "263121007", ItemGenre.DOCUMENTARY,
+					"Mondadori", 0015, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "273111007",
+					ItemGenre.DOCUMENTARY, "Mondadori", 0016, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "283121007", ItemGenre.DRAMA,
+					"Mondadori", 0017, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "293111007", ItemGenre.DRAMA,
+					"Mondadori", 0020, 3);
+			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "231121007", ItemGenre.FASHION,
+					"Mondadori", 0021, 2);
+			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "231211007", ItemGenre.FASHION,
+					"Mondadori", 0022, 3);
 			this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
 					120, true, 10);
 			this.m.registerMovie("Star Trek: Into Darkness", 2012, "Bad Robot", "J.J. Abrams", Language.ENGLISH,
@@ -149,6 +205,7 @@ public class ControllerImpl implements Controller {
 			cal2.set(Calendar.YEAR, 2016);
 			cal2.set(Calendar.MONTH, 8);
 			cal2.set(Calendar.DAY_OF_MONTH, 23);
+
 			this.m.bookSit(cal, 1, ((UserImpl) u).getIdUser());
 			this.m.bookSit(cal, 2, ((UserImpl) u2).getIdUser());
 			this.m.bookSit(cal2, 1, ((UserImpl) u).getIdUser());
@@ -179,9 +236,11 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			this.v.showError("Utente già presente nell'archivio");
 		}
+		System.out.println("writeonfile: dati quasi salvati");
 		this.fm.writeObjectIntoFile("archivio.utenti", this.m);
 		this.fm.writeObjectIntoFile("archivio.oggetti", this.m);
 		this.fm.writeObjectIntoFile("archivio.aulastudio", this.m);
+		System.out.println("writeonfile: dati salvati");
 	}
 
 	@Override
@@ -415,7 +474,7 @@ public class ControllerImpl implements Controller {
 				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemSelectedByUser())) {
 					try {
 						this.m.borrowItem(i, this.actualUser.getIdUser());
-						System.out.println("userModify: entrato nel try");
+						System.out.println("borrowItem: entrato nel try");
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						this.v.showError("Errore! itemId o userId non presente nell'archivio");
@@ -423,10 +482,10 @@ public class ControllerImpl implements Controller {
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				this.v.showError("Oggetto non presente nell'archivio per il prestito");
+				this.v.showError("Errore ritrovamento oggetto nell'archivio");
 			}
 		}
-		System.out.println("userModify: " + this.v.getItemSelectedByUser());
+		System.out.println("borrowItem: " + this.v.getItemSelectedByUser());
 	}
 
 	@Override
@@ -830,9 +889,11 @@ public class ControllerImpl implements Controller {
 				array[index] = "0";
 			} else if (arrayInt.get(index).equals(this.actualUser.getIdUser())) {
 				array[index] = "1";
+				System.out.println("setTakenSitsList: assegnato posto " + index + " a 1");
 			} else {
 				try {
 					array[index] = this.m.getRequiredUser(arrayInt.get(index)).getUsername();
+					System.out.println("setTakenSitsList: assegnato posto " + index + " a user");
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					this.v.showError("Errore! Utente non presente nell'archivio");
@@ -854,11 +915,14 @@ public class ControllerImpl implements Controller {
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
 
-		System.out.println("takeSit: " + this.v.getTakenSits());
+		System.out.println("takeSit: " + this.v.getSelectedSit());
 
 		try {
-			this.m.bookSit(day, this.v.getTakenSits(), this.actualUser.getIdUser());
+			System.out.println("takeSit: entrato nel try");
+			this.m.bookSit(day, (this.v.getSelectedSit() - 1), this.actualUser.getIdUser());
+			System.out.println("takeSit: eseguito il book");
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
+			System.out.println("takeSit: scritto nel file");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Posto o Id utente non validi");
@@ -880,8 +944,11 @@ public class ControllerImpl implements Controller {
 				this.v.getStudyRoomSelectedDay());
 
 		try {
-			this.m.cancelSit(day, this.v.getSelectedSit(), this.actualUser.getIdUser());
+			System.out.println("cancelSit: entrato nel try");
+			this.m.cancelSit(day, (this.v.getSelectedSit() - 1), this.actualUser.getIdUser());
+			System.out.println("cancelSit: eseguito il cancel");
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
+			System.out.println("cancelSit: eseguito il write");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			this.v.showError("Errore! Posto selezionato non valido per la cancellazione");
@@ -1090,6 +1157,6 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void setView(final view.View v) {
 		this.v = v;
-		// this.writeOnFile();
+		this.writeOnFile();
 	}
 }
