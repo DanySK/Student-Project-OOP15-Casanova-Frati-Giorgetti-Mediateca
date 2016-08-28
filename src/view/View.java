@@ -465,8 +465,11 @@ public interface View {
 
 	/**
 	 * Tells controller to extend borrow.
+	 * 
+	 * @param book
+	 *            the book to extend borrow
 	 */
-	void extendBorrow();
+	void extendBorrow(String book);
 
 	/**
 	 * Sets the wishlist.

@@ -652,15 +652,15 @@ public class ViewImpl implements View {
 		if (choose == 0) {
 			this.giveBackItem();
 		} else if (choose == 1) {
-			this.extendBorrow();
+			this.extendBorrow(book);
 		}
 
 	}
 
 	// //OK
 	@Override
-	public void extendBorrow() {
-		this.c.extendBorrow();
+	public void extendBorrow(final String book) {
+		this.c.extendBorrow(book);
 
 	}
 
@@ -702,7 +702,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveManagerBorrowList() {
-		this.c.borrowList();
+		this.c.otherUserBorrowList();
 
 	}
 
