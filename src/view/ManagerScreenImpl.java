@@ -49,6 +49,12 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		this.add(newBook);
 		JButton delete = new JButton("Elimina");
 
+		JButton seeBorrowedList = new JButton("Vedi prestiti");
+		seeBorrowedList.setFont(new Font("Tahoma", Font.PLAIN,
+				ViewImpl.FONT_SIZE));
+		seeBorrowedList.setBounds(498, 400, 273, 40);
+		this.add(seeBorrowedList);
+
 		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		JButton modifyBook = new JButton("Modifica Libro");
 		modifyBook.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
@@ -68,12 +74,13 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 150, 273, 40);
 		showUserList
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
 			this.type = TypeList.USER;
 			v.giveMeUserList();
+			seeBorrowedList.setEnabled(false);
 			delete.setEnabled(false);
 			modifyBook.setEnabled(false);
 			modifyMovie.setEnabled(false);
@@ -83,27 +90,22 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(498, 200, 273, 40);
 		showItemList
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
 			this.type = TypeList.ITEM;
-			delete.setEnabled(true);
-			modifyBook.setEnabled(true);
-			modifyMovie.setEnabled(true);
+			seeBorrowedList.setEnabled(false);
+			delete.setEnabled(false);
+			modifyBook.setEnabled(false);
+			modifyMovie.setEnabled(false);
 			v.giveMeItemList();
 			v.swapView(CardName.MANAGER_MENU);
 		});
 
-		JButton seeBorrowedList = new JButton("Vedi prestiti");
-		seeBorrowedList.setFont(new Font("Tahoma", Font.PLAIN,
-				ViewImpl.FONT_SIZE));
-		seeBorrowedList.setBounds(498, 400, 273, 40);
-		this.add(seeBorrowedList);
 		this.list = new JList<String>();
 		this.list.setModel(this.model);
 		this.add(this.list);
-
 		this.list.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
@@ -113,7 +115,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-									.toString());
+							.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
 					v.showUserInfo();
@@ -121,7 +123,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-									.toString());
+							.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
 					v.showItemInfo();
@@ -147,22 +149,40 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 			v.giveMeItemInfoFromManager();
 			v.swapView(CardName.FILM_MODIFY);
 		});
-		if (this.type.equals(TypeList.USER)) {
-			// SEE BORROWED LIST -> REFRESH
-			if (this.list.isSelectionEmpty()) {
-				seeBorrowedList.setEnabled(false);
-				v.swapView(CardName.MANAGER_MENU);
+
+		this.list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent evt) {
+				if (evt.getClickCount() == 1) {
+					System.out.println("click on user");
+					if ((ManagerScreenImpl.this.type == TypeList.ITEM)
+							&& ManagerScreenImpl.this.list.isSelectionEmpty()) {
+						delete.setEnabled(false);
+						modifyBook.setEnabled(false);
+						modifyMovie.setEnabled(false);
+						seeBorrowedList.setEnabled(false);
+					} else if ((ManagerScreenImpl.this.type == TypeList.ITEM)
+							&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
+						seeBorrowedList.setEnabled(false);
+						delete.setEnabled(true);
+						modifyBook.setEnabled(true);
+						modifyMovie.setEnabled(true);
+					} else if ((ManagerScreenImpl.this.type == TypeList.USER)
+							&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
+						delete.setEnabled(false);
+						seeBorrowedList.setEnabled(true);
+						modifyBook.setEnabled(false);
+						modifyMovie.setEnabled(false);
+					}
+					v.swapView(CardName.MANAGER_MENU);
+				}
+
 			}
-			seeBorrowedList.addActionListener(e -> {
-				v.giveManagerBorrowList();
-				v.swapView(CardName.MANAGER_MENU);
-			});
-		} else if (this.type.equals(TypeList.ITEM)) {
-
-			seeBorrowedList.setEnabled(false);
-
-		}
-
+		});
+		seeBorrowedList.addActionListener(e -> {
+			v.giveManagerBorrowList();
+			v.swapView(CardName.MANAGER_MENU);
+		});
 		JButton exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		exit.setBounds(620, 474, 151, 60);

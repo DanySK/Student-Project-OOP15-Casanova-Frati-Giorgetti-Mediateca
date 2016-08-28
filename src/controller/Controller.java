@@ -89,8 +89,9 @@ public interface Controller {
 
 	/**
 	 * Method which extends the borrowing of an object.
+	 * @param book 
 	 */
-	void extendBorrow();
+	void extendBorrow(String book);
 
 	/**
 	 * Method which deletes the actual user from the archive.
