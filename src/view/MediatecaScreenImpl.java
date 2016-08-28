@@ -31,6 +31,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private JComboBox<TypeItemInfo> itemSelect = new JComboBox<TypeItemInfo>();
 	private String dClicked;
 	private JTextField searchField;
+	private String selected;
 
 	/**
 	 * Builder for MediatecaScreen.
@@ -50,20 +51,16 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 		final JButton search;
 		final JButton review;
-		giveBackItem = new JButton("Restituisci ");
-		giveBackItem.setBounds(586, 164, 178, 27);
-		giveBackItem
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		likeItem = new JButton("Mi Piace");
 		likeItem.setBounds(586, 204, 178, 27);
 		likeItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeBorrowedItem = new JButton("In prestito");
-		seeBorrowedItem.setBounds(586, 246, 178, 27);
+		seeBorrowedItem.setBounds(586, 324, 178, 27);
 		seeBorrowedItem.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.SMALL_SIZE));
 		borrowItem = new JButton("Prendi ");
 		borrowItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		borrowItem.setBounds(586, 124, 178, 27);
+		borrowItem.setBounds(586, 164, 178, 27);
 		this.searchField = new JTextField();
 		this.searchField.setBounds(21, 84, 521, 27);
 		this.filterSelect = new JComboBox(utils.TypeItemInfo.values());
@@ -111,11 +108,10 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			}
 		});
 		review = new JButton("Recensisci");
-		review.setBounds(586, 286, 178, 27);
+		review.setBounds(586, 244, 178, 27);
 		review.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 
 		this.add(borrowItem);
-		this.add(giveBackItem);
 		this.add(likeItem);
 		this.add(seeBorrowedItem);
 		this.add(this.searchField);
@@ -132,7 +128,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		});
 
 		JButton seeWishlist = new JButton("Wishlist");
-		seeWishlist.setBounds(586, 326, 178, 27);
+		seeWishlist.setBounds(586, 284, 178, 27);
 		seeWishlist
 				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
@@ -143,7 +139,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 		JButton reviews = new JButton("Recensioni");
 		reviews.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		reviews.setBounds(586, 366, 178, 27);
+		reviews.setBounds(586, 364, 178, 27);
 		this.add(reviews);
 
 		JLabel pres = new JLabel("Cerca tra libri e film!");
@@ -159,11 +155,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			System.out.println("Prendi "
 					+ this.filteredJList.getSelectedValue());
 			v.borrowItem();
-		});
-		giveBackItem.addActionListener(e -> {
-			System.out.println("Consegna "
-					+ this.filteredJList.getSelectedValue());
-			v.giveBackItem();
 		});
 		likeItem.addActionListener(e -> {
 			System.out.println("Like " + this.filteredJList.getSelectedValue());
