@@ -124,7 +124,7 @@ public class ModelImpl implements Serializable, Model {
       this.setReccomandedList(u.getIdUser());
       System.out.println("User " + u.toString() + "adds to te archive.");
     } else {
-      throw new Exception("Can not add user " + initUsername
+      throw new UserException("Can not add user " + initUsername
                   + " into the archive becouse there is already a user with that username.");
     }
   }
@@ -146,7 +146,8 @@ public class ModelImpl implements Serializable, Model {
       this.archiveUser.removeUser(userId);
       System.out.println("User: " + userId + " removed from archive.");
     } else {
-      throw new Exception("User: " + userId + " not contained into the archive.Can not remove it");
+      throw new UserException(
+                  "User: " + userId + " not contained into the archive.Can not remove it");
     }
 
   }
@@ -193,7 +194,7 @@ public class ModelImpl implements Serializable, Model {
       this.archiveItem.removeItem(itemId);
       System.out.println("Item: " + itemId + " removed from archive.");
     } else {
-      throw new Exception("Item: " + itemId + " is not into the archive.");
+      throw new ItemException("Item: " + itemId + " is not into the archive.");
     }
 
   }
@@ -208,11 +209,11 @@ public class ModelImpl implements Serializable, Model {
       } else {
         System.out.println(itemId + " not available.");
       }
-    } else {
-      throw new Exception("ItemId: " + itemId + " or userId" + userId
-                  + "are not contained into the archive");
+    } else if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
+    } else if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + "are not contained into the archive");
     }
-
   }
 
   @Override
@@ -222,7 +223,7 @@ public class ModelImpl implements Serializable, Model {
       this.archiveUser.getUser(userId).removeItem(itemId);
       System.out.println("UserId " + userId + "returns itemId " + itemId);
     } else {
-      throw new Exception("ItemId: " + itemId + " or userId" + userId
+      throw new ItemException("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive");
     }
 
@@ -234,9 +235,10 @@ public class ModelImpl implements Serializable, Model {
       this.archiveItem.getItem(itemId).addLike(userId);
       this.archiveUser.getUser(userId).addToWishList(itemId);
       System.out.println("UserId: " + userId + " likes itemId: " + itemId);
-    } else {
-      throw new Exception("ItemId: " + itemId + " or userId" + userId
-                  + "are not contained into the archive");
+    } else if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
+    } else if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + "are not contained into the archive");
     }
   }
 
@@ -248,12 +250,13 @@ public class ModelImpl implements Serializable, Model {
         this.archiveUser.getUser(userId).removeFromWishList(itemId);
         System.out.println("UserId: " + userId + "doesn't like itemId: " + itemId);
       } else {
-        throw new Exception(
+        throw new UserException(
                     "ItemId: " + itemId + " not contained into the userId" + userId + "wishlist.");
       }
-    } else {
-      throw new Exception("ItemId: " + itemId + " or userId" + userId
-                  + "are not contained into the archive");
+    } else if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
+    } else if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + "are not contained into the archive");
     }
 
   }
@@ -268,11 +271,12 @@ public class ModelImpl implements Serializable, Model {
         this.archiveItem.getItem(itemId).addReview(rev);
         System.out.println(rev.toString() + " adds.");
       } else {
-        throw new Exception("ItemId: " + itemId + " not loaned to " + userId + " userId\n");
+        throw new UserException("ItemId: " + itemId + " not loaned to " + userId + " userId\n");
       }
-    } else {
-      throw new Exception("ItemId: " + itemId + " or userId" + userId
-                  + "are not contained into the archive\n");
+    } else if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
+    } else if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + "are not contained into the archive");
     }
   }
 
@@ -287,7 +291,7 @@ public class ModelImpl implements Serializable, Model {
     if (this.archiveItem.containsItem(itemId)) {
       return (ItemImpl) this.archiveItem.getItem(itemId);
     } else {
-      throw new Exception("ItemId: " + itemId + " not contained into the archive\n");
+      throw new ItemException("ItemId: " + itemId + " not contained into the archive\n");
     }
   }
 
@@ -296,7 +300,7 @@ public class ModelImpl implements Serializable, Model {
     if (this.archiveUser.contains(userId)) {
       return this.archiveUser.getUser(userId);
     } else {
-      throw new Exception("UserId: " + userId + " not contained into the archive\n");
+      throw new UserException("UserId: " + userId + " not contained into the archive\n");
     }
   }
 
@@ -321,7 +325,7 @@ public class ModelImpl implements Serializable, Model {
       }
       return mmap;
     } else {
-      throw new Exception("UserId: " + userId + "is not in the archive.");
+      throw new UserException("UserId: " + userId + "is not in the archive.");
     }
   }
 
@@ -387,7 +391,6 @@ public class ModelImpl implements Serializable, Model {
 
     }
     return r;
-
   }
 
   @Override
@@ -398,7 +401,9 @@ public class ModelImpl implements Serializable, Model {
                 && (!ts.equals(TypeItemInfo.LANGUAGE)) && (!ts.equals(TypeItemInfo.GENRE))) {
       throw new Exception("TypeSearch " + ts + "not valid to change on item");
     }
-
+    if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId" + itemId + " not contained into the archive.");
+    }
     if (ts.equals(TypeItemInfo.TITLE)) {
       ((ItemImpl) this.archiveItem.getItem(itemId)).setTitle((String) param);
     } else if (ts.equals(TypeItemInfo.AUTHOR)) {
@@ -423,6 +428,9 @@ public class ModelImpl implements Serializable, Model {
                 && (!ts.equals(UserInfo.TELEPHONE_NUMBER))) {
       throw new Exception("TypeSearch " + ts + "not valid to change on User");
     }
+    if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + " not contained into the archive.");
+    }
     if (ts.equals(UserInfo.NAME)) {
       this.archiveUser.getUser(userId).setName((String) param);
     } else if (ts.equals(UserInfo.SURNAME)) {
@@ -442,10 +450,8 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void setReccomandedList(final Integer userId) throws Exception {
-
     Set<Integer> all;
     List<Integer> toAdd = new LinkedList<Integer>();
-
     for (ItemGenre im : this.archiveUser.getUser(userId).getMoviePreferences()) {
       all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeItemInfo.GENRE, im.toString());
       if (all.size() != 0) {
@@ -455,13 +461,11 @@ public class ModelImpl implements Serializable, Model {
           if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
             start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
             best = v;
-
           }
         }
         toAdd.add(best);
       }
     }
-
     for (ItemGenre ig : this.archiveUser.getUser(userId).getBookPreferences()) {
       all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE, ig.toString());
       if (all.size() != 0) {
@@ -477,7 +481,6 @@ public class ModelImpl implements Serializable, Model {
       }
     }
     this.archiveUser.getUser(userId).setRecommendedList(toAdd);
-
   }
 
   @Override
@@ -493,7 +496,7 @@ public class ModelImpl implements Serializable, Model {
     if (this.archiveUser.contains(initUserId)) {
       this.studyRoom.takeSit(initDay, initSit, initUserId);
     } else {
-      throw new Exception("UserId: " + initUserId + " not in the archive.");
+      throw new UserException("UserId: " + initUserId + " not in the archive.");
     }
   }
 
