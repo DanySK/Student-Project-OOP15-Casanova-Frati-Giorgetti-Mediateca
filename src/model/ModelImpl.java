@@ -116,7 +116,7 @@ public class ModelImpl implements Serializable, Model {
               final GregorianCalendar initBirthdate, final String initUsername,
               final String initPassword, final String initEmail, final String initTelephoneNumber,
               final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
-              throws Exception {
+              throws Exception, UserException {
     if (!this.checkUsername(initUsername)) {
       UserImpl u = new UserImpl(initName, initSurname, initBirthdate, initUsername, initPassword,
                   initEmail, initTelephoneNumber, initBookPref, initMoviePref);
@@ -156,7 +156,7 @@ public class ModelImpl implements Serializable, Model {
   public void registerBook(final String initTitle, final int initReleaseYear,
               final String initAuthor, final Language initCurrentLanguage, final String initISBN,
               final ItemGenre initGenre, final String initPublisher, final Integer initNumRelease,
-              final Integer initNumCopy) throws Exception {
+              final Integer initNumCopy) throws Exception, ItemException {
 
     ItemImpl b = ItemFactory.getNewBook(initTitle, initReleaseYear, initAuthor, initCurrentLanguage,
                 initISBN, initGenre, initPublisher, initNumRelease);
@@ -175,7 +175,7 @@ public class ModelImpl implements Serializable, Model {
               final String initPublisher, final String initAuthor,
               final Language initCurrentLanguage, final ItemGenre initGenre,
               final Integer initDuration, final Boolean initColor, final Integer initNumCopy)
-              throws Exception {
+              throws Exception, ItemException {
     ItemImpl m = ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher, initAuthor,
                 initCurrentLanguage, initGenre, initDuration, initColor);
     if (!this.archiveItem.containsItem(m.getiD())) {
@@ -189,7 +189,7 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void deleteItem(final int itemId) throws Exception {
+  public void deleteItem(final int itemId) throws Exception, ItemException {
     if (this.archiveItem.containsItem(itemId)) {
       this.archiveItem.removeItem(itemId);
       System.out.println("Item: " + itemId + " removed from archive.");
@@ -200,7 +200,7 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void borrowItem(final int itemId, final int userId) throws Exception {
+  public void borrowItem(final int itemId, final int userId) throws Exception, ItemException {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       if (this.archiveItem.getItemInfo(itemId).isAvailable()) {
         this.archiveItem.addUser(itemId, userId);
@@ -217,7 +217,7 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void returnItem(final int itemId, final int userId) throws Exception {
+  public void returnItem(final int itemId, final int userId) throws Exception, ItemException {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.removeUser(itemId, userId);
       this.archiveUser.getUser(userId).removeItem(itemId);
@@ -230,7 +230,8 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void addLike(final int itemId, final int userId) throws Exception {
+  public void addLike(final int itemId, final int userId)
+              throws UserException, ItemException, Exception {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.getItem(itemId).addLike(userId);
       this.archiveUser.getUser(userId).addToWishList(itemId);
@@ -243,7 +244,8 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void removeLike(final Integer itemId, final Integer userId) throws Exception {
+  public void removeLike(final Integer itemId, final Integer userId)
+              throws Exception, UserException, ItemException {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       if (this.getRequiredUser(userId).getWishlist().contains(itemId)) {
         this.archiveItem.getItem(itemId).removeLike(userId);
@@ -263,7 +265,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void addReview(final Integer itemId, final Integer userId, final Integer vote,
-              final String note) throws Exception {
+              final String note) throws Exception, ItemException, UserException {
     ReviewImpl rev = new ReviewImpl(vote, note);
     if (this.archiveUser.contains(userId) && this.archiveItem.containsItem(itemId)) {
       if (this.getRequiredUser(userId).getLoanArchive().containsKey(itemId)) {
@@ -287,7 +289,7 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public ItemImpl getRequiredItem(final Integer itemId) throws Exception {
+  public ItemImpl getRequiredItem(final Integer itemId) throws Exception, ItemException {
     if (this.archiveItem.containsItem(itemId)) {
       return (ItemImpl) this.archiveItem.getItem(itemId);
     } else {
@@ -296,7 +298,7 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public UserImpl getRequiredUser(final Integer userId) throws Exception {
+  public UserImpl getRequiredUser(final Integer userId) throws Exception, UserException {
     if (this.archiveUser.contains(userId)) {
       return this.archiveUser.getUser(userId);
     } else {
@@ -315,7 +317,8 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public Map<Integer, Double> checkDeadlineas(final Integer userId) throws Exception {
+  public Map<Integer, Double> checkDeadlineas(final Integer userId)
+              throws Exception, UserException {
     Map<Integer, Double> mmap = new HashMap<>();
     if (this.archiveUser.contains(userId)) {
       for (Integer i : this.archiveUser.getUser(userId).getLoanArchive().keySet()) {
@@ -395,7 +398,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void changeItem(final TypeItemInfo ts, final Integer itemId, final Object param)
-              throws Exception {
+              throws Exception, ItemException {
     if ((!ts.equals(TypeItemInfo.AUTHOR)) && (!ts.equals(TypeItemInfo.TITLE))
                 && (!ts.equals(TypeItemInfo.PRODUCER)) && (!ts.equals(TypeItemInfo.RELEASE_YEAR))
                 && (!ts.equals(TypeItemInfo.LANGUAGE)) && (!ts.equals(TypeItemInfo.GENRE))) {
@@ -421,7 +424,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void changeUser(final UserInfo ts, final Integer userId, final Object param)
-              throws Exception {
+              throws Exception, UserException {
     if ((!ts.equals(UserInfo.NAME)) && (!ts.equals(UserInfo.SURNAME))
                 && (!ts.equals(UserInfo.BIRTHDATE)) && (!ts.equals(UserInfo.USERNAME))
                 && (!ts.equals(UserInfo.PASSWORD)) && (!ts.equals(UserInfo.EMAIL))
@@ -449,42 +452,47 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void setReccomandedList(final Integer userId) throws Exception {
-    Set<Integer> all;
-    List<Integer> toAdd = new LinkedList<Integer>();
-    for (ItemGenre im : this.archiveUser.getUser(userId).getMoviePreferences()) {
-      all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeItemInfo.GENRE, im.toString());
-      if (all.size() != 0) {
-        Integer start = 0;
-        Integer best = 0;
-        for (Integer v : all) {
-          if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
-            start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
-            best = v;
+  public void setReccomandedList(final Integer userId) throws Exception, UserException {
+    if (!this.archiveUser.contains(userId)) {
+      throw new UserException("User " + userId + " not contained into the archive.");
+    } else {
+      Set<Integer> all;
+      List<Integer> toAdd = new LinkedList<Integer>();
+      for (ItemGenre im : this.archiveUser.getUser(userId).getMoviePreferences()) {
+        all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeItemInfo.GENRE,
+                    im.toString());
+        if (all.size() != 0) {
+          Integer start = 0;
+          Integer best = 0;
+          for (Integer v : all) {
+            if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
+              start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
+              best = v;
+            }
           }
+          toAdd.add(best);
         }
-        toAdd.add(best);
       }
-    }
-    for (ItemGenre ig : this.archiveUser.getUser(userId).getBookPreferences()) {
-      all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE, ig.toString());
-      if (all.size() != 0) {
-        Integer start = 0;
-        Integer best = 0;
-        for (Integer v : all) {
-          if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
-            start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
-            best = v;
+      for (ItemGenre ig : this.archiveUser.getUser(userId).getBookPreferences()) {
+        all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE, ig.toString());
+        if (all.size() != 0) {
+          Integer start = 0;
+          Integer best = 0;
+          for (Integer v : all) {
+            if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
+              start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
+              best = v;
+            }
           }
+          toAdd.add(best);
         }
-        toAdd.add(best);
       }
+      this.archiveUser.getUser(userId).setRecommendedList(toAdd);
     }
-    this.archiveUser.getUser(userId).setRecommendedList(toAdd);
   }
 
   @Override
-  public void refreshRecommendedList() throws Exception {
+  public void refreshRecommendedList() throws UserException, Exception {
     for (Integer i : this.getAllUserId()) {
       this.setReccomandedList(i);
     }
@@ -492,7 +500,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public void bookSit(final GregorianCalendar initDay, final Integer initSit,
-              final Integer initUserId) throws Exception {
+              final Integer initUserId) throws UserException, Exception {
     if (this.archiveUser.contains(initUserId)) {
       this.studyRoom.takeSit(initDay, initSit, initUserId);
     } else {

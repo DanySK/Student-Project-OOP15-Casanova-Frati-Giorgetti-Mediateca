@@ -52,10 +52,9 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
   }
 
   @Override
-  public void addUser(final UserImpl initUser) throws Exception {
+  public void addUser(final UserImpl initUser) throws UserException {
     if (!ArchiveUserImpl.singleton.contains(initUser.getIdUser())) {
       ArchiveUserImpl.singleton.getUserArchive().put(initUser.getIdUser(), initUser);
-
     } else {
       throw new UserException("User: " + initUser.getIdUser()
                   + "contained into the archive.Can not add one more time.");
@@ -63,7 +62,7 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
   }
 
   @Override
-  public void removeUser(final Integer userId) throws Exception {
+  public void removeUser(final Integer userId) throws UserException {
     if (ArchiveUserImpl.singleton.contains(userId)) {
       ArchiveUserImpl.singleton.getUserArchive().remove(userId);
     } else {
@@ -73,7 +72,7 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
   }
 
   @Override
-  public UserImpl getUser(final Integer userId) throws Exception {
+  public UserImpl getUser(final Integer userId) throws UserException {
     if (ArchiveUserImpl.singleton.contains(userId)) {
       return ArchiveUserImpl.singleton.getUserArchive().get(userId);
     } else {

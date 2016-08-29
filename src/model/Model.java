@@ -60,14 +60,16 @@ public interface Model {
    *          user's list of BookGenre preferences.
    * @param initMoviePref
    *          user's list of MovieGenre preferences.
-   * @throws Exception
+   * @throws UserException
    *           in the case which Users already is into the archive.
+   * @throws Exception
+   *           in the case which the are problems with data struct.
    */
   void registerUser(final String initName, final String initSurname,
               final GregorianCalendar initBirthdate, final String initUsername,
               final String initPassword, final String initEmail, final String initTelephoneNumber,
               final List<ItemGenre> initBookPref, final List<ItemGenre> initMoviePref)
-              throws Exception;
+              throws Exception, UserException;
 
   /**
    * This method can be used by USER, MANAGER. This method removes the user with

@@ -73,7 +73,7 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public void changeAmount(final Integer itemId, final Integer amount) throws Exception {
+  public void changeAmount(final Integer itemId, final Integer amount) throws ItemException {
     if (this.containsItem(itemId)) {
       ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().addQuantity(amount);
     } else {
@@ -82,7 +82,7 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public Item getItem(final Integer itemId) throws Exception {
+  public Item getItem(final Integer itemId) throws ItemException {
     if (this.containsItem(itemId)) {
       return ArchiveImpl.singleton.getItemArchive().get(itemId).getFirst();
     } else {
@@ -91,7 +91,7 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public ItemInfo getItemInfo(final Integer itemId) throws Exception {
+  public ItemInfo getItemInfo(final Integer itemId) throws ItemException {
     if (this.containsItem(itemId)) {
       return ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond();
     } else {
@@ -100,7 +100,7 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public void removeItem(final Integer itemId) throws Exception {
+  public void removeItem(final Integer itemId) throws ItemException {
     if (this.containsItem(itemId)) {
       ArchiveImpl.singleton.getItemArchive().remove(itemId);
     } else {
@@ -111,7 +111,7 @@ public final class ArchiveImpl implements Serializable, Archive {
 
   @Override
   public double calculateDifferenceDays(final Integer itemId, final Integer userId)
-              throws Exception {
+              throws ItemException, UserException {
     if (this.containsItem(itemId)) {
       if (ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList()
                   .containsKey(userId)) {
@@ -145,7 +145,8 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public void addUser(final Integer itemId, final Integer userId) throws Exception {
+  public void addUser(final Integer itemId, final Integer userId)
+              throws ItemException, UserException {
     if (this.containsItem(itemId)) {
       ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList().put(userId,
                   this.getToDay());
@@ -158,7 +159,8 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public void removeUser(final Integer itemId, final Integer userId) throws Exception {
+  public void removeUser(final Integer itemId, final Integer userId)
+              throws ItemException, UserException {
     if (this.containsItem(itemId)) {
       if (ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList()
                   .containsKey(userId)) {
@@ -176,7 +178,7 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public boolean checkAvailability(final Integer itemId) throws Exception {
+  public boolean checkAvailability(final Integer itemId) throws ItemException {
     if (this.containsItem(itemId)) {
       return ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().isAvailable();
     } else {
@@ -185,7 +187,7 @@ public final class ArchiveImpl implements Serializable, Archive {
   }
 
   @Override
-  public Set<Integer> getUserList(final Integer itemId) throws Exception {
+  public Set<Integer> getUserList(final Integer itemId) throws ItemException {
     if (this.containsItem(itemId)) {
       return Collections.unmodifiableSet(ArchiveImpl.singleton.getItemArchive().get(itemId)
                   .getSecond().getUserList().keySet());
