@@ -35,7 +35,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	private JButton reviews;
 	private String dClicked;
 	private JTextField searchField;
-	private String selected;
 	private JScrollPane scroll;
 
 	/**
@@ -184,9 +183,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		pres.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		pres.setBounds(42, 13, 722, 27);
 		this.add(pres);
-		if (!this.filteredJList.isSelectionEmpty()) {
-			this.selected = this.filteredJList.getSelectedValue().toString();
-		}
 		this.reviews.addActionListener(e -> {
 			v.giveMeAllItemReviews();
 			v.swapView(CardName.ALL_REVIEWS);
@@ -227,7 +223,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 	@Override
 	public String getSearchFilter() {
-		return this.selected;
+		return this.filterSelect.getSelectedItem().toString();
 	}
 
 	@Override
