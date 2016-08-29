@@ -63,7 +63,7 @@ public interface Model {
    * @throws UserException
    *           in the case which Users already is into the archive.
    * @throws Exception
-   *           in the case which the are problems with data struct.
+   *           in the case which the are problems with data structure.
    */
   void registerUser(final String initName, final String initSurname,
               final GregorianCalendar initBirthdate, final String initUsername,

@@ -61,7 +61,6 @@ public class ModelImpl implements Serializable, Model {
    *          User archive saved in the file in order to be deserialized.
    * @param initStudyRoom
    *          StudyRoom saved in the file in order to be deserialized.
-   *
    * @throws Exception
    *           in the case which singleton already exist.
    */
@@ -141,7 +140,7 @@ public class ModelImpl implements Serializable, Model {
   }
 
   @Override
-  public void deleteUser(final int userId) throws Exception {
+  public void deleteUser(final int userId) throws Exception, UserException {
     if (this.archiveUser.contains(userId)) {
       this.archiveUser.removeUser(userId);
       System.out.println("User: " + userId + " removed from archive.");
