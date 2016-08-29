@@ -9,7 +9,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import model.ItemException;
 import model.Pair;
+import model.UserException;
 import utils.TypeItem;
 
 /**
@@ -75,7 +77,7 @@ public final class ArchiveImpl implements Serializable, Archive {
     if (this.containsItem(itemId)) {
       ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().addQuantity(amount);
     } else {
-      throw new Exception("Item " + itemId + " is not in the archive.");
+      throw new ItemException("Item " + itemId + " is not in the archive.");
     }
   }
 
@@ -84,7 +86,7 @@ public final class ArchiveImpl implements Serializable, Archive {
     if (this.containsItem(itemId)) {
       return ArchiveImpl.singleton.getItemArchive().get(itemId).getFirst();
     } else {
-      throw new Exception("Item " + itemId + "is not in the archive.");
+      throw new ItemException("Item " + itemId + "is not in the archive.");
     }
   }
 
@@ -93,7 +95,7 @@ public final class ArchiveImpl implements Serializable, Archive {
     if (this.containsItem(itemId)) {
       return ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond();
     } else {
-      throw new Exception("Item " + itemId + "is not in the archive.");
+      throw new ItemException("Item " + itemId + "is not in the archive.");
     }
   }
 
@@ -102,7 +104,7 @@ public final class ArchiveImpl implements Serializable, Archive {
     if (this.containsItem(itemId)) {
       ArchiveImpl.singleton.getItemArchive().remove(itemId);
     } else {
-      throw new Exception("Item: " + itemId + " is not into the archive.");
+      throw new ItemException("Item: " + itemId + " is not into the archive.");
     }
 
   }
@@ -116,26 +118,21 @@ public final class ArchiveImpl implements Serializable, Archive {
         return this.dayBetweenDates(ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond()
                     .getUserList().get(userId));
       } else {
-        throw new Exception("User: " + userId + "Not contained into the " + itemId + " list");
+        throw new UserException("User: " + userId + "Not contained into the " + itemId + " list");
       }
     } else {
-      throw new Exception("Item: " + itemId + "Not contained into the archive.");
+      throw new ItemException("Item: " + itemId + "Not contained into the archive.");
     }
   }
 
   private double dayBetweenDates(final GregorianCalendar fromDate) {
-
     GregorianCalendar toDate = this.getToDay();
-
     // Conversion in ms
     long msFromDate = fromDate.getTimeInMillis();
     long msToDate = toDate.getTimeInMillis();
-
     long msBetween = msToDate - msFromDate;
-
     // Conversion in days with math rounding
     double ddBetween = Math.round(msBetween / ArchiveImpl.SSINDD);
-
     return ddBetween;
   }
 
@@ -155,7 +152,7 @@ public final class ArchiveImpl implements Serializable, Archive {
       System.out.println("User " + userId + " adds to book list " + itemId + " in date "
                   + this.getToDay());
     } else {
-      throw new Exception("User: " + userId + "can not take item: " + itemId
+      throw new ItemException("User: " + userId + "can not take item: " + itemId
                   + "becouse it is not contained into the archive.");
     }
   }
@@ -170,10 +167,10 @@ public final class ArchiveImpl implements Serializable, Archive {
         System.out.println("User " + userId + " removes from the item list " + itemId + " in date "
                     + this.getToDay());
       } else {
-        throw new Exception(("userId is not in the item's list"));
+        throw new UserException(("User: " + userId + " is not in the item's list"));
       }
     } else {
-      throw new Exception("User: " + userId + "can not remove user:" + userId + " from item: "
+      throw new ItemException("User: " + userId + "can not remove user:" + userId + " from item: "
                   + itemId + "list.");
     }
   }
@@ -183,7 +180,7 @@ public final class ArchiveImpl implements Serializable, Archive {
     if (this.containsItem(itemId)) {
       return ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().isAvailable();
     } else {
-      throw new Exception("Item: " + itemId + "Not contained into the archive.");
+      throw new ItemException("Item: " + itemId + "Not contained into the archive.");
     }
   }
 
@@ -193,7 +190,7 @@ public final class ArchiveImpl implements Serializable, Archive {
       return Collections.unmodifiableSet(ArchiveImpl.singleton.getItemArchive().get(itemId)
                   .getSecond().getUserList().keySet());
     } else {
-      throw new Exception("Item: " + itemId + "Not contained into the archive.");
+      throw new ItemException("Item: " + itemId + "Not contained into the archive.");
     }
   }
 
