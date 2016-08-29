@@ -15,6 +15,7 @@ import java.util.Set;
 import com.google.common.base.Objects;
 import com.google.common.base.Optional;
 
+import model.ItemException;
 import model.Pair;
 import utils.ItemGenre;
 
@@ -100,6 +101,7 @@ public class UserImpl implements Serializable, User {
   /**
    * @return the wishList.
    */
+  @Override
   public Set<Integer> getWishlist() {
     return Collections.unmodifiableSet(this.wishList);
   }
@@ -120,6 +122,7 @@ public class UserImpl implements Serializable, User {
   /**
    * @return the bookPreferences
    */
+  @Override
   public List<ItemGenre> getBookPreferences() {
     return Collections.unmodifiableList(this.bookPreferences);
   }
@@ -128,6 +131,7 @@ public class UserImpl implements Serializable, User {
    * @param initBookPreferences
    *          the bookPreferences to set
    */
+  @Override
   public void setBookPreferences(final List<ItemGenre> initBookPreferences) {
     this.bookPreferences = initBookPreferences;
   }
@@ -135,6 +139,7 @@ public class UserImpl implements Serializable, User {
   /**
    * @return the moviePreferences
    */
+  @Override
   public List<ItemGenre> getMoviePreferences() {
     return Collections.unmodifiableList(this.moviePreferences);
   }
@@ -143,6 +148,7 @@ public class UserImpl implements Serializable, User {
    * @param initMoviePreferences
    *          the moviePreferences to set
    */
+  @Override
   public void setMoviePreferences(final List<ItemGenre> initMoviePreferences) {
     this.moviePreferences = initMoviePreferences;
   }
@@ -151,6 +157,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's name.
    */
+  @Override
   public String getName() {
     return this.name;
   }
@@ -159,6 +166,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's surname.
    */
+  @Override
   public String getSurname() {
     return this.surname;
   }
@@ -167,6 +175,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's birthdate.
    */
+  @Override
   public GregorianCalendar getBirthdate() {
     return this.birthdate;
   }
@@ -175,6 +184,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's username.
    */
+  @Override
   public String getUsername() {
     return this.username;
   }
@@ -183,6 +193,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's password.
    */
+  @Override
   public String getPassword() {
     return this.password;
   }
@@ -191,6 +202,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's id.
    */
+  @Override
   public Integer getIdUser() {
     return this.idUser;
   }
@@ -199,6 +211,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's email.
    */
+  @Override
   public String getEmail() {
     return this.email;
   }
@@ -207,6 +220,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's telephone number.
    */
+  @Override
   public String getTelephoneNumber() {
     return this.telephoneNumber;
   }
@@ -215,6 +229,7 @@ public class UserImpl implements Serializable, User {
    *
    * @return user's recommended list.
    */
+  @Override
   public List<Integer> getRecommendedList() {
     return Collections.unmodifiableList(this.recommendedList);
   }
@@ -225,6 +240,7 @@ public class UserImpl implements Serializable, User {
    * @param initRecommendedList
    *          of itemId to set.
    */
+  @Override
   public void setRecommendedList(final List<Integer> initRecommendedList) {
     this.recommendedList = initRecommendedList;
   }
@@ -233,6 +249,7 @@ public class UserImpl implements Serializable, User {
    * @param initName
    *          the name to set.
    */
+  @Override
   public void setName(final String initName) {
     this.name = initName.toUpperCase();
   }
@@ -241,6 +258,7 @@ public class UserImpl implements Serializable, User {
    * @param initSurname
    *          the surname to set
    */
+  @Override
   public void setSurname(final String initSurname) {
     this.surname = initSurname.toUpperCase();
   }
@@ -249,6 +267,7 @@ public class UserImpl implements Serializable, User {
    * @param initBirthdate
    *          the birthdate to set
    */
+  @Override
   public void setBirthdate(final GregorianCalendar initBirthdate) {
     this.birthdate = initBirthdate;
   }
@@ -257,6 +276,7 @@ public class UserImpl implements Serializable, User {
    * @param initUsername
    *          the username to set
    */
+  @Override
   public void setUsername(final String initUsername) {
     this.username = initUsername;
   }
@@ -265,6 +285,7 @@ public class UserImpl implements Serializable, User {
    * @param initPassword
    *          the password to set
    */
+  @Override
   public void setPassword(final String initPassword) {
     this.password = initPassword;
   }
@@ -273,6 +294,7 @@ public class UserImpl implements Serializable, User {
    * @param initEmail
    *          the email to set
    */
+  @Override
   public void setEmail(final String initEmail) {
     this.email = initEmail.toLowerCase();
   }
@@ -281,6 +303,7 @@ public class UserImpl implements Serializable, User {
    * @param initTelephoneNumber
    *          the telephoneNumber to set
    */
+  @Override
   public void setTelephoneNumber(final String initTelephoneNumber) {
     this.telephoneNumber = initTelephoneNumber;
   }
@@ -312,7 +335,7 @@ public class UserImpl implements Serializable, User {
     if (this.loanArchive.containsKey(itemId)) {
       this.loanArchive.put(itemId, new Pair<>(true, null));
     } else {
-      throw new Exception("ItemId" + itemId + " is not in the archive.");
+      throw new ItemException("ItemId" + itemId + " is not in the archive.");
     }
   }
 

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import model.UserException;
+
 /**
  * This class implements Serializable and ArchiveUser, it has only one field
  * which contains the map of user register to the 'Mediateca'.
@@ -55,7 +57,7 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
       ArchiveUserImpl.singleton.getUserArchive().put(initUser.getIdUser(), initUser);
 
     } else {
-      throw new Exception("User: " + initUser.getIdUser()
+      throw new UserException("User: " + initUser.getIdUser()
                   + "contained into the archive.Can not add one more time.");
     }
   }
@@ -65,7 +67,8 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
     if (ArchiveUserImpl.singleton.contains(userId)) {
       ArchiveUserImpl.singleton.getUserArchive().remove(userId);
     } else {
-      throw new Exception("User: " + userId + " not contained into the archive.Can not remove it");
+      throw new UserException(
+                  "User: " + userId + " not contained into the archive. Can not remove it");
     }
   }
 
@@ -74,7 +77,8 @@ public final class ArchiveUserImpl implements Serializable, ArchiveUser {
     if (ArchiveUserImpl.singleton.contains(userId)) {
       return ArchiveUserImpl.singleton.getUserArchive().get(userId);
     } else {
-      throw new Exception("User: " + userId + " not contained into the archive.Can not remove it");
+      throw new UserException(
+                  "User: " + userId + " not contained into the archive. Can not remove it");
     }
   }
 
