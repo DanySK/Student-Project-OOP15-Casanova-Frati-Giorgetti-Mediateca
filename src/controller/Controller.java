@@ -89,7 +89,8 @@ public interface Controller {
 
 	/**
 	 * Method which extends the borrowing of an object.
-	 * @param book 
+	 * 
+	 * @param book
 	 */
 	void extendBorrow(String book);
 
@@ -210,4 +211,6 @@ public interface Controller {
 	void elementSelectedInManager();
 
 	void takeItemBefore();
+
+	void otherUserBorrowList();
 }
