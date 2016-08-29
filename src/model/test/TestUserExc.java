@@ -7,6 +7,7 @@ import java.util.Set;
 
 import model.Model;
 import model.ModelImpl;
+import model.UserException;
 import utils.ItemGenre;
 
 /**
@@ -24,7 +25,7 @@ public class TestUserExc {
    * @throws Exception
    *           in the case which user is already into the archive.
    */
-  @org.junit.Test(expected = Exception.class)
+  @org.junit.Test(expected = UserException.class)
   public void testUserException() throws Exception {
     Model m = new ModelImpl();
     LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
