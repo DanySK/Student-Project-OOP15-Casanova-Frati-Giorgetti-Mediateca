@@ -42,7 +42,7 @@ public class ItemShowImpl implements ItemShow {
 		mainPanel.setBounds(0, 0, 594, 1);
 		mainFrame.setSize(ItemShowImpl.FRAME_LENGHT, ItemShowImpl.FRAME_WIDTH);
 		mainFrame.setResizable(false);
-		mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
 
 		mainFrame.getContentPane().add(mainPanel);

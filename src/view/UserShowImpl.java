@@ -38,7 +38,7 @@ public class UserShowImpl implements UserShow {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBounds(0, 0, 594, 1);
 		mainFrame.setSize(UserShowImpl.FRAME_LENGHT, UserShowImpl.FRAME_WIDTH);
-		mainFrame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		mainFrame.getContentPane().setLayout(null);
 		mainFrame.setResizable(false);
 		mainFrame.setTitle("Utente");

@@ -78,7 +78,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 150, 273, 40);
 		showUserList
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
@@ -94,7 +94,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(498, 200, 273, 40);
 		showItemList
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
@@ -118,7 +118,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-									.toString());
+							.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
 					v.showUserInfo();
@@ -126,7 +126,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
 					System.out.println("Cliccato utente"
 							+ ((JList) evt.getSource()).getSelectedValue()
-									.toString());
+							.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
 					v.showItemInfoManager();
