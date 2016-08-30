@@ -88,7 +88,7 @@ public class StudyRoomImpl implements Serializable, StudyRoom {
   public void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
               throws Exception {
     if (this.mapStudyRoom.containsKey(day)) {
-      if ((sit <= StudyRoomImpl.N) && (sit > 0)) {
+      if ((sit < StudyRoomImpl.N) && (sit >= 0)) {
         if (this.mapStudyRoom.get(day).get(sit).equals(userId)) {
           this.mapStudyRoom.get(day).add(sit, 0);
         } else {
