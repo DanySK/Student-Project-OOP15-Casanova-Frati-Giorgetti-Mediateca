@@ -72,4 +72,10 @@ public interface StudyRoom {
    */
   void cancelSit(final GregorianCalendar day, final Integer sit, final Integer userId)
               throws Exception;
+
+  /**
+   *
+   * @return the number of sit.
+   */
+  int getNumSit();
 }

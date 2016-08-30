@@ -99,4 +99,9 @@ public class StudyRoomImpl implements Serializable, StudyRoom {
       }
     }
   }
+
+  @Override
+  public int getNumSit() {
+    return StudyRoomImpl.N;
+  }
 }
