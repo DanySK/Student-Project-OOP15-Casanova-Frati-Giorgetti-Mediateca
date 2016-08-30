@@ -91,6 +91,8 @@ public class StudyRoomImpl implements Serializable, StudyRoom {
       if ((sit < StudyRoomImpl.N) && (sit >= 0)) {
         if (this.mapStudyRoom.get(day).get(sit).equals(userId)) {
           this.mapStudyRoom.get(day).add(sit, 0);
+          System.out.println("Day " + day.getTimeInMillis() + " User " + userId
+                      + " removed from position " + sit);
         } else {
           throw new Exception(+sit + " not busy by " + userId);
         }

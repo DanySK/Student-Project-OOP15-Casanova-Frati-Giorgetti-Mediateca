@@ -44,6 +44,13 @@ public class TestStudyRoom {
         org.junit.Assert.assertFalse(
                     m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).equals(197392167));
       }
+      System.out.println(m.getAllUserSit(new GregorianCalendar(2016, 8, 20)));
+      for (int i = 0; i < m.getStudyRoomSit(); i++) {
+        m.cancelSit(new GregorianCalendar(2016, 8, 20), i, 197392167);
+        org.junit.Assert.assertFalse(
+                    m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).equals(197392167));
+      }
+      System.out.println(m.getAllUserSit(new GregorianCalendar(2016, 8, 20)));
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
