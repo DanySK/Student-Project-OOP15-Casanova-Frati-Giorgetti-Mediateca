@@ -22,6 +22,7 @@ import model.user.ArchiveUserImpl;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeColor;
 import utils.TypeItem;
 import utils.TypeItemInfo;
 import utils.UserInfo;
@@ -173,7 +174,7 @@ public class ModelImpl implements Serializable, Model {
   public void registerMovie(final String initTitle, final int initReleaseYear,
               final String initPublisher, final String initAuthor,
               final Language initCurrentLanguage, final ItemGenre initGenre,
-              final Integer initDuration, final Boolean initColor, final Integer initNumCopy)
+              final Integer initDuration, final TypeColor initColor, final Integer initNumCopy)
               throws Exception, ItemException {
     ItemImpl m = ItemFactory.getNewMovie(initTitle, initReleaseYear, initPublisher, initAuthor,
                 initCurrentLanguage, initGenre, initDuration, initColor);

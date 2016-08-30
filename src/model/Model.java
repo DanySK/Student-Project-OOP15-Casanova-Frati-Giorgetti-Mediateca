@@ -13,6 +13,7 @@ import model.item.ReviewImpl;
 import model.user.UserImpl;
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeColor;
 import utils.TypeItem;
 import utils.TypeItemInfo;
 import utils.UserInfo;
@@ -139,7 +140,7 @@ public interface Model {
    */
   void registerMovie(final String initTitle, final int initReleaseYear, final String initPublisher,
               final String initAuthor, final Language initCurrentLanguage,
-              final ItemGenre initGenre, final Integer initDuration, final Boolean initColor,
+              final ItemGenre initGenre, final Integer initDuration, final TypeColor initColor,
               final Integer initNumCopy) throws Exception;
 
   /**

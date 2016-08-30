@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeColor;
 
 /**
  * Movie extends ItemImpl taking his common field with Book. It forms the
@@ -16,7 +17,7 @@ public class Movie extends ItemImpl {
 
   private static final long serialVersionUID = 856227185802047288L;
   private final Integer duration;
-  private final Boolean color;
+  private final TypeColor color;
 
   @Override
   public String toString() {
@@ -45,7 +46,7 @@ public class Movie extends ItemImpl {
    */
   public Movie(final String initTitle, final int initReleaseYear, final String initPublisher,
               final String initAuthor, final Language initCurrentLanguage,
-              final ItemGenre initGenre, final Integer initDuration, final Boolean initColor) {
+              final ItemGenre initGenre, final Integer initDuration, final TypeColor initColor) {
     super(initTitle, initReleaseYear, initPublisher, initAuthor, initCurrentLanguage, initGenre);
     this.duration = initDuration;
     this.color = initColor;
@@ -65,7 +66,7 @@ public class Movie extends ItemImpl {
    * @return true == color, false == b/w.
    */
   @Override
-  public Boolean getColour() {
+  public TypeColor getColour() {
     return this.color;
   }
 

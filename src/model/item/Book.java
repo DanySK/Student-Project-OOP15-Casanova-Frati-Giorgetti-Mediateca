@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeColor;
 
 /**
  * Book extends ItemImpl taking its common field with movie. It forms the
@@ -87,7 +88,7 @@ public class Book extends ItemImpl {
   }
 
   @Override
-  public Boolean getColour() {
-    return false;
+  public TypeColor getColour() {
+    return TypeColor.BLACK_AND_WHITE;
   }
 }

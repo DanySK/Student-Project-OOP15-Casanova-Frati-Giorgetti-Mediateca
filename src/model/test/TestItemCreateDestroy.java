@@ -7,6 +7,7 @@ import model.Model;
 import model.ModelImpl;
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeColor;
 import utils.TypeItem;
 
 /**
@@ -32,9 +33,9 @@ public class TestItemCreateDestroy {
     org.junit.Assert.assertEquals(m.getAllItemId(TypeItem.BOOK).size(), 1);
 
     m.registerMovie("Movie1", 2016, "Marvel", "Lee", Language.ITALIAN, ItemGenre.ADVENTURE, 300,
-                true, 3);
+                TypeColor.COLOR, 3);
     m.registerMovie("Movie2", 2013, "Marvel", "Lee", Language.ENGLISH, ItemGenre.ANIMATION, 180,
-                true, 1);
+                TypeColor.BLACK_AND_WHITE, 1);
     org.junit.Assert.assertEquals(m.getAllItemId(TypeItem.MOVIE).size(), 2);
 
     Set<Integer> s = new HashSet<Integer>(m.getAllItemId(TypeItem.MOVIE));

@@ -7,6 +7,7 @@ import com.google.common.base.Optional;
 
 import utils.ItemGenre;
 import utils.Language;
+import utils.TypeColor;
 
 /**
  * Item is the center interface of Book and Movie.
@@ -190,8 +191,8 @@ public interface Item {
 
   /**
    *
-   * @return true == color, false == b/w.
+   * @return the enum typecolor.
    */
-  Boolean getColour();
+  TypeColor getColour();
 
 }
