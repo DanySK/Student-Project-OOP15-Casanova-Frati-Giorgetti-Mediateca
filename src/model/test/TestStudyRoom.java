@@ -41,14 +41,15 @@ public class TestStudyRoom {
       System.out.println(m.getAllUserId().toString());
       for (int i = 0; i < m.getStudyRoomSit(); i++) {
         m.bookSit(new GregorianCalendar(2016, 8, 20), i, 197392167);
-        org.junit.Assert.assertFalse(
-                    m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).equals(197392167));
+        org.junit.Assert.assertTrue(
+                    m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).get(i).equals(197392167));
+
       }
       System.out.println(m.getAllUserSit(new GregorianCalendar(2016, 8, 20)));
       for (int i = 0; i < m.getStudyRoomSit(); i++) {
         m.cancelSit(new GregorianCalendar(2016, 8, 20), i, 197392167);
-        org.junit.Assert.assertFalse(
-                    m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).equals(197392167));
+        org.junit.Assert.assertTrue(
+                    m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).get(i).equals(0));
       }
       System.out.println(m.getAllUserSit(new GregorianCalendar(2016, 8, 20)));
     } catch (Exception e) {
