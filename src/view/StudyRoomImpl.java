@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.util.Arrays;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -115,8 +116,8 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 									+ String.valueOf(this.selectedSit));
 
 						}
-						v.giveMeStudyRoomStatus();
 						System.out.println("Aggiorno status...");
+						v.giveMeStudyRoomStatus();
 						v.swapView(CardName.STUDY_ROOM);
 					});
 		}
@@ -190,6 +191,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 	@Override
 	public void setStudyRoomStatus(final String[] status) {
 		int i;
+		System.out.println(Arrays.toString(status));
 		for (i = 0; i < status.length; i++) {
 			if (status[i].equals("0")) {
 				this.buttons[i].setBackground(Color.GREEN);
