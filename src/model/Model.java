@@ -456,4 +456,10 @@ public interface Model {
    *           archives.
    */
   void removeLike(final Integer itemId, final Integer userId) throws Exception;
+
+  /**
+   *
+   * This method @return the number of sit into the study room.
+   */
+  int getStudyRoomSit();
 }

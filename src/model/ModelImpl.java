@@ -538,4 +538,9 @@ public class ModelImpl implements Serializable, Model {
   public Set<Integer> getItemBorrowed(final Integer userId) throws Exception {
     return Collections.unmodifiableSet(this.getRequiredUser(userId).getLoanArchive().keySet());
   }
+
+  @Override
+  public int getStudyRoomSit() {
+    return this.studyRoom.getNumSit();
+  }
 }
