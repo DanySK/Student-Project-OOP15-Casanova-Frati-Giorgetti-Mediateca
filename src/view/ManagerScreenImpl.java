@@ -129,7 +129,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 									.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
-					v.showItemInfo();
+					v.showItemInfoManager();
 				}
 			}
 		});

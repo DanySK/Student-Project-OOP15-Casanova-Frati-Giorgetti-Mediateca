@@ -108,7 +108,7 @@ public class ViewImpl implements View {
 				"Manager Menu Card"), STUDY_ROOM("Study Room Card"), WISHLIST(
 				"Wishlist Card"), BOOK_MODIFY("Book Modify Card"), FILM_MODIFY(
 				"Film Modify Card"), ALL_REVIEWS("All Reviews Card"), USERS_BORROWED_LIST(
-																				"Users Borrowed List Card");
+				"Users Borrowed List Card");
 
 		private final String name;
 
@@ -432,8 +432,8 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void giveMeItemInfo() {
-		this.c.setItemInfo();
+	public void giveMeItemInfoMediateca() {
+		this.c.setItemInfoMediateca();
 	}
 
 	// //OK
@@ -444,17 +444,23 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void showItemInfo() {
+	public void showItemInfoManager() {
 		this.itemScreen = new ItemShowImpl();
-		this.giveMeItemInfoFromManager();
+		this.giveMeItemShowFromManager();
 		this.itemScreen.startItemShow(this);
+	}
+
+	// //OK
+	@Override
+	public void giveMeItemShowFromManager() {
+		this.c.itemElaboration();
 	}
 
 	// //OK
 	@Override
 	public void showItemInfoMediateca() {
 		this.itemScreen = new ItemShowImpl();
-		this.giveMeItemInfo();
+		this.giveMeItemInfoMediateca();
 		this.itemScreen.startItemShow(this);
 	}
 
@@ -762,7 +768,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeItemInfoFromManager() {
-		this.c.elementSelectedInManager();
+		this.c.setItemModifyField();
 	}
 
 	// //OK

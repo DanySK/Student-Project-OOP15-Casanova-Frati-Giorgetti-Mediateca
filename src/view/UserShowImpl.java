@@ -33,7 +33,7 @@ public class UserShowImpl implements UserShow {
 
 	@Override
 	public void startUserShow(final View v) {
-		v.giveMeItemInfo();
+		v.giveMeItemInfoMediateca();
 		final JFrame mainFrame = new JFrame();
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBounds(0, 0, 594, 1);

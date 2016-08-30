@@ -161,7 +161,7 @@ public interface Controller {
 	 * Method which elaborates the infos of an item to be showed in a new
 	 * screen.
 	 */
-	void setItemInfo();
+	void setItemInfoMediateca();
 
 	/**
 	 * Method which returns to the View the books suggested to the user based on

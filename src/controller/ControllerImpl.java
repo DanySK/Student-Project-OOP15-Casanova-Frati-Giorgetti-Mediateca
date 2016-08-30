@@ -638,7 +638,7 @@ public class ControllerImpl implements Controller {
 	}
 
 	@Override
-	public void setItemInfo() {
+	public void setItemInfoMediateca() {
 		this.setSelectedItemInfo(this.v.getDoubleClickedItemInMediateca());
 	}
 
@@ -1218,9 +1218,9 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void extendBorrow(final String book) {
-		// fai comparire solo uan finestra che dice che è stato esteso
+		// fai comparire solo uan finestra che dice che ï¿½ stato esteso
 
-		// se block user è true, manda la schermata solo per restituire
+		// se block user ï¿½ true, manda la schermata solo per restituire
 		this.v.showMessage("Prestito esteso per l'oggetto " + book);
 
 	}

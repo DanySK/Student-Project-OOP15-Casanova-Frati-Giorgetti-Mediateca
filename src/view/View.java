@@ -303,7 +303,7 @@ public interface View {
 	/**
 	 * Asks controller to set item info.
 	 */
-	void giveMeItemInfo();
+	void giveMeItemInfoMediateca();
 
 	/**
 	 * Tells controller to get item modified info.
@@ -317,7 +317,7 @@ public interface View {
 	 * @param type
 	 *            the type of item (book or movie)
 	 */
-	void showItemInfo();
+	void showItemInfoManager();
 
 	/**
 	 * Sets good login and change screen.
@@ -465,7 +465,7 @@ public interface View {
 
 	/**
 	 * Tells controller to extend borrow.
-	 * 
+	 *
 	 * @param book
 	 *            the book to extend borrow
 	 */
@@ -713,4 +713,8 @@ public interface View {
 	 */
 	void showItemInfoMediateca();
 
+	/**
+	 * Asks controller to set info for showing item at doubleclick.
+	 */
+	void giveMeItemShowFromManager();
 }
