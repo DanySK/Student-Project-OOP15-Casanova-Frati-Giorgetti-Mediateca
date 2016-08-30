@@ -172,29 +172,26 @@ public class ControllerImpl implements Controller {
 					"Mondadori", 0021, 2);
 			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "231211007", ItemGenre.FASHION,
 					"Mondadori", 0022, 3);
-			/*
-			 * this.m.registerMovie("Star Trek", 2009, "Bad Robot",
-			 * "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY, 120, true,
-			 * 10); this.m.registerMovie("Star Trek: Into Darkness", 2012,
-			 * "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
-			 * 130, true, 8); this.m.registerMovie("Star Trek: Beyond", 2015,
-			 * "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
-			 * 144, true, 2); this.m.registerMovie("Non aprite quella porta",
-			 * 2006, "Legendary", "John Nispel", Language.ENGLISH,
-			 * ItemGenre.HORROR, 100, true, 10); this.m.registerMovie(
-			 * "Saw 80: la fine", 2012, "Medusa film", "Carlo Vanzina",
-			 * Language.ENGLISH, ItemGenre.HORROR, 180, true, 1);
-			 * this.m.registerMovie("Mamma mia!", 2008, "Warner Bros",
-			 * "Meryl Streep", Language.ENGLISH, ItemGenre.MUSICAL, 100, true,
-			 * 1000); this.m.registerMovie("The Rocky Horror Picture Show",
-			 * 1977, "01 Distribution", "Tim Curry", Language.ENGLISH,
-			 * ItemGenre.MUSICAL, 120, true, 7); this.m.registerMovie("Tarzan",
-			 * 1966, "Disney Pictures", "Walt Disney", Language.ENGLISH,
-			 * ItemGenre.ANIMATION, 90, true, 1);
-			 * this.m.registerMovie("Aladdin", 1986, "Disney Pictures",
-			 * "Walt Disney", Language.ENGLISH, ItemGenre.ANIMATION, 100, true,
-			 * 2);
-			 */
+
+			this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
+					120, TypeColor.COLOR, 10);
+			this.m.registerMovie("Star Trek: Into Darkness", 2012, "Bad Robot", "J.J. Abrams", Language.ENGLISH,
+					ItemGenre.FANTASY, 130, TypeColor.COLOR, 8);
+			this.m.registerMovie("Star Trek: Beyond", 2015, "Bad Robot", "J.J. Abrams", Language.ENGLISH,
+					ItemGenre.FANTASY, 144, TypeColor.COLOR, 2);
+			this.m.registerMovie("Non aprite quella porta", 2006, "Legendary", "John Nispel", Language.ENGLISH,
+					ItemGenre.HORROR, 100, TypeColor.COLOR, 10);
+			this.m.registerMovie("Saw 80: la fine", 2012, "Medusa film", "Carlo Vanzina", Language.ENGLISH,
+					ItemGenre.HORROR, 180, TypeColor.COLOR, 1);
+			this.m.registerMovie("Mamma mia!", 2008, "Warner Bros", "Meryl Streep", Language.ENGLISH, ItemGenre.MUSICAL,
+					100, TypeColor.COLOR, 1000);
+			this.m.registerMovie("The Rocky Horror Picture Show", 1977, "01 Distribution", "Tim Curry",
+					Language.ENGLISH, ItemGenre.MUSICAL, 120, TypeColor.COLOR, 7);
+			this.m.registerMovie("Tarzan", 1966, "Disney Pictures", "Walt Disney", Language.ENGLISH,
+					ItemGenre.ANIMATION, 90, TypeColor.COLOR, 1);
+			this.m.registerMovie("Aladdin", 1986, "Disney Pictures", "Walt Disney", Language.ENGLISH,
+					ItemGenre.ANIMATION, 100, TypeColor.COLOR, 2);
+
 			User u = new UserImpl("Enrico", "Casanova", cal, "csharplover", "graffeallineate",
 					"enrico.casanova@gmail.it", "334534534534",
 					new ArrayList<ItemGenre>(
@@ -378,7 +375,7 @@ public class ControllerImpl implements Controller {
 			}
 		}
 
-		System.out.println("itemElaboration: restituita lista " + array[0]);
+		System.out.println("itemElaboration: sta per restituire lista");
 		this.v.setFilteredList(array);
 		System.out.println("itemElaboration: restituita lista");
 	}
