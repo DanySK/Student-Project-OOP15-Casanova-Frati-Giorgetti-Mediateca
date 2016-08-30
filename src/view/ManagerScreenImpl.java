@@ -98,7 +98,6 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
-			this.type = TypeList.ITEM;
 			seeBorrowedList.setEnabled(false);
 			delete.setEnabled(false);
 			modifyBook.setEnabled(false);
@@ -190,7 +189,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		});
 		seeBorrowedList.addActionListener(e -> {
 			v.giveManagerBorrowList();
-			v.swapView(CardName.MANAGER_MENU);
+			v.swapView(CardName.BORROWED_LIST);
 		});
 		JButton exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));

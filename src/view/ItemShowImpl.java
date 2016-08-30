@@ -132,7 +132,7 @@ public class ItemShowImpl implements ItemShow {
 			final String languageS) {
 		this.type = types;
 		System.out.println(this.type);
-		this.title = "TITOLOOOO";
+		this.title = titleS;
 		this.author = authorS;
 		this.manifacturer = manifacturerS;
 		this.year = yearS;
