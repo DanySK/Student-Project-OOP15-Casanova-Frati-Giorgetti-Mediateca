@@ -10,8 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import com.google.common.base.Optional;
-
 import model.ItemException;
 import model.Model;
 import model.ModelImpl;
@@ -44,7 +42,6 @@ public class ControllerImpl implements Controller {
 	// after the login, the corrispondent user will be saved here...
 	private UserImpl actualUser;
 	// ...and its LoanArchive will be saved here
-	private Map<Integer, Pair<Boolean, Optional<Integer>>> actualLoanArchive;
 	private String itemBeforeScreenChange;
 
 	// constants for I/O
@@ -439,7 +436,7 @@ public class ControllerImpl implements Controller {
 			try {
 				if (this.m.getRequiredItem(i).toString().equals(this.itemBeforeScreenChange)) {
 					this.m.addReview(i, this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
-					this.v.showMessage("Recensione per l'oggetto " + this.m.getRequiredItem(i) + "inserita");
+					this.v.showMessage("Recensione per l'oggetto " + this.m.getRequiredItem(i).toString() + "inserita");
 				}
 			} catch (ItemException e) {
 				this.v.showError(e.getMessage());
@@ -455,11 +452,20 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void borrowList() {
+		this.borrowListFromUser(this.actualUser);
+	}
+
+	/**
+	 * Method which takes the list of the items borrowed by the selected user.
+	 *
+	 * @param user
+	 *            selected user.
+	 */
+	public void borrowListFromUser(final UserImpl user) {
 		System.out.println("borrowList: entrato");
-		System.out.println("borrowList: dimensione archivio prestiti=" + this.actualUser.getLoanArchive().size());
+		System.out.println("borrowList: dimensione archivio prestiti=" + user.getLoanArchive().size());
 		try {
-			this.actualLoanArchive = this.actualUser.getLoanArchive();
-			String[] array = new String[this.actualLoanArchive.size()];
+			String[] array = new String[user.getLoanArchive().size()];
 			int index = 0;
 
 			/*
@@ -470,7 +476,7 @@ public class ControllerImpl implements Controller {
 			 * ).toArray(array);
 			 */
 
-			for (Integer i : this.m.getItemBorrowed(this.actualUser.getIdUser())) {
+			for (Integer i : this.m.getItemBorrowed(user.getIdUser())) {
 				array[index] = this.m.getRequiredItem(i).toString();
 				index++;
 			}
@@ -632,6 +638,12 @@ public class ControllerImpl implements Controller {
 		this.setSelectedItemInfo(this.v.getDoubleClickedItemInMediateca());
 	}
 
+	/**
+	 * Method which returns all the infos for the item passed as string.
+	 *
+	 * @param string
+	 *            Item passed as string
+	 */
 	public void setSelectedItemInfo(final String string) {
 		System.out.println("setItemInfo: entrato");
 		// getItemSelectedByuSer lo prendo da setFilteredList
@@ -1318,9 +1330,19 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void otherUserBorrowList() {
-		this.v.getUserItemSelectedByManager();
-		this.v.setBorrowedItemList();
-
+		UserImpl user = null;
+		try {
+			for (Integer i : this.m.getUserArchive().keySet()) {
+				if (this.m.getRequiredUser(i).toString().equals(this.v.getUserItemSelectedByManager())) {
+					user = this.m.getRequiredUser(i);
+				}
+			}
+		} catch (UserException e) {
+			this.v.showError(e.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+		this.borrowListFromUser(user);
 	}
 
 	@Override
