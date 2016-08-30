@@ -66,12 +66,12 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.searchField = new JTextField();
 		this.searchField.setBounds(21, 84, 521, 27);
 		this.filterSelect = new JComboBox(utils.TypeItemInfo.values());
-		this.filterSelect.setSelectedIndex(0);
+		this.filterSelect.setSelectedIndex(-1);
 		this.filterSelect.setBounds(232, 44, 200, 27);
 		this.filterSelect.setToolTipText("Dove ricercare");
 
 		this.itemSelect = new JComboBox(utils.TypeItem.values());
-		this.itemSelect.setSelectedIndex(0);
+		this.itemSelect.setSelectedIndex(-1);
 		this.itemSelect.setBounds(21, 44, 200, 27);
 		this.itemSelect.setToolTipText("Libro o Film");
 		this.add(this.itemSelect);
@@ -223,11 +223,17 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 	@Override
 	public String getSearchFilter() {
+		if (this.filterSelect.getSelectedIndex() == -1) {
+			return null;
+		}
 		return this.filterSelect.getSelectedItem().toString();
 	}
 
 	@Override
 	public String getItemType() {
+		if (this.itemSelect.getSelectedIndex() == -1) {
+			return null;
+		}
 		return this.itemSelect.getSelectedItem().toString();
 	}
 

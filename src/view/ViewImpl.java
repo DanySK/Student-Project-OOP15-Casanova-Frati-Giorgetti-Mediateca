@@ -749,13 +749,13 @@ public class ViewImpl implements View {
 
 	}
 
-	// //WAITING FOR CONTROLLER FUNCTION NAME
+	// //OK
 	@Override
 	public void controllerTakeItemBeforeChangeScreen() {
 		this.c.takeItemBefore();
 	}
 
-	// //WAITING FOR CONTROLLER FUNCTION NAME
+	// //OK
 	@Override
 	public void giveMeItemInfoFromManager() {
 		this.c.elementSelectedInManager();
