@@ -241,9 +241,9 @@ public class ControllerImpl implements Controller {
 			this.v.showError(e2.getMessage());
 		}
 		System.out.println("writeonfile: dati quasi salvati");
-		this.fm.writeObjectIntoFile("archivio.utenti", this.m);
-		this.fm.writeObjectIntoFile("archivio.oggetti", this.m);
-		this.fm.writeObjectIntoFile("archivio.aulastudio", this.m);
+		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
+		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 		System.out.println("writeonfile: dati salvati");
 	}
 
@@ -501,9 +501,13 @@ public class ControllerImpl implements Controller {
 					try {
 						this.m.borrowItem(i, this.actualUser.getIdUser());
 						System.out.println("borrowItem: entrato nel try");
-					} catch (Exception e) {
+					} catch (ItemException e) {
+						this.v.showError(e.getMessage());
+					} catch (UserException e1) {
+						this.v.showError(e1.getMessage());
+					} catch (Exception e2) {
 						// TODO Auto-generated catch block
-						this.v.showError("Errore! itemId o userId non presente nell'archivio");
+						this.v.showError(e2.getMessage());
 					}
 				}
 			} catch (ItemException e) {
@@ -686,7 +690,7 @@ public class ControllerImpl implements Controller {
 						Float.toString(this.m.getRequiredItem(itemId).getAverageVote()), Integer.toString(numCopy),
 						duration, color.toString(), language.toString());
 			} else {
-				this.v.showError("Errore! Id oggetto non presente nell'archivio");
+				this.v.showError("Item " + Integer.toString(itemId) + " not found in the archive!");
 			}
 
 		} catch (ItemException e) {
@@ -982,8 +986,10 @@ public class ControllerImpl implements Controller {
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
+
 		String[] array = new String[100];
 		List<Integer> arrayInt = this.m.getAllUserSit(day);
+
 		System.out.println("setTakenSitsList: " + arrayInt.size());
 
 		for (int index = 0; index < (arrayInt.size()); index++) {
@@ -1007,10 +1013,6 @@ public class ControllerImpl implements Controller {
 			}
 		}
 		this.v.setStudyRoomStatus(array);
-		// array di stringhe per i posto a sedere dove il posto vuoto è 0 e il
-		// posto occupato è username
-
-		// ritorna array di stringhe che mostra data e posto occupati
 	}
 
 	@Override
@@ -1025,7 +1027,7 @@ public class ControllerImpl implements Controller {
 
 		try {
 			System.out.println("takeSit: entrato nel try");
-			this.m.bookSit(day, (this.v.getSelectedSit()), this.actualUser.getIdUser());
+			this.m.bookSit(day, this.v.getSelectedSit(), this.actualUser.getIdUser());
 			System.out.println("takeSit: eseguito il book");
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 			System.out.println("takeSit: scritto nel file");
@@ -1055,7 +1057,7 @@ public class ControllerImpl implements Controller {
 
 		try {
 			System.out.println("cancelSit: entrato nel try");
-			this.m.cancelSit(day, (this.v.getSelectedSit() - 1), this.actualUser.getIdUser());
+			this.m.cancelSit(day, this.v.getSelectedSit(), this.actualUser.getIdUser());
 			System.out.println("cancelSit: eseguito il cancel");
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 			System.out.println("cancelSit: eseguito il write");
@@ -1186,7 +1188,7 @@ public class ControllerImpl implements Controller {
 			}
 
 			this.m.deleteItem(itemIdReceived);
-			this.fm.writeObjectIntoFile("archivio.oggetti", this.m);
+			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
 			this.v.showMessage("Oggetto " + itemIdReceived + " cancellato");
 		} catch (ItemException e) {
 			this.v.showError(e.getMessage());
@@ -1202,7 +1204,7 @@ public class ControllerImpl implements Controller {
 	public void deleteUser() {
 		try {
 			this.m.deleteUser(this.actualUser.getIdUser());
-			this.fm.writeObjectIntoFile("archivio.utenti", this.m);
+			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 			this.v.showMessage("Utente " + this.actualUser.getIdUser() + " cancellato");
 		} catch (ItemException e) {
 			this.v.showError(e.getMessage());
