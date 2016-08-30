@@ -407,17 +407,17 @@ public class ModelImpl implements Serializable, Model {
       throw new ItemException("ItemId" + itemId + " not contained into the archive.");
     }
     if (ts.equals(TypeItemInfo.TITLE)) {
-      ((ItemImpl) this.archiveItem.getItem(itemId)).setTitle((String) param);
+      this.getRequiredItem(itemId).setTitle((String) param);
     } else if (ts.equals(TypeItemInfo.AUTHOR)) {
-      ((ItemImpl) this.archiveItem.getItem(itemId)).setAuthor((String) param);
+      this.getRequiredItem(itemId).setAuthor((String) param);
     } else if (ts.equals(TypeItemInfo.PRODUCER)) {
-      ((ItemImpl) this.archiveItem.getItem(itemId)).setPublisher((String) param);
+      this.getRequiredItem(itemId).setPublisher((String) param);
     } else if (ts.equals(TypeItemInfo.RELEASE_YEAR)) {
-      ((ItemImpl) this.archiveItem.getItem(itemId)).setReleaseYear((int) param);
+      this.getRequiredItem(itemId).setReleaseYear((int) param);
     } else if (ts.equals(TypeItemInfo.LANGUAGE)) {
-      ((ItemImpl) this.archiveItem.getItem(itemId)).setCurrentLanguage((Language) param);
+      this.getRequiredItem(itemId).setCurrentLanguage((Language) param);
     } else if (ts.equals(TypeItemInfo.GENRE)) {
-      ((ItemImpl) this.archiveItem.getItem(itemId)).setGenre((ItemGenre) param);
+      this.getRequiredItem(itemId).setGenre((ItemGenre) param);
     }
   }
 
@@ -434,19 +434,35 @@ public class ModelImpl implements Serializable, Model {
       throw new UserException("UserId" + userId + " not contained into the archive.");
     }
     if (ts.equals(UserInfo.NAME)) {
-      this.archiveUser.getUser(userId).setName((String) param);
+      this.getRequiredUser(userId).setName((String) param);
     } else if (ts.equals(UserInfo.SURNAME)) {
-      this.archiveUser.getUser(userId).setSurname((String) param);
+      this.getRequiredUser(userId).setSurname((String) param);
     } else if (ts.equals(UserInfo.BIRTHDATE)) {
-      this.archiveUser.getUser(userId).setBirthdate((GregorianCalendar) param);
+      this.getRequiredUser(userId).setBirthdate((GregorianCalendar) param);
     } else if (ts.equals(UserInfo.USERNAME)) {
-      this.archiveUser.getUser(userId).setUsername((String) param);
+      this.getRequiredUser(userId).setUsername((String) param);
     } else if (ts.equals(UserInfo.PASSWORD)) {
-      this.archiveUser.getUser(userId).setPassword((String) param);
+      this.getRequiredUser(userId).setPassword((String) param);
     } else if (ts.equals(UserInfo.EMAIL)) {
-      this.archiveUser.getUser(userId).setEmail((String) param);
+      this.getRequiredUser(userId).setEmail((String) param);
     } else if (ts.equals(UserInfo.TELEPHONE_NUMBER)) {
-      this.archiveUser.getUser(userId).setTelephoneNumber((String) param);
+      this.getRequiredUser(userId).setTelephoneNumber((String) param);
+    }
+  }
+
+  @Override
+  public void changeUserPref(final TypeItem ti, final Integer userId,
+              final List<ItemGenre> listGenre) throws Exception, UserException {
+    if (!ti.equals(TypeItem.BOOK) && !ti.equals(TypeItem.MOVIE)) {
+      throw new Exception("TypeItem " + ti + "not valid to change on User");
+    }
+    if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + " not contained into the archive.");
+    }
+    if (ti.equals(TypeItem.BOOK)) {
+      this.getRequiredUser(userId).setBookPreferences(listGenre);
+    } else if (ti.equals(TypeItem.MOVIE)) {
+      this.getRequiredUser(userId).setMoviePreferences(listGenre);
     }
   }
 
@@ -457,36 +473,36 @@ public class ModelImpl implements Serializable, Model {
     } else {
       Set<Integer> all;
       List<Integer> toAdd = new LinkedList<Integer>();
-      for (ItemGenre im : this.archiveUser.getUser(userId).getMoviePreferences()) {
+      for (ItemGenre im : this.getRequiredUser(userId).getMoviePreferences()) {
         all = this.filtersItem(this.getAllItemId(TypeItem.MOVIE), TypeItemInfo.GENRE,
                     im.toString());
         if (all.size() != 0) {
           Integer start = 0;
           Integer best = 0;
           for (Integer v : all) {
-            if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
-              start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
+            if (this.getRequiredItem(v).getAverageVote() >= start) {
+              start = (int) this.getRequiredItem(v).getAverageVote();
               best = v;
             }
           }
           toAdd.add(best);
         }
       }
-      for (ItemGenre ig : this.archiveUser.getUser(userId).getBookPreferences()) {
+      for (ItemGenre ig : this.getRequiredUser(userId).getBookPreferences()) {
         all = this.filtersItem(this.getAllItemId(TypeItem.BOOK), TypeItemInfo.GENRE, ig.toString());
         if (all.size() != 0) {
           Integer start = 0;
           Integer best = 0;
           for (Integer v : all) {
-            if (((ItemImpl) this.archiveItem.getItem(v)).getAverageVote() >= start) {
-              start = (int) ((ItemImpl) this.archiveItem.getItem(v)).getAverageVote();
+            if (this.getRequiredItem(v).getAverageVote() >= start) {
+              start = (int) (this.getRequiredItem(v)).getAverageVote();
               best = v;
             }
           }
           toAdd.add(best);
         }
       }
-      this.archiveUser.getUser(userId).setRecommendedList(toAdd);
+      this.getRequiredUser(userId).setRecommendedList(toAdd);
     }
   }
 

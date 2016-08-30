@@ -462,4 +462,15 @@ public interface Model {
    * This method @return the number of sit into the study room.
    */
   int getStudyRoomSit();
+
+  /**
+   *
+   * @param ti
+   * @param userId
+   * @param listGenre
+   * @throws Exception
+   * @throws UserException
+   */
+  void changeUserPref(final TypeItem ti, final Integer userId, final List<ItemGenre> listGenre)
+              throws Exception, UserException;
 }
