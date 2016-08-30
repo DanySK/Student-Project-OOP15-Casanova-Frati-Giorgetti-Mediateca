@@ -47,7 +47,7 @@ public class ItemShowImpl implements ItemShow {
 
 		mainFrame.getContentPane().add(mainPanel);
 		mainPanel.setLayout(null);
-
+		this.type = TypeItem.BOOK;
 		final JLabel titleL = new JLabel("Titolo: " + this.title);
 		titleL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		titleL.setBounds(23, 14, 480, 30);
@@ -132,7 +132,7 @@ public class ItemShowImpl implements ItemShow {
 			final String languageS) {
 		this.type = types;
 		System.out.println(this.type);
-		this.title = titleS;
+		this.title = "TITOLOOOO";
 		this.author = authorS;
 		this.manifacturer = manifacturerS;
 		this.year = yearS;

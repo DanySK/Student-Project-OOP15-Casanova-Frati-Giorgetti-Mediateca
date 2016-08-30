@@ -83,7 +83,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		presentation.setBounds(12, 13, 776, 50);
 		this.add(presentation);
@@ -134,6 +134,6 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 	@Override
 	public String getSelectedItem() {
-		return this.list.getSelectedValue();
+		return this.list.getSelectedValue().toString();
 	}
 }
