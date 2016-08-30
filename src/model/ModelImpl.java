@@ -203,7 +203,7 @@ public class ModelImpl implements Serializable, Model {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       if (this.archiveItem.getItemInfo(itemId).isAvailable()) {
         this.archiveItem.addUser(itemId, userId);
-        this.archiveUser.getUser(userId).addItem(itemId);
+        this.getRequiredUser(userId).addItem(itemId);
         System.out.println("UserId " + userId + "takes itemId " + itemId);
       } else {
         System.out.println(itemId + " not available.");
@@ -219,7 +219,7 @@ public class ModelImpl implements Serializable, Model {
   public void returnItem(final int itemId, final int userId) throws Exception, ItemException {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.archiveItem.removeUser(itemId, userId);
-      this.archiveUser.getUser(userId).removeItem(itemId);
+      this.getRequiredUser(userId).removeItem(itemId);
       System.out.println("UserId " + userId + "returns itemId " + itemId);
     } else {
       throw new ItemException("ItemId: " + itemId + " or userId" + userId
@@ -232,8 +232,8 @@ public class ModelImpl implements Serializable, Model {
   public void addLike(final int itemId, final int userId)
               throws UserException, ItemException, Exception {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
-      this.archiveItem.getItem(itemId).addLike(userId);
-      this.archiveUser.getUser(userId).addToWishList(itemId);
+      this.getRequiredItem(itemId).addLike(userId);
+      this.getRequiredUser(userId).addToWishList(itemId);
       System.out.println("UserId: " + userId + " likes itemId: " + itemId);
     } else if (!this.archiveItem.containsItem(itemId)) {
       throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
@@ -247,8 +247,8 @@ public class ModelImpl implements Serializable, Model {
               throws Exception, UserException, ItemException {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       if (this.getRequiredUser(userId).getWishlist().contains(itemId)) {
-        this.archiveItem.getItem(itemId).removeLike(userId);
-        this.archiveUser.getUser(userId).removeFromWishList(itemId);
+        this.getRequiredItem(itemId).removeLike(userId);
+        this.getRequiredUser(userId).removeFromWishList(itemId);
         System.out.println("UserId: " + userId + "doesn't like itemId: " + itemId);
       } else {
         throw new UserException(
@@ -269,7 +269,7 @@ public class ModelImpl implements Serializable, Model {
     if (this.archiveUser.contains(userId) && this.archiveItem.containsItem(itemId)) {
       if (this.getRequiredUser(userId).getLoanArchive().containsKey(itemId)) {
         this.getRequiredUser(userId).setItemReview(itemId, (int) rev.getId());
-        this.archiveItem.getItem(itemId).addReview(rev);
+        this.getRequiredItem(itemId).addReview(rev);
         System.out.println(rev.toString() + " adds.");
       } else {
         throw new UserException("ItemId: " + itemId + " not loaned to " + userId + " userId\n");
@@ -283,8 +283,8 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public List<ReviewImpl> getAllItemReview(final Integer itemId) throws Exception {
-    return (List<ReviewImpl>) Collections.unmodifiableCollection(
-                ((ItemImpl) this.archiveItem.getItem(itemId)).getSetReview());
+    return (List<ReviewImpl>) Collections
+                .unmodifiableCollection(this.getRequiredItem(itemId).getSetReview());
   }
 
   @Override
@@ -320,8 +320,8 @@ public class ModelImpl implements Serializable, Model {
               throws Exception, UserException {
     Map<Integer, Double> mmap = new HashMap<>();
     if (this.archiveUser.contains(userId)) {
-      for (Integer i : this.archiveUser.getUser(userId).getLoanArchive().keySet()) {
-        if (!this.archiveUser.getUser(userId).itWasReturned(i)) {
+      for (Integer i : this.getRequiredUser(userId).getLoanArchive().keySet()) {
+        if (!this.getRequiredUser(userId).itWasReturned(i)) {
           mmap.put(i, this.archiveItem.calculateDifferenceDays(i, userId));
         }
       }
@@ -447,22 +447,6 @@ public class ModelImpl implements Serializable, Model {
       this.getRequiredUser(userId).setEmail((String) param);
     } else if (ts.equals(UserInfo.TELEPHONE_NUMBER)) {
       this.getRequiredUser(userId).setTelephoneNumber((String) param);
-    }
-  }
-
-  @Override
-  public void changeUserPref(final TypeItem ti, final Integer userId,
-              final List<ItemGenre> listGenre) throws Exception, UserException {
-    if (!ti.equals(TypeItem.BOOK) && !ti.equals(TypeItem.MOVIE)) {
-      throw new Exception("TypeItem " + ti + "not valid to change on User");
-    }
-    if (!this.archiveUser.contains(userId)) {
-      throw new UserException("UserId" + userId + " not contained into the archive.");
-    }
-    if (ti.equals(TypeItem.BOOK)) {
-      this.getRequiredUser(userId).setBookPreferences(listGenre);
-    } else if (ti.equals(TypeItem.MOVIE)) {
-      this.getRequiredUser(userId).setMoviePreferences(listGenre);
     }
   }
 
