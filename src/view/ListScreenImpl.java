@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -24,6 +26,10 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	private static final long serialVersionUID = 1L;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private JList<String> list = new JList<String>();
+	private static String selected;
+	JButton removeB = new JButton();
+	JButton removeW = new JButton();
+	JButton review = new JButton();
 
 	/**
 	 * Enumeration with types of list which can be showed.
@@ -50,8 +56,17 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		JLabel presentation;
 		JButton exit = new JButton();
 		JButton exitM = new JButton();
-		JButton remove = new JButton();
-		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+
+		this.removeB
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		this.removeB.setBounds(533, 76, 222, 35);
+		this.removeB.setText("Consegna");
+		this.add(this.removeB);
+		this.removeW
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		this.removeW.setBounds(533, 76, 222, 35);
+		this.removeW.setText("Rimuovi");
+		this.add(this.removeW);
 		presentation = new JLabel();
 
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
@@ -63,66 +78,111 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 		exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		exit.setBounds(603, 496, 166, 39);
+		exit.setBounds(533, 487, 222, 39);
 		this.add(exit);
 
 		exitM = new JButton("Esci");
 		exitM.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		exitM.setBounds(603, 496, 166, 39);
+		exitM.setBounds(533, 487, 222, 39);
 		this.add(exitM);
+		this.review = new JButton("Recensisci");
+		this.review.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		this.review.setBounds(533, 124, 222, 35);
+		this.add(this.review);
+		this.list.setModel(this.model);
+		this.list.setBounds(42, 76, 460, 450);
+		this.add(this.list);
 
 		switch (i) {
 		case BORROWED:
 			presentation.setText("Ecco gli oggetti che hai in prestito:");
-			remove.addActionListener(e -> {
-				v.giveBackItem();
-				v.giveMeBorrowList();
-				v.swapView(CardName.BORROWED_LIST);
-			});
-			remove.setText("Restituisci");
+			this.removeB.setVisible(true);
+			this.removeB.setEnabled(false);
+			this.removeW.setVisible(false);
 			exitM.setVisible(false);
 			exit.setVisible(true);
+			this.review.setVisible(true);
+			this.review.setEnabled(false);
 			break;
 		case WISH:
 			presentation.setText("Ecco gli oggetti che desideri");
-			remove.setText("Rimuovi da Wishlist");
-			remove.addActionListener(e -> {
-				v.removeFromWishlist();
-				v.giveMeBorrowList();
-				v.swapView(CardName.WISHLIST);
-			});
+			this.removeB.setVisible(false);
+			this.removeW.setVisible(true);
 			exit.setVisible(true);
 			exitM.setVisible(false);
+			this.review.setVisible(false);
 			break;
 
 		case REVIEWS:
 			presentation.setText("Ecco tutte le recensioni");
-			remove.setVisible(false);
+			this.removeB.setVisible(false);
+			this.removeW.setVisible(false);
 			exit.setVisible(true);
 			exitM.setVisible(false);
+			this.review.setVisible(false);
 			break;
 		case MANAGER_BORROW:
 			presentation.setText("Ecco gli oggetti in prestito");
-			remove.setVisible(false);
+			this.removeB.setVisible(false);
+			this.removeW.setVisible(false);
 			exit.setVisible(false);
 			exitM.setVisible(true);
+			this.review.setVisible(false);
 		default:
 			break;
 
 		}
-		this.list.setModel(this.model);
-		this.list.setBounds(42, 76, 704, 376);
-		this.add(this.list);
 
-		remove.setBounds(215, 462, 353, 35);
-		this.add(remove);
-
+		this.list.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(final MouseEvent evt) {
+				if ((evt.getClickCount() == 1)
+						&& (i == ListScreenType.BORROWED)) {
+					System.out.println("click");
+					if (!ListScreenImpl.this.list.isSelectionEmpty()) {
+						ListScreenImpl.this.review.setEnabled(true);
+						ListScreenImpl.this.removeB.setEnabled(true);
+						ListScreenImpl.selected = ListScreenImpl.this.list
+								.getSelectedValue();
+					}
+					v.swapView(CardName.BORROWED_LIST);
+				} else if ((evt.getClickCount() == 1)
+						&& (i == ListScreenType.WISH)) {
+					System.out.println("click");
+					if (!ListScreenImpl.this.list.isSelectionEmpty()) {
+						ListScreenImpl.this.removeW.setEnabled(true);
+						ListScreenImpl.selected = ListScreenImpl.this.list
+								.getSelectedValue();
+					}
+					v.swapView(CardName.WISHLIST);
+				}
+			}
+		});
 		exit.addActionListener(e -> {
 			v.giveMeFilteredList();
 			v.swapView(CardName.ITEM);
 		});
+
 		exitM.addActionListener(e -> {
 			v.swapView(CardName.MANAGER_MENU);
+		});
+
+		this.review.addActionListener(e -> {
+			v.controllerGetReview();
+		});
+
+		this.removeB.addActionListener(e -> {
+			v.giveBackItem();
+			v.giveMeBorrowList();
+			v.swapView(CardName.BORROWED_LIST);
+		});
+		this.removeB.setText("Restituisci");
+
+		this.removeW.setText("Rimuovi da Wishlist");
+		this.removeW.addActionListener(e -> {
+			v.removeFromWishlist();
+			v.giveMeBorrowList();
+			v.swapView(CardName.WISHLIST);
 		});
 
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
@@ -156,6 +216,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 	@Override
 	public String getSelectedItem() {
-		return this.list.getSelectedValue().toString();
+		System.out.println("Selezionato: " + ListScreenImpl.selected);
+		return ListScreenImpl.selected;
 	}
 }

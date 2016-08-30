@@ -47,17 +47,15 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 	public MediatecaScreenImpl(final View v) {
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		final JButton borrowItem;
-		final JButton giveBackItem;
 		final JButton likeItem;
 		final JButton seeBorrowedItem;
 		final JButton backToMenu;
 		final JButton search;
-		final JButton review;
 		likeItem = new JButton("Mi Piace");
 		likeItem.setBounds(586, 204, 178, 27);
 		likeItem.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeBorrowedItem = new JButton("In prestito");
-		seeBorrowedItem.setBounds(586, 324, 178, 27);
+		seeBorrowedItem.setBounds(586, 284, 178, 27);
 		seeBorrowedItem.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.SMALL_SIZE));
 		borrowItem = new JButton("Prendi ");
@@ -91,19 +89,15 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		backToMenu.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		backToMenu.setBounds(586, 495, 178, 27);
 
-		review = new JButton("Recensisci");
-		review.setBounds(586, 244, 178, 27);
-		review.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-
 		this.reviews = new JButton("Recensioni");
 		this.reviews.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		this.reviews.setBounds(586, 364, 178, 27);
+		this.reviews.setBounds(586, 324, 178, 27);
 		this.add(this.reviews);
 
 		this.filteredJList.setModel(this.model);
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
-				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.scroll = new JScrollPane(this.filteredJList,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -117,7 +111,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 				if (evt.getClickCount() == 2) {
 					System.out.println("Cliccato"
 							+ ((JList) evt.getSource()).getSelectedValue()
-									.toString());
+							.toString());
 					MediatecaScreenImpl.this.dClicked = ((JList) evt
 							.getSource()).getSelectedValue().toString();
 					System.out.println("doppio clickato"
@@ -133,10 +127,8 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.add(this.searchField);
 		this.add(search);
 		this.add(backToMenu);
-		this.add(review);
 		borrowItem.setEnabled(false);
 		likeItem.setEnabled(false);
-		review.setEnabled(false);
 		this.reviews.setEnabled(false);
 
 		this.filteredJList.addMouseListener(new MouseAdapter() {
@@ -144,19 +136,11 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			public void mouseClicked(final MouseEvent evt) {
 				if (evt.getClickCount() == 1) {
 					System.out.println("click");
-					if (MediatecaScreenImpl.this.filteredJList
+					if (!MediatecaScreenImpl.this.filteredJList
 							.isSelectionEmpty()) {
-						review.setEnabled(false);
-						MediatecaScreenImpl.this.reviews.setEnabled(false);
-						likeItem.setEnabled(false);
-						borrowItem.setEnabled(false);
-
-					} else if (!MediatecaScreenImpl.this.filteredJList
-							.isSelectionEmpty()) {
-						review.setEnabled(true);
+						MediatecaScreenImpl.this.reviews.setEnabled(true);
 						likeItem.setEnabled(true);
 						borrowItem.setEnabled(true);
-						MediatecaScreenImpl.this.reviews.setEnabled(true);
 					}
 					v.swapView(CardName.ITEM);
 				}
@@ -171,9 +155,9 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		});
 
 		JButton seeWishlist = new JButton("Wishlist");
-		seeWishlist.setBounds(586, 284, 178, 27);
+		seeWishlist.setBounds(586, 244, 178, 27);
 		seeWishlist
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);
@@ -197,10 +181,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		likeItem.addActionListener(e -> {
 			System.out.println("Like " + this.filteredJList.getSelectedValue());
 			v.likeItem();
-		});
-		review.addActionListener(e -> {
-			v.controllerTakeItemBeforeChangeScreen();
-			v.swapView(CardName.REVIEW);
 		});
 		seeBorrowedItem.addActionListener(e -> {
 			v.giveMeBorrowList();
