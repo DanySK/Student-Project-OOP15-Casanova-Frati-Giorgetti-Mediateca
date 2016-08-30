@@ -51,7 +51,11 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		newBook.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		newBook.setBounds(498, 50, 273, 40);
 		this.add(newBook);
+
 		JButton delete = new JButton("Elimina");
+		delete.setBounds(498, 250, 273, 40);
+		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		this.add(delete);
 
 		JButton seeBorrowedList = new JButton("Vedi prestiti");
 		seeBorrowedList.setFont(new Font("Tahoma", Font.PLAIN,
@@ -59,13 +63,11 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		seeBorrowedList.setBounds(498, 400, 273, 40);
 		this.add(seeBorrowedList);
 
-		delete.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		JButton modifyBook = new JButton("Modifica Libro");
 		modifyBook.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		delete.setBounds(498, 250, 273, 40);
-		this.add(delete);
 		modifyBook.setBounds(498, 300, 273, 40);
 		this.add(modifyBook);
+
 		JButton newMovie = new JButton("Crea Nuovo Film\r\n");
 		newMovie.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		newMovie.setBounds(498, 100, 273, 40);
@@ -75,6 +77,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		modifyMovie.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		modifyMovie.setBounds(498, 350, 273, 40);
 		this.add(modifyMovie);
+
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 150, 273, 40);
 		showUserList
@@ -98,6 +101,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
+			this.type = TypeList.ITEM;
 			seeBorrowedList.setEnabled(false);
 			delete.setEnabled(false);
 			modifyBook.setEnabled(false);
@@ -162,14 +166,8 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
 				if (evt.getClickCount() == 1) {
-					System.out.println("click on user");
+					System.out.println("click on element");
 					if ((ManagerScreenImpl.this.type == TypeList.ITEM)
-							&& ManagerScreenImpl.this.list.isSelectionEmpty()) {
-						delete.setEnabled(false);
-						modifyBook.setEnabled(false);
-						modifyMovie.setEnabled(false);
-						seeBorrowedList.setEnabled(false);
-					} else if ((ManagerScreenImpl.this.type == TypeList.ITEM)
 							&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
 						seeBorrowedList.setEnabled(false);
 						delete.setEnabled(true);
@@ -179,6 +177,11 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 							&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
 						delete.setEnabled(false);
 						seeBorrowedList.setEnabled(true);
+						modifyBook.setEnabled(false);
+						modifyMovie.setEnabled(false);
+					} else {
+						delete.setEnabled(false);
+						seeBorrowedList.setEnabled(false);
 						modifyBook.setEnabled(false);
 						modifyMovie.setEnabled(false);
 					}
@@ -191,13 +194,13 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 			v.giveManagerBorrowList();
 			v.swapView(CardName.USERS_BORROWED_LIST);
 		});
+
 		JButton exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		exit.setBounds(620, 474, 151, 60);
 		this.add(exit);
 
 		exit.addActionListener(e -> v.swapView(CardName.MANAGER_LOGIN));
-
 		newMovie.addActionListener(e -> v.swapView(CardName.FILM_CREATE));
 		newBook.addActionListener(e -> v.swapView(CardName.BOOK_CREATE));
 

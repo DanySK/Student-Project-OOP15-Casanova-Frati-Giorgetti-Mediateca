@@ -146,6 +146,20 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		authorL = new JLabel("Autore:");
 		authorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		authorL.setBounds(159, 144, 167, 30);
+		JLabel genreL = new JLabel("Genere:");
+		genreL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		genreL.setBounds(159, 264, 167, 30);
+		this.add(genreL);
+
+		JLabel languageL = new JLabel("Lingua:");
+		languageL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		languageL.setBounds(159, 384, 167, 30);
+		this.add(languageL);
+
+		JLabel colorL = new JLabel("Colore:");
+		colorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		colorL.setBounds(159, 424, 167, 30);
+		this.add(colorL);
 		this.add(authorL);
 		this.numCopiesF = new JTextField();
 		this.numCopiesF.setSize(78, 30);
@@ -187,6 +201,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			this.itemTypeF.setSelectedItem(TypeItem.BOOK);
 			this.itemTypeF.setEnabled(false);
 			this.colorF.setVisible(false);
+			colorL.setVisible(false);
 			this.durationF.setVisible(false);
 			durationL.setVisible(false);
 			this.isbnF.setVisible(true);
@@ -195,6 +210,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			this.itemTypeF.setSelectedItem(TypeItem.MOVIE);
 			this.itemTypeF.setEnabled(false);
 			this.colorF.setVisible(true);
+			colorL.setVisible(true);
 			this.durationF.setVisible(true);
 			durationL.setVisible(true);
 			this.isbnF.setVisible(false);
@@ -204,7 +220,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -329,7 +345,4 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		}
 		return null;
 	}
-	/*
-	 * @Override public ImageIcon resizeImage(String imagePath);
-	 */
 }

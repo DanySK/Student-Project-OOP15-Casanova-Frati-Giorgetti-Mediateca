@@ -122,6 +122,36 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.send = new JButton();
 
+		this.bookPref1 = new JComboBox(utils.ItemGenre.values());
+		this.bookPref1.setSelectedIndex(-1);
+		this.bookPref1.setBounds(212, 420, 177, 25);
+		this.add(this.bookPref1);
+
+		this.bookPref2 = new JComboBox(utils.ItemGenre.values());
+		this.bookPref2.setSelectedIndex(-1);
+		this.bookPref2.setBounds(401, 420, 177, 25);
+		this.add(this.bookPref2);
+
+		this.bookPref3 = new JComboBox(utils.ItemGenre.values());
+		this.bookPref3.setSelectedIndex(-1);
+		this.bookPref3.setBounds(590, 420, 177, 25);
+		this.add(this.bookPref3);
+
+		this.filmPref1 = new JComboBox(utils.ItemGenre.values());
+		this.filmPref1.setSelectedIndex(-1);
+		this.filmPref1.setBounds(212, 458, 177, 25);
+		this.add(this.filmPref1);
+
+		this.filmPref2 = new JComboBox(utils.ItemGenre.values());
+		this.filmPref2.setSelectedIndex(-1);
+		this.filmPref2.setBounds(401, 458, 177, 25);
+		this.add(this.filmPref2);
+
+		this.filmPref3 = new JComboBox(utils.ItemGenre.values());
+		this.filmPref3.setSelectedIndex(-1);
+		this.filmPref3.setBounds(590, 458, 177, 25);
+		this.add(this.filmPref3);
+
 		if (type.equals(UserScreenType.CREATE)) {
 			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
 			this.send.setText("Crea");
@@ -134,7 +164,14 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			this.presentation = new JLabel("Modifica qui i tuoi dati:");
 			v.giveMeUserInfo();
 			this.send.setText("Invio");
-			this.usernameF.setEditable(false);
+			this.usernameF.setEnabled(false);
+			this.bookPref1.setEnabled(false);
+			this.bookPref2.setEnabled(false);
+			this.bookPref3.setEnabled(false);
+			this.filmPref1.setEnabled(false);
+			this.filmPref2.setEnabled(false);
+			this.filmPref3.setEnabled(false);
+
 			discarge.addActionListener(e -> {
 				v.giveMeSuggestedBooks();
 				v.giveMeSuggestedMovies();
@@ -211,36 +248,6 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.datePicker.setLocation(246, 245);
 
 		this.add(this.datePicker);
-
-		this.bookPref1 = new JComboBox(utils.ItemGenre.values());
-		this.bookPref1.setSelectedIndex(-1);
-		this.bookPref1.setBounds(212, 420, 177, 25);
-		this.add(this.bookPref1);
-
-		this.bookPref2 = new JComboBox(utils.ItemGenre.values());
-		this.bookPref2.setSelectedIndex(-1);
-		this.bookPref2.setBounds(401, 420, 177, 25);
-		this.add(this.bookPref2);
-
-		this.bookPref3 = new JComboBox(utils.ItemGenre.values());
-		this.bookPref3.setSelectedIndex(-1);
-		this.bookPref3.setBounds(590, 420, 177, 25);
-		this.add(this.bookPref3);
-
-		this.filmPref1 = new JComboBox(utils.ItemGenre.values());
-		this.filmPref1.setSelectedIndex(-1);
-		this.filmPref1.setBounds(212, 458, 177, 25);
-		this.add(this.filmPref1);
-
-		this.filmPref2 = new JComboBox(utils.ItemGenre.values());
-		this.filmPref2.setSelectedIndex(-1);
-		this.filmPref2.setBounds(401, 458, 177, 25);
-		this.add(this.filmPref2);
-
-		this.filmPref3 = new JComboBox(utils.ItemGenre.values());
-		this.filmPref3.setSelectedIndex(-1);
-		this.filmPref3.setBounds(590, 458, 177, 25);
-		this.add(this.filmPref3);
 
 		JLabel prefL = new JLabel("Preferenze generi:\r\n");
 		prefL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
