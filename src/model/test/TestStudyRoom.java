@@ -17,7 +17,7 @@ public class TestStudyRoom {
 
   /**
    * This method tests the studyRoom service.
-   * 
+   *
    * @throws Exception
    */
   @org.junit.Test
@@ -38,14 +38,11 @@ public class TestStudyRoom {
 
       m.registerUser("GGGG", "HHHH", new GregorianCalendar(2000, 04, 5), "gghh", "gghh",
                   "gggghhhh@mail.com", "3333333333", ls, ls);
-
-      for (int i = 1; i < 100; i++) {
-        for (Integer userID : m.getAllUserId()) {
-          m.bookSit(new GregorianCalendar(2016, 8, 20), i, userID);
-          org.junit.Assert.assertFalse(
-                      m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).equals(userID));
-          i++;
-        }
+      System.out.println(m.getAllUserId().toString());
+      for (int i = 0; i < m.getStudyRoomSit(); i++) {
+        m.bookSit(new GregorianCalendar(2016, 8, 20), i, 197392167);
+        org.junit.Assert.assertFalse(
+                    m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).equals(197392167));
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
