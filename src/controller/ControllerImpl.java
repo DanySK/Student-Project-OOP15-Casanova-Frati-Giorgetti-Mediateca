@@ -970,8 +970,9 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void giveBackItemSelectedByUser() {
 		System.out.println("giveBackItemSelectedByUser: entrato");
-		System.out.println("giveBackItemSelectedByUser: " + this.v.getItemSelectedByUser());
-		this.giveBackItem(this.v.getItemSelectedByUser());
+		System.out.println("giveBackItemSelectedByUser: getitemtoremoveformlikeborrwwish="
+				+ this.v.getItemToRemoveFromLikeBorrowWish());
+		this.giveBackItem(this.v.getItemToRemoveFromLikeBorrowWish());
 	}
 
 	@Override
@@ -1024,7 +1025,7 @@ public class ControllerImpl implements Controller {
 
 		try {
 			System.out.println("takeSit: entrato nel try");
-			this.m.bookSit(day, (this.v.getSelectedSit() - 1), this.actualUser.getIdUser());
+			this.m.bookSit(day, (this.v.getSelectedSit()), this.actualUser.getIdUser());
 			System.out.println("takeSit: eseguito il book");
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 			System.out.println("takeSit: scritto nel file");
@@ -1287,12 +1288,13 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void elementSelectedInManager() {
 		System.out.println("elementSelectedInManager: entrato");
-		System.out.println("elementSelectedInManager: getItemSelectedByUser=" + this.v.getDoubleClickedInManager());
+		System.out.println(
+				"elementSelectedInManager: getdoubleclickedinmanager=" + this.v.getUserItemSelectedByManager());
 		// ANALIZZARE QUESTIONE SE UTENTE O OGGETTO
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			try {
-				if (this.m.getRequiredItem(i).toString().equals(this.v.getDoubleClickedInManager())) {
-					this.setSelectedItemInfo(this.v.getDoubleClickedInManager());
+				if (this.m.getRequiredItem(i).toString().equals(this.v.getUserItemSelectedByManager())) {
+					this.setSelectedItemInfo(this.v.getUserItemSelectedByManager());
 					return;
 				}
 			} catch (ItemException e) {
@@ -1307,7 +1309,7 @@ public class ControllerImpl implements Controller {
 
 		for (Integer i : this.m.getUserArchive().keySet()) {
 			try {
-				if (this.m.getRequiredUser(i).toString().equals(this.v.getDoubleClickedInManager())) {
+				if (this.m.getRequiredUser(i).toString().equals(this.v.getUserItemSelectedByManager())) {
 					this.setSelectedUserInfo(this.m.getRequiredUser(i));
 					return;
 				}
