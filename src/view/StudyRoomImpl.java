@@ -106,17 +106,18 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 							v.takeSit();
 							System.out.println("preso posto"
 									+ String.valueOf(this.selectedSit));
-							v.giveMeStudyRoomStatus();
-							v.swapView(CardName.STUDY_ROOM);
+
 						} else if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
 							this.selectedSit = Integer.parseInt(((JButton) e
 									.getSource()).getText());
 							v.cancelSit();
 							System.out.println("cancellato posto"
 									+ String.valueOf(this.selectedSit));
-							v.giveMeStudyRoomStatus();
-							v.swapView(CardName.STUDY_ROOM);
+
 						}
+						v.giveMeStudyRoomStatus();
+						System.out.println("Aggiorno status...");
+						v.swapView(CardName.STUDY_ROOM);
 					});
 		}
 
@@ -171,7 +172,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 
