@@ -35,7 +35,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		/**
 		 *
 		 */
-		BORROWED, WISH, REVIEWS
+		BORROWED, WISH, REVIEWS, MANAGER_BORROW
 	}
 
 	/**
@@ -49,9 +49,28 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	public ListScreenImpl(final View v, final ListScreenType i) {
 		JLabel presentation;
 		JButton exit = new JButton();
+		JButton exitM = new JButton();
 		JButton remove = new JButton();
 		remove.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation = new JLabel();
+
+		presentation.setHorizontalAlignment(SwingConstants.CENTER);
+		presentation
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+
+		presentation.setBounds(12, 13, 776, 50);
+		this.add(presentation);
+
+		exit = new JButton("Esci");
+		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		exit.setBounds(603, 496, 166, 39);
+		this.add(exit);
+
+		exitM = new JButton("Esci");
+		exitM.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		exitM.setBounds(603, 496, 166, 39);
+		this.add(exitM);
+
 		switch (i) {
 		case BORROWED:
 			presentation.setText("Ecco gli oggetti che hai in prestito:");
@@ -61,6 +80,8 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 				v.swapView(CardName.BORROWED_LIST);
 			});
 			remove.setText("Restituisci");
+			exitM.setVisible(false);
+			exit.setVisible(true);
 			break;
 		case WISH:
 			presentation.setText("Ecco gli oggetti che desideri");
@@ -70,37 +91,38 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 				v.giveMeBorrowList();
 				v.swapView(CardName.WISHLIST);
 			});
+			exit.setVisible(true);
+			exitM.setVisible(false);
 			break;
 
 		case REVIEWS:
 			presentation.setText("Ecco tutte le recensioni");
 			remove.setVisible(false);
+			exit.setVisible(true);
+			exitM.setVisible(false);
 			break;
+		case MANAGER_BORROW:
+			presentation.setText("Ecco gli oggetti in prestito");
+			remove.setVisible(false);
+			exit.setVisible(false);
+			exitM.setVisible(true);
 		default:
 			break;
 
 		}
-
-		presentation.setHorizontalAlignment(SwingConstants.CENTER);
-		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-
-		presentation.setBounds(12, 13, 776, 50);
-		this.add(presentation);
-
 		this.list.setModel(this.model);
 		this.list.setBounds(42, 76, 704, 376);
 		this.add(this.list);
 
-		exit = new JButton("Esci");
-		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
-		exit.setBounds(603, 511, 166, 39);
-		this.add(exit);
 		remove.setBounds(215, 462, 353, 35);
 		this.add(remove);
+
 		exit.addActionListener(e -> {
 			v.giveMeFilteredList();
 			v.swapView(CardName.ITEM);
+		});
+		exitM.addActionListener(e -> {
+			v.swapView(CardName.MANAGER_MENU);
 		});
 
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);

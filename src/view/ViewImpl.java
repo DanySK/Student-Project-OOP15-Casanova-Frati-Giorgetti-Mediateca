@@ -65,6 +65,7 @@ public class ViewImpl implements View {
 	private JPanel card14;
 	private JPanel card15;
 	private JPanel card16;
+	private JPanel card17;
 
 	private final JFrame mainFrame = new JFrame();
 
@@ -106,7 +107,8 @@ public class ViewImpl implements View {
 				"Book Create Card"), FILM_CREATE("Film Create Card"), MANAGER_MENU(
 				"Manager Menu Card"), STUDY_ROOM("Study Room Card"), WISHLIST(
 				"Wishlist Card"), BOOK_MODIFY("Book Modify Card"), FILM_MODIFY(
-				"Film Modify Card"), ALL_REVIEWS("All Reviews Card");
+				"Film Modify Card"), ALL_REVIEWS("All Reviews Card"), USERS_BORROWED_LIST(
+																				"Users Borrowed List Card");
 
 		private final String name;
 
@@ -149,6 +151,7 @@ public class ViewImpl implements View {
 				TypeItem.MOVIE);
 		this.card12 = new ManagerScreenImpl(this);
 		this.card14 = new ListScreenImpl(this, ListScreenType.REVIEWS);
+		this.card17 = new ListScreenImpl(this, ListScreenType.MANAGER_BORROW);
 		this.card0 = new JPanel();
 
 		this.mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -205,6 +208,8 @@ public class ViewImpl implements View {
 		ViewImpl.CONTAINER.add(this.card16, CardName.FILM_MODIFY.toString());
 		ViewImpl.CONTAINER.add(this.card12, CardName.MANAGER_MENU.toString());
 		ViewImpl.CONTAINER.add(this.card14, CardName.ALL_REVIEWS.toString());
+		ViewImpl.CONTAINER.add(this.card17,
+				CardName.USERS_BORROWED_LIST.toString());
 
 		this.swapView(CardName.MAIN);
 		login.addActionListener(e -> this.swapView(CardName.LOGIN));

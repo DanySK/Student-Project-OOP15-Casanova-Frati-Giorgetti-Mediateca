@@ -189,7 +189,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		});
 		seeBorrowedList.addActionListener(e -> {
 			v.giveManagerBorrowList();
-			v.swapView(CardName.BORROWED_LIST);
+			v.swapView(CardName.USERS_BORROWED_LIST);
 		});
 		JButton exit = new JButton("Esci");
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
