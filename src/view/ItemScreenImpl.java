@@ -21,19 +21,19 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 	private static final long serialVersionUID = 1L;
 
-	private final JTextField titleF;
-	private final JTextField authorF;
-	private final JTextField manifacturerF;
+	private JTextField titleF;
+	private JTextField authorF;
+	private JTextField manifacturerF;
 	private JComboBox<?> genreF;
 	private JComboBox<?> languageF;
-	private final JTextField yearF;
+	private JTextField yearF;
 	// private final JFileChooser imageChoose = new JFileChooser();
 	private JComboBox<?> itemTypeF;
-	private final JTextField durationF;
+	private JTextField durationF;
 	private JComboBox<?> colorF;
-	private final JTextField isbnF;
-	private final JTextField numCopiesF;
-	private final JTextField numReleaseF;
+	private JTextField isbnF;
+	private JTextField numCopiesF;
+	private JTextField numReleaseF;
 
 	/**
 	 * enum for type of Item screen to show.
@@ -178,10 +178,9 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
-
 		if (type.equals(ItemScreenType.CREATE)) {
 			presentation = new JLabel("Inserisci il nuovo oggetto");
 			send = new JButton("Crea");
@@ -233,7 +232,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -269,6 +268,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final utils.Language language,
 			final int copies, final int release) {
+		System.out.println("setto campi comuni");
 		this.titleF.setText(title);
 		this.authorF.setText(author);
 		this.manifacturerF.setText(manifacturer);
@@ -297,11 +297,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final String isbn,
 			final utils.Language language, final int copies, final int release) {
+		System.out.println("Ultimo setter setta i campi");
 		this.setCommonField(title, author, manifacturer, year, genre, language,
 				copies, release);
 		this.durationF.setText(null);
 		this.colorF.setSelectedItem(null);
-		this.isbnF.setText(isbn);
+		this.isbnF.setText("paperinoooooooo");
 	}
 
 	@Override

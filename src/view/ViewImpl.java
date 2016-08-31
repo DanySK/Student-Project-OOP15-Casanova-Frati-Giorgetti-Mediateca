@@ -415,7 +415,8 @@ public class ViewImpl implements View {
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final String isbn,
 			final utils.Language language, final int copies, final int release) {
-		((ItemScreen) this.card10).setBookField(title, author, manifacturer,
+		System.out.println("setter esegue e passa a quello in itemscreen");
+		((ItemScreen) this.card13).setBookField(title, author, manifacturer,
 				year, genre, isbn, language, copies, release);
 	}
 
@@ -426,7 +427,7 @@ public class ViewImpl implements View {
 			final utils.ItemGenre genre, final String duration,
 			final utils.TypeColor color, final utils.Language language,
 			final int copies, final int release) {
-		((ItemScreen) this.card10).setFilmField(title, author, manifacturer,
+		((ItemScreen) this.card16).setFilmField(title, author, manifacturer,
 				year, genre, duration, color, language, copies, release);
 	}
 
@@ -454,6 +455,7 @@ public class ViewImpl implements View {
 	@Override
 	public void giveMeItemShowFromManager() {
 		this.c.itemElaboration();
+
 	}
 
 	// //OK
@@ -770,7 +772,9 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeItemInfoFromManager() {
+		System.out.println("Chiedo di settare le info al setter in viewimpl");
 		this.c.setItemModifyField();
+
 	}
 
 	// //OK
