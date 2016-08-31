@@ -1003,11 +1003,8 @@ public class ControllerImpl implements Controller {
 
 		// String[] array = new String[this.m.getStudyRoomSit()];
 
-		int[] arrayInt = new int[this.m.getAllUserSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
-				this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay())).size()];
-		System.out.println("setTakenSitsList: this.m.getAllUserSit(day).size()="
-				+ this.m.getAllUserSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
-						this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay())).size());
+		int[] arrayInt = new int[this.m.getStudyRoomSit()];
+		System.out.println("setTakenSitsList: this.m.getAllUserSit(day).size()=" + this.m.getStudyRoomSit());
 		System.out.println("setTakenSitsList: arrayInt=" + arrayInt.length);
 		for (int i = 0; i < this.m.getStudyRoomSit(); i++) {
 			System.out
