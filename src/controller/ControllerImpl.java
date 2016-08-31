@@ -458,6 +458,7 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void borrowList() {
+		System.out.println("borrowList: entrato");
 		this.borrowListFromUser(this.actualUser);
 	}
 
@@ -468,8 +469,8 @@ public class ControllerImpl implements Controller {
 	 *            selected user.
 	 */
 	public void borrowListFromUser(final UserImpl user) {
-		System.out.println("borrowList: entrato");
-		System.out.println("borrowList: dimensione archivio prestiti=" + user.getLoanArchive().size());
+		System.out.println("borrowListFromUser: entrato");
+		System.out.println("borrowListFromUser: dimensione archivio prestiti=" + user.getLoanArchive().size());
 		try {
 			String[] array = new String[user.getLoanArchive().size()];
 			int index = 0;
@@ -481,14 +482,11 @@ public class ControllerImpl implements Controller {
 			 * this.m.getRequiredUser(i).toString()).collect(Collectors.toList()
 			 * ).toArray(array);
 			 */
-
 			for (Integer i : this.m.getItemBorrowed(user.getIdUser())) {
 				array[index] = this.m.getRequiredItem(i).toString();
 				index++;
 			}
-
 			this.v.setBorrowedItemList(array);
-
 		} catch (ItemException e) {
 			this.v.showError(e.getMessage());
 		} catch (UserException e1) {
@@ -507,6 +505,7 @@ public class ControllerImpl implements Controller {
 				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemSelectedByUser())) {
 					try {
 						this.m.borrowItem(i, this.actualUser.getIdUser());
+						this.v.showMessage("Oggetto " + this.m.getRequiredItem(i).toString() + " preso in prestito!");
 						System.out.println("borrowItem: entrato nel try");
 					} catch (ItemException e) {
 						this.v.showError(e.getMessage());
@@ -966,12 +965,13 @@ public class ControllerImpl implements Controller {
 			for (Integer i : this.actualUser.getLoanArchive().keySet()) {
 				if (this.m.getRequiredItem(i).toString().equals(item)) {
 					this.m.returnItem(i, this.actualUser.getIdUser());
-					this.v.showMessage("Oggetto " + this.m.getRequiredItem(i));
+					this.v.showMessage("Oggetto " + this.m.getRequiredItem(i) + " restituito!");
 					System.out.println("giveBackItem: try eseguito");
-				} else {
-					this.v.showMessage("Oggetto da restituire non trovato!");
+					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+					return;
 				}
 			}
+			this.v.showMessage("Oggetto da restituire non trovato!");
 		} catch (ItemException e) {
 			this.v.showError(e.getMessage());
 		} catch (UserException e1) {
@@ -1088,7 +1088,6 @@ public class ControllerImpl implements Controller {
 		// mi ritorna un pair con posto, giorno e devo fare il cast inverso
 
 		// elaborare la stringa per ottenere la data
-		System.out.println("cancelSit: entrato");
 		System.out.println("cancelSit: entrato");
 		/*
 		 * GregorianCalendar day = new GregorianCalendar();

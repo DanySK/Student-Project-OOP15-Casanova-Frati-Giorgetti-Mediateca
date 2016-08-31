@@ -58,8 +58,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		this.add(delete);
 
 		JButton seeBorrowedList = new JButton("Vedi prestiti");
-		seeBorrowedList.setFont(new Font("Tahoma", Font.PLAIN,
-				ViewImpl.FONT_SIZE));
+		seeBorrowedList.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		seeBorrowedList.setBounds(498, 400, 273, 40);
 		this.add(seeBorrowedList);
 
@@ -80,8 +79,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 150, 273, 40);
-		showUserList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		showUserList.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
@@ -96,8 +94,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(498, 200, 273, 40);
-		showItemList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		showItemList.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
@@ -118,28 +115,19 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 			public void mouseClicked(final MouseEvent evt) {
 				@SuppressWarnings("unchecked")
 				JList<String> elist = (JList<String>) evt.getSource();
-				if ((evt.getClickCount() == 2)
-						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
-					System.out.println("Cliccato utente"
-							+ ((JList) evt.getSource()).getSelectedValue()
-							.toString());
-					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
-							.getSelectedValue().toString();
+				if ((evt.getClickCount() == 2) && (ManagerScreenImpl.this.type == TypeList.USER)) {
+					System.out.println("Cliccato utente" + ((JList) evt.getSource()).getSelectedValue().toString());
+					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource()).getSelectedValue().toString();
 					v.showUserInfo();
-				} else if ((evt.getClickCount() == 2)
-						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
-					System.out.println("Cliccato utente"
-							+ ((JList) evt.getSource()).getSelectedValue()
-							.toString());
-					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
-							.getSelectedValue().toString();
+				} else if ((evt.getClickCount() == 2) && (ManagerScreenImpl.this.type == TypeList.ITEM)) {
+					System.out.println("Cliccato utente" + ((JList) evt.getSource()).getSelectedValue().toString());
+					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource()).getSelectedValue().toString();
 					v.showItemInfoManager();
 				}
 			}
 		});
 
-		scroll = new JScrollPane(this.list,
-				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+		scroll = new JScrollPane(this.list, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setBounds(35, 50, 436, 484);
 		scroll.setMinimumSize(new Dimension(300, 200));
