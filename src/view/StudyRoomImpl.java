@@ -144,14 +144,14 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 					.addActionListener(e -> {
 						if (((JButton) e.getSource()).getBackground() == Color.GREEN) {
 							this.selectedSit = Integer.parseInt(((JButton) e
-									.getSource()).getText());
+									.getSource()).getText()) - 1;
 							v.takeSit();
 							System.out.println("preso posto"
 									+ String.valueOf(this.selectedSit));
 
 						} else if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
 							this.selectedSit = Integer.parseInt(((JButton) e
-									.getSource()).getText());
+									.getSource()).getText()) - 1;
 							v.cancelSit();
 							System.out.println("cancellato posto"
 									+ String.valueOf(this.selectedSit));
