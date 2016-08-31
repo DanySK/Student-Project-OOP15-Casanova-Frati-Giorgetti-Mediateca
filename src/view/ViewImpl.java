@@ -43,7 +43,7 @@ public class ViewImpl implements View {
 	static final int IMAGE_LENGHT = 140;
 	static final int IMAGE_WIDTH = 100;
 	UserShow userScreen;
-	ItemShow itemScreen;
+	ItemShow itemShow;
 	String[] prova = { "1", "0", "casa", "0", "1", "2", "....", };
 
 	private boolean logged;
@@ -445,9 +445,9 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void showItemInfoManager() {
-		this.itemScreen = new ItemShowImpl();
+		this.itemShow = new ItemShowImpl();
 		this.giveMeItemShowFromManager();
-		this.itemScreen.startItemShow(this);
+		this.itemShow.startItemShow(this);
 	}
 
 	// //OK
@@ -459,9 +459,11 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void showItemInfoMediateca() {
-		this.itemScreen = new ItemShowImpl();
+		this.itemShow = new ItemShowImpl();
+		System.out.println("creata schermata");
 		this.giveMeItemInfoMediateca();
-		this.itemScreen.startItemShow(this);
+		System.out.println("settati valori");
+		this.itemShow.startItemShow(this);
 	}
 
 	// //OK
@@ -792,7 +794,7 @@ public class ViewImpl implements View {
 			final String yearS, final String genreS,
 			final String reviewAvarageS, final String availabilityS,
 			final String isbnS, final String languageS) {
-		this.itemScreen.setBookField(titleS, authorS, manifacturerS, yearS,
+		this.itemShow.setBookField(titleS, authorS, manifacturerS, yearS,
 				genreS, reviewAvarageS, availabilityS, isbnS, languageS);
 	}
 
@@ -803,7 +805,7 @@ public class ViewImpl implements View {
 			final String yearS, final String genreS,
 			final String reviewAvarageS, final String availabilityS,
 			final String durationS, final String colorS, final String languageS) {
-		this.itemScreen.setFilmField(titleS, authorS, manifacturerS, yearS,
+		this.itemShow.setFilmField(titleS, authorS, manifacturerS, yearS,
 				genreS, reviewAvarageS, availabilityS, durationS, colorS,
 				languageS);
 	}
