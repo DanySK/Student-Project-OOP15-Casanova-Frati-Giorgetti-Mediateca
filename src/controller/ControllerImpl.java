@@ -682,12 +682,13 @@ public class ControllerImpl implements Controller {
 
 			ItemGenre genre = this.m.getRequiredItem(itemId).getGenre();
 			String publisher = this.m.getRequiredItem(itemId).getPublisher();
-			Integer numRelease = this.m.getRequiredItem(itemId).getNumRelease().get();
+			
 			Integer numCopy = this.m.getItemArchive().get(itemId).getSecond().getQuantity();
 
 			if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
 				String isbn = this.m.getRequiredItem(itemId).getIsbn();
 				System.out.println("setSelectedItemInfo: mostra info libro");
+				Integer numRelease = this.m.getRequiredItem(itemId).getNumRelease().get();
 				this.v.setBookInfoDoubleClick(title, author, publisher, Integer.toString(releaseYear), genre.toString(),
 						Float.toString(this.m.getRequiredItem(itemId).getAverageVote()), Integer.toString(numCopy),
 						isbn, language.toString());
