@@ -994,22 +994,39 @@ public class ControllerImpl implements Controller {
 	public void setTakenSitsList() {
 		System.out.println("setTakenSitsList: entrato");
 
-		GregorianCalendar day = new GregorianCalendar();
-		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
-				this.v.getStudyRoomSelectedDay());
+		/*
+		 * GregorianCalendar day = new GregorianCalendar();
+		 * day.set(this.v.getStudyRoomSelectedYear(),
+		 * this.v.getStudyRoomSelectedMonth(),
+		 * this.v.getStudyRoomSelectedDay());
+		 */
 
 		// String[] array = new String[this.m.getStudyRoomSit()];
 
-		int[] arrayInt = new int[this.m.getAllUserSit(day).size()];
-
-		for (int i = 0; i < this.m.getAllUserSit(day).size(); i++) {
-			if (this.m.getAllUserSit(day).get(i).equals(this.actualUser.getIdUser())) {
+		int[] arrayInt = new int[this.m.getAllUserSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
+				this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay())).size()];
+		System.out.println("setTakenSitsList: this.m.getAllUserSit(day).size()="
+				+ this.m.getAllUserSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
+						this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay())).size());
+		System.out.println("setTakenSitsList: arrayInt=" + arrayInt.length);
+		for (int i = 0; i < this.m.getStudyRoomSit(); i++) {
+			System.out
+					.print(this.m
+							.getAllUserSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
+									this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay()))
+							.get(i).toString() + ",");
+			if (this.m
+					.getAllUserSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
+							this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay()))
+					.get(i).equals(this.actualUser.getIdUser())) {
 				arrayInt[i] = 1;
 			} else {
-				arrayInt[i] = this.m.getAllUserSit(day).get(i);
+				arrayInt[i] = this.m.getAllUserSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
+						this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay())).get(i);
 			}
 		}
 
+		this.v.setStudyRoomStatus(arrayInt);
 		/*
 		 * for (int index = 0; index < (arrayInt.size()); index++) {
 		 * System.out.print(arrayInt.get(index)); if ((arrayInt.get(index) ==
@@ -1027,23 +1044,31 @@ public class ControllerImpl implements Controller {
 		 */
 
 		// System.out.println(Arrays.toString(array));
-
-		this.v.setStudyRoomStatus(arrayInt);
 	}
 
 	@Override
 	public void takeSit() {
 		System.out.println("takeSit: entrato");
 
-		GregorianCalendar day = new GregorianCalendar();
-		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
-				this.v.getStudyRoomSelectedDay());
+		/*
+		 * GregorianCalendar day = new GregorianCalendar();
+		 * day.set(this.v.getStudyRoomSelectedYear(),
+		 * this.v.getStudyRoomSelectedMonth(),
+		 * this.v.getStudyRoomSelectedDay());
+		 */
 
 		System.out.println("takeSit: " + this.v.getSelectedSit());
 
 		try {
 			System.out.println("takeSit: entrato nel try");
-			this.m.bookSit(day, this.v.getSelectedSit(), this.actualUser.getIdUser());
+			System.out
+					.println(
+							"takeSit: this.m.getAllUserSit(day)=" + this.m
+									.getAllUserSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
+											this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay()))
+									.toString());
+			this.m.bookSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+					this.v.getStudyRoomSelectedDay()), this.v.getSelectedSit(), this.actualUser.getIdUser());
 			System.out.println("takeSit: eseguito il book");
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 			System.out.println("takeSit: scritto nel file");
@@ -1068,13 +1093,18 @@ public class ControllerImpl implements Controller {
 		// elaborare la stringa per ottenere la data
 		System.out.println("cancelSit: entrato");
 		System.out.println("cancelSit: entrato");
-		GregorianCalendar day = new GregorianCalendar();
-		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
-				this.v.getStudyRoomSelectedDay());
+		/*
+		 * GregorianCalendar day = new GregorianCalendar();
+		 * day.set(this.v.getStudyRoomSelectedYear(),
+		 * this.v.getStudyRoomSelectedMonth(),
+		 * this.v.getStudyRoomSelectedDay());
+		 */
 
 		try {
 			System.out.println("cancelSit: entrato nel try");
-			this.m.cancelSit(day, this.v.getSelectedSit(), this.actualUser.getIdUser());
+			this.m.cancelSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
+					this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay()), this.v.getSelectedSit(),
+					this.actualUser.getIdUser());
 			System.out.println("cancelSit: eseguito il cancel");
 			this.fm.writeObjectIntoFile(ControllerImpl.FILENAMESTUDYROOM, this.m);
 			System.out.println("cancelSit: eseguito il write");
