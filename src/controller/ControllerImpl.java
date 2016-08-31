@@ -17,7 +17,6 @@ import model.Pair;
 import model.UserException;
 import model.item.ItemImpl;
 import model.item.ItemInfo;
-import model.item.ReviewImpl;
 import model.user.User;
 import model.user.UserImpl;
 import utils.ItemGenre;
@@ -426,8 +425,8 @@ public class ControllerImpl implements Controller {
 	public void addReview() {
 		// DA CONTROLLARE
 		System.out.println("addReview: entrato");
-		System.out.println("addReview: " + this.itemBeforeScreenChange);
-		System.out.println("addReview: score e review " + this.v.getScore() + this.v.getReview());
+		System.out.println("addReview: " + this.v.getItemToRemoveFromLikeBorrowWish());
+		System.out.println("addReview: score " + this.v.getScore() + " e review " + this.v.getReview());
 		/*
 		 * this.m.getItemArchive().keySet().stream() .filter(i ->
 		 * this.m.getRequiredItem(i).toString().equals(this.v.
@@ -441,7 +440,7 @@ public class ControllerImpl implements Controller {
 
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			try {
-				if (this.m.getRequiredItem(i).toString().equals(this.itemBeforeScreenChange)) {
+				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemToRemoveFromLikeBorrowWish())) {
 					this.m.addReview(i, this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
 					this.v.showMessage("Recensione per l'oggetto " + this.m.getRequiredItem(i).toString() + "inserita");
 				}
@@ -657,9 +656,9 @@ public class ControllerImpl implements Controller {
 	 *            Item passed as string
 	 */
 	public void setSelectedItemInfo(final String string) {
-		System.out.println("setItemInfo: entrato");
+		System.out.println("setSelectedItemInfo: entrato");
 		// getItemSelectedByuSer lo prendo da setFilteredList
-		System.out.println("setItemInfo: getItemSelectedByUser=" + string);
+		System.out.println("setSelectedItemInfo: getItemSelectedByUser=" + string);
 		Integer itemId = 0;
 		for (Integer i : this.m.getItemArchive().keySet()) {
 			try {
@@ -689,16 +688,19 @@ public class ControllerImpl implements Controller {
 
 			if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
 				String isbn = this.m.getRequiredItem(itemId).getIsbn();
+				System.out.println("setSelectedItemInfo: mostra info libro");
 				this.v.setBookInfoDoubleClick(title, author, publisher, Integer.toString(releaseYear), genre.toString(),
 						Float.toString(this.m.getRequiredItem(itemId).getAverageVote()), Integer.toString(numCopy),
 						isbn, language.toString());
 			} else if (this.m.getAllItemId(TypeItem.MOVIE).contains(itemId)) {
+				System.out.println("setSelectedItemInfo: mostra info film");
 				String duration = Integer.toString(this.m.getRequiredItem(itemId).getDuration());
 				TypeColor color = this.m.getRequiredItem(itemId).getColour();
 				this.v.setFilmInfoDoubleClick(title, author, publisher, Integer.toString(releaseYear), genre.toString(),
 						Float.toString(this.m.getRequiredItem(itemId).getAverageVote()), Integer.toString(numCopy),
 						duration, color.toString(), language.toString());
 			} else {
+				System.out.println("setSelectedItemInfo: mostra errore");
 				this.v.showError("Item " + Integer.toString(itemId) + " not found in the archive!");
 			}
 
@@ -996,36 +998,37 @@ public class ControllerImpl implements Controller {
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
 
-		String[] array = new String[this.m.getStudyRoomSit()];
-		List<Integer> arrayInt = this.m.getAllUserSit(day);
-		System.out.println("arrayInt: " + arrayInt.toString());
+		// String[] array = new String[this.m.getStudyRoomSit()];
 
-		System.out.println("setTakenSitsList: " + arrayInt.size());
+		int[] arrayInt = new int[this.m.getAllUserSit(day).size()];
 
-		for (int index = 0; index < (arrayInt.size()); index++) {
-			System.out.print(arrayInt.get(index));
-			if ((arrayInt.get(index) == null) || (arrayInt.get(index) == 0)) {
-				array[index] = "0";
-			} else if (arrayInt.get(index).equals(this.actualUser.getIdUser())) {
-				array[index] = "1";
-				System.out.println("setTakenSitsList: assegnato posto " + index + " a 1");
+		for (int i = 0; i < this.m.getAllUserSit(day).size(); i++) {
+			if (this.m.getAllUserSit(day).get(i).equals(this.actualUser.getIdUser())) {
+				arrayInt[i] = 1;
 			} else {
-				try {
-					array[index] = this.m.getRequiredUser(arrayInt.get(index)).getUsername();
-					System.out.println("setTakenSitsList: assegnato posto " + index + " a user");
-				} catch (ItemException e) {
-					this.v.showError(e.getMessage());
-				} catch (UserException e1) {
-					this.v.showError(e1.getMessage());
-				} catch (Exception e2) {
-					// TODO Auto-generated catch block
-					this.v.showError(e2.getMessage());
-				}
+				arrayInt[i] = this.m.getAllUserSit(day).get(i);
 			}
 		}
-		System.out.println(Arrays.toString(array));
 
-		this.v.setStudyRoomStatus(array);
+		/*
+		 * for (int index = 0; index < (arrayInt.size()); index++) {
+		 * System.out.print(arrayInt.get(index)); if ((arrayInt.get(index) ==
+		 * null) || (arrayInt.get(index) == 0)) { array[index] = "0"; } else if
+		 * (arrayInt.get(index).equals(this.actualUser.getIdUser())) {
+		 * array[index] = "1"; System.out.println(
+		 * "setTakenSitsList: assegnato posto " + index + " a 1"); } else { try
+		 * { array[index] =
+		 * this.m.getRequiredUser(arrayInt.get(index)).getUsername();
+		 * System.out.println("setTakenSitsList: assegnato posto " + index +
+		 * " a user"); } catch (ItemException e) {
+		 * this.v.showError(e.getMessage()); } catch (UserException e1) {
+		 * this.v.showError(e1.getMessage()); } catch (Exception e2) { // TODO
+		 * Auto-generated catch block this.v.showError(e2.getMessage()); } } }
+		 */
+
+		// System.out.println(Arrays.toString(array));
+
+		this.v.setStudyRoomStatus(arrayInt);
 	}
 
 	@Override
@@ -1253,11 +1256,15 @@ public class ControllerImpl implements Controller {
 				}
 			}
 			String[] array;
-
+			System.out.println("AllItemReviews: creato array stringhe");
 			array = new String[this.m.getAllItemReview(id).size()];
-			for (ReviewImpl r : this.m.getAllItemReview(id)) {
-				array[index] = r.toString();
-				index++;
+			/*
+			 * for (Review r : this.m.getAllItemReview(id)) { array[index] =
+			 * r.toString(); index++; }
+			 */
+			System.out.println("AllItemReviews: inizializzato stringhe");
+			for (int i = 0; i < this.m.getAllItemReview(id).size(); i++) {
+				array[i] = this.m.getAllItemReview(id).get(i).toString();
 			}
 			this.v.setItemReviewsList(array);
 			System.out.println("AllItemReviews: try passato");
