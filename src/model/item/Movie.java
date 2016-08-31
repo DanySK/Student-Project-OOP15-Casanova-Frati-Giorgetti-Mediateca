@@ -21,7 +21,7 @@ public class Movie extends ItemImpl {
 
   @Override
   public String toString() {
-    return "MOVIE: " + super.toString();
+    return "MOVIE: " + super.toString() + this.getColour().toString();
   }
 
   /**

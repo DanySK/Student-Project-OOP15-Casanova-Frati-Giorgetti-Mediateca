@@ -17,7 +17,7 @@ public class Book extends ItemImpl {
 
   @Override
   public String toString() {
-    return "BOOK: " + super.toString();
+    return "BOOK: " + super.toString() + this.getIsbn();
   }
 
   private static final long serialVersionUID = -7358930538078727479L;
