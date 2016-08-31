@@ -158,6 +158,9 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			deleteUser.setVisible(false);
 			discarge.addActionListener(e -> v.swapView(CardName.START));
 			this.send.addActionListener(e -> {
+				System.out.println(this.datePicker.getModel().getDay());
+				System.out.println(this.datePicker.getModel().getMonth() + 1);
+				System.out.println(this.datePicker.getModel().getYear());
 				v.sendUserCreate();
 				v.swapView(CardName.LOGIN);
 			});
@@ -307,7 +310,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		case BIRTHDATE_DAY:
 			return String.valueOf(this.datePicker.getModel().getDay());
 		case BIRTHDATE_MONTH:
-			return String.valueOf(this.datePicker.getModel().getMonth());
+			return String.valueOf(this.datePicker.getModel().getMonth() + 1);
 		case BIRTHDATE_YEAR:
 			return String.valueOf(this.datePicker.getModel().getYear());
 		case EMAIL:

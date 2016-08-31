@@ -171,7 +171,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 
@@ -211,7 +211,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 
 	@Override
 	public int getDateMonth() {
-		return this.datePicker.getModel().getMonth();
+		return this.datePicker.getModel().getMonth() + 1;
 	}
 
 	@Override
