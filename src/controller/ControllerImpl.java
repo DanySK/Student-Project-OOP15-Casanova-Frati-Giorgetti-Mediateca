@@ -85,6 +85,7 @@ public class ControllerImpl implements Controller {
 			cal.set(Calendar.YEAR, 1994);
 			cal.set(Calendar.MONTH, 3);
 			cal.set(Calendar.DAY_OF_MONTH, 6);
+
 			/*
 			 * this.m.registerUser("Enrico", "Casanova", cal, "csharplover",
 			 * "graffeallineate", "enrico.casanova@gmail.it", "334534534534",
@@ -107,7 +108,8 @@ public class ControllerImpl implements Controller {
 			 * Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE,
 			 * ItemGenre.ANIMATION))); System.out.println(
 			 * "writeonfile: utente zxc registrato");
-			 */this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
+			 */
+			this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
 					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0011, 100);
 			this.m.registerBook("Lo hobbit", 1953, "J.R.R. Tolkien", Language.ENGLISH, "23123100",
 					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0012, 50);
@@ -208,16 +210,19 @@ public class ControllerImpl implements Controller {
 			cal2.set(Calendar.MONTH, 8);
 			cal2.set(Calendar.DAY_OF_MONTH, 23);
 
-			this.m.bookSit(cal, 1, ((UserImpl) u).getIdUser());
-			this.m.bookSit(cal, 2, ((UserImpl) u2).getIdUser());
-			this.m.bookSit(cal2, 1, ((UserImpl) u).getIdUser());
-			this.m.bookSit(cal2, 2, ((UserImpl) u).getIdUser());
-			this.m.bookSit(cal2, 3, ((UserImpl) u).getIdUser());
-			this.m.bookSit(cal2, 4, ((UserImpl) u).getIdUser());
-			this.m.bookSit(cal2, 6, ((UserImpl) u2).getIdUser());
-			this.m.bookSit(cal2, 7, ((UserImpl) u2).getIdUser());
-			this.m.bookSit(cal2, 8, ((UserImpl) u2).getIdUser());
-			this.m.bookSit(cal2, 9, ((UserImpl) u2).getIdUser());
+			// this.m.bookSit(cal, 1, this.m.ge);
+			// this.m.bookSit(cal, 2, this.m.getUserArchive().);
+			this.m.bookSit(cal2, 1, u.getIdUser());
+			this.m.bookSit(cal2, 2, u.getIdUser());
+			this.m.bookSit(cal2, 3, u.getIdUser());
+			this.m.bookSit(cal2, 4, u.getIdUser());
+			this.m.bookSit(cal2, 6, u2.getIdUser());
+			this.m.bookSit(cal2, 7, u2.getIdUser());
+			this.m.bookSit(cal2, 8, u2.getIdUser());
+			this.m.bookSit(cal2, 9, u2.getIdUser());
+
+			System.out.println(this.m.getAllUserSit(cal2));
+			System.out.println(this.m.getAllUserSit(cal));
 
 			Random random = new Random();
 			int n = 5;
@@ -676,19 +681,20 @@ public class ControllerImpl implements Controller {
 			int releaseYear = this.m.getRequiredItem(itemId).getReleaseYear();
 			String author = this.m.getRequiredItem(itemId).getAuthor();
 			Language language = this.m.getRequiredItem(itemId).getCurrentLanguage();
-			String isbn = this.v.getItemInfo(TypeItemInfo.ISBN);
+
 			ItemGenre genre = this.m.getRequiredItem(itemId).getGenre();
 			String publisher = this.m.getRequiredItem(itemId).getPublisher();
-			Integer numRelease = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
-			Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
-			String duration = this.v.getItemInfo(TypeItemInfo.DURATION);
-			TypeColor color = CastManager.castToTypeColor(this.v.getItemInfo(TypeItemInfo.COLOR));
+			Integer numRelease = this.m.getRequiredItem(itemId).getNumRelease().get();
+			Integer numCopy = this.m.getItemArchive().get(itemId).getSecond().getQuantity();
 
 			if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
+				String isbn = this.m.getRequiredItem(itemId).getIsbn();
 				this.v.setBookInfoDoubleClick(title, author, publisher, Integer.toString(releaseYear), genre.toString(),
 						Float.toString(this.m.getRequiredItem(itemId).getAverageVote()), Integer.toString(numCopy),
 						isbn, language.toString());
 			} else if (this.m.getAllItemId(TypeItem.MOVIE).contains(itemId)) {
+				String duration = Integer.toString(this.m.getRequiredItem(itemId).getDuration());
+				TypeColor color = this.m.getRequiredItem(itemId).getColour();
 				this.v.setFilmInfoDoubleClick(title, author, publisher, Integer.toString(releaseYear), genre.toString(),
 						Float.toString(this.m.getRequiredItem(itemId).getAverageVote()), Integer.toString(numCopy),
 						duration, color.toString(), language.toString());
@@ -990,12 +996,14 @@ public class ControllerImpl implements Controller {
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
 				this.v.getStudyRoomSelectedDay());
 
-		String[] array = new String[100];
+		String[] array = new String[this.m.getStudyRoomSit()];
 		List<Integer> arrayInt = this.m.getAllUserSit(day);
+		System.out.println("arrayInt: " + arrayInt.toString());
 
 		System.out.println("setTakenSitsList: " + arrayInt.size());
 
 		for (int index = 0; index < (arrayInt.size()); index++) {
+			System.out.print(arrayInt.get(index));
 			if ((arrayInt.get(index) == null) || (arrayInt.get(index) == 0)) {
 				array[index] = "0";
 			} else if (arrayInt.get(index).equals(this.actualUser.getIdUser())) {
@@ -1015,6 +1023,8 @@ public class ControllerImpl implements Controller {
 				}
 			}
 		}
+		System.out.println(Arrays.toString(array));
+
 		this.v.setStudyRoomStatus(array);
 	}
 
@@ -1053,6 +1063,7 @@ public class ControllerImpl implements Controller {
 		// mi ritorna un pair con posto, giorno e devo fare il cast inverso
 
 		// elaborare la stringa per ottenere la data
+		System.out.println("cancelSit: entrato");
 		System.out.println("cancelSit: entrato");
 		GregorianCalendar day = new GregorianCalendar();
 		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
@@ -1111,7 +1122,7 @@ public class ControllerImpl implements Controller {
 	public void removeFromWishList() {
 		System.out.println("removeFromWishlist: entrato");
 		try {
-			for (Integer i : this.m.getItemArchive().keySet()) {
+			for (Integer i : this.actualUser.getWishlist()) {
 				System.out.println("removeFromWishList: entrato nel for");
 				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemToRemoveFromLikeBorrowWish())) {
 
