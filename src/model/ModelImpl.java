@@ -202,10 +202,14 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void borrowItem(final int itemId, final int userId) throws Exception, ItemException {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
+      if (this.getRequiredUser(userId).getNowOnLoan().contains(itemId)
+                  || this.archiveItem.getUserList(itemId).contains(userId)) {
+        throw new UserException("UserId " + userId + " have already taken itemId " + itemId);
+      }
       if (this.archiveItem.getItemInfo(itemId).isAvailable()) {
         this.archiveItem.addUser(itemId, userId);
         this.getRequiredUser(userId).addItem(itemId);
-        System.out.println("UserId " + userId + "takes itemId " + itemId);
+        System.out.println("UserId " + userId + " takes itemId " + itemId);
       } else {
         System.out.println(itemId + " not available.");
       }
