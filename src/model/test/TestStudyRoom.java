@@ -43,7 +43,6 @@ public class TestStudyRoom {
         m.bookSit(new GregorianCalendar(2016, 8, 20), i, 197392167);
         org.junit.Assert.assertTrue(
                     m.getAllUserSit(new GregorianCalendar(2016, 8, 20)).get(i).equals(197392167));
-
       }
       System.out.println(m.getAllUserSit(new GregorianCalendar(2016, 8, 20)));
       for (int i = 0; i < m.getStudyRoomSit(); i++) {
