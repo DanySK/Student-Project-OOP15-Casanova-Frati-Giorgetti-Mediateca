@@ -55,68 +55,70 @@ public class ItemShowImpl implements ItemShow {
 
 		final JLabel authorL = new JLabel();
 		authorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		authorL.setBounds(23, 44, 480, 30);
-		authorL.setText("Autore:" + this.author);
+		authorL.setBounds(23, 54, 480, 30);
+		authorL.setText("Autore: " + this.author);
 		mainFrame.getContentPane().add(authorL);
 
 		final JLabel manifacturerL = new JLabel("Prodotto da: "
 				+ this.manifacturer);
 		manifacturerL.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.SMALL_SIZE));
-		manifacturerL.setBounds(23, 78, 480, 30);
+		manifacturerL.setBounds(23, 94, 480, 30);
 		mainFrame.getContentPane().add(manifacturerL);
 
 		final JLabel yearL = new JLabel("Anno di uscita: " + this.year);
 		yearL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		yearL.setBounds(23, 178, 480, 30);
+		yearL.setBounds(23, 214, 480, 30);
 		mainFrame.getContentPane().add(yearL);
 
 		final JLabel genreL = new JLabel("Genere: " + this.genre);
 		genreL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		genreL.setBounds(23, 113, 480, 30);
+		genreL.setBounds(23, 134, 480, 30);
 		mainFrame.getContentPane().add(genreL);
 
 		final JLabel reviewAvarageL = new JLabel("Media recensioni: "
 				+ this.reviewAvarage);
 		reviewAvarageL.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.SMALL_SIZE));
-		reviewAvarageL.setBounds(23, 148, 480, 30);
+		reviewAvarageL.setBounds(23, 174, 480, 30);
 		mainFrame.getContentPane().add(reviewAvarageL);
 
 		final JLabel availabilityL = new JLabel("Disponibile: "
 				+ this.availability);
 		availabilityL.setFont(new Font("Tahoma", Font.PLAIN,
 				ViewImpl.SMALL_SIZE));
-		availabilityL.setBounds(23, 210, 480, 30);
+		availabilityL.setBounds(23, 254, 480, 30);
 		mainFrame.getContentPane().add(availabilityL);
 
 		final JLabel isbnCodeL = new JLabel("Codice ISBN: " + this.isbn);
 		isbnCodeL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		isbnCodeL.setBounds(23, 279, 480, 30);
+		isbnCodeL.setBounds(23, 334, 480, 30);
 		mainFrame.getContentPane().add(isbnCodeL);
 
 		final JLabel colorL = new JLabel("Colore: " + this.color);
 		colorL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		colorL.setBounds(23, 313, 480, 37);
+		colorL.setBounds(23, 374, 480, 37);
 		mainFrame.getContentPane().add(colorL);
 
 		final JLabel durationL = new JLabel("Durata: " + this.duration);
 		durationL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		durationL.setBounds(23, 279, 480, 30);
+		durationL.setBounds(23, 334, 480, 30);
 		mainFrame.getContentPane().add(durationL);
 
 		final JLabel languageL = new JLabel("Lingua:" + this.language);
 		languageL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		languageL.setBounds(23, 241, 215, 37);
+		languageL.setBounds(23, 294, 215, 37);
 		mainFrame.getContentPane().add(languageL);
 
 		mainFrame.setTitle("Oggetto Selezionato");
-		authorL.setText("Regista:" + this.author);
+
 		if (this.type.equals(TypeItem.BOOK)) {
+			authorL.setText("Scrittore:" + this.author);
 			isbnCodeL.setVisible(true);
 			durationL.setVisible(false);
 			colorL.setVisible(false);
 		} else if (this.type.equals(TypeItem.MOVIE)) {
+			authorL.setText("Regista:" + this.author);
 			isbnCodeL.setVisible(false);
 			durationL.setVisible(true);
 			colorL.setVisible(true);
