@@ -159,7 +159,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			discarge.addActionListener(e -> v.swapView(CardName.START));
 			this.send.addActionListener(e -> {
 				System.out.println(this.datePicker.getModel().getDay());
-				System.out.println(this.datePicker.getModel().getMonth() + 1);
+				System.out.println(this.datePicker.getModel().getMonth());
 				System.out.println(this.datePicker.getModel().getYear());
 				v.sendUserCreate();
 				v.swapView(CardName.LOGIN);
@@ -285,7 +285,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		System.out.println(birthDate_month);
 		System.out.println(birthDate_year);
 		this.model.setDate(Integer.parseInt(birthDate_year),
-				Integer.parseInt(birthDate_month),
+				(Integer.parseInt(birthDate_month) - 1),
 				Integer.parseInt(birthDate_day));
 		this.model.setSelected(true);
 		this.emailF.setText(email);
