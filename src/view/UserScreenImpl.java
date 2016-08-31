@@ -78,7 +78,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		deleteUser.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		deleteUser.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		deleteUser.setLocation(428, 806);
-
+		this.add(deleteUser);
 		this.nameF = new JTextField();
 		this.nameF.setBounds(246, 85, 241, 25);
 		this.add(this.nameF);
@@ -155,10 +155,11 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		if (type.equals(UserScreenType.CREATE)) {
 			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
 			this.send.setText("Crea");
+			deleteUser.setVisible(false);
 			discarge.addActionListener(e -> v.swapView(CardName.START));
 			this.send.addActionListener(e -> {
 				v.sendUserCreate();
-				v.swapView(CardName.MAIN);
+				v.swapView(CardName.LOGIN);
 			});
 		} else if (type.equals(UserScreenType.MODIFY)) {
 			this.presentation = new JLabel("Modifica qui i tuoi dati:");
@@ -171,13 +172,13 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			this.filmPref1.setEnabled(false);
 			this.filmPref2.setEnabled(false);
 			this.filmPref3.setEnabled(false);
-
+			deleteUser.setVisible(true);
 			discarge.addActionListener(e -> {
 				v.giveMeSuggestedBooks();
 				v.giveMeSuggestedMovies();
 				v.swapView(CardName.MENU);
 			});
-			this.add(deleteUser);
+
 			deleteUser.addActionListener(e -> {
 				v.deleteUser();
 				v.swapView(CardName.LOGIN);

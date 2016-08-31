@@ -171,6 +171,17 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.add(this.numReleaseF);
 		discarge = new JButton("Annulla");
 		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		JLabel numCopiesL = new JLabel("Copie:");
+		numCopiesL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		numCopiesL.setBounds(159, 464, 167, 30);
+		this.add(numCopiesL);
+
+		JLabel numReleaseL = new JLabel("Release:");
+		numReleaseL
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		numReleaseL.setBounds(159, 504, 167, 30);
+		this.add(numReleaseL);
+
 		if (type.equals(ItemScreenType.CREATE)) {
 			presentation = new JLabel("Inserisci il nuovo oggetto");
 			send = new JButton("Crea");
@@ -216,6 +227,8 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			this.isbnF.setVisible(false);
 			this.add(this.isbnF);
 			isbnL.setVisible(false);
+			this.numReleaseF.setVisible(false);
+			numReleaseL.setVisible(false);
 		}
 
 		presentation.setBounds(50, 13, 692, 38);
@@ -241,17 +254,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		yearL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		yearL.setBounds(159, 224, 167, 30);
 		this.add(yearL);
-
-		JLabel numCopiesL = new JLabel("Copie:");
-		numCopiesL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		numCopiesL.setBounds(159, 464, 167, 30);
-		this.add(numCopiesL);
-
-		JLabel numReleaseL = new JLabel("Release:");
-		numReleaseL
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
-		numReleaseL.setBounds(159, 504, 167, 30);
-		this.add(numReleaseL);
 
 	}
 
