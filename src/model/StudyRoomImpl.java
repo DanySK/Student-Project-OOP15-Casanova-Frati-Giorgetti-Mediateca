@@ -91,7 +91,7 @@ public class StudyRoomImpl implements Serializable, StudyRoom {
     if (this.mapStudyRoom.containsKey(day)) {
       if ((sit < StudyRoomImpl.N) && (sit >= 0)) {
         if (this.mapStudyRoom.get(day).get(sit).equals(userId)) {
-          this.mapStudyRoom.get(day).add(sit, 0);
+          this.mapStudyRoom.get(day).set(sit, 0);
           System.out.println("Day " + day.get(Calendar.DAY_OF_MONTH) + "." + day.get(Calendar.MONTH)
                       + "." + day.get(Calendar.YEAR) + " User " + userId + " removed from position "
                       + sit);
