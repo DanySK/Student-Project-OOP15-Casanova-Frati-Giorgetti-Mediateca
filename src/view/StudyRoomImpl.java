@@ -98,30 +98,6 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 
 		}
 
-		for (i = 0; i < 100; i++) {
-			this.buttons[i]
-					.addActionListener(e -> {
-						if (((JButton) e.getSource()).getBackground() == Color.GREEN) {
-							this.selectedSit = Integer.parseInt(((JButton) e
-									.getSource()).getText());
-							v.takeSit();
-							System.out.println("preso posto"
-									+ String.valueOf(this.selectedSit));
-
-						} else if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
-							this.selectedSit = Integer.parseInt(((JButton) e
-									.getSource()).getText());
-							v.cancelSit();
-							System.out.println("cancellato posto"
-									+ String.valueOf(this.selectedSit));
-
-						}
-						System.out.println("Aggiorno status...");
-						v.giveMeStudyRoomStatus();
-						v.swapView(CardName.STUDY_ROOM);
-					});
-		}
-
 		new BorderLayout();
 		this.setLayout(null);
 		this.add(southPanel);
@@ -163,7 +139,29 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		occupiedSit.setFont(new Font("Tahoma", Font.BOLD, 20));
 		occupiedSit.setBounds(28, 60, 430, 30);
 		southPanel.add(occupiedSit);
+		for (i = 0; i < 100; i++) {
+			this.buttons[i]
+					.addActionListener(e -> {
+						if (((JButton) e.getSource()).getBackground() == Color.GREEN) {
+							this.selectedSit = Integer.parseInt(((JButton) e
+									.getSource()).getText());
+							v.takeSit();
+							System.out.println("preso posto"
+									+ String.valueOf(this.selectedSit));
 
+						} else if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
+							this.selectedSit = Integer.parseInt(((JButton) e
+									.getSource()).getText());
+							v.cancelSit();
+							System.out.println("cancellato posto"
+									+ String.valueOf(this.selectedSit));
+
+						}
+						System.out.println("Aggiorno status...");
+						v.giveMeStudyRoomStatus();
+						v.swapView(CardName.STUDY_ROOM);
+					});
+		}
 		this.add(northPanel);
 		northPanel.setLayout(null);
 		this.add(this.centerPanel);
@@ -189,14 +187,14 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 	}
 
 	@Override
-	public void setStudyRoomStatus(final String[] status) {
+	public void setStudyRoomStatus(final int[] status) {
 		int i;
 		System.out.println(Arrays.toString(status));
 		for (i = 0; i < status.length; i++) {
-			if (status[i].equals("0")) {
+			if (status[i] == 0) {
 				this.buttons[i].setBackground(Color.GREEN);
 				this.buttons[i].setEnabled(true);
-			} else if (status[i].equals("1")) {
+			} else if (status[i] == 1) {
 				this.buttons[i].setBackground(Color.CYAN);
 				this.buttons[i].setEnabled(true);
 			} else {

@@ -348,7 +348,7 @@ public interface View {
 	 * @param array
 	 *            array of taken sits
 	 */
-	void setStudyRoomStatus(String[] array);
+	void setStudyRoomStatus(int[] array);
 
 	/**
 	 * Allows to show a notification to user.

@@ -20,7 +20,7 @@ public interface StudyRoom {
 	 * @param status
 	 *            array of occupied sits
 	 */
-	void setStudyRoomStatus(String[] status);
+	void setStudyRoomStatus(int[] status);
 
 	/**
 	 * Returns the selected day.
