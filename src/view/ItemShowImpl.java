@@ -47,7 +47,7 @@ public class ItemShowImpl implements ItemShow {
 
 		mainFrame.getContentPane().add(mainPanel);
 		mainPanel.setLayout(null);
-		this.type = TypeItem.BOOK;
+
 		final JLabel titleL = new JLabel("Titolo: " + this.title);
 		titleL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		titleL.setBounds(23, 14, 480, 30);
@@ -110,19 +110,20 @@ public class ItemShowImpl implements ItemShow {
 		languageL.setBounds(23, 294, 215, 37);
 		mainFrame.getContentPane().add(languageL);
 
-		mainFrame.setTitle("Oggetto Selezionato");
-
 		if (this.type.equals(TypeItem.BOOK)) {
-			authorL.setText("Scrittore:" + this.author);
+			mainFrame.setTitle("Libro Selezionato");
+			authorL.setText("Scrittore: " + this.author);
 			isbnCodeL.setVisible(true);
 			durationL.setVisible(false);
 			colorL.setVisible(false);
 		} else if (this.type.equals(TypeItem.MOVIE)) {
-			authorL.setText("Regista:" + this.author);
+			mainFrame.setTitle("Film Selezionato");
+			authorL.setText("Regista: " + this.author);
 			isbnCodeL.setVisible(false);
 			durationL.setVisible(true);
 			colorL.setVisible(true);
 		}
+		mainFrame.revalidate();
 		mainFrame.setVisible(true);
 
 	}

@@ -441,6 +441,8 @@ public class ViewImpl implements View {
 	@Override
 	public void giveMeItemInfoMediateca() {
 		this.c.setItemInfoMediateca();
+		// this.setFilmInfoDoubleClick("prova", "prova", "prova", "2014",
+		// "prova", "prova", "prova", "prova", "prova", "prova");
 	}
 
 	// //OK
