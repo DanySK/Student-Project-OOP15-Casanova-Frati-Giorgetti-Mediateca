@@ -16,7 +16,7 @@ import utils.TypeItem;
  *
  */
 public class ItemShowImpl implements ItemShow {
-	static final int FRAME_LENGHT = 600;
+	static final int FRAME_LENGHT = 500;
 	static final int FRAME_WIDTH = 600;
 	private TypeItem type;
 	private String title;

@@ -43,13 +43,11 @@ public interface ItemScreen {
 	 *            the language of movie
 	 * @param copies
 	 *            the number of copies of movie
-	 * @param release
-	 *            the number of release of movie
 	 */
 
 	void setFilmField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String duration, TypeColor color,
-			Language language, int copies, int release);
+			Language language, int copies);
 
 	/**
 	 * Sets all book fields.

@@ -15,7 +15,7 @@ import javax.swing.WindowConstants;
  *
  */
 public class UserShowImpl implements UserShow {
-	private static final int FRAME_LENGHT = 400;
+	private static final int FRAME_LENGHT = 500;
 	private static final int FRAME_WIDTH = 600;
 	private String name;
 	private String surname;

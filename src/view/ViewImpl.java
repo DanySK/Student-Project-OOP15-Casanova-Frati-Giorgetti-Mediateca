@@ -432,9 +432,9 @@ public class ViewImpl implements View {
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final String duration,
 			final utils.TypeColor color, final utils.Language language,
-			final int copies, final int release) {
+			final int copies) {
 		((ItemScreen) this.card16).setFilmField(title, author, manifacturer,
-				year, genre, duration, color, language, copies, release);
+				year, genre, duration, color, language, copies);
 	}
 
 	// //OK
@@ -782,6 +782,9 @@ public class ViewImpl implements View {
 	public void giveMeItemInfoFromManager() {
 		System.out.println("Chiedo di settare le info al setter in viewimpl");
 		this.c.setItemModifyField();
+		// this.setFilmField("a", "a", "a", "1515",
+		// utils.ItemGenre.ADVENTURE,"15.15",
+		// utils.TypeColor.BLACK_AND_WHITE,utils.Language.AMERICAN, 51, 6);
 
 	}
 

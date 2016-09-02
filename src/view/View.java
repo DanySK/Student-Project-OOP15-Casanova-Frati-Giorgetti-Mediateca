@@ -293,12 +293,10 @@ public interface View {
 	 *            the language of item
 	 * @param copies
 	 *            the copies number of item
-	 * @param release
-	 *            the release number of item
 	 */
 	void setFilmField(String title, String author, String manifacturer,
 			String year, ItemGenre genre, String duration, TypeColor color,
-			Language language, int copies, int release);
+			Language language, int copies);
 
 	/**
 	 * Asks controller to set item info.
@@ -717,4 +715,5 @@ public interface View {
 	 * Asks controller to set info for showing item at doubleclick.
 	 */
 	void giveMeItemShowFromManager();
+
 }
