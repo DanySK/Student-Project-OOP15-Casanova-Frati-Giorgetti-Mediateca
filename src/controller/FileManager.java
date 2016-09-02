@@ -31,15 +31,6 @@ public class FileManager {
 			+ System.getProperty("file.separator");
 
 	/**
-	 * Empty constructor.
-	 *
-	 * @author
-	 *
-	 */
-	public FileManager() {
-	}
-
-	/**
 	 * Method that writes an object into a file.
 	 *
 	 * @param fileName

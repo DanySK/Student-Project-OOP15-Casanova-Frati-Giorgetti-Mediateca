@@ -5,19 +5,16 @@ import utils.Language;
 import utils.TypeColor;
 
 public class CastManager {
-	public CastManager() {
-
-	}
-
 	/**
-	 * Method which casts the given string to an Itemgenre type
-	 * 
+	 * Method which casts the given string to an ItemGenre type.
+	 *
 	 * @param string
-	 * @return
+	 *            string to be casted
+	 * @return the string casted to ItemGenre
 	 */
 	public static ItemGenre castToItemGenre(final String string) {
 
-		for (ItemGenre ig : ItemGenre.values()) {
+		for (final ItemGenre ig : ItemGenre.values()) {
 			if (ig.toString().equals(string)) {
 				return ig;
 			}
@@ -26,14 +23,15 @@ public class CastManager {
 	}
 
 	/**
-	 * Method which casts the given string to a Language type
-	 * 
+	 * Method which casts the given string to a Language type.
+	 *
 	 * @param string
-	 * @return
+	 *            string to be casted
+	 * @return the string casted to Language
 	 */
 	public static Language castToLanguage(final String string) {
 
-		for (Language l : Language.values()) {
+		for (final Language l : Language.values()) {
 			if (l.toString().equals(string)) {
 				return l;
 			}
@@ -41,8 +39,15 @@ public class CastManager {
 		return null;
 	}
 
+	/**
+	 * Method which casts the given string to a TypeColor type.
+	 *
+	 * @param string
+	 *            string to be casted
+	 * @return the string casted to TypeColor
+	 */
 	public static TypeColor castToTypeColor(final String string) {
-		for (TypeColor tc : TypeColor.values()) {
+		for (final TypeColor tc : TypeColor.values()) {
 			if (tc.toString().equals(string)) {
 				return tc;
 			}

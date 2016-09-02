@@ -15,7 +15,9 @@ public final class Application {
 	/**
 	 *
 	 * @param args
-	 *            Arguments passed to the main method
+	 *            Arguments passed to t
+	 * 
+	 *            he main method
 	 * @throws Exception
 	 */
 	public static void main(final String[] args) throws Exception {
