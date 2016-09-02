@@ -1365,7 +1365,8 @@ public class ControllerImpl implements Controller {
 			}
 			String[] array;
 			System.out.println("AllItemReviews: creato array stringhe");
-			array = new String[this.m.getAllItemReview(id).size()];
+			m.getAllItemReview(id).stream().toArray().toString();
+			//array = new String[this.m.getAllItemReview(id).size()];
 			/*
 			 * for (Review r : this.m.getAllItemReview(id)) { array[index] =
 			 * r.toString(); index++; }
