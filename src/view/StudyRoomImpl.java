@@ -2,8 +2,8 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -38,6 +38,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 	private UtilDateModel model = new UtilDateModel();
 	private SpringLayout springLayout = new SpringLayout();
 	private JPanel centerPanel;
+	private boolean dataSent = false;
 
 	/**
 	 * builder for StudyRoomImpl.
@@ -83,6 +84,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		JButton sendDate = new JButton("Invia Data");
 
 		sendDate.addActionListener(e -> {
+			this.dataSent = true;
 			v.giveMeStudyRoomStatus();
 			v.swapView(CardName.STUDY_ROOM);
 		});
@@ -92,9 +94,9 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 			this.buttons[i] = new JButton();
 			this.buttons[i].setSize(30, 30);
 			this.buttons[i].setText(String.valueOf(i + 1));
+			this.buttons[i].setFont(new Font("Tahoma", Font.PLAIN, 12));
 			this.buttons[i].setOpaque(true);
 			this.centerPanel.add(this.buttons[i]);
-
 		}
 
 		new BorderLayout();
@@ -105,6 +107,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		exit.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		exit.setBounds(567, 19, 128, 49);
 		exit.addActionListener(e -> {
+			this.dataSent = false;
 			v.giveMeSuggestedBooks();
 			v.giveMeSuggestedMovies();
 			v.swapView(CardName.MENU);
@@ -141,23 +144,28 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		for (i = 0; i < 100; i++) {
 			this.buttons[i]
 					.addActionListener(e -> {
-						if (((JButton) e.getSource()).getBackground() == Color.GREEN) {
-							this.selectedSit = Integer.parseInt(((JButton) e
-									.getSource()).getText()) - 1;
-							v.takeSit();
-						} else if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
-							this.selectedSit = Integer.parseInt(((JButton) e
-									.getSource()).getText()) - 1;
-							v.cancelSit();
+						if (this.dataSent) {
+							if (((JButton) e.getSource()).getBackground() == Color.GREEN) {
+								this.selectedSit = Integer
+										.parseInt(((JButton) e.getSource())
+												.getText()) - 1;
+								v.takeSit();
+							} else if (((JButton) e.getSource())
+									.getBackground() == Color.CYAN) {
+								this.selectedSit = Integer
+										.parseInt(((JButton) e.getSource())
+												.getText()) - 1;
+								v.cancelSit();
+							}
+							v.giveMeStudyRoomStatus();
+							v.swapView(CardName.STUDY_ROOM);
 						}
-						v.giveMeStudyRoomStatus();
-						v.swapView(CardName.STUDY_ROOM);
 					});
 		}
 		this.add(northPanel);
 		northPanel.setLayout(null);
 		this.add(this.centerPanel);
-		this.centerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		this.centerPanel.setLayout(new GridLayout(8, 14, 1, 1));
 		northPanel.setLayout(null);
 		JLabel presentation = new JLabel(
 				"Clicca una data e il posto che vuoi prenotare");

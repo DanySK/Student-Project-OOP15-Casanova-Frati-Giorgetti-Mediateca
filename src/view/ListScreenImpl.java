@@ -62,7 +62,8 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		this.removeB.setBounds(533, 76, 222, 35);
 		this.removeB.setText("Consegna");
 		this.add(this.removeB);
-		this.removeW.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		this.removeW
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.removeW.setBounds(533, 76, 222, 35);
 		this.removeW.setText("Rimuovi");
 		this.add(this.removeW);
@@ -91,6 +92,11 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		this.list.setModel(this.model);
 		this.list.setBounds(42, 76, 460, 450);
 		this.add(this.list);
+		if (this.list.isSelectionEmpty()) {
+			this.removeB.setEnabled(false);
+			this.removeW.setEnabled(false);
+			this.review.setEnabled(false);
+		}
 
 		switch (i) {
 		case BORROWED:
