@@ -58,12 +58,11 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		JButton exitM = new JButton();
 
 		this.removeB
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.removeB.setBounds(533, 76, 222, 35);
 		this.removeB.setText("Consegna");
 		this.add(this.removeB);
-		this.removeW
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		this.removeW.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		this.removeW.setBounds(533, 76, 222, 35);
 		this.removeW.setText("Rimuovi");
 		this.add(this.removeW);
@@ -71,7 +70,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		presentation.setBounds(12, 13, 776, 50);
 		this.add(presentation);
@@ -181,7 +180,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		this.removeW.setText("Rimuovi da Wishlist");
 		this.removeW.addActionListener(e -> {
 			v.removeFromWishlist();
-			v.giveMeBorrowList();
+			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);
 		});
 
