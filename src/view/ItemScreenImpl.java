@@ -178,7 +178,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
 		if (type.equals(ItemScreenType.CREATE)) {
@@ -232,7 +232,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -268,7 +268,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final utils.Language language,
 			final int copies) {
-		System.out.println("setto campi comuni");
 		this.titleF.setText(title);
 		this.authorF.setText(author);
 		this.manifacturerF.setText(manifacturer);
@@ -285,7 +284,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			final utils.ItemGenre genre, final String duration,
 			final utils.TypeColor color, final utils.Language language,
 			final int copies) {
-		System.out.println("Ultimo setter setta i campi di movie");
+
 		this.setCommonField(title, author, manifacturer, year, genre, language,
 				copies);
 		this.durationF.setText(duration);
@@ -298,12 +297,12 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final String isbn,
 			final utils.Language language, final int copies, final int release) {
-		System.out.println("Ultimo setter setta i campi di book");
+
 		this.setCommonField(title, author, manifacturer, year, genre, language,
 				copies);
 		this.durationF.setText(null);
 		this.colorF.setSelectedItem(null);
-		this.isbnF.setText("paperinoooooooo");
+		this.isbnF.setText(isbn);
 	}
 
 	@Override

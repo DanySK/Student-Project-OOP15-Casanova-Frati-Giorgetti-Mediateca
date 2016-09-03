@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.util.Arrays;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -85,7 +84,6 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 
 		sendDate.addActionListener(e -> {
 			v.giveMeStudyRoomStatus();
-			System.out.println("Invia data cliccato");
 			v.swapView(CardName.STUDY_ROOM);
 		});
 
@@ -147,18 +145,11 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 							this.selectedSit = Integer.parseInt(((JButton) e
 									.getSource()).getText()) - 1;
 							v.takeSit();
-							System.out.println("preso posto"
-									+ String.valueOf(this.selectedSit));
-
 						} else if (((JButton) e.getSource()).getBackground() == Color.CYAN) {
 							this.selectedSit = Integer.parseInt(((JButton) e
 									.getSource()).getText()) - 1;
 							v.cancelSit();
-							System.out.println("cancellato posto"
-									+ String.valueOf(this.selectedSit));
-
 						}
-						System.out.println("Aggiorno status...");
 						v.giveMeStudyRoomStatus();
 						v.swapView(CardName.STUDY_ROOM);
 					});
@@ -172,7 +163,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 
@@ -190,7 +181,6 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 	@Override
 	public void setStudyRoomStatus(final int[] status) {
 		int i;
-		System.out.println(Arrays.toString(status));
 		for (i = 0; i < status.length; i++) {
 			if (status[i] == 0) {
 				this.buttons[i].setBackground(Color.GREEN);

@@ -415,7 +415,7 @@ public class ViewImpl implements View {
 			final String manifacturer, final String year,
 			final utils.ItemGenre genre, final String isbn,
 			final utils.Language language, final int copies, final int release) {
-		System.out.println("setter esegue e passa a quello in itemscreen");
+
 		((ItemScreen) this.card13).setBookField(title, author, manifacturer,
 				year, genre, isbn, language, copies, release);
 	}
@@ -464,9 +464,7 @@ public class ViewImpl implements View {
 	@Override
 	public void showItemInfoMediateca() {
 		this.itemShow = new ItemShowImpl();
-		System.out.println("creata schermata");
 		this.giveMeItemInfoMediateca();
-		System.out.println("settati valori");
 		this.itemShow.startItemShow(this);
 	}
 
@@ -774,11 +772,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeItemInfoFromManager() {
-		System.out.println("Chiedo di settare le info al setter in viewimpl");
 		this.c.setItemModifyField();
-		// this.setFilmField("a", "a", "a", "1515",
-		// utils.ItemGenre.ADVENTURE,"15.15",
-		// utils.TypeColor.BLACK_AND_WHITE,utils.Language.AMERICAN, 51, 6);
 
 	}
 

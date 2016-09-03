@@ -123,17 +123,11 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 				JList<String> elist = (JList<String>) evt.getSource();
 				if ((evt.getClickCount() == 2)
 						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
-					System.out.println("Cliccato utente"
-							+ ((JList) evt.getSource()).getSelectedValue()
-							.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
 					v.showUserInfo();
 				} else if ((evt.getClickCount() == 2)
 						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
-					System.out.println("Cliccato utente"
-							+ ((JList) evt.getSource()).getSelectedValue()
-							.toString());
 					ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
 							.getSelectedValue().toString();
 					v.showItemInfoManager();
@@ -148,24 +142,17 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		scroll.setMinimumSize(new Dimension(300, 200));
 		this.add(scroll);
 		delete.addActionListener(e -> {
-			System.out.println("Elimina Selezionato");
 			v.deleteItem();
 			v.giveMeItemList();
 			v.swapView(CardName.MANAGER_MENU);
 
 		});
 		modifyBook.addActionListener(e -> {
-			System.out.println("Modifica Libro Selezionato");
-			System.out.println("Chiedo info con give me");
 			v.giveMeItemInfoFromManager();
-			System.out.println("Cambio schermata");
 			v.swapView(CardName.BOOK_MODIFY);
 		});
 		modifyMovie.addActionListener(e -> {
-			System.out.println("Modifica Film Selezionato");
-			System.out.println("Chiedo info con give me");
 			v.giveMeItemInfoFromManager();
-			System.out.println("Cambio schermata");
 			v.swapView(CardName.FILM_MODIFY);
 		});
 
@@ -173,7 +160,6 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
 				if (evt.getClickCount() == 1) {
-					System.out.println("click on element");
 					if ((ManagerScreenImpl.this.type == TypeList.ITEM)
 							&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
 						seeBorrowedList.setEnabled(false);

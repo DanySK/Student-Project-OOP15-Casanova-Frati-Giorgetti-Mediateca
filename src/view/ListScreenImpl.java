@@ -137,7 +137,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 			public void mouseClicked(final MouseEvent evt) {
 				if ((evt.getClickCount() == 1)
 						&& (i == ListScreenType.BORROWED)) {
-					System.out.println("click");
+
 					if (!ListScreenImpl.this.list.isSelectionEmpty()) {
 						ListScreenImpl.this.review.setEnabled(true);
 						ListScreenImpl.this.removeB.setEnabled(true);
@@ -147,7 +147,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 					v.swapView(CardName.BORROWED_LIST);
 				} else if ((evt.getClickCount() == 1)
 						&& (i == ListScreenType.WISH)) {
-					System.out.println("click");
+
 					if (!ListScreenImpl.this.list.isSelectionEmpty()) {
 						ListScreenImpl.this.removeW.setEnabled(true);
 						ListScreenImpl.selected = ListScreenImpl.this.list
@@ -215,7 +215,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 	@Override
 	public String getSelectedItem() {
-		System.out.println("Selezionato: " + ListScreenImpl.selected);
+
 		return ListScreenImpl.selected;
 	}
 }
