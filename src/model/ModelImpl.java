@@ -288,8 +288,7 @@ public class ModelImpl implements Serializable, Model {
 
   @Override
   public List<ReviewImpl> getAllItemReview(final Integer itemId) throws Exception {
-    return (List<ReviewImpl>) Collections
-                .unmodifiableCollection(this.getRequiredItem(itemId).getSetReview());
+    return this.getRequiredItem(itemId).getSetReview();
   }
 
   @Override
