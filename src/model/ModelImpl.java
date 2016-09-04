@@ -224,9 +224,13 @@ public class ModelImpl implements Serializable, Model {
   @Override
   public void returnItem(final int itemId, final int userId) throws Exception, ItemException {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
-      this.archiveItem.removeUser(itemId, userId);
-      this.getRequiredUser(userId).removeItem(itemId);
-      System.out.println("UserId " + userId + "returns itemId " + itemId);
+      if (!this.getRequiredUser(userId).itWasReturned(itemId)) {
+        this.archiveItem.removeUser(itemId, userId);
+        this.getRequiredUser(userId).removeItem(itemId);
+        System.out.println("UserId " + userId + " returns itemId " + itemId);
+      } else {
+        throw new UserException("User " + userId + " has already return this item: " + itemId);
+      }
     } else {
       throw new ItemException("ItemId: " + itemId + " or userId" + userId
                   + "are not contained into the archive");
