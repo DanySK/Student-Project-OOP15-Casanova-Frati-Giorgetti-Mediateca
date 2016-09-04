@@ -649,6 +649,8 @@ public class ControllerImpl implements Controller {
 					try {
 						this.m.borrowItem(i, this.actualUser.getIdUser());
 						this.v.showMessage("Oggetto " + this.m.getRequiredItem(i).toString() + " preso in prestito!");
+						this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+						this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 						System.out.println("borrowItem: entrato nel try");
 					} catch (ItemException e) {
 						this.v.showError(e.getMessage());
@@ -1424,11 +1426,12 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void allItemReviews() {
-		int index = 0;
+		String[] array;
 		int id = 0;
 		System.out.println("AllItemReviews: entrato");
 		System.out.println("AllItemReviews: " + this.v.getItemSelectedByUser());
 		try {
+
 			for (final Integer i : this.m.getItemArchive().keySet()) {
 				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemSelectedByUser())) {
 					id = i;
@@ -1436,17 +1439,15 @@ public class ControllerImpl implements Controller {
 					break;
 				}
 			}
-			String[] array = new String[this.m.getAllItemReview(id).size()];
+
+			array = new String[this.m.getAllItemReview(id).size()];
 			System.out.println("AllItemReviews: creato array stringhe");
 
-			/*
-			 * for (Review r : this.m.getAllItemReview(id)) { array[index] =
-			 * r.toString(); index++; }
-			 */
 			System.out.println("AllItemReviews: inizializzato stringhe");
 			for (int i = 0; i < this.m.getAllItemReview(id).size(); i++) {
 				array[i] = this.m.getAllItemReview(id).get(i).toString();
 			}
+
 			this.v.setItemReviewsList(array);
 			System.out.println("AllItemReviews: try passato");
 		} catch (ItemException e) {
