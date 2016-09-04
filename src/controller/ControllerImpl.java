@@ -521,7 +521,6 @@ public class ControllerImpl implements Controller {
 				this.v.showError(e2.getMessage());
 			}
 		}
-
 		System.out.println("itemElaboration: sta per restituire lista");
 		this.v.setFilteredList(array);
 		System.out.println("itemElaboration: restituita lista");
@@ -534,23 +533,13 @@ public class ControllerImpl implements Controller {
 		System.out.println("addLike: entrato");
 		System.out.println("addLike: " + this.v.getItemSelectedByUser());
 
-		/*
-		 * this.m.getItemArchive().keySet().stream().filter((Integer) i -> { try
-		 * { this.m.getRequiredItem(i).toString().equals(this.v.
-		 * getItemSelectedByUser()); } catch (Exception e) { this.v.showError(
-		 * "Oggetto non presente nell'archivio"); } }).forEach(i -> { try {
-		 * this.m.addLike(i, this.actualUser.getIdUser()); } catch (Exception e)
-		 * { // TODO Auto-generated catch block e.printStackTrace(); }
-		 * this.v.showMessage("Oggetto " + this.m.getItemArchive().get(i) +
-		 * " messo in wishlist"); System.out.println("addLike: entrato nel try"
-		 * ); });
-		 */
-
 		for (final Integer i : this.m.getItemArchive().keySet()) {
 			try {
 				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemSelectedByUser())) {
 					this.m.addLike(i, this.actualUser.getIdUser());
 					this.v.showMessage("Oggetto " + this.m.getItemArchive().get(i) + " messo in wishlist");
+					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 				}
 			} catch (ItemException e) {
 				this.v.showError(e.getMessage());
@@ -561,7 +550,6 @@ public class ControllerImpl implements Controller {
 				this.v.showError(e2.getMessage());
 			}
 		}
-
 	}
 
 	@Override
@@ -570,22 +558,14 @@ public class ControllerImpl implements Controller {
 		System.out.println("addReview: entrato");
 		System.out.println("addReview: " + this.v.getItemToRemoveFromLikeBorrowWish());
 		System.out.println("addReview: score " + this.v.getScore() + " e review " + this.v.getReview());
-		/*
-		 * this.m.getItemArchive().keySet().stream() .filter(i ->
-		 * this.m.getRequiredItem(i).toString().equals(this.v.
-		 * getItemSelectedByUser())).forEach(i -> { try { this.m.addReview(i,
-		 * this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
-		 * this.v.showMessage("Recensione per l'oggetto " +
-		 * this.m.getItemArchive().get(i) + "inserita"); } catch (Exception e) {
-		 * // TODO Auto-generated catch block this.v.showError(
-		 * "Errore inserimento recensione oggetto"); } });
-		 */
 
 		for (final Integer i : this.m.getItemArchive().keySet()) {
 			try {
 				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemToRemoveFromLikeBorrowWish())) {
 					this.m.addReview(i, this.actualUser.getIdUser(), this.v.getScore(), this.v.getReview());
 					this.v.showMessage("Recensione per l'oggetto " + this.m.getRequiredItem(i).toString() + "inserita");
+					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 				}
 			} catch (ItemException e) {
 				this.v.showError(e.getMessage());
@@ -596,7 +576,6 @@ public class ControllerImpl implements Controller {
 				this.v.showError(e2.getMessage());
 			}
 		}
-
 	}
 
 	@Override
@@ -618,13 +597,6 @@ public class ControllerImpl implements Controller {
 			String[] array = new String[user.getLoanArchive().size()];
 			int index = 0;
 
-			/*
-			 * array =
-			 * this.m.getItemBorrowed(this.actualUser.getIdUser()).stream()
-			 * .map(i ->
-			 * this.m.getRequiredUser(i).toString()).collect(Collectors.toList()
-			 * ).toArray(array);
-			 */
 			for (final Integer i : this.m.getItemBorrowed(user.getIdUser())) {
 				array[index] = this.m.getRequiredItem(i).toString();
 				index++;
@@ -724,11 +696,6 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
-		/*
-		 * for (UserInfo ui : listU) { try { ; } } catch (Exception e) { // TODO
-		 * Auto-generated catch block this.v.showError("Errore nell'UserInfo");
-		 * } }
-		 */
 	}
 
 	@Override
@@ -786,6 +753,7 @@ public class ControllerImpl implements Controller {
 				this.v.showError(e2.getMessage());
 			}
 		}
+		this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
 	}
 
 	@Override
@@ -820,29 +788,20 @@ public class ControllerImpl implements Controller {
 		}
 
 		try {
-
 			final String title = this.m.getRequiredItem(itemId).getTitle();
 			final int releaseYear = this.m.getRequiredItem(itemId).getReleaseYear();
 			final String author = this.m.getRequiredItem(itemId).getAuthor();
 			final Language language = this.m.getRequiredItem(itemId).getCurrentLanguage();
-
 			final ItemGenre genre = this.m.getRequiredItem(itemId).getGenre();
 			final String publisher = this.m.getRequiredItem(itemId).getPublisher();
-
 			final Integer numCopy = this.m.getItemArchive().get(itemId).getSecond().getQuantity();
 
 			if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
 				final String isbn = this.m.getRequiredItem(itemId).getIsbn();
 				System.out.println("setSelectedItemInfo: mostra info libro");
 
-				Integer numRelease = 0;
-				if (this.m.getRequiredItem(itemId).getNumRelease().isPresent()) {
-					numRelease = this.m.getRequiredItem(itemId).getNumRelease().get();
-				}
-
 				this.v.setBookInfoDoubleClick(title, author, publisher, Integer.toString(releaseYear), genre.toString(),
 						Float.toString(this.m.getRequiredItem(itemId).getAverageVote()), Integer.toString(numCopy),
-
 						isbn, language.toString());
 			} else if (this.m.getAllItemId(TypeItem.MOVIE).contains(itemId)) {
 				System.out.println("setSelectedItemInfo: mostra info film");
@@ -857,7 +816,6 @@ public class ControllerImpl implements Controller {
 				System.out.println("setSelectedItemInfo: mostra errore");
 				this.v.showError("Item " + Integer.toString(itemId) + " not found in the archive!");
 			}
-
 		} catch (ItemException e) {
 			this.v.showError(e.getMessage());
 		} catch (UserException e1) {
@@ -1125,6 +1083,7 @@ public class ControllerImpl implements Controller {
 					this.v.showMessage("Oggetto " + this.m.getRequiredItem(i) + " restituito!");
 					System.out.println("giveBackItem: try eseguito");
 					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 					return;
 				}
 			}
@@ -1203,14 +1162,6 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void takeSit() {
 		System.out.println("takeSit: entrato");
-
-		/*
-		 * GregorianCalendar day = new GregorianCalendar();
-		 * day.set(this.v.getStudyRoomSelectedYear(),
-		 * this.v.getStudyRoomSelectedMonth(),
-		 * this.v.getStudyRoomSelectedDay());
-		 */
-
 		System.out.println("takeSit: " + this.v.getSelectedSit());
 
 		try {
@@ -1246,13 +1197,6 @@ public class ControllerImpl implements Controller {
 
 		// elaborare la stringa per ottenere la data
 		System.out.println("cancelSit: entrato");
-		/*
-		 * GregorianCalendar day = new GregorianCalendar();
-		 * day.set(this.v.getStudyRoomSelectedYear(),
-		 * this.v.getStudyRoomSelectedMonth(),
-		 * this.v.getStudyRoomSelectedDay());
-		 */
-
 		try {
 			System.out.println("cancelSit: entrato nel try");
 			this.m.cancelSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(),
@@ -1270,15 +1214,6 @@ public class ControllerImpl implements Controller {
 			this.v.showError(e2.getMessage());
 		}
 	}
-
-	/*
-	 * @Override public void studyRoomStatus() { GregorianCalendar day = new
-	 * GregorianCalendar(); day.set(this.v.getStudyRoomSelectedYear(),
-	 * this.v.getStudyRoomSelectedMonth(), this.v.getStudyRoomSelectedDay());
-	 * int[] arrayint = new int[this.m.getAllUserSit(day).size()]; int index =
-	 * 0; for (Integer i : this.m.getAllUserSit(day)) { arrayint[index] = i; }
-	 * this.v.setStudyRoomStatus(arrayint); }
-	 */
 
 	@Override
 	public void setWishlist() {
@@ -1311,10 +1246,10 @@ public class ControllerImpl implements Controller {
 			for (final Integer i : this.actualUser.getWishlist()) {
 				System.out.println("removeFromWishList: entrato nel for");
 				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemToRemoveFromLikeBorrowWish())) {
-
 					this.m.removeLike(i, this.actualUser.getIdUser());
 					System.out.println("removeFromWishlist: entrato dopo op");
-
+					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEITEM, this.m);
+					this.fm.writeObjectIntoFile(ControllerImpl.FILENAMEUSER, this.m);
 				}
 			}
 		} catch (ItemException e) {
@@ -1526,7 +1461,6 @@ public class ControllerImpl implements Controller {
 				this.v.showError(e2.getMessage());
 			}
 		}
-
 	}
 
 	@Override
