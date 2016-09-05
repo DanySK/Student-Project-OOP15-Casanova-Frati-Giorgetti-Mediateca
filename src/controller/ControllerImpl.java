@@ -725,17 +725,16 @@ public class ControllerImpl implements Controller {
 					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
 					break;
 				case RELEASE_YEAR:
-					final int var = Integer.parseInt(this.v.getItemInfo(ti));
-					this.m.changeItem(ti, itemId, var);
+					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
 					break;
 				case AUTHOR:
 					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
 					break;
 				case LANGUAGE:
-					this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getItemInfo(ti)));
+					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
 					break;
 				case GENRE:
-					this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getItemInfo(ti)));
+					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
 					break;
 				case PRODUCER:
 					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
