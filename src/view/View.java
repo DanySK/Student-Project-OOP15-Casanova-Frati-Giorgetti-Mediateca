@@ -716,4 +716,13 @@ public interface View {
 	 */
 	void giveMeItemShowFromManager();
 
+	/**
+	 * Return if the item passed is a book.
+	 *
+	 * @param item
+	 *            Item
+	 * @return true if is book, false if movie.
+	 */
+	boolean itemIsBook(String item);
+
 }
