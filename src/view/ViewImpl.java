@@ -664,7 +664,7 @@ public class ViewImpl implements View {
 				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
 		if (choose == 0) {
-			this.giveBackItem();
+			this.giveBackItemAfterNotify(book);
 		} else if (choose == 1) {
 			this.extendBorrow(book);
 		}
@@ -683,9 +683,17 @@ public class ViewImpl implements View {
 	@Override
 	public void showGiveBackMessage(final String book) {
 
-		JOptionPane.showMessageDialog(this.mainFrame,
-				"Devi consegare il seguente libro:" + book,
-				"Notifica di consegna", JOptionPane.WARNING_MESSAGE);
+		final Object[] options = { "Consegna", "Esegui il logout" };
+		int choose = JOptionPane.showOptionDialog(this.mainFrame,
+				"Dovresti consegare il seguente libro:" + book
+				+ "Cosa vuoi fare?", "Notifica di consegna",
+				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
+
+		if (choose == 0) {
+			this.giveBackItemAfterNotify(book);
+		} else if (choose == 1) {
+			this.swapView(CardName.MAIN);
+		}
 
 	}
 
