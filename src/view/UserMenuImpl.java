@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import view.ViewImpl.CardName;
@@ -32,6 +34,8 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 	private DefaultListModel<String> modelB = new DefaultListModel<String>();
 	private JList<String> suggestedBooks = new JList<String>();
 	private JList<String> suggestedMovies = new JList<String>();
+	private JScrollPane scrollB;
+	private JScrollPane scrollM;
 
 	/**
 	 * Builder for User Menu.
@@ -55,13 +59,16 @@ public class UserMenuImpl extends JPanel implements UserMenu {
 		mainLabel.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.TITLE_SIZE));
 		mainLabel.setBounds(12, 24, 761, 49);
 		this.add(mainLabel);
-		this.suggestedBooks.setSize(375, 122);
-		this.suggestedBooks.setLocation(12, 197);
-		this.add(this.suggestedBooks);
-		this.suggestedMovies.setSize(349, 122);
-		this.suggestedMovies.setLocation(424, 197);
-
-		this.add(this.suggestedMovies);
+		this.scrollB = new JScrollPane(this.suggestedBooks,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scrollB.setBounds(12, 197, 377, 177);
+		this.add(this.scrollB);
+		this.scrollM = new JScrollPane(this.suggestedMovies,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scrollM.setBounds(424, 197, 349, 177);
+		this.add(this.scrollM);
 
 		exitProgram = new JButton("Esci");
 		exitProgram.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));

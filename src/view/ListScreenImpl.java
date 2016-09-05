@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import view.ViewImpl.CardName;
@@ -30,6 +32,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 	JButton removeB = new JButton();
 	JButton removeW = new JButton();
 	JButton review = new JButton();
+	private JScrollPane scroll;
 
 	/**
 	 * Enumeration with types of list which can be showed.
@@ -58,12 +61,12 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		JButton exitM = new JButton();
 
 		this.removeB
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.removeB.setBounds(533, 76, 222, 35);
 		this.removeB.setText("Consegna");
 		this.add(this.removeB);
 		this.removeW
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.removeW.setBounds(533, 76, 222, 35);
 		this.removeW.setText("Rimuovi");
 		this.add(this.removeW);
@@ -71,7 +74,7 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 
 		presentation.setBounds(12, 13, 776, 50);
 		this.add(presentation);
@@ -89,9 +92,12 @@ public class ListScreenImpl extends JPanel implements ListScreen {
 		this.review.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.review.setBounds(533, 124, 222, 35);
 		this.add(this.review);
+		this.scroll = new JScrollPane(this.list,
+				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		this.scroll.setBounds(42, 76, 460, 450);
+		this.add(this.scroll);
 		this.list.setModel(this.model);
-		this.list.setBounds(42, 76, 460, 450);
-		this.add(this.list);
 		if (this.list.isSelectionEmpty()) {
 			this.removeB.setEnabled(false);
 			this.removeW.setEnabled(false);
