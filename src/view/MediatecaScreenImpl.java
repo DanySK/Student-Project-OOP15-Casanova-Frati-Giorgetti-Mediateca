@@ -82,6 +82,9 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		// SEARCH ACTION LISTENER -> REFRESH
 		search.addActionListener(e -> {
 			v.giveMeFilteredList();
+			borrowItem.setEnabled(false);
+			likeItem.setEnabled(false);
+			this.reviews.setEnabled(false);
 			v.swapView(CardName.ITEM);
 		});
 
@@ -97,7 +100,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filteredJList.setModel(this.model);
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
-				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.scroll = new JScrollPane(this.filteredJList,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -135,14 +138,17 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 						MediatecaScreenImpl.this.reviews.setEnabled(true);
 						likeItem.setEnabled(true);
 						borrowItem.setEnabled(true);
+						v.swapView(CardName.ITEM);
 					}
-					v.swapView(CardName.ITEM);
 				}
 			}
 		});
 		// BACK ACTION LISTENER -> SUGGESTED LIST
 		backToMenu.addActionListener(e -> {
 			this.searchField.setText(null);
+			borrowItem.setEnabled(false);
+			likeItem.setEnabled(false);
+			this.reviews.setEnabled(false);
 			v.swapView(CardName.MENU);
 			v.giveMeSuggestedBooks();
 			v.giveMeSuggestedMovies();
@@ -151,7 +157,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 244, 178, 27);
 		seeWishlist
-				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);
@@ -164,6 +170,9 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		pres.setBounds(42, 13, 722, 27);
 		this.add(pres);
 		this.reviews.addActionListener(e -> {
+			borrowItem.setEnabled(false);
+			likeItem.setEnabled(false);
+			this.reviews.setEnabled(false);
 			v.giveMeAllItemReviews();
 			v.swapView(CardName.ALL_REVIEWS);
 		});
@@ -175,11 +184,17 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		});
 		seeBorrowedItem.addActionListener(e -> {
 			v.giveMeBorrowList();
+			borrowItem.setEnabled(false);
+			likeItem.setEnabled(false);
+			this.reviews.setEnabled(false);
 			v.swapView(CardName.BORROWED_LIST);
 		});
 
 		seeWishlist.addActionListener(e -> {
 			v.giveMeWishlist();
+			borrowItem.setEnabled(false);
+			likeItem.setEnabled(false);
+			this.reviews.setEnabled(false);
 			v.swapView(CardName.WISHLIST);
 		});
 	}

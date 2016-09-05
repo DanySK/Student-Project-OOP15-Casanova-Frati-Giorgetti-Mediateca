@@ -108,6 +108,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		exit.setBounds(567, 19, 128, 49);
 		exit.addActionListener(e -> {
 			this.dataSent = false;
+			this.studyRoomReset();
 			v.giveMeSuggestedBooks();
 			v.giveMeSuggestedMovies();
 			v.swapView(CardName.MENU);
@@ -171,7 +172,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 				"Clicca una data e il posto che vuoi prenotare");
 		presentation.setHorizontalAlignment(SwingConstants.CENTER);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		presentation.setBounds(12, 13, 776, 71);
 		northPanel.add(presentation);
 
@@ -179,6 +180,13 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		sendDate.setBounds(427, 82, 158, 40);
 		northPanel.add(sendDate);
 
+	}
+
+	private void studyRoomReset() {
+		int i;
+		for (i = 0; i < ViewImpl.STUDY_ROOM_SITS; i++) {
+			this.buttons[i].setBackground(null);
+		}
 	}
 
 	@Override
