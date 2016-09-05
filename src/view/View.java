@@ -3,7 +3,6 @@ package view;
 import utils.ItemGenre;
 import utils.Language;
 import utils.TypeColor;
-import utils.TypeItemInfo;
 import utils.UserInfo;
 import view.ViewImpl.CardName;
 import view.ViewImpl.OtherItemFilter;
@@ -238,13 +237,40 @@ public interface View {
 	void sendItemCreate();
 
 	/**
-	 * Gets item info after creation or modify.
+	 * Gets book info after creation.
 	 *
 	 * @param info
 	 *            the type of info you want
 	 * @return the information requested
 	 */
-	String getItemInfo(TypeItemInfo info);
+	String getBookCreateInfo(final utils.TypeItemInfo info);
+
+	/**
+	 * Gets book info after modify.
+	 *
+	 * @param info
+	 *            the type of info you want
+	 * @return the information requested
+	 */
+	String getBookModifiedInfo(final utils.TypeItemInfo info);
+
+	/**
+	 * Gets film info after creation.
+	 *
+	 * @param info
+	 *            the type of info you want
+	 * @return the information requested
+	 */
+	String getFilmCreateInfo(final utils.TypeItemInfo info);
+
+	/**
+	 * Gets film info after modify.
+	 *
+	 * @param info
+	 *            the type of info you want
+	 * @return the information requested
+	 */
+	String getFilmModifiedInfo(final utils.TypeItemInfo info);
 
 	/**
 	 * Sets information of books requested with giveMeItemInfo().

@@ -399,8 +399,26 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public String getItemInfo(final utils.TypeItemInfo info) {
+	public String getBookCreateInfo(final utils.TypeItemInfo info) {
 		return ((ItemScreen) this.card10).getItemInfo(info);
+	}
+
+	// //OK
+	@Override
+	public String getBookModifiedInfo(final utils.TypeItemInfo info) {
+		return ((ItemScreen) this.card13).getItemInfo(info);
+	}
+
+	// //OK
+	@Override
+	public String getFilmCreateInfo(final utils.TypeItemInfo info) {
+		return ((ItemScreen) this.card15).getItemInfo(info);
+	}
+
+	// //OK
+	@Override
+	public String getFilmModifiedInfo(final utils.TypeItemInfo info) {
+		return ((ItemScreen) this.card16).getItemInfo(info);
 	}
 
 	// //OK
