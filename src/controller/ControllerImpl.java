@@ -725,50 +725,76 @@ public class ControllerImpl implements Controller {
 				case TITLE:
 					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
 					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+						if ((this.v.getBookModifiedInfo(ti) != null) || (this.v.getBookModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+						}
 					} else {
-						this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+						if ((this.v.getFilmModifiedInfo(ti) != null) || (this.v.getFilmModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+						}
 					}
 					break;
 				case AUTHOR:
 					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
 					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+						if ((this.v.getBookModifiedInfo(ti) != null) || (this.v.getBookModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+						}
 					} else {
-						this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+						if ((this.v.getFilmModifiedInfo(ti) != null) || (this.v.getFilmModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+						}
 					}
 					break;
 				case PRODUCER:
 					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
 					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+						if ((this.v.getBookModifiedInfo(ti) != null) || (this.v.getBookModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+						}
 					} else {
-						this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+						if ((this.v.getFilmModifiedInfo(ti) != null) || (this.v.getFilmModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+						}
 					}
 					break;
 				case RELEASE_YEAR:
 					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
-					int var = Integer.parseInt(this.v.getBookModifiedInfo(ti));
+					int var;
 					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						this.m.changeItem(ti, itemId, var);
+						if ((this.v.getBookModifiedInfo(ti) != null) || (this.v.getBookModifiedInfo(ti) != "")) {
+							var = Integer.parseInt(this.v.getBookModifiedInfo(ti));
+							this.m.changeItem(ti, itemId, var);
+						}
 					} else {
-						this.m.changeItem(ti, itemId, var);
+						if ((this.v.getFilmModifiedInfo(ti) != null) || (this.v.getFilmModifiedInfo(ti) != "")) {
+							var = Integer.parseInt(this.v.getBookModifiedInfo(ti));
+							this.m.changeItem(ti, itemId, var);
+						}
 					}
 					break;
 				case GENRE:
 					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
 					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti)));
+						if ((this.v.getBookModifiedInfo(ti) != null) || (this.v.getBookModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti)));
+						}
 					} else {
-						this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getFilmModifiedInfo(ti)));
+						if ((this.v.getFilmModifiedInfo(ti) != null) || (this.v.getFilmModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getFilmModifiedInfo(ti)));
+						}
 					}
 					break;
 				case LANGUAGE:
 					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
 					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getBookModifiedInfo(ti)));
+						if ((this.v.getBookModifiedInfo(ti) != null) || (this.v.getBookModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getBookModifiedInfo(ti)));
+						}
 					} else {
-						this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getFilmModifiedInfo(ti)));
+						if ((this.v.getFilmModifiedInfo(ti) != null) || (this.v.getFilmModifiedInfo(ti) != "")) {
+							this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getFilmModifiedInfo(ti)));
+						}
 					}
 					break;
 				default:
