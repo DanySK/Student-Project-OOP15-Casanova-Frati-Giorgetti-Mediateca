@@ -720,24 +720,56 @@ public class ControllerImpl implements Controller {
 		System.out.println("itemModify: " + this.v.getUserItemSelectedByManager());
 		for (final TypeItemInfo ti : TypeItemInfo.values()) {
 			try {
+				// TITLE, AUTHOR, PRODUCER, GENRE, LANGUAGE, RELEASE_YEAR
 				switch (ti) {
 				case TITLE:
-					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
-					break;
-				case RELEASE_YEAR:
-					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
+					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
+						this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+					} else {
+						this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+					}
 					break;
 				case AUTHOR:
-					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
-					break;
-				case LANGUAGE:
-					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
-					break;
-				case GENRE:
-					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
+					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
+						this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+					} else {
+						this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+					}
 					break;
 				case PRODUCER:
-					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
+					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
+						this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
+					} else {
+						this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
+					}
+					break;
+				case RELEASE_YEAR:
+					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
+					int var = Integer.parseInt(this.v.getBookModifiedInfo(ti));
+					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
+						this.m.changeItem(ti, itemId, var);
+					} else {
+						this.m.changeItem(ti, itemId, var);
+					}
+					break;
+				case GENRE:
+					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
+					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
+						this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti)));
+					} else {
+						this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getFilmModifiedInfo(ti)));
+					}
+					break;
+				case LANGUAGE:
+					System.out.println("ItemModify: " + this.v.getBookModifiedInfo(ti));
+					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
+						this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getBookModifiedInfo(ti)));
+					} else {
+						this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getFilmModifiedInfo(ti)));
+					}
 					break;
 				default:
 					break;
@@ -955,13 +987,13 @@ public class ControllerImpl implements Controller {
 	public void registerNewBook() {
 		System.out.println("registerNewBook: entrato");
 
-		final String title = this.v.getItemInfo(TypeItemInfo.TITLE);
-		final int releaseYear = Integer.parseInt(this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR));
-		final String author = this.v.getItemInfo(TypeItemInfo.AUTHOR);
-		final Language language = CastManager.castToLanguage(this.v.getItemInfo(TypeItemInfo.LANGUAGE));
-		final String isbn = this.v.getItemInfo(TypeItemInfo.ISBN);
-		final ItemGenre genre = CastManager.castToItemGenre(this.v.getItemInfo(TypeItemInfo.GENRE));
-		final String publisher = this.v.getItemInfo(TypeItemInfo.PRODUCER);
+		final String title = this.v.getBookCreateInfo(TypeItemInfo.TITLE);
+		final int releaseYear = Integer.parseInt(this.v.getBookCreateInfo(TypeItemInfo.RELEASE_YEAR));
+		final String author = this.v.getBookCreateInfo(TypeItemInfo.AUTHOR);
+		final Language language = CastManager.castToLanguage(this.v.getBookCreateInfo(TypeItemInfo.LANGUAGE));
+		final String isbn = this.v.getBookCreateInfo(TypeItemInfo.ISBN);
+		final ItemGenre genre = CastManager.castToItemGenre(this.v.getBookCreateInfo(TypeItemInfo.GENRE));
+		final String publisher = this.v.getBookCreateInfo(TypeItemInfo.PRODUCER);
 		System.out.println(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
 		System.out.println(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 		final Integer numRelease = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.RELEASE_NUMBER));
@@ -990,14 +1022,14 @@ public class ControllerImpl implements Controller {
 	public void registerNewMovie() {
 		System.out.println("registerNewMovie: entrato");
 
-		final String title = this.v.getItemInfo(TypeItemInfo.TITLE);
-		final int releaseYear = Integer.parseInt(this.v.getItemInfo(TypeItemInfo.RELEASE_YEAR));
-		final String publisher = this.v.getItemInfo(TypeItemInfo.PRODUCER);
-		final String author = this.v.getItemInfo(TypeItemInfo.AUTHOR);
-		final Language language = CastManager.castToLanguage(this.v.getItemInfo(TypeItemInfo.LANGUAGE));
-		final ItemGenre genre = CastManager.castToItemGenre(this.v.getItemInfo(TypeItemInfo.GENRE));
-		final Integer duration = Integer.parseInt(this.v.getItemInfo(TypeItemInfo.DURATION));
-		final TypeColor color = CastManager.castToTypeColor((this.v.getItemInfo(TypeItemInfo.COLOR)));
+		final String title = this.v.getFilmCreateInfo(TypeItemInfo.TITLE);
+		final int releaseYear = Integer.parseInt(this.v.getFilmCreateInfo(TypeItemInfo.RELEASE_YEAR));
+		final String publisher = this.v.getFilmCreateInfo(TypeItemInfo.PRODUCER);
+		final String author = this.v.getFilmCreateInfo(TypeItemInfo.AUTHOR);
+		final Language language = CastManager.castToLanguage(this.v.getFilmCreateInfo(TypeItemInfo.LANGUAGE));
+		final ItemGenre genre = CastManager.castToItemGenre(this.v.getFilmCreateInfo(TypeItemInfo.GENRE));
+		final Integer duration = Integer.parseInt(this.v.getFilmCreateInfo(TypeItemInfo.DURATION));
+		final TypeColor color = CastManager.castToTypeColor((this.v.getFilmCreateInfo(TypeItemInfo.COLOR)));
 		final Integer numCopy = Integer.parseInt(this.v.getOtherItemInfo(ViewImpl.OtherItemFilter.COPIES_NUMBER));
 
 		try {
@@ -1020,11 +1052,11 @@ public class ControllerImpl implements Controller {
 	@Override
 	public void itemCreate() {
 		System.out.println("itemCreate: entrato");
-		if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.BOOK.toString())) {
+		if (this.v.getBookCreateInfo(TypeItemInfo.TYPE).equals(TypeItem.BOOK.toString())) {
 			System.out.println("itemCreate: dentro al libro");
 			this.registerNewBook();
 
-		} else if (this.v.getItemInfo(TypeItemInfo.TYPE).equals(TypeItem.MOVIE.toString())) {
+		} else if (this.v.getFilmCreateInfo(TypeItemInfo.TYPE).equals(TypeItem.MOVIE.toString())) {
 			System.out.println("itemCreate: dentro al film");
 			this.registerNewMovie();
 
