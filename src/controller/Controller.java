@@ -215,4 +215,6 @@ public interface Controller {
 	void otherUserBorrowList();
 
 	void setItemModifyField();
+
+	boolean tellMeIfItemIsBook(String string);
 }

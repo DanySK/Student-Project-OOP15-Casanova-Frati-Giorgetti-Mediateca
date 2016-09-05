@@ -592,12 +592,11 @@ public class ControllerImpl implements Controller {
 	 */
 	public void borrowListFromUser(final UserImpl user) {
 		System.out.println("borrowListFromUser: entrato");
-		System.out.println("borrowListFromUser: dimensione archivio prestiti=" + user.getLoanArchive().size());
+		System.out.println("borrowListFromUser: dimensione archivio prestiti=" + user.getNowOnLoan().size());
 		try {
-			String[] array = new String[user.getLoanArchive().size()];
+			String[] array = new String[user.getNowOnLoan().size()];
 			int index = 0;
-
-			for (final Integer i : this.m.getItemBorrowed(user.getIdUser())) {
+			for (final Integer i : user.getNowOnLoan()) {
 				array[index] = this.m.getRequiredItem(i).toString();
 				index++;
 			}
@@ -733,10 +732,10 @@ public class ControllerImpl implements Controller {
 					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
 					break;
 				case LANGUAGE:
-					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getItemInfo(ti)));
 					break;
 				case GENRE:
-					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
+					this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getItemInfo(ti)));
 					break;
 				case PRODUCER:
 					this.m.changeItem(ti, itemId, this.v.getItemInfo(ti));
@@ -1526,5 +1525,25 @@ public class ControllerImpl implements Controller {
 			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
+	}
+
+	@Override
+	public boolean tellMeIfItemIsBook(final String string) {
+		try {
+			for (final Integer i : this.m.getItemArchive().keySet()) {
+				if (this.m.getRequiredItem(i).toString().equals(string)) {
+					if (this.m.getAllItemId(TypeItem.BOOK).contains(i)) {
+						return true;
+					} else if (this.m.getAllItemId(TypeItem.MOVIE).contains(i)) {
+						return false;
+					}
+				}
+			}
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+		return false;
 	}
 }
