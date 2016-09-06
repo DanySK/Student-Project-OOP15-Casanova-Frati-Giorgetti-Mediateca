@@ -34,7 +34,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private JTextField isbnF;
 	private JTextField numCopiesF;
 	private JTextField numReleaseF;
-	private TypeItem tipo;
 
 	/**
 	 * enum for type of Item screen to show.
@@ -73,7 +72,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.setLayout(null);
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 
-		this.tipo = item;
 		this.titleF = new JTextField();
 		this.titleF.setBounds(338, 104, 230, 30);
 		this.add(this.titleF);
@@ -180,7 +178,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		JLabel numReleaseL = new JLabel("Release:");
 		numReleaseL
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		numReleaseL.setBounds(159, 504, 167, 30);
 		this.add(numReleaseL);
 		if (type.equals(ItemScreenType.CREATE)) {
@@ -213,7 +211,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		if (item.equals(TypeItem.BOOK)) {
 
 			this.itemTypeF.setSelectedItem(item);
-			System.out.println("variabile Tipo: " + this.tipo);
 			this.itemTypeF.setEnabled(false);
 			this.colorF.setVisible(false);
 			colorL.setVisible(false);
@@ -224,7 +221,6 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		} else if (item.equals(TypeItem.MOVIE)) {
 
 			this.itemTypeF.setSelectedItem(item);
-			System.out.println("variabile Tipo: " + this.tipo);
 			this.itemTypeF.setEnabled(false);
 			this.colorF.setVisible(true);
 			colorL.setVisible(true);
@@ -239,7 +235,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 
 		presentation.setBounds(50, 13, 692, 38);
 		presentation
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.add(presentation);
 
 		discarge.setBounds(474, 504, 143, 53);
@@ -326,8 +322,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		case GENRE:
 			return this.genreF.getSelectedItem().toString();
 		case TYPE:
-			System.out.println("tipo passato: " + this.tipo);
-			return this.tipo.toString();
+			return this.itemTypeF.getSelectedItem().toString();
 		case DURATION:
 			return this.durationF.getText();
 		case COLOR:

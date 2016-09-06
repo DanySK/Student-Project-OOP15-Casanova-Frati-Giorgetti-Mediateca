@@ -234,7 +234,7 @@ public interface View {
 
 	/**
 	 * Tells controller to create an item.
-	 * 
+	 *
 	 * @param item
 	 *            type of item if book or movie
 	 */
@@ -594,9 +594,12 @@ public interface View {
 	 *
 	 * @param info2
 	 *            the type of info (release or copies number)
+	 * 
+	 * @param type
+	 *            the type of item
 	 * @return the requeste information
 	 */
-	String getOtherItemInfo(OtherItemFilter info2);
+	String getOtherItemInfo(OtherItemFilter info2, TypeItem type);
 
 	/**
 	 * Sets logged variable and change screen after login.
