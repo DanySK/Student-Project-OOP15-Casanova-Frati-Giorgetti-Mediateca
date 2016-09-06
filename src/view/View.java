@@ -3,6 +3,7 @@ package view;
 import utils.ItemGenre;
 import utils.Language;
 import utils.TypeColor;
+import utils.TypeItem;
 import utils.UserInfo;
 import view.ViewImpl.CardName;
 import view.ViewImpl.OtherItemFilter;
@@ -233,8 +234,11 @@ public interface View {
 
 	/**
 	 * Tells controller to create an item.
+	 * 
+	 * @param item
+	 *            type of item if book or movie
 	 */
-	void sendItemCreate();
+	void sendItemCreate(TypeItem type);
 
 	/**
 	 * Gets book info after creation.

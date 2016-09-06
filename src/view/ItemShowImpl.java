@@ -100,7 +100,8 @@ public class ItemShowImpl implements ItemShow {
 		colorL.setBounds(23, 374, 480, 37);
 		mainFrame.getContentPane().add(colorL);
 
-		final JLabel durationL = new JLabel("Durata: " + this.duration);
+		final JLabel durationL = new JLabel("Durata: " + this.duration
+				+ " min.");
 		durationL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		durationL.setBounds(23, 334, 480, 30);
 		mainFrame.getContentPane().add(durationL);

@@ -83,7 +83,7 @@ public interface Controller {
 	void cancelSit();
 
 	/*
-	 *
+	 * 
 	 * void studyRoomStatus();
 	 */
 

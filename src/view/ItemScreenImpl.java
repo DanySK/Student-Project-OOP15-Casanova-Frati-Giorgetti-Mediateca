@@ -34,6 +34,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 	private JTextField isbnF;
 	private JTextField numCopiesF;
 	private JTextField numReleaseF;
+	private TypeItem tipo;
 
 	/**
 	 * enum for type of Item screen to show.
@@ -72,6 +73,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		this.setLayout(null);
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 
+		this.tipo = item;
 		this.titleF = new JTextField();
 		this.titleF.setBounds(338, 104, 230, 30);
 		this.add(this.titleF);
@@ -133,7 +135,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		titleL.setBounds(159, 104, 167, 30);
 		this.add(titleL);
 
-		durationL = new JLabel("Durata:");
+		durationL = new JLabel("Durata (min.):");
 		durationL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		durationL.setBounds(159, 304, 167, 30);
 		this.add(durationL);
@@ -186,7 +188,7 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			send = new JButton("Crea");
 			discarge.addActionListener(e -> v.swapView(CardName.MANAGER_MENU));
 			send.addActionListener(e -> {
-				v.sendItemCreate();
+				v.sendItemCreate(item);
 				v.giveMeItemList();
 				v.swapView(CardName.MANAGER_MENU);
 			});
@@ -209,7 +211,9 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			this.numReleaseF.setEnabled(false);
 		}
 		if (item.equals(TypeItem.BOOK)) {
-			this.itemTypeF.setSelectedItem(TypeItem.BOOK);
+
+			this.itemTypeF.setSelectedItem(item);
+			System.out.println("variabile Tipo: " + this.tipo);
 			this.itemTypeF.setEnabled(false);
 			this.colorF.setVisible(false);
 			colorL.setVisible(false);
@@ -218,7 +222,9 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 			this.isbnF.setVisible(true);
 			isbnL.setVisible(true);
 		} else if (item.equals(TypeItem.MOVIE)) {
-			this.itemTypeF.setSelectedItem(TypeItem.MOVIE);
+
+			this.itemTypeF.setSelectedItem(item);
+			System.out.println("variabile Tipo: " + this.tipo);
 			this.itemTypeF.setEnabled(false);
 			this.colorF.setVisible(true);
 			colorL.setVisible(true);
@@ -320,7 +326,8 @@ public class ItemScreenImpl extends JPanel implements ItemScreen {
 		case GENRE:
 			return this.genreF.getSelectedItem().toString();
 		case TYPE:
-			return this.itemTypeF.getSelectedItem().toString();
+			System.out.println("tipo passato: " + this.tipo);
+			return this.tipo.toString();
 		case DURATION:
 			return this.durationF.getText();
 		case COLOR:
