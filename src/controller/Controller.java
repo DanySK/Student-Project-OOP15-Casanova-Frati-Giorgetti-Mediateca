@@ -1,5 +1,7 @@
 package controller;
 
+import utils.TypeItem;
+
 /**
  * Interface for a generic controller.
  *
@@ -83,7 +85,7 @@ public interface Controller {
 	void cancelSit();
 
 	/*
-	 * 
+	 *
 	 * void studyRoomStatus();
 	 */
 
@@ -140,7 +142,7 @@ public interface Controller {
 	/**
 	 * Method which creates an item based on its type.
 	 */
-	void itemCreate();
+	void itemCreate(TypeItem type);
 
 	/**
 	 * Method which changes the fields of the user.
