@@ -105,7 +105,7 @@ public class ItemShowImpl implements ItemShow {
 		durationL.setBounds(23, 334, 480, 30);
 		mainFrame.getContentPane().add(durationL);
 
-		final JLabel languageL = new JLabel("Lingua:" + this.language);
+		final JLabel languageL = new JLabel("Lingua: " + this.language);
 		languageL.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		languageL.setBounds(23, 294, 215, 37);
 		mainFrame.getContentPane().add(languageL);
