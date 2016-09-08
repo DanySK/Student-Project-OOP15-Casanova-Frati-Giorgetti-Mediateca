@@ -26,9 +26,13 @@ import view.ViewImpl;
  */
 public class FileManager {
 
+	// constants for I/O
+	public static final String FILENAMEUSER = "archivio.utenti";
+	public static final String FILENAMEITEM = "archivio.oggetti";
+	public static final String FILENAMESTUDYROOM = "archivio.aulastudio";
+	public static final String PATH = System.getProperty("user.home") + System.getProperty("file.separator");
+
 	private View v = new ViewImpl();
-	private String path = System.getProperty("user.dir") + System.getProperty("file.separator") + "res"
-			+ System.getProperty("file.separator");
 
 	/**
 	 * Method that writes an object into a file.
@@ -41,12 +45,12 @@ public class FileManager {
 	 *             when the file at the target path is missing
 	 */
 	public void writeObjectIntoFile(final String fileName, final Model model) {
-		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(this.path + fileName))) {
-			if (fileName.contains("utenti")) {
+		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FileManager.PATH + fileName))) {
+			if (fileName.equals(FileManager.FILENAMEUSER)) {
 				oos.writeObject(model.getUserArchive());
-			} else if (fileName.contains("oggetti")) {
+			} else if (fileName.equals(FileManager.FILENAMEITEM)) {
 				oos.writeObject(model.getItemArchive());
-			} else if (fileName.contains("aulastudio")) {
+			} else if (fileName.equals(FileManager.FILENAMESTUDYROOM)) {
 				oos.writeObject(model.getStudyRoom());
 			}
 		} catch (FileNotFoundException e) {
@@ -67,7 +71,7 @@ public class FileManager {
 	 */
 	public Map<Integer, Pair<ItemImpl, ItemInfo>> readArchiveItemFromFile(final String fileNameItem) {
 		Map<Integer, Pair<ItemImpl, ItemInfo>> objectItem = null;
-		try (ObjectInputStream oisItem = new ObjectInputStream(new FileInputStream(this.path + fileNameItem))) {
+		try (ObjectInputStream oisItem = new ObjectInputStream(new FileInputStream(FileManager.PATH + fileNameItem))) {
 			objectItem = (Map<Integer, Pair<ItemImpl, ItemInfo>>) oisItem.readObject();
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
@@ -85,7 +89,7 @@ public class FileManager {
 	 */
 	public Map<Integer, UserImpl> readArchiveUserFromFile(final String fileNameUser) {
 		Map<Integer, UserImpl> objectUser = null;
-		try (ObjectInputStream oisUser = new ObjectInputStream(new FileInputStream(this.path + fileNameUser))) {
+		try (ObjectInputStream oisUser = new ObjectInputStream(new FileInputStream(FileManager.PATH + fileNameUser))) {
 			objectUser = (Map<Integer, UserImpl>) oisUser.readObject();
 		} catch (Exception e2) {
 			// TODO Auto-generated catch block
@@ -104,21 +108,12 @@ public class FileManager {
 	public Map<GregorianCalendar, ArrayList<Integer>> readStudyRoomFromFile(final String fileNameStudyRoom) {
 		Map<GregorianCalendar, ArrayList<Integer>> objectStudyRoom = null;
 		try (ObjectInputStream oisStudyRoom = new ObjectInputStream(
-				new FileInputStream(this.path + fileNameStudyRoom))) {
+				new FileInputStream(FileManager.PATH + fileNameStudyRoom))) {
 			objectStudyRoom = (Map<GregorianCalendar, ArrayList<Integer>>) oisStudyRoom.readObject();
 		} catch (Exception e3) {
 			// TODO Auto-generated catch block
 			this.v.showError("File .aulastudio non trovato");
 		}
 		return objectStudyRoom;
-	}
-
-	/**
-	 * Getter for the path of the folder which contains the archive files.
-	 *
-	 * @return returns the path of the folder which contains the archive files
-	 */
-	public String getPath() {
-		return this.path;
 	}
 }

@@ -93,6 +93,7 @@ public interface Controller {
 	 * Method which extends the borrowing of an object.
 	 *
 	 * @param book
+	 *            book which loan as to be extended
 	 */
 	void extendBorrow(String book);
 
@@ -141,6 +142,9 @@ public interface Controller {
 
 	/**
 	 * Method which creates an item based on its type.
+	 *
+	 * @param type
+	 *            type of item to be create.
 	 */
 	void itemCreate(TypeItem type);
 
@@ -206,17 +210,40 @@ public interface Controller {
 
 	/**
 	 * Method which sets the selected user informations to be seen by the actual
-	 * user
+	 * user.
 	 */
 	void giveOtherUserInfo();
 
+	/**
+	 * Method which returns the information of the selected user/item to be
+	 * shown in a new screen.
+	 */
 	void elementSelectedInManager();
 
+	/**
+	 * Method which memorizes the item selected by user before the screen
+	 * change.
+	 */
 	void takeItemBefore();
 
+	/**
+	 * Method which sets the list of item borrowed by the user selected by
+	 * manager.
+	 */
 	void otherUserBorrowList();
 
+	/**
+	 * Method which fills the fields of the item to be modified with its actual
+	 * data.
+	 */
 	void setItemModifyField();
 
+	/**
+	 * Method which tells if the item passed as string is a book or a movie.
+	 *
+	 * @param string
+	 *            item to be recognized as book or movie.
+	 * @return true == book false == movie
+	 */
 	boolean tellMeIfItemIsBook(String string);
 }
