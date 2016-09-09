@@ -122,7 +122,6 @@ public class ModelImpl implements Serializable, Model {
                   initEmail, initTelephoneNumber, initBookPref, initMoviePref);
       this.archiveUser.addUser(u);
       this.setReccomandedList(u.getIdUser());
-      System.out.println("User " + u.toString() + "adds to te archive.");
     } else {
       throw new UserException("Can not add user " + initUsername
                   + " into the archive becouse there is already a user with that username.");
@@ -144,7 +143,6 @@ public class ModelImpl implements Serializable, Model {
   public void deleteUser(final int userId) throws Exception, UserException {
     if (this.archiveUser.contains(userId)) {
       this.archiveUser.removeUser(userId);
-      System.out.println("User: " + userId + " removed from archive.");
     } else {
       throw new UserException(
                   "User: " + userId + " not contained into the archive.Can not remove it");
@@ -162,11 +160,8 @@ public class ModelImpl implements Serializable, Model {
                 initISBN, initGenre, initPublisher, initNumRelease);
     if (!this.archiveItem.containsItem(b.getiD())) {
       this.archiveItem.addItem(b, initNumCopy);
-      System.out.println("Book " + b.toString() + " adds to the archive");
     } else {
       this.archiveItem.changeAmount(b.getiD(), initNumCopy);
-      System.out.println("Item already present in the archive, change amount in "
-                  + this.archiveItem.getItemArchive().get(b.getiD()).getSecond().getQuantity());
     }
   }
 
@@ -180,11 +175,8 @@ public class ModelImpl implements Serializable, Model {
                 initCurrentLanguage, initGenre, initDuration, initColor);
     if (!this.archiveItem.containsItem(m.getiD())) {
       this.archiveItem.addItem(m, initNumCopy);
-      System.out.println("Movie " + m.toString() + " adds to the archive");
     } else {
       this.archiveItem.changeAmount(m.getiD(), initNumCopy);
-      System.out.println("Item already present in the archive, change amount in "
-                  + this.archiveItem.getItemArchive().get(m.getiD()).getSecond().getQuantity());
     }
   }
 
@@ -192,7 +184,6 @@ public class ModelImpl implements Serializable, Model {
   public void deleteItem(final int itemId) throws Exception, ItemException {
     if (this.archiveItem.containsItem(itemId)) {
       this.archiveItem.removeItem(itemId);
-      System.out.println("Item: " + itemId + " removed from archive.");
     } else {
       throw new ItemException("Item: " + itemId + " is not into the archive.");
     }
@@ -210,7 +201,6 @@ public class ModelImpl implements Serializable, Model {
       if (this.archiveItem.getItemInfo(itemId).isAvailable()) {
         this.archiveItem.addUser(itemId, userId);
         this.getRequiredUser(userId).addItem(itemId);
-        System.out.println("UserId " + userId + " takes itemId " + itemId);
       } else {
         throw new ItemException(itemId + " not available.");
       }
@@ -227,7 +217,6 @@ public class ModelImpl implements Serializable, Model {
       if (!this.getRequiredUser(userId).itWasReturned(itemId)) {
         this.archiveItem.removeUser(itemId, userId);
         this.getRequiredUser(userId).removeItem(itemId);
-        System.out.println("UserId " + userId + " returns itemId " + itemId);
       } else {
         throw new UserException("User " + userId + " has already return this item: " + itemId);
       }
@@ -244,7 +233,6 @@ public class ModelImpl implements Serializable, Model {
     if (this.archiveItem.containsItem(itemId) && this.archiveUser.contains(userId)) {
       this.getRequiredItem(itemId).addLike(userId);
       this.getRequiredUser(userId).addToWishList(itemId);
-      System.out.println("UserId: " + userId + " likes itemId: " + itemId);
     } else if (!this.archiveItem.containsItem(itemId)) {
       throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
     } else if (!this.archiveUser.contains(userId)) {
