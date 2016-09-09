@@ -486,7 +486,8 @@ public class ControllerImpl implements Controller {
 			} else {
 				// gli altri 2 parametri ci sono, filtro su tutti gli oggetti
 				try {
-					for (final Integer i : this.m.filtersItem(this.m.getItemArchive().keySet(), ts, searchText)) {
+					for (final Integer i : this.m.filtersItem(this.m.getItemArchive().keySet(), ts,
+							searchText.toUpperCase())) {
 						array[index] = this.m.getRequiredItem(i).toString();
 						index++;
 					}
@@ -523,7 +524,7 @@ public class ControllerImpl implements Controller {
 			} else {
 				// altrimento filtro in base a tutti i parametri
 				try {
-					for (final Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText)) {
+					for (final Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText.toUpperCase())) {
 						array[index] = this.m.getRequiredItem(i).toString();
 						index++;
 					}
