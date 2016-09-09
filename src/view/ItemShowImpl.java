@@ -36,7 +36,7 @@ public class ItemShowImpl implements ItemShow {
 	 */
 	@Override
 	public void startItemShow(final View v) {
-		v.giveMeItemInfoMediateca();
+
 		final JFrame mainFrame = new JFrame("Oggetto Selezionato");
 		JPanel mainPanel = new JPanel();
 		mainPanel.setBounds(0, 0, 594, 1);

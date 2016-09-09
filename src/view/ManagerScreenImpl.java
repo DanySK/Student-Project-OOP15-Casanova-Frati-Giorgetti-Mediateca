@@ -84,7 +84,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showUserList = new JButton("Lista Utenti");
 		showUserList.setBounds(498, 150, 273, 40);
 		showUserList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showUserList);
 		// SHOW ALL USER LIST -> REFRESH
 		showUserList.addActionListener(e -> {
@@ -100,7 +100,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		JButton showItemList = new JButton("Lista Oggetti");
 		showItemList.setBounds(498, 200, 273, 40);
 		showItemList
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.FONT_SIZE));
 		this.add(showItemList);
 		// SHOW ALL ITEM LIST -> REFRESH
 		showItemList.addActionListener(e -> {
@@ -123,20 +123,15 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
 					ManagerScreenImpl.this.dClicked = ((JList<String>) evt
 							.getSource()).getSelectedValue().toString();
-					System.out.println("VIEW: Mostro info di utente. Variabile:"
-							+ String.valueOf(ManagerScreenImpl.this.type));
 					v.showUserInfo();
-					System.out
-					.println("VIEW: Fine della chiamata a settaggio in view.");
+
 				} else if ((evt.getClickCount() == 2)
 						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
-					System.out.println("VIEW: Mostro info di item. Variabile:"
-							+ String.valueOf(ManagerScreenImpl.this.type));
+
 					ManagerScreenImpl.this.dClicked = ((JList<String>) evt
 							.getSource()).getSelectedValue().toString();
 					v.showItemInfoManager();
-					System.out
-					.println("VIEW: Fine della chiamata a settaggio in view.");
+
 				}
 			}
 		});
@@ -170,7 +165,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 					if (((ManagerScreenImpl.this.type == TypeList.ITEM) && v
 							.itemIsBook(((JList<String>) evt.getSource())
 									.getSelectedValue().toString()))
-							&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
+									&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
 						seeBorrowedList.setEnabled(false);
 						delete.setEnabled(true);
 						modifyBook.setEnabled(true);
@@ -178,7 +173,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 					} else if (((ManagerScreenImpl.this.type == TypeList.ITEM) && !v
 							.itemIsBook(((JList<String>) evt.getSource())
 									.getSelectedValue().toString()))
-									&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
+							&& !ManagerScreenImpl.this.list.isSelectionEmpty()) {
 						delete.setEnabled(true);
 						modifyBook.setEnabled(false);
 						modifyMovie.setEnabled(true);
