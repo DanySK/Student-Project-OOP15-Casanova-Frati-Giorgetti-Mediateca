@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -140,7 +139,6 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scroll.setBounds(35, 50, 436, 484);
-		scroll.setMinimumSize(new Dimension(300, 200));
 		this.add(scroll);
 		delete.addActionListener(e -> {
 			v.deleteItem();
@@ -156,7 +154,11 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 			v.giveMeItemInfoFromManager();
 			v.swapView(CardName.FILM_MODIFY);
 		});
-
+		if (this.list.isSelectionEmpty()) {
+			delete.setEnabled(false);
+			modifyBook.setEnabled(false);
+			modifyMovie.setEnabled(false);
+		}
 		this.list.addMouseListener(new MouseAdapter() {
 			@SuppressWarnings("unchecked")
 			@Override

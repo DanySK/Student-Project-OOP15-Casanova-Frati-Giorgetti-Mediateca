@@ -184,7 +184,6 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 
 		} else if (type.equals(UserScreenType.MODIFY)) {
 			this.presentation = new JLabel("Modifica qui i tuoi dati:");
-			v.giveMeUserInfo();
 			this.send.setText("Invio");
 			this.send.setEnabled(true);
 			this.usernameF.setEnabled(false);

@@ -44,7 +44,6 @@ public class ViewImpl implements View {
 	static final int IMAGE_WIDTH = 100;
 	private UserShow userScreen;
 	private ItemShow itemShow;
-	private boolean logged;
 
 	private JPanel card0;
 	private JPanel card1;
@@ -344,9 +343,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeUserInfo() {
-		if (this.logged) {
-			this.c.setUserInfo();
-		}
+		this.c.setUserInfo();
 	}
 
 	// //OK
@@ -358,9 +355,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeBorrowList() {
-		if (this.logged) {
-			this.c.borrowList();
-		}
+		this.c.borrowList();
 	}
 
 	// //OK
@@ -494,7 +489,6 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void goodLogin() {
-		this.logged = true;
 		this.giveMeSuggestedMovies();
 		this.giveMeSuggestedBooks();
 		this.swapView(CardName.MENU);
@@ -503,7 +497,6 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void goodManagerLogin() {
-		this.logged = true;
 		this.swapView(CardName.MANAGER_MENU);
 	}
 
@@ -528,18 +521,14 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeStudyRoomStatus() {
-		if (this.logged) {
-			this.c.setTakenSitsList();
-			// this.setStudyRoomStatus(this.statusTry);
-		}
+		this.c.setTakenSitsList();
 	}
 
 	// //OK
 	@Override
 	public void setStudyRoomStatus(final int[] status) {
-		if (this.logged) {
-			((StudyRoom) this.card11).setStudyRoomStatus(status);
-		}
+
+		((StudyRoom) this.card11).setStudyRoomStatus(status);
 	}
 
 	// //OK
@@ -551,45 +540,32 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public int getStudyRoomSelectedDay() {
-		if (this.logged) {
-			return ((StudyRoom) this.card11).getDateDay();
-		}
-		return 0;
+		return ((StudyRoom) this.card11).getDateDay();
 	}
 
 	// //OK
 	@Override
 	public int getStudyRoomSelectedMonth() {
-		if (this.logged) {
-			return ((StudyRoom) this.card11).getDateMonth();
-		}
-		return 0;
+		return ((StudyRoom) this.card11).getDateMonth();
 	}
 
 	// //OK
 	@Override
 	public int getStudyRoomSelectedYear() {
-		if (this.logged) {
-			return ((StudyRoom) this.card11).getDateYear();
-		}
-		return 0;
+		return ((StudyRoom) this.card11).getDateYear();
 	}
 
 	// //OK
 	@Override
 	public void giveMeSuggestedBooks() {
-		if (this.logged) {
-			this.c.suggestedBooks();
-		}
+		this.c.suggestedBooks();
 
 	}
 
 	// //OK
 	@Override
 	public void giveMeSuggestedMovies() {
-		if (this.logged) {
-			this.c.suggestedFilms();
-		}
+		this.c.suggestedFilms();
 	}
 
 	// //OK
@@ -608,9 +584,8 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeWishlist() {
-		if (this.logged) {
-			this.c.setWishlist();
-		}
+		this.c.setWishlist();
+
 	}
 
 	// //OK
@@ -622,9 +597,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void setSuggestedBooks(final String[] bList) {
-		// if (this.logged) {
 		((UserMenu) this.card2).setSuggestedBooks(bList);
-		// }
 	}
 
 	// //OK
