@@ -2,7 +2,6 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -53,8 +52,6 @@ public class StudyRoomImpl implements Serializable, StudyRoom {
         al.add(i, 0);
       }
       this.mapStudyRoom.put(day, al);
-    } else {
-      System.out.println("Day is in the archive");
     }
   }
 
@@ -75,8 +72,6 @@ public class StudyRoomImpl implements Serializable, StudyRoom {
     if ((sit < StudyRoomImpl.N) && (sit >= 0)) {
       if (this.mapStudyRoom.get(day).get(sit) == 0) {
         this.mapStudyRoom.get(day).set(sit, userId);
-        System.out.println("Day " + day.get(Calendar.DAY_OF_MONTH) + "." + day.get(Calendar.MONTH)
-                    + "." + day.get(Calendar.YEAR) + " User " + userId + " in position " + sit);
       } else {
         throw new Exception(+sit + " is a busy sit.");
       }
@@ -92,9 +87,6 @@ public class StudyRoomImpl implements Serializable, StudyRoom {
       if ((sit < StudyRoomImpl.N) && (sit >= 0)) {
         if (this.mapStudyRoom.get(day).get(sit).equals(userId)) {
           this.mapStudyRoom.get(day).set(sit, 0);
-          System.out.println("Day " + day.get(Calendar.DAY_OF_MONTH) + "." + day.get(Calendar.MONTH)
-                      + "." + day.get(Calendar.YEAR) + " User " + userId + " removed from position "
-                      + sit);
         } else {
           throw new Exception(+sit + " not busy by " + userId);
         }
