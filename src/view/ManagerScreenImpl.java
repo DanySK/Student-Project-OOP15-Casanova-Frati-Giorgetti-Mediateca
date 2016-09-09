@@ -113,21 +113,21 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 			v.swapView(CardName.MANAGER_MENU);
 		});
 
-		this.list = new JList<String>();
 		this.list.setModel(this.model);
 
 		this.list.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
-				@SuppressWarnings("unchecked")
-				JList<String> elist = (JList<String>) evt.getSource();
-				ManagerScreenImpl.this.dClicked = ((JList) evt.getSource())
-						.getSelectedValue().toString();
 				if ((evt.getClickCount() == 2)
 						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
+					ManagerScreenImpl.this.dClicked = ((JList<String>) evt
+							.getSource()).getSelectedValue().toString();
 					v.showUserInfo();
 				} else if ((evt.getClickCount() == 2)
 						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
+					ManagerScreenImpl.this.dClicked = ((JList<String>) evt
+							.getSource()).getSelectedValue().toString();
 					v.showItemInfoManager();
 				}
 			}
@@ -155,10 +155,9 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 		});
 
 		this.list.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("unchecked")
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
-				JList<String> elist = (JList<String>) evt.getSource();
-
 				if (evt.getClickCount() == 1) {
 					if (((ManagerScreenImpl.this.type == TypeList.ITEM) && v
 							.itemIsBook(((JList<String>) evt.getSource())

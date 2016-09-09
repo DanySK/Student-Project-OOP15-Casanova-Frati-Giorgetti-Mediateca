@@ -623,12 +623,6 @@ public interface View {
 	void giveMeOtherUserInfo();
 
 	/**
-	 * Asks controller to take item with GetSelectedItemFromList() before
-	 * changing screen.
-	 */
-	void controllerTakeItemBeforeChangeScreen();
-
-	/**
 	 * Tells to controller to take item info from getSelectedInManager().
 	 */
 	void giveMeItemInfoFromManager();

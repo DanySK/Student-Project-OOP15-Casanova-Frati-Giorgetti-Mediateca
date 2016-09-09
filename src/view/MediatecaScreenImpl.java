@@ -100,7 +100,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filteredJList.setModel(this.model);
 		this.filteredJList.setBounds(21, 124, 521, 398);
 		this.filteredJList
-		.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
+				.setVisibleRowCount(MediatecaScreenImpl.ELEMENTS_TO_SHOW);
 		this.scroll = new JScrollPane(this.filteredJList,
 				ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
 				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -110,7 +110,6 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		this.filteredJList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(final MouseEvent evt) {
-				JList<String> list = (JList) evt.getSource();
 				if (evt.getClickCount() == 2) {
 					MediatecaScreenImpl.this.dClicked = ((JList) evt
 							.getSource()).getSelectedValue().toString();
@@ -157,7 +156,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 244, 178, 27);
 		seeWishlist
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);

@@ -798,12 +798,6 @@ public class ViewImpl implements View {
 
 	// //OK
 	@Override
-	public void controllerTakeItemBeforeChangeScreen() {
-		this.c.takeItemBefore();
-	}
-
-	// //OK
-	@Override
 	public void giveMeItemInfoFromManager() {
 		this.c.setItemModifyField();
 
