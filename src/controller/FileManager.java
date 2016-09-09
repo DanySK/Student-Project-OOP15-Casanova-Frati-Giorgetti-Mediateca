@@ -27,9 +27,21 @@ import view.ViewImpl;
 public class FileManager {
 
 	// constants for I/O
+	/**
+	 * Name of the file containing the archive of users.
+	 */
 	public static final String FILENAMEUSER = "archivio.utenti";
+	/**
+	 * Name of the file containing the archive of items.
+	 */
 	public static final String FILENAMEITEM = "archivio.oggetti";
+	/**
+	 * Name of the file containing the status of study room.
+	 */
 	public static final String FILENAMESTUDYROOM = "archivio.aulastudio";
+	/**
+	 * Path to the folder where files are saved/read.
+	 */
 	public static final String PATH = System.getProperty("user.home") + System.getProperty("file.separator");
 
 	private View v = new ViewImpl();
@@ -73,9 +85,15 @@ public class FileManager {
 		Map<Integer, Pair<ItemImpl, ItemInfo>> objectItem = null;
 		try (ObjectInputStream oisItem = new ObjectInputStream(new FileInputStream(FileManager.PATH + fileNameItem))) {
 			objectItem = (Map<Integer, Pair<ItemImpl, ItemInfo>>) oisItem.readObject();
-		} catch (Exception e1) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			this.v.showError("File .oggetti non trovato");
+			this.v.showError("File " + fileNameItem + " non trovato per la lettura");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			this.v.showError("Errore I/O");
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			this.v.showError("File .oggetti non trovato:\n" + e2.getMessage());
 		}
 		return objectItem;
 	}
@@ -91,9 +109,15 @@ public class FileManager {
 		Map<Integer, UserImpl> objectUser = null;
 		try (ObjectInputStream oisUser = new ObjectInputStream(new FileInputStream(FileManager.PATH + fileNameUser))) {
 			objectUser = (Map<Integer, UserImpl>) oisUser.readObject();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			this.v.showError("File " + fileNameUser + " non trovato per la lettura");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			this.v.showError("Errore I/O");
 		} catch (Exception e2) {
 			// TODO Auto-generated catch block
-			this.v.showError("File .utenti non trovato");
+			this.v.showError("File .utenti non trovato:\n" + e2.getMessage());
 		}
 		return objectUser;
 	}
@@ -110,9 +134,15 @@ public class FileManager {
 		try (ObjectInputStream oisStudyRoom = new ObjectInputStream(
 				new FileInputStream(FileManager.PATH + fileNameStudyRoom))) {
 			objectStudyRoom = (Map<GregorianCalendar, ArrayList<Integer>>) oisStudyRoom.readObject();
-		} catch (Exception e3) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
-			this.v.showError("File .aulastudio non trovato");
+			this.v.showError("File " + fileNameStudyRoom + " non trovato per la lettura");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			this.v.showError("Errore I/O");
+		} catch (Exception e2) {
+			// TODO Auto-generated catch block
+			this.v.showError("File .oggetti non trovato:\n" + e2.getMessage());
 		}
 		return objectStudyRoom;
 	}

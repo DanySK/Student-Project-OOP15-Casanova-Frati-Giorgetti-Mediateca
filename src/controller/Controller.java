@@ -84,11 +84,6 @@ public interface Controller {
 	 */
 	void cancelSit();
 
-	/*
-	 *
-	 * void studyRoomStatus();
-	 */
-
 	/**
 	 * Method which extends the borrowing of an object.
 	 *
@@ -242,9 +237,9 @@ public interface Controller {
 	boolean tellMeIfItemIsBook(String string);
 
 	/**
-	 * Returns the number of sits available in study room.
+	 * Returns the number of sits in study room.
 	 *
-	 * @return
+	 * @return number of total sits in study room.
 	 */
 	int numberOfSits();
 }

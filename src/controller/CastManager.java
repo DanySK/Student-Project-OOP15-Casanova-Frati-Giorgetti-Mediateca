@@ -4,7 +4,17 @@ import utils.ItemGenre;
 import utils.Language;
 import utils.TypeColor;
 
-public class CastManager {
+/**
+ * Class containing methods that converts a string into a particular enum.
+ *
+ * @author
+ *
+ */
+public final class CastManager {
+
+	private CastManager() {
+	}
+
 	/**
 	 * Method which casts the given string to an ItemGenre type.
 	 *

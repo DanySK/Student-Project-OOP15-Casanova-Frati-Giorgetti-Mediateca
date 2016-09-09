@@ -13,11 +13,10 @@ public final class Application {
 	}
 
 	/**
+	 * First method to be executed.
 	 *
 	 * @param args
-	 *            Arguments passed to t
-	 * 
-	 *            he main method
+	 *            Arguments passed to the main method
 	 * @throws Exception
 	 */
 	public static void main(final String[] args) throws Exception {
