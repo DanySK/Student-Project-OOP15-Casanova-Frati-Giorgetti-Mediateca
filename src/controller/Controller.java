@@ -221,12 +221,6 @@ public interface Controller {
 	void elementSelectedInManager();
 
 	/**
-	 * Method which memorizes the item selected by user before the screen
-	 * change.
-	 */
-	void takeItemBefore();
-
-	/**
 	 * Method which sets the list of item borrowed by the user selected by
 	 * manager.
 	 */
@@ -246,4 +240,11 @@ public interface Controller {
 	 * @return true == book false == movie
 	 */
 	boolean tellMeIfItemIsBook(String string);
+
+	/**
+	 * Returns the number of sits available in study room.
+	 *
+	 * @return
+	 */
+	int numberOfSits();
 }

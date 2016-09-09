@@ -39,7 +39,6 @@ public class ControllerImpl implements Controller {
 	private Model m;
 	// after the login, the corrispondent user will be saved here
 	private UserImpl actualUser;
-	private String itemBeforeScreenChange;
 	private static final int FIRSTDEADLINE = 30;
 	private static final int LASTDEADLINE = 60;
 	private final FileManager fm = new FileManager();
@@ -1542,11 +1541,6 @@ public class ControllerImpl implements Controller {
 	}
 
 	@Override
-	public void takeItemBefore() {
-		this.itemBeforeScreenChange = this.v.getItemSelectedByUser();
-	}
-
-	@Override
 	public void otherUserBorrowList() {
 		try {
 			for (final Integer i : this.m.getUserArchive().keySet()) {
@@ -1624,5 +1618,10 @@ public class ControllerImpl implements Controller {
 			this.v.showError(e2.getMessage());
 		}
 		return false;
+	}
+
+	@Override
+	public int numberOfSits() {
+		return this.m.getStudyRoomSit();
 	}
 }
