@@ -41,7 +41,7 @@ public class ModelImpl implements Serializable, Model {
   private Archive archiveItem;
   private ArchiveUser archiveUser;
   private StudyRoom studyRoom;
-  private String systemPassword = "FmAlchemist";
+  private String systemPassword = "mediateca";
 
   /**
    * Empty constructor.
