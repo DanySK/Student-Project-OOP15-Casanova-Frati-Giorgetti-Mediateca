@@ -848,6 +848,8 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void setItemInfoMediateca() {
+		System.out
+				.println("SetItemInfoMediateca: entrato, sta per mostrare le info di getdoubleclickediteminmediateca");
 		this.setSelectedItemInfo(this.v.getDoubleClickedItemInMediateca());
 	}
 
@@ -860,7 +862,7 @@ public class ControllerImpl implements Controller {
 	public void setSelectedItemInfo(final String string) {
 		System.out.println("setSelectedItemInfo: entrato");
 		// getItemSelectedByuSer lo prendo da setFilteredList
-		System.out.println("setSelectedItemInfo: getItemSelectedByUser=" + string);
+		System.out.println("setSelectedItemInfo: oggetto passato a questo metodo=" + string);
 		Integer itemId = 0;
 		for (final Integer i : this.m.getItemArchive().keySet()) {
 			try {
