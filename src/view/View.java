@@ -415,14 +415,9 @@ public interface View {
 	int getStudyRoomSelectedYear();
 
 	/**
-	 * Asks controller to set SuggestedBooksList.
+	 * Asks controller to set SuggestedBooksList and SuggestedMoviesList.
 	 */
-	void giveMeSuggestedBooks();
-
-	/**
-	 * Asks controller to set SuggestedMoviesList.
-	 */
-	void giveMeSuggestedMovies();
+	void giveMeSuggestedItems();
 
 	/**
 	 * Asks controller to remove from wishlist an item getted by

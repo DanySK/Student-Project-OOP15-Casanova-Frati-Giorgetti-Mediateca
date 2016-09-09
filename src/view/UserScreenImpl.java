@@ -195,15 +195,13 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 			this.filmPref3.setEnabled(false);
 			deleteUser.setVisible(true);
 			discarge.addActionListener(e -> {
-				v.giveMeSuggestedBooks();
-				v.giveMeSuggestedMovies();
+				v.giveMeSuggestedItems();
 				v.swapView(CardName.MENU);
 			});
 
 			this.send.addActionListener(e -> {
 				v.sendUserModify();
-				v.giveMeSuggestedBooks();
-				v.giveMeSuggestedMovies();
+				v.giveMeSuggestedItems();
 				v.swapView(CardName.MENU);
 			});
 		}

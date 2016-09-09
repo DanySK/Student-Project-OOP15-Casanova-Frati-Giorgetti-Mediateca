@@ -78,7 +78,7 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 
 		this.search = new JButton("Cerca");
 		this.search
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		this.search.setBounds(586, 84, 178, 27);
 		// SEARCH ACTION LISTENER -> REFRESH
 		this.search.addActionListener(e -> {
@@ -147,14 +147,13 @@ public class MediatecaScreenImpl extends JPanel implements MediatecaScreen {
 			likeItem.setEnabled(false);
 			this.reviews.setEnabled(false);
 			v.swapView(CardName.MENU);
-			v.giveMeSuggestedBooks();
-			v.giveMeSuggestedMovies();
+			v.giveMeSuggestedItems();
 		});
 
 		JButton seeWishlist = new JButton("Wishlist");
 		seeWishlist.setBounds(586, 244, 178, 27);
 		seeWishlist
-		.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+				.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
 		seeWishlist.addActionListener(arg0 -> {
 			v.giveMeWishlist();
 			v.swapView(CardName.WISHLIST);
