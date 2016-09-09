@@ -1039,7 +1039,7 @@ public class ControllerImpl implements Controller {
 					this.v.showMessage("Oggetto " + this.m.getRequiredItem(i) + " restituito!");
 					this.fm.writeObjectIntoFile(FileManager.FILENAMEITEM, this.m);
 					this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
-					// ho già trovato l'elemento che mi serve, quindi chiudo il
+					// ho giï¿½ trovato l'elemento che mi serve, quindi chiudo il
 					// metodo
 					return;
 				}

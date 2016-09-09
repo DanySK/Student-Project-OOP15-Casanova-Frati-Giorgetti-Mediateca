@@ -294,7 +294,7 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.usernameF.setText(username);
 		this.passwordF.setText(password);
 		this.model.setDate(Integer.parseInt(birthDate_year),
-				(Integer.parseInt(birthDate_month) - 1),
+				(Integer.parseInt(birthDate_month)) - 1,
 				Integer.parseInt(birthDate_day));
 		this.model.setSelected(true);
 		this.emailF.setText(email);
