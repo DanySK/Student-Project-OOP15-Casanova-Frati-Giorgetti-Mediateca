@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
 import java.util.Properties;
 
 import javax.swing.JButton;
@@ -27,7 +28,6 @@ import view.ViewImpl.CardName;
 public class UserScreenImpl extends JPanel implements UserScreen {
 
 	private static final long serialVersionUID = 1L;
-
 	private JLabel presentation;
 	private JButton send;
 	private JTextField nameF;
@@ -44,6 +44,8 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 	private JComboBox<?> filmPref1;
 	private JComboBox<?> filmPref2;
 	private JComboBox<?> filmPref3;
+	private int count = 0;
+	private static final int BOX_NUMBER = 5;
 	private SpringLayout springLayout = new SpringLayout();
 
 	public enum UserScreenType {
@@ -123,7 +125,9 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.add(surnameL);
 		discarge = new JButton("Annulla");
 		discarge.setFont(new Font("Tahoma", Font.PLAIN, ViewImpl.SMALL_SIZE));
+
 		this.send = new JButton();
+		this.send.setEnabled(false);
 
 		this.bookPref1 = new JComboBox(utils.ItemGenre.values());
 		this.bookPref1.setSelectedIndex(-1);
@@ -155,6 +159,19 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.filmPref3.setBounds(590, 458, 177, 25);
 		this.add(this.filmPref3);
 
+		ActionListener selectInBox = e -> {
+			UserScreenImpl.this.count++;
+			if (UserScreenImpl.this.count == UserScreenImpl.BOX_NUMBER) {
+				UserScreenImpl.this.send.setEnabled(true);
+			}
+		};
+
+		this.bookPref1.addActionListener(selectInBox);
+		this.bookPref2.addActionListener(selectInBox);
+		this.bookPref3.addActionListener(selectInBox);
+		this.filmPref1.addActionListener(selectInBox);
+		this.filmPref2.addActionListener(selectInBox);
+		this.filmPref3.addActionListener(selectInBox);
 		if (type.equals(UserScreenType.CREATE)) {
 			this.presentation = new JLabel("Inserisci qui i tuoi dati:");
 			this.send.setText("Crea");
@@ -164,10 +181,12 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 				v.sendUserCreate();
 				v.swapView(CardName.LOGIN);
 			});
+
 		} else if (type.equals(UserScreenType.MODIFY)) {
 			this.presentation = new JLabel("Modifica qui i tuoi dati:");
 			v.giveMeUserInfo();
 			this.send.setText("Invio");
+			this.send.setEnabled(true);
 			this.usernameF.setEnabled(false);
 			this.bookPref1.setEnabled(false);
 			this.bookPref2.setEnabled(false);

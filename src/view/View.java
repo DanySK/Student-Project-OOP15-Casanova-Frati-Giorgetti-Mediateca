@@ -594,7 +594,7 @@ public interface View {
 	 *
 	 * @param info2
 	 *            the type of info (release or copies number)
-	 * 
+	 *
 	 * @param type
 	 *            the type of item
 	 * @return the requeste information
@@ -757,5 +757,12 @@ public interface View {
 	 * @return true if is book, false if movie.
 	 */
 	boolean itemIsBook(String item);
+
+	/**
+	 * Returns the number of sits in StudyRoom.
+	 *
+	 * @return number of sits.
+	 */
+	int numberOfSits();
 
 }

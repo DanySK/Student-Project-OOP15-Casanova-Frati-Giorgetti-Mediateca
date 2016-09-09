@@ -33,6 +33,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 
 	private static final long serialVersionUID = 1L;
 	private int selectedSit;
+	private int sitsNumber = 0;
 	private final JButton[] buttons;
 	private JDatePickerImpl datePicker;
 	private UtilDateModel model = new UtilDateModel();
@@ -55,7 +56,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 		this.centerPanel = new JPanel();
 		this.centerPanel.setBounds(0, 134, 800, 331);
 		this.add(this.centerPanel);
-
+		this.sitsNumber = v.numberOfSits();
 		this.setSize(ViewImpl.SCREEN_LENGHT, ViewImpl.SCREEN_WIDTH);
 		this.buttons = new JButton[ViewImpl.STUDY_ROOM_SITS];
 
@@ -184,7 +185,7 @@ class StudyRoomImpl extends JPanel implements StudyRoom {
 
 	private void studyRoomReset() {
 		int i;
-		for (i = 0; i < ViewImpl.STUDY_ROOM_SITS; i++) {
+		for (i = 0; i < this.sitsNumber; i++) {
 			this.buttons[i].setBackground(null);
 		}
 	}
