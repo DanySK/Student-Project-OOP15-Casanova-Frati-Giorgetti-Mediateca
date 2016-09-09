@@ -150,8 +150,6 @@ public final class ArchiveImpl implements Serializable, Archive {
     if (this.containsItem(itemId)) {
       ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList().put(userId,
                   this.getToDay());
-      System.out.println("User " + userId + " adds to book list " + itemId + " in date "
-                  + this.getToDay());
     } else {
       throw new ItemException("User: " + userId + "can not take item: " + itemId
                   + "becouse it is not contained into the archive.");
@@ -166,8 +164,6 @@ public final class ArchiveImpl implements Serializable, Archive {
                   .containsKey(userId)) {
         ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList().remove(userId,
                     this.getToDay());
-        System.out.println("User " + userId + " removes from the item list " + itemId + " in date "
-                    + this.getToDay());
       } else {
         throw new UserException(("User: " + userId + " is not in the item's list"));
       }
