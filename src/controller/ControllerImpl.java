@@ -55,6 +55,10 @@ public class ControllerImpl implements Controller {
 		final File fileUser = new File(FileManager.PATH + FileManager.FILENAMEUSER);
 		final File fileStudyRoom = new File(FileManager.PATH + FileManager.FILENAMESTUDYROOM);
 
+		/*
+		 * se i file non esistono, li creo con i dati per effettuare il testing
+		 * del programma
+		 */
 		if (!fileItem.exists() && !fileUser.exists() && !fileStudyRoom.exists()) {
 			this.m = new ModelImpl();
 			this.writeTestOnFile();
@@ -68,176 +72,6 @@ public class ControllerImpl implements Controller {
 		this.m = new ModelImpl(itemArchive, userArchive, studyRoomArchive);
 	}
 
-	@Override
-	public void writeOnFile() {
-
-		try {
-
-			final GregorianCalendar cal = new GregorianCalendar();
-			cal.set(Calendar.YEAR, 1994);
-			cal.set(Calendar.MONTH, 3);
-			cal.set(Calendar.DAY_OF_MONTH, 6);
-
-			this.m.registerUser("Enrico", "Casanova", cal, "csharplover", "graffeallineate", "enrico.casanova@gmail.it",
-					"334534534534",
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
-					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.FANTASY, ItemGenre.HORROR, ItemGenre.ANIMATION)));
-			this.m.registerUser("Edoardo", "Frati", cal, "animefan", "fullmetalalchemist", "edoardo.frati@gmail.it",
-					"321342111",
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
-
-			this.m.registerUser("Giacomo", "Giacomelli", cal, "zxc", "zxc", "edoardo.frati@gmail.it", "321342111",
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
-
-			this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
-					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0011, 3);
-			this.m.registerBook("Lo hobbit", 1953, "J.R.R. Tolkien", Language.ENGLISH, "23123100",
-					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0012, 3);
-			this.m.registerBook("Il Silmarillion", 1939, "J.R.R. Tolkien", Language.ENGLISH, "23123000",
-					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0013, 3);
-			this.m.registerBook("Il signore degli anelli", 1945, "J.R.R. Tolkien", Language.ENGLISH, "23123121",
-					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0011, 100);
-			this.m.registerBook("Lo hobbit", 1953, "J.R.R. Tolkien", Language.ENGLISH, "23123100",
-					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0012, 50);
-			this.m.registerBook("Il Silmarillion", 1939, "J.R.R. Tolkien", Language.ENGLISH, "23123000",
-					ItemGenre.ADVENTURE_HISTORY, "Mondadori", 0013, 30);
-			this.m.registerBook("Shining", 1960, "Stephen King", Language.ENGLISH, "23121000", ItemGenre.HORROR,
-					"Mondadori", 0017, 1);
-			this.m.registerBook("Misery non deve morire", 1966, "Stephen King", Language.ENGLISH, "231210072",
-					ItemGenre.HORROR, "Mondadori", 0111, 2);
-			this.m.registerBook("La macchina fantasma", 1970, "Stephen Cronenberg", Language.ENGLISH, "231110073",
-					ItemGenre.HORROR, "Mondadori", 0110, 3);
-			this.m.registerBook("Il vecchio e il mare", 1956, "Ernest Hemingway", Language.ENGLISH, "235210074",
-					ItemGenre.FANTASY, "Mondadori", 0101, 2);
-
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "231210078", ItemGenre.ADVENTURE,
-					"Mondadori", 0114, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "231110079",
-					ItemGenre.ADVENTURE, "Mondadori", 0115, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "123121007", ItemGenre.ANIMATION,
-					"Mondadori", 0116, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "223111007",
-					ItemGenre.ANIMATION, "Mondadori", 0117, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "323121007",
-					ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT, "Mondadori", 0001, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "423111007",
-					ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT, "Mondadori", 0002, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "523121007", ItemGenre.BIOGRAPHICAL,
-					"Mondadori", 0003, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "623111007",
-					ItemGenre.BIOGRAPHICAL, "Mondadori", 0004, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "723121007", ItemGenre.BIOGRAPHIES,
-					"Mondadori", 0005, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "823111007",
-					ItemGenre.BIOGRAPHIES, "Mondadori", 0006, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "923121007",
-					ItemGenre.CLASSICAL_CRITICISM, "Mondadori", 0007, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "213111007",
-					ItemGenre.CLASSICAL_CRITICISM, "Mondadori", 0010, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "223121007", ItemGenre.COMEDY,
-					"Mondadori", 0011, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "233111007", ItemGenre.COMEDY,
-					"Mondadori", 0012, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "243121007",
-					ItemGenre.CURRENT_NEWS_REPORTS, "Mondadori", 0013, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "253111007",
-					ItemGenre.CURRENT_NEWS_REPORTS, "Mondadori", 0014, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "263121007", ItemGenre.DOCUMENTARY,
-					"Mondadori", 0015, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "273111007",
-					ItemGenre.DOCUMENTARY, "Mondadori", 0016, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "283121007", ItemGenre.DRAMA,
-					"Mondadori", 0017, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "293111007", ItemGenre.DRAMA,
-					"Mondadori", 0020, 3);
-			this.m.registerBook("Libro 1", 1945, "Stephen King", Language.ENGLISH, "231121007", ItemGenre.FASHION,
-					"Mondadori", 0021, 2);
-			this.m.registerBook("Libro 2", 1946, "Stephen Cronenberg", Language.ENGLISH, "231211007", ItemGenre.FASHION,
-					"Mondadori", 0022, 3);
-
-			this.m.registerMovie("Star Trek", 2009, "Bad Robot", "J.J. Abrams", Language.ENGLISH, ItemGenre.FANTASY,
-					120, TypeColor.COLOR, 10);
-			this.m.registerMovie("Star Trek: Into Darkness", 2012, "Bad Robot", "J.J. Abrams", Language.ENGLISH,
-					ItemGenre.FANTASY, 130, TypeColor.COLOR, 8);
-			this.m.registerMovie("Star Trek: Beyond", 2015, "Bad Robot", "J.J. Abrams", Language.ENGLISH,
-					ItemGenre.FANTASY, 144, TypeColor.COLOR, 2);
-			this.m.registerMovie("Non aprite quella porta", 2006, "Legendary", "John Nispel", Language.ENGLISH,
-					ItemGenre.HORROR, 100, TypeColor.COLOR, 10);
-			this.m.registerMovie("Saw 80: la fine", 2012, "Medusa film", "Carlo Vanzina", Language.ENGLISH,
-					ItemGenre.HORROR, 180, TypeColor.COLOR, 1);
-			this.m.registerMovie("Mamma mia!", 2008, "Warner Bros", "Meryl Streep", Language.ENGLISH, ItemGenre.MUSICAL,
-					100, TypeColor.COLOR, 1000);
-			this.m.registerMovie("The Rocky Horror Picture Show", 1977, "01 Distribution", "Tim Curry",
-					Language.ENGLISH, ItemGenre.MUSICAL, 120, TypeColor.COLOR, 7);
-			this.m.registerMovie("Tarzan", 1966, "Disney Pictures", "Walt Disney", Language.ENGLISH,
-					ItemGenre.ANIMATION, 90, TypeColor.COLOR, 1);
-			this.m.registerMovie("Aladdin", 1986, "Disney Pictures", "Walt Disney", Language.ENGLISH,
-					ItemGenre.ANIMATION, 100, TypeColor.COLOR, 2);
-
-			final User u = new UserImpl("Enrico", "Casanova", cal, "csharplover", "graffeallineate",
-					"enrico.casanova@gmail.it", "334534534534",
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
-					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.FANTASY, ItemGenre.MUSICAL)));
-			final User u2 = new UserImpl("Edoardo", "Frati", cal, "animefan", "fullmetalalchemist",
-					"edoardo.frati@gmail.it", "321342111",
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
-					new ArrayList<ItemGenre>(
-							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
-			final GregorianCalendar cal2 = new GregorianCalendar();
-
-			cal2.set(Calendar.YEAR, 2016);
-			cal2.set(Calendar.MONTH, 8);
-			cal2.set(Calendar.DAY_OF_MONTH, 23);
-
-			// this.m.bookSit(cal, 1, this.m.ge);
-			// this.m.bookSit(cal, 2, this.m.getUserArchive().);
-			this.m.bookSit(cal2, 1, u.getIdUser());
-			this.m.bookSit(cal2, 2, u.getIdUser());
-			this.m.bookSit(cal2, 3, u.getIdUser());
-			this.m.bookSit(cal2, 4, u.getIdUser());
-			this.m.bookSit(cal2, 6, u2.getIdUser());
-			this.m.bookSit(cal2, 7, u2.getIdUser());
-			this.m.bookSit(cal2, 8, u2.getIdUser());
-			this.m.bookSit(cal2, 9, u2.getIdUser());
-
-			final Random random = new Random();
-			final int n = 5;
-			int index = 0;
-
-			for (final Integer i : this.m.getItemArchive().keySet()) {
-				final int k = random.nextInt(n);
-
-				this.m.addReview(i, ((UserImpl) u).getIdUser(), k, "recensione numero " + index);
-				if ((index % 2) == 0) {
-					this.m.addLike(i, ((UserImpl) u).getIdUser());
-				}
-				index++;
-			}
-
-			this.v.showMessage("Utenti creati");
-		} catch (ItemException e) {
-			// TODO Auto-generated catch block
-			this.v.showError(e.getMessage());
-		} catch (UserException e1) {
-			this.v.showError(e1.getMessage());
-		} catch (Exception e2) {
-			this.v.showError(e2.getMessage());
-		}
-
-		this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
-		this.fm.writeObjectIntoFile(FileManager.FILENAMEITEM, this.m);
-		this.fm.writeObjectIntoFile(FileManager.FILENAMESTUDYROOM, this.m);
-	}
-
 	/**
 	 * Method which creates some users and items for testing.
 	 */
@@ -246,6 +80,16 @@ public class ControllerImpl implements Controller {
 		cal.set(Calendar.YEAR, 1994);
 		cal.set(Calendar.MONTH, 3);
 		cal.set(Calendar.DAY_OF_MONTH, 6);
+
+		final GregorianCalendar cal2 = new GregorianCalendar();
+		cal2.set(Calendar.YEAR, 1995);
+		cal2.set(Calendar.MONTH, 5);
+		cal2.set(Calendar.DAY_OF_MONTH, 5);
+
+		final GregorianCalendar cal3 = new GregorianCalendar();
+		cal3.set(Calendar.YEAR, 1995);
+		cal3.set(Calendar.MONTH, 7);
+		cal3.set(Calendar.DAY_OF_MONTH, 7);
 		try {
 
 			this.m.registerUser("Enrico", "Casanova", cal, "clover", "crocks", "enrico.casanova@gmail.it",
@@ -253,11 +97,11 @@ public class ControllerImpl implements Controller {
 					new ArrayList<ItemGenre>(
 							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
 					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.FANTASY, ItemGenre.MUSICAL)));
-			this.m.registerUser("Edoardo", "Frati", cal, "anime", "ironman", "edoardo.frati@gmail.it", "321342111",
+			this.m.registerUser("Edoardo", "Frati", cal2, "anime", "ironman", "edoardo.frati@gmail.it", "321342111",
 					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)),
 					new ArrayList<ItemGenre>(
 							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
-			this.m.registerUser("Luca", "Giorgetti", cal, "giorgit", "lukegeorge", "luca.giorgetti@gmail.it",
+			this.m.registerUser("Luca", "Giorgetti", cal3, "giorgit", "lukegeorge", "luca.giorgetti@gmail.it",
 					"321342333",
 					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT,
 							ItemGenre.BIOGRAPHICAL, ItemGenre.HORROR)),
@@ -269,13 +113,13 @@ public class ControllerImpl implements Controller {
 							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
 					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.FANTASY, ItemGenre.MUSICAL)));
 
-			final User u2 = new UserImpl("Edoardo", "Frati", cal, "anime", "ironman", "edoardo.frati@gmail.it",
+			final User u2 = new UserImpl("Edoardo", "Frati", cal2, "anime", "ironman", "edoardo.frati@gmail.it",
 					"321342111",
 					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)),
 					new ArrayList<ItemGenre>(
 							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
 
-			final User u3 = new UserImpl("Luca", "Giorgetti", cal, "giorgit", "lukegeorge", "luca.giorgetti@gmail.it",
+			final User u3 = new UserImpl("Luca", "Giorgetti", cal3, "giorgit", "lukegeorge", "luca.giorgetti@gmail.it",
 					"321342333",
 					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT,
 							ItemGenre.BIOGRAPHICAL, ItemGenre.HORROR)),
@@ -349,16 +193,17 @@ public class ControllerImpl implements Controller {
 					ItemGenre.ADVENTURE, 105, TypeColor.COLOR, 2);
 			this.m.registerMovie("Indiana Jones 2", 1952, "Warner Bros", "Steven Spielberg", Language.ENGLISH,
 					ItemGenre.ADVENTURE, 101, TypeColor.COLOR, 2);
-
 			this.m.registerMovie("Un viaggio inaspettato", 2012, "Legendary Pictures", "Peter Jackson",
 					Language.ENGLISH, ItemGenre.FANTASY, 185, TypeColor.COLOR, 2);
 			this.m.registerMovie("La battaglia delle cinque armte", 2015, "Legendary Pictures", "Peter Jackson",
 					Language.ENGLISH, ItemGenre.FANTASY, 175, TypeColor.COLOR, 2);
 
+			/* L'utente clover prende in prestito tutti i libri e film */
 			for (final Integer i : this.m.getItemArchive().keySet()) {
 				this.m.borrowItem(i, u.getIdUser());
 			}
 
+			/* L'utente clover recensisce vari oggetti */
 			final Random random = new Random();
 			final int n = 5;
 			int index = 0;
@@ -389,25 +234,33 @@ public class ControllerImpl implements Controller {
 				.filter(e -> e.getValue().getUsername().equals(username))
 				.filter(e -> e.getValue().getPassword().equals(password)).map(e -> e.getValue()).findFirst();
 		if (user.isPresent()) {
+			/*
+			 * Se username e password sono corrette, salvo l'utente
+			 * corrispondente per poterci eseguire le varie operazioni sopra...
+			 */
 			this.actualUser = user.get();
 			try {
 				this.m.setReccomandedList(this.actualUser.getIdUser());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				this.v.showError("Lista consigli utente corrente non inizializzata");
 			}
 			this.elaborateLoans();
 			this.v.goodLogin();
 		} else {
+			/*
+			 * ...altrimenti segnalo all'utente attuale che non e' stato trovato
+			 */
 			this.v.showError("Utente non trovato");
 		}
 	}
 
 	@Override
 	public void logOut() {
+		/* Salvo tutto prima di uscire */
 		this.fm.writeObjectIntoFile(FileManager.FILENAMEITEM, this.m);
 		this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
 		this.fm.writeObjectIntoFile(FileManager.FILENAMESTUDYROOM, this.m);
+		/* Elimino la corrispondenza dell'utente memorizzata */
 		this.actualUser = null;
 	}
 
@@ -420,10 +273,6 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
-	/**
-	 * Method who elaborates inputs from the user and set the list with items
-	 * filtered.
-	 */
 	@Override
 	public void itemElaboration() {
 		int index = 0;
@@ -444,10 +293,13 @@ public class ControllerImpl implements Controller {
 
 		final String searchText = this.v.getSearchText();
 		if (ty == null) {
-			// prendo tutti gli oggetti, sia libri che film...
+			/*
+			 * non viene scelto filtrato tra libro o film, prendo tutti gli
+			 * oggetti, sia libri che film...
+			 */
 			array = new String[this.m.getItemArchive().size()];
 			if (((searchText == null) || searchText.equals("")) && (ts == null)) {
-				// nessun parametro nei filtri, restituisco tutto
+				/* nessun parametro nei filtri, restituisco tutto */
 				try {
 					for (final Integer i : this.m.getItemArchive().keySet()) {
 						array[index] = this.m.getRequiredItem(i).toString();
@@ -458,11 +310,10 @@ public class ControllerImpl implements Controller {
 				} catch (UserException e1) {
 					this.v.showError(e1.getMessage());
 				} catch (Exception e2) {
-					// TODO Auto-generated catch block
 					this.v.showError(e2.getMessage());
 				}
 			} else {
-				// gli altri 2 parametri ci sono, filtro su tutti gli oggetti
+				/* gli altri 2 parametri ci sono, filtro su tutti gli oggetti */
 				try {
 					for (final Integer i : this.m.filtersItem(this.m.getItemArchive().keySet(), ts,
 							searchText.toUpperCase())) {
@@ -474,17 +325,18 @@ public class ControllerImpl implements Controller {
 				} catch (UserException e1) {
 					this.v.showError(e1.getMessage());
 				} catch (Exception e2) {
-					// TODO Auto-generated catch block
 					this.v.showError(e2.getMessage());
 				}
 			}
 
 		} else {
-			// ho scelto tra libro o film
+			/* ho scelto tra libro o film */
 			array = new String[this.m.getAllItemId(ty).size()];
 			if (((searchText == null) || searchText.equals("")) && (ts == null)) {
-				// altri 2 parametri assenti, restituisco o tutti i libri o
-				// tutti i film
+				/*
+				 * altri 2 parametri assenti, restituisco o tutti i libri o
+				 * tutti i film
+				 */
 				try {
 					for (final Integer i : this.m.getAllItemId(ty)) {
 						array[index] = this.m.getRequiredItem(i).toString();
@@ -495,12 +347,11 @@ public class ControllerImpl implements Controller {
 				} catch (UserException e1) {
 					this.v.showError(e1.getMessage());
 				} catch (Exception e2) {
-					// TODO Auto-generated catch block
 					this.v.showError(e2.getMessage());
 				}
 
 			} else {
-				// altrimento filtro in base a tutti i parametri
+				/* altrimenti filtro in base a tutti i parametri */
 				try {
 					for (final Integer i : this.m.filtersItem(this.m.getAllItemId(ty), ts, searchText.toUpperCase())) {
 						array[index] = this.m.getRequiredItem(i).toString();
@@ -511,7 +362,6 @@ public class ControllerImpl implements Controller {
 				} catch (UserException e1) {
 					this.v.showError(e1.getMessage());
 				} catch (Exception e2) {
-					// TODO Auto-generated catch block
 					this.v.showError(e2.getMessage());
 				}
 			}
@@ -519,10 +369,8 @@ public class ControllerImpl implements Controller {
 		this.v.setFilteredList(array);
 	}
 
-	// first draft
 	@Override
 	public void addLike() {
-		// DA CONTROLLARE
 		for (final Integer i : this.m.getItemArchive().keySet()) {
 			try {
 				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemSelectedByUser())) {
@@ -536,7 +384,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -557,7 +404,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -588,7 +434,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -608,7 +453,6 @@ public class ControllerImpl implements Controller {
 					} catch (UserException e1) {
 						this.v.showError(e1.getMessage());
 					} catch (Exception e2) {
-						// TODO Auto-generated catch block
 						this.v.showError(e2.getMessage());
 					}
 				}
@@ -617,7 +461,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -651,7 +494,6 @@ public class ControllerImpl implements Controller {
 						} catch (UserException e1) {
 							this.v.showError(e1.getMessage());
 						} catch (Exception e2) {
-							// TODO Auto-generated catch block
 							this.v.showError(e2.getMessage());
 						}
 					}
@@ -664,7 +506,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -682,7 +523,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -741,7 +581,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -771,7 +610,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -804,7 +642,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -838,7 +675,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -867,7 +703,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -903,7 +738,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -934,7 +768,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -964,7 +797,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -988,7 +820,6 @@ public class ControllerImpl implements Controller {
 					try {
 						this.v.showGiveBackMessage(this.m.getRequiredItem(i).toString());
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						this.v.showError("Errore! Oggetto non presente nell'archivio");
 					}
 				} else if (map.get(i) > ControllerImpl.FIRSTDEADLINE) {
@@ -999,7 +830,6 @@ public class ControllerImpl implements Controller {
 					} catch (UserException e1) {
 						this.v.showError(e1.getMessage());
 					} catch (Exception e2) {
-						// TODO Auto-generated catch block
 						this.v.showError(e2.getMessage());
 					}
 				}
@@ -1009,7 +839,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1023,9 +852,10 @@ public class ControllerImpl implements Controller {
 					this.v.showMessage("Oggetto " + this.m.getRequiredItem(i) + " restituito!");
 					this.fm.writeObjectIntoFile(FileManager.FILENAMEITEM, this.m);
 					this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
-					// ho gi� trovato l'elemento che mi serve, quindi chiudo
-					// il
-					// metodo
+					/*
+					 * ho gia' trovato l'elemento che mi serve, quindi chiudo il
+					 * metodo
+					 */
 					return;
 				}
 			}
@@ -1035,7 +865,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1073,7 +902,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1090,7 +918,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1110,7 +937,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1130,7 +956,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1150,7 +975,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1170,7 +994,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1192,7 +1015,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1208,18 +1030,13 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
 
 	@Override
 	public void extendBorrow(final String book) {
-		// fai comparire solo uan finestra che dice che � stato esteso
-
-		// se block user � true, manda la schermata solo per restituire
 		this.v.showMessage("Prestito esteso per l'oggetto " + book);
-
 	}
 
 	@Override
@@ -1243,7 +1060,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}
@@ -1261,7 +1077,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -1287,7 +1102,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -1303,7 +1117,6 @@ public class ControllerImpl implements Controller {
 			} catch (UserException e1) {
 				this.v.showError(e1.getMessage());
 			} catch (Exception e2) {
-				// TODO Auto-generated catch block
 				this.v.showError(e2.getMessage());
 			}
 		}
@@ -1364,7 +1177,6 @@ public class ControllerImpl implements Controller {
 		} catch (UserException e1) {
 			this.v.showError(e1.getMessage());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			this.v.showError(e2.getMessage());
 		}
 	}

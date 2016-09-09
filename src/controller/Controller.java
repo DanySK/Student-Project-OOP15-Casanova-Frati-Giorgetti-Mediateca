@@ -32,12 +32,6 @@ public interface Controller {
 	void managerLogin();
 
 	/**
-	 * Method which writes some users, items and the study room situation on
-	 * files for debug.
-	 */
-	void writeOnFile();
-
-	/**
 	 *
 	 * Method which elaborates inputs from the user and set the list with items
 	 * filtered.
