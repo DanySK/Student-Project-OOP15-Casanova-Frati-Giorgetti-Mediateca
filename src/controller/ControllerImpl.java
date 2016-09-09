@@ -894,8 +894,9 @@ public class ControllerImpl implements Controller {
 		final String name = this.v.getUserRegistration(UserInfo.NAME);
 		final String surname = this.v.getUserRegistration(UserInfo.SURNAME);
 		final GregorianCalendar day = new GregorianCalendar();
-		day.set(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
-				this.v.getStudyRoomSelectedDay());
+		day.set(Integer.parseInt(this.v.getUserRegistration(UserInfo.BIRTHDATE_YEAR)),
+				Integer.parseInt(this.v.getUserRegistration(UserInfo.BIRTHDATE_MONTH)),
+				Integer.parseInt(this.v.getUserRegistration(UserInfo.BIRTHDATE_DAY)));
 		final String username = this.v.getUserRegistration(UserInfo.USERNAME);
 		final String password = this.v.getUserRegistration(UserInfo.PASSWORD);
 		final String email = this.v.getUserRegistration(UserInfo.EMAIL);
