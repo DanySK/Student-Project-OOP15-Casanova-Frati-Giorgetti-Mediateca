@@ -460,8 +460,6 @@ public class ViewImpl implements View {
 	@Override
 	public void giveMeItemInfoMediateca() {
 		this.c.setItemInfoMediateca();
-		// this.setFilmInfoDoubleClick("prova", "prova", "prova", "2014",
-		// "prova", "prova", "prova", "prova", "prova", "prova");
 	}
 
 	// //OK
@@ -474,6 +472,7 @@ public class ViewImpl implements View {
 	@Override
 	public void showItemInfoManager() {
 		this.itemShow = new ItemShowImpl();
+		System.out.println("VIEW: chiamo give me item show from manager.");
 		this.giveMeItemShowFromManager();
 		this.itemShow.startItemShow(this);
 	}
@@ -481,6 +480,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeItemShowFromManager() {
+		System.out.println("VIEW: chiamo element selected in manager.");
 		this.c.elementSelectedInManager();
 
 	}
@@ -673,6 +673,7 @@ public class ViewImpl implements View {
 	@Override
 	public void showUserInfo() {
 		this.userScreen = new UserShowImpl();
+		System.out.println("VIEW: Chiamo give me user info");
 		this.giveMeOtherUserInfo();
 		this.userScreen.startUserShow(this);
 	}
@@ -792,6 +793,7 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void giveMeOtherUserInfo() {
+		System.out.println("VIEW: chiamo give other user info.");
 		this.c.giveOtherUserInfo();
 
 	}

@@ -24,7 +24,7 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 
 	private static final long serialVersionUID = 3947236683472052024L;
 	private JList<String> list = new JList<String>();
-	private TypeList type = TypeList.USER;
+	private TypeList type;
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	private String dClicked;
 
@@ -123,12 +123,20 @@ public class ManagerScreenImpl extends JPanel implements ManagerScreen {
 						&& (ManagerScreenImpl.this.type == TypeList.USER)) {
 					ManagerScreenImpl.this.dClicked = ((JList<String>) evt
 							.getSource()).getSelectedValue().toString();
+					System.out.println("VIEW: Mostro info di utente. Variabile:"
+							+ String.valueOf(ManagerScreenImpl.this.type));
 					v.showUserInfo();
+					System.out
+					.println("VIEW: Fine della chiamata a settaggio in view.");
 				} else if ((evt.getClickCount() == 2)
 						&& (ManagerScreenImpl.this.type == TypeList.ITEM)) {
+					System.out.println("VIEW: Mostro info di item. Variabile:"
+							+ String.valueOf(ManagerScreenImpl.this.type));
 					ManagerScreenImpl.this.dClicked = ((JList<String>) evt
 							.getSource()).getSelectedValue().toString();
 					v.showItemInfoManager();
+					System.out
+					.println("VIEW: Fine della chiamata a settaggio in view.");
 				}
 			}
 		});
