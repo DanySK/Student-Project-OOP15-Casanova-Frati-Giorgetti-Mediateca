@@ -737,9 +737,14 @@ public class ControllerImpl implements Controller {
 		}
 		System.out.println("itemModify: " + this.v.getUserItemSelectedByManager());
 		for (final TypeItemInfo ti : TypeItemInfo.values()) {
-			final boolean isBook = this.m.getAllItemId(TypeItem.BOOK).contains(itemId);
-			final boolean isBookNotEmpty = !this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals("");
-			final boolean isFilmNotEmpty = !this.v.getFilmModifiedInfo(ti).isEmpty() && !this.v.getFilmModifiedInfo(ti).equals("");
+			// final boolean isBook =
+			// this.m.getAllItemId(TypeItem.BOOK).contains(itemId);
+			// final boolean isBookNotEmpty =
+			// !this.v.getBookModifiedInfo(ti).isEmpty() &&
+			// !this.v.getBookModifiedInfo(ti).equals("");
+			// final boolean isFilmNotEmpty =
+			// !this.v.getFilmModifiedInfo(ti).isEmpty() &&
+			// !this.v.getFilmModifiedInfo(ti).equals("");
 			try {
 				// TITLE, AUTHOR, PRODUCER, GENRE, LANGUAGE, RELEASE_YEAR
 
@@ -748,20 +753,43 @@ public class ControllerImpl implements Controller {
 				case TITLE:
 				case AUTHOR:
 				case PRODUCER:
-					x = (isBook && isBookNotEmpty ? this.v.getBookModifiedInfo(ti)
-							: (!isBook && isFilmNotEmpty ? this.v.getFilmModifiedInfo(ti) : null));
+					x = (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+							&& (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals(""))
+									? this.v.getBookModifiedInfo(ti)
+									: (!this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+											&& (!this.v.getFilmModifiedInfo(ti).isEmpty()
+													&& !this.v.getFilmModifiedInfo(ti).equals(""))
+															? this.v.getFilmModifiedInfo(ti) : null));
 					break;
 				case RELEASE_YEAR:
-					x = (isBook && isBookNotEmpty ? Integer.parseInt(this.v.getBookModifiedInfo(ti))
-							: (!isBook && isFilmNotEmpty ? Integer.parseInt(this.v.getFilmModifiedInfo(ti)) : null));
+					x = (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+							&& (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals(""))
+									? Integer.parseInt(this.v.getBookModifiedInfo(ti))
+									: (!this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+											&& (!this.v.getFilmModifiedInfo(ti).isEmpty()
+													&& !this.v.getFilmModifiedInfo(ti).equals(""))
+															? Integer.parseInt(this.v.getFilmModifiedInfo(ti)) : null));
 					break;
 				case GENRE:
-					x = (isBook && isBookNotEmpty ? CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti))
-							: (!isBook && isFilmNotEmpty ? CastManager.castToItemGenre(this.v.getFilmModifiedInfo(ti)) : null));
+					x = (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+							&& (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals(""))
+									? CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti))
+									: (!this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+											&& (!this.v.getFilmModifiedInfo(ti).isEmpty()
+													&& !this.v.getFilmModifiedInfo(ti).equals(""))
+															? CastManager.castToItemGenre(
+																	this.v.getFilmModifiedInfo(ti))
+															: null));
 					break;
 				case LANGUAGE:
-					x = (isBook && isBookNotEmpty ? CastManager.castToLanguage(this.v.getBookModifiedInfo(ti))
-							: (!isBook && isFilmNotEmpty ? CastManager.castToLanguage(this.v.getFilmModifiedInfo(ti)) : null));
+					x = (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+							&& (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals(""))
+									? CastManager.castToLanguage(this.v.getBookModifiedInfo(ti))
+									: (!this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+											&& (!this.v.getFilmModifiedInfo(ti).isEmpty()
+													&& !this.v.getFilmModifiedInfo(ti).equals(""))
+															? CastManager.castToLanguage(this.v.getFilmModifiedInfo(ti))
+															: null));
 				default:
 					break;
 				}
