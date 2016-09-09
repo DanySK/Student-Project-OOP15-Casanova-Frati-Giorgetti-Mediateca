@@ -1280,11 +1280,13 @@ public class ControllerImpl implements Controller {
 				this.v.showError(e2.getMessage());
 			}
 		}
-		this.v.setUserInfoDoubleClick(user.getName(), user.getSurname(), user.getUsername(), user.getPassword(),
-				user.getBirthdate().toString(), user.getEmail(), user.getTelephoneNumber(),
-				user.getBookPreferences().get(0).toString(), user.getBookPreferences().get(1).toString(),
-				user.getBookPreferences().get(2).toString(), user.getMoviePreferences().get(0).toString(),
-				user.getMoviePreferences().get(1).toString(), user.getMoviePreferences().get(2).toString());
+		GregorianCalendar cal = user.getBirthdate();
+		String s = cal.get(Calendar.DAY_OF_MONTH) + "-" + cal.get(Calendar.MONTH) + "-" + cal.get(Calendar.YEAR);
+		this.v.setUserInfoDoubleClick(user.getName(), user.getSurname(), user.getUsername(), user.getPassword(), s,
+				user.getEmail(), user.getTelephoneNumber(), user.getBookPreferences().get(0).toString(),
+				user.getBookPreferences().get(1).toString(), user.getBookPreferences().get(2).toString(),
+				user.getMoviePreferences().get(0).toString(), user.getMoviePreferences().get(1).toString(),
+				user.getMoviePreferences().get(2).toString());
 	}
 
 	@Override
