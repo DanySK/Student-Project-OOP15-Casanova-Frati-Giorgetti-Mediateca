@@ -844,41 +844,24 @@ public class ControllerImpl implements Controller {
 		}
 	}
 
-	// Modificare questi due metodi e renderlo uno solo con un parametro
 	@Override
-	public void suggestedBooks() {
-		String[] array = new String[this.actualUser.getBookPreferences().size()];
-		int index = 0;
+	public void suggestedItems() {
+		String[] arrayBook = new String[this.actualUser.getBookPreferences().size()];
+		String[] arrayMovie = new String[this.actualUser.getMoviePreferences().size()];
+		int indexBook = 0;
+		int indexMovie = 0;
 		try {
 			for (final Integer i : this.actualUser.getRecommendedList()) {
 				if (this.m.getAllItemId(TypeItem.BOOK).contains(i)) {
-					array[index] = this.m.getRequiredItem(i).toString();
-					index++;
+					arrayBook[indexBook] = this.m.getRequiredItem(i).toString();
+					indexBook++;
+				} else if (this.m.getAllItemId(TypeItem.MOVIE).contains(i)) {
+					arrayMovie[indexMovie] = this.m.getRequiredItem(i).toString();
+					indexMovie++;
 				}
 			}
-			this.v.setSuggestedBooks(array);
-		} catch (ItemException e) {
-			this.v.showError(e.getMessage());
-		} catch (UserException e1) {
-			this.v.showError(e1.getMessage());
-		} catch (Exception e2) {
-			// TODO Auto-generated catch block
-			this.v.showError(e2.getMessage());
-		}
-	}
-
-	@Override
-	public void suggestedFilms() {
-		int index = 0;
-		String[] array = new String[this.actualUser.getMoviePreferences().size()];
-		try {
-			for (final Integer i : this.actualUser.getRecommendedList()) {
-				if (this.m.getAllItemId(TypeItem.MOVIE).contains(i)) {
-					array[index] = this.m.getRequiredItem(i).toString();
-					index++;
-				}
-			}
-			this.v.setSuggestedMovies(array);
+			this.v.setSuggestedBooks(arrayBook);
+			this.v.setSuggestedMovies(arrayMovie);
 		} catch (ItemException e) {
 			this.v.showError(e.getMessage());
 		} catch (UserException e1) {
@@ -1040,7 +1023,8 @@ public class ControllerImpl implements Controller {
 					this.v.showMessage("Oggetto " + this.m.getRequiredItem(i) + " restituito!");
 					this.fm.writeObjectIntoFile(FileManager.FILENAMEITEM, this.m);
 					this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
-					// ho gi� trovato l'elemento che mi serve, quindi chiudo il
+					// ho gi� trovato l'elemento che mi serve, quindi chiudo
+					// il
 					// metodo
 					return;
 				}

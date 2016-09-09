@@ -165,16 +165,10 @@ public interface Controller {
 	void setItemInfoMediateca();
 
 	/**
-	 * Method which returns to the View the books suggested to the user based on
-	 * his preferences.
+	 * Method which returns to the View the books and movies suggested to the
+	 * user based on his preferences.
 	 */
-	void suggestedBooks();
-
-	/**
-	 * Method which returns to the View the movies suggested to the user based
-	 * on his preferences.
-	 */
-	void suggestedFilms();
+	void suggestedItems();
 
 	/**
 	 * Method which dissociates an item to the user selected by himself.
