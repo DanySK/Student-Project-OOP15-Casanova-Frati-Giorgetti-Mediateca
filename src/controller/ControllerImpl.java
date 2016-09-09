@@ -737,102 +737,36 @@ public class ControllerImpl implements Controller {
 		}
 		System.out.println("itemModify: " + this.v.getUserItemSelectedByManager());
 		for (final TypeItemInfo ti : TypeItemInfo.values()) {
+			final boolean isBook = this.m.getAllItemId(TypeItem.BOOK).contains(itemId);
+			final boolean isBookNotEmpty = !this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals("");
+			final boolean isFilmNotEmpty = !this.v.getFilmModifiedInfo(ti).isEmpty() && !this.v.getFilmModifiedInfo(ti).equals("");
 			try {
 				// TITLE, AUTHOR, PRODUCER, GENRE, LANGUAGE, RELEASE_YEAR
+
+				Object x = null;
 				switch (ti) {
 				case TITLE:
-
-					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						if (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals("")) {
-							System.out.println("ItemModify: title book=" + this.v.getBookModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
-						}
-					} else {
-						if (!this.v.getFilmModifiedInfo(ti).isEmpty() && !this.v.getFilmModifiedInfo(ti).equals("")) {
-							System.out.println("ItemModify: title movie=" + this.v.getFilmModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
-						}
-					}
-					break;
 				case AUTHOR:
-
-					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						if (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals("")) {
-							System.out.println("ItemModify: author book=" + this.v.getBookModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
-						}
-					} else {
-						if (!this.v.getFilmModifiedInfo(ti).isEmpty() && !this.v.getFilmModifiedInfo(ti).equals("")) {
-							System.out.println("ItemModify: author movie=" + this.v.getFilmModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
-						}
-					}
-					break;
 				case PRODUCER:
-					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						if (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals("")) {
-
-							System.out.println("ItemModify: producer book=" + this.v.getBookModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, this.v.getBookModifiedInfo(ti));
-						}
-					} else {
-						if (!this.v.getFilmModifiedInfo(ti).isEmpty() && !this.v.getFilmModifiedInfo(ti).equals("")) {
-
-							System.out.println("ItemModify: producer movie=" + this.v.getFilmModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, this.v.getFilmModifiedInfo(ti));
-						}
-					}
+					x = (isBook && isBookNotEmpty ? this.v.getBookModifiedInfo(ti)
+							: (!isBook && isFilmNotEmpty ? this.v.getFilmModifiedInfo(ti) : null));
 					break;
 				case RELEASE_YEAR:
-					int var;
-					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						if (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals("")) {
-							var = Integer.parseInt(this.v.getBookModifiedInfo(ti));
-							System.out.println("ItemModify: release year book=" + var);
-
-							this.m.changeItem(ti, itemId, var);
-						}
-					} else {
-						if (!this.v.getFilmModifiedInfo(ti).isEmpty() && !this.v.getFilmModifiedInfo(ti).equals("")) {
-							var = Integer.parseInt(this.v.getFilmModifiedInfo(ti));
-
-							System.out.println("ItemModify: release year movie=" + var);
-							this.m.changeItem(ti, itemId, var);
-						}
-					}
+					x = (isBook && isBookNotEmpty ? Integer.parseInt(this.v.getBookModifiedInfo(ti))
+							: (!isBook && isFilmNotEmpty ? Integer.parseInt(this.v.getFilmModifiedInfo(ti)) : null));
 					break;
 				case GENRE:
-
-					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						if (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals("")) {
-							System.out.println("ItemModify: genre book=" + this.v.getBookModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti)));
-						}
-					} else {
-						if (!this.v.getFilmModifiedInfo(ti).isEmpty() && !this.v.getFilmModifiedInfo(ti).equals("")) {
-
-							System.out.println("ItemModify: genre movie=" + this.v.getFilmModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, CastManager.castToItemGenre(this.v.getFilmModifiedInfo(ti)));
-						}
-					}
+					x = (isBook && isBookNotEmpty ? CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti))
+							: (!isBook && isFilmNotEmpty ? CastManager.castToItemGenre(this.v.getFilmModifiedInfo(ti)) : null));
 					break;
 				case LANGUAGE:
-					if (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)) {
-						if (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals("")) {
-
-							System.out.println("ItemModify: language book=" + this.v.getBookModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getBookModifiedInfo(ti)));
-						}
-					} else {
-						if (!this.v.getFilmModifiedInfo(ti).isEmpty() && !this.v.getFilmModifiedInfo(ti).equals("")) {
-
-							System.out.println("ItemModify: language movie=" + this.v.getFilmModifiedInfo(ti));
-							this.m.changeItem(ti, itemId, CastManager.castToLanguage(this.v.getFilmModifiedInfo(ti)));
-						}
-					}
-					break;
+					x = (isBook && isBookNotEmpty ? CastManager.castToLanguage(this.v.getBookModifiedInfo(ti))
+							: (!isBook && isFilmNotEmpty ? CastManager.castToLanguage(this.v.getFilmModifiedInfo(ti)) : null));
 				default:
 					break;
+				}
+				if (x != null) {
+					this.m.changeItem(ti, itemId, x);
 				}
 			} catch (ItemException e) {
 				this.v.showError(e.getMessage());
@@ -850,6 +784,9 @@ public class ControllerImpl implements Controller {
 	public void setItemInfoMediateca() {
 		System.out
 				.println("SetItemInfoMediateca: entrato, sta per mostrare le info di getdoubleclickediteminmediateca");
+		System.out.println(
+				"SetItemInfoMediateca:getdoubleclickediteminmediateca=" + this.v.getDoubleClickedItemInMediateca());
+
 		this.setSelectedItemInfo(this.v.getDoubleClickedItemInMediateca());
 	}
 
@@ -1481,6 +1418,7 @@ public class ControllerImpl implements Controller {
 
 	@Override
 	public void giveOtherUserInfo() {
+		System.out.println("giveOtherUserInfo: entrato");
 		// forse da eliminare
 		UserImpl user = null;
 		for (final Integer i : this.m.getUserArchive().keySet()) {
@@ -1502,6 +1440,8 @@ public class ControllerImpl implements Controller {
 				user.getBookPreferences().get(0).toString(), user.getBookPreferences().get(1).toString(),
 				user.getBookPreferences().get(2).toString(), user.getMoviePreferences().get(0).toString(),
 				user.getMoviePreferences().get(1).toString(), user.getMoviePreferences().get(2).toString());
+
+		System.out.println("giveOtherUserInfo: informazioni mostrate");
 	}
 
 	@Override
