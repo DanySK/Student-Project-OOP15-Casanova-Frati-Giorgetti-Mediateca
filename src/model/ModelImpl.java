@@ -247,7 +247,6 @@ public class ModelImpl implements Serializable, Model {
       if (this.getRequiredUser(userId).getWishlist().contains(itemId)) {
         this.getRequiredItem(itemId).removeLike(userId);
         this.getRequiredUser(userId).removeFromWishList(itemId);
-        System.out.println("UserId: " + userId + "doesn't like itemId: " + itemId);
       } else {
         throw new UserException(
                     "ItemId: " + itemId + " not contained into the userId" + userId + "wishlist.");
@@ -268,7 +267,6 @@ public class ModelImpl implements Serializable, Model {
       if (this.getRequiredUser(userId).getLoanArchive().containsKey(itemId)) {
         this.getRequiredUser(userId).setItemReview(itemId, (int) rev.getId());
         this.getRequiredItem(itemId).addReview(rev);
-        System.out.println(rev.toString() + " adds.");
       } else {
         throw new UserException("ItemId: " + itemId + " not loaned to " + userId + " userId\n");
       }
