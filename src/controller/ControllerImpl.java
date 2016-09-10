@@ -244,8 +244,9 @@ public class ControllerImpl implements Controller {
 			} catch (Exception e) {
 				this.v.showError("Lista consigli utente corrente non inizializzata");
 			}
-			this.elaborateLoans();
 			this.v.goodLogin();
+			this.elaborateLoans();
+
 		} else {
 			/*
 			 * ...altrimenti segnalo all'utente attuale che non e' stato trovato
