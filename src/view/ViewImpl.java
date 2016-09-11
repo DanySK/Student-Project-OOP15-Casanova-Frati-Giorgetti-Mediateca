@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -643,17 +644,36 @@ public class ViewImpl implements View {
 	// //OK
 	@Override
 	public void showGiveBackOptionMessage(final String book) {
-		// Custom button text
+
 		final Object[] options = { "Consegna",
 				"Aumenta il prestito di un altro mese" };
-		int choose = JOptionPane.showOptionDialog(this.mainFrame,
-				"Dovresti consegare il seguente libro:" + book
-						+ "Cosa vuoi fare?", "Notifica di consegna",
-				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
 
-		if (choose == 0) {
+		final JOptionPane optionPane = new JOptionPane(
+				"Dovresti consegnare il seguente libro:\n" + book
+						+ "\nCosa vuoi fare?\n", JOptionPane.QUESTION_MESSAGE,
+				JOptionPane.YES_NO_OPTION, null, options);
+
+		final JDialog dialog = new JDialog(this.mainFrame, "Click a button",
+				true);
+		dialog.setContentPane(optionPane);
+		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		dialog.setLocationRelativeTo(this.mainFrame);
+		optionPane.addPropertyChangeListener(e -> {
+			String prop = e.getPropertyName();
+
+			if (dialog.isVisible() && (e.getSource() == optionPane)
+					&& (prop.equals(JOptionPane.VALUE_PROPERTY))) {
+				dialog.setVisible(false);
+			}
+		});
+		dialog.pack();
+		dialog.setVisible(true);
+
+		Object value = optionPane.getValue();
+		System.out.println(String.valueOf(value));
+		if (value.equals(options[0])) {
 			this.giveBackItemAfterNotify(book);
-		} else if (choose == 1) {
+		} else if (value.equals(options[1])) {
 			this.extendBorrow(book);
 		}
 
@@ -672,16 +692,34 @@ public class ViewImpl implements View {
 	public void showGiveBackMessage(final String book) {
 
 		final Object[] options = { "Consegna", "Esegui il logout" };
-		int choose = JOptionPane.showOptionDialog(this.mainFrame,
-				"Dovresti consegare il seguente libro: " + book
-						+ " Cosa vuoi fare?", "Notifica di consegna",
-				JOptionPane.YES_NO_CANCEL_OPTION, 0, null, options, options[0]);
+		final JOptionPane optionPane = new JOptionPane(
+				"Devi consegnare il seguente libro:\n" + book
+						+ "\nCosa vuoi fare?\n", JOptionPane.QUESTION_MESSAGE,
+				JOptionPane.YES_NO_OPTION, null, options);
 
-		if (choose == 0) {
+		final JDialog dialog = new JDialog(this.mainFrame, "Click a button",
+				true);
+		dialog.setContentPane(optionPane);
+		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		dialog.setLocationRelativeTo(this.mainFrame);
+		optionPane.addPropertyChangeListener(e -> {
+			String prop = e.getPropertyName();
+
+			if (dialog.isVisible() && (e.getSource() == optionPane)
+					&& (prop.equals(JOptionPane.VALUE_PROPERTY))) {
+				dialog.setVisible(false);
+			}
+		});
+		dialog.pack();
+		dialog.setVisible(true);
+
+		Object value = optionPane.getValue();
+		System.out.println(String.valueOf(value));
+		if (value.equals(options[0])) {
 			this.giveBackItemAfterNotify(book);
-		} else if (choose == 1) {
-			this.swapView(CardName.LOGIN);
+		} else if (value.equals(options[1])) {
 			this.logOut();
+			this.swapView(CardName.LOGIN);
 		}
 
 	}
