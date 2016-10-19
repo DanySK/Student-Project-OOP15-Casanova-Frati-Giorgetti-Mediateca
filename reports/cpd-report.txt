@@ -1,0 +1,1209 @@
+Found a 25 line (163 tokens) duplication in the following files: 
+Starting at line 652 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/view/ViewImpl.java
+Starting at line 695 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/view/ViewImpl.java
+
+				"Dovresti consegnare il seguente libro:\n" + book
+				+ "\nCosa vuoi fare?\n", JOptionPane.QUESTION_MESSAGE,
+				JOptionPane.YES_NO_OPTION, null, options);
+
+		final JDialog dialog = new JDialog(this.mainFrame,
+				"Notifica di scadenza", true);
+		dialog.setContentPane(optionPane);
+		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		dialog.setLocationRelativeTo(this.mainFrame);
+		optionPane.addPropertyChangeListener(e -> {
+			String prop = e.getPropertyName();
+
+			if (dialog.isVisible() && (e.getSource() == optionPane)
+					&& (prop.equals(JOptionPane.VALUE_PROPERTY))) {
+				dialog.setVisible(false);
+			}
+		});
+		dialog.pack();
+		dialog.setVisible(true);
+
+		Object value = optionPane.getValue();
+		if (value.equals(options[0])) {
+			this.giveBackItemAfterNotify(book);
+		} else if (value.equals(options[1])) {
+			this.extendBorrow(book);
+=====================================================================
+Found a 18 line (151 tokens) duplication in the following files: 
+Starting at line 63 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/view/StudyRoomImpl.java
+Starting at line 248 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/view/UserScreenImpl.java
+
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+
+		this.model = new UtilDateModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(this.model, p);
+		this.datePicker = new JDatePickerImpl(datePanel,
+				new DateLabelFormatter());
+		this.springLayout.putConstraint(SpringLayout.NORTH,
+				this.datePicker.getJFormattedTextField(), 0,
+				SpringLayout.NORTH, this.datePicker);
+		this.springLayout = (SpringLayout) this.datePicker.getLayout();
+		this.springLayout.putConstraint(SpringLayout.SOUTH,
+				this.datePicker.getJFormattedTextField(), 0,
+				SpringLayout.SOUTH, this.datePicker);
+		this.datePicker.setSize(241, 25);
+		this.datePicker.setLocation(158, 86);
+=====================================================================
+Found a 15 line (129 tokens) duplication in the following files: 
+Starting at line 28 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestFilters.java
+Starting at line 26 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLike.java
+
+  public void testFilters() throws Exception {
+    Model m = new ModelImpl();
+    LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+    try {
+      m.registerUser("NNNN", "MMMM", new GregorianCalendar(1995, 06, 20), "nnmm", "nnmm",
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+
+      m.registerBook("BookN", 2016, "Author", Language.ITALIAN, "1234567890EDC",
+                  ItemGenre.ADVENTURE, "Mondadori", 1, 4);
+
+      m.registerBook("BookM", 2012, "Autore", Language.ITALIAN, "1234567880EDC",
+                  ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT, "Elleci", 1, 3);
+=====================================================================
+Found a 14 line (122 tokens) duplication in the following files: 
+Starting at line 904 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 919 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.m.bookSit(new GregorianCalendar(this.v.getStudyRoomSelectedYear(), this.v.getStudyRoomSelectedMonth(),
+					this.v.getStudyRoomSelectedDay()), this.v.getSelectedSit(), this.actualUser.getIdUser());
+			this.fm.writeObjectIntoFile(FileManager.FILENAMESTUDYROOM, this.m);
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void cancelSit() {
+=====================================================================
+Found a 4 line (103 tokens) duplication in the following files: 
+Starting at line 668 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1092 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					String.valueOf(user.getBirthdate().get(Calendar.YEAR)), user.getEmail(), user.getTelephoneNumber(),
+					user.getBookPreferences().get(0).toString(), user.getBookPreferences().get(1).toString(),
+					user.getBookPreferences().get(2).toString(), user.getMoviePreferences().get(0).toString(),
+					user.getMoviePreferences().get(1).toString(), user.getMoviePreferences().get(2).toString());
+=====================================================================
+Found a 15 line (102 tokens) duplication in the following files: 
+Starting at line 305 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 342 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					for (final Integer i : this.m.getItemArchive().keySet()) {
+						array[index] = this.m.getRequiredItem(i).toString();
+						index++;
+					}
+				} catch (ItemException e) {
+					this.v.showError(e.getMessage());
+				} catch (UserException e1) {
+					this.v.showError(e1.getMessage());
+				} catch (Exception e2) {
+					this.v.showError(e2.getMessage());
+				}
+			} else {
+				/* gli altri 2 parametri ci sono, filtro su tutti gli oggetti */
+				try {
+					for (final Integer i : this.m.filtersItem(this.m.getItemArchive().keySet(), ts,
+=====================================================================
+Found a 12 line (95 tokens) duplication in the following files: 
+Starting at line 763 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 792 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.m.registerBook(title, releaseYear, author, language, isbn, genre, publisher, numRelease, numCopy);
+			this.fm.writeObjectIntoFile(FileManager.FILENAMEITEM, this.m);
+		} catch (IOException e4) {
+			this.v.showError(e4.getMessage());
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+=====================================================================
+Found a 16 line (94 tokens) duplication in the following files: 
+Starting at line 379 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 399 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					this.v.showMessage("Oggetto " + this.m.getItemArchive().get(i) + " messo in wishlist");
+					this.fm.writeObjectIntoFile(FileManager.FILENAMEITEM, this.m);
+					this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
+				}
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+	}
+
+	@Override
+	public void addReview() {
+=====================================================================
+Found a 15 line (92 tokens) duplication in the following files: 
+Starting at line 319 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 357 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					for (final Integer i : this.m.filtersItem(this.m.getItemArchive().keySet(), ts,
+							searchText.toUpperCase())) {
+						array[index] = this.m.getRequiredItem(i).toString();
+						index++;
+					}
+				} catch (ItemException e) {
+					this.v.showError(e.getMessage());
+				} catch (UserException e1) {
+					this.v.showError(e1.getMessage());
+				} catch (Exception e2) {
+					this.v.showError(e2.getMessage());
+				}
+			}
+
+		} else {
+=====================================================================
+Found a 5 line (84 tokens) duplication in the following files: 
+Starting at line 342 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+Starting at line 395 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+
+              throws Exception {
+    if ((!ts.equals(TypeItemInfo.AUTHOR)) && (!ts.equals(TypeItemInfo.TITLE))
+                && (!ts.equals(TypeItemInfo.PRODUCER)) && (!ts.equals(TypeItemInfo.RELEASE_YEAR))
+                && (!ts.equals(TypeItemInfo.LANGUAGE)) && (!ts.equals(TypeItemInfo.GENRE))) {
+      throw new Exception("TypeSearch " + ts + "not valid");
+=====================================================================
+Found a 11 line (83 tokens) duplication in the following files: 
+Starting at line 28 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestFilters.java
+Starting at line 24 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestStudyRoom.java
+
+  public void testFilters() throws Exception {
+    Model m = new ModelImpl();
+    LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+    try {
+      m.registerUser("NNNN", "MMMM", new GregorianCalendar(1995, 06, 20), "nnmm", "nnmm",
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+
+      m.registerBook("BookN", 2016, "Author", Language.ITALIAN, "1234567890EDC",
+=====================================================================
+Found a 12 line (82 tokens) duplication in the following files: 
+Starting at line 305 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 320 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 342 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 357 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					for (final Integer i : this.m.getItemArchive().keySet()) {
+						array[index] = this.m.getRequiredItem(i).toString();
+						index++;
+					}
+				} catch (ItemException e) {
+					this.v.showError(e.getMessage());
+				} catch (UserException e1) {
+					this.v.showError(e1.getMessage());
+				} catch (Exception e2) {
+					this.v.showError(e2.getMessage());
+				}
+			} else {
+=====================================================================
+Found a 16 line (81 tokens) duplication in the following files: 
+Starting at line 734 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 764 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.v.showMessage("Utente " + username + " registrato con successo!");
+		} catch (IOException e4) {
+			this.v.showError(e4.getMessage());
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	/**
+	 * Method which adds a new Book to the archive.
+	 */
+	public void registerNewBook() {
+=====================================================================
+Found a 9 line (81 tokens) duplication in the following files: 
+Starting at line 28 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestFilters.java
+Starting at line 29 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLoan.java
+Starting at line 24 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestStudyRoom.java
+
+  public void testFilters() throws Exception {
+    Model m = new ModelImpl();
+    LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+    try {
+      m.registerUser("NNNN", "MMMM", new GregorianCalendar(1995, 06, 20), "nnmm", "nnmm",
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+=====================================================================
+Found a 10 line (81 tokens) duplication in the following files: 
+Starting at line 26 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLike.java
+Starting at line 26 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestReview.java
+
+  public void testerLike() {
+    Model m = new ModelImpl();
+    LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+    try {
+      m.registerUser("NNNN", "MMMM", new GregorianCalendar(1995, 06, 20), "nnmm", "nnmm",
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+      m.registerBook("BookN", 2016, "Author", Language.ITALIAN, "1234567890EDC",
+=====================================================================
+Found a 10 line (81 tokens) duplication in the following files: 
+Starting at line 26 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestReview.java
+Starting at line 24 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestStudyRoom.java
+
+  public void testerReview() {
+    Model m = new ModelImpl();
+    LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+    try {
+      m.registerUser("NNNN", "MMMM", new GregorianCalendar(1995, 06, 20), "nnmm", "nnmm",
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+      m.registerUser("AAAA", "BBBB", new GregorianCalendar(1995, 06, 20), "aabb", "aabb",
+=====================================================================
+Found a 6 line (80 tokens) duplication in the following files: 
+Starting at line 34 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLike.java
+Starting at line 36 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestReview.java
+
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+      m.registerBook("BookN", 2016, "Author", Language.ITALIAN, "1234567890EDC",
+                  ItemGenre.ADVENTURE, "Mondadori", 1, 4);
+      m.registerBook("BookM", 2012, "Autore", Language.ITALIAN, "1234567880EDC",
+                  ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT, "Elleci", 1, 3);
+      Set<Integer> s = new HashSet<Integer>(m.getAllItemId(TypeItem.BOOK));
+=====================================================================
+Found a 11 line (79 tokens) duplication in the following files: 
+Starting at line 734 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 793 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.v.showMessage("Utente " + username + " registrato con successo!");
+		} catch (IOException e4) {
+			this.v.showError(e4.getMessage());
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+=====================================================================
+Found a 11 line (79 tokens) duplication in the following files: 
+Starting at line 28 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestFilters.java
+Starting at line 26 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestReview.java
+
+  public void testFilters() throws Exception {
+    Model m = new ModelImpl();
+    LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+    try {
+      m.registerUser("NNNN", "MMMM", new GregorianCalendar(1995, 06, 20), "nnmm", "nnmm",
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+
+      m.registerBook("BookN", 2016, "Author", Language.ITALIAN, "1234567890EDC",
+=====================================================================
+Found a 10 line (79 tokens) duplication in the following files: 
+Starting at line 26 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLike.java
+Starting at line 24 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestStudyRoom.java
+
+  public void testerLike() {
+    Model m = new ModelImpl();
+    LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+    try {
+      m.registerUser("NNNN", "MMMM", new GregorianCalendar(1995, 06, 20), "nnmm", "nnmm",
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+      m.registerBook("BookN", 2016, "Author", Language.ITALIAN, "1234567890EDC",
+=====================================================================
+Found a 9 line (77 tokens) duplication in the following files: 
+Starting at line 26 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLike.java
+Starting at line 29 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLoan.java
+Starting at line 26 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestReview.java
+
+  public void testerLike() {
+    Model m = new ModelImpl();
+    LinkedList<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+    try {
+      m.registerUser("NNNN", "MMMM", new GregorianCalendar(1995, 06, 20), "nnmm", "nnmm",
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+=====================================================================
+Found a 4 line (71 tokens) duplication in the following files: 
+Starting at line 1165 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1172 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+						this.v.setBookField(this.m.getRequiredItem(i).getTitle(), this.m.getRequiredItem(i).getAuthor(),
+								this.m.getRequiredItem(i).getPublisher(),
+								Integer.toString(this.m.getRequiredItem(i).getReleaseYear()),
+								this.m.getRequiredItem(i).getGenre(), this.m.getRequiredItem(i).getIsbn(),
+=====================================================================
+Found a 12 line (66 tokens) duplication in the following files: 
+Starting at line 432 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 941 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 979 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 998 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1064 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.v.setBorrowedItemList(array);
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void borrowItem() {
+=====================================================================
+Found a 11 line (66 tokens) duplication in the following files: 
+Starting at line 519 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 606 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				if (this.m.getRequiredItem(i).toString().equals(this.v.getUserItemSelectedByManager())) {
+					itemId = i;
+				}
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+=====================================================================
+Found a 12 line (66 tokens) duplication in the following files: 
+Starting at line 1019 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1034 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.v.showMessage("Oggetto " + itemIdReceived + " cancellato");
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void deleteUser() {
+=====================================================================
+Found a 7 line (66 tokens) duplication in the following files: 
+Starting at line 29 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestUserCreateDestroy.java
+Starting at line 31 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestUserExc.java
+
+    List<ItemGenre> ls = new LinkedList<ItemGenre>();
+    ls.add(ItemGenre.ADVENTURE);
+    ls.add(ItemGenre.CLASSICAL_CRITICISM);
+    ls.add(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT);
+
+    m.registerUser("AAAA", "BBBB", new GregorianCalendar(1995, 06, 20), "aabb", "aabb",
+                "aaaabbbb@mail.com", "3333333333", ls, ls);
+=====================================================================
+Found a 10 line (66 tokens) duplication in the following files: 
+Starting at line 47 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestUserCreateDestroy.java
+Starting at line 39 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestUserExc.java
+
+    System.out.println(m.getAllUserId().toString());
+    Set<Integer> s = new HashSet<Integer>(m.getAllUserId());
+    int num = s.size();
+    for (Integer i : s) {
+      m.deleteUser(i);
+      num--;
+      org.junit.Assert.assertEquals(m.getAllUserId().size(), num);
+    }
+  }
+}
+=====================================================================
+Found a 13 line (65 tokens) duplication in the following files: 
+Starting at line 382 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 402 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 459 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1121 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				}
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+	}
+
+	@Override
+	public void addReview() {
+=====================================================================
+Found a 12 line (64 tokens) duplication in the following files: 
+Starting at line 383 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 403 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 460 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 674 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1122 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+	}
+
+	@Override
+	public void addReview() {
+=====================================================================
+Found a 12 line (64 tokens) duplication in the following files: 
+Starting at line 432 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 504 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 701 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 795 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 843 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 869 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 906 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 922 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 941 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 979 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 998 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1019 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1034 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1064 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.v.setBorrowedItemList(array);
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void borrowItem() {
+=====================================================================
+Found a 9 line (64 tokens) duplication in the following files: 
+Starting at line 451 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 906 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 922 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+						this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
+					} catch (ItemException e) {
+						this.v.showError(e.getMessage());
+					} catch (UserException e1) {
+						this.v.showError(e1.getMessage());
+					} catch (Exception e2) {
+						this.v.showError(e2.getMessage());
+					}
+				}
+=====================================================================
+Found a 12 line (64 tokens) duplication in the following files: 
+Starting at line 640 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 960 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			}
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void setUserInfo() {
+=====================================================================
+Found a 13 line (64 tokens) duplication in the following files: 
+Starting at line 959 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1180 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				}
+			}
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void setAllUserList() {
+=====================================================================
+Found a 5 line (63 tokens) duplication in the following files: 
+Starting at line 95 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 110 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.m.registerUser("Enrico", "Casanova", cal, "clover", "crocks", "enrico.casanova@gmail.it",
+					"334534534534",
+					new ArrayList<ItemGenre>(
+							Arrays.asList(ItemGenre.ADVENTURE_HISTORY, ItemGenre.FANTASY, ItemGenre.HORROR)),
+					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.FANTASY, ItemGenre.MUSICAL)));
+=====================================================================
+Found a 4 line (63 tokens) duplication in the following files: 
+Starting at line 100 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 116 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.m.registerUser("Edoardo", "Frati", cal2, "anime", "ironman", "edoardo.frati@gmail.it", "321342111",
+					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)),
+					new ArrayList<ItemGenre>(
+							Arrays.asList(ItemGenre.SCI_FI, ItemGenre.ADVENTURE, ItemGenre.ANIMATION)));
+=====================================================================
+Found a 6 line (63 tokens) duplication in the following files: 
+Starting at line 104 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 122 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.m.registerUser("Luca", "Giorgetti", cal3, "giorgit", "lukegeorge", "luca.giorgetti@gmail.it",
+					"321342333",
+					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT,
+							ItemGenre.BIOGRAPHICAL, ItemGenre.HORROR)),
+					new ArrayList<ItemGenre>(Arrays.asList(ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT,
+							ItemGenre.BIOGRAPHICAL, ItemGenre.HORROR)));
+=====================================================================
+Found a 11 line (63 tokens) duplication in the following files: 
+Starting at line 433 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 505 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 641 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 702 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 796 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 844 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 870 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 907 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 923 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 942 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 961 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 980 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 999 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1020 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1035 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1065 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void borrowItem() {
+=====================================================================
+Found a 10 line (63 tokens) duplication in the following files: 
+Starting at line 492 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 834 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+							this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
+						} catch (ItemException e) {
+							this.v.showError(e.getMessage());
+						} catch (UserException e1) {
+							this.v.showError(e1.getMessage());
+						} catch (Exception e2) {
+							this.v.showError(e2.getMessage());
+						}
+					}
+				});
+=====================================================================
+Found a 10 line (63 tokens) duplication in the following files: 
+Starting at line 521 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1106 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				}
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+		for (final TypeItemInfo ti : TypeItemInfo.values()) {
+=====================================================================
+Found a 12 line (63 tokens) duplication in the following files: 
+Starting at line 640 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1181 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			}
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void setUserInfo() {
+=====================================================================
+Found a 10 line (63 tokens) duplication in the following files: 
+Starting at line 673 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 834 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				this.m.setReccomandedList(user.getIdUser());
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+	}
+=====================================================================
+Found a 11 line (63 tokens) duplication in the following files: 
+Starting at line 1104 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1119 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					this.setSelectedItemInfo(this.v.getDoubleClickedInManager());
+					return;
+				}
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+=====================================================================
+Found a 11 line (62 tokens) duplication in the following files: 
+Starting at line 433 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 505 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 702 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 796 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 844 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 870 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 907 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 923 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 942 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 980 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 999 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1020 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1035 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1065 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1182 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+
+	@Override
+	public void borrowItem() {
+=====================================================================
+Found a 11 line (62 tokens) duplication in the following files: 
+Starting at line 457 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 958 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+						this.v.showError(e2.getMessage());
+					}
+				}
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+=====================================================================
+Found a 10 line (62 tokens) duplication in the following files: 
+Starting at line 492 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 673 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+							this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
+						} catch (ItemException e) {
+							this.v.showError(e.getMessage());
+						} catch (UserException e1) {
+							this.v.showError(e1.getMessage());
+						} catch (Exception e2) {
+							this.v.showError(e2.getMessage());
+						}
+					}
+				});
+=====================================================================
+Found a 5 line (62 tokens) duplication in the following files: 
+Starting at line 557 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 568 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+									? CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti))
+									: (!this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+											&& (!this.v.getFilmModifiedInfo(ti).isEmpty()
+													&& !this.v.getFilmModifiedInfo(ti).equals(""))
+															? CastManager.castToItemGenre(
+=====================================================================
+Found a 9 line (62 tokens) duplication in the following files: 
+Starting at line 673 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 736 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 766 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 795 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 834 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				this.m.setReccomandedList(user.getIdUser());
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+=====================================================================
+Found a 7 line (62 tokens) duplication in the following files: 
+Starting at line 286 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/view/UserScreenImpl.java
+Starting at line 332 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/view/ViewImpl.java
+
+	public void setField(final String name, final String surname,
+			final String username, final String password,
+			final String birthDate_day, final String birthDate_month,
+			final String birthDate_year, final String email,
+			final String telephone, final String bPref1, final String bPref2,
+			final String bPref3, final String fPref1, final String fPref2,
+			final String fPref3) {
+=====================================================================
+Found a 11 line (61 tokens) duplication in the following files: 
+Starting at line 323 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 360 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 382 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 402 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 459 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1121 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					}
+				} catch (ItemException e) {
+					this.v.showError(e.getMessage());
+				} catch (UserException e1) {
+					this.v.showError(e1.getMessage());
+				} catch (Exception e2) {
+					this.v.showError(e2.getMessage());
+				}
+			}
+
+		} else {
+=====================================================================
+Found a 10 line (61 tokens) duplication in the following files: 
+Starting at line 381 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 401 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 578 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 639 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1080 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
+				}
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+=====================================================================
+Found a 10 line (61 tokens) duplication in the following files: 
+Starting at line 451 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 492 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 673 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 834 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+						this.fm.writeObjectIntoFile(FileManager.FILENAMEUSER, this.m);
+					} catch (ItemException e) {
+						this.v.showError(e.getMessage());
+					} catch (UserException e1) {
+						this.v.showError(e1.getMessage());
+					} catch (Exception e2) {
+						this.v.showError(e2.getMessage());
+					}
+				}
+			} catch (ItemException e) {
+=====================================================================
+Found a 10 line (61 tokens) duplication in the following files: 
+Starting at line 458 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1180 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					}
+				}
+			} catch (ItemException e) {
+				this.v.showError(e.getMessage());
+			} catch (UserException e1) {
+				this.v.showError(e1.getMessage());
+			} catch (Exception e2) {
+				this.v.showError(e2.getMessage());
+			}
+		}
+=====================================================================
+Found a 9 line (61 tokens) duplication in the following files: 
+Starting at line 492 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 736 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 766 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 795 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+							this.m.changeUser(ui, this.actualUser.getIdUser(), this.v.getModifiedInfo(ui));
+						} catch (ItemException e) {
+							this.v.showError(e.getMessage());
+						} catch (UserException e1) {
+							this.v.showError(e1.getMessage());
+						} catch (Exception e2) {
+							this.v.showError(e2.getMessage());
+						}
+					}
+=====================================================================
+Found a 9 line (60 tokens) duplication in the following files: 
+Starting at line 308 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 323 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 345 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 360 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 382 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 402 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 459 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 521 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 579 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 608 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 640 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 960 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1081 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1106 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1121 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1181 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+					}
+				} catch (ItemException e) {
+					this.v.showError(e.getMessage());
+				} catch (UserException e1) {
+					this.v.showError(e1.getMessage());
+				} catch (Exception e2) {
+					this.v.showError(e2.getMessage());
+				}
+			} else {
+=====================================================================
+Found a 10 line (60 tokens) duplication in the following files: 
+Starting at line 324 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 361 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 383 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 403 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 452 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 460 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 493 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 674 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 835 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1122 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				} catch (ItemException e) {
+					this.v.showError(e.getMessage());
+				} catch (UserException e1) {
+					this.v.showError(e1.getMessage());
+				} catch (Exception e2) {
+					this.v.showError(e2.getMessage());
+				}
+			}
+
+		} else {
+=====================================================================
+Found a 9 line (60 tokens) duplication in the following files: 
+Starting at line 432 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 451 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 492 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 504 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 673 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 701 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 736 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 766 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 795 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 834 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 843 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 869 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 906 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 922 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 941 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 979 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 998 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1019 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1034 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1064 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+			this.v.setBorrowedItemList(array);
+		} catch (ItemException e) {
+			this.v.showError(e.getMessage());
+		} catch (UserException e1) {
+			this.v.showError(e1.getMessage());
+		} catch (Exception e2) {
+			this.v.showError(e2.getMessage());
+		}
+	}
+=====================================================================
+Found a 5 line (60 tokens) duplication in the following files: 
+Starting at line 548 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 557 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 568 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+									? Integer.parseInt(this.v.getBookModifiedInfo(ti))
+									: (!this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+											&& (!this.v.getFilmModifiedInfo(ti).isEmpty()
+													&& !this.v.getFilmModifiedInfo(ti).equals(""))
+															? Integer.parseInt(this.v.getFilmModifiedInfo(ti)) : null));
+=====================================================================
+Found a 8 line (59 tokens) duplication in the following files: 
+Starting at line 309 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 324 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 346 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 361 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 383 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 403 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 433 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 452 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 460 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 493 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 505 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 522 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 580 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 609 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 641 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 674 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 702 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 737 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 767 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 796 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 835 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 844 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 870 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 907 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 923 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 942 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 961 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 980 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 999 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1020 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1035 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1065 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1082 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1107 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1122 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1182 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				} catch (ItemException e) {
+					this.v.showError(e.getMessage());
+				} catch (UserException e1) {
+					this.v.showError(e1.getMessage());
+				} catch (Exception e2) {
+					this.v.showError(e2.getMessage());
+				}
+			} else {
+=====================================================================
+Found a 7 line (59 tokens) duplication in the following files: 
+Starting at line 36 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestFilters.java
+Starting at line 36 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestReview.java
+
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+
+      m.registerBook("BookN", 2016, "Author", Language.ITALIAN, "1234567890EDC",
+                  ItemGenre.ADVENTURE, "Mondadori", 1, 4);
+
+      m.registerBook("BookM", 2012, "Autore", Language.ITALIAN, "1234567880EDC",
+                  ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT, "Elleci", 1, 3);
+=====================================================================
+Found a 11 line (58 tokens) duplication in the following files: 
+Starting at line 205 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+Starting at line 252 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+
+        throw new ItemException(itemId + " not available.");
+      }
+    } else if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
+    } else if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + "are not contained into the archive");
+    }
+  }
+
+  @Override
+  public void returnItem(final int itemId, final int userId) throws Exception, ItemException {
+=====================================================================
+Found a 11 line (57 tokens) duplication in the following files: 
+Starting at line 205 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+Starting at line 252 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+Starting at line 271 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+
+        throw new ItemException(itemId + " not available.");
+      }
+    } else if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
+    } else if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + "are not contained into the archive");
+    }
+  }
+
+  @Override
+  public void returnItem(final int itemId, final int userId) throws Exception, ItemException {
+=====================================================================
+Found a 9 line (56 tokens) duplication in the following files: 
+Starting at line 207 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+Starting at line 236 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+Starting at line 254 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+
+    } else if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
+    } else if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + "are not contained into the archive");
+    }
+  }
+
+  @Override
+  public void returnItem(final int itemId, final int userId) throws Exception, ItemException {
+=====================================================================
+Found a 9 line (55 tokens) duplication in the following files: 
+Starting at line 236 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+Starting at line 273 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+
+    } else if (!this.archiveItem.containsItem(itemId)) {
+      throw new ItemException("ItemId: " + itemId + "are not contained into the archive");
+    } else if (!this.archiveUser.contains(userId)) {
+      throw new UserException("UserId" + userId + "are not contained into the archive");
+    }
+  }
+
+  @Override
+  public void removeLike(final Integer itemId, final Integer userId)
+=====================================================================
+Found a 4 line (53 tokens) duplication in the following files: 
+Starting at line 554 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 565 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				case GENRE:
+					x = (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+							&& (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals(""))
+									? CastManager.castToItemGenre(this.v.getBookModifiedInfo(ti))
+=====================================================================
+Found a 7 line (53 tokens) duplication in the following files: 
+Starting at line 457 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+Starting at line 471 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/ModelImpl.java
+
+                    im.toString());
+        if (all.size() != 0) {
+          Integer start = 0;
+          Integer best = 0;
+          for (Integer v : all) {
+            if (this.getRequiredItem(v).getAverageVote() >= start) {
+              start = (int) this.getRequiredItem(v).getAverageVote();
+=====================================================================
+Found a 5 line (53 tokens) duplication in the following files: 
+Starting at line 113 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/item/ArchiveImpl.java
+Starting at line 160 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/item/ArchiveImpl.java
+
+  public double calculateDifferenceDays(final Integer itemId, final Integer userId)
+              throws ItemException, UserException {
+    if (this.containsItem(itemId)) {
+      if (ArchiveImpl.singleton.getItemArchive().get(itemId).getSecond().getUserList()
+                  .containsKey(userId)) {
+=====================================================================
+Found a 7 line (53 tokens) duplication in the following files: 
+Starting at line 36 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestFilters.java
+Starting at line 34 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLike.java
+Starting at line 43 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestLoan.java
+Starting at line 36 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/model/test/TestReview.java
+
+                  "nnnnmmmm@mail.com", "3333333333", ls, ls);
+
+      m.registerBook("BookN", 2016, "Author", Language.ITALIAN, "1234567890EDC",
+                  ItemGenre.ADVENTURE, "Mondadori", 1, 4);
+
+      m.registerBook("BookM", 2012, "Autore", Language.ITALIAN, "1234567880EDC",
+                  ItemGenre.ART_FILM_MUSIC_ENTERTAINMENT, "Elleci", 1, 3);
+=====================================================================
+Found a 4 line (51 tokens) duplication in the following files: 
+Starting at line 374 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 443 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+	public void addLike() {
+		for (final Integer i : this.m.getItemArchive().keySet()) {
+			try {
+				if (this.m.getRequiredItem(i).toString().equals(this.v.getItemSelectedByUser())) {
+=====================================================================
+Found a 4 line (51 tokens) duplication in the following files: 
+Starting at line 536 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 545 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 554 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 565 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+				case PRODUCER:
+					x = (this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+							&& (!this.v.getBookModifiedInfo(ti).isEmpty() && !this.v.getBookModifiedInfo(ti).equals(""))
+									? this.v.getBookModifiedInfo(ti)
+=====================================================================
+Found a 5 line (51 tokens) duplication in the following files: 
+Starting at line 539 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 548 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 557 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 568 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+									? this.v.getBookModifiedInfo(ti)
+									: (!this.m.getAllItemId(TypeItem.BOOK).contains(itemId)
+											&& (!this.v.getFilmModifiedInfo(ti).isEmpty()
+													&& !this.v.getFilmModifiedInfo(ti).equals(""))
+															? this.v.getFilmModifiedInfo(ti) : null));
+=====================================================================
+Found a 10 line (51 tokens) duplication in the following files: 
+Starting at line 280 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/view/ItemScreenImpl.java
+Starting at line 441 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/view/ViewImpl.java
+
+		this.numCopiesF.setText(Integer.toString(copies));
+
+	}
+
+	@Override
+	public void setFilmField(final String title, final String author,
+			final String manifacturer, final String year,
+			final utils.ItemGenre genre, final String duration,
+			final utils.TypeColor color, final utils.Language language,
+			final int copies) {
+=====================================================================
+Found a 4 line (50 tokens) duplication in the following files: 
+Starting at line 1010 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+Starting at line 1157 of /home/danysk/Dropbox/Didattica/2015-16/Programmazione ad Oggetti/Progetti/oop15-mediateca-frati-giorgetti-casanova/src/controller/ControllerImpl.java
+
+		int itemIdReceived = 0;
+		try {
+			for (final Integer i : this.m.getItemArchive().keySet()) {
+				if (this.m.getRequiredItem(i).toString().equals(this.v.getUserItemSelectedByManager())) {

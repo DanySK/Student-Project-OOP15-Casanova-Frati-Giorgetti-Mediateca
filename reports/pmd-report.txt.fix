@@ -1,0 +1,564 @@
+Violated encapsulation: 14
+view/ItemShowImpl.java:19:	Use explicit scoping instead of the default package private level
+view/ItemShowImpl.java:20:	Use explicit scoping instead of the default package private level
+view/ListScreenImpl.java:32:	Use explicit scoping instead of the default package private level
+view/ListScreenImpl.java:33:	Use explicit scoping instead of the default package private level
+view/ListScreenImpl.java:34:	Use explicit scoping instead of the default package private level
+view/ReviewScreenImpl.java:27:	Use explicit scoping instead of the default package private level
+view/ViewImpl.java:37:	Use explicit scoping instead of the default package private level
+view/ViewImpl.java:38:	Use explicit scoping instead of the default package private level
+view/ViewImpl.java:39:	Use explicit scoping instead of the default package private level
+view/ViewImpl.java:40:	Use explicit scoping instead of the default package private level
+view/ViewImpl.java:41:	Use explicit scoping instead of the default package private level
+view/ViewImpl.java:42:	Use explicit scoping instead of the default package private level
+view/ViewImpl.java:44:	Use explicit scoping instead of the default package private level
+view/ViewImpl.java:45:	Use explicit scoping instead of the default package private level
+
+Poor design: 76
+controller/ControllerImpl.java:130:	The String literal "Mondadori" appears 18 times in this file; the first occurrence is on line 130
+controller/ControllerImpl.java:135:	The String literal "Stephen King" appears 4 times in this file; the first occurrence is on line 135
+controller/ControllerImpl.java:176:	The String literal "Warner Bros" appears 7 times in this file; the first occurrence is on line 176
+controller/ControllerImpl.java:184:	The String literal "Steven Spielberg" appears 6 times in this file; the first occurrence is on line 184
+controller/ControllerImpl.java:379:	The String literal "Oggetto " appears 4 times in this file; the first occurrence is on line 379
+controller/FileManager.java:70:	The String literal "File " appears 4 times in this file; the first occurrence is on line 70
+controller/FileManager.java:73:	The String literal "Errore I/O" appears 4 times in this file; the first occurrence is on line 73
+model/Model.java:69:	Rather than using a lot of String arguments, consider using a container object for those values.
+model/Model.java:111:	Rather than using a lot of String arguments, consider using a container object for those values.
+model/ModelImpl.java:115:	Rather than using a lot of String arguments, consider using a container object for those values.
+model/ModelImpl.java:154:	Rather than using a lot of String arguments, consider using a container object for those values.
+model/ModelImpl.java:208:	The String literal "ItemId: " appears 8 times in this file; the first occurrence is on line 208
+model/ModelImpl.java:208:	The String literal "are not contained into the archive" appears 9 times in this file; the first occurrence is on line 208
+model/ModelImpl.java:210:	The String literal "UserId" appears 5 times in this file; the first occurrence is on line 210
+model/item/ArchiveImpl.java:107:	The String literal "Item: " appears 4 times in this file; the first occurrence is on line 107
+model/item/ArchiveImpl.java:121:	The String literal "User: " appears 4 times in this file; the first occurrence is on line 121
+model/item/Book.java:81:	Overriding method merely calls super
+model/item/ItemFactory.java:43:	Rather than using a lot of String arguments, consider using a container object for those values.
+model/item/Movie.java:74:	Overriding method merely calls super
+model/item/Movie.java:79:	Overriding method merely calls super
+model/test/TestFilters.java:41:	The String literal "Autore" appears 6 times in this file; the first occurrence is on line 41
+model/test/TestFilters.java:42:	The String literal "Elleci" appears 5 times in this file; the first occurrence is on line 42
+model/test/TestStudyRoom.java:32:	The String literal "3333333333" appears 4 times in this file; the first occurrence is on line 32
+model/test/TestUserCreateDestroy.java:35:	The String literal "3333333333" appears 4 times in this file; the first occurrence is on line 35
+model/test/TestUserExc.java:36:	The String literal "aabb" appears 4 times in this file; the first occurrence is on line 36
+view/ItemScreen.java:48:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemScreen.java:74:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemScreenImpl.java:92:	The String literal "Tahoma" appears 16 times in this file; the first occurrence is on line 92
+view/ItemScreenImpl.java:270:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemScreenImpl.java:285:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemScreenImpl.java:299:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemShow.java:36:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemShow.java:63:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemShowImpl.java:52:	The String literal "Tahoma" appears 11 times in this file; the first occurrence is on line 52
+view/ItemShowImpl.java:132:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemShowImpl.java:149:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ItemShowImpl.java:163:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ListScreenImpl.java:31:	Possible unsafe assignment to a non-final static field in a constructor.
+view/ListScreenImpl.java:35:	Perhaps 'scroll' could be replaced by a local variable.
+view/ListScreenImpl.java:64:	The String literal "Tahoma" appears 6 times in this file; the first occurrence is on line 64
+view/ManagerScreenImpl.java:50:	The String literal "Tahoma" appears 9 times in this file; the first occurrence is on line 50
+view/MediatecaScreenImpl.java:37:	Perhaps 'scroll' could be replaced by a local variable.
+view/MediatecaScreenImpl.java:38:	Perhaps 'search' could be replaced by a local variable.
+view/MediatecaScreenImpl.java:55:	The String literal "Tahoma" appears 8 times in this file; the first occurrence is on line 55
+view/ReviewScreenImpl.java:30:	Perhaps 'discard' could be replaced by a local variable.
+view/ReviewScreenImpl.java:31:	Perhaps 'send' could be replaced by a local variable.
+view/ReviewScreenImpl.java:46:	The String literal "Tahoma" appears 9 times in this file; the first occurrence is on line 46
+view/StudyRoomImpl.java:39:	Perhaps 'model' could be replaced by a local variable.
+view/StudyRoomImpl.java:41:	Perhaps 'centerPanel' could be replaced by a local variable.
+view/StudyRoomImpl.java:42:	Perhaps 'dataSent' could be replaced by a local variable.
+view/StudyRoomImpl.java:98:	The String literal "Tahoma" appears 7 times in this file; the first occurrence is on line 98
+view/UserLoginImpl.java:61:	The String literal "Tahoma" appears 8 times in this file; the first occurrence is on line 61
+view/UserMenuImpl.java:37:	Perhaps 'scrollB' could be replaced by a local variable.
+view/UserMenuImpl.java:38:	Perhaps 'scrollM' could be replaced by a local variable.
+view/UserMenuImpl.java:59:	The String literal "Tahoma" appears 7 times in this file; the first occurrence is on line 59
+view/UserScreen.java:47:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/UserScreenImpl.java:33:	Perhaps 'send' could be replaced by a local variable.
+view/UserScreenImpl.java:81:	The String literal "Tahoma" appears 14 times in this file; the first occurrence is on line 81
+view/UserScreenImpl.java:286:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/UserShow.java:48:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/UserShowImpl.java:52:	The String literal "Tahoma" appears 15 times in this file; the first occurrence is on line 52
+view/UserShowImpl.java:142:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/View.java:167:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/View.java:301:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/View.java:327:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/View.java:647:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/View.java:676:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/View.java:711:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ViewImpl.java:49:	Perhaps 'card0' could be replaced by a local variable.
+view/ViewImpl.java:163:	The String literal "Tahoma" appears 4 times in this file; the first occurrence is on line 163
+view/ViewImpl.java:332:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ViewImpl.java:435:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ViewImpl.java:446:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ViewImpl.java:808:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ViewImpl.java:822:	Rather than using a lot of String arguments, consider using a container object for those values.
+view/ViewImpl.java:833:	Rather than using a lot of String arguments, consider using a container object for those values.
+
+Very bad code practices and potential bugs: 23
+controller/ControllerImpl.java:64:	Overridable method 'writeTestOnFile' called during object construction
+controller/ControllerImpl.java:116:	Avoid unused local variables such as 'u2'.
+controller/ControllerImpl.java:122:	Avoid unused local variables such as 'u3'.
+controller/ControllerImpl.java:130:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:132:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:134:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:136:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:138:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:140:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:142:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:144:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:146:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:148:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:150:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:152:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:154:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:156:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:158:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:160:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:162:	Do not start a literal by 0 unless its an octal value
+controller/ControllerImpl.java:164:	Do not start a literal by 0 unless its an octal value
+model/item/ItemImpl.java:68:	Overridable method 'hashCode' called during object construction
+model/user/UserImpl.java:89:	Overridable method 'hashCode' called during object construction
+
+Bad exception handling: 75
+controller/Application.java:22:	A method/constructor shouldnt explicitly throw java.lang.Exception
+controller/ControllerImpl.java:52:	A method/constructor shouldnt explicitly throw java.lang.Exception
+controller/ControllerImpl.java:224:	Avoid empty catch blocks
+model/Model.java:73:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:84:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:114:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:144:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:155:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:169:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:183:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:197:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:230:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:243:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:261:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:273:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:285:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:305:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:320:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:335:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:345:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:361:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:379:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:416:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:434:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:445:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/Model.java:459:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:70:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:92:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:110:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:119:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:143:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:157:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:173:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:184:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:195:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:215:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:232:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:245:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:264:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:281:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:286:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:295:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:315:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:330:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:342:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:395:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:421:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:449:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:489:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:497:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:507:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/ModelImpl.java:533:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/StudyRoom.java:57:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/StudyRoom.java:74:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/StudyRoomImpl.java:68:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/StudyRoomImpl.java:85:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:28:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:46:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:58:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:71:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:83:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:93:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:109:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:121:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:134:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:146:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/Archive.java:160:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/item/ArchiveImpl.java:64:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/user/ArchiveUser.java:32:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/user/ArchiveUser.java:42:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/user/ArchiveUser.java:52:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/user/ArchiveUser.java:63:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/user/ArchiveUserImpl.java:50:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/user/User.java:190:	A method/constructor shouldnt explicitly throw java.lang.Exception
+model/user/UserImpl.java:334:	A method/constructor shouldnt explicitly throw java.lang.Exception
+
+Portability issues: 18
+controller/ControllerImpl.java:320:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+controller/ControllerImpl.java:357:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/ModelImpl.java:354:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/ModelImpl.java:361:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/ModelImpl.java:368:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/item/Book.java:52:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/item/ItemImpl.java:61:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/item/ItemImpl.java:63:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/item/ItemImpl.java:64:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/item/ItemImpl.java:140:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/item/ItemImpl.java:155:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/item/ReviewImpl.java:55:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/user/UserImpl.java:84:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/user/UserImpl.java:85:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/user/UserImpl.java:90:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/user/UserImpl.java:254:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/user/UserImpl.java:263:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+model/user/UserImpl.java:299:	When doing a String.toLowerCase()/toUpperCase() call, use a Locale
+
+Bad naming: 22
+controller/ControllerImpl.java:1150:	Unnecessary use of fully qualified name 'view.View' due to existing import 'view.View'
+model/user/UserImpl.java:313:	Unnecessary use of fully qualified name 'com.google.common.base.Objects.hashCode' due to existing import 'com.google.common.base.Objects'
+view/ItemScreenImpl.java:119:	Unnecessary use of fully qualified name 'utils.TypeItem.values' due to existing import 'utils.TypeItem'
+view/MediatecaScreenImpl.java:32:	Unnecessary use of fully qualified name 'utils.TypeItemInfo' due to existing import 'utils.TypeItemInfo'
+view/MediatecaScreenImpl.java:65:	Unnecessary use of fully qualified name 'utils.TypeItemInfo.values' due to existing import 'utils.TypeItemInfo'
+view/UserScreen.java:48:	Only variables that are final should contain underscores (except for underscores in standard prefix/suffix), 'birthDate_day' is not final.
+view/UserScreen.java:48:	Only variables that are final should contain underscores (except for underscores in standard prefix/suffix), 'birthDate_month' is not final.
+view/UserScreen.java:49:	Only variables that are final should contain underscores (except for underscores in standard prefix/suffix), 'birthDate_year' is not final.
+view/UserScreenImpl.java:133:	Unnecessary use of fully qualified name 'utils.ItemGenre.values' due to existing import 'utils.ItemGenre'
+view/UserScreenImpl.java:138:	Unnecessary use of fully qualified name 'utils.ItemGenre.values' due to existing import 'utils.ItemGenre'
+view/UserScreenImpl.java:143:	Unnecessary use of fully qualified name 'utils.ItemGenre.values' due to existing import 'utils.ItemGenre'
+view/UserScreenImpl.java:148:	Unnecessary use of fully qualified name 'utils.ItemGenre.values' due to existing import 'utils.ItemGenre'
+view/UserScreenImpl.java:153:	Unnecessary use of fully qualified name 'utils.ItemGenre.values' due to existing import 'utils.ItemGenre'
+view/UserScreenImpl.java:158:	Unnecessary use of fully qualified name 'utils.ItemGenre.values' due to existing import 'utils.ItemGenre'
+view/UserScreenImpl.java:304:	Unnecessary use of fully qualified name 'utils.ItemGenre.values' due to existing import 'utils.ItemGenre'
+view/View.java:83:	Unnecessary use of fully qualified name 'utils.UserInfo' due to existing import 'utils.UserInfo'
+view/View.java:168:	Only variables that are final should contain underscores (except for underscores in standard prefix/suffix), 'birthDate_day' is not final.
+view/View.java:168:	Only variables that are final should contain underscores (except for underscores in standard prefix/suffix), 'birthDate_month' is not final.
+view/View.java:169:	Only variables that are final should contain underscores (except for underscores in standard prefix/suffix), 'birthDate_year' is not final.
+view/ViewImpl.java:307:	Unnecessary use of fully qualified name 'utils.UserInfo' due to existing import 'utils.UserInfo'
+view/ViewImpl.java:424:	Unnecessary use of fully qualified name 'utils.TypeItem.BOOK' due to existing import 'utils.TypeItem'
+view/ViewImpl.java:426:	Unnecessary use of fully qualified name 'utils.TypeItem.MOVIE' due to existing import 'utils.TypeItem'
+
+Bad code practices: 12
+model/ModelImpl.java:384:	These nested if statements could be combined
+model/ModelImpl.java:458:	Substitute calls to size() == 0 (or size() != 0, size() > 0, size() < 1) with calls to isEmpty()
+model/ModelImpl.java:472:	Substitute calls to size() == 0 (or size() != 0, size() > 0, size() < 1) with calls to isEmpty()
+model/StudyRoomImpl.java:31:	Document empty constructor
+view/DateLabelFormatter.java:22:	When instantiating a SimpleDateFormat object, specify a Locale
+view/MediatecaScreenImpl.java:133:	These nested if statements could be combined
+view/UserShowImpl.java:89:	Avoid calling toString() on String objects; this is unnecessary.
+view/UserShowImpl.java:95:	Avoid calling toString() on String objects; this is unnecessary.
+view/UserShowImpl.java:101:	Avoid calling toString() on String objects; this is unnecessary.
+view/UserShowImpl.java:107:	Avoid calling toString() on String objects; this is unnecessary.
+view/UserShowImpl.java:113:	Avoid calling toString() on String objects; this is unnecessary.
+view/UserShowImpl.java:119:	Avoid calling toString() on String objects; this is unnecessary.
+
+Use modern Java: 0
+
+Performance and resource waste: 15
+model/ModelImpl.java:519:	Consider simply returning the value vs storing it in local variable 's'
+model/item/ArchiveImpl.java:32:	Avoid using redundant field initializer for 'singleton'
+model/item/ArchiveImpl.java:136:	Consider simply returning the value vs storing it in local variable 'ddBetween'
+model/item/Book.java:77:	Consider simply returning the value vs storing it in local variable 'i'
+model/test/TestLoan.java:68:	Do not add empty strings
+model/user/ArchiveUserImpl.java:26:	Avoid using redundant field initializer for 'singleton'
+view/StudyRoomImpl.java:36:	Avoid using redundant field initializer for 'sitsNumber'
+view/StudyRoomImpl.java:42:	Avoid using redundant field initializer for 'dataSent'
+view/UserLoginImpl.java:122:	Avoid instantiating String objects; this is usually unnecessary.
+view/UserLoginImpl.java:123:	Consider simply returning the value vs storing it in local variable 'pwd'
+view/UserLoginImpl.java:129:	Avoid instantiating String objects; this is usually unnecessary.
+view/UserLoginImpl.java:130:	Consider simply returning the value vs storing it in local variable 'pwd'
+view/UserScreenImpl.java:48:	Avoid using redundant field initializer for 'count'
+view/UserScreenImpl.java:343:	Avoid instantiating String objects; this is usually unnecessary.
+view/UserScreenImpl.java:344:	Consider simply returning the value vs storing it in local variable 'pwd'
+
+Potentially dangerous side effects: 0
+
+Use final: 213
+controller/ControllerImpl.java:1090:	Local variable 'cal' could be declared final
+controller/ControllerImpl.java:1091:	Local variable 's' could be declared final
+controller/FileManager.java:47:	Private field 'v' could be made final; it is only initialized in the declaration or constructor.
+model/ModelImpl.java:41:	Private field 'archiveItem' could be made final; it is only initialized in the declaration or constructor.
+model/ModelImpl.java:42:	Private field 'archiveUser' could be made final; it is only initialized in the declaration or constructor.
+model/ModelImpl.java:43:	Private field 'studyRoom' could be made final; it is only initialized in the declaration or constructor.
+model/ModelImpl.java:121:	Local variable 'u' could be declared final
+model/ModelImpl.java:159:	Local variable 'b' could be declared final
+model/ModelImpl.java:174:	Local variable 'm' could be declared final
+model/ModelImpl.java:265:	Local variable 'rev' could be declared final
+model/ModelImpl.java:316:	Local variable 'mmap' could be declared final
+model/ModelImpl.java:318:	Local variable 'i' could be declared final
+model/ModelImpl.java:331:	Local variable 'mmap' could be declared final
+model/ModelImpl.java:332:	Local variable 'd' could be declared final
+model/ModelImpl.java:348:	Local variable 'r' could be declared final
+model/ModelImpl.java:349:	Local variable 'i' could be declared final
+model/ModelImpl.java:454:	Local variable 'toAdd' could be declared final
+model/ModelImpl.java:455:	Local variable 'im' could be declared final
+model/ModelImpl.java:461:	Local variable 'v' could be declared final
+model/ModelImpl.java:470:	Local variable 'ig' could be declared final
+model/ModelImpl.java:475:	Local variable 'v' could be declared final
+model/ModelImpl.java:490:	Local variable 'i' could be declared final
+model/ModelImpl.java:518:	Local variable 's' could be declared final
+model/StudyRoomImpl.java:26:	Private field 'mapStudyRoom' could be made final; it is only initialized in the declaration or constructor.
+model/StudyRoomImpl.java:50:	Local variable 'al' could be declared final
+model/item/ArchiveImpl.java:33:	Private field 'itemArchive' could be made final; it is only initialized in the declaration or constructor.
+model/item/ArchiveImpl.java:129:	Local variable 'toDate' could be declared final
+model/item/ArchiveImpl.java:131:	Local variable 'msFromDate' could be declared final
+model/item/ArchiveImpl.java:132:	Local variable 'msToDate' could be declared final
+model/item/ArchiveImpl.java:133:	Local variable 'msBetween' could be declared final
+model/item/ArchiveImpl.java:135:	Local variable 'ddBetween' could be declared final
+model/item/ArchiveImpl.java:141:	Local variable 'c' could be declared final
+model/item/ArchiveImpl.java:142:	Local variable 'toDay' could be declared final
+model/item/ArchiveImpl.java:202:	Local variable 'booklist' could be declared final
+model/item/ArchiveImpl.java:203:	Local variable 'movielist' could be declared final
+model/item/ArchiveImpl.java:204:	Local variable 'i' could be declared final
+model/item/Book.java:26:	Private field 'numRelease' could be made final; it is only initialized in the declaration or constructor.
+model/item/Book.java:76:	Local variable 'i' could be declared final
+model/item/ItemImpl.java:35:	Private field 'setReview' could be made final; it is only initialized in the declaration or constructor.
+model/item/ItemImpl.java:36:	Private field 'like' could be made final; it is only initialized in the declaration or constructor.
+model/item/ItemImpl.java:74:	Local variable 'stringBuilder' could be declared final
+model/item/ItemImpl.java:75:	Local variable 'formatter' could be declared final
+model/item/ItemImpl.java:76:	Local variable 'template' could be declared final
+model/item/ItemImpl.java:211:	Local variable 'div' could be declared final
+model/item/ItemImpl.java:213:	Local variable 'r' could be declared final
+model/item/ItemInfo.java:27:	Private field 'userList' could be made final; it is only initialized in the declaration or constructor.
+model/item/ReviewImpl.java:80:	Local variable 'c' could be declared final
+model/test/TestFilters.java:29:	Local variable 'm' could be declared final
+model/test/TestFilters.java:30:	Local variable 'ls' could be declared final
+model/test/TestItemCreateDestroy.java:29:	Local variable 'm' could be declared final
+model/test/TestItemCreateDestroy.java:41:	Local variable 's' could be declared final
+model/test/TestItemCreateDestroy.java:43:	Local variable 'i' could be declared final
+model/test/TestLike.java:27:	Local variable 'm' could be declared final
+model/test/TestLike.java:28:	Local variable 'ls' could be declared final
+model/test/TestLike.java:39:	Local variable 's' could be declared final
+model/test/TestLike.java:41:	Local variable 'i' could be declared final
+model/test/TestLike.java:46:	Local variable 'i' could be declared final
+model/test/TestLoan.java:30:	Local variable 'm' could be declared final
+model/test/TestLoan.java:31:	Local variable 'ls' could be declared final
+model/test/TestLoan.java:57:	Local variable 's' could be declared final
+model/test/TestLoan.java:59:	Local variable 'i' could be declared final
+model/test/TestLoan.java:66:	Local variable 'l' could be declared final
+model/test/TestLoan.java:69:	Local variable 'i' could be declared final
+model/test/TestReview.java:27:	Local variable 'm' could be declared final
+model/test/TestReview.java:28:	Local variable 'ls' could be declared final
+model/test/TestReview.java:41:	Local variable 's' could be declared final
+model/test/TestReview.java:42:	Local variable 'u' could be declared final
+model/test/TestReview.java:43:	Local variable 'userId' could be declared final
+model/test/TestReview.java:44:	Local variable 'itemID' could be declared final
+model/test/TestReview.java:49:	Local variable 'i' could be declared final
+model/test/TestStudyRoom.java:25:	Local variable 'm' could be declared final
+model/test/TestStudyRoom.java:26:	Local variable 'ls' could be declared final
+model/test/TestUserCreateDestroy.java:28:	Local variable 'm' could be declared final
+model/test/TestUserCreateDestroy.java:29:	Local variable 'ls' could be declared final
+model/test/TestUserCreateDestroy.java:48:	Local variable 's' could be declared final
+model/test/TestUserCreateDestroy.java:50:	Local variable 'i' could be declared final
+model/test/TestUserExc.java:30:	Local variable 'm' could be declared final
+model/test/TestUserExc.java:31:	Local variable 'ls' could be declared final
+model/test/TestUserExc.java:40:	Local variable 's' could be declared final
+model/test/TestUserExc.java:42:	Local variable 'i' could be declared final
+model/user/ArchiveUserImpl.java:27:	Private field 'userArchive' could be made final; it is only initialized in the declaration or constructor.
+model/user/ArchiveUserImpl.java:96:	Local variable 'all' could be declared final
+model/user/ArchiveUserImpl.java:97:	Local variable 'i' could be declared final
+model/user/UserImpl.java:37:	Private field 'idUser' could be made final; it is only initialized in the declaration or constructor.
+model/user/UserImpl.java:41:	Private field 'loanArchive' could be made final; it is only initialized in the declaration or constructor.
+model/user/UserImpl.java:42:	Private field 'wishList' could be made final; it is only initialized in the declaration or constructor.
+model/user/UserImpl.java:49:	Local variable 'stringBuilder' could be declared final
+model/user/UserImpl.java:50:	Local variable 'formatter' could be declared final
+model/user/UserImpl.java:51:	Local variable 'template' could be declared final
+model/user/UserImpl.java:344:	Local variable 'l' could be declared final
+model/user/UserImpl.java:345:	Local variable 'i' could be declared final
+view/ItemScreenImpl.java:24:	Private field 'titleF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:25:	Private field 'authorF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:26:	Private field 'manifacturerF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:27:	Private field 'genreF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:28:	Private field 'languageF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:29:	Private field 'yearF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:31:	Private field 'itemTypeF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:32:	Private field 'durationF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:33:	Private field 'colorF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:34:	Private field 'isbnF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:35:	Private field 'numCopiesF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:36:	Private field 'numReleaseF' could be made final; it is only initialized in the declaration or constructor.
+view/ItemScreenImpl.java:149:	Local variable 'genreL' could be declared final
+view/ItemScreenImpl.java:154:	Local variable 'languageL' could be declared final
+view/ItemScreenImpl.java:159:	Local variable 'colorL' could be declared final
+view/ItemScreenImpl.java:174:	Local variable 'numCopiesL' could be declared final
+view/ItemScreenImpl.java:179:	Local variable 'numReleaseL' could be declared final
+view/ItemShowImpl.java:41:	Local variable 'mainPanel' could be declared final
+view/ListScreenImpl.java:29:	Private field 'model' could be made final; it is only initialized in the declaration or constructor.
+view/ListScreenImpl.java:30:	Private field 'list' could be made final; it is only initialized in the declaration or constructor.
+view/ListScreenImpl.java:35:	Private field 'scroll' could be made final; it is only initialized in the declaration or constructor.
+view/ListScreenImpl.java:207:	Local variable 'element' could be declared final
+view/ListScreenImpl.java:215:	Local variable 'element' could be declared final
+view/ListScreenImpl.java:223:	Local variable 'element' could be declared final
+view/ManagerScreenImpl.java:25:	Private field 'list' could be made final; it is only initialized in the declaration or constructor.
+view/ManagerScreenImpl.java:26:	Private field 'type' could be made final; it is only initialized in the declaration or constructor.
+view/ManagerScreenImpl.java:27:	Private field 'model' could be made final; it is only initialized in the declaration or constructor.
+view/ManagerScreenImpl.java:49:	Local variable 'newBook' could be declared final
+view/ManagerScreenImpl.java:54:	Local variable 'delete' could be declared final
+view/ManagerScreenImpl.java:59:	Local variable 'seeBorrowedList' could be declared final
+view/ManagerScreenImpl.java:65:	Local variable 'modifyBook' could be declared final
+view/ManagerScreenImpl.java:70:	Local variable 'newMovie' could be declared final
+view/ManagerScreenImpl.java:75:	Local variable 'modifyMovie' could be declared final
+view/ManagerScreenImpl.java:83:	Local variable 'showUserList' could be declared final
+view/ManagerScreenImpl.java:99:	Local variable 'showItemList' could be declared final
+view/ManagerScreenImpl.java:204:	Local variable 'exit' could be declared final
+view/ManagerScreenImpl.java:218:	Local variable 'element' could be declared final
+view/ManagerScreenImpl.java:226:	Local variable 'element' could be declared final
+view/ManagerScreenImpl.java:234:	Local variable 'element' could be declared final
+view/MediatecaScreenImpl.java:30:	Private field 'filteredJList' could be made final; it is only initialized in the declaration or constructor.
+view/MediatecaScreenImpl.java:31:	Private field 'model' could be made final; it is only initialized in the declaration or constructor.
+view/MediatecaScreenImpl.java:32:	Private field 'filterSelect' could be made final; it is only initialized in the declaration or constructor.
+view/MediatecaScreenImpl.java:33:	Private field 'itemSelect' could be made final; it is only initialized in the declaration or constructor.
+view/MediatecaScreenImpl.java:34:	Private field 'reviews' could be made final; it is only initialized in the declaration or constructor.
+view/MediatecaScreenImpl.java:36:	Private field 'searchField' could be made final; it is only initialized in the declaration or constructor.
+view/MediatecaScreenImpl.java:37:	Private field 'scroll' could be made final; it is only initialized in the declaration or constructor.
+view/MediatecaScreenImpl.java:38:	Private field 'search' could be made final; it is only initialized in the declaration or constructor.
+view/MediatecaScreenImpl.java:153:	Local variable 'seeWishlist' could be declared final
+view/MediatecaScreenImpl.java:163:	Local variable 'pres' could be declared final
+view/MediatecaScreenImpl.java:227:	Local variable 'element' could be declared final
+view/ReviewScreenImpl.java:30:	Private field 'discard' could be made final; it is only initialized in the declaration or constructor.
+view/ReviewScreenImpl.java:31:	Private field 'send' could be made final; it is only initialized in the declaration or constructor.
+view/ReviewScreenImpl.java:32:	Private field 'scoreGroup' could be made final; it is only initialized in the declaration or constructor.
+view/ReviewScreenImpl.java:58:	Local variable 'score1' could be declared final
+view/ReviewScreenImpl.java:64:	Local variable 'score2' could be declared final
+view/ReviewScreenImpl.java:70:	Local variable 'score3' could be declared final
+view/ReviewScreenImpl.java:76:	Local variable 'score4' could be declared final
+view/ReviewScreenImpl.java:82:	Local variable 'score5' could be declared final
+view/ReviewScreenImpl.java:123:	Local variable 'scores' could be declared final
+view/ReviewScreenImpl.java:125:	Local variable 'scoreB' could be declared final
+view/StudyRoomImpl.java:36:	Private field 'sitsNumber' could be made final; it is only initialized in the declaration or constructor.
+view/StudyRoomImpl.java:38:	Private field 'datePicker' could be made final; it is only initialized in the declaration or constructor.
+view/StudyRoomImpl.java:39:	Private field 'model' could be made final; it is only initialized in the declaration or constructor.
+view/StudyRoomImpl.java:40:	Private field 'springLayout' could be made final; it is only initialized in the declaration or constructor.
+view/StudyRoomImpl.java:41:	Private field 'centerPanel' could be made final; it is only initialized in the declaration or constructor.
+view/StudyRoomImpl.java:42:	Private field 'dataSent' could be made final; it is only initialized in the declaration or constructor.
+view/StudyRoomImpl.java:51:	Local variable 'southPanel' could be declared final
+view/StudyRoomImpl.java:53:	Local variable 'northPanel' could be declared final
+view/StudyRoomImpl.java:63:	Local variable 'p' could be declared final
+view/StudyRoomImpl.java:69:	Local variable 'datePanel' could be declared final
+view/StudyRoomImpl.java:85:	Local variable 'sendDate' could be declared final
+view/StudyRoomImpl.java:107:	Local variable 'exit' could be declared final
+view/StudyRoomImpl.java:118:	Local variable 'freeSit' could be declared final
+view/StudyRoomImpl.java:127:	Local variable 'justTakenSit' could be declared final
+view/StudyRoomImpl.java:137:	Local variable 'occupiedSit' could be declared final
+view/StudyRoomImpl.java:171:	Local variable 'presentation' could be declared final
+view/UserLoginImpl.java:28:	Private field 'usernameTextField' could be made final; it is only initialized in the declaration or constructor.
+view/UserLoginImpl.java:122:	Local variable 'pwd' could be declared final
+view/UserLoginImpl.java:129:	Local variable 'pwd' could be declared final
+view/UserMenuImpl.java:33:	Private field 'modelM' could be made final; it is only initialized in the declaration or constructor.
+view/UserMenuImpl.java:34:	Private field 'modelB' could be made final; it is only initialized in the declaration or constructor.
+view/UserMenuImpl.java:35:	Private field 'suggestedBooks' could be made final; it is only initialized in the declaration or constructor.
+view/UserMenuImpl.java:36:	Private field 'suggestedMovies' could be made final; it is only initialized in the declaration or constructor.
+view/UserMenuImpl.java:37:	Private field 'scrollB' could be made final; it is only initialized in the declaration or constructor.
+view/UserMenuImpl.java:38:	Private field 'scrollM' could be made final; it is only initialized in the declaration or constructor.
+view/UserMenuImpl.java:95:	Local variable 'suggestedBooksLabel' could be declared final
+view/UserMenuImpl.java:101:	Local variable 'suggestedMoviesLabel' could be declared final
+view/UserMenuImpl.java:128:	Local variable 'element' could be declared final
+view/UserMenuImpl.java:137:	Local variable 'element' could be declared final
+view/UserScreenImpl.java:33:	Private field 'send' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:34:	Private field 'nameF' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:35:	Private field 'surnameF' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:36:	Private field 'passwordF' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:37:	Private field 'usernameF' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:38:	Private field 'emailF' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:39:	Private field 'cellF' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:40:	Private field 'datePicker' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:41:	Private field 'model' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:42:	Private field 'bookPref1' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:43:	Private field 'bookPref2' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:44:	Private field 'bookPref3' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:45:	Private field 'filmPref1' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:46:	Private field 'filmPref2' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:47:	Private field 'filmPref3' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:48:	Private field 'count' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:50:	Private field 'springLayout' could be made final; it is only initialized in the declaration or constructor.
+view/UserScreenImpl.java:163:	Local variable 'selectInBox' could be declared final
+view/UserScreenImpl.java:248:	Local variable 'p' could be declared final
+view/UserScreenImpl.java:254:	Local variable 'datePanel' could be declared final
+view/UserScreenImpl.java:269:	Local variable 'prefL' could be declared final
+view/UserScreenImpl.java:274:	Local variable 'bookL' could be declared final
+view/UserScreenImpl.java:279:	Local variable 'filmL' could be declared final
+view/UserScreenImpl.java:304:	Local variable 'i' could be declared final
+view/UserScreenImpl.java:343:	Local variable 'pwd' could be declared final
+view/UserShowImpl.java:41:	Local variable 'mainPanel' could be declared final
+view/UserShowImpl.java:126:	Local variable 'bookPreferences' could be declared final
+view/UserShowImpl.java:132:	Local variable 'filmPreferences' could be declared final
+view/ViewImpl.java:181:	Local variable 'managerLogin' could be declared final
+view/ViewImpl.java:662:	Local variable 'prop' could be declared final
+view/ViewImpl.java:672:	Local variable 'value' could be declared final
+view/ViewImpl.java:705:	Local variable 'prop' could be declared final
+view/ViewImpl.java:715:	Local variable 'value' could be declared final
+
+Complex code: 4
+view/ItemScreenImpl.java:60:	The constructor with 3 parameters has an NCSS line count of 159
+view/UserScreenImpl.java:68:	The constructor with 2 parameters has an NCSS line count of 161
+view/View.java:1:	This class has a bunch of public methods and attributes
+view/ViewImpl.java:1:	This class has a bunch of public methods and attributes
+
+Concurrency issues: 0
+
+Testing issues: 8
+model/test/TestFilters.java:27:	JUnit 4 tests that execute tests should use the @Test annotation
+model/test/TestItemCreateDestroy.java:27:	JUnit 4 tests that execute tests should use the @Test annotation
+model/test/TestLike.java:25:	JUnit 4 tests that execute tests should use the @Test annotation
+model/test/TestLoan.java:28:	JUnit 4 tests that execute tests should use the @Test annotation
+model/test/TestReview.java:25:	JUnit 4 tests that execute tests should use the @Test annotation
+model/test/TestStudyRoom.java:23:	JUnit 4 tests that execute tests should use the @Test annotation
+model/test/TestUserCreateDestroy.java:26:	JUnit 4 tests that execute tests should use the @Test annotation
+model/test/TestUserExc.java:28:	JUnit 4 tests that execute tests should use the @Test annotation
+
+Android-specific issues: 0
+
+Minor issues: 50
+controller/Application.java:22:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ItemScreenImpl.java:60:	It is a good practice to call super() in a constructor
+view/ListScreen.java:15:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ListScreen.java:23:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ListScreen.java:38:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ListScreenImpl.java:58:	It is a good practice to call super() in a constructor
+view/ListScreenImpl.java:205:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ListScreenImpl.java:213:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ListScreenImpl.java:221:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ManagerScreen.java:16:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ManagerScreen.java:24:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ManagerScreen.java:39:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ManagerScreenImpl.java:43:	It is a good practice to call super() in a constructor
+view/ManagerScreenImpl.java:216:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ManagerScreenImpl.java:224:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ManagerScreenImpl.java:232:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/MediatecaScreen.java:44:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/MediatecaScreenImpl.java:47:	It is a good practice to call super() in a constructor
+view/MediatecaScreenImpl.java:225:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ReviewScreenImpl.java:40:	It is a good practice to call super() in a constructor
+view/StudyRoom.java:23:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/StudyRoomImpl.java:50:	It is a good practice to call super() in a constructor
+view/StudyRoomImpl.java:198:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/UserLoginImpl.java:52:	It is a good practice to call super() in a constructor
+view/UserMenu.java:16:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/UserMenu.java:24:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/UserMenuImpl.java:46:	It is a good practice to call super() in a constructor
+view/UserMenuImpl.java:126:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/UserMenuImpl.java:135:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/UserScreenImpl.java:68:	It is a good practice to call super() in a constructor
+view/View.java:197:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:233:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:379:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:503:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:511:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:519:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:527:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:535:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:563:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/View.java:577:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:275:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:281:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:529:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:586:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:592:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:598:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:727:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:733:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:758:	Consider using varargs for methods or constructors which take an array the last parameter.
+view/ViewImpl.java:770:	Consider using varargs for methods or constructors which take an array the last parameter.
+
+Other errors: 0
+
