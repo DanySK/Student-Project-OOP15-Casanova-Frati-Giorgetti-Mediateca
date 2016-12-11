@@ -819,7 +819,13 @@ public class ControllerImpl implements Controller {
 			map.keySet().stream().forEach(i -> {
 				if (map.get(i) > ControllerImpl.LASTDEADLINE) {
 					try {
-						this.v.showGiveBackMessage(this.m.getRequiredItem(i).toString());
+						/*
+						 * Se l'utente decide di eseguire il logout, non mostro
+						 * altri messaggi
+						 */
+						if (this.actualUser != null) {
+							this.v.showGiveBackMessage(this.m.getRequiredItem(i).toString());
+						}
 					} catch (Exception e) {
 						this.v.showError("Errore! Oggetto non presente nell'archivio");
 					}
