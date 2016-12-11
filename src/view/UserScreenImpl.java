@@ -17,6 +17,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import utils.ItemGenre;
 import view.ViewImpl.CardName;
 
 /**
@@ -299,6 +300,28 @@ public class UserScreenImpl extends JPanel implements UserScreen {
 		this.model.setSelected(true);
 		this.emailF.setText(email);
 		this.cellF.setText(telephone);
+
+		for (ItemGenre i : utils.ItemGenre.values()) {
+			if (i.toString().equals(bPref1)) {
+				this.bookPref1.setSelectedItem(i);
+			}
+			if (i.toString().equals(bPref2)) {
+				this.bookPref2.setSelectedItem(i);
+			}
+			if (i.toString().equals(bPref3)) {
+				this.bookPref3.setSelectedItem(i);
+			}
+			if (i.toString().equals(fPref1)) {
+				this.filmPref1.setSelectedItem(i);
+			}
+			if (i.toString().equals(fPref2)) {
+				this.filmPref2.setSelectedItem(i);
+			}
+			if (i.toString().equals(fPref3)) {
+				this.filmPref3.setSelectedItem(i);
+			}
+		}
+
 		this.bookPref1.setSelectedItem(bPref1);
 		this.bookPref2.setSelectedItem(bPref2);
 		this.bookPref3.setSelectedItem(bPref3);
