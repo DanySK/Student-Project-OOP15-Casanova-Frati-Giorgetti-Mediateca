@@ -99,14 +99,14 @@ public class ViewImpl implements View {
 	public enum CardName {
 		START("Start Card"), MAIN("Main Card"), LOGIN("Login Card"), MENU(
 				"Menu Card"), ITEM("Item Card"), USER_MODIFY("User Modify Card"), LIKE_LIST(
-						"LikeList Screen Card"), BORROWED_LIST(
-								"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
-										"User Create Card"), MANAGER_LOGIN("Manager Login"), BOOK_CREATE(
-												"Book Create Card"), FILM_CREATE("Film Create Card"), MANAGER_MENU(
-														"Manager Menu Card"), STUDY_ROOM("Study Room Card"), WISHLIST(
-																"Wishlist Card"), BOOK_MODIFY("Book Modify Card"), FILM_MODIFY(
-																		"Film Modify Card"), ALL_REVIEWS("All Reviews Card"), USERS_BORROWED_LIST(
-																				"Users Borrowed List Card");
+				"LikeList Screen Card"), BORROWED_LIST(
+				"BorrowedList Screen Card"), REVIEW("Review Card"), USER_CREATE(
+				"User Create Card"), MANAGER_LOGIN("Manager Login"), BOOK_CREATE(
+				"Book Create Card"), FILM_CREATE("Film Create Card"), MANAGER_MENU(
+				"Manager Menu Card"), STUDY_ROOM("Study Room Card"), WISHLIST(
+				"Wishlist Card"), BOOK_MODIFY("Book Modify Card"), FILM_MODIFY(
+				"Film Modify Card"), ALL_REVIEWS("All Reviews Card"), USERS_BORROWED_LIST(
+				"Users Borrowed List Card");
 
 		private final String name;
 
@@ -646,11 +646,11 @@ public class ViewImpl implements View {
 	public void showGiveBackOptionMessage(final String book) {
 
 		final Object[] options = { "Consegna",
-		"Aumenta il prestito di un altro mese" };
+				"Aumenta il prestito di un altro mese" };
 
 		final JOptionPane optionPane = new JOptionPane(
 				"Dovresti consegnare il seguente libro:\n" + book
-				+ "\nCosa vuoi fare?\n", JOptionPane.QUESTION_MESSAGE,
+						+ "\nCosa vuoi fare?\n", JOptionPane.QUESTION_MESSAGE,
 				JOptionPane.YES_NO_OPTION, null, options);
 
 		final JDialog dialog = new JDialog(this.mainFrame,
@@ -691,14 +691,14 @@ public class ViewImpl implements View {
 	@Override
 	public void showGiveBackMessage(final String book) {
 
-		final Object[] options = { "Consegna", "Notifica di scadenza" };
+		final Object[] options = { "Consegna", "Esegui il logout" };
 		final JOptionPane optionPane = new JOptionPane(
 				"Devi consegnare il seguente libro:\n" + book
-				+ "\nCosa vuoi fare?\n", JOptionPane.QUESTION_MESSAGE,
+						+ "\nCosa vuoi fare?\n", JOptionPane.QUESTION_MESSAGE,
 				JOptionPane.YES_NO_OPTION, null, options);
 
-		final JDialog dialog = new JDialog(this.mainFrame, "Click a button",
-				true);
+		final JDialog dialog = new JDialog(this.mainFrame,
+				"Notifica di scadenza", true);
 		dialog.setContentPane(optionPane);
 		dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		dialog.setLocationRelativeTo(this.mainFrame);
